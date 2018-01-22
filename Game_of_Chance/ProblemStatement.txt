@@ -1,0 +1,29 @@
+The delhi-iit has organized a lucky draw for students.It is planned to select X students in Y days, and give them some M Reward points freely,
+such that the student selected gets 100 Reward points every day till the Yth day(Including Y),starting from the day of his/her selection.
+
+It has to be noted that only one student is selected on any given day during the lucky draw event.Also there are days when no student gets selected.
+It's observed that, the lucky student always gets reward points which are either 100 or in its multiples.
+These reward points can be encashed after the draw period.
+Puzzle now is to calculate the number of students who got the bonus points.
+
+
+Input Format
+You will be given a function which an array of string. Each element of the array is in the form of (Y,M,X).
+Y represents number of days the ONEHOST planned to distribute the reward points
+M represents the number of reward points
+X represents the number of employees
+
+Output Format
+You need to return the array of integer where each element represents the number of customers who got the bonus points.
+
+
+Sample Test Case
+
+Sample Input
+2
+(3,400,3)
+(3,600,3)
+
+Sample Output
+2
+3

@@ -1,0 +1,10 @@
+C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\SortingStringValues\bin\Debug\SortingStringValues.exe.config
+C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\SortingStringValues\bin\Debug\SortingStringValues.exe
+C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\SortingStringValues\bin\Debug\SortingStringValues.pdb
+C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\SortingStringValues\obj\Debug\SortingStringValues.exe
+C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\SortingStringValues\obj\Debug\SortingStringValues.pdb
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\SortingStringValues\bin\Debug\SortingStringValues.exe.config
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\SortingStringValues\bin\Debug\SortingStringValues.exe
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\SortingStringValues\bin\Debug\SortingStringValues.pdb
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\SortingStringValues\obj\Debug\SortingStringValues.exe
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\SortingStringValues\obj\Debug\SortingStringValues.pdb

@@ -1,0 +1,10 @@
+C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\SortStack\bin\Debug\SortStack.exe.config
+C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\SortStack\bin\Debug\SortStack.exe
+C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\SortStack\bin\Debug\SortStack.pdb
+C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\SortStack\obj\Debug\SortStack.exe
+C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\SortStack\obj\Debug\SortStack.pdb
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\SortStack\bin\Debug\SortStack.exe.config
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\SortStack\bin\Debug\SortStack.exe
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\SortStack\bin\Debug\SortStack.pdb
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\SortStack\obj\Debug\SortStack.exe
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\SortStack\obj\Debug\SortStack.pdb

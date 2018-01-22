@@ -1,0 +1,10 @@
+C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\Sorting\bin\Debug\Sorting.exe.config
+C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\Sorting\bin\Debug\Sorting.exe
+C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\Sorting\bin\Debug\Sorting.pdb
+C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\Sorting\obj\Debug\Sorting.exe
+C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\Sorting\obj\Debug\Sorting.pdb
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\Sorting\bin\Debug\Sorting.exe.config
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\Sorting\bin\Debug\Sorting.exe
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\Sorting\bin\Debug\Sorting.pdb
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\Sorting\obj\Debug\Sorting.exe
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\Sorting\obj\Debug\Sorting.pdb
