@@ -1,0 +1,7 @@
+Remove consecutive repeating words from the input
+
+Input - "abc xyz harsh harsh xyz abc"
+Ouput - ""
+
+Input - "abc xyz harsh harsh xyz blah abc"
+Ouput - "abc blah abc"

@@ -1,0 +1,6 @@
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\RepeatingNameinString\bin\Debug\RepeatingNameinString.exe.config
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\RepeatingNameinString\bin\Debug\RepeatingNameinString.exe
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\RepeatingNameinString\bin\Debug\RepeatingNameinString.pdb
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\RepeatingNameinString\obj\Debug\RepeatingNameinString.csprojResolveAssemblyReference.cache
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\RepeatingNameinString\obj\Debug\RepeatingNameinString.exe
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\RepeatingNameinString\obj\Debug\RepeatingNameinString.pdb

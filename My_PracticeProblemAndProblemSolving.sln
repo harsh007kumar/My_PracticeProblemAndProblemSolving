@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiThreading", "MultiThre
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game_of_Chance", "Game_of_Chance\Game_of_Chance.csproj", "{66950BE7-9C08-4ECA-87D0-BF201C685EBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepeatingNameinString", "RepeatingNameinString\RepeatingNameinString.csproj", "{77266544-B5B7-4388-8BF2-CA2635C2EC74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{66950BE7-9C08-4ECA-87D0-BF201C685EBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66950BE7-9C08-4ECA-87D0-BF201C685EBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66950BE7-9C08-4ECA-87D0-BF201C685EBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77266544-B5B7-4388-8BF2-CA2635C2EC74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77266544-B5B7-4388-8BF2-CA2635C2EC74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77266544-B5B7-4388-8BF2-CA2635C2EC74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77266544-B5B7-4388-8BF2-CA2635C2EC74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
