@@ -1,0 +1,6 @@
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/HourGlass/bin/Release/HourGlass.exe.config
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/HourGlass/bin/Release/HourGlass.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/HourGlass/bin/Release/HourGlass.pdb
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/HourGlass/obj/Release/HourGlass.csproj.CoreCompileInputs.cache
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/HourGlass/obj/Release/HourGlass.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/HourGlass/obj/Release/HourGlass.pdb

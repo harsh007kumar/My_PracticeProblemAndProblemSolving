@@ -24,7 +24,7 @@ namespace Enum_Value_NotAvaliable
         static void Main(string[] args)
         {
             int b = -1;
-            object obj = (SwitchStateReason)(-1);
+            object obj = (SwitchStateReason)(b);
             object obj2 = (SwitchStateReason)(9);
             Console.WriteLine("\n\t{0}", obj);
             Console.WriteLine("\n\t{0}", obj2);

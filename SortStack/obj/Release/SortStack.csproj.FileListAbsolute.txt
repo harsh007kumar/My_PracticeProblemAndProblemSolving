@@ -1,0 +1,6 @@
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/SortStack/bin/Release/SortStack.exe.config
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/SortStack/bin/Release/SortStack.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/SortStack/bin/Release/SortStack.pdb
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/SortStack/obj/Release/SortStack.csproj.CoreCompileInputs.cache
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/SortStack/obj/Release/SortStack.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/SortStack/obj/Release/SortStack.pdb

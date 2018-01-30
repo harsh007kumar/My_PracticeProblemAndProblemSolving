@@ -1,0 +1,6 @@
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/bin/Release/stringPalindrome.exe.config
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/bin/Release/stringPalindrome.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/bin/Release/stringPalindrome.pdb
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/obj/Release/stringPalindrome.csproj.CoreCompileInputs.cache
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/obj/Release/stringPalindrome.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/obj/Release/stringPalindrome.pdb

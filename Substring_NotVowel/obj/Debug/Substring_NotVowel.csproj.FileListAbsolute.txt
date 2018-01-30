@@ -1,10 +1,16 @@
-C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\Substring_NotVowel\bin\Debug\Substring_NotVowel.exe.config
-C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\Substring_NotVowel\bin\Debug\Substring_NotVowel.exe
-C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\Substring_NotVowel\bin\Debug\Substring_NotVowel.pdb
-C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\Substring_NotVowel\obj\Debug\Substring_NotVowel.exe
-C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\Substring_NotVowel\obj\Debug\Substring_NotVowel.pdb
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\Substring_NotVowel\bin\Debug\Substring_NotVowel.exe.config
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\Substring_NotVowel\bin\Debug\Substring_NotVowel.exe
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\Substring_NotVowel\bin\Debug\Substring_NotVowel.pdb
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\Substring_NotVowel\obj\Debug\Substring_NotVowel.exe
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\Substring_NotVowel\obj\Debug\Substring_NotVowel.pdb
+C:/Users/kumarh/documents/visual studio 2015/Projects/ConsoleApplication4_Byte_Enum/Substring_NotVowel/bin/Debug/Substring_NotVowel.exe.config
+C:/Users/kumarh/documents/visual studio 2015/Projects/ConsoleApplication4_Byte_Enum/Substring_NotVowel/bin/Debug/Substring_NotVowel.exe
+C:/Users/kumarh/documents/visual studio 2015/Projects/ConsoleApplication4_Byte_Enum/Substring_NotVowel/bin/Debug/Substring_NotVowel.pdb
+C:/Users/kumarh/documents/visual studio 2015/Projects/ConsoleApplication4_Byte_Enum/Substring_NotVowel/obj/Debug/Substring_NotVowel.exe
+C:/Users/kumarh/documents/visual studio 2015/Projects/ConsoleApplication4_Byte_Enum/Substring_NotVowel/obj/Debug/Substring_NotVowel.pdb
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/bin/Debug/Substring_NotVowel.exe.config
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/bin/Debug/Substring_NotVowel.exe
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/bin/Debug/Substring_NotVowel.pdb
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/obj/Debug/Substring_NotVowel.exe
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/obj/Debug/Substring_NotVowel.pdb
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/bin/Debug/Substring_NotVowel.exe.config
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/bin/Debug/Substring_NotVowel.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/bin/Debug/Substring_NotVowel.pdb
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/obj/Debug/Substring_NotVowel.csproj.CoreCompileInputs.cache
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/obj/Debug/Substring_NotVowel.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/obj/Debug/Substring_NotVowel.pdb
