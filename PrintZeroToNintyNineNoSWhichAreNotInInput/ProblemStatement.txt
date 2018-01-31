@@ -1,0 +1,4 @@
+Print Numbers from 0-99 which are not present in a given input array which can have duplicate elements.
+
+Sample Input - { 101,5,43,666,5,4 }
+Output - All numbers from 0 to 99 should be printed except 4,5 & 43
