@@ -1,0 +1,6 @@
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/bin/Release/Substring_NotVowel.exe.config
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/bin/Release/Substring_NotVowel.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/bin/Release/Substring_NotVowel.pdb
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/obj/Release/Substring_NotVowel.csproj.CoreCompileInputs.cache
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/obj/Release/Substring_NotVowel.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/obj/Release/Substring_NotVowel.pdb

@@ -11,8 +11,9 @@ namespace _24HourFormat_To_12HourFormat
         static void Main(string[] args)
         {
             // Sample input - 00:15 || 23:19 || 11:59
-            string inputtime = "11:19";
+            string inputtime = "23:19";
             Console.WriteLine(Convert24to12Hour(inputtime));
+            Console.ReadLine();
         }
 
         private static string Convert24to12Hour(string inputTime)

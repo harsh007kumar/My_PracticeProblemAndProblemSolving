@@ -1,12 +1,18 @@
-C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\stringPalindrome\bin\Debug\stringPalindrome.exe.config
-C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\stringPalindrome\bin\Debug\stringPalindrome.exe
-C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\stringPalindrome\bin\Debug\stringPalindrome.pdb
-C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\stringPalindrome\obj\Debug\stringPalindrome.csprojResolveAssemblyReference.cache
-C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\stringPalindrome\obj\Debug\stringPalindrome.exe
-C:\Users\kumarh\documents\visual studio 2015\Projects\ConsoleApplication4_Byte_Enum\stringPalindrome\obj\Debug\stringPalindrome.pdb
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\stringPalindrome\bin\Debug\stringPalindrome.exe.config
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\stringPalindrome\bin\Debug\stringPalindrome.exe
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\stringPalindrome\bin\Debug\stringPalindrome.pdb
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\stringPalindrome\obj\Debug\stringPalindrome.csprojResolveAssemblyReference.cache
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\stringPalindrome\obj\Debug\stringPalindrome.exe
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\stringPalindrome\obj\Debug\stringPalindrome.pdb
+C:/Users/kumarh/documents/visual studio 2015/Projects/ConsoleApplication4_Byte_Enum/stringPalindrome/bin/Debug/stringPalindrome.exe.config
+C:/Users/kumarh/documents/visual studio 2015/Projects/ConsoleApplication4_Byte_Enum/stringPalindrome/bin/Debug/stringPalindrome.exe
+C:/Users/kumarh/documents/visual studio 2015/Projects/ConsoleApplication4_Byte_Enum/stringPalindrome/bin/Debug/stringPalindrome.pdb
+C:/Users/kumarh/documents/visual studio 2015/Projects/ConsoleApplication4_Byte_Enum/stringPalindrome/obj/Debug/stringPalindrome.csprojResolveAssemblyReference.cache
+C:/Users/kumarh/documents/visual studio 2015/Projects/ConsoleApplication4_Byte_Enum/stringPalindrome/obj/Debug/stringPalindrome.exe
+C:/Users/kumarh/documents/visual studio 2015/Projects/ConsoleApplication4_Byte_Enum/stringPalindrome/obj/Debug/stringPalindrome.pdb
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/bin/Debug/stringPalindrome.exe.config
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/bin/Debug/stringPalindrome.exe
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/bin/Debug/stringPalindrome.pdb
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/obj/Debug/stringPalindrome.csprojResolveAssemblyReference.cache
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/obj/Debug/stringPalindrome.exe
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/obj/Debug/stringPalindrome.pdb
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/bin/Debug/stringPalindrome.exe.config
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/bin/Debug/stringPalindrome.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/bin/Debug/stringPalindrome.pdb
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/obj/Debug/stringPalindrome.csproj.CoreCompileInputs.cache
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/obj/Debug/stringPalindrome.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/obj/Debug/stringPalindrome.pdb

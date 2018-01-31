@@ -1,0 +1,6 @@
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/VarandDynamic/bin/Release/VarandDynamic.exe.config
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/VarandDynamic/bin/Release/VarandDynamic.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/VarandDynamic/bin/Release/VarandDynamic.pdb
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/VarandDynamic/obj/Release/VarandDynamic.csproj.CoreCompileInputs.cache
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/VarandDynamic/obj/Release/VarandDynamic.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/VarandDynamic/obj/Release/VarandDynamic.pdb
