@@ -11,7 +11,7 @@ namespace MergeTwoSortedArrays
         static void Main(string[] args)
         {
             int[] arr1 = { 1, 2, 4, 6, 8 };
-            int[] arr2 = { 2, 3, 5, 7, 9 };
+            int[] arr2 = { 2, 8, 8 };
             int[] result = MergeArray(arr1, arr2);
             foreach (int var in result)
                 Console.WriteLine(" {0}", var);

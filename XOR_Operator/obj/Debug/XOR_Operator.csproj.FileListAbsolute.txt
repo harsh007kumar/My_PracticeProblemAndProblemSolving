@@ -1,0 +1,5 @@
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\XOR_Operator\bin\Debug\XOR_Operator.exe.config
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\XOR_Operator\bin\Debug\XOR_Operator.exe
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\XOR_Operator\bin\Debug\XOR_Operator.pdb
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\XOR_Operator\obj\Debug\XOR_Operator.exe
+C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\XOR_Operator\obj\Debug\XOR_Operator.pdb

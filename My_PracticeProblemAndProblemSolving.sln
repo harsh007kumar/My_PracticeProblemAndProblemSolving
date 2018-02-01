@@ -41,6 +41,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MergeTwoSortedArrays", "Mer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrintZeroToNintyNineNoSWhichAreNotInInput", "PrintZeroToNintyNineNoSWhichAreNotInInput\PrintZeroToNintyNineNoSWhichAreNotInInput.csproj", "{2BA84257-67E9-4E51-8DDD-2FA82CB07E48}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAINTAINING_GARDEN_TechGiG", "MAINTAINING_GARDEN_TechGiG\MAINTAINING_GARDEN_TechGiG.csproj", "{EBECC7A8-1382-44DF-B69E-39029745BDD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XOR_Operator", "XOR_Operator\XOR_Operator.csproj", "{5FCB8925-E9D7-4A20-9EF0-D824E3CA8610}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +127,14 @@ Global
 		{2BA84257-67E9-4E51-8DDD-2FA82CB07E48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BA84257-67E9-4E51-8DDD-2FA82CB07E48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BA84257-67E9-4E51-8DDD-2FA82CB07E48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBECC7A8-1382-44DF-B69E-39029745BDD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBECC7A8-1382-44DF-B69E-39029745BDD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBECC7A8-1382-44DF-B69E-39029745BDD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBECC7A8-1382-44DF-B69E-39029745BDD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FCB8925-E9D7-4A20-9EF0-D824E3CA8610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FCB8925-E9D7-4A20-9EF0-D824E3CA8610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FCB8925-E9D7-4A20-9EF0-D824E3CA8610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FCB8925-E9D7-4A20-9EF0-D824E3CA8610}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
