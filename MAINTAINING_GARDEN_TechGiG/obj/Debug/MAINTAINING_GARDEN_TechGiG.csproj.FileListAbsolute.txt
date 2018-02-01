@@ -1,5 +1,0 @@
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\MAINTAINING_GARDEN_TechGiG\bin\Debug\MAINTAINING_GARDEN_TechGiG.exe.config
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\MAINTAINING_GARDEN_TechGiG\bin\Debug\MAINTAINING_GARDEN_TechGiG.exe
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\MAINTAINING_GARDEN_TechGiG\bin\Debug\MAINTAINING_GARDEN_TechGiG.pdb
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\MAINTAINING_GARDEN_TechGiG\obj\Debug\MAINTAINING_GARDEN_TechGiG.exe
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\MAINTAINING_GARDEN_TechGiG\obj\Debug\MAINTAINING_GARDEN_TechGiG.pdb
