@@ -43,6 +43,22 @@ namespace Create_LinkedList
                 addOne.prv = Temp;          // Point newly added Node->Previous to previously last element
             }
         }
+
+        public void DeleteByKey(int no)
+        {
+            Node current = Head;
+            while(current!=null)
+            {
+                if(current.Data==no)
+                {
+                    if(current.prv!=null)
+                        (current.prv).next = current.next;
+                    if(current.next!=null)
+                        (current.next).prv = current.prv;
+                }
+                current = current.next;
+            }
+        }
     }
     class MainClass
     {
@@ -56,10 +72,11 @@ namespace Create_LinkedList
             myList.AddAtStart(25);  // 25 10 5 15 20
             myList.AddAtEnd(30);    // 25 10 5 15 20 30
 
-            PrintFromStart(myList);
-            PrintFromEnd(myList);
-            PrintFromStart(myList);
-            PrintFromEnd(myList);
+            myList.DeleteByKey(15); // Delete no in between
+            myList.DeleteByKey(30); // Delete Last
+            PrintFromStart(myList); // Print from Start
+            myList.DeleteByKey(25); // Delete First
+            PrintFromEnd(myList);   // Print from End
             Console.ReadLine();
         }
 
