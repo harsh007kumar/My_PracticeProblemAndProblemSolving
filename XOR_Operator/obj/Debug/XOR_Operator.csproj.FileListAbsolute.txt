@@ -1,6 +1,12 @@
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\XOR_Operator\bin\Debug\XOR_Operator.exe.config
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\XOR_Operator\bin\Debug\XOR_Operator.exe
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\XOR_Operator\bin\Debug\XOR_Operator.pdb
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\XOR_Operator\obj\Debug\XOR_Operator.exe
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\XOR_Operator\obj\Debug\XOR_Operator.pdb
-C:\Users\kumarh\Documents\Visual Studio 2015\Projects\My_PracticeProblemAndProblemSolving\XOR_Operator\obj\Debug\XOR_Operator.csprojResolveAssemblyReference.cache
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/XOR_Operator/bin/Debug/XOR_Operator.exe.config
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/XOR_Operator/bin/Debug/XOR_Operator.exe
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/XOR_Operator/bin/Debug/XOR_Operator.pdb
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/XOR_Operator/obj/Debug/XOR_Operator.exe
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/XOR_Operator/obj/Debug/XOR_Operator.pdb
+C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/XOR_Operator/obj/Debug/XOR_Operator.csprojResolveAssemblyReference.cache
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/XOR_Operator/bin/Debug/XOR_Operator.exe.config
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/XOR_Operator/bin/Debug/XOR_Operator.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/XOR_Operator/bin/Debug/XOR_Operator.pdb
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/XOR_Operator/obj/Debug/XOR_Operator.csproj.CoreCompileInputs.cache
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/XOR_Operator/obj/Debug/XOR_Operator.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/XOR_Operator/obj/Debug/XOR_Operator.pdb
