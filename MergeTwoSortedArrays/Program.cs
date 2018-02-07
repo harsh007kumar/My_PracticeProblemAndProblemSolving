@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MergeTwoSortedArrays
 {
+    // MERGE TWO SORTED ARRAY WHICH ARE IN ASCENDING ORDER INTO RESULTANT ARRAY WHICH SHOULD BE IN DESCENDING ORDER
     class Program
     {
         static void Main(string[] args)

@@ -1,21 +1,26 @@
-﻿<Properties StartupConfiguration="{7458DBF7-F88E-4CB0-86B4-52C29BBDF37C}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Create_LinkedList/Program.cs">
+﻿<Properties StartupConfiguration="{C110D9D2-5FE7-43EB-B102-751BCC13D091}|Default">
+  <MonoDevelop.Ide.ItemProperties.K__LargestElementsInArray PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Segregate0sAnd1s/Program.cs">
     <Files>
-      <File FileName="24HourFormat_To_12HourFormat/Program.cs" Line="10" Column="6" />
-      <File FileName="Create_LinkedList/Program.cs" Line="5" Column="11" />
+      <File FileName="MergeTwoSortedArrays/Program.cs" Line="13" Column="10" />
+      <File FileName="K_LargestElementsInArray/Program.cs" Line="34" Column="13" />
+      <File FileName="Segregate0sAnd1s/Program.cs" Line="36" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Create__LinkedList PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/DS_1/Program.cs" relfile="DS_1/Program.cs" line="12" column="16" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Segregate0sAnd1s PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.ConsoleApplication4__Byte__Enum PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.24HourFormat__To__12HourFormat PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.DS__1 PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
+  <DisabledProjects>
+    <String>Create_LinkedList/LinkedList.csproj</String>
+  </DisabledProjects>
   <MonoDevelop.Ide.ItemProperties.Enum__Value__NotAvaliable PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
