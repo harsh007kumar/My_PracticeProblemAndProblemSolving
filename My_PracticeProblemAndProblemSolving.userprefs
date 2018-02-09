@@ -1,10 +1,12 @@
-﻿<Properties StartupConfiguration="{C110D9D2-5FE7-43EB-B102-751BCC13D091}|Default">
+﻿<Properties StartupConfiguration="{5FD42DA0-5CC2-44F5-A492-47ACA04A286A}|Default">
   <MonoDevelop.Ide.ItemProperties.K__LargestElementsInArray PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Segregate0sAnd1s/Program.cs">
+  <MonoDevelop.Ide.ItemProperties.LargestSumContiguousSubarray PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="LargestSumContiguousSubarray/Program.cs">
     <Files>
       <File FileName="MergeTwoSortedArrays/Program.cs" Line="13" Column="10" />
       <File FileName="K_LargestElementsInArray/Program.cs" Line="34" Column="13" />
       <File FileName="Segregate0sAnd1s/Program.cs" Line="36" Column="14" />
+      <File FileName="LargestSumContiguousSubarray/Program.cs" Line="9" Column="31" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
