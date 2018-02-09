@@ -13,7 +13,7 @@ namespace Sorting
             string var = null;
             while (var != "0")
             {
-                Console.WriteLine("\n\n=== Select which Sorting u wish to perfrom from below\\nB=BubbleSort\nS=SelectionSort\nInsertionSort\n0=EXIT");
+                Console.WriteLine("\n\n====== Select which Sorting u wish to perfrom from below =====\nB=BubbleSort\nS=SelectionSort\nI=InsertionSort\n0=EXIT");
                 var = Console.ReadLine();
                 switch (var.ToUpper())
                 {
@@ -34,7 +34,7 @@ namespace Sorting
                         print(I_arr);
                         break;
                     case "0":
-                        Console.WriteLine("=== Exiting the Solution ===");
+                        Console.WriteLine("==================== Exiting the Solution ====================");
                         break;
                     default:
                         Console.WriteLine("Enter a Appropriate Keyword");
@@ -46,13 +46,20 @@ namespace Sorting
 
         public static void bubblesort(ref int[] arr)
         {
+            bool swapped;
             for (int i = 0; i< arr.Length-1; i++)
             {
+                swapped = false;
                 for (int j = 0; j< arr.Length-1-i; j++)
                 {
                     if (arr[j] > arr[j + 1])
-                        swap(ref arr[j],ref arr[j + 1]);
+                    {
+                        swap(ref arr[j], ref arr[j + 1]);
+                        swapped = true;
+                    }
                 }
+                if (swapped == false)
+                    break;
             }
         }
         public static int[] selectionsort(int[] arr)
@@ -78,7 +85,31 @@ namespace Sorting
         private static int[] Insertionsort(int[] arr)
         {
             int[] to_sort = arr;
-            return to_sort;
+            int i,last,k,len=arr.Length;
+            for(i=1;i<len;i++)
+            {
+                last = arr[i - 1];
+                if (arr[i] < last)
+                {
+                    bool change=true;
+                    int min = arr[i];
+                    for (k = i-1; k >= 0; k--)
+                    {
+                        if (min < arr[k])
+                        {
+                            arr[k + 1] = arr[k];
+                        }
+                        else
+                        {
+                            arr[k] = min;
+                            change = false;
+                        }
+                    }
+                    if (change)
+                        arr[0] = min;
+                }
+            }
+            return arr;
         }
 
         /// <summary>
@@ -88,9 +119,9 @@ namespace Sorting
         /// <param name="v2"></param>
         private static void swap(ref int v1,ref int v2)
         {
-            v1 = v1 + v2;
-            v2 = v1 - v2;
-            v1 = v1 - v2;
+            v1 = v1 ^ v2;
+            v2 = v1 ^ v2;
+            v1 = v1 ^ v2;
         }
         private static int[] takearrayinput()
         {
