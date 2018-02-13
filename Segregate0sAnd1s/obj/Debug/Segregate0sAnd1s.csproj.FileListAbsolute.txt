@@ -3,3 +3,4 @@
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Segregate0sAnd1s/obj/Debug/Segregate0sAnd1s.csproj.CoreCompileInputs.cache
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Segregate0sAnd1s/obj/Debug/Segregate0sAnd1s.exe
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Segregate0sAnd1s/obj/Debug/Segregate0sAnd1s.pdb
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Segregate0sAnd1s/obj/Debug/Segregate0sAnd1s.csprojResolveAssemblyReference.cache

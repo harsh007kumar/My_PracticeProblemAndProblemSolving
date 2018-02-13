@@ -1,26 +1,31 @@
-﻿<Properties StartupConfiguration="{5FD42DA0-5CC2-44F5-A492-47ACA04A286A}|Default">
+﻿<Properties StartupConfiguration="{0643CB4D-4363-4395-BE0D-56F66D9D9653}|Default">
   <MonoDevelop.Ide.ItemProperties.K__LargestElementsInArray PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.LargestSumContiguousSubarray PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="LargestSumContiguousSubarray/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Sorting/Program.cs">
     <Files>
       <File FileName="MergeTwoSortedArrays/Program.cs" Line="13" Column="10" />
       <File FileName="K_LargestElementsInArray/Program.cs" Line="34" Column="13" />
       <File FileName="Segregate0sAnd1s/Program.cs" Line="36" Column="14" />
-      <File FileName="LargestSumContiguousSubarray/Program.cs" Line="9" Column="31" />
+      <File FileName="LargestSumContiguousSubarray/Program.cs" Line="9" Column="6" />
+      <File FileName="Searching/Program.cs" Line="23" Column="21" />
+      <File FileName="Sorting/Program.cs" Line="120" Column="56" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/DS_1/Program.cs" relfile="DS_1/Program.cs" line="12" column="16" />
+      <Breakpoint file="/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Sorting/Program.cs" relfile="Sorting/Program.cs" line="19" column="18" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.Segregate0sAnd1s PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.ConsoleApplication4__Byte__Enum PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.Sorting PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.24HourFormat__To__12HourFormat PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.DS__1 PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Searching PreferredExecutionTarget="MonoDevelop.Default" />
   <DisabledProjects>
     <String>Create_LinkedList/LinkedList.csproj</String>
   </DisabledProjects>
