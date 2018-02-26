@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LargestSumContiguousSubarra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Searching", "Searching\Searching.csproj", "{0643CB4D-4363-4395-BE0D-56F66D9D9653}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lexicographical_ConcatenationOfAllSubstrings", "Lexicographical_ConcatenationOfAllSubstrings\Lexicographical_ConcatenationOfAllSubstrings.csproj", "{66F08A6D-5D49-41A3-998F-DE278A4AC38D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,10 @@ Global
 		{0643CB4D-4363-4395-BE0D-56F66D9D9653}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0643CB4D-4363-4395-BE0D-56F66D9D9653}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0643CB4D-4363-4395-BE0D-56F66D9D9653}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66F08A6D-5D49-41A3-998F-DE278A4AC38D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66F08A6D-5D49-41A3-998F-DE278A4AC38D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66F08A6D-5D49-41A3-998F-DE278A4AC38D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66F08A6D-5D49-41A3-998F-DE278A4AC38D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

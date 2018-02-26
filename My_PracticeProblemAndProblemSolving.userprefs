@@ -1,7 +1,7 @@
-﻿<Properties StartupConfiguration="{0643CB4D-4363-4395-BE0D-56F66D9D9653}|Default">
+﻿<Properties StartupConfiguration="{66F08A6D-5D49-41A3-998F-DE278A4AC38D}|Default">
   <MonoDevelop.Ide.ItemProperties.K__LargestElementsInArray PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.LargestSumContiguousSubarray PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Sorting/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Lexicographical_ConcatenationOfAllSubstrings/Program.cs">
     <Files>
       <File FileName="MergeTwoSortedArrays/Program.cs" Line="13" Column="10" />
       <File FileName="K_LargestElementsInArray/Program.cs" Line="34" Column="13" />
@@ -9,6 +9,7 @@
       <File FileName="LargestSumContiguousSubarray/Program.cs" Line="9" Column="6" />
       <File FileName="Searching/Program.cs" Line="23" Column="21" />
       <File FileName="Sorting/Program.cs" Line="120" Column="56" />
+      <File FileName="Lexicographical_ConcatenationOfAllSubstrings/Program.cs" Line="22" Column="40" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -20,6 +21,7 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.Segregate0sAnd1s PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Lexicographical__ConcatenationOfAllSubstrings PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.ConsoleApplication4__Byte__Enum PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.Sorting PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.24HourFormat__To__12HourFormat PreferredExecutionTarget="MonoDevelop.Default" />
