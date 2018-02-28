@@ -1,17 +1,15 @@
-﻿<Properties StartupConfiguration="{66F08A6D-5D49-41A3-998F-DE278A4AC38D}|Default">
+﻿<Properties StartupConfiguration="{313774EE-5019-460D-A691-A9B2067ACF35}|Default">
   <MonoDevelop.Ide.ItemProperties.K__LargestElementsInArray PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.LargestSumContiguousSubarray PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Lexicographical_ConcatenationOfAllSubstrings/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="NoOfContiguousSubsequences_WhichAddUpTo9/Program.cs">
     <Files>
       <File FileName="MergeTwoSortedArrays/Program.cs" Line="13" Column="10" />
-      <File FileName="K_LargestElementsInArray/Program.cs" Line="34" Column="13" />
-      <File FileName="Segregate0sAnd1s/Program.cs" Line="36" Column="14" />
-      <File FileName="LargestSumContiguousSubarray/Program.cs" Line="9" Column="6" />
       <File FileName="Searching/Program.cs" Line="23" Column="21" />
-      <File FileName="Sorting/Program.cs" Line="120" Column="56" />
       <File FileName="Lexicographical_ConcatenationOfAllSubstrings/Program.cs" Line="22" Column="40" />
+      <File FileName="NoOfContiguousSubsequences_WhichAddUpTo9/Program.cs" Line="24" Column="13" />
     </Files>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.NoOfContiguousSubsequences__WhichAddUpTo9 PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
