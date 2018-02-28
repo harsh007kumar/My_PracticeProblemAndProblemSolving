@@ -1,12 +1,13 @@
-﻿<Properties StartupConfiguration="{313774EE-5019-460D-A691-A9B2067ACF35}|Default">
+﻿<Properties StartupConfiguration="{CAC449A1-314F-4C71-905F-51A7D494EDDD}|Default">
   <MonoDevelop.Ide.ItemProperties.K__LargestElementsInArray PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.LargestSumContiguousSubarray PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="NoOfContiguousSubsequences_WhichAddUpTo9/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="NoOfFactorialHaving_N_ZerosAtEnd/Program.cs">
     <Files>
       <File FileName="MergeTwoSortedArrays/Program.cs" Line="13" Column="10" />
       <File FileName="Searching/Program.cs" Line="23" Column="21" />
-      <File FileName="Lexicographical_ConcatenationOfAllSubstrings/Program.cs" Line="22" Column="40" />
-      <File FileName="NoOfContiguousSubsequences_WhichAddUpTo9/Program.cs" Line="24" Column="13" />
+      <File FileName="Lexicographical_ConcatenationOfAllSubstrings/Program.cs" Line="13" Column="34" />
+      <File FileName="NoOfContiguousSubsequences_WhichAddUpTo9/Program.cs" Line="3" Column="51" />
+      <File FileName="NoOfFactorialHaving_N_ZerosAtEnd/Program.cs" Line="26" Column="45" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.NoOfContiguousSubsequences__WhichAddUpTo9 PreferredExecutionTarget="MonoDevelop.Default" />
@@ -18,6 +19,7 @@
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.Segregate0sAnd1s PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.NoOfFactorialHaving__N__ZerosAtEnd PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.Lexicographical__ConcatenationOfAllSubstrings PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.ConsoleApplication4__Byte__Enum PreferredExecutionTarget="MonoDevelop.Default" />
