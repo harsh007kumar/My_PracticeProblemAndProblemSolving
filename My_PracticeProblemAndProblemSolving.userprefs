@@ -1,13 +1,14 @@
-﻿<Properties StartupConfiguration="{CAC449A1-314F-4C71-905F-51A7D494EDDD}|Default">
+﻿<Properties StartupConfiguration="{7EE79CCC-CA23-4D7A-8DD8-D9902A4945A2}|Default">
   <MonoDevelop.Ide.ItemProperties.K__LargestElementsInArray PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.LargestSumContiguousSubarray PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="NoOfFactorialHaving_N_ZerosAtEnd/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="LargestNoNotAPerfectSquare/Program.cs">
     <Files>
       <File FileName="MergeTwoSortedArrays/Program.cs" Line="13" Column="10" />
       <File FileName="Searching/Program.cs" Line="23" Column="21" />
       <File FileName="Lexicographical_ConcatenationOfAllSubstrings/Program.cs" Line="13" Column="34" />
       <File FileName="NoOfContiguousSubsequences_WhichAddUpTo9/Program.cs" Line="3" Column="51" />
-      <File FileName="NoOfFactorialHaving_N_ZerosAtEnd/Program.cs" Line="26" Column="45" />
+      <File FileName="NoOfFactorialHaving_N_ZerosAtEnd/Program.cs" Line="7" Column="20" />
+      <File FileName="LargestNoNotAPerfectSquare/Program.cs" Line="6" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.NoOfContiguousSubsequences__WhichAddUpTo9 PreferredExecutionTarget="MonoDevelop.Default" />
@@ -22,6 +23,7 @@
   <MonoDevelop.Ide.ItemProperties.NoOfFactorialHaving__N__ZerosAtEnd PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.Lexicographical__ConcatenationOfAllSubstrings PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.LargestNoNotAPerfectSquare PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.ConsoleApplication4__Byte__Enum PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.Sorting PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.24HourFormat__To__12HourFormat PreferredExecutionTarget="MonoDevelop.Default" />

@@ -1,0 +1,5 @@
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/LargestNoNotAPerfectSquare/bin/Debug/LargestNoNotAPerfectSquare.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/LargestNoNotAPerfectSquare/bin/Debug/LargestNoNotAPerfectSquare.pdb
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/LargestNoNotAPerfectSquare/obj/Debug/LargestNoNotAPerfectSquare.csproj.CoreCompileInputs.cache
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/LargestNoNotAPerfectSquare/obj/Debug/LargestNoNotAPerfectSquare.exe
+/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/LargestNoNotAPerfectSquare/obj/Debug/LargestNoNotAPerfectSquare.pdb
