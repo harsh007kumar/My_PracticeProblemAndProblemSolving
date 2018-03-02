@@ -22,9 +22,11 @@ namespace MaxLenOfPrefixInOneStringOccursAsSubsequenceAnother
 
         private static int FindLongestPrefixWhichIsSubsequenceInAnother(string s, string t)
         {
-            int l2 = t.Length, i, count = 0;
+            int l1 = s.Length, l2 = t.Length, i, count = 0;
             for (i = 0; i < l2; i++)
             {
+                if (count == l1)
+                    break;
                 if (s[0 + count] == t[i])
                     count++;
             }
