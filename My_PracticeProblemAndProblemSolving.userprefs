@@ -1,7 +1,7 @@
-﻿<Properties StartupConfiguration="{7EE79CCC-CA23-4D7A-8DD8-D9902A4945A2}|Default">
+﻿<Properties StartupConfiguration="{98B6BD47-628C-4768-8A38-E874BD2A0E56}|Default">
   <MonoDevelop.Ide.ItemProperties.K__LargestElementsInArray PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.LargestSumContiguousSubarray PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="LargestNoNotAPerfectSquare/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MaxLenOfPrefixInOneStringOccursAsSubsequenceAnother/Program.cs">
     <Files>
       <File FileName="MergeTwoSortedArrays/Program.cs" Line="13" Column="10" />
       <File FileName="Searching/Program.cs" Line="23" Column="21" />
@@ -9,6 +9,7 @@
       <File FileName="NoOfContiguousSubsequences_WhichAddUpTo9/Program.cs" Line="3" Column="51" />
       <File FileName="NoOfFactorialHaving_N_ZerosAtEnd/Program.cs" Line="7" Column="20" />
       <File FileName="LargestNoNotAPerfectSquare/Program.cs" Line="6" Column="5" />
+      <File FileName="MaxLenOfPrefixInOneStringOccursAsSubsequenceAnother/Program.cs" Line="5" Column="8" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.NoOfContiguousSubsequences__WhichAddUpTo9 PreferredExecutionTarget="MonoDevelop.Default" />
@@ -29,6 +30,7 @@
   <MonoDevelop.Ide.ItemProperties.24HourFormat__To__12HourFormat PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.DS__1 PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.MaxLenOfPrefixInOneStringOccursAsSubsequenceAnother PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.Searching PreferredExecutionTarget="MonoDevelop.Default" />
   <DisabledProjects>
     <String>Create_LinkedList/LinkedList.csproj</String>
