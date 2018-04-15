@@ -1,7 +1,7 @@
-﻿<Properties StartupConfiguration="{98B6BD47-628C-4768-8A38-E874BD2A0E56}|Default">
+﻿<Properties StartupConfiguration="{666ED06A-B1FA-4D79-80EC-0A50B3956782}|Default">
   <MonoDevelop.Ide.ItemProperties.K__LargestElementsInArray PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.LargestSumContiguousSubarray PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MaxLenOfPrefixInOneStringOccursAsSubsequenceAnother/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Currency_Conversion_From_NumbersToWords/Program.cs">
     <Files>
       <File FileName="MergeTwoSortedArrays/Program.cs" Line="13" Column="10" />
       <File FileName="Searching/Program.cs" Line="23" Column="21" />
@@ -9,7 +9,8 @@
       <File FileName="NoOfContiguousSubsequences_WhichAddUpTo9/Program.cs" Line="3" Column="51" />
       <File FileName="NoOfFactorialHaving_N_ZerosAtEnd/Program.cs" Line="7" Column="20" />
       <File FileName="LargestNoNotAPerfectSquare/Program.cs" Line="6" Column="5" />
-      <File FileName="MaxLenOfPrefixInOneStringOccursAsSubsequenceAnother/Program.cs" Line="5" Column="8" />
+      <File FileName="MaxLenOfPrefixInOneStringOccursAsSubsequenceAnother/Program.cs" Line="14" Column="6" />
+      <File FileName="Currency_Conversion_From_NumbersToWords/Program.cs" Line="21" Column="33" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.NoOfContiguousSubsequences__WhichAddUpTo9 PreferredExecutionTarget="MonoDevelop.Default" />
@@ -18,6 +19,8 @@
     <BreakpointStore>
       <Breakpoint file="/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/DS_1/Program.cs" relfile="DS_1/Program.cs" line="12" column="16" />
       <Breakpoint file="/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Sorting/Program.cs" relfile="Sorting/Program.cs" line="19" column="18" />
+      <Breakpoint file="/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Currency_Conversion_From_NumbersToWords/Program.cs" relfile="Currency_Conversion_From_NumbersToWords/Program.cs" line="25" column="1" />
+      <Breakpoint file="/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Currency_Conversion_From_NumbersToWords/Program.cs" relfile="Currency_Conversion_From_NumbersToWords/Program.cs" line="11" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.Segregate0sAnd1s PreferredExecutionTarget="MonoDevelop.Default" />
@@ -29,6 +32,7 @@
   <MonoDevelop.Ide.ItemProperties.Sorting PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.24HourFormat__To__12HourFormat PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.DS__1 PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.Currency__Conversion__From__NumbersToWords PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.MaxLenOfPrefixInOneStringOccursAsSubsequenceAnother PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.ItemProperties.Searching PreferredExecutionTarget="MonoDevelop.Default" />
