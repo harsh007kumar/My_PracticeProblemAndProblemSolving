@@ -65,6 +65,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Currency_Conversion_From_Nu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sock_Merchant_Problem", "Sock_Merchant_Problem\Sock_Merchant_Problem.csproj", "{4CFFDF80-CEEB-464B-9906-F61457225F7F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Counting_Mountains_Valleys", "Counting_Mountains_Valleys\Counting_Mountains_Valleys.csproj", "{5A37B745-7EC0-4BAD-81DA-E55AA26FA7F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -195,6 +197,10 @@ Global
 		{4CFFDF80-CEEB-464B-9906-F61457225F7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CFFDF80-CEEB-464B-9906-F61457225F7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CFFDF80-CEEB-464B-9906-F61457225F7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A37B745-7EC0-4BAD-81DA-E55AA26FA7F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A37B745-7EC0-4BAD-81DA-E55AA26FA7F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A37B745-7EC0-4BAD-81DA-E55AA26FA7F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A37B745-7EC0-4BAD-81DA-E55AA26FA7F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
