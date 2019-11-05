@@ -14,3 +14,9 @@ C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProbl
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/SortingStringValues/obj/Debug/SortingStringValues.csproj.CoreCompileInputs.cache
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/SortingStringValues/obj/Debug/SortingStringValues.exe
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/SortingStringValues/obj/Debug/SortingStringValues.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\SortingStringValues\bin\Debug\SortingStringValues.exe.config
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\SortingStringValues\bin\Debug\SortingStringValues.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\SortingStringValues\bin\Debug\SortingStringValues.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\SortingStringValues\obj\Debug\SortingStringValues.csproj.CoreCompileInputs.cache
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\SortingStringValues\obj\Debug\SortingStringValues.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\SortingStringValues\obj\Debug\SortingStringValues.pdb

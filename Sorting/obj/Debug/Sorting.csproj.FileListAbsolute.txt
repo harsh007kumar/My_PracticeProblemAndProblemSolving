@@ -16,3 +16,10 @@ C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProbl
 C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/Sorting/bin/Debug/Sorting.pdb
 C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProblemSolving/Sorting/obj/Debug/Sorting.csprojResolveAssemblyReference.cache
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Sorting/obj/Debug/Sorting.csprojResolveAssemblyReference.cache
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Sorting\bin\Debug\Sorting.exe.config
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Sorting\bin\Debug\Sorting.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Sorting\bin\Debug\Sorting.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Sorting\obj\Debug\Sorting.csprojAssemblyReference.cache
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Sorting\obj\Debug\Sorting.csproj.CoreCompileInputs.cache
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Sorting\obj\Debug\Sorting.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Sorting\obj\Debug\Sorting.pdb

@@ -14,3 +14,9 @@ C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProbl
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/obj/Debug/Substring_NotVowel.csproj.CoreCompileInputs.cache
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/obj/Debug/Substring_NotVowel.exe
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Substring_NotVowel/obj/Debug/Substring_NotVowel.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Substring_NotVowel\bin\Debug\Substring_NotVowel.exe.config
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Substring_NotVowel\bin\Debug\Substring_NotVowel.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Substring_NotVowel\bin\Debug\Substring_NotVowel.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Substring_NotVowel\obj\Debug\Substring_NotVowel.csproj.CoreCompileInputs.cache
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Substring_NotVowel\obj\Debug\Substring_NotVowel.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Substring_NotVowel\obj\Debug\Substring_NotVowel.pdb

@@ -16,3 +16,10 @@ C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProbl
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/obj/Debug/stringPalindrome.csproj.CoreCompileInputs.cache
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/obj/Debug/stringPalindrome.exe
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/stringPalindrome/obj/Debug/stringPalindrome.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\stringPalindrome\bin\Debug\stringPalindrome.exe.config
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\stringPalindrome\bin\Debug\stringPalindrome.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\stringPalindrome\bin\Debug\stringPalindrome.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\stringPalindrome\obj\Debug\stringPalindrome.csprojAssemblyReference.cache
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\stringPalindrome\obj\Debug\stringPalindrome.csproj.CoreCompileInputs.cache
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\stringPalindrome\obj\Debug\stringPalindrome.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\stringPalindrome\obj\Debug\stringPalindrome.pdb

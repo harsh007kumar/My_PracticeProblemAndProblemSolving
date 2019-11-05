@@ -14,3 +14,9 @@ C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProbl
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/HourGlass/obj/Debug/HourGlass.csproj.CoreCompileInputs.cache
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/HourGlass/obj/Debug/HourGlass.exe
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/HourGlass/obj/Debug/HourGlass.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\HourGlass\bin\Debug\HourGlass.exe.config
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\HourGlass\bin\Debug\HourGlass.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\HourGlass\bin\Debug\HourGlass.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\HourGlass\obj\Debug\HourGlass.csproj.CoreCompileInputs.cache
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\HourGlass\obj\Debug\HourGlass.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\HourGlass\obj\Debug\HourGlass.pdb

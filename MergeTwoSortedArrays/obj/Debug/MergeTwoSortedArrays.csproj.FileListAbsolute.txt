@@ -10,3 +10,9 @@ C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProbl
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/MergeTwoSortedArrays/obj/Debug/MergeTwoSortedArrays.csproj.CoreCompileInputs.cache
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/MergeTwoSortedArrays/obj/Debug/MergeTwoSortedArrays.exe
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/MergeTwoSortedArrays/obj/Debug/MergeTwoSortedArrays.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\MergeTwoSortedArrays\bin\Debug\MergeTwoSortedArrays.exe.config
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\MergeTwoSortedArrays\bin\Debug\MergeTwoSortedArrays.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\MergeTwoSortedArrays\bin\Debug\MergeTwoSortedArrays.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\MergeTwoSortedArrays\obj\Debug\MergeTwoSortedArrays.csproj.CoreCompileInputs.cache
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\MergeTwoSortedArrays\obj\Debug\MergeTwoSortedArrays.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\MergeTwoSortedArrays\obj\Debug\MergeTwoSortedArrays.pdb

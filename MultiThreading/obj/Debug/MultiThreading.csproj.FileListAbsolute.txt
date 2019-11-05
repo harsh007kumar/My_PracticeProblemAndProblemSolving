@@ -14,3 +14,9 @@ C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProbl
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/MultiThreading/obj/Debug/MultiThreading.csproj.CoreCompileInputs.cache
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/MultiThreading/obj/Debug/MultiThreading.exe
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/MultiThreading/obj/Debug/MultiThreading.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\MultiThreading\bin\Debug\MultiThreading.exe.config
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\MultiThreading\bin\Debug\MultiThreading.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\MultiThreading\bin\Debug\MultiThreading.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\MultiThreading\obj\Debug\MultiThreading.csproj.CoreCompileInputs.cache
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\MultiThreading\obj\Debug\MultiThreading.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\MultiThreading\obj\Debug\MultiThreading.pdb

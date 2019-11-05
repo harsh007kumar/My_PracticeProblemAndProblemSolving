@@ -16,3 +16,10 @@ C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProbl
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Enum_Value_NotAvaliable/obj/Debug/Enum_Value_NotAvaliable.csproj.CoreCompileInputs.cache
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Enum_Value_NotAvaliable/obj/Debug/Enum_Value_NotAvaliable.exe
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Enum_Value_NotAvaliable/obj/Debug/Enum_Value_NotAvaliable.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Enum_Value_NotAvaliable\bin\Debug\Enum_Value_NotAvaliable.exe.config
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Enum_Value_NotAvaliable\bin\Debug\Enum_Value_NotAvaliable.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Enum_Value_NotAvaliable\bin\Debug\Enum_Value_NotAvaliable.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Enum_Value_NotAvaliable\obj\Debug\Enum_Value_NotAvaliable.csprojAssemblyReference.cache
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Enum_Value_NotAvaliable\obj\Debug\Enum_Value_NotAvaliable.csproj.CoreCompileInputs.cache
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Enum_Value_NotAvaliable\obj\Debug\Enum_Value_NotAvaliable.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Enum_Value_NotAvaliable\obj\Debug\Enum_Value_NotAvaliable.pdb

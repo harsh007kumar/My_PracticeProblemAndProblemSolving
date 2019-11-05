@@ -14,3 +14,10 @@ C:/Users/kumarh/Documents/Visual Studio 2015/Projects/My_PracticeProblemAndProbl
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/DS_1/obj/Debug/DS_1.csproj.CoreCompileInputs.cache
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/DS_1/obj/Debug/DS_1.exe
 /Users/harsh/Projects/My_PracticeProblemAndProblemSolving/DS_1/obj/Debug/DS_1.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\DS_1\bin\Debug\DS_1.exe.config
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\DS_1\bin\Debug\DS_1.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\DS_1\bin\Debug\DS_1.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\DS_1\obj\Debug\DS_1.csprojAssemblyReference.cache
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\DS_1\obj\Debug\DS_1.csproj.CoreCompileInputs.cache
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\DS_1\obj\Debug\DS_1.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\DS_1\obj\Debug\DS_1.pdb
