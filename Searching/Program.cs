@@ -4,7 +4,7 @@ using System.Linq;
 namespace Searching
 {
     // Visit https://www.geeksforgeeks.org/searching-algorithms/ for more info on types of searching algorithm
-    class MainClass
+    class Search
     {
         public static void Main(string[] args)
         {
@@ -22,7 +22,7 @@ namespace Searching
                         int elementToBeSearched = 38;//Convert.ToInt32(Console.ReadLine());
                         print(B_arr);   //Show array
                         Console.WriteLine("We are searching for {0}", elementToBeSearched);
-                        int foudnAt = BinarySearch(B_arr, 0, B_arr.Length-1, elementToBeSearched);
+                        int foudnAt = BinarySearch(B_arr, elementToBeSearched);
                         Console.WriteLine((foudnAt == -1) ? "Element Not Present" : "Element found at index : "+ foudnAt);
                         break;
                     case "E":
@@ -61,9 +61,17 @@ namespace Searching
             Console.ReadKey();
         }
 
-
         // Binary Search using recursion
-        private static int BinarySearch(int[] arr,int Low, int High, int elementToBeSearched)
+        private static int BinarySearch(int[] arr, int elementToBeSearched)
+        {
+            //Console.WriteLine("Recursive Binary Search");
+            //return BinarySearch_Recursive(arr, 0, arr.Length - 1, elementToBeSearched);     //recursive way
+
+            Console.WriteLine("Iterative Binary Search");
+            return BinarySearch_Iterative(arr, 0, arr.Length - 1, elementToBeSearched);     //Iterative way
+        }
+        // Binary Search using recursion
+        private static int BinarySearch_Recursive(int[] arr,int Low, int High, int elementToBeSearched)
         {
             int Mid = (High + Low) / 2,index=-1;
             if (elementToBeSearched == arr[Mid])
@@ -71,10 +79,28 @@ namespace Searching
             else if (Mid == High)
                 return index;
             else if (elementToBeSearched > arr[Mid])
-                index = BinarySearch(arr, Mid + 1, High, elementToBeSearched);
+                index = BinarySearch_Recursive(arr, Mid + 1, High, elementToBeSearched);
             else
-                index = BinarySearch(arr, Low, Mid -1, elementToBeSearched);
+                index = BinarySearch_Recursive(arr, Low, Mid -1, elementToBeSearched);
 
+            return index;
+        }
+
+        // Binary Search using Iteration
+        private static int BinarySearch_Iterative(int[] arr, int Low, int High, int elementToBeSearched)
+        {
+            int Mid, index = -1;
+            do
+            {
+                Mid = (High + Low) / 2;
+                if (elementToBeSearched == arr[Mid])
+                    index = Mid;
+                else if (elementToBeSearched > arr[Mid])
+                    Low = Mid + 1;
+                else
+                    High = Mid - 1;
+            }
+            while (Mid != High);
             return index;
         }
 
