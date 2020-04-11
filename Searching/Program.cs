@@ -3,6 +3,7 @@ using System.Linq;
 
 namespace Searching
 {
+    // Visit https://www.geeksforgeeks.org/searching-algorithms/ for more info on types of searching algorithm
     class MainClass
     {
         public static void Main(string[] args)
@@ -17,9 +18,12 @@ namespace Searching
                 {
                     case "B":
                         Console.WriteLine("Binary Search");
-                        int[] B_arr = takearrayinput();
-                        BinarySearch(ref B_arr, 25);
-                        print(B_arr);
+                        int[] B_arr = returnStaticArray();//takearrayinput();
+                        int elementToBeSearched = 38;//Convert.ToInt32(Console.ReadLine());
+                        print(B_arr);   //Show array
+                        Console.WriteLine("We are searching for {0}", elementToBeSearched);
+                        int foudnAt = BinarySearch(B_arr, 0, B_arr.Length-1, elementToBeSearched);
+                        Console.WriteLine((foudnAt == -1) ? "Element Not Present" : "Element found at index : "+ foudnAt);
                         break;
                     case "E":
                         Console.WriteLine("Exponential Search");
@@ -58,33 +62,43 @@ namespace Searching
         }
 
 
+        // Binary Search using recursion
+        private static int BinarySearch(int[] arr,int Low, int High, int elementToBeSearched)
+        {
+            int Mid = (High + Low) / 2,index=-1;
+            if (elementToBeSearched == arr[Mid])
+                index=Mid;
+            else if (Mid == High)
+                return index;
+            else if (elementToBeSearched > arr[Mid])
+                index = BinarySearch(arr, Mid + 1, High, elementToBeSearched);
+            else
+                index = BinarySearch(arr, Low, Mid -1, elementToBeSearched);
 
-        private static void BinarySearch(ref int[] b_arr, int v)
+            return index;
+        }
+
+        private static int[] ExponentialSearch(int[] arr, int elementToBeSearched)
         {
             throw new NotImplementedException();
         }
 
-        private static int[] ExponentialSearch(int[] v1, int v2)
+        private static int[] FibonacciSearch(int[] arr, int elementToBeSearched)
         {
             throw new NotImplementedException();
         }
 
-        private static int[] FibonacciSearch(int[] v1, int v2)
+        private static int[] LinearSearch(int[] arr, int elementToBeSearched)
         {
             throw new NotImplementedException();
         }
 
-        private static int[] LinearSearch(int[] v1, int v2)
+        private static int[] JumpSearch(int[] arr, int elementToBeSearched)
         {
             throw new NotImplementedException();
         }
 
-        private static int[] JumpSearch(int[] v1, int v2)
-        {
-            throw new NotImplementedException();
-        }
-
-        private static int[] InterpolationSearch(int[] v1, int v2)
+        private static int[] InterpolationSearch(int[] arr, int elementToBeSearched)
         {
             throw new NotImplementedException();
         }
@@ -99,15 +113,18 @@ namespace Searching
         private static int[] takearrayinput()
         {
             //int[] arr = new int[] { };
-            Console.WriteLine("\nEnter the integer(s) you want in ur Sorted Array seperated by comma(,) like 2,3,4 and Search would be for no 25");
+            Console.WriteLine("\nEnter the integer(s) you want in ur Sorted Array seperated by comma(,) like 2,3,4 and Search would be to check presense of no \"25\"");
             return Console.ReadLine().Split(',').Select(str => int.Parse(str)).ToArray();
             //var result = myString.Select(s => s.ToSafeInt()).ToArray()
         }
+        private static int[] returnStaticArray()
+        {   return new int[] { 2, 5, 8, 12, 16, 23, 38, 56, 72, 91 };        }
 
         private static void print(int[] arr)
         {
             for (int i = 0; i < arr.Length; i++)
                 Console.Write("\t{0}", arr[i]);
+            Console.WriteLine();
         }
     }
 }
