@@ -8,47 +8,43 @@ namespace Searching
     {
         public static void Main(string[] args)
         {
+            int[] array = ReturnStaticArray();//takearrayinput();
+            print(array);   //Show array
+            int elementToBeSearched = 138;//Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("We are searching for element : {0}", elementToBeSearched);
             string var = null;
             while (var != "0")
             {
-                Console.WriteLine("\n\n====== Select which Searching u wish to perfrom from below =====\nB=Binary Search\nE=Exponential Search\n" +
+                Console.WriteLine("\n\n====== Select which Searching u wish to perfrom on above array =====\nB=Binary Search\nE=Exponential Search\n" +
                                   "I=Interpolation Search\nJ=Jump Search\nL=Linear Search\nF=Fibonacci Search\n0=EXIT");
                 var = Console.ReadLine();
                 switch (var.ToUpper())
                 {
                     case "B":
                         Console.WriteLine("Binary Search");
-                        int[] B_arr = returnStaticArray();//takearrayinput();
-                        int elementToBeSearched = 38;//Convert.ToInt32(Console.ReadLine());
-                        print(B_arr);   //Show array
-                        Console.WriteLine("We are searching for {0}", elementToBeSearched);
-                        int foudnAt = BinarySearch(B_arr, elementToBeSearched);
-                        Console.WriteLine((foudnAt == -1) ? "Element Not Present" : "Element found at index : "+ foudnAt);
+                        int foundAt = BinarySearch(array, elementToBeSearched);
+                        Console.WriteLine((foundAt == -1) ? "Element Not Present" : "Element found at index : "+ foundAt);
                         break;
                     case "E":
                         Console.WriteLine("Exponential Search");
                         int[] E_arr = ExponentialSearch(takearrayinput(), 25);
-                        print(E_arr);
                         break;
                     case "I":
                         Console.WriteLine("Interpolation Search");
                         int[] I_arr = InterpolationSearch(takearrayinput(), 25);
-                        print(I_arr);
                         break;
                     case "J":
                         Console.WriteLine("Jump Search");
-                        int[] J_arr = JumpSearch(takearrayinput(), 25);
-                        print(J_arr);
+                        foundAt = JumpSearch(array, elementToBeSearched);
+                        Console.WriteLine((foundAt == -1) ? "Element Not Present" : "Element found at index : " + foundAt);
                         break;
                     case "L":
                         Console.WriteLine("Linear Search");
                         int[] L_arr = LinearSearch(takearrayinput(), 25);
-                        print(L_arr);
                         break;
                     case "F":
                         Console.WriteLine("Fibonacci Search");
                         int[] F_arr = FibonacciSearch(takearrayinput(), 25);
-                        print(F_arr);
                         break;
                     case "0":
                         Console.WriteLine("==================== Exiting the Solution ====================");
@@ -94,7 +90,10 @@ namespace Searching
             {
                 Mid = (High + Low) / 2;
                 if (elementToBeSearched == arr[Mid])
+                {
                     index = Mid;
+                    break;
+                }
                 else if (elementToBeSearched > arr[Mid])
                     Low = Mid + 1;
                 else
@@ -119,9 +118,33 @@ namespace Searching
             throw new NotImplementedException();
         }
 
-        private static int[] JumpSearch(int[] arr, int elementToBeSearched)
+        // Time Complexity : O(√n)
+        private static int JumpSearch(int[] arr, int elementToBeSearched)
         {
-            throw new NotImplementedException();
+            int len = arr.Length, jump_by = (int)Math.Sqrt(len), i, index = -1, startFrom=-1;
+            for(i=0;i<len;i=i+jump_by)  //(len/jump_by) times loop
+            {
+                if (arr[i] == elementToBeSearched)
+                    return i;
+                else if (arr[i] < elementToBeSearched)
+                    continue;
+                else if (arr[i] > elementToBeSearched)
+                {
+                    startFrom = i - jump_by;
+                    break;
+                }
+            }
+            if(startFrom!=-1)   //jump_by-1 time loop
+            {
+                int k = startFrom;
+                while (k < (jump_by+startFrom))
+                {
+                    if (arr[k] == elementToBeSearched)
+                    { index = k; break; }
+                    k++;
+                }
+            }
+            return index;
         }
 
         private static int[] InterpolationSearch(int[] arr, int elementToBeSearched)
@@ -138,12 +161,12 @@ namespace Searching
 
         private static int[] takearrayinput()
         {
-            //int[] arr = new int[] { };
+            //int[] arr = new int[] { 2, 5, 8, 12, 16, 23, 38, 56, 72, 91 };
             Console.WriteLine("\nEnter the integer(s) you want in ur Sorted Array seperated by comma(,) like 2,3,4 and Search would be to check presense of no \"25\"");
             return Console.ReadLine().Split(',').Select(str => int.Parse(str)).ToArray();
             //var result = myString.Select(s => s.ToSafeInt()).ToArray()
         }
-        private static int[] returnStaticArray()
+        private static int[] ReturnStaticArray()
         {   return new int[] { 2, 5, 8, 12, 16, 23, 38, 56, 72, 91 };        }
 
         private static void print(int[] arr)
