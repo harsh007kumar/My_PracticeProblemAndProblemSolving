@@ -10,7 +10,7 @@ namespace Searching
         {
             int[] array = ReturnStaticArray();//takearrayinput();
             print(array);   //Show array
-            int elementToBeSearched = 138;//Convert.ToInt32(Console.ReadLine());
+            int foundAt,elementToBeSearched = 38;//Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("We are searching for element : {0}", elementToBeSearched);
             string var = null;
             while (var != "0")
@@ -18,33 +18,32 @@ namespace Searching
                 Console.WriteLine("\n\n====== Select which Searching u wish to perfrom on above array =====\nB=Binary Search\nE=Exponential Search\n" +
                                   "I=Interpolation Search\nJ=Jump Search\nL=Linear Search\nF=Fibonacci Search\n0=EXIT");
                 var = Console.ReadLine();
+                foundAt=-1;
                 switch (var.ToUpper())
                 {
                     case "B":
                         Console.WriteLine("Binary Search");
-                        int foundAt = BinarySearch(array, elementToBeSearched);
-                        Console.WriteLine((foundAt == -1) ? "Element Not Present" : "Element found at index : "+ foundAt);
+                        foundAt = BinarySearch(array, elementToBeSearched);
                         break;
                     case "E":
                         Console.WriteLine("Exponential Search");
-                        int[] E_arr = ExponentialSearch(takearrayinput(), 25);
+                        int[] E_arr = ExponentialSearch(array, elementToBeSearched);
                         break;
                     case "I":
                         Console.WriteLine("Interpolation Search");
-                        int[] I_arr = InterpolationSearch(takearrayinput(), 25);
+                        foundAt = InterpolationSearch(array, elementToBeSearched);
                         break;
                     case "J":
                         Console.WriteLine("Jump Search");
                         foundAt = JumpSearch(array, elementToBeSearched);
-                        Console.WriteLine((foundAt == -1) ? "Element Not Present" : "Element found at index : " + foundAt);
                         break;
                     case "L":
                         Console.WriteLine("Linear Search");
-                        int[] L_arr = LinearSearch(takearrayinput(), 25);
+                        int[] L_arr = LinearSearch(array, elementToBeSearched);
                         break;
                     case "F":
                         Console.WriteLine("Fibonacci Search");
-                        int[] F_arr = FibonacciSearch(takearrayinput(), 25);
+                        int[] F_arr = FibonacciSearch(array, elementToBeSearched);
                         break;
                     case "0":
                         Console.WriteLine("==================== Exiting the Solution ====================");
@@ -53,11 +52,11 @@ namespace Searching
                         Console.WriteLine("Enter a Appropriate Keyword");
                         break;
                 }
+                Console.WriteLine((foundAt == -1) ? "Element Not Present" : "Element found at index : " + foundAt);
             }
-            Console.ReadKey();
         }
 
-        // Binary Search using recursion
+        // Binary Search, Time Complexity : O(Log n)
         private static int BinarySearch(int[] arr, int elementToBeSearched)
         {
             //Console.WriteLine("Recursive Binary Search");
@@ -118,7 +117,7 @@ namespace Searching
             throw new NotImplementedException();
         }
 
-        // Time Complexity : O(√n)
+        // Jump Search, Time Complexity : O(√n)
         private static int JumpSearch(int[] arr, int elementToBeSearched)
         {
             int len = arr.Length, jump_by = (int)Math.Sqrt(len), i, index = -1, startFrom=-1;
@@ -147,11 +146,29 @@ namespace Searching
             return index;
         }
 
-        private static int[] InterpolationSearch(int[] arr, int elementToBeSearched)
+        //  Interpolation Search, Time Complexity : if elements are uniformly distributed, then O (log log n)). In worst case it can take upto O(n).
+        private static int InterpolationSearch(int[] arr, int elementToBeSearched)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Recursive Interpolation Search");
+            return InterpolationSearch_Recursive(arr, 0, arr.Length - 1, elementToBeSearched);     //recursive way
         }
 
+        // Interpolation Search using recursion
+        private static int InterpolationSearch_Recursive(int[] arr, int Low, int High, int elementToBeSearched)
+        {
+            //Interpolation formula : pos = lo + [ (x-arr[lo])*(hi-lo) / (arr[hi]-arr[Lo]) ]
+            int pos = Low + (((elementToBeSearched - arr[Low]) * (High - Low)) / (arr[High] - arr[Low])), index = -1;
+            if (pos >= High)
+                return index;
+            else if (elementToBeSearched == arr[pos])
+                return pos;
+            else if (elementToBeSearched < arr[pos])
+                index = InterpolationSearch_Recursive(arr, Low, pos - 1, elementToBeSearched);
+            else if (elementToBeSearched > arr[pos] )
+                index = InterpolationSearch_Recursive(arr, pos + 1, High, elementToBeSearched);
+
+            return index;
+        }
         private static void swap(ref int v1, ref int v2)
         {
             v1 = v1 ^ v2;
