@@ -27,7 +27,7 @@ namespace Searching
                         break;
                     case "E":
                         Console.WriteLine("Exponential Search");
-                        int[] E_arr = ExponentialSearch(array, elementToBeSearched);
+                        foundAt = ExponentialSearch(array, elementToBeSearched);
                         break;
                     case "I":
                         Console.WriteLine("Interpolation Search");
@@ -39,11 +39,11 @@ namespace Searching
                         break;
                     case "L":
                         Console.WriteLine("Linear Search");
-                        int[] L_arr = LinearSearch(array, elementToBeSearched);
+                        foundAt = LinearSearch(array, elementToBeSearched);
                         break;
                     case "F":
                         Console.WriteLine("Fibonacci Search");
-                        int[] F_arr = FibonacciSearch(array, elementToBeSearched);
+                        foundAt = FibonacciSearch(array, elementToBeSearched);
                         break;
                     case "0":
                         Console.WriteLine("==================== Exiting the Solution ====================");
@@ -102,19 +102,30 @@ namespace Searching
             return index;
         }
 
-        private static int[] ExponentialSearch(int[] arr, int elementToBeSearched)
+        // Exponential Search using iteration which utilizes binary search, Time Complexity : O(Log n) || A) Find range where element is present B) Do Binary Search in found range.
+        private static int ExponentialSearch(int[] arr, int elementToBeSearched)
+        {
+            int i = 1, Len = arr.Length;
+            if (elementToBeSearched == arr[0])
+                return 0;
+            while (i < Len && arr[i] <= elementToBeSearched)
+                i *= 2;     // doubling i
+            return BinarySearch_Recursive(arr, i / 2, i, elementToBeSearched);      // Searching last subset of array which had highest value bigger than element to be searched
+        }
+
+        private static int FibonacciSearch(int[] arr, int elementToBeSearched)
         {
             throw new NotImplementedException();
         }
 
-        private static int[] FibonacciSearch(int[] arr, int elementToBeSearched)
+        // Liner Search, Time Complexity : O(n)
+        private static int LinearSearch(int[] arr, int elementToBeSearched)
         {
-            throw new NotImplementedException();
-        }
-
-        private static int[] LinearSearch(int[] arr, int elementToBeSearched)
-        {
-            throw new NotImplementedException();
+            int Len = arr.Length, i = 0;
+            while (i < Len)
+                if (arr[i++] == elementToBeSearched)
+                    return i-1;
+            return -1;
         }
 
         // Jump Search, Time Complexity : O(√n)
@@ -171,7 +182,7 @@ namespace Searching
             //Interpolation formula : pos = lo + [ (x-arr[lo])*(hi-lo) / (arr[hi]-arr[Lo]) ]
             int pos = Low + (((elementToBeSearched - arr[Low]) * (High - Low)) / (arr[High] - arr[Low])), index = -1;
             
-            if (pos > High)
+            if (pos > High || pos < Low)
                 return index;
             else if (elementToBeSearched == arr[pos])
                 return pos;
