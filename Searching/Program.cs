@@ -10,7 +10,7 @@ namespace Searching
         {
             int[] array = ReturnStaticArray();//takearrayinput();
             print(array);   //Show array
-            int foundAt,elementToBeSearched = 38;//Convert.ToInt32(Console.ReadLine());
+            int foundAt,elementToBeSearched = 38;//Convert.ToInt32(Console.ReadLine()); // TestCase : check for -ve values and 1st and last index values along with values not present in array.Ex:  -138, 2 , 3, 38, 91, 138
             Console.WriteLine("We are searching for element : {0}", elementToBeSearched);
             string var = null;
             while (var != "0")
@@ -84,10 +84,9 @@ namespace Searching
         // Binary Search using Iteration
         private static int BinarySearch_Iterative(int[] arr, int Low, int High, int elementToBeSearched)
         {
-            int Mid, index = -1;
+            int Mid = (High + Low) / 2, index = -1;
             do
             {
-                Mid = (High + Low) / 2;
                 if (elementToBeSearched == arr[Mid])
                 {
                     index = Mid;
@@ -97,8 +96,9 @@ namespace Searching
                     Low = Mid + 1;
                 else
                     High = Mid - 1;
+                Mid = (High + Low) / 2;
             }
-            while (Mid != High);
+            while (Mid <= High && Mid >= Low);
             return index;
         }
 
@@ -133,7 +133,7 @@ namespace Searching
                     break;
                 }
             }
-            if(startFrom!=-1)   //jump_by-1 time loop
+            if(startFrom > i)   //jump_by-1 time loop
             {
                 int k = startFrom;
                 while (k < (jump_by+startFrom))
@@ -149,16 +149,29 @@ namespace Searching
         //  Interpolation Search, Time Complexity : if elements are uniformly distributed, then O (log log n)). In worst case it can take upto O(n).
         private static int InterpolationSearch(int[] arr, int elementToBeSearched)
         {
-            Console.WriteLine("Recursive Interpolation Search");
-            return InterpolationSearch_Recursive(arr, 0, arr.Length - 1, elementToBeSearched);     //recursive way
+            //Console.WriteLine("Recursive Interpolation Search");
+            //return InterpolationSearch_Recursive(arr, 0, arr.Length - 1, elementToBeSearched);     //recursive way
+
+            Console.WriteLine("Iterative Interpolation Search");
+            return InterpolationSearch_Iterative(arr, 0, arr.Length - 1, elementToBeSearched);     //iterative way
         }
 
-        // Interpolation Search using recursion
+        /// <summary>
+        /// Interpolation Search using recursion.
+        /// The idea of formula is to return higher value of pos when element to be searched(x) is closer to arr[hi]. And smaller value when closer to arr[lo], using
+        /// pos = lo + [ (x - arr[lo])*(hi-lo) / (arr[hi]-arr[Lo]) ]
+        /// </summary>
+        /// <param name="arr">Uniformely sorted array</param>
+        /// <param name="Low">Lowest Index of array</param>
+        /// <param name="High">Lowest Index of array</param>
+        /// <param name="elementToBeSearched"></param>
+        /// <returns>index of Element being searched, if present in uniformely sorted array</returns>
         private static int InterpolationSearch_Recursive(int[] arr, int Low, int High, int elementToBeSearched)
         {
             //Interpolation formula : pos = lo + [ (x-arr[lo])*(hi-lo) / (arr[hi]-arr[Lo]) ]
             int pos = Low + (((elementToBeSearched - arr[Low]) * (High - Low)) / (arr[High] - arr[Low])), index = -1;
-            if (pos >= High)
+            
+            if (pos > High)
                 return index;
             else if (elementToBeSearched == arr[pos])
                 return pos;
@@ -169,6 +182,30 @@ namespace Searching
 
             return index;
         }
+
+        // Interpolation Search using iteration.
+        private static int InterpolationSearch_Iterative(int[] arr, int Low, int High, int elementToBeSearched)
+        {
+            //Interpolation formula : pos = lo + [ (x-arr[lo])*(hi-lo) / (arr[hi]-arr[Lo]) ]
+            int index = -1, pos = Low + (((elementToBeSearched - arr[Low]) * (High - Low)) / (arr[High] - arr[Low]));
+
+            while (pos <= High && pos >=Low)
+            {
+                if (elementToBeSearched == arr[pos])
+                {
+                    index = pos;
+                    break;
+                }
+                else if (elementToBeSearched < arr[pos])
+                    High = pos - 1;
+                else if (elementToBeSearched > arr[pos])
+                    Low = pos + 1;
+                pos = Low + (((elementToBeSearched - arr[Low]) * (High - Low)) / (arr[High] - arr[Low]));
+            }
+            return index;
+        }
+
+
         private static void swap(ref int v1, ref int v2)
         {
             v1 = v1 ^ v2;
