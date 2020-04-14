@@ -20,3 +20,4 @@ C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\SortingStringV
 C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\SortingStringValues\obj\Debug\SortingStringValues.csproj.CoreCompileInputs.cache
 C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\SortingStringValues\obj\Debug\SortingStringValues.exe
 C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\SortingStringValues\obj\Debug\SortingStringValues.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\SortingStringValues\obj\Debug\SortingStringValues.csprojAssemblyReference.cache

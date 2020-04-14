@@ -23,3 +23,6 @@ C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Sorting\obj\De
 C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Sorting\obj\Debug\Sorting.csproj.CoreCompileInputs.cache
 C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Sorting\obj\Debug\Sorting.exe
 C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Sorting\obj\Debug\Sorting.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Sorting\bin\Debug\Searching.exe
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Sorting\bin\Debug\Searching.pdb
+C:\Users\harkuma\source\repos\My_PracticeProblemAndProblemSolving\Sorting\obj\Debug\Sorting.csproj.CopyComplete

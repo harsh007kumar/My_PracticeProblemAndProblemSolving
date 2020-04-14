@@ -4,11 +4,11 @@ using System.Linq;
 namespace Searching
 {
     // Visit https://www.geeksforgeeks.org/searching-algorithms/ for more info on types of searching algorithm
-    class Search
+    public class Search
     {
         public static void Main(string[] args)
         {
-            int[] array = ReturnStaticArray();//takearrayinput();
+            int[] array = ReturnSortedArray();//takearrayinput();
             print(array);   //Show array
             int foundAt,elementToBeSearched = 38;//Convert.ToInt32(Console.ReadLine()); // TestCase : check for -ve values and 1st and last index values along with values not present in array.Ex:  -138, 2 , 3, 38, 91, 138
             Console.WriteLine("We are searching for element : {0}", elementToBeSearched);
@@ -57,7 +57,7 @@ namespace Searching
         }
 
         // Binary Search, Time Complexity : O(Log n)
-        private static int BinarySearch(int[] arr, int elementToBeSearched)
+        public static int BinarySearch(int[] arr, int elementToBeSearched)
         {
             //Console.WriteLine("Recursive Binary Search");
             //return BinarySearch_Recursive(arr, 0, arr.Length - 1, elementToBeSearched);     //recursive way
@@ -102,8 +102,8 @@ namespace Searching
             return index;
         }
 
-        // Exponential Search using iteration which utilizes binary search, Time Complexity : O(Log n) || A) Find range where element is present B) Do Binary Search in found range.
-        private static int ExponentialSearch(int[] arr, int elementToBeSearched)
+        // Exponential Search using iteration which utilizes binary search, Time Complexity : O(Log n) [ a) Find range where element is present b) Do Binary Search in found range.]
+        public static int ExponentialSearch(int[] arr, int elementToBeSearched)
         {
             int i = 1, Len = arr.Length;
             if (elementToBeSearched == arr[0])
@@ -113,13 +113,14 @@ namespace Searching
             return BinarySearch_Recursive(arr, i / 2, i, elementToBeSearched);      // Searching last subset of array which had highest value bigger than element to be searched
         }
 
+        // Fibonacci Search, Time Complexity : O(Log n)
         private static int FibonacciSearch(int[] arr, int elementToBeSearched)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException();    // https://www.geeksforgeeks.org/fibonacci-search/
         }
 
         // Liner Search, Time Complexity : O(n)
-        private static int LinearSearch(int[] arr, int elementToBeSearched)
+        public static int LinearSearch(int[] arr, int elementToBeSearched)
         {
             int Len = arr.Length, i = 0;
             while (i < Len)
@@ -129,7 +130,7 @@ namespace Searching
         }
 
         // Jump Search, Time Complexity : O(√n)
-        private static int JumpSearch(int[] arr, int elementToBeSearched)
+        public static int JumpSearch(int[] arr, int elementToBeSearched)
         {
             int len = arr.Length, jump_by = (int)Math.Sqrt(len), i, index = -1, startFrom=-1;
             for(i=0;i<len;i=i+jump_by)  //(len/jump_by) times loop
@@ -158,7 +159,7 @@ namespace Searching
         }
 
         //  Interpolation Search, Time Complexity : if elements are uniformly distributed, then O (log log n)). In worst case it can take upto O(n).
-        private static int InterpolationSearch(int[] arr, int elementToBeSearched)
+        public static int InterpolationSearch(int[] arr, int elementToBeSearched)
         {
             //Console.WriteLine("Recursive Interpolation Search");
             //return InterpolationSearch_Recursive(arr, 0, arr.Length - 1, elementToBeSearched);     //recursive way
@@ -217,7 +218,7 @@ namespace Searching
         }
 
 
-        private static void swap(ref int v1, ref int v2)
+        public static void swap(ref int v1, ref int v2)
         {
             v1 = v1 ^ v2;
             v2 = v1 ^ v2;
@@ -227,14 +228,15 @@ namespace Searching
         private static int[] takearrayinput()
         {
             //int[] arr = new int[] { 2, 5, 8, 12, 16, 23, 38, 56, 72, 91 };
-            Console.WriteLine("\nEnter the integer(s) you want in ur Sorted Array seperated by comma(,) like 2,3,4 and Search would be to check presense of no \"25\"");
+            Console.WriteLine("\nEnter the integer(s) you want in ur Sorted Array seperated by comma(,) like 2,3,4");
             return Console.ReadLine().Split(',').Select(str => int.Parse(str)).ToArray();
             //var result = myString.Select(s => s.ToSafeInt()).ToArray()
         }
-        private static int[] ReturnStaticArray()
+
+        public static int[] ReturnSortedArray()
         {   return new int[] { 2, 5, 8, 12, 16, 23, 38, 56, 72, 91 };        }
 
-        private static void print(int[] arr)
+        public static void print(int[] arr)
         {
             for (int i = 0; i < arr.Length; i++)
                 Console.Write("\t{0}", arr[i]);
