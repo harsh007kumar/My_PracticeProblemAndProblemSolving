@@ -38,7 +38,7 @@ namespace Sorting
                         break;
                     case "M":
                         Console.WriteLine("Merge Sort O(n log(n))");
-                        array = Mergesort(array);
+                        array = Mergesort(array,0,array.Length-1);
                         break;
                     case "C":
                         Console.WriteLine("Count/Bucket Sort O(n^2)");
@@ -89,10 +89,38 @@ namespace Sorting
             throw new NotImplementedException();
         }
 
-        // Stable sort
-        public static int[] Mergesort(int[] array)
+        // Merge Sort Recursive || Stable sort || Not In Place || External Sorting || TimeComplexity O(n log(n)) || Auxiliary Space: O(n)
+        public static int[] Mergesort(int[] array, int first, int last)
         {
-            throw new NotImplementedException();
+            if(last==first)
+                return new int[] { array[first] };      //Till array is broken down to single element, return array containing single element
+            else
+            {
+                int middle = (first + last) / 2;
+                int [] LeftSubArray = Mergesort(array, first, middle);
+                int[] RightSubArray = Mergesort(array, middle+1, last);
+                return Merge(LeftSubArray, RightSubArray);
+            }
+        }
+
+        // Merging two sorted array || TimeComplexity O(n)
+        private static int[] Merge(int[] ltArr,int[] rtArr)
+        {
+            int LtLength = ltArr.Length, RtLegth = rtArr.Length;
+            int[] NewArray = new int[LtLength + RtLegth];
+            int index = 0, ltIndex = 0, rtIndex = 0;
+            while (index < NewArray.Length)
+            {
+                if (ltIndex == LtLength)
+                    NewArray[index++] = rtArr[rtIndex++];
+                else if (rtIndex == RtLegth)
+                    NewArray[index++] = ltArr[ltIndex++];
+                else if (ltArr[ltIndex] <= rtArr[rtIndex])
+                    NewArray[index++] = ltArr[ltIndex++];
+                else if (ltArr[ltIndex] > rtArr[rtIndex])
+                    NewArray[index++] = rtArr[rtIndex++];
+            }
+            return NewArray;
         }
 
         // Bubble Sort Iterative || In Place || Stable by Default || TimeComplexity O(n^2)
@@ -159,6 +187,7 @@ namespace Sorting
                 //{
                     for (k = i-1; k >= 0; k--)
                     {
+                        // CurrentElemenetBeingInspected is at correct index, if it's bigger than last element of sorted sub-array
                         if (CurrentElemenetBeingInspected > arr[k])
                             break;
                         arr[k+1] = arr[k];
@@ -178,6 +207,6 @@ namespace Sorting
         }
 
         public static int[] ReturnUnsortedArray()
-        { return new int[] { 64, 25, 12, 22, 11 }; }// To check Sort Stablility use this => { 4, 5, 3, 2, 4, 1 }; }
+        { return new int[] { 38, 27, 43, 3, 9, 82, 10 }; }// { 64, 25, 12, 22, 11 }; }// To check Sort Stablility use this => { 4, 5, 3, 2, 4, 1 }; }
     }
 }
