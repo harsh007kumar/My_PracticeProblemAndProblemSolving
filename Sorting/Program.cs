@@ -40,6 +40,10 @@ namespace Sorting
                         Console.WriteLine("Merge Sort O(n log(n))");
                         array = Mergesort(array,0,array.Length-1);
                         break;
+                    case "Q":
+                        Console.WriteLine("Quick Sort O(n^2)");
+                        Quicksort(array,0,array.Length-1);
+                        break;
                     case "C":
                         Console.WriteLine("Count/Bucket Sort O(n^2)");
                         array = Countsort(array);
@@ -47,10 +51,6 @@ namespace Sorting
                     case "R":
                         Console.WriteLine("Radix Sort O(nk)");
                         array = Radixsort(array);
-                        break;
-                    case "Q":
-                        Console.WriteLine("Quick Sort O(n^2)");
-                        array = Quicksort(array);
                         break;
                     case "H":
                         Console.WriteLine("Heap Sort O(n log(n))");
@@ -73,9 +73,35 @@ namespace Sorting
             throw new NotImplementedException();
         }
 
-        private static int[] Quicksort(int[] array)
+        // Quicksort Sort Recursive || Not Stable sort || In Place || TimeComplexity O(n^2) || Divide and Conquer algorithm
+        public static void Quicksort(int[] array, int firstIndex, int lastIndex)
         {
-            throw new NotImplementedException();
+            if(firstIndex<lastIndex)
+            {
+                int pivot = Partition(array, firstIndex, lastIndex);     // Time O(n)
+                Quicksort(array, firstIndex, pivot-1);     // Time T(k)
+                Quicksort(array, pivot+1, lastIndex);     // Time T(n-k-1)
+            }
+        }
+
+        /// <summary>
+        /// Function which return pivot and sorts array such that all element to its left are smaller and all to its rt are bigger than pivot.
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="startIndex"></param>
+        /// <param name="endIndex"></param>
+        /// <returns></returns>
+        private static int Partition(int[] array, int startIndex, int endIndex)
+        {
+            // Here picking last element as pivot (can also select first, median or any random no for the same)
+            int pivot = array[endIndex], lastBiggestIndex = startIndex;
+            while(startIndex < endIndex)
+            {
+                if (array[startIndex++] < pivot)
+                    Swap(ref array[startIndex - 1], ref array[lastBiggestIndex++]);
+            }
+            Swap(ref array[endIndex], ref array[lastBiggestIndex]);
+            return lastBiggestIndex;
         }
 
         private static int[] Radixsort(int[] array)
@@ -89,17 +115,17 @@ namespace Sorting
             throw new NotImplementedException();
         }
 
-        // Merge Sort Recursive || Stable sort || Not In Place || External Sorting || TimeComplexity O(n log(n)) || Auxiliary Space: O(n)
-        public static int[] Mergesort(int[] array, int first, int last)
+        // Merge Sort Recursive || Stable sort || Not In Place || External Sorting || TimeComplexity O(n log(n)) || Auxiliary Space: O(n) || Divide and Conquer algorithm
+        public static int[] Mergesort(int[] array, int firstIndex, int lastIndex)
         {
-            if(last==first)
-                return new int[] { array[first] };      //Till array is broken down to single element, return array containing single element
+            if(lastIndex == firstIndex)
+                return new int[] { array[firstIndex] };      //Till array is broken down to single element, return array containing single element
             else
             {
-                int middle = (first + last) / 2;
-                int [] LeftSubArray = Mergesort(array, first, middle);
-                int[] RightSubArray = Mergesort(array, middle+1, last);
-                return Merge(LeftSubArray, RightSubArray);
+                int middle = (firstIndex + lastIndex) / 2;
+                int [] LeftSubArray = Mergesort(array, firstIndex, middle);     // Time T(n/2)
+                int[] RightSubArray = Mergesort(array, middle+1, lastIndex);     // Time T(n/2)
+                return Merge(LeftSubArray, RightSubArray);     // Time O(n)
             }
         }
 
@@ -208,5 +234,17 @@ namespace Sorting
 
         public static int[] ReturnUnsortedArray()
         { return new int[] { 38, 27, 43, 3, 9, 82, 10 }; }// { 64, 25, 12, 22, 11 }; }// To check Sort Stablility use this => { 4, 5, 3, 2, 4, 1 }; }
+
+        /// <summary>
+        /// Swaping two no using temp variable
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        public static void Swap(ref int v1, ref int v2)
+        {
+            int temp = v2;
+            v2 = v1;
+            v1 = temp;
+        }
     }
 }

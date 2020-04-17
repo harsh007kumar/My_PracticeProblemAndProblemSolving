@@ -217,7 +217,11 @@ namespace Searching
             return index;
         }
 
-
+        /// <summary>
+        /// Swaping two no without using 3rd variable and using ^ operator
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
         public static void swap(ref int v1, ref int v2)
         {
             v1 = v1 ^ v2;
