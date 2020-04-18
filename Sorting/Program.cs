@@ -38,15 +38,15 @@ namespace Sorting
                         break;
                     case "M":
                         Console.WriteLine("Merge Sort O(n log(n))");
-                        array = Mergesort(array,0,array.Length-1);
+                        array = Mergesort(array, 0, array.Length - 1);
                         break;
                     case "Q":
                         Console.WriteLine("Quick Sort O(n^2)");
-                        Quicksort(array,0,array.Length-1);
+                        Quicksort(array, 0, array.Length - 1);
                         break;
                     case "C":
-                        Console.WriteLine("Count/Bucket Sort O(n^2)");
-                        array = Countsort(array);
+                        Console.WriteLine("Count Sort O(n^2)");
+                        array = Countsort(array, -3, 9);       // we are passing array to be sorted as 1st paramter & starting element of range as 2nd & last element as 3rd parameter, assuming range consists of consecutive no's.
                         break;
                     case "R":
                         Console.WriteLine("Radix Sort O(nk)");
@@ -76,11 +76,11 @@ namespace Sorting
         // Quicksort Sort Recursive || Not Stable sort || In Place || TimeComplexity O(n^2) || Divide and Conquer algorithm
         public static void Quicksort(int[] array, int firstIndex, int lastIndex)
         {
-            if(firstIndex<lastIndex)
+            if (firstIndex < lastIndex)
             {
                 int pivot = Partition(array, firstIndex, lastIndex);     // Time O(n)
-                Quicksort(array, firstIndex, pivot-1);     // Time T(k)
-                Quicksort(array, pivot+1, lastIndex);     // Time T(n-k-1)
+                Quicksort(array, firstIndex, pivot - 1);     // Time T(k)
+                Quicksort(array, pivot + 1, lastIndex);     // Time T(n-k-1)
             }
         }
 
@@ -95,7 +95,7 @@ namespace Sorting
         {
             // Here picking last element as pivot (can also select first, median or any random no for the same)
             int pivot = array[endIndex], lastBiggestIndex = startIndex;
-            while(startIndex < endIndex)
+            while (startIndex < endIndex)
             {
                 if (array[startIndex++] < pivot)
                     Swap(ref array[startIndex - 1], ref array[lastBiggestIndex++]);
@@ -109,28 +109,52 @@ namespace Sorting
             throw new NotImplementedException();
         }
 
-        // Stable sort
-        public static int[] Countsort(int[] array)
+        // Counting Sort || Stable sort || TimeComplexity O(n+k) where n = no of elements & k = range of inputs || Auxiliary Space: O(n+k) || Not comparison based sorting
+        public static int[] Countsort(int[] array, int firstElementInRange, int lastElementInRange)
         {
-            throw new NotImplementedException();
+            int i, j, Len = array.Length, rangeOfElements = lastElementInRange - firstElementInRange + 1;
+            int[] countArray = new int[rangeOfElements];        // array to store the count of each unique object
+            // storing count of each unique element
+            for (j = 0; j < Len; j++)
+                countArray[array[j] - firstElementInRange] += 1;
+            //Console.WriteLine("storing count of each unique element");
+            //Search.print(countArray);
+
+            // Modify the count array such that each element at each index stores the sum of previous counts
+            for (i = 1; i < rangeOfElements; i++)
+                countArray[i] += countArray[i - 1];
+            //Console.WriteLine("Modified count array with each element at each index storing the sum of previous counts");
+            //Search.print(countArray);
+
+            int[] sortedArray = new int[Len];
+            int checkCount = 0, index = 0;
+            for (i = 0; i < rangeOfElements; i++)       // Here running loop till Range Of Elements, Not length of input array.
+                if(countArray[i]>0 && countArray[i]>checkCount)
+                {
+                    int noOfTimesElementIsPresent = countArray[i] - checkCount;
+                    for (int k = 0; k < noOfTimesElementIsPresent; k++)
+                        sortedArray[index++] = firstElementInRange + i;       // Console.Write("\t"+firstElementInRange + i);
+                    checkCount = countArray[i];
+                }
+            return sortedArray;
         }
 
         // Merge Sort Recursive || Stable sort || Not In Place || External Sorting || TimeComplexity O(n log(n)) || Auxiliary Space: O(n) || Divide and Conquer algorithm
         public static int[] Mergesort(int[] array, int firstIndex, int lastIndex)
         {
-            if(lastIndex == firstIndex)
+            if (lastIndex == firstIndex)
                 return new int[] { array[firstIndex] };      //Till array is broken down to single element, return array containing single element
             else
             {
                 int middle = (firstIndex + lastIndex) / 2;
-                int [] LeftSubArray = Mergesort(array, firstIndex, middle);     // Time T(n/2)
-                int[] RightSubArray = Mergesort(array, middle+1, lastIndex);     // Time T(n/2)
+                int[] LeftSubArray = Mergesort(array, firstIndex, middle);     // Time T(n/2)
+                int[] RightSubArray = Mergesort(array, middle + 1, lastIndex);     // Time T(n/2)
                 return Merge(LeftSubArray, RightSubArray);     // Time O(n)
             }
         }
 
         // Merging two sorted array || TimeComplexity O(n)
-        private static int[] Merge(int[] ltArr,int[] rtArr)
+        private static int[] Merge(int[] ltArr, int[] rtArr)
         {
             int LtLength = ltArr.Length, RtLegth = rtArr.Length;
             int[] NewArray = new int[LtLength + RtLegth];
@@ -171,7 +195,7 @@ namespace Sorting
         }
 
         // Bubble Sort Recursive || In Place || Stable by Default || TimeComplexity O(n^2)
-        public static void Bubblesort_Recursive(ref int[] arr,int Len)
+        public static void Bubblesort_Recursive(ref int[] arr, int Len)
         {
             bool swapped = false;
             for (int i = 0; i < Len - 1; i++)
@@ -196,7 +220,7 @@ namespace Sorting
                 for (j = i + 1; j < Len; j++)
                     if (arr[j] < arr[min_index])
                         min_index = j;
-                if(arr[min_index] < arr[i])
+                if (arr[min_index] < arr[i])
                     Search.swap(ref arr[min_index], ref arr[i]);
             }
             return arr;
@@ -205,20 +229,20 @@ namespace Sorting
         // Insertion Sort || In Place || Stable by default || TimeComplexity O(n^2)
         public static int[] Insertionsort(int[] arr)
         {
-            int i,k, CurrentElemenetBeingInspected, Len=arr.Length;
-            for(i=1;i<Len;i++)
+            int i, k, CurrentElemenetBeingInspected, Len = arr.Length;
+            for (i = 1; i < Len; i++)
             {
                 CurrentElemenetBeingInspected = arr[i];
                 //if (CurrentElemenetBeingInspected < arr[i - 1])
                 //{
-                    for (k = i-1; k >= 0; k--)
-                    {
-                        // CurrentElemenetBeingInspected is at correct index, if it's bigger than last element of sorted sub-array
-                        if (CurrentElemenetBeingInspected > arr[k])
-                            break;
-                        arr[k+1] = arr[k];
-                    }
-                    arr[k+1] = CurrentElemenetBeingInspected;
+                for (k = i - 1; k >= 0; k--)
+                {
+                    // CurrentElemenetBeingInspected is at correct index, if it's bigger than last element of sorted sub-array
+                    if (CurrentElemenetBeingInspected > arr[k])
+                        break;
+                    arr[k + 1] = arr[k];
+                }
+                arr[k + 1] = CurrentElemenetBeingInspected;
                 //}
             }
             return arr;
@@ -233,7 +257,12 @@ namespace Sorting
         }
 
         public static int[] ReturnUnsortedArray()
-        { return new int[] { 38, 27, 43, 3, 9, 82, 10 }; }// { 64, 25, 12, 22, 11 }; }// To check Sort Stablility use this => { 4, 5, 3, 2, 4, 1 }; }
+        {
+            return new int[] { -3, 1, 4, 1, 2, 7, 5, 2 , -1, -2, -2 };      // use for Counting Sort 
+            // return new int[] { 38, 27, 43, 3, 9, 82, 10 };       // used for Merge Sort
+            // return new int[] { 64, 25, 12, 22, 11 };     // used with most other Sorting techniques
+            // return new int[] { 4, 5, 3, 2, 4, 1 };       // to check Sort Stablility use this
+        }
 
         /// <summary>
         /// Swaping two no using temp variable
