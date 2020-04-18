@@ -113,6 +113,7 @@ namespace Sorting
         public static int[] Countsort(int[] array, int firstElementInRange, int lastElementInRange)
         {
             int i, j, Len = array.Length, rangeOfElements = lastElementInRange - firstElementInRange + 1;
+            int[] sortedArray = new int[Len];
             int[] countArray = new int[rangeOfElements];        // array to store the count of each unique object
             // storing count of each unique element
             for (j = 0; j < Len; j++)
@@ -126,16 +127,21 @@ namespace Sorting
             //Console.WriteLine("Modified count array with each element at each index storing the sum of previous counts");
             //Search.print(countArray);
 
-            int[] sortedArray = new int[Len];
-            int checkCount = 0, index = 0;
-            for (i = 0; i < rangeOfElements; i++)       // Here running loop till Range Of Elements, Not length of input array.
-                if(countArray[i]>0 && countArray[i]>checkCount)
-                {
-                    int noOfTimesElementIsPresent = countArray[i] - checkCount;
-                    for (int k = 0; k < noOfTimesElementIsPresent; k++)
-                        sortedArray[index++] = firstElementInRange + i;       // Console.Write("\t"+firstElementInRange + i);
-                    checkCount = countArray[i];
-                }
+
+            //// use either of 1st or 2nd loop below to fill sorted array
+            //// 1st
+            //int checkCount = 0, index = 0;
+            //for (i = 0; i < rangeOfElements; i++)       // loop till length of Range Of Elements, Not length of input array || Loop Time Complexity = O(rangeOfElements+Len)
+            //    if (countArray[i] > 0 && countArray[i] > checkCount)
+            //    {
+            //        int noOfTimesElementIsPresent = countArray[i] - checkCount;
+            //        for (int k = 0; k < noOfTimesElementIsPresent; k++)
+            //            sortedArray[index++] = firstElementInRange + i;       // Console.Write("\t"+firstElementInRange + i);
+            //        checkCount = countArray[i];
+            //    }
+            //// 2nd || faster than above esp when range of elements is large || Not Stable Sorting
+            for (i = 0; i < Len; i++)       // loop till length of input array O(Len)
+                sortedArray[--countArray[array[i] - firstElementInRange]] = array[i];
             return sortedArray;
         }
 
