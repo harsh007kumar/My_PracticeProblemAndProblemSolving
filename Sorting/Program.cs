@@ -139,8 +139,8 @@ namespace Sorting
             //            sortedArray[index++] = firstElementInRange + i;       // Console.Write("\t"+firstElementInRange + i);
             //        checkCount = countArray[i];
             //    }
-            //// 2nd || faster than above esp when range of elements is large || Not Stable Sorting
-            for (i = 0; i < Len; i++)       // loop till length of input array O(Len)
+            //// 2nd || faster than above esp when range of elements is large || Stable Sorting
+            for (i = Len-1; i >=0; i--)       // loop till length of input array O(Len)
                 sortedArray[--countArray[array[i] - firstElementInRange]] = array[i];
             return sortedArray;
         }
