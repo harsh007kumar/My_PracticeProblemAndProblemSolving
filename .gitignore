@@ -1,6 +1,7 @@
 *.cache
 *.pdb
 *.exe
+*.suo
 */obj/Debug/
 */obj/Release/
 */bin/Debug/
