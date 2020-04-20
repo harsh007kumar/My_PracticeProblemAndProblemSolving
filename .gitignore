@@ -1,5 +1,6 @@
 *.cache
 *.pdb
+*.exe
 */obj/Debug/
 */obj/Release/
 */bin/Debug/
@@ -9,7 +10,3 @@
 /[Oo]bj/
 /[Bb]in/
 .vs/My_PracticeProblemAndProblemSolving/
-[Oo]bj\
-[Bb]in\
-\[Oo]bj\
-\[Bb]in\
