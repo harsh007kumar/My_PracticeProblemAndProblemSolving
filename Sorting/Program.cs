@@ -45,12 +45,12 @@ namespace Sorting
                         Quicksort(array, 0, array.Length - 1);
                         break;
                     case "C":
-                        Console.WriteLine("Count Sort O(n^2)");
+                        Console.WriteLine("Count Sort O(n+k)");
                         array = Countsort(array, -3, 9);       // we are passing array to be sorted as 1st paramter & starting element of range as 2nd & last element as 3rd parameter, assuming range consists of consecutive no's.
                         break;
                     case "R":
                         Console.WriteLine("Radix Sort O(nk)");
-                        array = Radixsort(array);
+                        Radixsort(ref array);
                         break;
                     case "H":
                         Console.WriteLine("Heap Sort O(n log(n))");
@@ -104,9 +104,35 @@ namespace Sorting
             return lastBiggestIndex;
         }
 
-        private static int[] Radixsort(int[] array)
+        // Radix Sort || Stable Sort || TimeComplexity O(d*(n+k)) where k is base representing numbers(decimal system b=10 i.e, Range) & d = O(logb(k)) K=Max possible value of base b.
+        private static void Radixsort(ref int[] array)
         {
-            throw new NotImplementedException();
+            int significantDigitBeingSorted = 1, Len = array.Length, minSingleDigit = 0, maxSingleDigit = 9;
+            while (int.MaxValue / significantDigitBeingSorted > 0)
+            {
+                Countsort(ref array, minSingleDigit, maxSingleDigit, significantDigitBeingSorted);
+                significantDigitBeingSorted *= 10;
+            }
+        }
+        
+        // Counting Sort to be used within Radix Sort
+        public static void Countsort(ref int[] array, int firstElementInRange, int lastElementInRange, int n_th_DigitBeingSorted)
+        {
+            int i, j, Len = array.Length, rangeOfElements = lastElementInRange - firstElementInRange + 1;
+            int[] sortedArray = new int[Len];
+            int[] countArray = new int[rangeOfElements];        // array to store the count of each unique object
+            // storing count of each unique element
+            for (j = 0; j < Len; j++)
+                countArray[((array[j] - firstElementInRange)/ n_th_DigitBeingSorted) %10] += 1;
+
+            // Modify the count array such that each element at each index stores the sum of previous counts
+            for (i = 1; i < rangeOfElements; i++)
+                countArray[i] += countArray[i - 1];
+
+            for (i = Len - 1; i >= 0; i--)       // loop till length of input array O(Len)
+                sortedArray[--countArray[((array[i] - firstElementInRange)/ n_th_DigitBeingSorted) %10]] = array[i];
+            //bool nextSortIterationRequired = !(countArray[1] == countArray[rangeOfElements-1]);     // this might seem like gr8 idea to break sorting as soon as we get 1st True value indicating elements are already sorted but it applicable only to current i th digit being sorted(Ex- for 2nd digit of array 112,415,218,11119 would return True even when elements are still not sorted.
+            array = sortedArray;
         }
 
         // Counting Sort || Stable sort || TimeComplexity O(n+k) where n = no of elements & k = range of inputs || Auxiliary Space: O(n+k) || Not comparison based sorting
@@ -264,10 +290,11 @@ namespace Sorting
 
         public static int[] ReturnUnsortedArray()
         {
-            return new int[] { -3, 1, 4, 1, 2, 7, 5, 2 , -1, -2, -2 };      // use for Counting Sort 
-            // return new int[] { 38, 27, 43, 3, 9, 82, 10 };       // used for Merge Sort
-            // return new int[] { 64, 25, 12, 22, 11 };     // used with most other Sorting techniques
-            // return new int[] { 4, 5, 3, 2, 4, 1 };       // to check Sort Stablility use this
+            return new int[] { 170, 45, 75, 90, 802, 24, 2, 66 };           // use for Radix Sort
+            //return new int[] { -3, 1, 4, 1, 2, 7, 5, 2 , -1, -2, -2 };    // use for Counting Sort 
+            // return new int[] { 38, 27, 43, 3, 9, 82, 10 };               // use for Merge Sort
+            // return new int[] { 64, 25, 12, 22, 11 };                     // use with most other Sorting techniques
+            // return new int[] { 4, 5, 3, 2, 4, 1 };                       // to check Sort Stablility use this
         }
 
         /// <summary>
