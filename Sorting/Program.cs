@@ -19,7 +19,8 @@ namespace Sorting
                 Console.WriteLine("\n========== Un-sorted original array ==========");
                 array = ReturnUnsortedArray();//takearrayinput();
                 Search.print(array);
-                Console.WriteLine("\n====== Select which Sorting u wish to perfrom from below =====\nB=BubbleSort\nS=SelectionSort\nI=InsertionSort\nM=MergeSort\nC=CountSort\nR=RadixSort\nH=HeapSort\nQ=QuickSort\n0=EXIT");
+                Console.WriteLine("\n====== Select which Sorting you wish to perfrom from below =====" +
+                    "\nB=BubbleSort\nS=SelectionSort\nI=InsertionSort\nM=MergeSort\nC=CountSort\nR=RadixSort\nH=HeapSort\nQ=QuickSort\nSh=ShellSort\n0=EXIT");
                 var = Console.ReadLine();
                 switch (var.ToUpper())
                 {
@@ -55,6 +56,10 @@ namespace Sorting
                     case "H":
                         Console.WriteLine("Heap Sort O(n log(n))");
                         array = Heapsort(array);
+                        break;
+                    case "SH":
+                        Console.WriteLine("Shell Sort O(n^2)");
+                        ShellSort(ref array);
                         break;
                     case "0":
                         Console.WriteLine("==================== Exiting the Solution ====================");
@@ -278,6 +283,28 @@ namespace Sorting
                 //}
             }
             return arr;
+        }
+
+        // Shell Sort || In Place || Stable by default || TimeComplexity O(n^2)
+        public static void ShellSort(ref int[] arr)
+        {
+            int Len = arr.Length, gap;
+            for (gap = Len / 2; gap>0;gap/=2)
+            {
+                //int currentElementBeingInspected = gap + 1;
+                for (int j = gap; j < Len; j++)
+                {
+                    int k = j;
+                    while (k - gap >= 0)
+                    {
+                        if (arr[k] < arr[k - gap])
+                            Swap(ref arr[k], ref arr[k - gap]);
+                        else
+                            break;
+                        k -= gap;
+                    }
+                }
+            }
         }
 
         private static int[] Takearrayinput()
