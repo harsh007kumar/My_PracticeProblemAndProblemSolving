@@ -289,20 +289,18 @@ namespace Sorting
         public static void ShellSort(ref int[] arr)
         {
             int Len = arr.Length, gap;
-            for (gap = Len / 2; gap>0;gap/=2)
+            for (gap = Len / 2; gap > 0; gap /= 2)      // Log (n)
             {
-                //int currentElementBeingInspected = gap + 1;
-                for (int j = gap; j < Len; j++)
+                for (int j = gap; j < Len; j++)         // (len-gap)
                 {
+                    int currentElementBeingInspected = arr[j];
                     int k = j;
-                    while (k - gap >= 0)
+                    while (k -gap >= 0 && arr[k-gap] > currentElementBeingInspected)    // (n/gap)
                     {
-                        if (arr[k] < arr[k - gap])
-                            Swap(ref arr[k], ref arr[k - gap]);
-                        else
-                            break;
+                        arr[k] = arr[k - gap];          // Moving the element which are greater than currentElementBeingInspected to right
                         k -= gap;
                     }
+                    arr[k] = currentElementBeingInspected;  // Replace currentElementBeingInspected with last index which is either 0 or index where elements to left are smaller
                 }
             }
         }
