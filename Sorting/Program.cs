@@ -55,7 +55,7 @@ namespace Sorting
                         break;
                     case "H":
                         Console.WriteLine("Heap Sort O(n log(n))");
-                        array = Heapsort(array);
+                        Heapsort(ref array);
                         break;
                     case "SH":
                         Console.WriteLine("Shell Sort O(n^2)");
@@ -73,10 +73,43 @@ namespace Sorting
             }
         }
 
-        private static int[] Heapsort(int[] array)
+        // Heap Sort Iterative || Not Stable sort || In Place || TimeComplexity O(n/2*Logn)+O(nlogn) = O(nlogn)
+        public static void Heapsort(ref int[] array)
         {
-            throw new NotImplementedException();
+            int Len = array.Length;
+            // Create MaxHeap, we start from mid of the array as Heapify itself will take care of element to left & right, remember left = 2*currentIndex+1
+            for (int currentRoot = (Len / 2) - 1; currentRoot >= 0; currentRoot--)  // O(n/2)
+                MaxHeapify(ref array, currentRoot, Len - 1);                    // Maintin Heap integrity after at each level. O(logn)
+
+            while (Len>0)                                                       // O(n)
+            {
+                Swap(ref array[0], ref array[--Len]);                           // Swap Highest element i.e. root with smallest element
+                MaxHeapify(ref array, 0, Len-1);                                // Maintin Heap integrity after swap and reduced length. O(logn)
+            }
         }
+
+        /// <summary>
+        /// Recursive Heapify function which check and maintains Heap Intergrity from parent index passeed as argument, assumtion both child trees are already heapified.
+        /// TimeComplexity of heapify is O(Logn)
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="currentRoot">Parent index from where Heap is restructured downwards</param>
+        /// <param name="len">Last Index of element in HeapArray</param>
+        private static void MaxHeapify(ref int[] array, int currentRoot, int len)
+        {
+            int left = currentRoot * 2 + 1, right = currentRoot * 2 + 2, largest = currentRoot;
+            if (left < len && array[left] > array[currentRoot])
+                largest = left;
+            if (right < len && array[right] > array[largest])
+                largest = right;
+
+            if (currentRoot != largest)
+            {
+                Swap(ref array[largest], ref array[currentRoot]);
+                MaxHeapify(ref array, largest, len);
+            }
+        }
+
 
         // Quicksort Sort Recursive || Not Stable sort || In Place || TimeComplexity O(n^2) || Divide and Conquer algorithm
         public static void Quicksort(int[] array, int firstIndex, int lastIndex)
