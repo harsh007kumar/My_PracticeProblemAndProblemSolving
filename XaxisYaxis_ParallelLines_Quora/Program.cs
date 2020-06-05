@@ -23,7 +23,7 @@ namespace XaxisYaxis_ParallelLines_Quora
                 noOfLinesStillVisible = NoOfLines;
             Line[] lineArray = new Line[NoOfLines];
 
-            //below loop creates 
+            //loop to initializes/create lines in array
             for (i = firstPointOnXAxis; i < 10000; i = i * index)
             {
                 // inserting lines of length = (lineLength + 1) and each line is 1 coordinate above the previous line wrt to Y axis.
@@ -33,21 +33,20 @@ namespace XaxisYaxis_ParallelLines_Quora
 
             lastPointOnXAxis = i+lineLength;
             int maxNoOfLineIntersectingOnAnyPoint = 0, x_CoordinateIntersectingMaxLines = 0;
+            //Loop until all lines parallel to X axis are covered/hidden
             while (noOfLinesStillVisible > 0)
             {
                 maxNoOfLineIntersectingOnAnyPoint = 0;
+                //Loop from Starting point on X axis to last point on X axis (all lines are lying are within these two points)
                 for (int x = firstPointOnXAxis; x <= lastPointOnXAxis; x++)
                 {
                     int NoOfLineIntersectingOnGivenPoint = 0;
+
+                    //loop to traverse thru array of lines
                     for (int eachLine = 0; eachLine < NoOfLines; eachLine++)
-                    {
-                        if (lineArray[eachLine].IsVisible)
-                        {
-                            bool pointPresentOnLine = lineArray[eachLine].FindPointLiesOnXAxisOfLine(x);
-                            if (pointPresentOnLine)
+                        // Check if given point x lies within start and end of a line which are still visible
+                        if (lineArray[eachLine].IsVisible && lineArray[eachLine].PointLiesOnXAxisOfLine(x))
                                 NoOfLineIntersectingOnGivenPoint++;
-                        }
-                    }
 
                     if (NoOfLineIntersectingOnGivenPoint > maxNoOfLineIntersectingOnAnyPoint)
                     {
@@ -55,7 +54,7 @@ namespace XaxisYaxis_ParallelLines_Quora
                         x_CoordinateIntersectingMaxLines = x;
                     }
                 }
-
+                //Func to hide all lines which contain X point i.e point which passes thru max no of lines
                 HideLine(ref lineArray, x_CoordinateIntersectingMaxLines, ref noOfVerticalLines, ref noOfLinesStillVisible);
             }
 
@@ -74,7 +73,7 @@ namespace XaxisYaxis_ParallelLines_Quora
         {
             for (int eachLine = 0; eachLine < lines.Length; eachLine++)
                 if (lines[eachLine].IsVisible)
-                    if (lines[eachLine].FindPointLiesOnXAxisOfLine(x))
+                    if (lines[eachLine].PointLiesOnXAxisOfLine(x))
                     {
                         lines[eachLine].IsVisible = false;                                          // Hiding all lines which with pass thru given X coordinate
                         noOfLinesStillVisible--;
@@ -113,7 +112,12 @@ namespace XaxisYaxis_ParallelLines_Quora
             Length = x2 - x1 + 1;
         }
 
-        public bool FindPointLiesOnXAxisOfLine(int xPoint)
+        /// <summary>
+        /// Returns True if Point Lies On X Axis Of the Line else returns False
+        /// </summary>
+        /// <param name="xPoint"></param>
+        /// <returns></returns>
+        public bool PointLiesOnXAxisOfLine(int xPoint)
         {
             return (xPoint >= Start.X && xPoint <= End.X) ? true : false;
         }
