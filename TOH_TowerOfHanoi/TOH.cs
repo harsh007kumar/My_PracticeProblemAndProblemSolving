@@ -19,7 +19,7 @@ namespace TOH_TowerOfHanoi
             PopulateATower(towerA, smallestDiskSize, noOfDisk);
             PrintTowers(Towers);
             
-            //Solution to TOH
+            //Solution to TOH, move N disk from tower A to C
             MoveNDisk(noOfDiskToBeMovedFromTop, towerA, towerB, towerC);
 
             PrintTowers(Towers);
@@ -51,11 +51,8 @@ namespace TOH_TowerOfHanoi
             foreach (var tower in towers)
             {
                 Console.Write("\nTower {0} : ",i++);
-                if (tower.Count > 0)
-                {
                     foreach (var disk in tower)
                         Console.Write($" {disk}");
-                }
             }
         }
         public static void PopulateATower(Stack<int> s, int smallestDiskSize, int noOfDisk)
