@@ -7,3 +7,6 @@
 */bin/Debug/
 */bin/Release/
 .vs/
+*.ide
+*.ide-shm
+*.ide-wal

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E8689931-19FB-4A38-B24B-CD9ED6689074}</ProjectGuid>
+    <ProjectGuid>{00B50A4C-DD2B-4105-951F-2043D58CCDAB}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>_1_GROUND_ZERO</RootNamespace>
-    <AssemblyName>1_GROUND_ZERO</AssemblyName>
+    <RootNamespace>InterviewProblemNSolutions</RootNamespace>
+    <AssemblyName>InterviewProblemNSolutions</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonFunctions.cs" />
     <Compile Include="StartPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

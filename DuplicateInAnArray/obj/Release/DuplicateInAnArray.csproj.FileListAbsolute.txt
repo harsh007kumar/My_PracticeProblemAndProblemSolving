@@ -1,6 +1,0 @@
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/DuplicateInAnArray/bin/Release/DuplicateInAnArray.exe.config
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/DuplicateInAnArray/bin/Release/DuplicateInAnArray.exe
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/DuplicateInAnArray/bin/Release/DuplicateInAnArray.pdb
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/DuplicateInAnArray/obj/Release/DuplicateInAnArray.csproj.CoreCompileInputs.cache
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/DuplicateInAnArray/obj/Release/DuplicateInAnArray.exe
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/DuplicateInAnArray/obj/Release/DuplicateInAnArray.pdb

@@ -1,6 +1,0 @@
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/RepeatingNameinString/bin/Release/RepeatingNameinString.exe.config
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/RepeatingNameinString/bin/Release/RepeatingNameinString.exe
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/RepeatingNameinString/bin/Release/RepeatingNameinString.pdb
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/RepeatingNameinString/obj/Release/RepeatingNameinString.csproj.CoreCompileInputs.cache
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/RepeatingNameinString/obj/Release/RepeatingNameinString.exe
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/RepeatingNameinString/obj/Release/RepeatingNameinString.pdb

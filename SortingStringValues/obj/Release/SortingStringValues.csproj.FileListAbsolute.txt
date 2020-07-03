@@ -1,6 +1,0 @@
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/SortingStringValues/bin/Release/SortingStringValues.exe.config
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/SortingStringValues/bin/Release/SortingStringValues.exe
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/SortingStringValues/bin/Release/SortingStringValues.pdb
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/SortingStringValues/obj/Release/SortingStringValues.csproj.CoreCompileInputs.cache
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/SortingStringValues/obj/Release/SortingStringValues.exe
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/SortingStringValues/obj/Release/SortingStringValues.pdb

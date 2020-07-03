@@ -1,6 +1,0 @@
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Sorting/bin/Release/Sorting.exe.config
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Sorting/bin/Release/Sorting.exe
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Sorting/bin/Release/Sorting.pdb
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Sorting/obj/Release/Sorting.csproj.CoreCompileInputs.cache
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Sorting/obj/Release/Sorting.exe
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Sorting/obj/Release/Sorting.pdb

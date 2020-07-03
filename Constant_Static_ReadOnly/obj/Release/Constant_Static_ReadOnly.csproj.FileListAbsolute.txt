@@ -1,6 +1,0 @@
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Constant_Static_ReadOnly/bin/Release/Constant_Static_ReadOnly.exe.config
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Constant_Static_ReadOnly/bin/Release/Constant_Static_ReadOnly.exe
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Constant_Static_ReadOnly/bin/Release/Constant_Static_ReadOnly.pdb
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Constant_Static_ReadOnly/obj/Release/Constant_Static_ReadOnly.csproj.CoreCompileInputs.cache
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Constant_Static_ReadOnly/obj/Release/Constant_Static_ReadOnly.exe
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Constant_Static_ReadOnly/obj/Release/Constant_Static_ReadOnly.pdb

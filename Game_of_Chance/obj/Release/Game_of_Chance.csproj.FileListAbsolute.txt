@@ -1,6 +1,0 @@
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Game_of_Chance/bin/Release/Game_of_Chance.exe.config
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Game_of_Chance/bin/Release/Game_of_Chance.exe
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Game_of_Chance/bin/Release/Game_of_Chance.pdb
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Game_of_Chance/obj/Release/Game_of_Chance.csproj.CoreCompileInputs.cache
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Game_of_Chance/obj/Release/Game_of_Chance.exe
-/Users/harsh/Projects/My_PracticeProblemAndProblemSolving/Game_of_Chance/obj/Release/Game_of_Chance.pdb
