@@ -37,35 +37,50 @@ namespace InterviewProblemNSolutions
                 Console.Write("\n\nInput Array : ");
                 arr.Print();
                 int low, mid, high;         // to save current index of 3 distinct inputs
+                //low = mid = 0;              // start from left and increment by 1
+                //high = arr.Length;          // start from right and decreament by 1
+                //int i = 0;
+                //while (i < arr.Length)
+                //{
+                //    i = low > mid ? low : mid;
+                //    if (i == high) break;
+                //    Console.Write($"For {i} Index Array is : ");
+                //    // Arr[i] is low i.e, 1
+                //    if (arr[i] == 1)
+                //    {
+                //        if (low == i)
+                //            low++;
+                //        else
+                //            Utility.Swap(ref arr[low++], ref arr[i]);
+                //    }
+                //    // Arr[i] is mid i.e, 2
+                //    else if (arr[i] == 2)
+                //    {
+                //        if (mid == i)
+                //            mid++;
+                //        else
+                //            Utility.Swap(ref arr[mid++], ref arr[i]);
+                //    }
+                //    // Arr[i] is high i.e, 3
+                //    else if (arr[i] == 3)
+                //        Utility.Swap(ref arr[i], ref arr[--high]);
+                //    arr.Print();
+                //}
+
+                #region Alternative Best Efficient Solution || Link https://www.educative.io/edpresso/the-dutch-national-flag-problem-in-cpp
                 low = mid = 0;              // start from left and increment by 1
-                high = arr.Length;          // start from right and decreament by 1
-                int i = 0;
-                while (i < arr.Length)
+                high = arr.Length-1;
+                while (mid <= high)
                 {
-                    i = low > mid ? low : mid;
-                    if (i == high) break;
-                    Console.Write($"For {i} Index Array is : ");
-                    // Arr[i] is low i.e, 1
-                    if (arr[i] == 1)
-                    {
-                        if (low == i)
-                            low++;
-                        else
-                            Utility.Swap(ref arr[low++], ref arr[i]);
-                    }
-                    // Arr[i] is mid i.e, 2
-                    else if (arr[i] == 2)
-                    {
-                        if (mid == i)
-                            mid++;
-                        else
-                            Utility.Swap(ref arr[mid++], ref arr[i]);
-                    }
-                    // Arr[i] is high i.e, 3
-                    else if (arr[i] == 3)
-                        Utility.Swap(ref arr[i], ref arr[--high]);
+                    if (arr[mid] == 1)
+                        Utility.Swap(ref arr[low++], ref arr[mid++]);
+                    else if (arr[mid] == 2)
+                        mid++;
+                    else
+                        Utility.Swap(ref arr[mid], ref arr[high--]);
                     arr.Print();
                 }
+                #endregion
             }
         }
     
