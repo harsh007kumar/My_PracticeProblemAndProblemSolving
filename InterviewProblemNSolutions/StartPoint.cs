@@ -12,6 +12,7 @@ namespace InterviewProblemNSolutions
         {
             DutchFlagProblem();
             EventAndDelegate();
+            MinimumStepsToMinimizeToOne();      // Learn Dynamic Programming (Memoization & Tabulation)
             Console.ReadKey();
         }
 
@@ -89,6 +90,20 @@ namespace InterviewProblemNSolutions
         {
             Utility.Print("Creating custom Event of custom Delegate type & registering an method which matchs delegate signature with that event");
             new EventDemo();
+        }
+
+        // Learn Dynamic Programming (Memoization & Tabulation)
+        // KeepOnCoding https://youtu.be/f2xi3c1S95M
+        /// <summary>
+        /// Calculate the minimum steps required to minimize any given no to '1', using below avaliable rules/steps only
+        /// Number - 1 || Number / 3 || Number / 2
+        /// </summary>
+        public static void MinimumStepsToMinimizeToOne()
+        {
+            Utility.Print("MinimumStepsToMinimize_NoTo1 || Dynamic Programming (Memoization & Tabulation)");
+            int[] numArray = { 6, 5, 4, 10, 15, 25 };
+            foreach (var num in numArray)
+                Console.WriteLine($"\n Minmum Steps Requied to minimize '{num}' to '1' :\t{DynamicProgramming.GetMinSteps_Recursive(num)}");
         }
     }
 }
