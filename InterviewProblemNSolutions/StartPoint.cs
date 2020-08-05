@@ -100,10 +100,29 @@ namespace InterviewProblemNSolutions
         /// </summary>
         public static void MinimumStepsToMinimizeToOne()
         {
-            Utility.Print("MinimumStepsToMinimize_NoTo1 || Dynamic Programming (Memoization & Tabulation)");
-            int[] numArray = { 6, 5, 4, 10, 15, 25 };
+            Utility.Print("MinimumStepsToMinimize_NoTo1 || Dynamic Programming");
+            Console.WriteLine("\n------------ Recursive approach");
+            int[] numArray = { 6, 5, 4, 10, 15, 25, 500, 45123, 75845, 13245, 99589 };
             foreach (var num in numArray)
-                Console.WriteLine($"\n Minmum Steps Requied to minimize '{num}' to '1' :\t{DynamicProgramming.GetMinSteps_Recursive(num)}");
+                Console.WriteLine($"\n Minimum Steps Requied to minimize '{num}' to '1' : \t{DynamicProgramming.GetMinSteps_Recursive(num)}");
+
+
+
+            Console.WriteLine("\n------------ Dynamic Programming (Memoization) || Top-Down approach");
+            // Memoization
+            // create an array to update intermediate value as & when encoutnered while calculating min steps for a given 'num'
+            int[] memo = new int[numArray.Max() + 1];
+            foreach (var num in numArray)
+                Console.WriteLine($" Minimum Steps Requied to minimize '{num}' to '1' : \t{DynamicProgramming.GetMinSteps_DP_Memo(num, ref memo)}");
+
+
+
+            Console.WriteLine("\n------------ Dynamic Programming (Tabulation) || Bottom-up approach");
+            // Tabulation
+            // create an array to store all possible value b/w 1 to largest input num
+            int[] tab = DynamicProgramming.GetMinSteps_DP_Tab(numArray.Max() + 1);
+            foreach (var num in numArray)
+                Console.WriteLine($" Minimum Steps Requied to minimize '{num}' to '1' : \t {tab[num]}");
         }
     }
 }
