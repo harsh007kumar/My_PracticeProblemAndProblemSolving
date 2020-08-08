@@ -12,7 +12,12 @@ namespace InterviewProblemNSolutions
         {
             DutchFlagProblem();
             EventAndDelegate();
-            MinimumStepsToMinimizeToOne();      // Learn Dynamic Programming (Memoization & Tabulation)
+
+            // Learn Dynamic Programming (Memoization & Tabulation)
+            MinimumStepsToMinimizeToOne();
+
+            // String Algorithm
+            BruteForceWay();
             Console.ReadKey();
         }
 
@@ -123,6 +128,16 @@ namespace InterviewProblemNSolutions
             int[] tab = DynamicProgramming.GetMinSteps_DP_Tab(numArray.Max() + 1);
             foreach (var num in numArray)
                 Console.WriteLine($" Minimum Steps Requied to minimize '{num}' to '1' : \t {tab[num]}");
+        }
+
+        public static void BruteForceWay()
+        {
+            Utility.Print("Brute Force Excat String Match");
+            string input = "My name is Harsh";
+            string pattern = "Harsh";
+            int foudnAt = StringAlgorithms.BruteForceStringMatch(input, pattern);
+            if (foudnAt != -1) Console.WriteLine($" Pattern '{pattern}' first found at index '{foudnAt}' in Input string \"{input}\"");
+            else Console.WriteLine($" Pattern '{pattern}' Not found in Input string \"{input}\"");
         }
     }
 }

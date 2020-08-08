@@ -12,7 +12,7 @@ namespace InterviewProblemNSolutions
 
     public static class Utility
     {
-        public static void Print(string str) => Console.WriteLine($"\n===================== {str} =====================");
+        public static void Print(string str = "") => Console.WriteLine($"\n===================== {str} =====================");
 
         public static void Swap(ref int a,ref int b)
         {
