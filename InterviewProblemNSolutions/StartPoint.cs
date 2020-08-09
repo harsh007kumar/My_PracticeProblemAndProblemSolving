@@ -18,7 +18,8 @@ namespace InterviewProblemNSolutions
 
             // String Algorithm
             BruteForceWay();
-            Console.ReadKey();
+            RabinKarpStringMatchingAlgo();
+         Console.ReadKey();
         }
 
         /// <summary>
@@ -138,6 +139,19 @@ namespace InterviewProblemNSolutions
             int foudnAt = StringAlgorithms.BruteForceStringMatch(input, pattern);
             if (foudnAt != -1) Console.WriteLine($" Pattern '{pattern}' first found at index '{foudnAt}' in Input string \"{input}\"");
             else Console.WriteLine($" Pattern '{pattern}' Not found in Input string \"{input}\"");
+        }
+
+        public static void RabinKarpStringMatchingAlgo()
+        {
+            Utility.Print("Rabin-Karp String Matching (p. 657)");
+            string[] inputArr = { "My name is Harsh", "GEEKS FOR GEEKS" };
+            string[] patternArr = {"Harsh","GEEK"};
+            foreach (var input in inputArr)
+            {
+                var primeNo = 101;
+                foreach (var pattern in patternArr)
+                    StringAlgorithms.RabinKarpStringMatch(input, pattern, primeNo);
+            }
         }
     }
 }

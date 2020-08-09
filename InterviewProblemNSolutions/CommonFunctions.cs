@@ -27,6 +27,42 @@ namespace InterviewProblemNSolutions
                 Console.Write($" {arr[i]} >>");
             Console.WriteLine();
         }
+
+        public static int FindPrime(int num)
+        {
+            if (num <= 1)
+                return num;
+
+            int prime = 1;
+            // loop to iterate thru all integers smaller than num to find larget prime no
+            for (prime = num - 1; prime > 1; prime--)
+            {
+                bool isPrime = true;
+                // loop to check given number is prime or not
+                for (int i = prime / 2; i > 1; i--)
+                    if (prime % i == 0)
+                    { isPrime = false; break; }
+
+                // break outer loop if prime found
+                if (isPrime)
+                    break;
+            }
+            return prime;
+        }
+
+        /// <summary>
+        /// Returns num^power i.e, Math.Pow(num,power)
+        /// </summary>
+        /// <param name="num"></param>
+        /// <param name="power"></param>
+        /// <returns></returns>
+        public static int Power(int num, int power)
+        {
+            var ans = 1;
+            for (int i = 0; i <= power - 1; i++)
+                ans *= num;
+            return ans;
+        }
     }
 
     //Custom Delegate
