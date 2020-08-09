@@ -19,6 +19,7 @@ namespace InterviewProblemNSolutions
             // String Algorithm
             BruteForceWay();
             RabinKarpStringMatchingAlgo();
+            KnuthMorrisPratt_KMP_PatternMatchingAlgo();
          Console.ReadKey();
         }
 
@@ -145,13 +146,22 @@ namespace InterviewProblemNSolutions
         {
             Utility.Print("Rabin-Karp String Matching (p. 657)");
             string[] inputArr = { "My name is Harsh", "GEEKS FOR GEEKS" };
-            string[] patternArr = {"Harsh","GEEK"};
+            string[] patternArr = { "Harsh", "GEEK" };
+            var primeNo = 101;
             foreach (var input in inputArr)
-            {
-                var primeNo = 101;
                 foreach (var pattern in patternArr)
                     StringAlgorithms.RabinKarpStringMatch(input, pattern, primeNo);
-            }
+        }
+
+        // Tushar Roy https://youtu.be/GTJr8OvyEVQ
+        public static void KnuthMorrisPratt_KMP_PatternMatchingAlgo()
+        {
+            Utility.Print("Knuth–Morris–Pratt(KMP) Pattern Matching(Substring search)");
+            string[] inputArr = { "My name is Harsh", "GEEKS FOR GEEKS" };
+            string[] patternArr = { "Harsh", "GEEK" };
+            foreach (var input in inputArr)
+                foreach (var pattern in patternArr)
+                    StringAlgorithms.KMPStringMatch(input, pattern);
         }
     }
 }
