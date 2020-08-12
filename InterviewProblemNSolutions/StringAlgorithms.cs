@@ -83,7 +83,7 @@ namespace InterviewProblemNSolutions
                 // We might get negative value of tHash, converting it to positive 
                 if (tHash < 0)
                     tHash = tHash + q;
-                
+
             }
         }
 
@@ -138,5 +138,33 @@ namespace InterviewProblemNSolutions
                 else i++;
             }
         }
+
+
+
+
+        // Time O(n/2) ~n || Space O(1)
+        public static void ReverseStringInPlace(char[] str)
+        {
+            Console.Write($"Reversing(In-Place) input string : '{new string(str)}'");
+            int len = str.Length - 1, i = 0;
+            while (i <= len)
+                Utility.Swap(ref str[i++], ref str[len--]);
+            Console.WriteLine($" \t'{new string(str)}'");
+        }
+
+        // Time O(n/2) ~n || Space O(n)
+        public static string ReverseString(string str)
+        {
+            Console.Write($"Reverse input string : '{str}' and return reverse");
+            char[] reverse = new char[str.Length];          // object to store reversed string
+            int len = str.Length - 1, i = 0;
+            while (i <= len)
+            {
+                reverse[len] = str[i];
+                reverse[i++] = str[len--];
+            }
+            return new string(reverse);
+        }
+
     }
 }

@@ -20,6 +20,29 @@ namespace InterviewProblemNSolutions
             a = b;
             b = temp;
         }
+        public static void Swap(ref char a, ref char b)
+        {
+            var temp = a;
+            a = b;
+            b = temp;
+        }
+
+        /// <summary>
+        /// Swap two distinct and different input, doesn't works if inputs are same(Ex- XOR of 5 ^ 5 = 0)
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        public static void SwapXOR(ref char a, ref char b)
+        {
+            a ^= b;
+            b ^= a;
+            a ^= b;
+            /* same as
+            a=a^b;
+            b=a^b;
+            a=a^b;
+            */
+        }
 
         public static void Print(this int[] arr)
         {

@@ -16,11 +16,13 @@ namespace InterviewProblemNSolutions
             // Learn Dynamic Programming (Memoization & Tabulation)
             MinimumStepsToMinimizeToOne();
 
-            // String Algorithm
+            // String Matching Algorithm
             BruteForceWay();
             RabinKarpStringMatchingAlgo();
             KnuthMorrisPratt_KMP_PatternMatchingAlgo();
-         Console.ReadKey();
+
+            ReverseString();
+            Console.ReadKey();
         }
 
         /// <summary>
@@ -162,6 +164,18 @@ namespace InterviewProblemNSolutions
             foreach (var input in inputArr)
                 foreach (var pattern in patternArr)
                     StringAlgorithms.KMPStringMatch(input, pattern);
+        }
+
+        public static void ReverseString()
+        {
+            Utility.Print("Problem - 5/6/7 Give an algorithm for reversing a string.(p. 689)");
+            string[] inputs = { "Harsh", "banana", "lalal" };
+            foreach (var str in inputs)
+            {
+                Console.WriteLine($" \t'{StringAlgorithms.ReverseString(str)}'");
+                StringAlgorithms.ReverseStringInPlace(str.ToCharArray());
+                Console.WriteLine();
+            }
         }
     }
 }
