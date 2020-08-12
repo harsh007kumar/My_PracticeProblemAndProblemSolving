@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace InterviewProblemNSolutions
             KnuthMorrisPratt_KMP_PatternMatchingAlgo();
 
             ReverseString();
+            ReverseSentence();
             Console.ReadKey();
         }
 
@@ -176,6 +178,14 @@ namespace InterviewProblemNSolutions
                 StringAlgorithms.ReverseStringInPlace(str.ToCharArray());
                 Console.WriteLine();
             }
+        }
+
+        public static void ReverseSentence()
+        {
+            Utility.Print("Problem - 9 Give an algorithm for reversing words in a sentence.(p. 691)");
+            string input = "This is a Career Monk String";
+            Console.WriteLine($" Sentence : \t'{input}'\n In-Reverse : \t'{StringAlgorithms.ReverseSentence(input.ToCharArray())}'");
+            Console.WriteLine($" Sentence : \t'{input}'\n In-Reverse : \t'{StringAlgorithms.ReverseSentenceInPlace(input.ToCharArray())}'");
         }
     }
 }

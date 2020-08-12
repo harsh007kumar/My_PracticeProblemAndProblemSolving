@@ -143,19 +143,24 @@ namespace InterviewProblemNSolutions
 
 
         // Time O(n/2) ~n || Space O(1)
-        public static void ReverseStringInPlace(char[] str)
+        public static void ReverseStringInPlace(char[] str, int startIndex = -1, int endIndex = -1)
         {
             Console.Write($"Reversing(In-Place) input string : '{new string(str)}'");
-            int len = str.Length - 1, i = 0;
-            while (i <= len)
-                Utility.Swap(ref str[i++], ref str[len--]);
+            int start = 0, len = str.Length - 1;
+            if (startIndex != -1 && startIndex <= endIndex)     // if provied start & end Index use them
+            {
+                start = startIndex;
+                len = endIndex;
+            }
+            while (start < len)
+                Utility.SwapXOR(ref str[start++], ref str[len--]);
             Console.WriteLine($" \t'{new string(str)}'");
         }
 
         // Time O(n/2) ~n || Space O(n)
         public static string ReverseString(string str)
         {
-            Console.Write($"Reverse input string : '{str}' and return reverse");
+            Console.Write($"Reversing input string : \t'{str}' ==> ");
             char[] reverse = new char[str.Length];          // object to store reversed string
             int len = str.Length - 1, i = 0;
             while (i <= len)
@@ -164,6 +169,45 @@ namespace InterviewProblemNSolutions
                 reverse[i++] = str[len--];
             }
             return new string(reverse);
+        }
+
+        // Time O(n) || Space O(n)
+        public static string ReverseSentence(char[] sentence, char delimeter = ' ')
+        {
+            Stack<string> words = new Stack<string>();
+            string currentWord = "";
+            foreach (char ch in sentence)       // Time O(n)
+                if (ch == delimeter)
+                {
+                    words.Push(currentWord);
+                    words.Push(delimeter.ToString());
+                    currentWord = "";
+                }
+                else
+                    currentWord += ch;
+            
+            words.Push(currentWord);            // push last word
+
+            string reverseString = "";
+            foreach (var word in words)         // read from stack top and construct reverse string
+                reverseString += word;
+            return reverseString;
+        }
+
+        // Time O(n) || Space O(1)
+        public static string ReverseSentenceInPlace(char[] sentence, char delimeter = ' ')
+        {
+            ReverseStringInPlace(sentence);                                     // reverse entire sentence
+
+            int lastDelimiterFoundAt = 0, i;
+            for (i = 0; i < sentence.Length; i++)
+                if (sentence[i] == delimeter)
+                {
+                    ReverseStringInPlace(sentence, lastDelimiterFoundAt, i-1);  // reverse each word when delimiter is encountered
+                    lastDelimiterFoundAt = i + 1;
+                }
+            ReverseStringInPlace(sentence, lastDelimiterFoundAt, i - 1);        // reverse last word
+            return new string(sentence);
         }
 
     }
