@@ -24,6 +24,7 @@ namespace InterviewProblemNSolutions
 
             ReverseString();
             ReverseSentence();
+            StringPermutationAlgorithm();
             Console.ReadKey();
         }
 
@@ -186,6 +187,13 @@ namespace InterviewProblemNSolutions
             string input = "This is a Career Monk String";
             Console.WriteLine($" Sentence : \t'{input}'\n In-Reverse : \t'{StringAlgorithms.ReverseSentence(input.ToCharArray())}'");
             Console.WriteLine($" Sentence : \t'{input}'\n In-Reverse : \t'{StringAlgorithms.ReverseSentenceInPlace(input.ToCharArray())}'");
+        }
+
+        public static void StringPermutationAlgorithm()
+        {
+            Utility.Print("Problem - 10 Permutations of a string[anagrams]:(p. 691)");
+            string input = "aabc";
+            StringAlgorithms.StringPermutation(input);
         }
     }
 }

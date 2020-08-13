@@ -143,9 +143,9 @@ namespace InterviewProblemNSolutions
 
 
         // Time O(n/2) ~n || Space O(1)
-        public static void ReverseStringInPlace(char[] str, int startIndex = -1, int endIndex = -1)
+        public static void ReverseStringInPlace(char[] str, int startIndex = -1, int endIndex = -1, bool silent=false)
         {
-            Console.Write($"Reversing(In-Place) input string : '{new string(str)}'");
+            if (!silent) Console.Write($"Reversing(In-Place) input string : '{new string(str)}'");
             int start = 0, len = str.Length - 1;
             if (startIndex != -1 && startIndex <= endIndex)     // if provied start & end Index use them
             {
@@ -154,13 +154,13 @@ namespace InterviewProblemNSolutions
             }
             while (start < len)
                 Utility.SwapXOR(ref str[start++], ref str[len--]);
-            Console.WriteLine($" \t'{new string(str)}'");
+            if (!silent) Console.WriteLine($" \t'{new string(str)}'");
         }
 
         // Time O(n/2) ~n || Space O(n)
         public static string ReverseString(string str)
         {
-            Console.Write($"Reversing input string : \t'{str}' ==> ");
+            Console.Write($"Reversing input string : \t'{str}' ");
             char[] reverse = new char[str.Length];          // object to store reversed string
             int len = str.Length - 1, i = 0;
             while (i <= len)
@@ -208,6 +208,118 @@ namespace InterviewProblemNSolutions
                 }
             ReverseStringInPlace(sentence, lastDelimiterFoundAt, i - 1);        // reverse last word
             return new string(sentence);
+        }
+
+        [Obsolete("use => StringPermutation() instead",true)]
+        public static void PrintStringPermutation(char[] input)
+        {
+            /* 1) fix first character of the array >> than print the rest character in sliding window pattern(rotate the array)
+             * 2) now left rotate the array and repeat step 1
+             * keep repeating 2nd step until all the characters have been at been fixed at 1st index atleast once.
+             */
+            var len = input.Length;
+            int startIndex = 0;
+            while (startIndex < len)
+            {
+                Utility.Swap(ref input[0], ref input[startIndex]);
+                Console.WriteLine(input[0]);
+                PrintCurrentWindow(input, 1, len);  // remove this hardcoding for 1, instead pass something like range which increase with length of input
+                Console.WriteLine("\n\n");
+                startIndex++;
+            }
+
+            void PrintCurrentWindow(char[] str, int startFromIndex, int endAtIndex)
+            {
+                int counter = 0;
+                while (counter < endAtIndex - startFromIndex)
+                {
+                    int j = 0;
+                    while (j < startFromIndex) Console.Write(str[j++]);
+                    while (j < endAtIndex)
+                    {
+                        var toPrint = counter + j++;
+                        if (toPrint >= endAtIndex) toPrint -= (endAtIndex - startFromIndex);
+                        Console.Write(str[toPrint]);
+                    }
+                    counter++;
+                    Console.Write(" ");
+                }
+                ReverseStringInPlace(str, 1, endAtIndex - 1, true);
+                counter = 0;
+                while (counter < endAtIndex - startFromIndex)
+                {
+                    int j = 0;
+                    while (j < startFromIndex) Console.Write(str[j++]);
+                    while (j < endAtIndex)
+                    {
+                        var toPrint = counter + j++;
+                        if (toPrint >= endAtIndex) toPrint -= (endAtIndex - startFromIndex);
+                        Console.Write(str[toPrint]);
+                    }
+                    counter++;
+                    Console.Write(" ");
+                }
+                //for (int i = startIndex; i < endAtIndex; i++)
+                //{
+                //    int j = 0;
+                //    while (j < endAtIndex)
+                //        Console.Write($"{str[(i + j++) % endAtIndex]}");
+                //    Console.Write(" ");
+                //}
+                ReverseStringInPlace(str, 1, endAtIndex - 1, true);
+            }
+            
+        }
+
+        // Tushar Roy https://youtu.be/nYFd7VHKyWQ
+        /// <summary>
+        /// String Permutation Algorithm, which prints all the permutation in lexographical order, also handles duplicates
+        /// Time Complxity O(factorial time), if K unique charactes in input than O(K!)
+        /// else if out of unqiue k, 2 charactes repeat a & b times than O(k! / (a! * b!))
+        /// Space Complexity O(english characters) = O(26)
+        /// </summary>
+        /// <param name="input"></param>
+        public static void StringPermutation(string input)
+        {
+            // assumption we are only working with large Caps in English
+            input = input.ToUpper();
+
+            // create a dataset/HashMap which stores occurence of each alphabet in in lexographical order
+            int[] characterCount = Enumerable.Repeat(-1, 26).ToArray();
+            
+            var charArray = input.ToCharArray();
+
+            // update the count for each character from input in the map
+            foreach (var ch in charArray)
+                characterCount[ch - 'A'] = characterCount[ch - 'A'] == -1 ? 1 : characterCount[ch - 'A'] + 1;
+
+            // create a result datastruture of length same as input
+            char[] result = new char[input.Length];
+
+            // call recursive func on HashMap
+            StringPermutation_Util(characterCount, result, 0);
+        }
+
+        protected static void StringPermutation_Util(int[] map, char[] result, int depth)
+        {
+            for (int i = 0; i < map.Length; i++)
+            {
+                // skip character with count = 0
+                if (map[i] == 0 || map[i] == -1) continue;
+
+                result[depth] = (char)(i + 'A');    // add character at current depth of recursion
+                map[i] -= 1;                        // decreament the count of current character in dictonary
+
+                StringPermutation_Util(map, result, depth + 1);
+                map[i] += 1;                        // restore the count of current character after exiting recursion
+            }
+            // if count for all is 0 print the result
+            bool allZero = true;
+            foreach (var ch in map)
+                if (ch == -1) continue;
+                else if (ch != 0) allZero = false;
+
+            if (allZero) Console.WriteLine(new string(result));
         }
 
     }
