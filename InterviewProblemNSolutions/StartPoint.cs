@@ -27,6 +27,7 @@ namespace InterviewProblemNSolutions
             StringPermutationAlgorithm();
             CombinationOfCharactersInString();
             RecursivelyRemoveAdjacentCharacters();
+            MinWindowContainingAllCharacters();
             Console.ReadKey();
         }
 
@@ -212,6 +213,14 @@ namespace InterviewProblemNSolutions
             // For example, ABCCBCBAnnnnnn -> ABBCBA ->ACBA
             var input = "AABCCBCBAnnnnnn";
             StringAlgorithms.RecursiveRemoveAdjacentCharacters(input);
+        }
+
+        public static void MinWindowContainingAllCharacters()
+        {
+            Utility.Print("minimum window in input string which will contain all the characters given in char array(p. 693)");
+            var input = "ABBACBA";
+            var chArray = "AAB";
+            StringAlgorithms.MinWindowContainingAllCharacters(input,chArray);
         }
     }
 }

@@ -362,5 +362,66 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" \tTransforms =>> '{input}'\n after recursively removing same adjacent characters");
         }
 
+        public static void MinWindowContainingAllCharacters(string input, string charSet)
+        {
+            /* set the window size as charSet.Length
+             * store all the characters & their count in Dictonary/hashMap
+             * precompute 1st window for input string and add characters & their count in second dictonary/hashMap
+             * if both hashMap match, print the characters/index i to (i + charSetLength - 1), EXIT
+             * else increament i++
+             */
+
+            if (charSet.Length > input.Length) return;
+
+            var slideSize = charSet.Length;
+            // Dictonary to store characters & count from 'charSet'
+            Dictionary<char, int> dictChars = new Dictionary<char, int>();
+            foreach (var ch in charSet)
+                if (dictChars.ContainsKey(ch))
+                    dictChars[ch]++;
+                else
+                    dictChars.Add(ch, 1);
+
+            // Dictonary to store characters & count from 'input' for initial window
+            Dictionary<char, int> dictSlideWindow = new Dictionary<char, int>();
+            int i = 0;
+            while (i < slideSize)
+            {
+                var ch = input[i];
+                if (dictSlideWindow.ContainsKey(ch))
+                    dictSlideWindow[ch]++;
+                else
+                    dictSlideWindow.Add(ch, 1);
+                i++;
+            }
+
+            // start sliding the window and keep matching the hashMap if true break and print the index i
+            i = 0;
+            bool mapMatch = false;
+            while (i < input.Length - slideSize + 1)
+            {
+                // match hashMap/Dictonary if they contain same characters with same count
+                mapMatch = dictSlideWindow.OrderBy(kvp => kvp.Key).SequenceEqual(dictChars.OrderBy(kvp => kvp.Key));
+                if (mapMatch)
+                    break;
+
+                var windowStartChar = input[i];
+                if (dictSlideWindow[windowStartChar] == 1) dictSlideWindow.Remove(windowStartChar);
+                else dictSlideWindow[windowStartChar]--;
+
+                if (i < input.Length - slideSize)
+                {
+                    var windowEndChar = input[i + slideSize];
+                    if (dictSlideWindow.ContainsKey(windowEndChar)) dictSlideWindow[windowEndChar]++;
+                    else dictSlideWindow.Add(windowEndChar, 1);
+                }
+                i++;
+            }
+            if(mapMatch) Console.WriteLine($" First Min window containing all characters '{charSet}'" +
+                $"\n In input '{input}' \n Start at index '{i}' \n Ends at index '{i + slideSize - 1}'");
+            else Console.WriteLine($"No Window Containing All Characters '{charSet}' found in input '{input}'");
+
+        }
+
     }
 }
