@@ -26,6 +26,7 @@ namespace InterviewProblemNSolutions
             ReverseSentence();
             StringPermutationAlgorithm();
             CombinationOfCharactersInString();
+            RecursivelyRemoveAdjacentCharacters();
             Console.ReadKey();
         }
 
@@ -197,14 +198,20 @@ namespace InterviewProblemNSolutions
             StringAlgorithms.StringPermutation(input);
         }
 
-        // Combination of Characters in String (All subsets of characters)
-        
         public static void CombinationOfCharactersInString()
         {
+            // Combination of Characters in String (All subsets of characters)
             Utility.Print("Problem - 11 Combinations Combinations of a String: (p. 692)");
             string input = "aabc";
             StringAlgorithms.CombinationOfCharacters(input);
+        }
 
+        public static void RecursivelyRemoveAdjacentCharacters()
+        {
+            Utility.Print("recursively removing the adjacent characters if they are the same.(p. 692)");
+            // For example, ABCCBCBAnnnnnn -> ABBCBA ->ACBA
+            var input = "AABCCBCBAnnnnnn";
+            StringAlgorithms.RecursiveRemoveAdjacentCharacters(input);
         }
     }
 }

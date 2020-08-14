@@ -333,5 +333,34 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        /// <summary>
+        /// Function take string input and recursively removes all adjacent duplicate characters
+        /// Time O(n), n = length of input || Space Complexity O(1)
+        /// </summary>
+        /// <param name="input"></param>
+        public static void RecursiveRemoveAdjacentCharacters(string input)
+        {
+            // read first index of input and store its index
+            // read next character if it matches with input[index] remove both index and continue in loop also set index--
+            // else if next char not same as input[index] index++
+            Console.Write($" Input '{input}'");
+
+            int i = 1, lastCharIndex = -1;
+            while (i < input.Length)
+            {
+                if (lastCharIndex == -1)
+                    lastCharIndex = 0;
+
+                if (input[i] == input[lastCharIndex])
+                {
+                    input = input.Remove(lastCharIndex, i - lastCharIndex + 1);     // remove same adjacent characters from input
+                    i = lastCharIndex--;
+                }
+                else
+                    lastCharIndex = i++;                                            // if characters don't match increament both last index & i by 1
+            }
+            Console.WriteLine($" \tTransforms =>> '{input}'\n after recursively removing same adjacent characters");
+        }
+
     }
 }
