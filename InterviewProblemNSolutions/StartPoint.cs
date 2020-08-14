@@ -25,6 +25,7 @@ namespace InterviewProblemNSolutions
             ReverseString();
             ReverseSentence();
             StringPermutationAlgorithm();
+            CombinationOfCharactersInString();
             Console.ReadKey();
         }
 
@@ -194,6 +195,16 @@ namespace InterviewProblemNSolutions
             Utility.Print("Problem - 10 Permutations of a string[anagrams]:(p. 691)");
             string input = "aabc";
             StringAlgorithms.StringPermutation(input);
+        }
+
+        // Combination of Characters in String (All subsets of characters)
+        
+        public static void CombinationOfCharactersInString()
+        {
+            Utility.Print("Problem - 11 Combinations Combinations of a String: (p. 692)");
+            string input = "aabc";
+            StringAlgorithms.CombinationOfCharacters(input);
+
         }
     }
 }

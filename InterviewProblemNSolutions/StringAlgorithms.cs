@@ -213,10 +213,10 @@ namespace InterviewProblemNSolutions
 
         // Tushar Roy https://youtu.be/nYFd7VHKyWQ
         /// <summary>
-        /// String Permutation Algorithm, which prints all the permutation in lexographical order, also handles duplicates
+        /// String Permutation Algorithm, which prints all the permutation/anagrams in lexographical order, also handle duplicates
         /// Time Complxity O(factorial time), if K unique charactes in input than O(K!)
-        /// else if out of unqiue k, 2 charactes repeat a & b times than O(k! / (a! * b!))
-        /// Space Complexity O(english characters) = O(26)
+        /// else if out of unqiue 'k', 2 charactes repeat a & b times than O(k! / (a! * b!))
+        /// Space Complexity O(k), K unique charactes
         /// </summary>
         /// <param name="input"></param>
         public static void StringPermutation(string input)
@@ -248,7 +248,7 @@ namespace InterviewProblemNSolutions
             }
             
             // create a result datastruture of length same as input
-            char[] result = new char[input.Length];
+            char[] result = new char[len];
 
             // call recursive func on HashMap
             StringPermutation_Util(character, count, result, 0);
@@ -266,12 +266,70 @@ namespace InterviewProblemNSolutions
                     // skip character with count = 0
                     if (count[i] == 0) continue;
 
-                    result[depth] = map[i];     // add character at current depth of recursion
-                    count[i] -= 1;              // decreament the count of current character in dictonary
+                    result[depth] = map[i];     // update character in result array, at index = depth of recursion
+                    count[i] -= 1;              // decreament the count of current character in map
 
                     StringPermutation_Util(map, count, result, depth + 1);
                     count[i] += 1;              // restore the count of current character after exiting recursion
                 }
+            }
+        }
+
+        // Tushar Roy https://youtu.be/xTNFs5KRV_g
+        /// <summary>
+        /// String Combination Algorithm, which prints all the combinateion in lexographical order,
+        /// Combination 'AB' is same as 'BA' hence we can print this combo/set just once unlike permutation where we print both
+        /// Time Complexity O(2^N), i.e, exponantional where N = length of input
+        /// Space Complexity O(k), K unique charactes
+        /// </summary>
+        /// <param name="input"></param>
+        public static void CombinationOfCharacters(string input)
+        {
+            // assumption we are only working with large Caps from English dictonary
+            input = input.ToUpper();
+            var len = input.Length;
+
+            // create a HashMap which stores occurence of each alphabet in in lexographical order
+            SortedDictionary<char, int> hashMap = new SortedDictionary<char, int>();
+            foreach (var ch in input.ToCharArray())
+                if (hashMap.ContainsKey(ch))
+                    hashMap[ch] += 1;
+                else
+                    hashMap.Add(ch, 1);
+
+            // create a result datastruture of length same as input
+            char[] charArray = new char[hashMap.Count];
+            // int array to hold all unqiue characters count
+            int[] count = new int[hashMap.Count];
+
+            int i = 0;
+            foreach (var keyvalue in hashMap)
+            {
+                charArray[i] = keyvalue.Key;
+                count[i] = keyvalue.Value;
+                i++;
+            }
+
+            // create a result datastruture of length same as input
+            char[] output = new char[len];
+
+            // call recursive func
+            CombinationOfCharacters_Util(charArray, count, output);
+        }
+
+        protected static void CombinationOfCharacters_Util(char[] map, int[] count, char[] output, int startFrom = 0, int depth = 0)
+        {
+            Console.WriteLine(new string(output, 0, depth));
+            for (int i = startFrom; i < map.Length; i++)
+            {
+                // skip character with count = 0
+                if (count[i] == 0) continue;
+
+                output[depth] = map[i];     // update character in result array, at index = depth of recursion
+                count[i] -= 1;              // decreament the count of current character in map
+
+                CombinationOfCharacters_Util(map, count, output, i, depth + 1);
+                count[i] += 1;              // restore the count of current character after exiting recursion
             }
         }
 
