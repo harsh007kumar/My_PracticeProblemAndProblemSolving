@@ -209,7 +209,7 @@ namespace InterviewProblemNSolutions
 
         public static void RecursivelyRemoveAdjacentCharacters()
         {
-            Utility.Print("recursively removing the adjacent characters if they are the same.(p. 692)");
+            Utility.Print("Problem - 12 Recursively removing the adjacent characters if they are the same.(p. 692)");
             // For example, ABCCBCBAnnnnnn -> ABBCBA ->ACBA
             var input = "AABCCBCBAnnnnnn";
             StringAlgorithms.RecursiveRemoveAdjacentCharacters(input);
@@ -217,9 +217,9 @@ namespace InterviewProblemNSolutions
 
         public static void MinWindowContainingAllCharacters()
         {
-            Utility.Print("minimum window in input string which will contain all the characters given in char array(p. 693)");
-            var input = "ABBACBA";
-            var chArray = "AAB";
+            Utility.Print("Problem - 13 Minimum window in input string which will contain all the characters given in char array(p. 693)");
+            var input = "ABB$ACBAA$";
+            var chArray = "A$AB";
             StringAlgorithms.MinWindowContainingAllCharacters(input,chArray);
         }
     }

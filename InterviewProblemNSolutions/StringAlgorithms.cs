@@ -362,7 +362,7 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" \tTransforms =>> '{input}'\n after recursively removing same adjacent characters");
         }
 
-        public static void MinWindowContainingAllCharacters(string input, string charSet)
+        public static void FixedWindowContainingAllCharacters(string input, string charSet)
         {
             /* set the window size as charSet.Length
              * store all the characters & their count in Dictonary/hashMap
@@ -420,8 +420,66 @@ namespace InterviewProblemNSolutions
             if(mapMatch) Console.WriteLine($" First Min window containing all characters '{charSet}'" +
                 $"\n In input '{input}' \n Start at index '{i}' \n Ends at index '{i + slideSize - 1}'");
             else Console.WriteLine($"No Window Containing All Characters '{charSet}' found in input '{input}'");
-
         }
 
+        /// <summary>
+        /// Time Complexity O(2n) ~ O(n), worst case when we adding characters 2n times, i.e, each window has same length and m possilbe windows are present in array
+        /// Space Compexity O(ExtendedASCII) = O(256) ~O(1)
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="charSet"></param>
+        public static void MinWindowContainingAllCharacters(string input, string charSet)
+        {
+            if (charSet.Length > input.Length) return;
+            var StandardASCII = 128;                    // characters(0-127)
+            var ExtendedASCII = StandardASCII * 2;      // characters(128-255)
+
+            // int array to store each unquie characters count from 'charSet'
+            int[] expected = new int[ExtendedASCII];
+            // update the count of characters found in charSet
+            foreach (var ch in charSet)
+                expected[(int)ch]++;
+
+            // int array to store each unquie characters count from 'input'
+            int[] actual = new int[ExtendedASCII];
+
+            int startIndex = 0, endIndex = -1;     // to store sliding window start & end index
+            int i = 0, j = 0, MinWindowLen = int.MaxValue, count = 0;
+            for (i = 0; i < input.Length; i++)
+            {
+                var chInt = (int)input[i];
+                if (expected[chInt] == 0)           // characters which is not present in charSet found skip forward
+                    continue;
+
+                actual[chInt]++;                    // increment count in actual array
+
+                if (actual[chInt] <= expected[chInt])
+                    count++;
+
+                if (count >= charSet.Length)        // all required characters found
+                {
+                    // now try reducing the size of the window
+                    // traverse thru each character from input string & try to find if it doesnt exsits in expected set or it actual has more count than expected
+                    while (expected[input[j]] == 0 || actual[input[j]] > expected[input[j]])
+                    {
+                        if (actual[input[j]] > expected[input[j]])
+                            actual[input[j]]--;
+                        j++;
+                        if (j == expected.Length) break;
+                    }
+                    if (MinWindowLen > i - j + 1)
+                    {
+                        MinWindowLen = i - j + 1;   // update the Sliding window size
+                        startIndex = j;
+                        endIndex = i;
+                    }
+                }
+            }
+            if (endIndex != -1)
+                Console.WriteLine($" Min window containing all characters \t'{charSet}'" +
+                 $"\n Input string \t'{input}' \n Start Index \t'{startIndex}' \n End Index \t'{endIndex}'");
+            else
+                Console.WriteLine($"No Window Containing All Characters \t'{charSet}' found in input \t'{input}'");
+        }
     }
 }
