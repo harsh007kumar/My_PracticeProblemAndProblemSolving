@@ -28,6 +28,7 @@ namespace InterviewProblemNSolutions
             CombinationOfCharactersInString();
             RecursivelyRemoveAdjacentCharacters();
             MinWindowContainingAllCharacters();
+            FindPatternPresentIn2DCharArray();
             Console.ReadKey();
         }
 
@@ -221,6 +222,21 @@ namespace InterviewProblemNSolutions
             var input = "ABB$ACBAA$";
             var chArray = "A$AB";
             StringAlgorithms.MinWindowContainingAllCharacters(input,chArray);
+        }
+
+        public static void FindPatternPresentIn2DCharArray()
+        {
+            Utility.Print("Problem-14  We are given a 2D array of characters and a character pattern. " +
+                "Give an algorithm to find if the pattern is present in the 2D array.(pp. 694 - 695)");
+            char[,] input2D = { { 'A', 'C', 'P', 'R', 'C' },
+                                { 'X', 'S', 'O', 'P', 'C' },
+                                { 'V', 'O', 'V', 'N', 'I' },
+                                { 'W', 'G', 'F', 'M', 'N' },
+                                { 'Q', 'A', 'T', 'I', 'T' } };
+            string pattern = "MICROSOFT";   // for more complex sample pattern use = QWGFINIPPCAX
+            input2D.Print();
+            pattern.Show();
+            StringAlgorithms.FindPatternIn2DCharArray(input2D, pattern);
         }
     }
 }

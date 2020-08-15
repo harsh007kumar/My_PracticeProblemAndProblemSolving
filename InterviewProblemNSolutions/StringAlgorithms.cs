@@ -9,6 +9,9 @@ namespace InterviewProblemNSolutions
 {
     public class StringAlgorithms
     {
+        static readonly int StandardASCII = 128;                // characters(0-127)
+        static readonly int ExtendedASCII = StandardASCII * 2;  // characters(128-255)
+
         // exact string matching algorithms. (p. 656) || Brute Force
         /// <summary>
         /// Returns index in input where given pattern is found for 1st time, else -1 of pattern not found
@@ -465,7 +468,6 @@ namespace InterviewProblemNSolutions
                         if (actual[input[j]] > expected[input[j]])
                             actual[input[j]]--;
                         j++;
-                        if (j == expected.Length) break;
                     }
                     if (MinWindowLen > i - j + 1)
                     {
@@ -480,6 +482,86 @@ namespace InterviewProblemNSolutions
                  $"\n Input string \t'{input}' \n Start Index \t'{startIndex}' \n End Index \t'{endIndex}'");
             else
                 Console.WriteLine($"No Window Containing All Characters \t'{charSet}' found in input \t'{input}'");
+        }
+
+        /// <summary>
+        /// Returns True if given 'pattern' exists in 2-D 'input' char array, else returns false
+        /// Time Complexity O(R*C), R = rows & C = Columns in input 2-D char array || Auxillary Space O(1)
+        /// can also check GFG https://www.geeksforgeeks.org/search-a-word-in-a-2d-grid-of-characters/ , below is personnel implementation after referring the book
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="pattern"></param>
+        /// <returns></returns>
+        public static bool FindPatternIn2DCharArray(char[,] input, string pattern)
+        {
+            /* start from first index check if it matches first character of pattern
+             * if yes than 
+             *      a) Mark current Node as visited
+             *      c) Recursively find other remaining characters(in any order) in all possible 8 directions
+             *      d) maintain a 'count' to indicate no of characters found at every step
+             *      e) if count equals length of pattern, return true and break out
+             * also remeber if during recursion next characters is not found
+             *      a) Mark back the current Node as un-visited
+             *      c) decrement the 'count' by one
+             * if No than check at next index in 2D array
+             * if u reach end of the 2D array return false
+             */
+
+            var noOfRow = input.GetLength(0);               // no of rows
+            var noOfCol = input.GetLength(1);               // no of cols
+
+            // visited array to mark which Nodes are visited
+            bool[,] isVisited = new bool[noOfRow, noOfCol];
+
+            // call recusrive function from 1st row's 1st column
+            return FindPatternIn2DCharArrayUtil(input, pattern, isVisited, noOfRow, noOfCol, 0, 0, 0);
+        }
+
+        protected static bool FindPatternIn2DCharArrayUtil(char[,] input, string pattern, bool[,] isVisited, int maxRow, int maxCol, int currentRow = 0, int currentCol = 0, int level = 0)
+        {
+            if (level == pattern.Length)
+            {
+                Console.WriteLine($" Pattern '{pattern}' found in given 2D char array");
+                return true;
+            }
+            else if (isVisited[currentRow, currentCol])
+                return false;
+
+            // check if first character of pattern doesn't matches any given node of input 2D array
+            if (input[currentRow, currentCol] != pattern[level] && level == 0)
+            {
+                if (currentCol + 1 < maxCol)               // if next column exists search again from 0th row index of next
+                    return FindPatternIn2DCharArrayUtil(input, pattern, isVisited, maxRow, maxCol, currentRow, currentCol + 1, level);
+                else if (currentRow + 1 < maxRow)          // else if next index in row avaliable search it
+                    return FindPatternIn2DCharArrayUtil(input, pattern, isVisited, maxRow, maxCol, currentRow + 1, 0, level);
+                else return false;                          // reached end of the 2D array
+            }
+            else if (input[currentRow, currentCol] == pattern[level])   // character matched
+            {
+                isVisited[currentRow, currentCol] = true;   // Mark current Node Visited
+
+                int upperRowLimit = currentRow, lowerRowLimit = currentRow, leftmostColLimit = currentCol, rtmostColLimit = currentCol;
+                /*      Now start matching all the remaing characters of pattern in all 8 directions
+                 *      1  2  3
+                 *      4 [*] 5
+                 *      6  7  8
+                 */
+                // Set upper & lower bound of the rows and columns where we can search for next character in pattern
+                if (currentRow > 0) upperRowLimit--;
+                if (currentRow + 1 < maxRow) lowerRowLimit++;
+                if (leftmostColLimit > 0) leftmostColLimit--;
+                if (rtmostColLimit + 1 < maxCol) rtmostColLimit++;
+
+                for (int i = upperRowLimit; i <= lowerRowLimit; i++)
+                    for (int j = leftmostColLimit; j <= rtmostColLimit; j++)
+                    {
+                        var foundNext = FindPatternIn2DCharArrayUtil(input, pattern, isVisited, maxRow, maxCol, i, j, level + 1);
+                        if (foundNext)
+                            return true;
+                    }
+                isVisited[currentRow, currentCol] = false;  // mark current Node back as Not-Visited
+            }
+            return false;
         }
     }
 }
