@@ -593,5 +593,31 @@ namespace InterviewProblemNSolutions
                 PrintInterleavingsUtil(firstString, secondString, output, firstIndex, secondIndex + 1);
             }
         }
+
+        /// <summary>
+        /// Time O(2n) ~ O(n) || Space O(n+m), n = length of input, m = noOfSpaces * replaceWithString length
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="replaceWith"></param>
+        public static void ReplaceSpaceWithGivenChars(string input, string replaceWith)
+        {
+            Console.WriteLine($" Input String : '{input}'\n replace with : '{replaceWith}'");
+            int countSpace = 0, i = 0;
+            var space = ' ';
+            for (i = 0; i < input.Length; i++)
+                if (input[i] == space) countSpace++;
+            var outputLen = input.Length + (countSpace * replaceWith.Length);
+            var output = new char[outputLen];
+            outputLen--;
+            for (i = input.Length - 1; i >= 0; i--)
+            {
+                if (input[i] == space)
+                    for (int j = replaceWith.Length - 1; j >= 0; j--)
+                        output[outputLen--] = replaceWith[j];
+                else
+                    output[outputLen--] = input[i];
+            }
+            Console.WriteLine($" Final output is : {new string(output)}");
+        }
     }
 }

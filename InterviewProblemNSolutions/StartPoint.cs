@@ -30,6 +30,7 @@ namespace InterviewProblemNSolutions
             MinWindowContainingAllCharacters();
             FindPatternPresentIn2DCharArray();
             PrintInterLeavingsOfGivenTwoString();
+            ReplaceSpaceInStringWithGivenCharacters();
             Console.ReadKey();
         }
 
@@ -248,6 +249,15 @@ namespace InterviewProblemNSolutions
             var firstString = "AB";
             var secondString = "12";
             StringAlgorithms.PrintInterleavings(firstString, secondString);
+        }
+
+        public static void ReplaceSpaceInStringWithGivenCharacters()
+        {
+            Utility.Print("Problem-17  Write a method to replace all spaces in a string with ‘%20’." +
+                "Assume string has sufficient space at end of string to hold additional characters.(pp. 698 - 699)");
+            var input = "Harsh is my name";
+            var replaceWith = "%20";
+            StringAlgorithms.ReplaceSpaceWithGivenChars(input,replaceWith);
         }
     }
 }
