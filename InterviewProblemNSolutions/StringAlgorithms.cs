@@ -147,7 +147,7 @@ namespace InterviewProblemNSolutions
 
 
         // Time O(n/2) ~n || Space O(1)
-        public static void ReverseStringInPlace(char[] str, int startIndex = -1, int endIndex = -1, bool silent=false)
+        public static void ReverseStringInPlace(char[] str, int startIndex = -1, int endIndex = -1, bool silent = false)
         {
             if (!silent) Console.Write($"Reversing(In-Place) input string : '{new string(str)}'");
             int start = 0, len = str.Length - 1;
@@ -189,7 +189,7 @@ namespace InterviewProblemNSolutions
                 }
                 else
                     currentWord += ch;
-            
+
             words.Push(currentWord);            // push last word
 
             string reverseString = "";
@@ -207,7 +207,7 @@ namespace InterviewProblemNSolutions
             for (i = 0; i < sentence.Length; i++)
                 if (sentence[i] == delimeter)
                 {
-                    ReverseStringInPlace(sentence, lastDelimiterFoundAt, i-1);  // reverse each word when delimiter is encountered
+                    ReverseStringInPlace(sentence, lastDelimiterFoundAt, i - 1);  // reverse each word when delimiter is encountered
                     lastDelimiterFoundAt = i + 1;
                 }
             ReverseStringInPlace(sentence, lastDelimiterFoundAt, i - 1);        // reverse last word
@@ -249,7 +249,7 @@ namespace InterviewProblemNSolutions
                 count[i] = ch.Value;            // update the count for each character from input
                 i++;
             }
-            
+
             // create a result datastruture of length same as input
             char[] result = new char[len];
 
@@ -420,8 +420,8 @@ namespace InterviewProblemNSolutions
                 }
                 i++;
             }
-            if(mapMatch) Console.WriteLine($" First Min window containing all characters '{charSet}'" +
-                $"\n In input '{input}' \n Start at index '{i}' \n Ends at index '{i + slideSize - 1}'");
+            if (mapMatch) Console.WriteLine($" First Min window containing all characters '{charSet}'" +
+                 $"\n In input '{input}' \n Start at index '{i}' \n Ends at index '{i + slideSize - 1}'");
             else Console.WriteLine($"No Window Containing All Characters '{charSet}' found in input '{input}'");
         }
 
@@ -530,9 +530,9 @@ namespace InterviewProblemNSolutions
             // check if first character of pattern doesn't matches any given node of input 2D array
             if (input[currentRow, currentCol] != pattern[level] && level == 0)
             {
-                if (currentCol + 1 < maxCol)               // if next column exists search again from 0th row index of next
+                if (currentCol + 1 < maxCol)                // if next column exists in current row search it
                     return FindPatternIn2DCharArrayUtil(input, pattern, isVisited, maxRow, maxCol, currentRow, currentCol + 1, level);
-                else if (currentRow + 1 < maxRow)          // else if next index in row avaliable search it
+                else if (currentRow + 1 < maxRow)           // else if next row is avaliable search it and reset the column to 0
                     return FindPatternIn2DCharArrayUtil(input, pattern, isVisited, maxRow, maxCol, currentRow + 1, 0, level);
                 else return false;                          // reached end of the 2D array
             }
@@ -562,6 +562,36 @@ namespace InterviewProblemNSolutions
                 isVisited[currentRow, currentCol] = false;  // mark current Node back as Not-Visited
             }
             return false;
+        }
+
+
+        public static void PrintInterleavings(string firstString, string secondString)
+        {
+            var output = new char[firstString.Length + secondString.Length];
+            PrintInterleavingsUtil(firstString, secondString, output, 0, 0);
+        }
+
+        protected static void PrintInterleavingsUtil(string firstString, string secondString, char[] output, int firstIndex = 0, int secondIndex = 0)
+        {
+            var len1 = firstString.Length;
+            var len2 = secondString.Length;
+
+            // we have read all the characters from both input strings
+            if (firstIndex == len1 && secondIndex == len2)
+            {
+                Console.WriteLine($" {new string(output)}"); 
+                return;
+            }
+            if (firstIndex < len1)
+            {
+                output[firstIndex + secondIndex] = firstString[firstIndex];
+                PrintInterleavingsUtil(firstString, secondString, output, firstIndex + 1, secondIndex);
+            }
+            if (secondIndex < len2)
+            {
+                output[firstIndex + secondIndex] = secondString[secondIndex];
+                PrintInterleavingsUtil(firstString, secondString, output, firstIndex, secondIndex + 1);
+            }
         }
     }
 }

@@ -29,6 +29,7 @@ namespace InterviewProblemNSolutions
             RecursivelyRemoveAdjacentCharacters();
             MinWindowContainingAllCharacters();
             FindPatternPresentIn2DCharArray();
+            PrintInterLeavingsOfGivenTwoString();
             Console.ReadKey();
         }
 
@@ -237,6 +238,16 @@ namespace InterviewProblemNSolutions
             input2D.Print();
             pattern.Show();
             StringAlgorithms.FindPatternIn2DCharArray(input2D, pattern);
+        }
+
+        public static void PrintInterLeavingsOfGivenTwoString()
+        {
+            // explanation of algo https://www.youtube.com/watch?v=jspbN5bNPqM
+            // GFG https://www.geeksforgeeks.org/print-all-interleavings-of-given-two-strings/
+            Utility.Print("Problem-15  Given two strings str1 and str2, write a function that prints all interleavings of the given two strings.(p. 697)");
+            var firstString = "AB";
+            var secondString = "12";
+            StringAlgorithms.PrintInterleavings(firstString, secondString);
         }
     }
 }
