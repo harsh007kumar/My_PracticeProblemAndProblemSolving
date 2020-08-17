@@ -16,12 +16,14 @@ namespace Sorting
             string var = null;
             while (var != "0")
             {
-                Console.WriteLine("\n========== Un-sorted original array ==========");
                 array = ReturnUnsortedArray();//takearrayinput();
-                Search.print(array);
                 Console.WriteLine("\n====== Select which Sorting you wish to perfrom from below =====" +
                     "\nB=BubbleSort\nS=SelectionSort\nI=InsertionSort\nM=MergeSort\nC=CountSort\nR=RadixSort\nH=HeapSort\nQ=QuickSort\nSh=ShellSort\n0=EXIT");
                 var = Console.ReadLine();
+
+                Console.WriteLine("\n========== Un-sorted original array ==========");
+                Search.print(array);
+
                 switch (var.ToUpper())
                 {
                     case "B":
@@ -79,12 +81,12 @@ namespace Sorting
             int Len = array.Length;
             // Create MaxHeap, we start from mid of the array as Heapify itself will take care of element to left & right, remember left = 2*currentIndex+1
             for (int currentRoot = (Len / 2) - 1; currentRoot >= 0; currentRoot--)  // O(n/2)
-                MaxHeapify(ref array, currentRoot, Len - 1);                    // Maintin Heap integrity after at each level. O(logn)
+                MaxHeapify(ref array, currentRoot, Len);                    // Maintin Heap integrity after at each level. O(logn)
 
-            while (Len>0)                                                       // O(n)
+            while (Len > 1)                                                 // O(n)
             {
-                Swap(ref array[0], ref array[--Len]);                           // Swap Highest element i.e. root with smallest element
-                MaxHeapify(ref array, 0, Len-1);                                // Maintin Heap integrity after swap and reduced length. O(logn)
+                Swap(ref array[0], ref array[--Len]);                       // Swap Highest element i.e. root with smallest element
+                MaxHeapify(ref array, 0, Len);                              // Maintin Heap integrity after swap and reduced length. O(logn)
             }
         }
 
@@ -303,8 +305,6 @@ namespace Sorting
             for (i = 1; i < Len; i++)
             {
                 CurrentElemenetBeingInspected = arr[i];
-                //if (CurrentElemenetBeingInspected < arr[i - 1])
-                //{
                 for (k = i - 1; k >= 0; k--)
                 {
                     // CurrentElemenetBeingInspected is at correct index, if it's bigger than last element of sorted sub-array
@@ -313,7 +313,6 @@ namespace Sorting
                     arr[k + 1] = arr[k];
                 }
                 arr[k + 1] = CurrentElemenetBeingInspected;
-                //}
             }
             return arr;
         }
