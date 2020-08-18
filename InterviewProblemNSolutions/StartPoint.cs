@@ -35,7 +35,8 @@ namespace InterviewProblemNSolutions
         }
 
         /// <summary>
-        /// The Dutch national flag
+        /// The Dutch national flag || Time Complexity O(n) || Space O(1)
+        /// can also be solved by 3-way QuickSort for implementation check : 'Sort' class >> QuickSort3Way() [avaliable under Sorting project]
         /// </summary>
         public static void DutchFlagProblem()
         {
@@ -56,7 +57,7 @@ namespace InterviewProblemNSolutions
                 Console.Write("\n\nInput Array : ");
                 arr.Print();
                 int low, mid, high;         // to save current index of 3 distinct inputs
-                //// My Orignal Solution Time O(n+k) 1 Pass
+                #region My Orignal Solution Time O(n+k) 1 Pass
                 //low = mid = 0;              // start from left and increment by 1
                 //high = arr.Length;          // start from right and decreament by 1
                 //int i = 0;
@@ -86,15 +87,17 @@ namespace InterviewProblemNSolutions
                 //        Utility.Swap(ref arr[i], ref arr[--high]);
                 //    arr.Print();
                 //}
+                #endregion
 
                 #region Alternative Best Efficient Solution || Link https://www.educative.io/edpresso/the-dutch-national-flag-problem-in-cpp || Time O(n) 1-Pass solution
                 low = mid = 0;              // start from left and increment by 1
                 high = arr.Length-1;
-                while (mid <= high)
+                var pivot = 2;              // middle no of any 3 given no's in input
+                while (mid <= high)         // similar approach used in 3-Way QuickSort solution
                 {
-                    if (arr[mid] == 1)
+                    if (arr[mid] < pivot)
                         Utility.Swap(ref arr[low++], ref arr[mid++]);
-                    else if (arr[mid] == 2)
+                    else if (arr[mid] == pivot)
                         mid++;
                     else
                         Utility.Swap(ref arr[mid], ref arr[high--]);

@@ -212,23 +212,23 @@ namespace Sorting
                 significantDigitBeingSorted *= 10;
             }
         }
-        
+
         // Counting Sort to be used within Radix Sort
         public static void Countsort(ref int[] array, int firstElementInRange, int lastElementInRange, int n_th_DigitBeingSorted)
         {
-            int i, j, Len = array.Length, rangeOfElements = lastElementInRange - firstElementInRange + 1;
+            int i, Len = array.Length, rangeOfElements = lastElementInRange - firstElementInRange + 1;
             int[] sortedArray = new int[Len];
             int[] countArray = new int[rangeOfElements];        // array to store the count of each unique object
             // storing count of each unique element
-            for (j = 0; j < Len; j++)
-                countArray[((array[j] - firstElementInRange)/ n_th_DigitBeingSorted) %10] += 1;
+            for (i = 0; i < Len; i++)
+                countArray[(array[i] / n_th_DigitBeingSorted) % 10 - firstElementInRange] += 1;
 
             // Modify the count array such that each element at each index stores the sum of previous counts
             for (i = 1; i < rangeOfElements; i++)
                 countArray[i] += countArray[i - 1];
 
             for (i = Len - 1; i >= 0; i--)       // loop till length of input array O(Len)
-                sortedArray[--countArray[((array[i] - firstElementInRange)/ n_th_DigitBeingSorted) %10]] = array[i];
+                sortedArray[--countArray[(array[i] / n_th_DigitBeingSorted) % 10 - firstElementInRange]] = array[i];
             //bool nextSortIterationRequired = !(countArray[1] == countArray[rangeOfElements-1]);     // this might seem like gr8 idea to break sorting as soon as we get 1st True value indicating elements are already sorted but it applicable only to current i th digit being sorted(Ex- for 2nd digit of array 112,415,218,11119 would return True even when elements are still not sorted.
             array = sortedArray;
         }
@@ -236,23 +236,19 @@ namespace Sorting
         // Counting Sort || Stable sort || TimeComplexity O(n+k) where n = no of elements & k = range of inputs || Auxiliary Space: O(n+k) || Not comparison based sorting
         public static int[] Countsort(int[] array, int firstElementInRange, int lastElementInRange)
         {
-            int i, j, Len = array.Length, rangeOfElements = lastElementInRange - firstElementInRange + 1;
-            int[] sortedArray = new int[Len];
+            int i, Len = array.Length, rangeOfElements = lastElementInRange - firstElementInRange + 1;
+            int[] sortedArray = new int[Len];                   // array to store final sorted output
             int[] countArray = new int[rangeOfElements];        // array to store the count of each unique object
+
             // storing count of each unique element
-            for (j = 0; j < Len; j++)
-                countArray[array[j] - firstElementInRange] += 1;
-            //Console.WriteLine("storing count of each unique element");
-            //Search.print(countArray);
+            for (i = 0; i < Len; i++)
+                countArray[array[i] - firstElementInRange] += 1;
 
             // Modify the count array such that each element at each index stores the sum of previous counts
             for (i = 1; i < rangeOfElements; i++)
                 countArray[i] += countArray[i - 1];
-            //Console.WriteLine("Modified count array with each element at each index storing the sum of previous counts");
-            //Search.print(countArray);
 
-
-            //// use either of 1st or 2nd loop below to fill sorted array
+            #region My 1st attempt use either of 1st or 2nd loop below to fill sorted array
             //// 1st
             //int checkCount = 0, index = 0;
             //for (i = 0; i < rangeOfElements; i++)       // loop till length of Range Of Elements, Not length of input array || Loop Time Complexity = O(rangeOfElements+Len)
@@ -263,7 +259,9 @@ namespace Sorting
             //            sortedArray[index++] = firstElementInRange + i;       // Console.Write("\t"+firstElementInRange + i);
             //        checkCount = countArray[i];
             //    }
-            //// 2nd || faster than above esp when range of elements is large || Stable Sorting
+            //// 2nd below || faster than above esp when range of elements is large || also Stable Sorting
+            #endregion
+
             for (i = Len-1; i >=0; i--)       // loop till length of input array O(Len)
                 sortedArray[--countArray[array[i] - firstElementInRange]] = array[i];
             return sortedArray;
