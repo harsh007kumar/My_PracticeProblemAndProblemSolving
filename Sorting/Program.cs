@@ -18,7 +18,9 @@ namespace Sorting
             {
                 array = ReturnUnsortedArray();//takearrayinput();
                 Console.WriteLine("\n====== Select which Sorting you wish to perfrom from below =====" +
-                    "\nB=BubbleSort\nS=SelectionSort\nI=InsertionSort\nM=MergeSort\nC=CountSort\nR=RadixSort\nH=HeapSort\nQ=QuickSort\nSh=ShellSort\n0=EXIT");
+                    "\nB=BubbleSort\nS=SelectionSort\nI=InsertionSort\nM=MergeSort\nC=CountSort\nR=RadixSort" +
+                    "\nH=HeapSort\nQ=QuickSort\nSh=ShellSort\n3Q=3Way Quick Sort/ Dutch National Flag problem" +
+                    "\n0 =EXIT");
                 var = Console.ReadLine();
 
                 Console.WriteLine("\n========== Un-sorted original array ==========");
@@ -46,6 +48,10 @@ namespace Sorting
                     case "Q":
                         Console.WriteLine("Quick Sort O(n^2)");
                         Quicksort(array, 0, array.Length - 1);
+                        break;
+                    case "3Q":
+                        Console.WriteLine("3Way Quick Sort O(n^2)/ Dutch National Flag problem");
+                        QuickSort3Way(array, 0, array.Length - 1);
                         break;
                     case "C":
                         Console.WriteLine("Count Sort O(n+k)");
@@ -118,9 +124,9 @@ namespace Sorting
         {
             if (firstIndex < lastIndex)
             {
-                int pivot = Partition(array, firstIndex, lastIndex);     // Time O(n)
-                Quicksort(array, firstIndex, pivot - 1);     // Time T(k)
-                Quicksort(array, pivot + 1, lastIndex);     // Time T(n-k-1)
+                int pivot = Partition(array, firstIndex, lastIndex);    // Time O(n)
+                Quicksort(array, firstIndex, pivot - 1);                // Time T(k)
+                Quicksort(array, pivot + 1, lastIndex);                 // Time T(n-k-1)
             }
         }
 
@@ -131,17 +137,69 @@ namespace Sorting
         /// <param name="startIndex"></param>
         /// <param name="endIndex"></param>
         /// <returns></returns>
-        private static int Partition(int[] array, int startIndex, int endIndex)
+        protected static int Partition(int[] array, int startIndex, int endIndex)
         {
             // Here picking last element as pivot (can also select first, median or any random no for the same)
             int pivot = array[endIndex], lastBiggestIndex = startIndex;
-            while (startIndex < endIndex)
+            var currentIndex = startIndex;
+            while (currentIndex < endIndex)
             {
-                if (array[startIndex++] < pivot)
-                    Swap(ref array[startIndex - 1], ref array[lastBiggestIndex++]);
+                if (array[currentIndex] < pivot)
+                    Swap(ref array[currentIndex], ref array[lastBiggestIndex++]);
+                currentIndex++;
             }
             Swap(ref array[endIndex], ref array[lastBiggestIndex]);
             return lastBiggestIndex;
+        }
+
+        // GFG 3-Way QuickSort (Dutch National Flag)
+        public static void QuickSort3Way(int[] input, int start, int end)
+        {
+            if (start < end)
+            {
+                int i = 0, j = 0;
+                Partition(input, start, end, ref i, ref j);
+                QuickSort3Way(input, start, i);
+                QuickSort3Way(input, j, end);
+            }
+        }
+
+        /// <summary>
+        /// Function which updates i & j such that all element to its left of 'i' are smaller than pivot & all to rt of 'j' are bigger than pivot.
+        /// Used with 3Way-QuickSort (scenarios when multiple duplicates entries are present in unsorted array Ex: Dutch National Flag problem)
+        /// Time O(n) || Space O(1)
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="low"></param>
+        /// <param name="high"></param>
+        /// <param name="i"></param>
+        /// <param name="j"></param>
+        protected static void Partition(int[] input, int low, int high, ref int i, ref int j)
+        {
+            if (high - low <= 1)
+            {
+                if (input[low] > input[high])
+                    Swap(ref input[low], ref input[high]);
+                i = low;
+                j = high;
+                return;
+            }
+            else
+            {
+                var mid = low;
+                var pivot = input[high];            // here Pivot is taken as last element(can use low or mid or random index also)
+                while (mid <= high)
+                {
+                    if (input[mid] < pivot) 
+                        Swap(ref input[low++], ref input[mid++]);
+                    else if (input[mid] == pivot)
+                        mid++;
+                    else if (input[mid] > pivot)
+                        Swap(ref input[mid], ref input[high--]);
+                }
+                i = low - 1;
+                j = mid;    // or high+1
+            }
         }
 
         // Radix Sort || Stable Sort || TimeComplexity O(d*(n+k)) where k is base representing numbers(decimal system b=10 i.e, Range) & d = O(logb(k)) K=Max possible value of base b.
@@ -347,7 +405,8 @@ namespace Sorting
 
         public static int[] ReturnUnsortedArray()
         {
-            return new int[] { 170, 45, 75, 90, 802, 24, 2, 66 };           // use for Radix Sort
+            return new int[] { 4, 9, 4, 4, 1, 9, 4, 4, 9, 4, 4, 1, 4 };     // use for 3-way QuickSort / Dutch National Flag problem
+            //return new int[] { 170, 45, 75, 90, 802, 24, 2, 66 };           // use for Radix Sort
             //return new int[] { -3, 1, 4, 1, 2, 7, 5, 2 , -1, -2, -2 };    // use for Counting Sort 
             // return new int[] { 38, 27, 43, 3, 9, 82, 10 };               // use for Merge Sort
             // return new int[] { 64, 25, 12, 22, 11 };                     // use with most other Sorting techniques
