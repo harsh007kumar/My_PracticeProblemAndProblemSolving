@@ -31,6 +31,9 @@ namespace InterviewProblemNSolutions
             FindPatternPresentIn2DCharArray();
             PrintInterLeavingsOfGivenTwoString();
             ReplaceSpaceInStringWithGivenCharacters();
+
+            // Sorting Problem
+            ElectionWinner();
             Console.ReadKey();
         }
 
@@ -261,6 +264,47 @@ namespace InterviewProblemNSolutions
             var input = "Harsh is my name";
             var replaceWith = "%20";
             StringAlgorithms.ReplaceSpaceWithGivenChars(input,replaceWith);
+        }
+
+        public static void ElectionWinner()
+        {
+            Utility.Print("Problem-3&4  Given an array A[0 ...n – 1], where each element of the array represents a vote in the election." +
+                "Assume that each vote is given as an integer representing the ID of the chosen candidate." +
+                "Give an algorithm for determining who wins the election.(p. 532)");
+            Console.WriteLine();
+
+            int[] input = { 2, 5, 8, 9, 4, 6, 7, 12, 5, 4, 3, 8, 9, 6, 6, 3, 5, 5, 2, 3, 1, 0 };
+            input.Print("Input Array");
+            #region Handling corner cases no votes or just 1 or 2 votes (candidate who got 1st vote wins)
+            if (input == null) return;
+            else if (input.Length <= 2)
+            {
+                Console.WriteLine($" Winning candidate of the election is '{input[0]}'");
+                return;
+            }
+            #endregion
+
+            // sort the array
+            Sorting.Sort.Heapsort(ref input);               // Time O(nLogn) || Space O(1)
+            input.Print("after Sorting Using HEAPSORT ");
+
+            // check for reapted ID's and if found one update its count and at last update WinnerCount and WinnerID
+            int winnerCount = 0, winnerID = -1, count = 1;
+            for (int i = 0; i < input.Length - 1; i++)      // Time O(n)
+            {
+                if (input[i] == input[i + 1])
+                    count++;
+                else
+                {
+                    if (count > winnerCount)
+                    {
+                        winnerCount = count;
+                        winnerID = input[i];
+                    }
+                    count = 1;
+                }
+            }
+            if (winnerID != -1) Console.WriteLine($" Winning candidate of the election is '{winnerID}' and got max votes : {winnerCount}");
         }
     }
 }
