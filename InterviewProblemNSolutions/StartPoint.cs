@@ -284,9 +284,13 @@ namespace InterviewProblemNSolutions
             }
             #endregion
 
-            // sort the array
-            Sorting.Sort.Heapsort(ref input);               // Time O(nLogn) || Space O(1)
-            input.Print("after Sorting Using HEAPSORT ");
+            
+            // if we are allowed to use little extra space & Min - Max ID's of all candidate are known can use 'Counting Sort' 
+            input = Sorting.Sort.Countsort(input, 0, 12);   // Time O(n), N = no of votes || Space O(k), k = no of candidates
+
+            // To Sort the array without using extra space
+            //Sorting.Sort.Heapsort(ref input);               // Time O(nLogn) || Space O(1)
+            input.Print("after Sorting Using COUNT SORT ");
 
             // check for reapted ID's and if found one update its count and at last update WinnerCount and WinnerID
             int winnerCount = 0, winnerID = -1, count = 1;
