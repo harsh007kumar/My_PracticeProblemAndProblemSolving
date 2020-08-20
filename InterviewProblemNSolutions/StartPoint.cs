@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Sorting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace InterviewProblemNSolutions
 
             // Sorting Problem
             ElectionWinner();
+            Merge_BinA_WhichHasExtraSpaceEqualToB();
             Console.ReadKey();
         }
 
@@ -309,6 +311,52 @@ namespace InterviewProblemNSolutions
                 }
             }
             if (winnerID != -1) Console.WriteLine($" Winning candidate of the election is '{winnerID}' and got max votes : {winnerCount}");
+        }
+
+        public static void Merge_BinA_WhichHasExtraSpaceEqualToB()
+        {
+            Utility.Print("Problem-33  There are two sorted arrays A and B. The first one is of size m + n containing only m elements." +
+                "Another one is of size n and contains n elements. Merge these two arrays into the first array of size m + n such that the output is sorted.(p. 543)");
+            int[] a = new int[10];      // size m + n
+            int[] b = new int[4];       // size n
+
+            #region Initialize Input arrays
+            Console.WriteLine();
+            int i = 10, j;
+            for (j = 0; j < b.Length; j++)
+            {
+                b[j] = j + 20;
+                a[j] = (i % 2 == 0) ? b[j] + i : b[j] - i;
+                i++;
+            }
+            for (i = j; i < a.Length - b.Length; i++)
+                a[i] = i + 10;
+            
+            var index = a.Length - 1;   // last index in bigger array i.e, 'a'
+            j = b.Length - 1;           // index of largest element present in 'b'
+            i = index - b.Length;       // index of largest element present in 'a'
+
+            // sort & print
+            Sort.Quicksort(a, 0, i);
+            Sort.Heapsort(ref b);
+            a.Print("First Array");
+            b.Print("Second Array");
+            #endregion
+
+            // logic is to start filling from back as its empty
+            while (index>=0)
+            {
+                if (i < 0)
+                    a[index] = b[j--];
+                else if (j < 0)
+                    a[index] = a[i--];
+                else if (a[i] > b[j])
+                    a[index] = a[i--];
+                else if(a[i] <= b[j])
+                    a[index] = b[j--];
+                index--;
+            }
+            a.Print("After Merging First and Second array into First");
         }
     }
 }

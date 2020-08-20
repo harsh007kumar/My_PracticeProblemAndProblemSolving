@@ -46,7 +46,7 @@ namespace InterviewProblemNSolutions
 
         public static void Print(this int[] arr, string msg ="")
         {
-            if (msg != "") Console.Write($" Printing '{msg}' : ");
+            if (msg != "") Console.Write($" Printing '{msg}' : \t");
             for(int i=0;i<arr.Length;i++)
                 Console.Write($" {arr[i]} >>");
             Console.WriteLine();
