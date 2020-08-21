@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace InterviewProblemNSolutions
 {
@@ -39,6 +40,7 @@ namespace InterviewProblemNSolutions
 
             // Searching Problem
             DetectDuplicate();
+            MaxRecurrence();
          Console.ReadKey();
         }
 
@@ -369,16 +371,37 @@ namespace InterviewProblemNSolutions
             input.Print("Input Array");
             // array is not readonly
             for (int i = 0; i < input.Length; i++)                                                     // Time O(n) || Space O(1)
-            {
-                if (input[i] < 0)  // marked -ve
+                if (input[i] < 0)                               // already marked -ve
                     Console.WriteLine($"Duplicate '{Math.Abs(input[i])}' at Index : {i}");
                 else
-                    input[input[i]] *= -1;
-            }
+                    input[input[i]] *= -1;                      // mark -ve
+
             // Other solution include sorting array and search for next value is same or not    // Time O(nlogn) || Space O(1)
             // using Hashtable to store already seen values                                     // Time O(n) || Space O(n)
         }
 
+        public static void MaxRecurrence()
+        {
+            Utility.Print("Problem-5  Given an array of n numbers. Give an algorithm for finding the element which appears the max times(p. 564)");
+            int[] input = { 3, 5, 1, 3, 3, 5, 1, 5, 5 };
+            input.Print("Input Array");
+            var len = input.Length;
+            // array is not readonly
+            for (int i = 0; i < len; i++)                                                       // Time O(n) || Space O(1)
+                input[input[i] % len] += len;                 // add array length, instead of marking the node -ve like in above solution to detect duplicates
+            
+            // Algo works only if the Array containing Positive values in the range [0 .. N-1]
+            int max = -1, index = -1;
+            for (int i = 0; i < len; i++)
+                if (input[i] / len > max)
+                {
+                    max = input[i] / len;
+                    index = i;
+                }
 
+            Console.WriteLine($" Element {input[index] % len} found max time in above array");
+            // Other solution include sorting array and search for next value is same and updating counter // Time O(nlogn) || Space O(1)
+            // using Hashtable to store already seen values and their count                     // Time O(n) || Space O(n)
+        }
     }
 }
