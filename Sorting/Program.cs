@@ -24,7 +24,7 @@ namespace Sorting
                 var = Console.ReadLine();
 
                 Console.WriteLine("\n========== Un-sorted original array ==========");
-                Search.print(array);
+                Search.Print(array);
 
                 switch (var.ToUpper())
                 {
@@ -77,7 +77,7 @@ namespace Sorting
                         break;
                 }
                 Console.WriteLine("---------- Array after sorting ----------");
-                Search.print(array);
+                Search.Print(array);
             }
         }
 

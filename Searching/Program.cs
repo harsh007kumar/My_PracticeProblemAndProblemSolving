@@ -10,7 +10,7 @@ namespace Searching
         {
             // 2, 5, 8, 12, 16, 23, 38, 56, 72, 91
             int[] array = ReturnSortedArray();//takearrayinput();
-            print(array);   //Show array
+            Print(array);   //Show array
             int foundAt,elementToBeSearched = 38;//Convert.ToInt32(Console.ReadLine()); // TestCase : check for -ve values and 1st and last index values along with values not present in array.Ex:  -138, 2 , 3, 38, 91, 138
             Console.WriteLine("We are searching for element : {0}", elementToBeSearched);
             string var = null;
@@ -270,7 +270,7 @@ namespace Searching
         public static int[] ReturnSortedArray()
         {   return new int[] { 2, 5, 8, 12, 16, 23, 38, 56, 72, 91 };        }
 
-        public static void print(int[] arr)
+        public static void Print(int[] arr)
         {
             for (int i = 0; i < arr.Length; i++)
                 Console.Write("\t{0}", arr[i]);

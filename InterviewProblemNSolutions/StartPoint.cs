@@ -36,7 +36,10 @@ namespace InterviewProblemNSolutions
             // Sorting Problem
             ElectionWinner();
             Merge_BinA_WhichHasExtraSpaceEqualToB();
-            Console.ReadKey();
+
+            // Searching Problem
+            DetectDuplicate();
+         Console.ReadKey();
         }
 
         /// <summary>
@@ -358,5 +361,24 @@ namespace InterviewProblemNSolutions
             }
             a.Print("After Merging First and Second array into First");
         }
+
+        public static void DetectDuplicate()
+        {
+            Utility.Print("Problem-4 Detect Duplicates in Array containing Positive values in the range [0 .. N-1] (p. 562)");
+            int[] input = { 3, 2, 1, 3, 4, 5, 1 };
+            input.Print("Input Array");
+            // array is not readonly
+            for (int i = 0; i < input.Length; i++)                                                     // Time O(n) || Space O(1)
+            {
+                if (input[i] < 0)  // marked -ve
+                    Console.WriteLine($"Duplicate '{Math.Abs(input[i])}' at Index : {i}");
+                else
+                    input[input[i]] *= -1;
+            }
+            // Other solution include sorting array and search for next value is same or not    // Time O(nlogn) || Space O(1)
+            // using Hashtable to store already seen values                                     // Time O(n) || Space O(n)
+        }
+
+
     }
 }
