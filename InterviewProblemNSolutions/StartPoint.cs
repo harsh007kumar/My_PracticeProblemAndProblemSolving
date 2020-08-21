@@ -41,7 +41,9 @@ namespace InterviewProblemNSolutions
             // Searching Problem
             DetectDuplicate();
             MaxRecurrence();
-         Console.ReadKey();
+            FindMissingNo();
+
+            Console.ReadKey();
         }
 
         /// <summary>
@@ -402,6 +404,25 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" Element {input[index] % len} found max time in above array");
             // Other solution include sorting array and search for next value is same and updating counter // Time O(nlogn) || Space O(1)
             // using Hashtable to store already seen values and their count                     // Time O(n) || Space O(n)
+        }
+
+        public static void FindMissingNo()
+        {
+            Utility.Print("Finding the Missing Number: (p. 568)");
+            int[] input = new int[15];
+            for (int i = 0; i < input.Length - 1; i++)
+                input[i] = i + 1;
+            input.Print("Input Array");
+
+            // store XOR of input array values (no duplicate allowed)
+            int XOR = 0;
+            for (int i = 0; i < input.Length; i++)
+                XOR ^= input[i];
+
+            // XOR all possible values in range [1..N], left value in XOR is missing Number
+            for (int i = 1; i < input.Length + 1; i++)
+                XOR ^= i;
+            Console.WriteLine($"Missing value in above array is {XOR}");
         }
     }
 }
