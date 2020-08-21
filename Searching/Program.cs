@@ -8,6 +8,7 @@ namespace Searching
     {
         public static void Main(string[] args)
         {
+            // 2, 5, 8, 12, 16, 23, 38, 56, 72, 91
             int[] array = ReturnSortedArray();//takearrayinput();
             print(array);   //Show array
             int foundAt,elementToBeSearched = 38;//Convert.ToInt32(Console.ReadLine()); // TestCase : check for -ve values and 1st and last index values along with values not present in array.Ex:  -138, 2 , 3, 38, 91, 138
@@ -65,42 +66,71 @@ namespace Searching
             Console.WriteLine("Iterative Binary Search");
             return BinarySearch_Iterative(arr, 0, arr.Length - 1, elementToBeSearched);     //Iterative way
         }
-        // Binary Search using recursion
-        private static int BinarySearch_Recursive(int[] arr,int Low, int High, int elementToBeSearched)
-        {
-            int Mid = (High + Low) / 2,index=-1;
-            if (elementToBeSearched == arr[Mid])
-                index=Mid;
-            else if (Mid == High)
-                return index;
-            else if (elementToBeSearched > arr[Mid])
-                index = BinarySearch_Recursive(arr, Mid + 1, High, elementToBeSearched);
-            else
-                index = BinarySearch_Recursive(arr, Low, Mid -1, elementToBeSearched);
 
-            return index;
+        // Binary Search using recursion
+        public static int BinarySearch_Recursive(int[] arr, int start, int last, int elementToBeSearched)
+        {
+            if (start <= last)
+            {
+                int mid = start + (last - start) / 2;
+                if (elementToBeSearched == arr[mid]) return mid;
+                else if (elementToBeSearched < arr[mid]) return BinarySearch_Recursive(arr, start, mid - 1, elementToBeSearched);
+                else return BinarySearch_Recursive(arr, mid + 1, last, elementToBeSearched);
+            }
+            return -1;
         }
+        #region OLD Binary Search Recursive func()
+        //// Binary Search using recursion
+        //private static int BinarySearch_Recursive(int[] arr,int Low, int High, int elementToBeSearched)
+        //{
+        //    int Mid = (High + Low) / 2,index=-1;
+        //    if (elementToBeSearched == arr[Mid])
+        //        index=Mid;
+        //    else if (Mid == High)
+        //        return index;
+        //    else if (elementToBeSearched > arr[Mid])
+        //        index = BinarySearch_Recursive(arr, Mid + 1, High, elementToBeSearched);
+        //    else
+        //        index = BinarySearch_Recursive(arr, Low, Mid -1, elementToBeSearched);
+
+        //    return index;
+        //}
+        #endregion
 
         // Binary Search using Iteration
-        private static int BinarySearch_Iterative(int[] arr, int Low, int High, int elementToBeSearched)
+        public static int BinarySearch_Iterative(int[] arr, int start, int last, int elementToBeSearched)
         {
-            int Mid = (High + Low) / 2, index = -1;
-            do
+            while (start <= last)
             {
-                if (elementToBeSearched == arr[Mid])
-                {
-                    index = Mid;
-                    break;
-                }
-                else if (elementToBeSearched > arr[Mid])
-                    Low = Mid + 1;
-                else
-                    High = Mid - 1;
-                Mid = (High + Low) / 2;
+                int mid = start + (last - start) / 2;
+                if (arr[mid] == elementToBeSearched) return mid;
+                else if (elementToBeSearched < arr[mid]) last = mid - 1;
+                else start = mid + 1;
             }
-            while (Mid <= High && Mid >= Low);
-            return index;
+            return -1;
         }
+        #region OLD Binary Search Iterative func()
+        //private static int BinarySearch_Iterative(int[] arr, int start, int last, int elementToBeSearched)
+        //{
+        //    int mid = start + (last - start) / 2;               // to avoid overflow
+        //    int index = -1;
+        //    do
+        //    {
+        //        if (elementToBeSearched == arr[mid])
+        //        {
+        //            index = mid;
+        //            break;
+        //        }
+        //        else if (elementToBeSearched > arr[mid])
+        //            start = mid + 1;
+        //        else
+        //            last = mid - 1;
+        //        mid = (last + start) / 2;
+        //    }
+        //    while (mid <= last && mid >= start);
+        //    return index;
+        //}
+        #endregion
 
         // Exponential Search using iteration which utilizes binary search, Time Complexity : O(Log n) [ a) Find range where element is present b) Do Binary Search in found range.]
         public static int ExponentialSearch(int[] arr, int elementToBeSearched)
