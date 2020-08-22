@@ -42,6 +42,7 @@ namespace InterviewProblemNSolutions
             DetectDuplicate();
             MaxRecurrence();
             FindMissingNo();
+            PairWhoseSumIsClosedToGivenValue();
 
             Console.ReadKey();
         }
@@ -414,7 +415,7 @@ namespace InterviewProblemNSolutions
                 input[i] = i + 1;
             input.Print("Input Array");
 
-            // store XOR of input array values (no duplicate allowed)
+            // store XOR of input array values (NO DUPLICATE VALUES ALLOWED)
             int XOR = 0;
             for (int i = 0; i < input.Length; i++)
                 XOR ^= input[i];
@@ -423,6 +424,31 @@ namespace InterviewProblemNSolutions
             for (int i = 1; i < input.Length + 1; i++)
                 XOR ^= i;
             Console.WriteLine($"Missing value in above array is {XOR}");
+        }
+
+        // GFG https://www.geeksforgeeks.org/given-sorted-array-number-x-find-pair-array-whose-sum-closest-x/
+        public static void PairWhoseSumIsClosedToGivenValue()
+        {
+            Utility.Print("Problem - 25 Given an array of n elements. Find two elements in the array such that their sum is equal to given element K.(p. 572)");
+            int[] input = { 3, 8, 2, 5, 9, 1, 15, 8, 45 };
+            input.Print("Input");
+            int sum = 18;
+            Console.WriteLine($"Find Pair whose Sum matches or closet to {sum}");
+            Sort.Heapsort(ref input);   // Time O(nLogn) can skip this step if array is already sorted
+
+            // algo
+            int low = 0, high = input.Length - 1;
+            int resulStart = -1, resultEnd = -1, diff = int.MaxValue;
+            while (low < high)          // Time O(n)
+            {
+                if (Math.Abs(input[low] + input[high] - sum) < diff)
+                { resulStart = low; resultEnd = high; diff = Math.Abs(input[low] + input[high] - sum); if (sum == 0) break; }
+                if (input[low] + input[high] < sum)
+                    low++;              // move to larger values
+                else
+                    high--;             // move to smaller values
+            }
+            Console.WriteLine($" Pair '{input[resulStart]}' & '{input[resultEnd]}' matches/closet to Sum : {sum}");
         }
     }
 }
