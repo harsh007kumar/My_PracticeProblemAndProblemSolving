@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="CommonFunctions.cs" />
     <Compile Include="DynamicProgramming.cs" />
+    <Compile Include="SearchAlgorithms.cs" />
     <Compile Include="StartPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringAlgorithms.cs" />

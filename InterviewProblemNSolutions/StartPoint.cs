@@ -40,9 +40,10 @@ namespace InterviewProblemNSolutions
 
             // Searching Problem
             DetectDuplicate();
-            MaxRecurrence();
+            FindMaxRecurrence();
             FindMissingNo();
-            PairWhoseSumIsClosedToGivenValue();
+            FindPairWhoseSumIsClosetToGivenValue();
+            FindTripletWhoseSumIsClosetToGivenValue();
 
             Console.ReadKey();
         }
@@ -372,39 +373,15 @@ namespace InterviewProblemNSolutions
             Utility.Print("Problem-4 Detect Duplicates in Array containing Positive values in the range [0 .. N-1] (p. 562)");
             int[] input = { 3, 2, 1, 3, 4, 5, 1 };
             input.Print("Input Array");
-            // array is not readonly
-            for (int i = 0; i < input.Length; i++)                                                     // Time O(n) || Space O(1)
-                if (input[i] < 0)                               // already marked -ve
-                    Console.WriteLine($"Duplicate '{Math.Abs(input[i])}' at Index : {i}");
-                else
-                    input[input[i]] *= -1;                      // mark -ve
-
-            // Other solution include sorting array and search for next value is same or not    // Time O(nlogn) || Space O(1)
-            // using Hashtable to store already seen values                                     // Time O(n) || Space O(n)
+            SearchAlgorithms.DetectDuplicate(input);
         }
 
-        public static void MaxRecurrence()
+        public static void FindMaxRecurrence()
         {
             Utility.Print("Problem-5  Given an array of n numbers. Give an algorithm for finding the element which appears the max times(p. 564)");
             int[] input = { 3, 5, 1, 3, 3, 5, 1, 5, 5 };
             input.Print("Input Array");
-            var len = input.Length;
-            // array is not readonly
-            for (int i = 0; i < len; i++)                                                       // Time O(n) || Space O(1)
-                input[input[i] % len] += len;                 // add array length, instead of marking the node -ve like in above solution to detect duplicates
-            
-            // Algo works only if the Array containing Positive values in the range [0 .. N-1]
-            int max = -1, index = -1;
-            for (int i = 0; i < len; i++)
-                if (input[i] / len > max)
-                {
-                    max = input[i] / len;
-                    index = i;
-                }
-
-            Console.WriteLine($" Element {input[index] % len} found max time in above array");
-            // Other solution include sorting array and search for next value is same and updating counter // Time O(nlogn) || Space O(1)
-            // using Hashtable to store already seen values and their count                     // Time O(n) || Space O(n)
+            SearchAlgorithms.MaxRecurrence(input);
         }
 
         public static void FindMissingNo()
@@ -414,41 +391,32 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < input.Length - 1; i++)
                 input[i] = i + 1;
             input.Print("Input Array");
-
-            // store XOR of input array values (NO DUPLICATE VALUES ALLOWED)
-            int XOR = 0;
-            for (int i = 0; i < input.Length; i++)
-                XOR ^= input[i];
-
-            // XOR all possible values in range [1..N], left value in XOR is missing Number
-            for (int i = 1; i < input.Length + 1; i++)
-                XOR ^= i;
-            Console.WriteLine($"Missing value in above array is {XOR}");
+            SearchAlgorithms.MissingNo(input);
         }
 
         // GFG https://www.geeksforgeeks.org/given-sorted-array-number-x-find-pair-array-whose-sum-closest-x/
-        public static void PairWhoseSumIsClosedToGivenValue()
+        public static void FindPairWhoseSumIsClosetToGivenValue()
         {
             Utility.Print("Problem - 25 Given an array of n elements. Find two elements in the array such that their sum is equal to given element K.(p. 572)");
-            int[] input = { 3, 8, 2, 5, 9, 1, 15, 8, 45 };
+            int[] input = { 3, 8, 2, 5, 9, 1, 15, 7, 45 };
             input.Print("Input");
             int sum = 18;
             Console.WriteLine($"Find Pair whose Sum matches or closet to {sum}");
             Sort.Heapsort(ref input);   // Time O(nLogn) can skip this step if array is already sorted
 
-            // algo
-            int low = 0, high = input.Length - 1;
-            int resulStart = -1, resultEnd = -1, diff = int.MaxValue;
-            while (low < high)          // Time O(n)
-            {
-                if (Math.Abs(input[low] + input[high] - sum) < diff)
-                { resulStart = low; resultEnd = high; diff = Math.Abs(input[low] + input[high] - sum); if (sum == 0) break; }
-                if (input[low] + input[high] < sum)
-                    low++;              // move to larger values
-                else
-                    high--;             // move to smaller values
-            }
-            Console.WriteLine($" Pair '{input[resulStart]}' & '{input[resultEnd]}' matches/closet to Sum : {sum}");
+            SearchAlgorithms.PairWhoseSumIsClosestToGivenValue(input, sum);     // O(n)
+        }
+
+        public static void FindTripletWhoseSumIsClosetToGivenValue()
+        {
+            Utility.Print("Problem-36  Given an array of n integers, find three integers whose sum is closest to GivenNo/zero.(p. 578)");
+            int[] input = { 3, -8, 2, 5, 9, -1, 15, 7, 45, -5, -15 };
+            input.Print("Input");
+            int sum = 0;
+            Console.WriteLine($"Find Pair whose Sum matches or closet to {sum}");
+            Sort.Heapsort(ref input);   // Time O(nLogn) can skip this step if array is already sorted
+
+            SearchAlgorithms.TripletWhoseSumIsClosetToGivenValue(input, sum);   // O(n^2)
         }
     }
 }
