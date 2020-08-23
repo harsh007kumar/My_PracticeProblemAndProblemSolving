@@ -54,6 +54,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Searching\Searching.csproj">
+      <Project>{0643cb4d-4363-4395-be0d-56f66d9d9653}</Project>
+      <Name>Searching</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sorting\Sorting.csproj">
       <Project>{3d1adbe7-2711-4b06-8210-024d35f1549e}</Project>
       <Name>Sorting</Name>

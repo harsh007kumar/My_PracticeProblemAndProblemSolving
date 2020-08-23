@@ -45,6 +45,8 @@ namespace InterviewProblemNSolutions
             FindTwoRepeatingElements();
             FindPairWhoseSumIsClosetToGivenValue();
             FindTripletWhoseSumIsClosetToGivenValue();
+            FindPeakOfIncreasingSequence();
+            BinarySearchInRotatedSortedArray();
 
             Console.ReadKey();
         }
@@ -432,6 +434,28 @@ namespace InterviewProblemNSolutions
             Sort.Heapsort(ref input);   // Time O(nLogn) can skip this step if array is already sorted
 
             SearchAlgorithms.TripletWhoseSumIsClosetToGivenValue(input, sum);   // O(n^2)
+        }
+
+        public static void FindPeakOfIncreasingSequence()
+        {
+            Utility.Print("Problem-37 Increasing sequence (p. 578)");
+            int[] input = { 1, 2, 4, 5, 7, 9, 3, 2, 1 };
+            input.Print("Input : ");
+            SearchAlgorithms.IncreasingSequence(input, 0, input.Length - 1);
+        }
+
+        public static void BinarySearchInRotatedSortedArray()
+        {
+            Utility.Print("Problem-40  Given a sorted array of n integers that has been rotated an unknown number of times," +
+                " give a O(logn) algorithm that finds an element in the array.(pp. 579 - 580)");
+            int[] input = { 15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14 };
+            int searchFor = 5;
+            input.Print("Input : ");
+            var index = SearchAlgorithms.BinarySearchInRotatedArray(input, searchFor);
+            if (index != -1)
+                Console.WriteLine($" Element {searchFor} found at index : {index}");
+            else
+                Console.WriteLine($" Element {searchFor} Not Found in array");
         }
     }
 }

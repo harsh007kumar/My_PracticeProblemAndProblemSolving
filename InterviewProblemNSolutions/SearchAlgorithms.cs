@@ -1,7 +1,10 @@
 ﻿using System;
+using Searching;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,15 +59,25 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($"Missing value in above array is {XOR}");
         }
 
-        // Time O(n) || Space O(1)
+        /// <summary>
+        /// Time O(n) || Space O(1)
+        /// 
+        /// Simple mathematical solution is to compute X & Y from below equations
+        /// X + Y = Sum - (n(n+1)/2),  here n = max no in the range
+        /// X * Y = P/n!
+        /// Hence replacing X in above equvation gives us both X and Y
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="range"></param>
+        /// <param name="length"></param>
         public static void TwoRepeatingElements(int[] input, int range, int length)
         {
             // 1# find XOR of values in array, so repeating elements would be removed as A ^ A = 0, lets call this XOR_A
             // 2# now XOR all the values from from 1..range with XOR_A, it will remove all values which were present in XOR_A (i.e, all nums which appeared once in input)
             // 3# now we have XOR_A containing XOR of our two repeating values 'X' & 'Y'
             // 4# to find X we need to find first right most bit in XOR_A which is set '1', lets call this no as RightMostSetBitNo
-            // 5# Now we calculate XOR of all elements in input array whose above Bit is ON i.e, input[i] & SetBitNo = 0
-            // 6# also we repeated same operation with values in range whose above Bit is ON i.e, range[i] & SetBitNo = 0
+            // 5# Now we calculate XOR of all elements in input array whose above Bit is ON i.e, input[i] & SetBitNo > 0
+            // 6# also we repeated same operation with values in range whose above Bit is ON i.e, range[i] & SetBitNo > 0
             // 7# XOR of values obtained from step 5th & 6th leaves us value = 'X' || As repeated elements will be (A ^ A ^ A = A) where as non repeated elements (B ^ B = 0)
             // XOR 'X' with XOR_A gets our second repeated value 'Y'
             int i = 0, XOR_Duplicates = 0, XOR_Input = 0, XOR_Range = 0;
@@ -77,7 +90,7 @@ namespace InterviewProblemNSolutions
 
             XOR_Duplicates = XOR_Input ^ XOR_Range;
 
-            var RightMostSetBitNo = Utility.GetRightMostBit(XOR_Duplicates);
+            var RightMostSetBitNo = Utility.GetRightMostBit(XOR_Duplicates); // O(1)
 
             XOR_Input = 0;
             for (i = 0; i < length; i++)                    // Time O(n)
@@ -146,6 +159,71 @@ namespace InterviewProblemNSolutions
                 if (diff == 0) break;
             }
             Console.WriteLine($" Pair '{input[p1]} {input[p2]}' & '{input[p3]}' matches/closet to Sum : {sum}");
+        }
+
+        public static void IncreasingSequence(int[] input, int start, int last)
+        {
+            while (start <= last)
+            {
+                if (start == last)              // single element
+                { Console.WriteLine($"Mid Point of the array is : \t{input[start]}"); return; }
+                else if (start == last - 1)     // only two elements
+                { Console.WriteLine($"Mid Point of the array is : \t{input[Math.Max(start, last)]}"); return; }
+                else
+                {
+                    var mid = start + (last - start) / 2;
+
+                    if (input[mid - 1] < input[mid] && input[mid] > input[mid + 1])
+                    { Console.WriteLine($"Mid Point of the array is : \t{input[mid]}"); return; }
+                    else if (input[mid - 1] > input[mid] && input[mid] > input[mid + 1])
+                        last = mid - 1;
+                    else if (input[mid - 1] < input[mid] && input[mid] < input[mid + 1])
+                        start = mid + 1;
+                    else
+                        return;
+                }
+            }
+        }
+
+        // Time O(Logn) || Space O(1)
+        public static int BinarySearchInRotatedArray(int[] input, int element)
+        {
+            if (input == null || input.Length == 0) return -1;
+            // find pivot, element after which following element in smaller (there can be only once such index)
+            // divide the array into two sub-array left and right
+            // if 'element' is greater than value present at first index search in left sub-array, else search in right
+
+            var pivot = FindPivotInRotatedArray(input);             // Time O(Logn)
+
+            if (pivot == -1)                    // array not rotated
+                return Search.BinarySearch_Iterative(input, 0, input.Length, element);  // search in entire array
+            else if (input[pivot] == element)   // element found
+                return pivot;
+            else if (input[0] <= element)        // search in left sub-array
+                return Search.BinarySearch_Iterative(input, 0, pivot - 1, element);
+            else // (element < input[0])        // search in right sub-array
+                return Search.BinarySearch_Iterative(input, pivot + 1, input.Length - 1, element);
+        }
+
+        // Time O(Logn) || Space O(1)
+        public static int FindPivotInRotatedArray(int[] input)
+        {
+            int low = 0, high = input.Length - 1, pivot = -1;
+            while (low <= high)
+            {
+                if (low == high)
+                { pivot = low; break; }
+                else if (low == high - 1)
+                { pivot = Math.Max(low, high); break; }
+
+                var mid = low + (high + low) / 2;
+
+                if (mid < high && input[mid] > input[mid] + 1) return mid;
+                else if (low < mid && input[mid - 1] > input[mid]) return mid - 1;
+                else if (input[low] >= input[mid]) high = mid - 1;
+                else low = mid + 1;
+            }
+            return pivot;
         }
     }
 }
