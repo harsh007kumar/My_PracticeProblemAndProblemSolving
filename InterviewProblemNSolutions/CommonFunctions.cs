@@ -103,6 +103,11 @@ namespace InterviewProblemNSolutions
                 ans *= num;
             return ans;
         }
+
+        public static int GetRightMostBit(int num)
+        {
+            return 4;
+        }
     }
 
     //Custom Delegate

@@ -42,6 +42,7 @@ namespace InterviewProblemNSolutions
             DetectDuplicate();
             FindMaxRecurrence();
             FindMissingNo();
+            FindTwoRepeatingElements();
             FindPairWhoseSumIsClosetToGivenValue();
             FindTripletWhoseSumIsClosetToGivenValue();
 
@@ -392,6 +393,20 @@ namespace InterviewProblemNSolutions
                 input[i] = i + 1;
             input.Print("Input Array");
             SearchAlgorithms.MissingNo(input);
+        }
+
+        public static void FindTwoRepeatingElements()
+        {
+            Utility.Print("Problem-19  Find the two repeating elements in a given array: Given an array with size," +
+                " all elements of the array are in range 1 to n and also all elements occur only once except two numbers which occur twice." +
+                " Find those two repeating numbers. For example: if the array is 4,2,4,5,2,3,1 with size = 7 and n = 5." +
+                " This input has n + 2 = 7 elements with all elements occurring once except 2 and 4 which occur twice. So the output should be 4 2.(pp. 569)");
+            int[] input = { 4, 2, 4, 5, 2, 3, 1 };
+            int len = input.Length;
+            int range = 5;    // [1...5] all elements are in this range
+            input.Print("Input Array");
+
+            SearchAlgorithms.TwoRepeatingElements(input, range, len);
         }
 
         // GFG https://www.geeksforgeeks.org/given-sorted-array-number-x-find-pair-array-whose-sum-closest-x/

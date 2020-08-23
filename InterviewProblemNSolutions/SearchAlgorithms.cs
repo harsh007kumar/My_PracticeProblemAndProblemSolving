@@ -57,6 +57,47 @@ namespace InterviewProblemNSolutions
         }
 
         // Time O(n) || Space O(1)
+        public static void TwoRepeatingElements(int[] input, int range, int length)
+        {
+            // 1# find XOR of values in array, so repeating elements would be removed as A ^ A = 0, lets call this XOR_A
+            // 2# now XOR all the values from from 1..range with XOR_A, it will remove all values which were present in XOR_A (i.e, all nums which appeared once in input)
+            // 3# now we have XOR_A containing XOR of our two repeating values 'X' & 'Y'
+            // 4# to find X we need to find first right most bit in XOR_A which is set '1', lets call this no as RightMostSetBitNo
+            // 5# Now we calculate XOR of all elements in input array whose above Bit is ON i.e, input[i] & SetBitNo = 0
+            // 6# also we repeated same operation with values in range whose above Bit is ON i.e, range[i] & SetBitNo = 0
+            // 7# XOR of values obtained from step 5th & 6th leaves us value = 'X' || As repeated elements will be (A ^ A ^ A = A) where as non repeated elements (B ^ B = 0)
+            // XOR 'X' with XOR_A gets our second repeated value 'Y'
+            int i = 0, XOR_A = 0, XOR_I = 0, XOR_R = 0;
+
+            for (i = 0; i < length; i++)                    // Time O(n)
+                XOR_I ^= input[i];
+
+            for (i = 1; i <= range; i++)                    // Time O(n-2)
+                XOR_R ^= i;
+
+            XOR_A = XOR_I ^ XOR_R;
+
+            var RightMostSetBitNo = Utility.GetRightMostBit(XOR_A);
+
+            XOR_I = 0;
+            for (i = 0; i < length; i++)                    // Time O(n)
+                if ((input[i] & RightMostSetBitNo) == 0)
+                    XOR_I ^= input[i];
+
+            XOR_R = 0;
+            for (i = 0; i <= range; i++)                    // Time O(n-2)
+                if ((i & RightMostSetBitNo) == 0)
+                    XOR_R ^= i;
+
+            // first repeated nun
+            var X = XOR_I ^ XOR_R;
+            // second repeated nun
+            var Y = XOR_A ^ X;
+
+            Console.WriteLine($"Repeated nums in given input array are : \t'{X}' and '{Y}'");
+        }
+
+        // Time O(n) || Space O(1)
         public static void PairWhoseSumIsClosestToGivenValue(int[] input, int sum = 0)
         {
             int low = 0, high = input.Length - 1;
