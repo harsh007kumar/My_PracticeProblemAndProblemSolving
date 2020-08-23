@@ -269,5 +269,21 @@ namespace InterviewProblemNSolutions
             }
             return -1;
         }
+
+        // Time (Logn) || Space O(1)
+        public static int LastOccurenceInSortedArray(int[] input, int data)
+        {
+            if (input == null || input.Length == 0) return -1;
+            int start = 0, last = input.Length - 1;
+            while (start <= last)
+            {
+                var mid = start + (last - start) / 2;
+                if (mid == last && input[mid] == data) return mid;
+                else if (input[mid] == data && input[mid + 1] > data) return mid;
+                else if (input[mid] <= data) start = mid + 1;
+                else last = mid - 1;
+            }
+            return -1;
+        }
     }
 }
