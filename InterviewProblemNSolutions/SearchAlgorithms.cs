@@ -67,32 +67,32 @@ namespace InterviewProblemNSolutions
             // 6# also we repeated same operation with values in range whose above Bit is ON i.e, range[i] & SetBitNo = 0
             // 7# XOR of values obtained from step 5th & 6th leaves us value = 'X' || As repeated elements will be (A ^ A ^ A = A) where as non repeated elements (B ^ B = 0)
             // XOR 'X' with XOR_A gets our second repeated value 'Y'
-            int i = 0, XOR_A = 0, XOR_I = 0, XOR_R = 0;
+            int i = 0, XOR_Duplicates = 0, XOR_Input = 0, XOR_Range = 0;
 
             for (i = 0; i < length; i++)                    // Time O(n)
-                XOR_I ^= input[i];
+                XOR_Input ^= input[i];
 
             for (i = 1; i <= range; i++)                    // Time O(n-2)
-                XOR_R ^= i;
+                XOR_Range ^= i;
 
-            XOR_A = XOR_I ^ XOR_R;
+            XOR_Duplicates = XOR_Input ^ XOR_Range;
 
-            var RightMostSetBitNo = Utility.GetRightMostBit(XOR_A);
+            var RightMostSetBitNo = Utility.GetRightMostBit(XOR_Duplicates);
 
-            XOR_I = 0;
+            XOR_Input = 0;
             for (i = 0; i < length; i++)                    // Time O(n)
-                if ((input[i] & RightMostSetBitNo) == 0)
-                    XOR_I ^= input[i];
+                if ((input[i] & RightMostSetBitNo) > 0)
+                    XOR_Input ^= input[i];
 
-            XOR_R = 0;
+            XOR_Range = 0;
             for (i = 0; i <= range; i++)                    // Time O(n-2)
-                if ((i & RightMostSetBitNo) == 0)
-                    XOR_R ^= i;
+                if ((i & RightMostSetBitNo) > 0)
+                    XOR_Range ^= i;
 
             // first repeated nun
-            var X = XOR_I ^ XOR_R;
+            var X = XOR_Input ^ XOR_Range;
             // second repeated nun
-            var Y = XOR_A ^ X;
+            var Y = XOR_Duplicates ^ X;
 
             Console.WriteLine($"Repeated nums in given input array are : \t'{X}' and '{Y}'");
         }

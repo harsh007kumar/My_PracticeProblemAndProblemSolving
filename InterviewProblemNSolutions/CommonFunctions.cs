@@ -104,10 +104,18 @@ namespace InterviewProblemNSolutions
             return ans;
         }
 
-        public static int GetRightMostBit(int num)
-        {
-            return 4;
-        }
+        /// <summary>
+        /// Formula is 
+        /// a)  num & ~(num-1)     or can also be written as       b)  num & (num* -1)
+        /// lets understand with a) and example below
+        /// num = 5 in binary(0000 0101)
+        /// num-1 = 4 in binary(0000 0100)
+        /// ~(num-1) = -5 in binary(1111 1011) // Negation results in all bits changing to opposite values 0 to 1 and 1 to 0
+        /// num & ~(num-1)  = (0000 0101) & (1111 1011)  =  (0000 0001) = 1 in Decimal system
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public static int GetRightMostBit(int num) => num & ~(num - 1);
     }
 
     //Custom Delegate
