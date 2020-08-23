@@ -47,6 +47,7 @@ namespace InterviewProblemNSolutions
             FindTripletWhoseSumIsClosetToGivenValue();
             FindPeakOfIncreasingSequence();
             BinarySearchInRotatedSortedArray();
+            FindFirstOccurenceOfNumInSortedArrayWithDuplicates();
 
             Console.ReadKey();
         }
@@ -457,6 +458,17 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Element {searchFor} found at index : {index}");
             else
                 Console.WriteLine($" Element {searchFor} Not Found in array");
+        }
+
+        public static void FindFirstOccurenceOfNumInSortedArrayWithDuplicates()
+        {
+            Utility.Print("Problem-46  Given a sorted array A of n elements, possibly with duplicates," +
+                " find the index of the first occurrence of a number in O(logn) time.(p. 582)");
+            int[] input = { 1, 1, 1, 1, 2, 2, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 6, 7, 7, 8 };
+            input.Print("Input : ");
+            int searchFor = 3;
+            var index = SearchAlgorithms.FirstOccurenceInSortedArray(input, searchFor);
+            Console.WriteLine($" First index where {searchFor} found is : {index}");
         }
     }
 }

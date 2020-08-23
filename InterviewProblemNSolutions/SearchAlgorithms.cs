@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics.Eventing.Reader;
 
 namespace InterviewProblemNSolutions
 {
@@ -161,28 +162,29 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" Pair '{input[p1]} {input[p2]}' & '{input[p3]}' matches/closet to Sum : {sum}");
         }
 
-        public static void IncreasingSequence(int[] input, int start, int last)
+        public static int IncreasingSequence(int[] input, int start, int last)
         {
             while (start <= last)
             {
                 if (start == last)              // single element
-                { Console.WriteLine($"Mid Point of the array is : \t{input[start]}"); return; }
+                { Console.WriteLine($"Mid Point of the array is : \t{input[start]}"); return start; }
                 else if (start == last - 1)     // only two elements
-                { Console.WriteLine($"Mid Point of the array is : \t{input[Math.Max(start, last)]}"); return; }
+                { Console.WriteLine($"Mid Point of the array is : \t{input[Math.Max(start, last)]}"); return Math.Max(start, last); }
                 else
                 {
                     var mid = start + (last - start) / 2;
 
                     if (input[mid - 1] < input[mid] && input[mid] > input[mid + 1])
-                    { Console.WriteLine($"Mid Point of the array is : \t{input[mid]}"); return; }
+                    { Console.WriteLine($"Mid Point of the array is : \t{input[mid]}"); return mid; }
                     else if (input[mid - 1] > input[mid] && input[mid] > input[mid + 1])
                         last = mid - 1;
                     else if (input[mid - 1] < input[mid] && input[mid] < input[mid + 1])
                         start = mid + 1;
                     else
-                        return;
+                        return -1;
                 }
             }
+            return -1;
         }
 
         // GFG https://www.geeksforgeeks.org/search-an-element-in-a-sorted-and-pivoted-array/
@@ -248,6 +250,22 @@ namespace InterviewProblemNSolutions
                     else
                         return BinarySearchInRotatedArraySinglePass(input, start, mid - 1, element);
                 }
+            }
+            return -1;
+        }
+
+        // Time (Logn) || Space O(1)
+        public static int FirstOccurenceInSortedArray(int[] input, int data)
+        {
+            if (input == null || input.Length == 0) return -1;
+            int start = 0, last = input.Length - 1;
+            while (start <= last)
+            {
+                var mid = start + (last - start) / 2;
+                if (start == mid && input[mid] == data) return mid;
+                else if (input[mid] == data && input[mid - 1] < data) return mid;
+                else if (input[mid] >= data) last = mid - 1;
+                else start = mid + 1;
             }
             return -1;
         }
