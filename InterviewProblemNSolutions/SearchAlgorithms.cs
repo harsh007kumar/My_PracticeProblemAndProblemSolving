@@ -185,7 +185,8 @@ namespace InterviewProblemNSolutions
             }
         }
 
-        // Time O(Logn) || Space O(1)
+        // GFG https://www.geeksforgeeks.org/search-an-element-in-a-sorted-and-pivoted-array/
+        // Time O(Logn) || Space O(1) || 2 pass
         public static int BinarySearchInRotatedArray(int[] input, int element)
         {
             if (input == null || input.Length == 0) return -1;
@@ -201,7 +202,7 @@ namespace InterviewProblemNSolutions
                 return pivot;
             else if (input[0] <= element)        // search in left sub-array
                 return Search.BinarySearch_Iterative(input, 0, pivot - 1, element);
-            else // (element < input[0])        // search in right sub-array
+            else // (input[0] > element)        // search in right sub-array
                 return Search.BinarySearch_Iterative(input, pivot + 1, input.Length - 1, element);
         }
 
@@ -224,6 +225,31 @@ namespace InterviewProblemNSolutions
                 else low = mid + 1;
             }
             return pivot;
+        }
+
+        // Time O(Logn) || Space O(1) || 1 pass
+        public static int BinarySearchInRotatedArraySinglePass(int[] input, int start, int end, int element)
+        {
+            if(start<=end)
+            {
+                var mid = start + (end - start) / 2;
+                if (input[mid] == element) return mid;
+                else if (input[start] <= input[mid])   // if first half is sorted
+                {
+                    if (input[start] <= element && element <= input[mid])
+                        return BinarySearchInRotatedArraySinglePass(input, start, mid - 1, element);
+                    else
+                        return BinarySearchInRotatedArraySinglePass(input, mid + 1, end, element);
+                }
+                else                                // second half must be sorted
+                {
+                    if (input[mid] <= element && element <= input[end])
+                        return BinarySearchInRotatedArraySinglePass(input, mid + 1, end, element);
+                    else
+                        return BinarySearchInRotatedArraySinglePass(input, start, mid - 1, element);
+                }
+            }
+            return -1;
         }
     }
 }

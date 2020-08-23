@@ -452,6 +452,7 @@ namespace InterviewProblemNSolutions
             int searchFor = 5;
             input.Print("Input : ");
             var index = SearchAlgorithms.BinarySearchInRotatedArray(input, searchFor);
+            var indexFast = SearchAlgorithms.BinarySearchInRotatedArraySinglePass(input, 0, input.Length - 1, searchFor);
             if (index != -1)
                 Console.WriteLine($" Element {searchFor} found at index : {index}");
             else
