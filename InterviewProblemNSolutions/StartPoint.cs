@@ -48,6 +48,7 @@ namespace InterviewProblemNSolutions
             FindPeakOfIncreasingSequence();
             BinarySearchInRotatedSortedArray();
             FindFirstAndLastOccurenceOfNumInSortedArrayWithDuplicates();
+            SeperateEvenNOdds();
 
             Console.ReadKey();
         }
@@ -474,6 +475,15 @@ namespace InterviewProblemNSolutions
             input.Print("Input : ");
             index = SearchAlgorithms.LastOccurenceInSortedArray(input, searchFor);
             Console.WriteLine($" Last index where {searchFor} found is : {index}");
+        }
+
+        public static void SeperateEvenNOdds()
+        {
+            Utility.Print("Problem-67  Separate even and odd numbers: Given an array A[], write a function that segregates even and odd numbers.(p. 589)");
+            int[] input = { 12, 34, 45, 9, 8, 90, 3 };
+            input.Print("Input Array : ");
+            SearchAlgorithms.SeperateEvenOdd(input);
+            input.Print("Output Array : ");
         }
     }
 }

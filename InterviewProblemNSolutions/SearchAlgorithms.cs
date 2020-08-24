@@ -285,5 +285,19 @@ namespace InterviewProblemNSolutions
             }
             return -1;
         }
+
+        // Time O(n) || Space O(1)
+        // Similar problem is seperating O's & 1's which is also similar to 'Dutch National Flag' problem or '3-Way Quick-Sort'
+        public static void SeperateEvenOdd(int[] input)
+        {
+            if (input == null || input.Length == 0) return;
+            int low = 0, high = input.Length - 1;
+            while (low < high)
+            {
+                while (input[low] % 2 == 0 && low < high) low++;
+                while (input[high] % 2 == 1 && low < high) high--;
+                if (low < high) Utility.Swap(ref input[low++], ref input[high--]);
+            }
+        }
     }
 }
