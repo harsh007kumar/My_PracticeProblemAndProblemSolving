@@ -50,6 +50,7 @@ namespace InterviewProblemNSolutions
             FindFirstAndLastOccurenceOfNumInSortedArrayWithDuplicates();
             SeperateEvenNOdds();
             MaxIndexDiffInArray();
+            CountFrequenciesOfNElements();
 
             Console.ReadKey();
         }
@@ -495,6 +496,23 @@ namespace InterviewProblemNSolutions
             int[] input = { 34, 8, 10, 3, 2, 80, 30, 33, 1 };
             input.Print("Input Array : ");
             SearchAlgorithms.MaxIndexDiff(input);
+        }
+
+        // GFG https://www.geeksforgeeks.org/count-frequencies-elements-array-o1-extra-space-time/
+        // Other Approach similar to MaxRecurrence https://youtu.be/UW1InjlrXFU
+        public static void CountFrequenciesOfNElements()
+        {
+            Utility.Print("Problem-79  Given an array of n elements, how do you print the frequencies of elements without using extra space. Assume all elements are positive, editable and less than n.(p. 596)");
+            int[][] inputs = { new int[] { 10, 10, 9, 4, 7, 6, 5, 2, 3, 2, 1 },
+                                new int[] { 4, 4, 4, 4, 4, 6 },
+                                new int[] { 1, 3, 5, 7, 9, 1, 3, 5, 7, 9, 1}
+                            };
+            foreach (var input in inputs)
+            {
+                input.Print("Input Array : ");
+                SearchAlgorithms.CountFrequencyNegationMethod(input);
+                //SearchAlgorithms.CountFrequencyAddArrayLengthMethod(input);
+            }
         }
 
     }

@@ -18,10 +18,10 @@ namespace InterviewProblemNSolutions
             // array is not readonly
             // Algo works only if the Array containing Positive values in the range [0 .. N-1]
             for (int i = 0; i < input.Length; i++)                                                          // Time O(n) || Space O(1)
-                if (input[i] < 0)                               // already marked -ve
+                if (input[Math.Abs(input[i])] < 0)              // already marked -ve
                     Console.WriteLine($"Duplicate '{Math.Abs(input[i])}' at Index : {i}");
                 else
-                    input[input[i]] *= -1;                      // mark -ve
+                    input[Math.Abs(input[i])] *= -1;            // mark -ve
 
             // METHOD 2 : Sort array and search for next value is same or not                               // Time O(nlogn) || Space O(1)
             // METHOD 3 : using Hashtable to store already seen values                                      // Time O(n) || Space O(n)
@@ -36,7 +36,7 @@ namespace InterviewProblemNSolutions
             // Algo works only if the Array containing Positive values in the range [0 .. N-1]
             int max = -1, index = -1;
             for (int i = 0; i < len; i++)
-                if (input[i] / len > max)
+                if (input[i] / len > max)                       // (input[i] > len*2) can be used to detect duplicates also
                 {
                     max = input[i] / len;
                     index = i;
@@ -339,6 +339,61 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" The Max Difference 'j-i' which holds true for 'A[j] > A[i]' is : {maxDiff}");
         }
 
+        // Time O(n) || Space O(1)
+        // Input array is being used as HashTable itself to store the count
+        public static void CountFrequencyNegationMethod(int[] input)
+        {
+            Console.WriteLine($" Finding frequency using Negation Method : ");
+            if (input == null || input.Length < 1) return;
+            int pos = 0, prvPos = -1, len = input.Length;
+            while (pos < len)               // Time O(n)
+            {
+                prvPos = input[pos] - 1;    // since array contains element from 1...N but index are in range 0...N-1
+                // if current element is encountered for first time
+                if (input[pos] > 0)
+                {
+                    if (input[prvPos] > 0)  // some other element exists at prvPos index
+                    {
+                        Utility.Swap(ref input[pos], ref input[prvPos]);
+                        input[prvPos] = -1; // set -1 to indicate this element is visited once
+                    }
+                    else                    // prvPos is already -ve means we are encountering this value i.e, input[pos] again
+                    {
+                        input[prvPos]--;    // increament the counter
+                        input[pos++] = 0;   // set 0 counter for current 'pos'
+                    }
+                }
+                else 
+                    pos++;
+            }
 
+            // Print the frequency for all elements now
+            pos = 0;
+            while (pos < len)               // Time O(n)
+                Console.WriteLine($" Frequency of {pos + 1} : {Math.Abs(input[pos++])}");
+
+            Console.WriteLine();
+        }
+
+        // Time O(n) || Space O(1)
+        // Issue with this approach is it only prints Frequency of No present in array (that too multiple times if present more than once)
+        public static void CountFrequencyAddArrayLengthMethod(int[] input)
+        {
+            Console.WriteLine($" Finding frequency using Max Recourrence Method : ");
+            if (input == null || input.Length < 1) return;
+            int len = input.Length;
+
+            // decreament all values so is fits in index range 0...N-1
+            for (int i = 0; i < len; i++)
+                input[i]--;
+            
+            // add length of array to each value
+            for (int i = 0; i < len; i++)
+                input[input[i] % len] += len;
+
+            for (int i = 0; i < len; i++)
+                Console.WriteLine($" Frequency of {input[i] % len + 1} : {input[input[i] % len] / len} ");
+
+        }
     }
 }
