@@ -49,6 +49,7 @@ namespace InterviewProblemNSolutions
             BinarySearchInRotatedSortedArray();
             FindFirstAndLastOccurenceOfNumInSortedArrayWithDuplicates();
             SeperateEvenNOdds();
+            MaxIndexDiffInArray();
 
             Console.ReadKey();
         }
@@ -485,5 +486,16 @@ namespace InterviewProblemNSolutions
             SearchAlgorithms.SeperateEvenOdd(input);
             input.Print("Output Array : ");
         }
+
+        // GFG https://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/
+        public static void MaxIndexDiffInArray()
+        {
+            Utility.Print("Problem-77  Given an array A[], find the maximum j – i such that A[j] > A[i]." +
+                " For example, Input: {34, 8, 10, 3, 2, 80, 30, 33, 1} and Output: 6 (j = 7, i = 1).(p. 595)");
+            int[] input = { 34, 8, 10, 3, 2, 80, 30, 33, 1 };
+            input.Print("Input Array : ");
+            SearchAlgorithms.MaxIndexDiff(input);
+        }
+
     }
 }

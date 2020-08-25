@@ -294,10 +294,51 @@ namespace InterviewProblemNSolutions
             int low = 0, high = input.Length - 1;
             while (low < high)
             {
-                while (input[low] % 2 == 0 && low < high) low++;
-                while (input[high] % 2 == 1 && low < high) high--;
+                while (input[low] % 2 == 0) low++;
+                while (input[high] % 2 == 1) high--;
                 if (low < high) Utility.Swap(ref input[low++], ref input[high--]);
             }
         }
+
+        // Time O(n) || Space O(n)
+        public static void MaxIndexDiff(int[] input)
+        {
+            if (input == null || input.Length <= 1) return;
+            var len = input.Length;
+            int i = 0, j = 0;
+
+            // create leftMin array to store smallest value on left side Arr[i] in input array
+            int[] leftMin = new int[len];
+            // create rightMax array to store largest value on Right side Arr[j] in input array
+            int[] rightMax = new int[len];
+
+            // set initial first value in leftMin array and than populate the remaing array from the start
+            // by storing Minimum of values at current index from input array or value on left side of it in leftMin array
+            leftMin[0] = input[0];
+            for (i = 1; i < len; i++)
+                leftMin[i] = Math.Min(leftMin[i - 1], input[i]);
+
+            // set initial first value i rightMax array and than populate the remaing array from the end
+            // by storing Maximum of values at current index from input array or value on right side of it in rightMax array
+            rightMax[len-1] = input[len - 1];
+            for (j = len - 2; j >= 0; j--)
+                rightMax[j] = Math.Max(input[j], rightMax[j + 1]);
+
+            int maxDiff = -1;
+            i = j = 0;
+            while (i < len && j < len)
+            {
+                if (leftMin[i] < rightMax[j])
+                {
+                    maxDiff = Math.Max(maxDiff, j - i);
+                    j++;
+                }
+                else
+                    i++;
+            }
+            Console.WriteLine($" The Max Difference 'j-i' which holds true for 'A[j] > A[i]' is : {maxDiff}");
+        }
+
+
     }
 }
