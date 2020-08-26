@@ -52,6 +52,8 @@ namespace InterviewProblemNSolutions
             MaxIndexDiffInArray();
             CountFrequenciesOfNElements();
 
+            // Selection Algorithms [Medians]
+            FindKSmallestElements();
             Console.ReadKey();
         }
 
@@ -513,6 +515,24 @@ namespace InterviewProblemNSolutions
                 SearchAlgorithms.CountFrequencyNegationMethod(input);
                 //SearchAlgorithms.CountFrequencyAddArrayLengthMethod(input);
             }
+        }
+
+        public static void FindKSmallestElements()
+        {
+            Utility.Print("Problem-6  Find the k-smallest elements in an array S of n elements using partitioning method.(p. 604)");
+            int[] input = { 10, 10, 9, 4, 7, 6, 5, 2, 3, 2, 1 };
+            input.Print("Input array :");
+            var k = 4;
+            // based on Quick Sort
+            SelectionAlgorithms.KSmallestElements(input, 0, input.Length - 1, k);
+
+            // Another way to solve in O(klogk) + O((n-k)logk) = O(nlogk) by creating 'balanced binary search tree' for K elements
+            // & than inserting elements one by one if it's greater than largest element in tree (after removing current largest)
+            // in the end printing all elements of tree via InOrder traversal
+
+            // print k elements from start as array sorted in ascending order
+            for (int i = 0; i < k; i++)
+                Console.Write($" {input[i]}");
         }
 
     }
