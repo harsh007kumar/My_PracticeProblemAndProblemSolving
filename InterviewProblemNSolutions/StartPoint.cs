@@ -54,6 +54,8 @@ namespace InterviewProblemNSolutions
 
             // Selection Algorithms [Medians]
             FindKSmallestElements();
+            HappyNumbers();
+
             Console.ReadKey();
         }
 
@@ -535,5 +537,58 @@ namespace InterviewProblemNSolutions
                 Console.Write($" {input[i]}");
         }
 
+        public static void HappyNumbers()
+        {
+            Utility.Print("Find if given number is happy number or not.");
+            /* Number is happy is or not?
+             * Ex: 7 square of Digits (7*7) = 49 (2 digits) || Square of (4 = 16) + (9 = 81) = 97 (2 digits) || Square of (9=81)+(7=49) = 130 ||
+             * Square of (1=1)+(3=9)+(0=0) = 10 || Square of (1=1)+(0=0) = 1
+             * So number who's square of digit comes out to be 1 after some 'n' operation is said to be 'Happy Number'
+             */
+            int[] inputs = { 7, 13, 19, 23, 31, 79, 97, 103, 109, 139, 144, 256, 1091 };
+            foreach (var num in inputs)
+            {
+                // Hashset to hold sequence of no's while finding is given no is happy or not
+                var nothappySet = new HashSet<int>();
+
+                Console.WriteLine($" {num} is Happy : {isHappyFloydWay(num)}");
+
+                // Recursive algo + Auxillary Space
+                bool isHappyNumber(int number)
+                {
+                    if (number == 1) return true;
+                    if (nothappySet.Contains(number)) return false;         // if present in set means we have visited the number before & now in loop
+                    nothappySet.Add(number);
+                    return isHappyNumber(GetSquaredDigitSum(number));
+                }
+
+                // Iterative algo + Auxillary Space
+                bool isHappyNum(int number)
+                {
+                    while (true)
+                    {
+                        var squareOfDigits = GetSquaredDigitSum(number);
+                        if (squareOfDigits == 1) return true;
+                        if (nothappySet.Contains(squareOfDigits)) break;    // if present in set means we have visited the number before & now in loop
+                        nothappySet.Add(number = squareOfDigits);
+                    }
+                    return false;
+                }
+
+                // Iterative algo + O(1) space
+                bool isHappyFloydWay(int number)
+                {
+                    int slow = number, fast = number;
+                    do
+                    {
+                        slow = GetSquaredDigitSum(slow);
+                        fast = GetSquaredDigitSum(GetSquaredDigitSum(fast));
+                    }
+                    while (slow != fast);
+                    return slow == 1;
+                }
+            }
+            int GetSquaredDigitSum(int n) => (n == 0) ? 0 : (n % 10) * (n % 10) + GetSquaredDigitSum(n / 10);
+        }
     }
 }
