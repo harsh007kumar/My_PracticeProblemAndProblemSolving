@@ -18,6 +18,7 @@ namespace InterviewProblemNSolutions
 
             // Learn Dynamic Programming (Memoization & Tabulation)
             MinimumStepsToMinimizeToOne();
+            HappyNumbers();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -54,7 +55,7 @@ namespace InterviewProblemNSolutions
 
             // Selection Algorithms [Medians]
             FindKSmallestElements();
-            HappyNumbers();
+            KSmallestWorstCaseMedianOfMedians();
 
             Console.ReadKey();
         }
@@ -521,7 +522,7 @@ namespace InterviewProblemNSolutions
 
         public static void FindKSmallestElements()
         {
-            Utility.Print("Problem-6  Find the k-smallest elements in an array S of n elements using partitioning method.(p. 604)");
+            Utility.Print("Problem-10  Find the k-smallest elements in an array S of n elements using partitioning method.(p. 604)");
             int[] input = { 10, 10, 9, 4, 7, 6, 5, 2, 3, 2, 1 };
             input.Print("Input array :");
             var k = 4;
@@ -533,10 +534,12 @@ namespace InterviewProblemNSolutions
             // in the end printing all elements of tree via InOrder traversal
 
             // print k elements from start as array sorted in ascending order
+            Console.WriteLine($" Printing k : {k} smallest elements");
             for (int i = 0; i < k; i++)
                 Console.Write($" {input[i]}");
         }
 
+        // GFG https://www.geeksforgeeks.org/happy-number/
         public static void HappyNumbers()
         {
             Utility.Print("Find if given number is happy number or not.");
@@ -589,6 +592,21 @@ namespace InterviewProblemNSolutions
                 }
             }
             int GetSquaredDigitSum(int n) => (n == 0) ? 0 : (n % 10) * (n % 10) + GetSquaredDigitSum(n / 10);
+        }
+
+        // GFG https://www.geeksforgeeks.org/kth-smallestlargest-element-unsorted-array-set-3-worst-case-linear-time/
+        public static void KSmallestWorstCaseMedianOfMedians()
+        {
+            Utility.Print("K’th Smallest/Largest Element in Unsorted Array | Set 3 (Worst Case Linear Time)");
+            // for O(NLogK) algorithms use Heap/QuickSort
+            // For Expected O(n) use Random Pivot in QuickSort
+            // For worse case but still O(n) use Med of Med below
+            int[] input = { 7, 10, 4, 3, 20, 15 };
+            input.Print("Input array :");
+            var k = 4;  // 4th smallest
+            // based on Quick Sort
+            var kthIndex = SelectionAlgorithms.KSmallestUsingMedOfMed(input, 0, input.Length - 1, k);
+            Console.WriteLine($" {k}th Smallest in above array in : {input[kthIndex]}");
         }
     }
 }

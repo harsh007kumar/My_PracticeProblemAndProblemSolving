@@ -116,6 +116,9 @@ namespace InterviewProblemNSolutions
         /// <param name="num"></param>
         /// <returns></returns>
         public static int GetRightMostBit(int num) => num & ~(num - 1);
+
+        // Returns sum of 'square of digits' Ex- 13, 1*1 + 3*3 = 10
+        public static int GetSquaredDigitSum(int n) => (n == 0) ? 0 : (n % 10) * (n % 10) + GetSquaredDigitSum(n / 10);
     }
 
     //Custom Delegate
