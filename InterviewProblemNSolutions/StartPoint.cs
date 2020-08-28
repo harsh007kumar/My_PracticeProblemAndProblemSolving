@@ -56,7 +56,7 @@ namespace InterviewProblemNSolutions
             // Selection Algorithms [Medians]
             FindKSmallestElements();
             KSmallestWorstCaseMedianOfMedians();
-
+            MedianOfTwoSortedArraysSameSize();
             Console.ReadKey();
         }
 
@@ -607,6 +607,17 @@ namespace InterviewProblemNSolutions
             // based on Quick Sort
             var kthIndex = SelectionAlgorithms.KSmallestUsingMedOfMed(input, 0, input.Length - 1, k);
             Console.WriteLine($" {k}th Smallest in above array in : {input[kthIndex]}");
+        }
+
+        public static void MedianOfTwoSortedArraysSameSize()
+        {
+            Utility.Print("Median Of Two Sorted Arrays of Same Size || Time O(n)");
+            int[] a1 = { 1, 12, 16, 26, 38 };
+            int[] a2 = { 2, 13, 17, 30, 45 };
+            a1.Print(" Arr1 :");
+            a2.Print(" Arr2 :");
+            var median = SelectionAlgorithms.MedianSortedArrayEqualSizeUsingCount(a1, a2, a1.Length);
+            if (median >= 0) Console.WriteLine($" Median value of above two sorted array is : {median}");
         }
     }
 }

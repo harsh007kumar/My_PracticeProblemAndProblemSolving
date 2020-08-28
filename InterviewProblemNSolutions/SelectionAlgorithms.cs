@@ -42,6 +42,7 @@ namespace InterviewProblemNSolutions
         }
 
         // Time O(n)
+        // Median of Medians
         // constants are very high for this algorithm. Therefore, this algorithm doesn’t work well in practical situations, randomized quickSelect works better
         public static int KSmallestUsingMedOfMed(int[] input, int start, int last, int k)
         {
@@ -113,6 +114,31 @@ namespace InterviewProblemNSolutions
             }
             Utility.Swap(ref input[pivot], ref input[start]);
             return start;
+        }
+
+        public static double MedianSortedArrayEqualSizeUsingCount(int[] a1, int[] a2, int len)
+        {
+            int i = 0, j = 0, medPrv = -1, medCurr = -1, count = 0;
+            while (count <= len)
+            {
+                medPrv = medCurr;
+
+                // if we reach end of first array
+                if (i == len)
+                { medCurr = a2[j]; break; }
+
+                // if we reach end of second array
+                else if (j == len)
+                { medCurr = a1[i]; break; }
+
+                if (a1[i] <= a2[j])
+                    medCurr = a1[i++];
+                else
+                    medCurr = a2[j++];
+                
+                count++;
+            }
+            return (double)(medPrv + medCurr) / 2;
         }
     }
 }
