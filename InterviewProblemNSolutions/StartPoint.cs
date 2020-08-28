@@ -611,12 +611,23 @@ namespace InterviewProblemNSolutions
 
         public static void MedianOfTwoSortedArraysSameSize()
         {
-            Utility.Print("Median Of Two Sorted Arrays of Same Size || Time O(n)");
             int[] a1 = { 1, 12, 16, 26, 38 };
             int[] a2 = { 2, 13, 17, 30, 45 };
             a1.Print(" Arr1 :");
             a2.Print(" Arr2 :");
-            var median = SelectionAlgorithms.MedianSortedArrayEqualSizeUsingCount(a1, a2, a1.Length);
+            var len = a1.Length;
+
+
+            Utility.Print("Median Of Two Sorted Arrays of Same Size, using Count || Time O(n)");
+            var median = SelectionAlgorithms.MedianSortedArrayEqualSizeUsingCount(a1, a2, len);
+            if (median >= 0) Console.WriteLine($" Median value of above two sorted array is : {median}");
+
+            Utility.Print("Median Of Two Sorted Arrays of Same Size, using Median || Recursive || Time O(Logn)");
+            median = SelectionAlgorithms.MedianSortedArrayEqualSizeByComparingMedians(a1, 0, len - 1, a2, 0, len - 1);
+            if (median >= 0) Console.WriteLine($" Median value of above two sorted array is : {median}");
+
+            Utility.Print("Median Of Two Sorted Arrays of Same Size, using Median || Iterative || Time O(Logn)");
+            median = SelectionAlgorithms.MedianSortedArrayEqualSizeByComparingMedians_Iterative(a1, 0, len - 1, a2, 0, len - 1);
             if (median >= 0) Console.WriteLine($" Median value of above two sorted array is : {median}");
         }
     }

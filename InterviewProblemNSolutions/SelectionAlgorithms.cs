@@ -140,5 +140,58 @@ namespace InterviewProblemNSolutions
             }
             return (double)(medPrv + medCurr) / 2;
         }
+
+        // Recusrive Func which find Median of Two Sorted Array || Time O(logn)
+        public static double MedianSortedArrayEqualSizeByComparingMedians(int[] a, int aLow, int aHigh, int[] b, int bLow, int bHigh)
+        {
+            var midA = aLow + (aHigh - aLow) / 2;
+            var midB = bLow + (bHigh - bLow) / 2;
+            // we got a match, return median from either array a or b
+            if (a[midA] == b[midB])
+                return a[midA];
+
+            // handling for corner cases
+            var lenA = aHigh - aLow + 1;
+            var lenB = bHigh - bLow + 1;
+            // only 2 elements left in both arrays
+            if (lenA == 2 && lenB == 2)
+                return (double)(Math.Max(a[aLow], b[bLow]) + Math.Min(a[aHigh], b[bHigh])) / 2;
+
+            if (a[midA] > b[midB])              // median must be b/w left half of A and right half of B
+                return MedianSortedArrayEqualSizeByComparingMedians(a, aLow, midA, b, midB, bHigh);
+            else // (a[midA] < b[midB])         // median must be b/w right half of A and left half of B
+                return MedianSortedArrayEqualSizeByComparingMedians(a, midA, aHigh, b, aLow, midB);
+        }
+
+        // Iterative Func which find Median of Two Sorted Array || Time O(logn) || Space O(1)
+        public static double MedianSortedArrayEqualSizeByComparingMedians_Iterative(int[] a, int aLow, int aHigh, int[] b, int bLow, int bHigh)
+        {
+            while (true)
+            {
+                var midA = aLow + (aHigh - aLow) / 2;
+                var midB = bLow + (bHigh - bLow) / 2;
+                // we got a match, return median from either array a or b
+                if (a[midA] == b[midB])
+                    return a[midA];
+
+                // handling for corner cases
+                var lenA = aHigh - aLow + 1;
+                var lenB = bHigh - bLow + 1;
+                // only 2 elements left in both arrays
+                if (lenA == 2 && lenB == 2)
+                    return (double)(Math.Max(a[aLow], b[bLow]) + Math.Min(a[aHigh], b[bHigh])) / 2;
+
+                if (a[midA] > b[midB])              // median must be b/w left half of A and right half of B
+                {
+                    aHigh = midA;
+                    bLow = midB;
+                }
+                else // (a[midA] < b[midB])         // median must be b/w right half of A and left half of B
+                {
+                    aLow = midA;
+                    bHigh = midB;
+                }
+            }
+        }
     }
 }
