@@ -216,5 +216,56 @@ namespace InterviewProblemNSolutions
                 return a[start + len / 2];
         }
 
+        /// <summary>
+        /// Returns Median of two sorted arrays, of different length || Time O(Log(Min(m,n))), m = length of 1st & n = length of 2nd array || Space O(1)
+        /// Tushar Roy https://youtu.be/LPFhl65R7ww
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static double MedianOfSortedArray(int[] a, int[] b)
+        {
+            int lenA = a.Length;
+            int lenB = b.Length;
+            /* We would like to keep first passed argument as smaller than second array */
+            if (lenA > lenB)
+                return MedianOfSortedArray(b, a);
+
+            int startA = 0, endA = lenA;
+
+            // We keep no of elements on left side of partition(total count from A & B array) 'one more or equal' to no of elements on right side of partition (both array)
+            while (startA <= endA)
+            {
+                /* Parition to decide 'no of elements on left side'
+                 * Always keep no of elements on left one more or equal than total no of elements on right [including both arrays]
+                 */
+                int partitionA = (startA + endA) / 2;                       // elements before this Index are considered on left side of A         
+                int partitionB = (lenA + lenB + 1) / 2 - partitionA;        // elements before this Index are considered on left side of B
+                // We also add one while paritioning B above as its both 'odd and even friendly'
+
+
+                // calculate value of elements on left & ride of partition for both arrays
+                // [assign -ve infinity value in case we reach to -1 index and +ve infinity when we cross last index of array]
+                int leftOfA, rightOfA, leftOfB, rightOfB;
+                leftOfA = partitionA == 0 ? int.MinValue : a[partitionA - 1];
+                rightOfA = partitionA == lenA ? int.MaxValue : a[partitionA];
+                leftOfB = partitionB == 0 ? int.MinValue : b[partitionB - 1];
+                rightOfB = partitionB == lenB ? int.MaxValue : b[partitionB];
+
+                if (leftOfA <= rightOfB && leftOfB <= rightOfA)
+                    if ((lenA + lenB) % 2 == 1)                             // combined length of arrays is ODD
+                        return Math.Max(leftOfA, leftOfB);
+                    else                                                    // combined length of arrays is EVEN
+                        return (double)(Math.Max(leftOfA, leftOfB) + Math.Min(rightOfA, rightOfB)) / 2;
+                else if (leftOfA < rightOfB && leftOfB > rightOfA)          // not quite at partition, we need to move more on right side of A
+                    startA = partitionA + 1;
+                else // if (leftOfA > rightOfB)                             // came too far on right, move to left
+                    endA = partitionA - 1;
+            }
+
+            var errorMsg = "one or both provided Input arrays are Not Sorted";
+            Console.WriteLine(errorMsg);
+            throw new ArgumentException(errorMsg);
+        }
     }
 }
