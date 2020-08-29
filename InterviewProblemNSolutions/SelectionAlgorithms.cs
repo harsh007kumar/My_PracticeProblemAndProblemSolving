@@ -141,6 +141,7 @@ namespace InterviewProblemNSolutions
             return (double)(medPrv + medCurr) / 2;
         }
 
+        // DO NOT USE HAS FUNDAMENTAL ISSUE WITH ALGO IF ARRAY ARE OF EVEN LENGTH || MEDIAN IS NOT CALCULATED RIGHT
         // Recusrive Func which find Median of Two Sorted Array || Time O(logn)
         public static double MedianSortedArrayEqualSizeByComparingMedians(int[] a, int aLow, int aHigh, int[] b, int bLow, int bHigh)
         {
@@ -165,6 +166,7 @@ namespace InterviewProblemNSolutions
                 return MedianSortedArrayEqualSizeByComparingMedians(a, midA, aHigh, b, aLow, midB);
         }
 
+        // DO NOT USE HAS FUNDAMENTAL ISSUE WITH ALGO IF ARRAY ARE OF EVEN LENGTH || MEDIAN IS NOT CALCULATED RIGHT
         // Iterative Func which find Median of Two Sorted Array || Time O(logn) || Space O(1)
         public static double MedianSortedArrayEqualSizeByComparingMedians_Iterative(int[] a, int aLow, int aHigh, int[] b, int bLow, int bHigh)
         {
@@ -181,17 +183,17 @@ namespace InterviewProblemNSolutions
                     return (double)(Math.Max(a[aLow], b[bLow]) + Math.Min(a[aHigh], b[bHigh])) / 2;
 
 
-                var midA = Median(a, aLow, lenA);
-                var midB = Median(b, bLow, lenB);
+                var midA = aLow + (aHigh - aLow) / 2;
+                var midB = bLow + (bHigh - bLow) / 2;
 
-                if (midA == midB)             // we got a match, return median from either array a or b
-                    return midA;
-                else if (midA > midB)         // median must be b/w left half of A and right half of B
+                if (a[midA] == b[midB])             // we got a match, return median from either array a or b
+                    return a[midA];
+                else if (a[midA] > b[midB])         // median must be b/w left half of A and right half of B
                 {
                     aHigh = midA;
                     bLow = midB;
                 }
-                else // (midA < midB)         // median must be b/w right half of A and left half of B
+                else // (a[midA] < b[midB])         // median must be b/w right half of A and left half of B
                 {
                     aLow = midA;
                     bHigh = midB;
