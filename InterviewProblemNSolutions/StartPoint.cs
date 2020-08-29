@@ -57,6 +57,7 @@ namespace InterviewProblemNSolutions
             FindKSmallestElements();
             KSmallestWorstCaseMedianOfMedians();
             MedianOfTwoSortedArraysSameSize();
+            
             Console.ReadKey();
         }
 
@@ -611,8 +612,8 @@ namespace InterviewProblemNSolutions
 
         public static void MedianOfTwoSortedArraysSameSize()
         {
-            int[] a1 = { 1, 12, 16, 26, 38 };
-            int[] a2 = { 2, 13, 17, 30, 45 };
+            int[] a1 = { 1, 12, 16, 26, 38 , 45};
+            int[] a2 = { 2, 13, 17, 30, 45 , 65};
             a1.Print(" Arr1 :");
             a2.Print(" Arr2 :");
             var len = a1.Length;
@@ -630,5 +631,6 @@ namespace InterviewProblemNSolutions
             median = SelectionAlgorithms.MedianSortedArrayEqualSizeByComparingMedians_Iterative(a1, 0, len - 1, a2, 0, len - 1);
             if (median >= 0) Console.WriteLine($" Median value of above two sorted array is : {median}");
         }
+
     }
 }

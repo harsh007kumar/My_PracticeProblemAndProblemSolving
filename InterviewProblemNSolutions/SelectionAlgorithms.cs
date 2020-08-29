@@ -144,20 +144,22 @@ namespace InterviewProblemNSolutions
         // Recusrive Func which find Median of Two Sorted Array || Time O(logn)
         public static double MedianSortedArrayEqualSizeByComparingMedians(int[] a, int aLow, int aHigh, int[] b, int bLow, int bHigh)
         {
+            // handling for corner cases
+            var lenA = aHigh - aLow + 1;
+            var lenB = bHigh - bLow + 1;
+            if (lenA == 0 && lenB == 0)
+                return -1;
+            else if (lenA == 1 && lenB == 1)    // only 1 elements left in both arrays
+                return (double)(a[aLow] + b[bLow]) / 2;
+            else if (lenA == 2 && lenB == 2)    // only 2 elements left in both arrays
+                return (double)(Math.Max(a[aLow], b[bLow]) + Math.Min(a[aHigh], b[bHigh])) / 2;
+
             var midA = aLow + (aHigh - aLow) / 2;
             var midB = bLow + (bHigh - bLow) / 2;
             // we got a match, return median from either array a or b
             if (a[midA] == b[midB])
                 return a[midA];
-
-            // handling for corner cases
-            var lenA = aHigh - aLow + 1;
-            var lenB = bHigh - bLow + 1;
-            // only 2 elements left in both arrays
-            if (lenA == 2 && lenB == 2)
-                return (double)(Math.Max(a[aLow], b[bLow]) + Math.Min(a[aHigh], b[bHigh])) / 2;
-
-            if (a[midA] > b[midB])              // median must be b/w left half of A and right half of B
+            else if (a[midA] > b[midB])              // median must be b/w left half of A and right half of B
                 return MedianSortedArrayEqualSizeByComparingMedians(a, aLow, midA, b, midB, bHigh);
             else // (a[midA] < b[midB])         // median must be b/w right half of A and left half of B
                 return MedianSortedArrayEqualSizeByComparingMedians(a, midA, aHigh, b, aLow, midB);
@@ -168,30 +170,51 @@ namespace InterviewProblemNSolutions
         {
             while (true)
             {
-                var midA = aLow + (aHigh - aLow) / 2;
-                var midB = bLow + (bHigh - bLow) / 2;
-                // we got a match, return median from either array a or b
-                if (a[midA] == b[midB])
-                    return a[midA];
-
                 // handling for corner cases
                 var lenA = aHigh - aLow + 1;
                 var lenB = bHigh - bLow + 1;
-                // only 2 elements left in both arrays
-                if (lenA == 2 && lenB == 2)
+                if (lenA == 0 && lenB == 0)
+                    return -1;
+                else if (lenA == 1 && lenB == 1)
+                    return (double)(a[aLow] + b[bLow]) / 2;
+                else if (lenA == 2 && lenB == 2)    // only 2 elements left in both arrays
                     return (double)(Math.Max(a[aLow], b[bLow]) + Math.Min(a[aHigh], b[bHigh])) / 2;
 
-                if (a[midA] > b[midB])              // median must be b/w left half of A and right half of B
+
+                var midA = Median(a, aLow, lenA);
+                var midB = Median(b, bLow, lenB);
+
+                if (midA == midB)             // we got a match, return median from either array a or b
+                    return midA;
+                else if (midA > midB)         // median must be b/w left half of A and right half of B
                 {
                     aHigh = midA;
                     bLow = midB;
                 }
-                else // (a[midA] < b[midB])         // median must be b/w right half of A and left half of B
+                else // (midA < midB)         // median must be b/w right half of A and left half of B
                 {
                     aLow = midA;
                     bHigh = midB;
                 }
             }
         }
+
+        /// <summary>
+        /// Returns Median value from Sorted Array || Time O(1)
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="start"></param>
+        /// <param name="len"></param>
+        /// <returns></returns>
+        public static int Median(int[] a, int start, int len)
+        {
+            if (len < 1) return -1;
+
+            if (len % 2 == 0)       // even no of elements
+                return (a[len / 2] + a[len / 2 - 1]) / 2;
+            else
+                return a[start + len / 2];
+        }
+
     }
 }
