@@ -619,5 +619,56 @@ namespace InterviewProblemNSolutions
             }
             Console.WriteLine($" Final output is : {new string(output)}");
         }
+
+        // Time O(n^2) || Space O(256) ~O(1), 256 no of Extended ASCII characters
+        public static void LongestSubStringNonRepeatingCharacters(string str)
+        {
+            HashSet<int> charCount = new HashSet<int>();    // instead of HashSet we can also use array to represent all characters int[256]
+            int len = str.Length;
+            int longestSubstring = 1, i = 0, j = 0;
+            for (i = 0; i < len; i++)
+            {
+                charCount.Add(str[i]);                      // add character to count
+                bool duplicateFound = false;
+                // now traverse thru the input string till be dont find any character which is alredy present in the hashset
+                for (j = i + 1; j < len; j++)
+                {
+                    if (charCount.Contains(str[j]))
+                    {
+                        longestSubstring = Math.Max(longestSubstring, charCount.Count);     // can also use 'j - i' here 
+                        duplicateFound = true;
+                    }
+                    if (duplicateFound) break;
+                    charCount.Add(str[j]);
+                }
+                if (duplicateFound) charCount.Clear();
+            }
+            longestSubstring = Math.Max(longestSubstring, charCount.Count);
+            Console.WriteLine($" Longest substring in input : {str}\n Without any repeating character was of length : {longestSubstring}");
+        }
+
+        // Time O(n) || Space O(256) ~O(1), 256 no of Extended ASCII characters
+        public static void LongestSubStringNonRepeatingChar(string str)
+        {
+            bool[] charArr = new bool[ExtendedASCII];       // instead of array we can also use HashSet to represent all characters
+            int len = str.Length;
+            int longestSubstring = 1;
+            int i, j = 0;
+            for (i = 0; i < len; i++)
+            {
+                if (!charArr[str[i]])                       // char not found yet
+                {
+                    charArr[str[i]] = true;                 // add character to count
+                    continue;
+                }
+                longestSubstring = Math.Max(longestSubstring, i - j);
+                while (str[j] != str[i])                    // find the index which was the 1st occurance of the repeated character
+                    charArr[str[j++]] = false;              // also keep removing all characters on the way as they can't be utilized in further sub-strings
+                charArr[str[j++]] = false;                  // mark not found for the duplicate character
+                i--;
+            }
+            longestSubstring = Math.Max(longestSubstring, i - j);
+            Console.WriteLine($" Longest substring in input : {str}\n Without any repeating character was of length : {longestSubstring}");
+        }
     }
 }

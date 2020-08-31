@@ -34,6 +34,7 @@ namespace InterviewProblemNSolutions
             FindPatternPresentIn2DCharArray();
             PrintInterLeavingsOfGivenTwoString();
             ReplaceSpaceInStringWithGivenCharacters();
+            LongestSubStringOfNonRepeatingCharacters();
 
             // Sorting Problem
             ElectionWinner();
@@ -288,6 +289,16 @@ namespace InterviewProblemNSolutions
             var input = "Harsh is my name";
             var replaceWith = "%20";
             StringAlgorithms.ReplaceSpaceWithGivenChars(input,replaceWith);
+        }
+
+        public static void LongestSubStringOfNonRepeatingCharacters()
+        {
+            // GFG https://www.geeksforgeeks.org/length-of-the-longest-substring-without-repeating-characters/
+            Utility.Print("Length of the longest substring without repeating characters");
+            string[] strArr = { "BBBBA", "ABDEFGABEF", "GEEKSFORGEEKS" };
+            foreach (var str in strArr)
+                StringAlgorithms.LongestSubStringNonRepeatingChar(str);       // O(n)
+            //StringAlgorithms.LongestSubStringNonRepeatingCharacters(str);   // O(n^2)
         }
 
         public static void ElectionWinner()
