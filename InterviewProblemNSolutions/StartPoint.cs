@@ -1,11 +1,7 @@
-﻿using Microsoft.Win32;
-using Sorting;
+﻿using Sorting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
 
 namespace InterviewProblemNSolutions
 {
@@ -59,6 +55,10 @@ namespace InterviewProblemNSolutions
             KSmallestWorstCaseMedianOfMedians();
             MedianOfTwoSortedArraysSameSize();
             MedianOfTwoSortedArraysDifferentSize();
+
+            // Divide and Conquer Algo
+            MaximumValueContinousSubsequence();
+
             Console.ReadKey();
         }
 
@@ -652,6 +652,18 @@ namespace InterviewProblemNSolutions
             a2.Print(" Arr2 :");
             var median = SelectionAlgorithms.MedianOfSortedArray(a1, a2);
             Console.WriteLine($" Median value of above two sorted array is : {median}");
+        }
+
+        public static void MaximumValueContinousSubsequence()
+        {
+            Utility.Print("Problem-25  Maximum Value Contiguous Subsequence: (p. 748)");
+            int[][] inputs = { new int[] { -2, 11, -4, 13, -5, 2 }, new int[] { 1, -3, 4, -2, -1, 6 } };
+            foreach (var input in inputs)
+            {
+                input.Print("Input values :");
+                var maxValue = DivideAndConquerAlgorithms.MaxValueContinousSubsequence(input, 0, input.Length - 1);
+                Console.WriteLine($" Maximum Value Contiguous Subsequence in above array is : {maxValue}");
+            }
         }
     }
 }
