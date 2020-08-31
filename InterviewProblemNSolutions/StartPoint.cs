@@ -58,6 +58,7 @@ namespace InterviewProblemNSolutions
 
             // Divide and Conquer Algo
             MaximumValueContinousSubsequence();
+            CalculateKtoPowerN();
 
             Console.ReadKey();
         }
@@ -664,6 +665,13 @@ namespace InterviewProblemNSolutions
                 var maxValue = DivideAndConquerAlgorithms.MaxValueContinousSubsequence(input, 0, input.Length - 1);
                 Console.WriteLine($" Maximum Value Contiguous Subsequence in above array is : {maxValue}");
             }
+        }
+
+        public static void CalculateKtoPowerN()
+        {
+            Utility.Print("Problem-29  To calculate kn, give algorithm and discuss its complexity.(p. 754)");
+            long k = 9, n = 24;
+            Console.WriteLine($" k {k} to power {n} : {DivideAndConquerAlgorithms.FindPower(k, n)}");
         }
     }
 }

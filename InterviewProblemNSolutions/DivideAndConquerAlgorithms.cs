@@ -37,5 +37,23 @@ namespace InterviewProblemNSolutions
             // return max value from left half or right half or combined max value from left+right
             return Math.Max(leftHalfMax, Math.Max(rightHalfMax, leftMax + rightMax));
         }
+
+        // Time O(logn), Ex- 9^24 can we calculated as (9^12)^2 = ((9^6)^2)^2 = (((9^3)^2)^2)^2 = (((9.9^2)^2)^2)^2 total 5 multiplications required
+        // as apposed to Linear way where we multiple no by itself O(n-1) times
+        public static long FindPower(long num, long power)
+        {
+            if (power == 0)
+                return 1;
+            if (power % 2 == 1)
+            {
+                var oddPower = FindPower(num, power - 1);
+                return num * oddPower;
+            }
+            else
+            {
+                var evenPower = FindPower(num, power / 2);
+                return evenPower * evenPower;
+            }
+        }
     }
 }
