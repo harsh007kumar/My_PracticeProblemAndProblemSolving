@@ -628,22 +628,17 @@ namespace InterviewProblemNSolutions
             int longestSubstring = 1, i = 0, j = 0;
             for (i = 0; i < len; i++)
             {
+                charCount.Clear();
                 charCount.Add(str[i]);                      // add character to count
-                bool duplicateFound = false;
                 // now traverse thru the input string till be dont find any character which is alredy present in the hashset
                 for (j = i + 1; j < len; j++)
                 {
                     if (charCount.Contains(str[j]))
-                    {
-                        longestSubstring = Math.Max(longestSubstring, charCount.Count);     // can also use 'j - i' here 
-                        duplicateFound = true;
-                    }
-                    if (duplicateFound) break;
+                        break;
                     charCount.Add(str[j]);
                 }
-                if (duplicateFound) charCount.Clear();
+                longestSubstring = Math.Max(longestSubstring, charCount.Count);     // can also use 'j - i' here 
             }
-            longestSubstring = Math.Max(longestSubstring, charCount.Count);
             Console.WriteLine($" Longest substring in input : {str}\n Without any repeating character was of length : {longestSubstring}");
         }
 

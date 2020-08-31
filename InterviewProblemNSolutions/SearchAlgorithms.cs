@@ -199,7 +199,7 @@ namespace InterviewProblemNSolutions
             var pivot = FindPivotInRotatedArray(input);             // Time O(Logn)
 
             if (pivot == -1)                    // array not rotated
-                return Search.BinarySearch_Iterative(input, 0, input.Length, element);  // search in entire array
+                return Search.BinarySearch_Iterative(input, 0, input.Length - 1, element);  // search in entire array
             else if (input[pivot] == element)   // element found
                 return pivot;
             else if (input[0] <= element)        // search in left sub-array

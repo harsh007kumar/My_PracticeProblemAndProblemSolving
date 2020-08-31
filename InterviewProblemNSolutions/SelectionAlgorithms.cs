@@ -183,8 +183,8 @@ namespace InterviewProblemNSolutions
                     return (double)(Math.Max(a[aLow], b[bLow]) + Math.Min(a[aHigh], b[bHigh])) / 2;
 
 
-                var midA = aLow + (aHigh - aLow) / 2;
-                var midB = bLow + (bHigh - bLow) / 2;
+                var midA = aLow + lenA / 2;
+                var midB = bLow + lenB / 2;
 
                 if (a[midA] == b[midB])             // we got a match, return median from either array a or b
                     return a[midA];
