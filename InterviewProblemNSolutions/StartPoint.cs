@@ -59,6 +59,7 @@ namespace InterviewProblemNSolutions
             // Divide and Conquer Algo
             MaximumValueContinousSubsequence();
             CalculateKtoPowerN();
+            ClosetPairOfPoints();
 
             Console.ReadKey();
         }
@@ -672,6 +673,21 @@ namespace InterviewProblemNSolutions
             Utility.Print("Problem-29  To calculate kn, give algorithm and discuss its complexity.(p. 754)");
             long k = 9, n = 24;
             Console.WriteLine($" k {k} to power {n} : {DivideAndConquerAlgorithms.FindPower(k, n)}");
+        }
+
+        // GFG https://www.geeksforgeeks.org/closest-pair-of-points-using-divide-and-conquer-algorithm/
+        public static void ClosetPairOfPoints()
+        {
+            Utility.Print("Closest-Pair of Points: Given a set of n points, S = {p1,p2,p3,…,pn}, " +
+                "where pi = (xi,yi). Find the pair of points having the smallest distance among all pairs (assume that all points are in one dimension).(p. 749)");
+            int[,] input = { { 2, 3 }, { 12, 30 }, { 40, 50 }, { 5, 1 }, { 12, 10 }, { 3, 4 } };
+            Point[] pointArr = new Point[input.GetLength(0)];
+
+            for (int i = 0; i < input.GetLength(0); i++)            // store pair of X,Y cordinates as Array of Points
+                pointArr[i] = new Point(input[i, 0], input[i, 1]);
+
+            var minDistance = DivideAndConquerAlgorithms.ClosetPair(pointArr);
+            Console.WriteLine($" Minimum distance in 'pair of points' in above provided Points in 2D-space : \t {minDistance}");
         }
     }
 }
