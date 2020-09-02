@@ -47,6 +47,13 @@ namespace InterviewProblemNSolutions
         { left = leftXCoordinate; ht = height; right = rightXCoordinate; }
     }
 
+    public class Strip
+    {
+        public int X, Ht;
+        public Strip(int xCoordinate, int height)
+        { X = xCoordinate; Ht = height; }
+    }
+
     public class DivideAndConquerAlgorithms
     {
         // Time O(nlogn) || Space O(1) (does required recursion stack thou)
@@ -224,7 +231,7 @@ namespace InterviewProblemNSolutions
         }
 
         // Time O(nlogn) || Space O(n)
-        public static KeyValuePair<int, int>[] GetSkyLine(Building[] buildings, int start, int last)
+        public static List<Strip> GetSkyLine(Building[] buildings, int start, int last)
         {
             /*
              * Divide the input buildings into two halfs leftSkyL and rightSkyL
@@ -234,9 +241,9 @@ namespace InterviewProblemNSolutions
             if (start == last)                                                  // Time O(1)
             {
                 // when we are down to single building Ex: {2,15,5} we return array of keyValue with value {2,15},{5,0}
-                var skyLine = new KeyValuePair<int, int>[2];
-                skyLine[0] = new KeyValuePair<int, int>(buildings[start].left, buildings[start].ht);
-                skyLine[1] = new KeyValuePair<int, int>(buildings[start].right, 0);
+                var skyLine = new List<Strip>();
+                skyLine.Add(new Strip(buildings[start].left, buildings[start].ht));
+                skyLine.Add(new Strip(buildings[start].right, 0));
                 return skyLine;
             }
 
@@ -249,45 +256,50 @@ namespace InterviewProblemNSolutions
         }
 
         // Time O(n+m), n = length of left SkyLine & m = length of right SkyLine || Space O(n+m)
-        public static KeyValuePair<int, int>[] MergeSkyLine(KeyValuePair<int, int>[] left, KeyValuePair<int, int>[] right)
+        public static List<Strip> MergeSkyLine(List<Strip> left, List<Strip> right)
         {
-            int hLeft = 0, hRight = 0, prvHeight = -1;                      // to store current height of left & right
-            int leftIndex = 0, rightIndex = 0, mergeIndex = 0;              // for iterating thru both the left and right SkyLine
-            int leftLen = left.Length, rightLen = right.Length;             // length of left & right Skyline
-            int mergeLen = leftLen + rightLen;
-            KeyValuePair<int, int>[] mergedSkyLine = new KeyValuePair<int, int>[mergeLen];
-            while (mergeIndex < mergeLen)
+            int hLeft = 0, hRight = 0;                                      // to store current height of left & right
+            int leftIndex = 0, rightIndex = 0;                              // for iterating thru both the left and right SkyLine
+            int leftLen = left.Count, rightLen = right.Count;               // length of left & right Skyline
+            int maxHeight = -1, prvHeight = -1;
+
+            List<Strip> mergedSkyLine = new List<Strip>();
+            while (leftIndex < leftLen || rightIndex < rightLen)
             {
                 if (leftIndex == leftLen)
-                    mergedSkyLine[mergeIndex] = right[rightIndex++];
+                    mergedSkyLine.Add(right[rightIndex++]);
                 else if (rightIndex == rightLen)
-                    mergedSkyLine[mergeIndex] = left[leftIndex++];
-                else if (left[leftIndex].Key < right[rightIndex].Key)       // 'X' coordinate from left Skyline is smaller than right
+                    mergedSkyLine.Add(left[leftIndex++]);
+                else if (left[leftIndex].X < right[rightIndex].X)           // 'X' coordinate from left Skyline is smaller than right
                 {
-                    hLeft = left[leftIndex].Value;
-                    var maxHeight = Math.Max(hLeft, hRight);
-                    mergedSkyLine[mergeIndex] = new KeyValuePair<int, int>(left[leftIndex++].Key, maxHeight);
+                    hLeft = left[leftIndex].Ht;
+                    maxHeight = Math.Max(hLeft, hRight);
+                    if (prvHeight != maxHeight)                             // add to Merge only if Height is different than last height
+                        mergedSkyLine.Add(new Strip(left[leftIndex].X, maxHeight));
+                    leftIndex++;
                 }
                 else
                 {
-                    hRight = right[rightIndex].Value;
-                    var maxHeight = Math.Max(hLeft, hRight);
-                    mergedSkyLine[mergeIndex] = new KeyValuePair<int, int>(right[rightIndex++].Key, maxHeight);
+                    hRight = right[rightIndex].Ht;
+                    maxHeight = Math.Max(hLeft, hRight);
+                    if (prvHeight != maxHeight)                             // add to Merge only if Height is different than last height
+                        mergedSkyLine.Add(new Strip(right[rightIndex].X, maxHeight));
+                    rightIndex++;
                 }
-                mergeIndex++;
+                prvHeight = maxHeight;
             }
             return mergedSkyLine;
         }
 
-        public static void PrintSkyLine(KeyValuePair<int, int>[] skyline)
+        public static void PrintSkyLine(List<Strip> skyline)
         {
             var prvHeight = 0;
             Console.Write($"\n SkyLine for given set of buildings is : ");
-            foreach(var point in skyline)
-                if (point.Value != prvHeight)
+            foreach (var point in skyline)
+                if (point.Ht != prvHeight)
                 {
-                    Console.Write($" [{point.Key},{point.Value}]");
-                    prvHeight = point.Value;
+                    Console.Write($" [{point.X},{point.Ht}]");
+                    prvHeight = point.Ht;
                 }
             Console.WriteLine();
         }
