@@ -213,6 +213,7 @@ namespace InterviewProblemNSolutions
                     Console.Write($" [{i},{skyline[i]}]");
                     prvHeight = skyline[i];
                 }
+            Console.WriteLine();
         }
 
         public static void PrintBuildings(Building[] buildings)
@@ -221,5 +222,75 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < buildings.Length; i++)
                 Console.Write($" [{buildings[i].left},{buildings[i].ht},{buildings[i].right}]");
         }
+
+        // Time O(nlogn) || Space O(n)
+        public static KeyValuePair<int, int>[] GetSkyLine(Building[] buildings, int start, int last)
+        {
+            /*
+             * Divide the input buildings into two halfs leftSkyL and rightSkyL
+             * Recursively call the Main method on both the halves to get their left & right SkyLine
+             * Now Merge these Skyline (delete any duplicate points with same heights/ or while adding check for last points height)
+             */
+            if (start == last)                                                  // Time O(1)
+            {
+                // when we are down to single building Ex: {2,15,5} we return array of keyValue with value {2,15},{5,0}
+                var skyLine = new KeyValuePair<int, int>[2];
+                skyLine[0] = new KeyValuePair<int, int>(buildings[start].left, buildings[start].ht);
+                skyLine[1] = new KeyValuePair<int, int>(buildings[start].right, 0);
+                return skyLine;
+            }
+
+            var mid = start + (last - start) / 2;
+            var leftHalfSkyLine = GetSkyLine(buildings, start, mid);            // Time O(n/2)
+            var rightHalfSkyLine = GetSkyLine(buildings, mid + 1, last);        // Time O(n/2)
+
+            // Merge the Skyline of left and right half to get SkyLine for original question
+            return MergeSkyLine(leftHalfSkyLine, rightHalfSkyLine);             // Time O(n)
+        }
+
+        // Time O(n+m), n = length of left SkyLine & m = length of right SkyLine || Space O(n+m)
+        public static KeyValuePair<int, int>[] MergeSkyLine(KeyValuePair<int, int>[] left, KeyValuePair<int, int>[] right)
+        {
+            int hLeft = 0, hRight = 0, prvHeight = -1;                      // to store current height of left & right
+            int leftIndex = 0, rightIndex = 0, mergeIndex = 0;              // for iterating thru both the left and right SkyLine
+            int leftLen = left.Length, rightLen = right.Length;             // length of left & right Skyline
+            int mergeLen = leftLen + rightLen;
+            KeyValuePair<int, int>[] mergedSkyLine = new KeyValuePair<int, int>[mergeLen];
+            while (mergeIndex < mergeLen)
+            {
+                if (leftIndex == leftLen)
+                    mergedSkyLine[mergeIndex] = right[rightIndex++];
+                else if (rightIndex == rightLen)
+                    mergedSkyLine[mergeIndex] = left[leftIndex++];
+                else if (left[leftIndex].Key < right[rightIndex].Key)       // 'X' coordinate from left Skyline is smaller than right
+                {
+                    hLeft = left[leftIndex].Value;
+                    var maxHeight = Math.Max(hLeft, hRight);
+                    mergedSkyLine[mergeIndex] = new KeyValuePair<int, int>(left[leftIndex++].Key, maxHeight);
+                }
+                else
+                {
+                    hRight = right[rightIndex].Value;
+                    var maxHeight = Math.Max(hLeft, hRight);
+                    mergedSkyLine[mergeIndex] = new KeyValuePair<int, int>(right[rightIndex++].Key, maxHeight);
+                }
+                mergeIndex++;
+            }
+            return mergedSkyLine;
+        }
+
+        public static void PrintSkyLine(KeyValuePair<int, int>[] skyline)
+        {
+            var prvHeight = 0;
+            Console.Write($"\n SkyLine for given set of buildings is : ");
+            foreach(var point in skyline)
+                if (point.Value != prvHeight)
+                {
+                    Console.Write($" [{point.Key},{point.Value}]");
+                    prvHeight = point.Value;
+                }
+            Console.WriteLine();
+        }
+
     }
 }

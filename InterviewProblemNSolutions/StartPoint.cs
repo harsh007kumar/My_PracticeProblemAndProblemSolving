@@ -690,6 +690,7 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" Minimum distance in 'pair of points' in above provided Points in 2D-space : \t {minDistance}");
         }
 
+        // GFG https://www.geeksforgeeks.org/the-skyline-problem-using-divide-and-conquer-algorithm/
         public static void SkyLineProblem()
         {
             Utility.Print("The Skyline Problem using Divide and Conquer algorithm. " +
@@ -700,9 +701,12 @@ namespace InterviewProblemNSolutions
 
             for (int i = 0; i < input.GetLength(0); i++)
                 buildArr[i] = new Building(input[i, 0], input[i, 1], input[i, 2]);
-
             DivideAndConquerAlgorithms.PrintBuildings(buildArr);
-            var skyline = DivideAndConquerAlgorithms.BruteForceSkyLine(buildArr, 0, buildArr.Length - 1);
+
+            var skyLine = DivideAndConquerAlgorithms.GetSkyLine(buildArr, 0, buildArr.Length - 1);              // O(nlogn)
+            DivideAndConquerAlgorithms.PrintSkyLine(skyLine);
+
+            var skyLineSlow = DivideAndConquerAlgorithms.BruteForceSkyLine(buildArr, 0, buildArr.Length - 1);   // O(n^2)
         }
     }
 }
