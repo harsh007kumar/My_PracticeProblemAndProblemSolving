@@ -40,6 +40,13 @@ namespace InterviewProblemNSolutions
         public int Compare(Point p1, Point p2) => p1.Y.CompareTo(p2.Y);
     }
 
+    public class Building
+    {
+        public int left, ht, right;
+        public Building(int leftXCoordinate, int height, int rightXCoordinate)
+        { left = leftXCoordinate; ht = height; right = rightXCoordinate; }
+    }
+
     public class DivideAndConquerAlgorithms
     {
         // Time O(nlogn) || Space O(1) (does required recursion stack thou)
@@ -167,10 +174,52 @@ namespace InterviewProblemNSolutions
         {
             var dDash = minDistance;
             for (int i = 0; i < points.Length; i++)
-                for (int j = i + 1; j < points.Length && (points[i].Y - points[j].Y < minDistance); j++)
+                for (int j = i + 1; j < points.Length && Math.Abs(points[i].Y - points[j].Y) < minDistance; j++)
                     if (Point.GetDistance(points[i], points[j]) < dDash)
                         dDash = Point.GetDistance(points[i], points[j]);
             return dDash;
+        }
+
+        // Time O(n^2) || Space O(1000) ~ O(1)
+        public static int[] BruteForceSkyLine(Building[] buildings, int start, int last)
+        {
+            // making an assumption here that right of last most building is less than equal to 1000
+            var maxRightX = 1000;
+            int[] skyLine = new int[maxRightX];      // array which will hold max height at each point thruout the city
+
+            int i = 0, j = 0, rightMostXInSkyLine = 0;
+            for (i = start; i <= last; i++)                             // iterate thru all the buildings in input
+            {
+                for (j = buildings[i].left; j < buildings[i].right; j++)// iterate thru all the point b/w left and right of the building
+                {
+                    if (skyLine[j] < buildings[i].ht)                   // update height of Skyline
+                        skyLine[j] = buildings[i].ht;
+                }
+                if (rightMostXInSkyLine < buildings[i].right)
+                    rightMostXInSkyLine = buildings[i].right;
+            }
+
+            PrintSkyLine(skyLine, rightMostXInSkyLine + 1);
+            return skyLine;
+        }
+
+        public static void PrintSkyLine(int[] skyline, int length = 0)
+        {
+            var prvHeight = 0;
+            Console.Write($"\n SkyLine for given set of buildings is : ");
+            for (int i = 0; i < length; i++)
+                if (skyline[i] != prvHeight)
+                {
+                    Console.Write($" [{i},{skyline[i]}]");
+                    prvHeight = skyline[i];
+                }
+        }
+
+        public static void PrintBuildings(Building[] buildings)
+        {
+            Console.Write($"\n Input Buildings are : ");
+            for (int i = 0; i < buildings.Length; i++)
+                Console.Write($" [{buildings[i].left},{buildings[i].ht},{buildings[i].right}]");
         }
     }
 }

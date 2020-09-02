@@ -60,7 +60,7 @@ namespace InterviewProblemNSolutions
             MaximumValueContinousSubsequence();
             CalculateKtoPowerN();
             ClosetPairOfPoints();
-
+            SkyLineProblem();
             Console.ReadKey();
         }
 
@@ -688,6 +688,21 @@ namespace InterviewProblemNSolutions
 
             var minDistance = DivideAndConquerAlgorithms.ClosetPair(pointArr);
             Console.WriteLine($" Minimum distance in 'pair of points' in above provided Points in 2D-space : \t {minDistance}");
+        }
+
+        public static void SkyLineProblem()
+        {
+            Utility.Print("The Skyline Problem using Divide and Conquer algorithm. " +
+                "Given n rectangular buildings in a 2 - dimensional city, computes the skyline of these buildings, eliminating hidden lines.");
+            //int[,] input = { { 1, 14, 7 }, { 3, 9, 10 }, { 5, 17, 12 }, { 14, 11, 18 }, { 15, 6, 27 }, { 20, 19, 22 }, { 23, 15, 30 }, { 26, 14, 29 } };
+            int[,] input = { { 1, 11, 5 }, { 2, 6, 7 }, { 3, 13, 9 }, { 12, 7, 16 }, { 14, 3, 25 }, { 19, 18, 22 }, { 23, 13, 29 }, { 24, 4, 28 } };
+            Building[] buildArr = new Building[input.GetLength(0)];
+
+            for (int i = 0; i < input.GetLength(0); i++)
+                buildArr[i] = new Building(input[i, 0], input[i, 1], input[i, 2]);
+
+            DivideAndConquerAlgorithms.PrintBuildings(buildArr);
+            var skyline = DivideAndConquerAlgorithms.BruteForceSkyLine(buildArr, 0, buildArr.Length - 1);
         }
     }
 }
