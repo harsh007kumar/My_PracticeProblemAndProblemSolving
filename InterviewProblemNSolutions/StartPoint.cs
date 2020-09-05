@@ -64,7 +64,7 @@ namespace InterviewProblemNSolutions
             MinimumStepsToMinimizeToOne();
             HappyNumbers();
             FibonacciAndFactorial();
-
+            LongestCommonSubsequenceLength();
 
             Console.ReadKey();
         }
@@ -726,9 +726,21 @@ namespace InterviewProblemNSolutions
             long[] memoTable = new long[max + 1];
             foreach (var num in numbers)
             {
-                Console.Write($"  Fibonnaci of {num} is : {DynamicProgramming.Fibonnaci(num)} \t||");
+                Console.Write($"  Fibonnaci of {num} is : {DynamicProgramming.FibonnaciIterative(num)} \t||");
                 Console.WriteLine($"  Factorial of {num} is : {DynamicProgramming.Factorial(num, memoTable)}");
             }
+        }
+
+        // Tushar Roy https://youtu.be/NnD96abizww
+        public static void LongestCommonSubsequenceLength()
+        {
+            Utility.Print("19.8 Longest Common Subsequence (p. 768)");
+            // X = “ABCBDAB” and Y = “BDCABA”, the LCS(X, Y) = {“BCBA”, “BDAB”, “BCAB”} = 4
+            string str1 = "ABCDAF";// ABCBDAB";
+            string str2 = "ACBCF";// BDCABA";
+            string lcsString = "";
+            var LCS = DynamicProgramming.LongestCommonSubsequence(str1, str2, ref lcsString);
+            Console.WriteLine($" Input1 : \t{str1}\n Input2 : \t{str2}\n Longest Common Subsequence : {lcsString} of length {LCS}");
         }
     }
 }

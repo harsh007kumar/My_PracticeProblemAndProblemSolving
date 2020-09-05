@@ -70,14 +70,14 @@ namespace InterviewProblemNSolutions
             return FibonnaciRecursive(num - 1) + FibonnaciRecursive(num - 2);
         }
 
-        public static int Fibonnaci(int num)
+        public static int FibonnaciIterative(int num)
         {
             if (num < 1) return 0;
             int fib0 = 0, fib1 = 1;
             int result = 1;
             while(num>1)
             {
-                result = fib0 + fib1;
+                result = fib0 + fib1;       // saving results in table while moving bottoms-up will result in subsquently faster response time finding result for nums in array
                 fib0 = fib1;
                 fib1 = result;
                 num--;
@@ -112,6 +112,55 @@ namespace InterviewProblemNSolutions
             return memoizationTable[num] = num * Factorial(num - 1, memoizationTable);  // memorising values on our top down approach to reduce recalculation later = 'Memoization'
         }
 
+        // Time O(n*(2^m)), n = length of 1st string, m = length of 2nd string || Auxilary Space O(1), thou requires recursive space
+        public static int LengthLongestCommonSubsequence(string x, string y, int currPosX = 0, int currPosY = 0)
+        {
+            int lenX = x.Length;
+            int lenY = y.Length;
 
+            if (currPosX == lenX || currPosY == lenY)           // we reach end of string
+                return 0;
+            else if (x[currPosX] == y[currPosY])                // first Characters match, add 1 to length and recursively call on remaining strings
+                return 1 + LengthLongestCommonSubsequence(x, y, currPosX + 1, currPosY + 1);
+            else // (x[currPosX] not equals y[currPosY])        // either 1st char from X or from Y (or both) will not be part of common subsequence
+                return Math.Max(LengthLongestCommonSubsequence(x, y, currPosX + 1, currPosY), LengthLongestCommonSubsequence(x, y, currPosX, currPosY + 1));
+        }
+
+        // Time O(n*m), n = length of 1st string, m = length of 2nd string || Auxilary Space O(n*m)
+        public static int LongestCommonSubsequence(string x, string y, ref string lcsString)
+        {
+            int lenX = x.Length;
+            int lenY = y.Length;
+            int[,] LCS = new int[lenX + 1, lenY + 1];           // we create GRID with 1 more row & column than len of input strings, as we use 1st row & 1st col for default value
+            int i = 0, j = 0;
+
+            // to find length of common string
+            for (i = 0; i < lenX; i++)                          // start from 1st characters of 'x'
+                for (j = 0; j < lenY; j++)                      // start from 1st characters of 'y'
+                {
+                    if (x[i] == y[j])                           // match found
+                        LCS[i + 1, j + 1] = 1 + LCS[i, j];
+                    else
+                        LCS[i + 1, j + 1] = Math.Max(LCS[i + 1, j], LCS[i, j + 1]);
+                }
+            
+            LCS.Print();
+
+            // to also find & print common string
+            i = lenX; j = lenY;
+            while (i > 0 && j > 0)
+            {
+                if (LCS[i, j] == LCS[i, j - 1])                 // value of LCS[i, j] came from LCS[i, j-1]
+                    j--;
+                else if (LCS[i, j] == LCS[i - 1, j])            // value of LCS[i, j] came from LCS[i-1, j]
+                    i--;
+                else //if (LCS[i, j] == 1 + LCS[i - 1, j - 1])  // if not from above two if wud surely came from cross LCS[i-1, j-1]
+                {
+                    i--; j--;
+                    lcsString = x[i] + lcsString;
+                }
+            }
+            return LCS[lenX, lenY];
+        }
     }
 }
