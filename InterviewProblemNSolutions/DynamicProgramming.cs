@@ -162,5 +162,46 @@ namespace InterviewProblemNSolutions
             }
             return LCS[lenX, lenY];
         }
+
+        public static int RecurrenceToCodeRecursive(int num)
+        {
+            if (num == 0 || num == 1) return 2;
+            int i = 1, sum = 0;
+            while(i<num)
+            {
+                sum += 2 * RecurrenceToCodeRecursive(i) * RecurrenceToCodeRecursive(i - 1);
+                i++;
+            }
+            return sum;
+        }
+
+        // Bottom-up approach || Time Complexity O(n^2) for 2 loops || Space O(n)
+        public static int RecurrenceToCodeUsingDP(int num, int[] tab)
+        {
+            tab[0] = 2;
+            tab[1] = 2;
+            if (num < 2) return 2;
+
+            for (int i = 2; i <= num; i++)              // first we calculate answers for values which are smaller than 'num' but required to calculate num
+            {
+                if (tab[i] != 0) continue;              // useful when we are calling for list of no's (which we might have calculated in prv calls)
+                for (int j = 1; j < i; j++)
+                    tab[i] += 2 * tab[j] * tab[j - 1];
+            }
+            return tab[num];
+        }
+
+        // Bottom-up approach || Time Complexity O(n) || Space O(n)
+        public static int RecurrenceToCodeUsingDP_Iterative(int num, int[] tab)
+        {
+            tab[0] = 2;
+            tab[1] = 2;
+            tab[2] = 2 * tab[1] * tab[0];
+
+            for (int i = 3; i <= num; i++)              // first we calculate answers for values which are smaller than 'num' but required to calculate num
+                tab[i] = tab[i - 1] + (2 * tab[i - 1] * tab[i - 2]);
+
+            return tab[num];
+        }
     }
 }

@@ -65,6 +65,7 @@ namespace InterviewProblemNSolutions
             HappyNumbers();
             FibonacciAndFactorial();
             LongestCommonSubsequenceLength();
+            ConvertGivenRecurrenceToCode();
 
             Console.ReadKey();
         }
@@ -741,6 +742,19 @@ namespace InterviewProblemNSolutions
             string lcsString = "";
             var LCS = DynamicProgramming.LongestCommonSubsequence(str1, str2, ref lcsString);
             Console.WriteLine($" Input1 : \t{str1}\n Input2 : \t{str2}\n Longest Common Subsequence : {lcsString} of length {LCS}");
+        }
+
+        public static void ConvertGivenRecurrenceToCode()
+        {
+            Utility.Print("Problem-1,2,3  Convert the following recurrence to code.(pp. 772 - 773)");
+            /* T(0) =T(1) = 2
+             * for n > 1
+             * T(n) sum of [ 2 * T(i) * T(i-1) ] for all i starting from '1 to n-1'
+             */
+            int[] nums = { 1, 2, 3, 4, 5 };
+            int[] tab = new int[nums.Max() + 1];
+            foreach (var num in nums)
+                Console.WriteLine($" Answer for number {num} is : {DynamicProgramming.RecurrenceToCodeUsingDP_Iterative(num,tab)}");
         }
     }
 }
