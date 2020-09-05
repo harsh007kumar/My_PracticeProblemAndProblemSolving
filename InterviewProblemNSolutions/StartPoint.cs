@@ -720,10 +720,14 @@ namespace InterviewProblemNSolutions
         {
             Utility.Print("Find out Fibonacci and Factorial of 'N'");
             int[] numbers = { 0, 1, 5, 10 };
+            // For memo 
+            var max = numbers.Max();
+            // create an array to update intermediate value as & when encoutnered while calculating min steps for a given 'num'
+            long[] memoTable = new long[max + 1];
             foreach (var num in numbers)
             {
                 Console.Write($"  Fibonnaci of {num} is : {DynamicProgramming.Fibonnaci(num)} \t||");
-                Console.WriteLine($"  Factorial of {num} is : {DynamicProgramming.Factorial(num)}");
+                Console.WriteLine($"  Factorial of {num} is : {DynamicProgramming.Factorial(num, memoTable)}");
             }
         }
     }

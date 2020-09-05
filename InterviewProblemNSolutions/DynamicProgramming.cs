@@ -91,7 +91,7 @@ namespace InterviewProblemNSolutions
             return num * FactorialRecursive(num - 1);
         }
 
-        public static long Factorial(long num)
+        public static long FactorialIterative(long num)
         {
             if (num < 2) return 1;              // base case for num is 0 or 1
             long lastFact = 2, currNum = 2, result = 2;
@@ -100,8 +100,18 @@ namespace InterviewProblemNSolutions
             {
                 result = currNum * lastFact;
                 lastFact = result;
+                //tabulation[currNum] = result;   // addtionally Storing values while iterating bottom to up and returning from table in end = 'Tabulation'
             }
             return result;
         }
+
+        public static long Factorial(long num, long[] memoizationTable)
+        {
+            if (num < 2) return 1;              // base case for num is 0 or 1
+            if (memoizationTable[num] != 0) return memoizationTable[num];
+            return memoizationTable[num] = num * Factorial(num - 1, memoizationTable);  // memorising values on our top down approach to reduce recalculation later = 'Memoization'
+        }
+
+
     }
 }
