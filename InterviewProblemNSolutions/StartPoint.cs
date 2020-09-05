@@ -66,6 +66,7 @@ namespace InterviewProblemNSolutions
             FibonacciAndFactorial();
             LongestCommonSubsequenceLength();
             ConvertGivenRecurrenceToCode();
+            MaxValueContinousSubsequence();
 
             Console.ReadKey();
         }
@@ -755,6 +756,18 @@ namespace InterviewProblemNSolutions
             int[] tab = new int[nums.Max() + 1];
             foreach (var num in nums)
                 Console.WriteLine($" Answer for number {num} is : {DynamicProgramming.RecurrenceToCodeUsingDP_Iterative(num,tab)}");
+        }
+
+        public static void MaxValueContinousSubsequence()
+        {
+            Utility.Print("Problem-6  Maximum Value Contiguous Subsequence (p. 774)");
+            int[][] inputs = { new int[] { -2, 11, -4, 13, -5, 2 }, new int[] { 1, -3, 4, -2, -1, 6 } };
+            foreach (var input in inputs)
+            {
+                input.Print("Input values :");
+                var maxValue = DynamicProgramming.MaxValueContinousSubsequence(input);
+                Console.WriteLine($" Maximum Value Contiguous Subsequence in above array is : {maxValue}");
+            }
         }
     }
 }

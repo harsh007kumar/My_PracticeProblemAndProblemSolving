@@ -203,5 +203,26 @@ namespace InterviewProblemNSolutions
 
             return tab[num];
         }
+
+        // Time O(n) || Space O(n) for table
+        public static int MaxValueContinousSubsequence(int[] input)
+        {
+            var len = input.Length;
+            if (len < 1) return -1;
+
+            int[] maxSumTillIndex = new int[len];
+            maxSumTillIndex[0] = (input[0] > 0) ? input[0] : 0;
+
+            // calculate max sum till ith index starting from 1th index to last
+            for (int i = 1; i < len; i++)
+                maxSumTillIndex[i] = maxSumTillIndex[i - 1] + input[i] > 0 ? maxSumTillIndex[i - 1] + input[i] : 0;
+
+            int maxSum = 0;
+            // find global max sum in maxSumTillIndex array
+            for (int i = 0; i < len; i++)
+                maxSum = Math.Max(maxSum, maxSumTillIndex[i]);
+
+            return maxSum;
+        }
     }
 }
