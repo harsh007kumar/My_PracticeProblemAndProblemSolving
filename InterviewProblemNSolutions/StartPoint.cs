@@ -12,9 +12,6 @@ namespace InterviewProblemNSolutions
             DutchFlagProblem();
             EventAndDelegate();
 
-            // Learn Dynamic Programming (Memoization & Tabulation)
-            MinimumStepsToMinimizeToOne();
-            HappyNumbers();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -61,6 +58,14 @@ namespace InterviewProblemNSolutions
             CalculateKtoPowerN();
             ClosetPairOfPoints();
             SkyLineProblem();
+
+
+            // Learn Dynamic Programming (Memoization & Tabulation)
+            MinimumStepsToMinimizeToOne();
+            HappyNumbers();
+            FibonacciAndFactorial();
+
+
             Console.ReadKey();
         }
 
@@ -566,7 +571,7 @@ namespace InterviewProblemNSolutions
             foreach (var num in inputs)
             {
                 // Hashset to hold sequence of no's while finding is given no is happy or not
-                var nothappySet = new HashSet<int>();
+                var notHappySet = new HashSet<int>();
 
                 Console.WriteLine($" {num} is Happy : {isHappyFloydWay(num)}");
 
@@ -574,8 +579,8 @@ namespace InterviewProblemNSolutions
                 bool isHappyNumber(int number)
                 {
                     if (number == 1) return true;
-                    if (nothappySet.Contains(number)) return false;         // if present in set means we have visited the number before & now in loop
-                    nothappySet.Add(number);
+                    if (notHappySet.Contains(number)) return false;         // if present in set means we have visited the number before & now in loop
+                    notHappySet.Add(number);
                     return isHappyNumber(GetSquaredDigitSum(number));
                 }
 
@@ -586,8 +591,8 @@ namespace InterviewProblemNSolutions
                     {
                         var squareOfDigits = GetSquaredDigitSum(number);
                         if (squareOfDigits == 1) return true;
-                        if (nothappySet.Contains(squareOfDigits)) break;    // if present in set means we have visited the number before & now in loop
-                        nothappySet.Add(number = squareOfDigits);
+                        if (notHappySet.Contains(squareOfDigits)) break;    // if present in set means we have visited the number before & now in loop
+                        notHappySet.Add(number = squareOfDigits);
                     }
                     return false;
                 }
@@ -707,6 +712,19 @@ namespace InterviewProblemNSolutions
             DivideAndConquerAlgorithms.PrintSkyLine(skyLine);
 
             var skyLineSlow = DivideAndConquerAlgorithms.BruteForceSkyLine(buildArr, 0, buildArr.Length - 1);   // O(n^2)
+        }
+
+
+
+        public static void FibonacciAndFactorial()
+        {
+            Utility.Print("Find out Fibonacci and Factorial of 'N'");
+            int[] numbers = { 0, 1, 5, 10 };
+            foreach (var num in numbers)
+            {
+                Console.Write($"  Fibonnaci of {num} is : {DynamicProgramming.Fibonnaci(num)} \t||");
+                Console.WriteLine($"  Factorial of {num} is : {DynamicProgramming.Factorial(num)}");
+            }
         }
     }
 }

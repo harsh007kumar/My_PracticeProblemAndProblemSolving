@@ -63,5 +63,45 @@ namespace InterviewProblemNSolutions
             return tab;
         }
 
+        public static int FibonnaciRecursive(int num)
+        {
+            if (num == 0) return 0;
+            if (num == 1) return 1;
+            return FibonnaciRecursive(num - 1) + FibonnaciRecursive(num - 2);
+        }
+
+        public static int Fibonnaci(int num)
+        {
+            if (num < 1) return 0;
+            int fib0 = 0, fib1 = 1;
+            int result = 1;
+            while(num>1)
+            {
+                result = fib0 + fib1;
+                fib0 = fib1;
+                fib1 = result;
+                num--;
+            }
+            return result;
+        }
+
+        public static long FactorialRecursive(long num)
+        {
+            if (num < 2) return 1;
+            return num * FactorialRecursive(num - 1);
+        }
+
+        public static long Factorial(long num)
+        {
+            if (num < 2) return 1;              // base case for num is 0 or 1
+            long lastFact = 2, currNum = 2, result = 2;
+
+            while (num > currNum++)             // while currNum is not equal to input num keep on calculating factorial
+            {
+                result = currNum * lastFact;
+                lastFact = result;
+            }
+            return result;
+        }
     }
 }
