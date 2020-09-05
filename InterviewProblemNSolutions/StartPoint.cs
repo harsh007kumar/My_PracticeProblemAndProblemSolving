@@ -755,7 +755,7 @@ namespace InterviewProblemNSolutions
             int[] nums = { 1, 2, 3, 4, 5 };
             int[] tab = new int[nums.Max() + 1];
             foreach (var num in nums)
-                Console.WriteLine($" Answer for number {num} is : {DynamicProgramming.RecurrenceToCodeUsingDP_Iterative(num,tab)}");
+                Console.WriteLine($" Answer for number {num} is : {DynamicProgramming.RecurrenceToCodeUsingDPEfficient(num,tab)}");
         }
 
         public static void MaxValueContinousSubsequence()

@@ -75,7 +75,7 @@ namespace InterviewProblemNSolutions
             if (num < 1) return 0;
             int fib0 = 0, fib1 = 1;
             int result = 1;
-            while(num>1)
+            while (num > 1)
             {
                 result = fib0 + fib1;       // saving results in table while moving bottoms-up will result in subsquently faster response time finding result for nums in array
                 fib0 = fib1;
@@ -143,7 +143,7 @@ namespace InterviewProblemNSolutions
                     else
                         LCS[i + 1, j + 1] = Math.Max(LCS[i + 1, j], LCS[i, j + 1]);
                 }
-            
+
             LCS.Print();
 
             // to also find & print common string
@@ -167,7 +167,7 @@ namespace InterviewProblemNSolutions
         {
             if (num == 0 || num == 1) return 2;
             int i = 1, sum = 0;
-            while(i<num)
+            while (i < num)
             {
                 sum += 2 * RecurrenceToCodeRecursive(i) * RecurrenceToCodeRecursive(i - 1);
                 i++;
@@ -192,7 +192,7 @@ namespace InterviewProblemNSolutions
         }
 
         // Bottom-up approach || Time Complexity O(n) || Space O(n)
-        public static int RecurrenceToCodeUsingDP_Iterative(int num, int[] tab)
+        public static int RecurrenceToCodeUsingDPEfficient(int num, int[] tab)
         {
             tab[0] = 2;
             tab[1] = 2;
@@ -223,6 +223,19 @@ namespace InterviewProblemNSolutions
                 maxSum = Math.Max(maxSum, maxSumTillIndex[i]);
 
             return maxSum;
+        }
+
+        // Algo doesn't work if all numbers are -ve (add extra check for input array if all are -ve return least -ve value)
+        // Time O(n) || Space O(1)
+        public static int MaxValueContinousSubsequenceInOn(int[] input)
+        {
+            int maxSumFoFar = 0, maxSumEndingHere = 0;
+            for (int i = 0; i < input.Length; i++)
+            {
+                maxSumEndingHere = maxSumEndingHere + input[i] > 0 ? maxSumEndingHere + input[i] : 0;
+                maxSumFoFar = Math.Max(maxSumFoFar, maxSumEndingHere);
+            }
+            return maxSumFoFar;
         }
     }
 }
