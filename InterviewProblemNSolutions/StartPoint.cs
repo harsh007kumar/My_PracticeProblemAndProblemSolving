@@ -68,7 +68,7 @@ namespace InterviewProblemNSolutions
             LongestCommonSubsequenceLength();
             ConvertGivenRecurrenceToCode();
             MaxValueContinousSubsequence();
-            
+            FindCatalanNumber();
             FindOrderToPerformMatrixMultiplications();
 
             Console.ReadKey();
@@ -770,6 +770,18 @@ namespace InterviewProblemNSolutions
                 input.Print("Input values :");
                 var maxValue = DynamicProgramming.MaxValueContinousSubsequence(input);
                 Console.WriteLine($" Maximum Value Contiguous Subsequence in above array is : {maxValue}");
+            }
+        }
+
+        public static void FindCatalanNumber()
+        {
+            Utility.Print("Problem-14  Catalan Numbers: How many binary search trees are there with n vertices?(p. 782)");
+            int[] nodeArr = { 1, 2, 3, 4, 5 };
+            int[] memo = new int[nodeArr.Max() + 1];            // Cache/table being populated and used in DP solution
+            foreach (var noOfNodes in nodeArr)
+            {
+                var result = DynamicProgramming.CatalanNumber(noOfNodes, memo);
+                Console.WriteLine($" No Of Possilbe 'Binary Search Trees' with '{noOfNodes}' Nodes i.e, CatalanNumber : \t{result}");
             }
         }
 

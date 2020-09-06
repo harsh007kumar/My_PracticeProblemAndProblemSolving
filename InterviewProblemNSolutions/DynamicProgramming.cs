@@ -238,6 +238,29 @@ namespace InterviewProblemNSolutions
             return maxSumFoFar;
         }
 
+        // Time (4^n) || Space O(1)
+        // Returns No Of possible 'Binary Search Trees' with 'N' Nodes
+        public static int CatalanNumberRecursion(int noOfNodes)
+        {
+            if (noOfNodes == 0) return 1;
+            int count = 0;
+            for (int i = 1; i <= noOfNodes; i++)
+                count += CatalanNumberRecursion(i - 1) * CatalanNumberRecursion(noOfNodes - i);
+            return count;
+        }
+
+        // Time O(n^2) computing CatalanNumber(n), we need to compute all of the CatalanNumber(i) values between 0 & n – 1, each one will be computed exactly once, in linear time
+        // Space O(n)
+        // Returns No Of possible 'Binary Search Trees' with 'N' Nodes
+        public static int CatalanNumber(int noOfNodes, int[] memo)
+        {
+            if (noOfNodes == 0) return 1;
+            if (memo[noOfNodes] != 0) return memo[noOfNodes];       // return value for sub-problem which was solved previously
+            for (int i = 1; i <= noOfNodes; i++)
+                memo[noOfNodes] += CatalanNumber(i - 1, memo) * CatalanNumber(noOfNodes - i, memo);
+            return memo[noOfNodes];
+        }
+
         // Here, p[] is arr of 'matrices'
         // MatrixChainOrderBruteForce(chainOfMatrices, 1, chainOfMatrices.Length - 1)
         public static int MatrixChainOrderBruteForce(int[] p, int start, int last)
