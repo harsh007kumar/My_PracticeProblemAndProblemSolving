@@ -80,6 +80,16 @@ namespace InterviewProblemNSolutions
             Console.WriteLine();
         }
 
+        public static void Print(this int[] arr)
+        {
+            var len = arr.Length;
+            Console.WriteLine($" ==== Printing given int array with '{len}' elements ====");
+            for (int i = 0; i < len; i++)
+                Console.Write($" {arr[i]} >>");
+
+            Console.WriteLine();
+        }
+
         public static void Show(this string str) => Console.WriteLine( str);
 
         public static int FindPrime(int num)
