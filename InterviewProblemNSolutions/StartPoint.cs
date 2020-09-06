@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace InterviewProblemNSolutions
 {
@@ -67,6 +68,8 @@ namespace InterviewProblemNSolutions
             LongestCommonSubsequenceLength();
             ConvertGivenRecurrenceToCode();
             MaxValueContinousSubsequence();
+            
+            FindOrderToPerformMatrixMultiplications();
 
             Console.ReadKey();
         }
@@ -767,6 +770,34 @@ namespace InterviewProblemNSolutions
                 input.Print("Input values :");
                 var maxValue = DynamicProgramming.MaxValueContinousSubsequence(input);
                 Console.WriteLine($" Maximum Value Contiguous Subsequence in above array is : {maxValue}");
+            }
+        }
+
+        public static void FindOrderToPerformMatrixMultiplications()
+        {
+            Utility.Print("Problem-15  Matrix Chain/Product Multiplications/Parenthesizations(p. 784)");
+            int[][] arrChainOfMatrices = { new int[] { 40, 20, 30, 10, 30},
+                                            new int[] {10, 20, 30, 40, 30},
+                                            new int[] {10, 20, 30},
+                                            new int[] { 1, 2, 3, 4, 3} };
+
+            foreach (var chainOfMatrices in arrChainOfMatrices)
+            {
+                PrintMatrix(chainOfMatrices);
+                //var result = DynamicProgramming.MatrixChainOrderBruteForce(chainOfMatrices, 1, chainOfMatrices.Length - 1); // Brute Force
+                var result = DynamicProgramming.MatrixChainOrder(chainOfMatrices);
+                Console.WriteLine($" Minimum no of Multiplication required to perform Matrix Multiplication on above Matrices : {result} ");
+            }
+
+            // local function to print Matrixces and their dimensions
+            void PrintMatrix(int[] arr)
+            {
+                var len = arr.Length;
+                Console.Write($"\n Input Matrices \t");
+                for (int i = 1; i < len; i++)
+                    Console.Write($" {arr[i - 1]}x{arr[i]} >>");      // end of last matrix becomes the start of next matrix
+
+                Console.WriteLine();
             }
         }
     }

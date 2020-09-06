@@ -237,5 +237,59 @@ namespace InterviewProblemNSolutions
             }
             return maxSumFoFar;
         }
+
+        // Here, p[] is arr of 'matrices'
+        // MatrixChainOrderBruteForce(chainOfMatrices, 1, chainOfMatrices.Length - 1)
+        public static int MatrixChainOrderBruteForce(int[] p, int start, int last)
+        {
+            if (start == last) return 0;
+            int minOrder = int.MaxValue;
+            for (int k = start; k < last; k++)
+                minOrder = Math.Min(minOrder, MatrixChainOrderBruteForce(p, start, k) + MatrixChainOrderBruteForce(p, k + 1, last) + (p[start - 1] * p[k] * p[last]));
+            return minOrder;
+        }
+
+        // Abdul Bari https://youtu.be/prx1psByp7U
+        // Returns the 'Minimum No Of Multiplications' required to multiple matrics in 'chain Of Matrices' array
+        // array p[] which represents the 'chain of matrices' such that the ith matrix A(i) is of the dimension p[i-1] x p[i].
+        // Time O(n^3) as w need to compute matrix multiplication time for n^2 matrixces each operation takes liner time 'n' || Space O(n^2)
+        // #DP #tabulation #bottom-up #approach
+        public static int MatrixChainOrder(int[] p)
+        {
+            var len = p.Length - 1;         // No of matrix we can extract from 1-D array of ex size 3 {10,20,30} is 3-1=2 as 10x20, 20x30 these 2 form are input matrix
+
+            /* '2-D table' used for Tabulation as we would be solving the problem in bottoms-up fashion
+             * stores multiplications required to multiple matrices,
+             * Ex: tab[1,2] indicates no of multiplications for multipying Matrix.1 & Matrix.2,
+             * similar tab[3,3] indicates cost of multiple Matrix.3 by itself which is 0
+             */
+            int[,] m = new int[len + 1, len + 1];       // one extra row & column are allocated (0th row & 0th colum are un-used)
+
+            // set m[1,1], m[2,2], m[3,3] and so on.. as 0 as cost of matric multiplied by itself is Zero
+            for (int i = 0; i < len + 1; i++)
+                m[i, i] = 0;                            // we can skip this step in C# as default value of integer arrays are 0
+
+            // below array stores partition point for the whole multiplication aka 'orderOfParenthesis'
+            int[,] s = new int[len + 1, len + 1];
+
+            for (int l = 2; l <= len; l++)              // length of matrix chain
+                for (int i = 1; i <= len - l + 1; i++)  // loop to slide the current window of Matrices (shifting starting index of 1st Matrix)
+                {
+                    int j = i + l - 1;                  // to calculate last Matrix index at each step
+                    m[i, j] = int.MaxValue;             // setting default value before finding min multiplications required
+                    // trying all possible division b/w i..k & k..j
+                    for (int k = i; k < j; k++)         // Parition point of current chain (point where we are placing parenthesis)
+                    {
+                        var currCost = m[i, k] + m[k + 1, j] + (p[i - 1] * p[k] * p[j]);
+                        if (currCost < m[i, j])
+                        {
+                            m[i, j] = currCost;
+                            s[i, j] = k;
+                        }
+                    }
+                }
+
+            return m[1, len];
+        }
     }
 }
