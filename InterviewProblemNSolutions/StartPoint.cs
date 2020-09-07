@@ -798,7 +798,7 @@ namespace InterviewProblemNSolutions
                 PrintMatrix(chainOfMatrices);
                 //var result = DynamicProgramming.MatrixChainOrderBruteForce(chainOfMatrices, 1, chainOfMatrices.Length - 1); // Brute Force
                 var result = DynamicProgramming.MatrixChainOrder(chainOfMatrices);
-                Console.WriteLine($" Minimum no of Multiplication required to perform Matrix Multiplication on above Matrices : {result} ");
+                Console.WriteLine($"\n Minimum no of Multiplication required to perform Matrix Multiplication on above Matrices : {result} ");
             }
 
             // local function to print Matrixces and their dimensions

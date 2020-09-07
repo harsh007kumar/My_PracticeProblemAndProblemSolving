@@ -273,7 +273,7 @@ namespace InterviewProblemNSolutions
         }
 
         // Abdul Bari https://youtu.be/prx1psByp7U
-        // Returns the 'Minimum No Of Multiplications' required to multiple matrics in 'chain Of Matrices' array
+        // Returns the 'Minimum No Of Multiplications' required to multiply matrics in 'chain Of Matrices' array
         // array p[] which represents the 'chain of matrices' such that the ith matrix A(i) is of the dimension p[i-1] x p[i].
         // Time O(n^3) as w need to compute matrix multiplication time for n^2 matrixces each operation takes liner time 'n' || Space O(n^2)
         // #DP #tabulation #bottom-up #approach
@@ -282,9 +282,9 @@ namespace InterviewProblemNSolutions
             var len = p.Length - 1;         // No of matrix we can extract from 1-D array of ex size 3 {10,20,30} is 3-1=2 as 10x20, 20x30 these 2 form are input matrix
 
             /* '2-D table' used for Tabulation as we would be solving the problem in bottoms-up fashion
-             * stores multiplications required to multiple matrices,
-             * Ex: tab[1,2] indicates no of multiplications for multipying Matrix.1 & Matrix.2,
-             * similar tab[3,3] indicates cost of multiple Matrix.3 by itself which is 0
+             * stores multiplications required to multiply matrices,
+             * Ex: m[1,2] indicates no of multiplications for multipying Matrix.1 & Matrix.2,
+             * similar m[3,3] indicates cost of multiplying Matrix.3 by itself which is 0
              */
             int[,] m = new int[len + 1, len + 1];       // one extra row & column are allocated (0th row & 0th colum are un-used)
 
@@ -311,8 +311,29 @@ namespace InterviewProblemNSolutions
                         }
                     }
                 }
+            
+            Console.Write($" Printing Parenthesis for Matrix Multiplication : ");
+            PrintParenthesis(p, s, 1, len);
 
-            return m[1, len];
+            return m[1, len];                           // last value from the 1st row used
+        }
+
+        // Abdul Bari https://www.youtube.com/watch?v=eKkXU3uu2zk&ab_channel=AbdulBari
+        public static void PrintParenthesis(int[] chainOfMatrices, int[,] partitionPoint, int firstMatrixId, int lastMatrixId)
+        {
+            Console.Write(" (");
+            if (firstMatrixId == lastMatrixId)
+                Console.Write($"{chainOfMatrices[lastMatrixId - 1]}x{chainOfMatrices[lastMatrixId]}");
+            else
+            {
+                var paritionAt = partitionPoint[firstMatrixId, lastMatrixId];           // matrixMultiplications[row,col]
+
+                // print Matrices on left of partition
+                PrintParenthesis(chainOfMatrices, partitionPoint, firstMatrixId, paritionAt);
+                // print Matrices on Right of partition
+                PrintParenthesis(chainOfMatrices, partitionPoint, paritionAt + 1, lastMatrixId);
+            }
+            Console.Write(") ");
         }
     }
 }
