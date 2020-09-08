@@ -335,5 +335,65 @@ namespace InterviewProblemNSolutions
             }
             Console.Write(") ");
         }
+
+        // Time Complexicity O(2^n) || Auxillary Space O(1) || Brute Force solution
+        public static int KnapSackBrute(int W, int[] profit, int[] wt, int n)
+        {
+            if (n == 0 || W == 0) return 0;         // if no items left to choose from or sack capacity is Zero return 0 value.
+
+            if (wt[n - 1] > W)                      // if weight of last item is larger than sack capacity, skip that item
+                return KnapSackBrute(W, profit, wt, n - 1);
+
+            return Math.Max(KnapSackBrute(W, profit, wt, n - 1),                    // not selecting (n-1)th item
+                profit[n - 1] + KnapSackBrute(W - wt[n - 1], profit, wt, n - 1));   // selecting (n-1)th item & adding its profit
+        }
+
+
+        // Abdul Bari https://youtu.be/nLmhmB6NzcM
+        // Time O(N*W), N = no of items/weights & W = capacity of knapsack || Space O(N*W)
+        public static int KnapSack(int W, int[] profit, int[] wt, int n)
+        {
+            // Step1. create an 2D value array to store max profit, rows = noOfItems+1 & col = maxWeight knapsack can handle + 1
+            int[,] val = new int[n + 1, W + 1];
+
+            // Step2. Set 1st row & 1st col to zero, as there is 0 profit with 0 i.e,no wt selected(1st row) & no weight can be selected if given capacity is 0 (1st column)
+
+            // Step3. start filling from i=1 row at each row try to maximize the profit(row no indicates no of items we can choose from start of weight array),
+            // (under given constrait of max wt possible indicated by column no, last col indicated max capacity of KnapSack i.e, W)
+            for (int i = 0; i <= n; i++)
+                for (int w = 0; w <= W; w++)
+                // Max of either (value from last row & same col) or (profit of current row item + value from last row & (current col W - wt[i] wt of current item))
+                // val[i, w] = Math.Max(val[i - 1, w], profit[i] + val[i - 1, w - wt[i]]);  // use this, if we have we have 0 as first element of both profit & wt array
+                {
+                    if (i == 0 || w == 0)       // can skip this step as default value is 0 for new int array in C# & instead use continue statement here.
+                        val[i, w] = 0;
+                    else if (w - wt[i - 1] >= 0)// as wt should not be -ve at any instance (avoids invalid index exception)
+                        val[i, w] = Math.Max(val[i - 1, w], profit[i - 1] + val[i - 1, w - wt[i - 1]]);
+                    else
+                        val[i, w] = val[i - 1, w];
+                }
+            
+            PrintItemsPicked(val, profit, wt, n, W);
+            return val[n, W];                   // Max Profit possible with all possible wt to choose from and under Full Capacity
+        }
+
+        public static void PrintItemsPicked(int[,] val, int[] profit, int[] wt, int row, int col)
+        {
+            while (row > 0 && col > 0)
+            {
+                if (val[row, col] == val[row - 1, col])    // it means current row item was not picked
+                {
+                    Console.Write($" wt:{wt[row - 1]} with Profit:{profit[row - 1]} \tNot Selected : \t 0");
+                    row--;
+                }
+                else
+                {
+                    Console.Write($" wt:{wt[row - 1]} with Profit:{profit[row - 1]} \tSelected : \t 1");
+                    row--;
+                    col -= wt[row];
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }

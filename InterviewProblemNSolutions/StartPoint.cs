@@ -70,6 +70,7 @@ namespace InterviewProblemNSolutions
             MaxValueContinousSubsequence();
             FindCatalanNumber();
             FindOrderToPerformMatrixMultiplications();
+            ZeroOneKnapSackProblem();
 
             Console.ReadKey();
         }
@@ -810,6 +811,23 @@ namespace InterviewProblemNSolutions
                     Console.Write($" {arr[i - 1]}x{arr[i]} >>");      // end of last matrix becomes the start of next matrix
 
                 Console.WriteLine();
+            }
+        }
+
+        public static void ZeroOneKnapSackProblem()
+        {
+            Utility.Print("Problem-18  0-1 Knapsack Problem (p. 787)");
+            int[] profit = { 60, 100, 120 };
+            int[] wt = { 10, 20, 30 };
+            int[] bagCapacityArr = { 30, 50, 60 };              // Max weight knapsack can handle
+            int noOfItems = profit.Length;                      // no of items to choose from
+            profit.Print("Profit Array");
+            wt.Print("Weight Array");
+
+            foreach (var bagCapacity in bagCapacityArr)
+            {
+                var maxProfit = DynamicProgramming.KnapSack(bagCapacity, profit, wt, noOfItems);
+                Console.WriteLine($" Max Profit/Value we can get by filling KnapSack of capacity '{bagCapacity}' is : '{maxProfit}'\n");
             }
         }
     }
