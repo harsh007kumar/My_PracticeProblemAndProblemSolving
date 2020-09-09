@@ -73,6 +73,7 @@ namespace InterviewProblemNSolutions
             ZeroOneKnapSackProblem();
             CoinChangingMinimumNoOfCoins();
             FindLongestIncreasingSubsequence();
+            BuildingBridgesOverRiver();
 
             Console.ReadKey();
         }
@@ -855,6 +856,28 @@ namespace InterviewProblemNSolutions
             input.Print("Input");
             var maxLen = DynamicProgramming.LongestIncreasingSubsequence(input);
             Console.WriteLine($" 'Longest Increasing Subsequence' in above array is of Length : \t{maxLen}");
+        }
+
+        public static void BuildingBridgesOverRiver()
+        {
+            Utility.Print("Problem-24  Building Bridges in India (p. 795)");
+            int[][,] inputArr = { new int[,] { { 4, 1 }, { 1, 3 }, { 3, 4 }, { 2, 2 } }, new int[,] { { 6, 2 }, { 4, 3 }, { 2, 6 }, { 1, 5 } } };
+            foreach (var input in inputArr)
+            {
+                var len = input.GetLength(0);                    // no of cities
+
+                // create list of cities from raw input data
+                List<CityPair> cities = new List<CityPair>();
+                for (int i = 0; i < len; i++)
+                {
+                    cities.Add(new CityPair(input[i, 0], input[i, 1]));
+                    Console.WriteLine($" {input[i, 0]}||{input[i, 1]}");
+                }
+
+                var maxBridgesPossible = DynamicProgramming.MaxBridges(cities, len);
+                Console.WriteLine($" Max Bridges that can be build over above pair of cities is : \t{maxBridgesPossible} \n");
+            }
+
         }
     }
 }

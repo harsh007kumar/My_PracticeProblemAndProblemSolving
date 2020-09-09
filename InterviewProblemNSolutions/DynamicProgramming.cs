@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace InterviewProblemNSolutions
 {
+    public class CityPair
+    {
+        public int left, right;
+        public CityPair(int north, int south)
+        { left = north; right = south; }
+    }
+
     public static class DynamicProgramming
     {
         static int[] minSteps = new int[100];
@@ -481,6 +489,55 @@ namespace InterviewProblemNSolutions
                     maxLen--;
                 }
             Console.WriteLine();
+        }
+
+        // This Bridge Problem is variation of LIS i.e, LongestIncreasingSubsequence, other similar ex are 'Stacking Boxes over each other for Max Height'
+        // Time O(n^2) || Space O(n)
+        public static int MaxBridges(List<CityPair> cities, int len)
+        {
+            // sort the cities based on either North or Sourth side cities Number
+            cities = cities.OrderBy(c => c.left).ToList<CityPair>();        // LINQ function sorting cities as per left side of river
+            
+
+            // create table to store intermittent values, max cities possible till given index
+            int[] tab = new int[len];
+            
+
+            // set default values in table for each index as 1 (min 1 bridge can surely be constructed over any pari of cities
+            for (int i = 0; i < len; i++)
+                tab[i] = 1;
+
+            int maxBridges = 0;     // we can have atleast 1 bridge
+            
+            // check from left for increasing order
+            for (int i = 0; i < len; i++)
+            {
+                for (int j = 0; j < i; j++)
+                    if (cities[j].right < cities[i].right && tab[i] < 1 + tab[j])
+                        tab[i] = 1 + tab[j];
+                if (tab[i] > maxBridges)
+                    maxBridges = tab[i];
+            }
+
+            return maxBridges;
+        }
+
+        public static void PrintBridgesSequence(int[] table, int totalBridges, List<CityPair> cities, int len)
+        {
+            Console.Write($" Bridges can be built b/w cities: \t");
+            for (int i = len - 1; i >= 0; i--)
+                if (table[i] == totalBridges)
+                {
+                    Console.Write($" {cities[i].right}");
+                    totalBridges--;
+                }
+            Console.WriteLine();
+        }
+
+        // can be called in List of city as => cities.Sort(new SortCity());
+        public class SortCity : IComparer<CityPair>
+        {
+            public int Compare(CityPair x, CityPair y) => x.right.CompareTo(y.right);
         }
     }
 }
