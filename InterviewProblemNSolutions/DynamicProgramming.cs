@@ -519,6 +519,20 @@ namespace InterviewProblemNSolutions
                     maxBridges = tab[i];
             }
 
+            #region Not necessary if we get values right with just above loop, for some inputs this works
+            //for (int i = 0; i < len; i++)
+            //    tab[i] = 1;
+            //// check again from right for decreasing order
+            //for (int i = len - 1; i >= 0; i--)
+            //{
+            //    for (int j = len - 1; j > i; j--)
+            //        if (cities[j].right < cities[i].right && tab[i] < 1 + tab[j])
+            //            tab[i] = 1 + tab[j];
+            //    if (tab[i] > maxBridges)
+            //        maxBridges = tab[i];
+            //}
+            #endregion
+
             return maxBridges;
         }
 
