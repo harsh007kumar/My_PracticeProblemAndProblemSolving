@@ -71,6 +71,7 @@ namespace InterviewProblemNSolutions
             FindCatalanNumber();
             FindOrderToPerformMatrixMultiplications();
             ZeroOneKnapSackProblem();
+            CoinChangingMinimumNoOfCoins();
 
             Console.ReadKey();
         }
@@ -828,6 +829,21 @@ namespace InterviewProblemNSolutions
             {
                 var maxProfit = DynamicProgramming.KnapSack(bagCapacity, profit, wt, noOfItems);
                 Console.WriteLine($" Max Profit/Value we can get by filling KnapSack of capacity '{bagCapacity}' is : '{maxProfit}'\n");
+            }
+        }
+
+        public static void CoinChangingMinimumNoOfCoins()
+        {
+            Utility.Print("Problem-19 Making Change (p. 789)");
+            int[] coins = { 1, 5, 6, 8 };
+            int[] changeReqFor = { 2, 6, 9, 11 };
+            int noOfCoins = coins.Length;
+            coins.Print("Coins Array");
+
+            foreach (var changeAmt in changeReqFor)
+            {
+                var minNoOfCoins = DynamicProgramming.CoinChangeMinimumNoOfCoins(changeAmt, coins, noOfCoins);
+                Console.WriteLine($" Min No of coins to get change '{changeAmt}' is : '{minNoOfCoins}'\n");
             }
         }
     }

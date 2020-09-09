@@ -395,5 +395,53 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine();
             }
         }
+
+        // Time O(N*C), N = no of coins & W = Change required for Value || Space O(N*C)
+        // this problem is very similar to 0-1 knapsack problem just consider value of each coin to be same(ex: -1)
+        public static int CoinChangeMinimumNoOfCoins(int C, int[] coins, int n)
+        {
+            // Create Table to store are intermediate results
+            // Step1. Create Table to store are intermediate results min coins req, rows = noOfCoins + 1 & col = totalChange required + 1
+            int[,] m = new int[n + 1, C + 1];
+
+            // Step2. start filling from i=1 row at each row try to minimize the coins(row no indicates no of items we can choose from start of coins array),
+            // (under given constrait of change required for Value indicated by column no, last col indicated max value for which Change is requied i.e, C)
+            for (int i = 0; i <= n; i++)
+                for (int c = 1; c <= C; c++)
+                {
+                    if (i == 0)                 // Extra Row, Set Int.Max value here so its not picked when we are picking Min value later
+                        m[i, c] = int.MaxValue;
+                    else if (i == 1)            // As first row is of 1.Re coin filling same no of coins as the 'Total Amt/Buck' required fr that column (Ex- Amt=5, 1.Re x 5 coins)
+                        m[i, c] = c;
+                    else if (c == 0)            // As first column represents 'Total Amt = 0' hence no coins should be selected to get 0 bucks
+                        m[i, c] = c;
+                    // Min of coins either (value from last row & same col) or (1 coin + value from last row & current col Amt - picked coin value)
+                    else if (c >= coins[i - 1])
+                        m[i, c] = Math.Min(m[i - 1, c], 1 + m[i - 1, c - coins[i - 1]]);
+                    else
+                        m[i, c] = m[i - 1, c];
+
+                }
+            PrintCoinsPicked(m, coins, n, C);
+            return m[n, C];                     // Min Coins Requierd to make change with all possible coins to choose from
+        }
+
+        public static void PrintCoinsPicked(int[,] val, int[] coins, int row, int col)
+        {
+            while (row > 0 && col > 0)
+            {
+                if (val[row, col] == val[row - 1, col])     // current row coin not selected
+                {
+                    Console.WriteLine($" Coins {coins[row - 1]} \tNot Selected : \t0");
+                    row--;
+                }
+                else
+                {
+                    Console.WriteLine($" Coins {coins[row - 1]} \tSelected : \t1");
+                    row--;
+                    col -= coins[row];
+                }
+            }
+        }
     }
 }
