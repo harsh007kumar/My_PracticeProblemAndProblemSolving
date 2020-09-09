@@ -396,6 +396,7 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        // Tushar Roy https://youtu.be/Y0ZqKpToTic
         // Time O(N*C), N = no of coins & W = Change required for Value || Space O(N*C)
         // this problem is very similar to 0-1 knapsack problem just consider value of each coin to be same(ex: -1)
         public static int CoinChangeMinimumNoOfCoins(int C, int[] coins, int n)
@@ -442,6 +443,44 @@ namespace InterviewProblemNSolutions
                     col -= coins[row];
                 }
             }
+        }
+
+        // Time O(n^2) || Space O(n)
+        public static int LongestIncreasingSubsequence(int[] input)
+        {
+            var len = input.Length;
+
+            // Create a array to store max increasing length till given ith index
+            int[] tab = new int[len];
+            int maxLen = 1;
+
+            // set default value in table as 1 as min len of sequencec can b 1
+            for (int i = 0; i < len; i++)
+                tab[i] = 1;
+
+            for (int i = 0; i < len; i++)           // index for which we are updating maxLen value
+            {
+                for (int j = 0; j < i; j++)         // iterate thru each index from 0 to i-1 to find max len for i
+                    // if value at i is greater than value at j and maxLen value for i is less than maxLenValue at j + 1 (adding 1 as we r including ith value in array)
+                    if (input[i] > input[j] && tab[i] < tab[j] + 1)
+                        tab[i] = tab[j] + 1;
+                if (tab[i] > maxLen)                // keep updating max length so far
+                    maxLen = tab[i];
+            }
+            PrintIncreasingSequence(tab, maxLen, input, len);
+            return maxLen;
+        }
+
+        public static void PrintIncreasingSequence(int[] table, int maxLen, int[] input, int len)
+        {
+            Console.Write($" Numbers selected in sequence (starting from last index): \t");
+            for (int i = len - 1; i >= 0; i--)
+                if (table[i] == maxLen)
+                {
+                    Console.Write($" {input[i]}");
+                    maxLen--;
+                }
+            Console.WriteLine();
         }
     }
 }

@@ -72,6 +72,7 @@ namespace InterviewProblemNSolutions
             FindOrderToPerformMatrixMultiplications();
             ZeroOneKnapSackProblem();
             CoinChangingMinimumNoOfCoins();
+            FindLongestIncreasingSubsequence();
 
             Console.ReadKey();
         }
@@ -843,8 +844,17 @@ namespace InterviewProblemNSolutions
             foreach (var changeAmt in changeReqFor)
             {
                 var minNoOfCoins = DynamicProgramming.CoinChangeMinimumNoOfCoins(changeAmt, coins, noOfCoins);
-                Console.WriteLine($" Min No of coins to get change '{changeAmt}' is : '{minNoOfCoins}'\n");
+                Console.WriteLine($" Min No of coins to get '{changeAmt}' in change is : '{minNoOfCoins}'\n");
             }
+        }
+
+        public static void FindLongestIncreasingSubsequence()
+        {
+            Utility.Print("Problem-20  Longest Increasing Subsequence (p. 790)");
+            int[] input = { 5, 6, 2, 3, 4, 1, 9, 9, 8, 9, 5 };
+            input.Print("Input");
+            var maxLen = DynamicProgramming.LongestIncreasingSubsequence(input);
+            Console.WriteLine($" 'Longest Increasing Subsequence' in above array is of Length : \t{maxLen}");
         }
     }
 }
