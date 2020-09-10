@@ -424,7 +424,7 @@ namespace InterviewProblemNSolutions
                         m[i, c] = c;
                     else if (c == 0)            // As first column represents 'Total Amt = 0' hence no coins should be selected to get 0 bucks
                         m[i, c] = c;
-                    // Min of coins either (value from last row & same col) or (1 coin + value from last row & current col Amt - picked coin value)
+                    // Min of coins either (value from last row & same col) or (picking curr row coin + value from last row & (current col Amt - picked coin value))
                     else if (c >= coins[i - 1])
                         m[i, c] = Math.Min(m[i - 1, c], 1 + m[i - 1, c - coins[i - 1]]);
                     else
@@ -552,6 +552,44 @@ namespace InterviewProblemNSolutions
         public class SortCity : IComparer<CityPair>
         {
             public int Compare(CityPair x, CityPair y) => x.right.CompareTo(y.right);
+        }
+
+        // Tushar Roy https://youtu.be/s6FhG--P7z0
+        // Time O(N*S), N = no of items/no's & S = desired sum || Space O(N*W)
+        // This Problem is a variation of 0-1 KnapSack Problem, instead of profit array we have no's whose total sum should match given Sum 'S'
+        public static bool SubsetSum(int[] input, int len, int sum) 
+        {
+            bool[,] tab = new bool[len + 1, sum + 1];   // 1 extra row & col for default values
+
+            for (int i = 0; i <= len; i++)
+                for (int s = 0; s <= sum; s++)
+                {
+                    if (s == 0) tab[i, s] = true;       // default value 'True' for 1st col, which indicates Curr Desired Sum = 0, which is always achievable by not selecting any element
+                    else if(i == 0) tab[i, s] = false;  // default value 'False' for 1st row, which indicates no number is avaliable, hencec can't select any no to make given Sum
+                    else if (s >= input[i - 1]) tab[i, s] = tab[i - 1, s] || tab[i - 1, s - input[i - 1]];  // set true if either (row above with same col is true) or (row above n col = 'current desired Sum - current no val' is true)
+                    else tab[i, s] = tab[i - 1, s];
+                }
+            // tab.Print();
+            PrintSubSetOfNumberForGivenSum(tab, input, len, sum);
+            return tab[len, sum];
+        }
+
+        public static void PrintSubSetOfNumberForGivenSum(bool[,] tab, int[] input, int row, int col)
+        {
+            while (row > 0 && col > 0)
+            {
+                if (tab[row, col] == tab[row - 1, col])//value came row above, hence current item/no must have have been selected
+                {
+                    Console.WriteLine($" '{input[row - 1]}' \tNot selected");
+                    row--;
+                }
+                else // subset must have come after selcting current row no from input
+                {
+                    Console.WriteLine($" '{input[row - 1]}' \tSelected");
+                    row--;
+                    col -= input[row];
+                }
+            }
         }
     }
 }

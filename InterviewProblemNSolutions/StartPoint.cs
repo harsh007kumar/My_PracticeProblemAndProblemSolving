@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Xml;
 
 namespace InterviewProblemNSolutions
 {
@@ -74,6 +75,7 @@ namespace InterviewProblemNSolutions
             CoinChangingMinimumNoOfCoins();
             FindLongestIncreasingSubsequence();
             BuildingBridgesOverRiver();
+            SubsetSumProblem();
 
             Console.ReadKey();
         }
@@ -878,6 +880,17 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Max Bridges that can be build over above pair of cities is : \t{maxBridgesPossible} \n");
             }
 
+        }
+
+        public static void SubsetSumProblem()
+        {
+            Utility.Print("Problem-25  Subset Sum: Sequence of N positive no's A1 . . . An, algorithm which checks if there exists subset of A whose sum of no's is T?(p. 796)");
+            int[] input = { 2, 3, 7, 8, 10 };
+            int[] sumArr = { 2, 4, 7, 21, 11 };
+            input.Print("Set of No's: ");
+
+            foreach (var findSubsetForSum in sumArr)
+                Console.WriteLine($" Subset in above array whose sum equals to '{findSubsetForSum}', \tExists = {DynamicProgramming.SubsetSum(input, input.Length, findSubsetForSum)}\n");
         }
     }
 }
