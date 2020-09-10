@@ -76,6 +76,7 @@ namespace InterviewProblemNSolutions
             FindLongestIncreasingSubsequence();
             BuildingBridgesOverRiver();
             SubsetSumProblem();
+            ParitionArrayInEqualHalf();
 
             Console.ReadKey();
         }
@@ -891,6 +892,15 @@ namespace InterviewProblemNSolutions
 
             foreach (var findSubsetForSum in sumArr)
                 Console.WriteLine($" Subset in above array whose sum equals to '{findSubsetForSum}', \tExists = {DynamicProgramming.SubsetSum(input, input.Length, findSubsetForSum)}\n");
+        }
+
+        public static void ParitionArrayInEqualHalf()
+        {
+            Utility.Print("Problem-28  Partition partition problem is to determine whether a given set can be partitioned into two subsets such that the sum of elements in both subsets is the same(p. 800)");
+            int[] input = { 1, 5, 11, 5 };
+            input.Print("Input Array");
+            Console.WriteLine($" Above array can be paritioned into two subsets with equal total-sum : {DynamicProgramming.FindPartition(input, input.Length)}");
+
         }
     }
 }

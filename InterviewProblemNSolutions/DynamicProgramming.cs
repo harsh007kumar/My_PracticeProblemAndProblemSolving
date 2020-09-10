@@ -557,6 +557,7 @@ namespace InterviewProblemNSolutions
         // Tushar Roy https://youtu.be/s6FhG--P7z0
         // Time O(N*S), N = no of items/no's & S = desired sum || Space O(N*W)
         // This Problem is a variation of 0-1 KnapSack Problem, instead of profit array we have no's whose total sum should match given Sum 'S'
+        // Returns true if subset in array exists who's Summation equals Sum
         public static bool SubsetSum(int[] input, int len, int sum) 
         {
             bool[,] tab = new bool[len + 1, sum + 1];   // 1 extra row & col for default values
@@ -591,5 +592,58 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+        // recursive function return true if subset in array exists who's Summation equals Sum
+        // Time O(2^n) we have 2 decisions to make at every index from 0..N-1 || Recursive Space Required!
+        public static bool SubSetSumRecursive(int[] input, int len, int sum)
+        {
+            // we have reduced initial sum that was provided to 0 by selecting some elements in array
+            if (sum == 0) return true;
+            // reached end of array
+            if (len == 0) return false;
+
+            // 2 choice : (Either Not selecting last element) or (select last element n reduce now requied sum by same value)
+            return SubSetSumRecursive(input, len - 1, sum) || SubSetSumRecursive(input, len - 1, sum - input[len - 1]);
+        }
+
+        // return true if canPartition array into 2 subset who's sum are equal
+        public static bool FindPartition(int[] input, int len)
+        {
+            int totalSum = 0;
+            // get total sum of array
+            for (int i = 0; i < len; i++) totalSum += input[i];
+
+            // odd total sum, cannot have 2 subset with equal sum
+            if (totalSum % 2 == 1) return false;
+
+            // return true if subSet with Half of total sum exists
+            return SubsetSum(input, len, totalSum / 2);                 // DP Tabulation bottom up O(N*S) [Constraint space is very high if totalSum is large]
+            //return SubSetSumRecursive(input, len, totalSum / 2);        // Time Consuming O(2^n) recursive approach
+            //return SubSetSumMemo(input, len, totalSum / 2, new Dictionary<string, bool>());   // DP Memoization top down approach
+        }
+
+        // https://youtu.be/3N47yKRDed0
+        // Memoization based || Top Down Approach
+        // Time O(2^n) we have 2 decisions to make at every index from 0..N-1 || Recursive Space Required!
+        public static bool SubSetSumMemo(int[] input, int len, int requiredSum, Dictionary<string,bool> state, int currentSum = 0)
+        {
+            // currentSum equals requriedSum
+            if (currentSum == requiredSum) 
+                return true;
+
+            // reached end of array
+            if (len <= 0 || currentSum > requiredSum) return false;
+
+            var key = len - 1 + "" + currentSum;    // made key or currentIndex + currentSum
+            // if we have precomputed this sub-problem before return from map
+            if (state.ContainsKey("key")) 
+                return state[key];
+
+            // 2 choice : (Either Not selecting last element) or (select last element n adding it to currentSum value)
+            var result = SubSetSumMemo(input, len - 1, requiredSum, state, currentSum) || SubSetSumMemo(input, len - 1, requiredSum, state, currentSum + input[len - 1]);
+            state.Add(key, result);
+            return state[key];
+        }
+
     }
 }
