@@ -47,11 +47,12 @@ namespace InterviewProblemNSolutions
         public static void Print(this int[] arr, string msg ="")
         {
             if (msg != "") Console.Write($" Printing '{msg}' : \t");
-            for(int i=0;i<arr.Length;i++)
+            else Console.WriteLine($" ==== Printing given int array with '{arr.Length}' elements ====");
+
+            for (int i=0;i<arr.Length;i++)
                 Console.Write($" {arr[i]} >>");
             Console.WriteLine();
         }
-
         public static void Print(this char[,] arr)
         {
             var row = arr.GetLength(0);
@@ -65,7 +66,6 @@ namespace InterviewProblemNSolutions
             }
             Console.WriteLine();
         }
-
         public static void Print(this int[,] arr)
         {
             var row = arr.GetLength(0);
@@ -79,16 +79,20 @@ namespace InterviewProblemNSolutions
             }
             Console.WriteLine();
         }
-
-        public static void Print(this int[] arr)
+        public static void Print(this bool[,] arr)
         {
-            var len = arr.Length;
-            Console.WriteLine($" ==== Printing given int array with '{len}' elements ====");
-            for (int i = 0; i < len; i++)
-                Console.Write($" {arr[i]} >>");
-
+            var row = arr.GetLength(0);
+            var col = arr.GetLength(1);
+            Console.WriteLine($" ==== Printing given 2-D bool array with {row}:Row & {col}:Col ====");
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < col; j++)
+                    Console.Write($" {arr[i, j]} >>");
+                Console.WriteLine();
+            }
             Console.WriteLine();
         }
+        
 
         public static void Show(this string str) => Console.WriteLine( str);
 
