@@ -1,6 +1,7 @@
 ﻿using Sorting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Xml;
@@ -13,7 +14,7 @@ namespace InterviewProblemNSolutions
         {
             DutchFlagProblem();
             EventAndDelegate();
-
+            CircularPetrolPumpProblem();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -158,6 +159,27 @@ namespace InterviewProblemNSolutions
         {
             Utility.Print("Creating custom Event of custom Delegate type & registering an method which matchs delegate signature with that event");
             new EventDemo();
+        }
+
+        /// <summary>
+        /// GFG https://www.geeksforgeeks.org/find-a-tour-that-visits-all-stations/?ref=lbp
+        /// Find the starting index/pump so that we can complete entire loop before running out of fuel, else return -1 (loop traversal not possible)
+        /// </summary>
+        public static void CircularPetrolPumpProblem()
+        {
+            Utility.Print("Find the first circular tour that visits all petrol pumps");
+            int[][,] petrolsPumpsArr = { new int[,] { { 4, 6 }, { 6, 5 }, { 7, 3 }, { 4, 5 } }, new int[,] { { 6, 4 }, { 3, 6 }, { 7, 3 } } };  // multiple array inputs
+            foreach (var petrolsPumps in petrolsPumpsArr)
+            {
+                List<PetrolPump> pumps = new List<PetrolPump>();
+                for (int i = 0; i < petrolsPumps.GetLength(0); i++)
+                {
+                    pumps.Add(new PetrolPump(petrolsPumps[i, 0], petrolsPumps[i, 1]));
+                    Console.WriteLine($" index:{i} \tPetrol: {petrolsPumps[i, 0]} \tDistanceToNext Pump: {petrolsPumps[i, 1]}");
+                }
+                var startAtIndex = DailyProblem.PetrolPump(pumps, pumps.Count);
+                Console.WriteLine($" To Complete Entire circle Start at Pump with Index: \t{startAtIndex}\n");
+            }
         }
 
         // Learn Dynamic Programming (Memoization & Tabulation)

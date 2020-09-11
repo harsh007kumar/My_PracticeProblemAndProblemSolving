@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonFunctions.cs" />
+    <Compile Include="DailyProblem.cs" />
     <Compile Include="DivideAndConquerAlgorithms.cs" />
     <Compile Include="DynamicProgramming.cs" />
     <Compile Include="SearchAlgorithms.cs" />
