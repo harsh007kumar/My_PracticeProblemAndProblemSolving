@@ -645,5 +645,82 @@ namespace InterviewProblemNSolutions
             return state[key];
         }
 
+        // Time O(n^3) || Space O(n^2)
+        // Returns the Optimal/Min cost of searching Keys with given frequencies on creating Optimal Binary Search Tree
+        public static int OptimalBinarySearchTree(int[] keys, int[] frequency, int len)
+        {
+            // Step1. create 2D array with 1 extra (row & col) for ease of calculation
+            // Stores 'cost of search' each step
+            int[,] C = new int[len + 1, len + 1];
+
+            // Step2, set default value 0 along diagonal, as its represents tree with single node as root, Ex- C[1,1] indicates tree with root 1
+            for (int i = 0; i < len; i++)
+                C[i, i] = 0;                            // can skip this step as default value for new int array is 0 by default in C#
+
+            // Step3. Calculate 'Min Cost of Search' starting with Cost of Search with Tree size 1 and keep it increasing
+            for (int l = 1; l <= len; l++)              // 'l' indicates length of current window i.e, first we start with trees with 1 elemenet than with 2 than 3 ...
+                for (int i = 0; i <= len - l; i++)      // 'i' indicates starting point of are sliding windows (windows which decides 'no of elements' to choose from as root)
+                {
+                    int j = i + l;                      // 'j' end point of sliding window
+
+                    // now we loop and try each element as root to find minimum cost of search for this given set of elements
+
+                    // if only 1 item to select as root, set its value in table as 'Frequency * 1'
+                    if (j - i == 1)
+                    {
+                        C[i, j] = frequency[i];         // set cost considering single item in tree as root
+                        C[j, i] = j;                    // store choosen root element column ID
+                    }
+                    else
+                    {
+                        C[i, j] = int.MaxValue;         // Set default cost before finding minimum
+                        var wt = Weight(frequency, i, j);
+                        for (int k = i + 1; k <= j; k++)// 'k' indicates current col ID of element choose as root [ColID = 1 + index of element in keys/frequency array]
+                        {
+                            var currCost = C[i, k - 1] + C[k, j] + wt;      // Cost of 
+                            if (currCost < C[i, j])
+                            {
+                                C[i, j] = currCost;     // update min cost of search
+                                C[j, i] = k;            // store selected root element col ID(in opposite side of diagonal of 2D array Hint: Its the part that is never used)
+                            }
+
+                        }
+                    }
+                }
+            //C.Print();
+            PrintOptimalBST(C, keys, 0, len);
+            return C[0, len];
+        }
+
+        // returns the combined sum of frequency from start to last-1 elements, required during Optiomal BST
+        public static int Weight(int[] frequency, int start, int last)
+        {
+            var totalCostOfIndividualSearch = 0;
+            while (start < last)
+                totalCostOfIndividualSearch += frequency[start++];
+            return totalCostOfIndividualSearch;
+        }
+
+        public static void PrintOptimalBST(int[,] C, int[] keys, int row, int col, string spacing = "\t")
+        {
+            // Optimal Cost is stored at C[i,j]
+            // Choosen Root is stored at C[j,i] opp. index
+            if (row != col)     // skip diagonal's 
+            {
+                var indexInKeys = C[col, row] - 1;
+                var element = keys[indexInKeys];
+                Console.Write($" Root {element}");
+
+                // print left subtree
+                Console.Write($"\n {spacing}{element}'s Left >>");
+                PrintOptimalBST(C, keys, row, indexInKeys, spacing + spacing);
+
+                // print right subtree
+                Console.Write($"\n {spacing}{element}'s Right >>");
+                PrintOptimalBST(C, keys, indexInKeys + 1, col, spacing + spacing);
+            }
+        }
+
+
     }
 }

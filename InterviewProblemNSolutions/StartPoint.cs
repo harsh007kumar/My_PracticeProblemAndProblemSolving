@@ -78,6 +78,7 @@ namespace InterviewProblemNSolutions
             BuildingBridgesOverRiver();
             SubsetSumProblem();
             ParitionArrayInEqualHalf();
+            FindOptimalBinarySearchTree();
 
             Console.ReadKey();
         }
@@ -923,6 +924,18 @@ namespace InterviewProblemNSolutions
             input.Print("Input Array");
             Console.WriteLine($" Above array can be paritioned into two subsets with equal total-sum : {DynamicProgramming.FindPartition(input, input.Length)}");
 
+        }
+
+        public static void FindOptimalBinarySearchTree()
+        {
+            Utility.Print("Problem - 30 Optimal Binary Search Tree (p. 804)");
+            int[] keys = { 10, 20, 30, 40 };
+            int[] frequency = { 4, 2, 6, 3 };
+            keys.Print("Keys");
+            frequency.Print("Frequence");
+
+            var costOfSearch = DynamicProgramming.OptimalBinarySearchTree(keys, frequency, keys.Length);
+            Console.WriteLine($"\n Min Cost of Search in Optimal BST with above 'keys & frequencey' is : \t{costOfSearch}");
         }
     }
 }
