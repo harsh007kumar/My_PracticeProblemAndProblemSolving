@@ -81,7 +81,7 @@ namespace InterviewProblemNSolutions
             FindOptimalBinarySearchTree();
             MinOperationToConvertStringAtoB();
             AllPairsShortestPathFloydWarshall();
-            
+            OptimalStrategyForACoinGame();
 
             Console.ReadKey();
         }
@@ -975,6 +975,22 @@ namespace InterviewProblemNSolutions
             graph.Print(true);
         }
 
+        public static void OptimalStrategyForACoinGame()
+        {
+            Utility.Print("Problem-33  Optimal Strategy for a Game(p. 810)");
+            int[][] inputs = { new int[] { 8, 15, 3, 7 }, new int[] { 2, 2, 2, 2 }, new int[] { 20, 30, 2, 2, 2, 10 } };
+            
+            foreach(var input in inputs)
+            {
+                var len = input.Length;
+                int[,] cache = new int[len, len];
+                input.Print("Given Coins");
 
+                var maxWinValue = DynamicProgramming.OptimalStrategy(input, len);                       // Tabulation 
+                //var maxWinValue = DynamicProgramming.OptimalStrategyMemo(input, 0, len - 1, cache);     // Memoization
+                //var maxWinValue = DynamicProgramming.OptimalStrategyGameRecursive(input, 0, len - 1);   // Recursive Brute Force 
+                Console.WriteLine($" Mav value Player1 (us) can get with above set of values : {maxWinValue}\n");
+            }
+        }
     }
 }

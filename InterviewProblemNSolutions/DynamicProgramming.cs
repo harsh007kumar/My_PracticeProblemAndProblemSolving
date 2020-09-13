@@ -810,6 +810,75 @@ namespace InterviewProblemNSolutions
             return S;
         }
 
+        // Time O(n^2) || Auxillary Space O(1), as we have n^2 sub-problems to compute each of which takes constant time to compute
+        public static int OptimalStrategyGameRecursive(int[] input, int start, int last)
+        {
+            if (start == last)          // only single coin left we take it
+                return input[start];
+            else if (start + 1 == last) // if just 2 coins are left we take Max of either
+                return Math.Max(input[start], input[last]);
 
+            /* Here we are dealing with an Smart Player2, and as Player1 we have two choice as laid out below:
+             * Case1: We(Player1) choose the >> 'start value/coin'
+             *      Start+1.....Last        these value are left
+             *      Player2 will definatly pick the value which is higher for him/her and has 2 choices below:
+             *              CaseA: P2 chooses >> start+1,  now we are left with start+2...Last to choose from
+             *              CaseB: P2 chooses >> last,     now we are left with start+1...last-1 to choose from
+             *      since we have a smart player2 we will be left with Min (of above two cases) + are orginal value 'Start'
+             * Case2: We(Player1) choose the >> 'last value/coin'
+             *      Start...Last-1          these values are left on table
+             *      Player2 will again make most smart choice and pick the higher and leaves us with below 2 option:
+             *              CaseA: P2 choose >> start,     now we are left with start+1...last-1 to choose from
+             *              CaseB: P2 choose >> last-1,    now we are left with start...last-2 to choose from
+             *      since we have a smart player2 we will be left with Min (of above two cases) + are orginal value 'Last'
+             */
+            return Math.Max(input[start] + Math.Min(OptimalStrategyGameRecursive(input, start + 2, last),
+                                                    OptimalStrategyGameRecursive(input, start + 1, last - 1)),
+                            input[last] + Math.Min(OptimalStrategyGameRecursive(input, start + 1, last - 1),
+                                                    OptimalStrategyGameRecursive(input, start, last - 2)));
+        }
+
+        // Time O(n^2) || Auxillary Space O(n^2), as we have n^2 sub-problems to compute each of which takes constant time to compute
+        // DP Memoization approach 'top-down' solution
+        public static int OptimalStrategyMemo(int[] input, int start, int last, int[,] cache)
+        {
+            if (cache[start, last] > 0)         // if sub-Problem is solved before return from cache
+                return cache[start, last];
+            if (start == last)                  // base case 1
+                return cache[start, last] = input[start];
+            if (start + 1 == last)              // base case 2
+                return cache[start, last] = Math.Max(input[start], input[last]);
+
+            return cache[start, last] = Math.Max(input[start] + Math.Min(OptimalStrategyMemo(input, start + 2, last, cache),
+                                                                        OptimalStrategyMemo(input, start + 1, last - 1, cache)),
+                                                 input[last] + Math.Min(OptimalStrategyMemo(input, start + 1, last - 1, cache),
+                                                                        OptimalStrategyMemo(input, start, last - 2, cache)));
+        }
+
+        // Time O(n^2) || Space O(n^2)
+        // DP Tabulation approach 'bottom-up' solution
+        public static int OptimalStrategy(int[] input, int len)
+        {
+            int[,] cache = new int[len, len];
+            int x, y, z;
+
+            for (int size = 0; size < len; size++)
+                for (int i = 0; i < len - size; i++)
+                {
+                    int j = i + size;
+                    if (i == j)                 // base case 1, considering only 1 element in array
+                        cache[i, j] = input[i++];
+                    else
+                    {
+                        x = i + 2 <= j ? cache[i + 2, j] : 0;
+                        y = i + 1 <= j - 1 ? cache[i + 1, j - 1] : 0;
+                        z = i <= j - 2 ? cache[i, j - 2] : 0;
+
+                        cache[i, j] = Math.Max(input[i] + Math.Min(x, y),
+                                               input[j] + Math.Min(y, z));
+                    }
+                }
+            return cache[0, len - 1];
+        }
     }
 }
