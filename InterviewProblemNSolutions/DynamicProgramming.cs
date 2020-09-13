@@ -880,5 +880,45 @@ namespace InterviewProblemNSolutions
                 }
             return cache[0, len - 1];
         }
+
+        // Time O(n^2) || Space O(1)
+        // Recursive Brute Force Solution which returns longest Palindromic Subsequence present in input string
+        public static int LongestPalindromicSubsequenceRecursive(string input, int start, int last)
+        {
+            if (start == last) return 1;                                    // single character string had Palindrome of len 1
+            if (start + 1 == last && input[start] == input[last]) return 2; // string of len 2 with same character has Palindrome of len 2
+
+            // If first & last character match than we atleast have Palindrome of len 2+ Longest Palindrome in i+1..j-1
+            if (input[start] == input[last]) return 2 + LongestPalindromicSubsequenceRecursive(input, start + 1, last - 1);
+
+            // else If first & last character don't match than find longest Palindrome in 'i..j-1' & 'i+1..j'
+            return Math.Max(LongestPalindromicSubsequenceRecursive(input, start, last - 1), LongestPalindromicSubsequenceRecursive(input, start + 1, last));
+        }
+
+        // Time O(n^2) || Space O(n^2)
+        // DP Tabulation based bottom-up solution
+        public static int LongestPalindromicSubsequence(string input, int len)
+        {
+            // Step1 Create a 23 table to store lps of intermediate string while finding LPS for entire string
+            int[,] lps = new int[len, len];
+
+            // Step2 Start by finding lps for string consider length = 1, n after each iteration keep increasing the len to finally match it to len of string
+            for (int l = 0; l < len; l++)
+                for (int i = 0; i < len - l; i++)
+                {
+                    var j = i + l;
+                    
+                    if (i == j)                                     // base1 case single character string
+                        lps[i, j] = 1;
+                    else if (i + 1 == j && input[i] == input[j])    // base2 case string of len 2
+                        lps[i, j] = 2;
+                    else if (input[i] == input[j])                  // first last character match
+                        lps[i, j] = 2 + lps[i + 1, j - 1];
+                    else                                            // Longest LPS from i..j-1 or i+1..j
+                        lps[i, j] = Math.Max(lps[i, j - 1], lps[i + 1, j]);
+                }
+
+            return lps[0, len - 1];
+        }
     }
 }

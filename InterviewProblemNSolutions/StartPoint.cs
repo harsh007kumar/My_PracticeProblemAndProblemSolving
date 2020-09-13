@@ -82,6 +82,7 @@ namespace InterviewProblemNSolutions
             MinOperationToConvertStringAtoB();
             AllPairsShortestPathFloydWarshall();
             OptimalStrategyForACoinGame();
+            LongestPalindromicSubsequence();
 
             Console.ReadKey();
         }
@@ -990,6 +991,22 @@ namespace InterviewProblemNSolutions
                 //var maxWinValue = DynamicProgramming.OptimalStrategyMemo(input, 0, len - 1, cache);     // Memoization
                 //var maxWinValue = DynamicProgramming.OptimalStrategyGameRecursive(input, 0, len - 1);   // Recursive Brute Force 
                 Console.WriteLine($" Mav value Player1 (us) can get with above set of values : {maxWinValue}\n");
+            }
+        }
+
+        public static void LongestPalindromicSubsequence()
+        {
+            Utility.Print("Problem-35  Longest Palindrome Subsequence (p. 813)");
+            string[] inputArr = { "AGDDDA", "AGCTCBMAACTGGAM", "GEEKSFORGEEKS" };
+            foreach (var input in inputArr)
+            {
+                var len = input.Length;
+
+                //var maxLps = DynamicProgramming.LongestPalindromicSubsequenceRecursive(input, 0, len - 1);    // Recursive
+                //Console.WriteLine($" Length of Longest Longest Palindromic Subsequence LPS in '{input}' is of length: '{maxLps}'");
+
+                var maxLps = DynamicProgramming.LongestPalindromicSubsequence(input, len);                    // DP Tabulation
+                Console.WriteLine($" Length of Longest Longest Palindromic Subsequence LPS in '{input}' is of length: '{maxLps}'");
             }
         }
     }
