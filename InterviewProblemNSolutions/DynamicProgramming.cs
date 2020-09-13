@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace InterviewProblemNSolutions
@@ -719,6 +720,7 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        // Tushar Roy https://youtu.be/We3YDTzNXEk
         /// <summary>
         /// returns Minimum no of operation (Delete,Convert,Add) required to Convert string 'A' into String 'B'
         /// Time O(nm) || Space O(nm) , where n = length of string A and m = len of string B
@@ -776,6 +778,35 @@ namespace InterviewProblemNSolutions
                     }
                 }
             }
+        }
+
+        // Time O(n^3) || Space O(n^2)
+        // Returns 'All Pair Shortest Path' for Directed A-cyclic Graph
+        // Self Loops are replaced by 0 and no Edge is indicated by +infinity i.e, IntMax
+        public static int[,] FloydWarshall(int[,] graph, int noOfVertex)
+        {
+            // Step1 Create a table to store shortest path b/w all pairs of Vertex
+            int[,] S = new int[noOfVertex, noOfVertex];
+
+            // Step2. Copy all values from graph matrix to S
+            for (int i = 0; i < noOfVertex; i++)
+                for (int j = 0; j < noOfVertex; j++)
+                    S[i, j] = graph[i, j];
+
+            // Step3. If Self loops are present remove them
+            for (int j = 0; j < noOfVertex; j++)
+                S[j, j] = 0;
+
+            // Step4. for each vertex A..B try and see if there exists an path via some Vertex V which yields shorter distance,
+            // dist(A to B) = Min(dist(A to B) , dist(A to K) + dist(K to B))
+            for (int k = 0; k < noOfVertex; k++)                            // intermediate Vertex being tried
+                for (int i = 0; i < noOfVertex; i++)                        // Vertex A
+                    for (int j = 0; j < noOfVertex; j++)                    // Vertex B
+                        if (i != j && i != k && j != k)                             // skip when Vertex A&B are same, also exclude when k is either A or B
+                            if (S[i, k] != int.MaxValue && S[k, j] != int.MaxValue) // make sure connecting edge with K exists (IntMax indicates Edge doesn't exists)
+                                S[i, j] = Math.Min(S[i, j], S[i, k] + S[k, j]);
+
+            return S;
         }
     }
 }

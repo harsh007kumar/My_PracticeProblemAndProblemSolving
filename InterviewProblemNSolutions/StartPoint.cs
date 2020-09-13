@@ -80,6 +80,7 @@ namespace InterviewProblemNSolutions
             ParitionArrayInEqualHalf();
             FindOptimalBinarySearchTree();
             MinOperationToConvertStringAtoB();
+            AllPairsShortestPathFloydWarshall();
 
             Console.ReadKey();
         }
@@ -955,6 +956,20 @@ namespace InterviewProblemNSolutions
                     var minCost = DynamicProgramming.MinimumEditDistance(a, a.Length, b, b.Length);
                     Console.WriteLine($" Min Cost of converting A:'{a}' into B:'{b}' is: {minCost}\n");
                 }
+        }
+
+        public static void AllPairsShortestPathFloydWarshall()
+        {
+            Utility.Print("Problem-32  All Pairs Shortest Path Problem: Floyd’s Algorithm:(p. 808)");
+            // Directed Graph represented in form of Adjacancy Matrix of size V x V
+            var infinity = int.MaxValue;        // infinity represents no edge
+            int[,] graph = {    { 0, 3, infinity, 7 },
+                                { 8, 0, 2, infinity },
+                                { 5, infinity, 0, 1 },
+                                { 2, infinity, infinity, 0 } };
+            graph.Print();
+            graph = DynamicProgramming.FloydWarshall(graph, graph.GetLength(0));
+            graph.Print();
         }
     }
 }
