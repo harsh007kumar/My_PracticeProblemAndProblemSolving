@@ -66,11 +66,11 @@ namespace InterviewProblemNSolutions
             }
             Console.WriteLine();
         }
-        public static void Print(this int[,] arr)
+        public static void Print(this int[,] arr, bool silent = false)
         {
             var row = arr.GetLength(0);
             var col = arr.GetLength(1);
-            Console.WriteLine($" ==== Printing given 2-D int array with {row}:Row & {col}:Col ====");
+            if (!silent) Console.WriteLine($" ==== Printing given 2-D int array with {row}:Row & {col}:Col ====");
             for (int i = 0; i < row; i++)
             {
                 for (int j = 0; j < col; j++)

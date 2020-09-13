@@ -81,6 +81,7 @@ namespace InterviewProblemNSolutions
             FindOptimalBinarySearchTree();
             MinOperationToConvertStringAtoB();
             AllPairsShortestPathFloydWarshall();
+            
 
             Console.ReadKey();
         }
@@ -967,9 +968,13 @@ namespace InterviewProblemNSolutions
                                 { 8, 0, 2, infinity },
                                 { 5, infinity, 0, 1 },
                                 { 2, infinity, infinity, 0 } };
-            graph.Print();
+            graph.Print(true);
             graph = DynamicProgramming.FloydWarshall(graph, graph.GetLength(0));
-            graph.Print();
+
+            Console.WriteLine($" After Applying Floyd Warshall, Min Distance is Shows below:");
+            graph.Print(true);
         }
+
+
     }
 }
