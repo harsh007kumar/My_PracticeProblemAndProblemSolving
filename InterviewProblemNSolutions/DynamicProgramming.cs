@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InterviewProblemNSolutions
 {
@@ -654,11 +651,11 @@ namespace InterviewProblemNSolutions
             // Stores 'cost of search' each step
             int[,] C = new int[len + 1, len + 1];
 
-            // Step2, set default value 0 along diagonal, as its represents tree with single node as root, Ex- C[1,1] indicates tree with root 1
-            for (int i = 0; i < len; i++)
+            // Step2, set default value 0 along diagonal, as its represents tree with single node as root, Ex- C[1,1] indicates tree with 1st element as root, C[len,len] is fr last element
+            for (int i = 0; i <= len; i++)
                 C[i, i] = 0;                            // can skip this step as default value for new int array is 0 by default in C#
 
-            // Step3. Calculate 'Min Cost of Search' starting with Cost of Search with Tree size 1 and keep it increasing
+            // Step3. Calculate 'Min Cost of Search' starting with Cost of Search with Tree size 1 and keep increasing the size of tree
             for (int l = 1; l <= len; l++)              // 'l' indicates length of current window i.e, first we start with trees with 1 elemenet than with 2 than 3 ...
                 for (int i = 0; i <= len - l; i++)      // 'i' indicates starting point of are sliding windows (windows which decides 'no of elements' to choose from as root)
                 {
@@ -666,11 +663,11 @@ namespace InterviewProblemNSolutions
 
                     // now we loop and try each element as root to find minimum cost of search for this given set of elements
 
-                    // if only 1 item to select as root, set its value in table as 'Frequency * 1'
+                    // if only 1 item to select as root, set its costOFSearch in table as 'Frequency * 1'
                     if (j - i == 1)
                     {
-                        C[i, j] = frequency[i];         // set cost considering single item in tree as root
-                        C[j, i] = j;                    // store choosen root element column ID
+                        C[i, j] = frequency[i];         // store frequency for given root using index of root in keys/frequency
+                        C[j, i] = j;                    // store choosen root element column ID = (1 + actualIndex of root in keys)
                     }
                     else
                     {
@@ -678,13 +675,13 @@ namespace InterviewProblemNSolutions
                         var wt = Weight(frequency, i, j);
                         for (int k = i + 1; k <= j; k++)// 'k' indicates current col ID of element choose as root [ColID = 1 + index of element in keys/frequency array]
                         {
-                            var currCost = C[i, k - 1] + C[k, j] + wt;      // Cost of 
+                            // Cost of (k-1 as root for elements b/w i..k-1) + (j as root for elements b/w k..j) + sum of individual frequency of each element b/w i..j
+                            var currCost = C[i, k - 1] + C[k, j] + wt;
                             if (currCost < C[i, j])
                             {
                                 C[i, j] = currCost;     // update min cost of search
                                 C[j, i] = k;            // store selected root element col ID(in opposite side of diagonal of 2D array Hint: Its the part that is never used)
                             }
-
                         }
                     }
                 }
@@ -696,10 +693,10 @@ namespace InterviewProblemNSolutions
         // returns the combined sum of frequency from start to last-1 elements, required during Optiomal BST
         public static int Weight(int[] frequency, int start, int last)
         {
-            var totalCostOfIndividualSearch = 0;
+            var combineCostOfIndividualSearchs = 0;
             while (start < last)
-                totalCostOfIndividualSearch += frequency[start++];
-            return totalCostOfIndividualSearch;
+                combineCostOfIndividualSearchs += frequency[start++];
+            return combineCostOfIndividualSearchs;
         }
 
         public static void PrintOptimalBST(int[,] C, int[] keys, int row, int col, string spacing = "\t")
@@ -708,7 +705,7 @@ namespace InterviewProblemNSolutions
             // Choosen Root is stored at C[j,i] opp. index
             if (row != col)     // skip diagonal's 
             {
-                var indexInKeys = C[col, row] - 1;
+                var indexInKeys = C[col, row] - 1;          // since we stored col ID & not index during building table
                 var element = keys[indexInKeys];
                 Console.Write($" Root {element}");
 
@@ -722,6 +719,63 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        /// <summary>
+        /// returns Minimum no of operation (Delete,Convert,Add) required to Convert string 'A' into String 'B'
+        /// Time O(nm) || Space O(nm) , where n = length of string A and m = len of string B
+        /// </summary>
+        /// <param name="a">String being Converted</param>
+        /// <param name="lenA"></param>
+        /// <param name="b">Referrence String</param>
+        /// <param name="lenB"></param>
+        /// <returns></returns>
+        public static int MinimumEditDistance(string a, int lenA, string b, int lenB)
+        {
+            // Step1 Create 2D array which will hold intermediate minimum cost of convert string A from 1..i to string B from 1..j
+            int[,] C = new int[lenB + 1, lenA + 1];     // 1 extra row&col for ease of calculations, row=for stringB(matchWith string) col=for stringA
 
+            // Step2 Set default values for 1st row and 1st col
+
+
+            for (int i = 0; i <= lenB; i++)             // to iterate over string B, increasing no of characters to be matched one at a time
+                for (int j = 0; j <= lenA; j++)         // to iterate over string A, how many operations wud be required to convert increasing length of A to B
+                    if (i == 0)                 // indicates we need to convert 'A' to null
+                        C[i, j] = j;
+                    else if (j == 0)            // indicates we need to convert null to 'B'
+                        C[i, j] = i;
+                    else if (a[j - 1] == b[i - 1])// char match, no operation required
+                        C[i, j] = C[i - 1, j - 1];
+                    else                        // either Addition, Conversion or Deletion would be required
+                        C[i, j] = 1 + Math.Min(C[i - 1, j], Math.Min(C[i - 1, j - 1], C[i, j - 1]));        // adding 1 indicates same cost of all 3 operations(expand the equation if those can be different)
+            //C.Print();
+            PrintMinDistanceOperations(C, lenB, lenA, a, b);
+            return C[lenB, lenA];
+        }
+
+        public static void PrintMinDistanceOperations(int[,] C, int row, int col, string a, string b)
+        {
+            while (row > 0 && col > 0)
+            {
+                if (b[row - 1] == a[col - 1])                                   // same characters were found
+                { row--; col--; }
+                else //(b[row - 1] != a[col - 1])
+                {
+                    if (C[row, col] == 1 + C[row - 1, col - 1])                 // value came from diagonal cell (convert operation)
+                    {
+                        row--; col--;
+                        Console.WriteLine($" '{a[col]}' Conveted to '{b[row]}'");
+                    }
+                    else if (C[row, col] == 1 + C[row, col - 1])                // value came from left cell (delete operation)
+                    {
+                        col--;
+                        Console.WriteLine($" '{a[col]}' Deleted");
+                    }
+                    else // (C[row, col] == 1 + C[row-1, col])                  // value came from above cell (insert operation)
+                    {
+                        row--;
+                        Console.WriteLine($" '{b[row]}' inserted");
+                    }
+                }
+            }
+        }
     }
 }

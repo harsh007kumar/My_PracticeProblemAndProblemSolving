@@ -79,6 +79,7 @@ namespace InterviewProblemNSolutions
             SubsetSumProblem();
             ParitionArrayInEqualHalf();
             FindOptimalBinarySearchTree();
+            MinOperationToConvertStringAtoB();
 
             Console.ReadKey();
         }
@@ -936,6 +937,24 @@ namespace InterviewProblemNSolutions
 
             var costOfSearch = DynamicProgramming.OptimalBinarySearchTree(keys, frequency, keys.Length);
             Console.WriteLine($"\n Min Cost of Search in Optimal BST with above 'keys & frequencey' is : \t{costOfSearch}");
+        }
+
+        public static void MinOperationToConvertStringAtoB()
+        {
+            Utility.Print("Minimum Edit Distance");
+            Console.WriteLine("Problem - 31 Problem Statement: Given two strings A of length m and B of length n," +
+                " transform A into B with a minimum number of operations of the following types: (p. 806)" +
+                "\n >> delete a character from A,\n >> insert a character into A,\n >> change some character in A into a new character.\n");
+
+            string[] aArr = { "abcdef" ,"harsh", ""};
+            string[] bArr = { "azced", "", "har" };
+
+            foreach (var a in aArr)
+                foreach (var b in bArr)
+                {
+                    var minCost = DynamicProgramming.MinimumEditDistance(a, a.Length, b, b.Length);
+                    Console.WriteLine($" Min Cost of converting A:'{a}' into B:'{b}' is: {minCost}\n");
+                }
         }
     }
 }
