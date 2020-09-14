@@ -84,6 +84,7 @@ namespace InterviewProblemNSolutions
             OptimalStrategyForACoinGame();
             LongestPalindromicSubsequence();
             LongestPalindromicSubString();
+            NoOfTimesStringOccursAsSubsequenceInAnotherString();
 
             Console.ReadKey();
         }
@@ -1021,6 +1022,16 @@ namespace InterviewProblemNSolutions
                 var maxLps = DynamicProgramming.LongestPalindromicSubString(input, len);                    // DP Tabulation
                 Console.WriteLine($" Length of Longest Palindromic SubString LPS in '{input}' is of length: '{maxLps}'");
             }
+        }
+
+        public static void NoOfTimesStringOccursAsSubsequenceInAnotherString()
+        {
+            // GFG https://www.geeksforgeeks.org/find-number-times-string-occurs-given-string/
+            Utility.Print("Problem - 37 Find number of times a string occurs as a subsequence in given string (p. 816)");
+            string text = "GeeksforGeeks";
+            string pattern = "Gks";
+            var times = DynamicProgramming.TimesStringAOccursAsSubsequenceInStringB(text, text.Length, pattern, pattern.Length);
+            Console.WriteLine($" No of times '{pattern}' appears as subsequence in '{text}' is: {times}");
         }
     }
 }

@@ -949,5 +949,30 @@ namespace InterviewProblemNSolutions
             return maxLen;
         }
 
+        // Time O(n^2) || Space O(n^2)
+        public static int TimesStringAOccursAsSubsequenceInStringB(string text, int lenA, string pattern, int lenB)
+        {
+            int[,] count = new int[lenA + 1, lenB + 1];
+
+            // If text string is empty, no subsequence possible
+            for (int i = 0; i <= lenB; i++)
+                count[0, i] = 0;
+
+            // If pattern string is empty, if empty string is to be match every text string will match for empty scenario atleast once
+            for (int i = 0; i <= lenA; i++)
+                count[i, 0] = 1;
+
+            for (int i = 1; i <= lenA; i++)          // text length
+                for (int j = 1; j <= lenB; j++)      // pattern length
+                    // last characters match than we can choose either to include them or we can try to find subsequence in shorter length text
+                    if (text[i - 1] == pattern[j - 1])
+                        count[i, j] = count[i - 1, j - 1] + count[i - 1, j];
+                    // last characters different, try reducing length of text to find an match
+                    else
+                        count[i, j] = count[i - 1, j];
+            //count.Print();
+            return count[lenA, lenB];
+        }
+
     }
 }
