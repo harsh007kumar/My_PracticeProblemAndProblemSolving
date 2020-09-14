@@ -895,6 +895,7 @@ namespace InterviewProblemNSolutions
             return Math.Max(LongestPalindromicSubsequenceRecursive(input, start, last - 1), LongestPalindromicSubsequenceRecursive(input, start + 1, last));
         }
 
+        // Tushar Roy https://youtu.be/_nCsPn7_OgI
         // Time O(n^2) || Space O(n^2)
         // DP Tabulation based bottom-up solution
         public static int LongestPalindromicSubsequence(string input, int len)
@@ -920,5 +921,33 @@ namespace InterviewProblemNSolutions
 
             return lps[0, len - 1];
         }
+
+        // https://youtu.be/UflHuQj6MVA
+        // Time O(n^2) || Space O(n^2)
+        // DP Tabulation based bottom-up solution
+        public static int LongestPalindromicSubString(string input, int len)
+        {
+            bool[,] lps = new bool[len, len];
+            int maxLen = 0;
+
+            for (int size = 0; size < len; size++)
+                for (int i = 0; i < len - size; i++)
+                {
+                    int j = i + size;
+                    var isPalindrome = false;
+
+                    if (i == j)                     // single character is palindrome of length 1
+                        isPalindrome = true;
+                    else if (i + 1 == j)            // 2 character string is palindrome if both characters match
+                        isPalindrome = input[i] == input[j];
+                    else                            // for (Len > 3), if input[first] == input[last] than check if input i+1..j-1 is palindrome or not
+                        isPalindrome = (input[i] == input[j]) && lps[i + 1, j - 1];
+
+                    lps[i, j] = isPalindrome;
+                    if (isPalindrome) maxLen = Math.Max(maxLen, j - i + 1);
+                }
+            return maxLen;
+        }
+
     }
 }

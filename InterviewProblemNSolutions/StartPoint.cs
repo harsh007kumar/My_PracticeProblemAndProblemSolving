@@ -83,6 +83,7 @@ namespace InterviewProblemNSolutions
             AllPairsShortestPathFloydWarshall();
             OptimalStrategyForACoinGame();
             LongestPalindromicSubsequence();
+            LongestPalindromicSubString();
 
             Console.ReadKey();
         }
@@ -1003,10 +1004,22 @@ namespace InterviewProblemNSolutions
                 var len = input.Length;
 
                 //var maxLps = DynamicProgramming.LongestPalindromicSubsequenceRecursive(input, 0, len - 1);    // Recursive
-                //Console.WriteLine($" Length of Longest Longest Palindromic Subsequence LPS in '{input}' is of length: '{maxLps}'");
+                //Console.WriteLine($" Length of Longest Palindromic Subsequence LPS in '{input}' is of length: '{maxLps}'");
 
                 var maxLps = DynamicProgramming.LongestPalindromicSubsequence(input, len);                    // DP Tabulation
-                Console.WriteLine($" Length of Longest Longest Palindromic Subsequence LPS in '{input}' is of length: '{maxLps}'");
+                Console.WriteLine($" Length of Longest Palindromic Subsequence LPS in '{input}' is of length: '{maxLps}'");
+            }
+        }
+
+        public static void LongestPalindromicSubString()
+        {
+            Utility.Print("Problem-36  Longest Palindromic Substring (p. 814)");
+            string[] inputArr = { "AAAABBAA", "AGDDDA", "AGCTCBMAACTGGAM", "GEEKSFORGEEKS", "ABAXAABAXABYBAXABYB" };
+            foreach (var input in inputArr)
+            {
+                var len = input.Length;
+                var maxLps = DynamicProgramming.LongestPalindromicSubString(input, len);                    // DP Tabulation
+                Console.WriteLine($" Length of Longest Palindromic SubString LPS in '{input}' is of length: '{maxLps}'");
             }
         }
     }
