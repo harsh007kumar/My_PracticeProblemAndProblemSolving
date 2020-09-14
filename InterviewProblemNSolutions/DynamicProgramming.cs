@@ -974,5 +974,34 @@ namespace InterviewProblemNSolutions
             return count[lenA, lenB];
         }
 
+        // Time O(n^2) || Space O(n^2)
+        public static int MaxSizeSquareSubMatrix(int[,] input, int row, int col)
+        {
+            int[,] m = new int[row, col];
+            int max = 0, maxI = 0, maxJ = 0;
+
+            for (int i = 0; i < row; i++)
+                for (int j = 0; j < col; j++)
+                {
+                    if (i == 0)             // for 1st row
+                        m[i, j] = input[i, j];
+                    else if (j == 0)        // for 1st col
+                        m[i, j] = input[i, j];
+                    else if (input[i, j] == 1)// right & bottom most corner has 1, check for biggest sub-square possible around it
+                        m[i, j] = 1 + Math.Min(Math.Min(m[i - 1, j], m[i, j - 1]), m[i - 1, j - 1]);
+                    else                    // right & bottom most corner has 0, subSquare not possible
+                        m[i, j] = 0;
+                    
+                    // keep updating max square found
+                    if (m[i, j] > max)
+                    {
+                        max = m[i, j];      // max size square
+                        maxI = i;           // right most row index
+                        maxJ = j;           // right most col index
+                    }
+                }
+            //m.Print(true);
+            return max;
+        }
     }
 }

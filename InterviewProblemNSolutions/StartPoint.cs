@@ -85,6 +85,7 @@ namespace InterviewProblemNSolutions
             LongestPalindromicSubsequence();
             LongestPalindromicSubString();
             NoOfTimesStringOccursAsSubsequenceInAnotherString();
+            MaxSizeSquareSUbMatrix();
 
             Console.ReadKey();
         }
@@ -1032,6 +1033,20 @@ namespace InterviewProblemNSolutions
             string pattern = "Gks";
             var times = DynamicProgramming.TimesStringAOccursAsSubsequenceInStringB(text, text.Length, pattern, pattern.Length);
             Console.WriteLine($" No of times '{pattern}' appears as subsequence in '{text}' is: {times}");
+        }
+
+        public static void MaxSizeSquareSUbMatrix()
+        {
+            Utility.Print("Problem-40  Maximum size square sub-matrix with all 1’s:(p. 819)");
+            int[,] input = { { 0, 1, 1, 0, 1 },
+                             { 1, 1, 0, 1, 0 },
+                             { 0, 1, 1, 1, 0 },
+                             { 1, 1, 1, 1, 0 },
+                             { 1, 1, 1, 1, 1 },
+                             { 0, 0, 0, 0, 0 } };
+            input.Print(true);
+            var maxSize = DynamicProgramming.MaxSizeSquareSubMatrix(input, input.GetLength(0), input.GetLength(1));
+            Console.WriteLine($" Maximum size square sub-Matrix with all 1's in above matrix can be of size {maxSize} ");
         }
     }
 }
