@@ -232,6 +232,7 @@ namespace InterviewProblemNSolutions
         }
 
         // Algo doesn't work if all numbers are -ve (add extra check for input array if all are -ve return least -ve value)
+        // KadaneAlgo()
         // Time O(n) || Space O(1)
         public static int MaxValueContinousSubsequenceInOn(int[] input)
         {
@@ -1002,6 +1003,98 @@ namespace InterviewProblemNSolutions
                 }
             //m.Print(true);
             return max;
+        }
+
+        // Tushar Roy https://youtu.be/yCQN096CwWM
+        // Time O(col x col x row) || Space O(row)
+        public static int MaximumSumRectangleSubMatrix(int[,] input, int row, int col)
+        {
+            int L, R, max = int.MinValue;
+            int maxLeft = 0, maxRt = 0, maxTop = 0, maxBottom = 0;
+
+            // Step1. Iterate thru each sub-matrix consider size/width(no of col) starting with orignal & keep moving the starting column Index
+            // Also keep track of current LeftMost & RtMost point in SubMatrix
+            // L Marks start of current sub-Matrix
+            for (L = 0; L < col; L++)                                       // Time O(column)
+            {
+                // Step2. Create 1D array of len = 'row' to store value of one column of Matrix
+                int[] tab = new int[row];
+
+                // R Marks the end of current sub-Matrix
+                for (R = L; R < col; R++)                                   // Time O(column)
+                {
+                    // Add all elements of current column to their specific index in 1D array
+                    for (int i = 0; i < row; i++)                           // Time O(row)
+                        tab[i] += input[i, R];
+
+
+                    int start = 0, last = 0;
+                    // Returns MaxValueContinousSubsequence in O(n)
+                    var currentSum = KadaneAlgo(tab, ref start, ref last);  // Time O(row)
+
+                    // If new sum is bigger than global max, update max & maximum sum Sub-Matrix coordinates
+                    if (currentSum > max)
+                    {
+                        max = currentSum;
+                        maxLeft = L;
+                        maxRt = R;
+                        maxTop = start;
+                        maxBottom = last;
+                    }
+                }
+            }
+            PrintMaxSumRectangleSubMatrix(input, maxLeft, maxRt, maxTop, maxBottom);
+            return max;
+        }
+
+        // Time O(n) || Space O(1)
+        // Returns MaxValueContinousSubsequence, also contains check in case all -ve numbers are present in array
+        public static int KadaneAlgo(int[] input, ref int startIndex, ref int lastIndex)
+        {
+            int maxSumFoFar = int.MinValue;
+            int currSum = 0, currentStart = 0;
+            bool onePositiveNoPresent = false;
+
+            for (int i = 0; i < input.Length; i++)          // Time O(n)
+            {
+                currSum += input[i];
+                if (currSum < 0)
+                {
+                    currSum = 0;
+                    currentStart = i + 1;
+                }
+                else if (currSum > maxSumFoFar)
+                {
+                    maxSumFoFar = currSum;
+                    startIndex = currentStart;
+                    lastIndex = i;
+                    onePositiveNoPresent = true;
+                }
+            }
+            
+            // all numbers are -ve (additional check not required if we know for sure their exists atleast one +ve Integers)
+            if (!onePositiveNoPresent)                      // Time O(n)
+            {
+                maxSumFoFar = int.MinValue;
+                for (int i = 0; i < input.Length; i++)
+                    if (input[i] > maxSumFoFar)
+                    {
+                        maxSumFoFar = input[i];
+                        startIndex = lastIndex = i;
+                    }
+            }
+
+            return maxSumFoFar;
+        }
+
+        public static void PrintMaxSumRectangleSubMatrix(int[,] input, int startCol, int endCol, int startRow, int endRow)
+        {
+            for (int r = startRow; r <= endRow; r++)
+            {
+                for (int c = startCol; c <= endCol; c++)
+                    Console.Write($" \t{input[r, c]}");
+                Console.WriteLine();
+            }
         }
     }
 }

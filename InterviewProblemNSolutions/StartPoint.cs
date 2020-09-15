@@ -86,6 +86,7 @@ namespace InterviewProblemNSolutions
             LongestPalindromicSubString();
             NoOfTimesStringOccursAsSubsequenceInAnotherString();
             MaxSizeSquareSUbMatrix();
+            MaximumSumRectangle();
 
             Console.ReadKey();
         }
@@ -1047,6 +1048,29 @@ namespace InterviewProblemNSolutions
             input.Print(true);
             var maxSize = DynamicProgramming.MaxSizeSquareSubMatrix(input, input.GetLength(0), input.GetLength(1));
             Console.WriteLine($" Maximum size square sub-Matrix with all 1's in above matrix can be of size {maxSize} ");
+        }
+
+        
+        public static void MaximumSumRectangle()
+        {
+            // GFG https://www.geeksforgeeks.org/maximum-sum-rectangle-in-a-2d-matrix-dp-27/
+            Utility.Print("Problem-42  Maximum sum rectangle Sub-matrix:" +
+                " Given an n × n matrix M of positive and negative integers," +
+                " give an algorithm to find the sub-matrix with the largest possible sum.(p. 823)");
+            int[][,] inputArr = { new int[,] {{ 2, 1, -3, -4, 5 },
+                                              { 0, 6, 3, 4, 1 },
+                                              { 2, -2, -1, 4, -5 },
+                                              { -3, 3, 1, 0, 3 } },
+                                  new int[,] {{ 1, 2, -1, -4, -20},
+                                              { -8, -3, 4, 2, 1},
+                                              { 3, 8, 10, 1, 3},
+                                              { -4, -1, 1, 7, -6} } };
+            foreach (var input in inputArr)
+            {
+                input.Print();
+                var maxSum = DynamicProgramming.MaximumSumRectangleSubMatrix(input, input.GetLength(0), input.GetLength(1));
+                Console.WriteLine($" Maximum Sum Rectangular SubMatrix in above Matrix has SUM : {maxSum}\n");
+            }
         }
     }
 }
