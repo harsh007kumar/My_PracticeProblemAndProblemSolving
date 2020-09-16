@@ -88,6 +88,7 @@ namespace InterviewProblemNSolutions
             MaxSizeSquareSUbMatrix();
             MaximumSumRectangle();
             FindingOptimalJumpsToReachLast();
+            CircusTowerRoutine();
 
             Console.ReadKey();
         }
@@ -1084,6 +1085,20 @@ namespace InterviewProblemNSolutions
                 input.Print("Jump Array");
                 Console.WriteLine($" Min no of jumps required to reach end in above array is: {DynamicProgramming.OptimalJumpsToReachLastOn(input, input.Length)}\n");
             }
+        }
+
+        public static void CircusTowerRoutine()
+        {
+            Utility.Print("Problem-48  A circus is designing a tower routine(p. 827)");
+            int[,] input = { { 65, 100 }, { 70, 150 }, { 56, 90 }, { 75, 190 }, { 60, 95 }, { 68, 110 } };
+            List<Person> persons = new List<Person>();
+            for (int i = 0; i < input.GetLength(0); i++)
+            {
+                persons.Add(new Person(input[i, 0], input[i, 1]));
+                Console.Write($" Ht: {input[i, 0]} Wt: {input[i, 1]} ||");
+            }
+            var maxPersonPossible = DynamicProgramming.CircusTowerRoutine(persons, persons.Count);
+            Console.WriteLine($"\n Max person possible with above list of persons is: {maxPersonPossible}");
         }
     }
 }

@@ -12,6 +12,13 @@ namespace InterviewProblemNSolutions
         { left = north; right = south; }
     }
 
+    public class Person
+    {
+        public int ht, wt;
+        public Person(int height, int weight)
+        { ht = height; wt = weight; }
+    }
+
     public static class DynamicProgramming
     {
         static int[] minSteps = new int[100];
@@ -490,7 +497,7 @@ namespace InterviewProblemNSolutions
             Console.WriteLine();
         }
 
-        // This Bridge Problem is variation of LIS i.e, LongestIncreasingSubsequence, other similar ex are 'Stacking Boxes over each other for Max Height'
+        // This Bridge Problem is variation of LIS i.e, LongestIncreasingSubsequence, other similar ex are 'Stacking Boxes over each other for Max Height' & 'Circus Tower Routine'
         // Time O(n^2) || Space O(n)
         public static int MaxBridges(List<CityPair> cities, int len)
         {
@@ -1155,6 +1162,27 @@ namespace InterviewProblemNSolutions
                     reserveLadderReach = ladderAti;
             }
             return jumps;
+        }
+
+        // Time O(n^2) || Space O(n)
+        // Solution is based upon LIS(LongestIncreasingSubsequence) approach
+        public static int CircusTowerRoutine(List<Person> input, int len)
+        {
+            int maxPplPossible = 0;
+            // sort initial list by height
+            input = input.OrderBy(p => p.ht).Reverse().ToList();
+
+            int[] tab = new int[len];
+
+            for (int i = 0; i < len; i++)
+            {
+                tab[i] = 1;         // default value min 1 person is always possible
+                for (int j = 0; j < i; j++)
+                    if (input[j].wt > input[i].wt && tab[i] < 1 + tab[j])
+                        tab[i] = 1 + tab[j];
+                maxPplPossible = Math.Max(maxPplPossible, tab[i]);
+            }
+            return maxPplPossible;
         }
     }
 }
