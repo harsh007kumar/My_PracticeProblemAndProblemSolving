@@ -1096,5 +1096,65 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine();
             }
         }
+
+        // Time O(n^2) || Space O(n)
+        // Solution is based upon LIS(LongestIncreasingSubsequence) approach
+        public static int OptimalJumpsToReachLast(int[] input, int len)
+        {
+            // base case, if input array is empty or value at 0th index is zero means, no further jump possible
+            if (len == 0 || input[0] == 0) return int.MaxValue;
+
+            // array to hold min jumps required till given index
+            int[] minJumps = new int[len];
+
+            minJumps[0] = 0;                    // as 0 jumps required to reach 1st index
+
+            // iterate thru each index starting from start and find min no of jumps to reach that index
+            for (int i = 1; i < len; i++)
+            {
+                minJumps[i] = int.MaxValue;     // Set default value
+                for (int j = 0; j < i; j++)
+                    // If Jump Possible
+                    if (input[j] >= i - j)
+                        // update jump if shorter path found
+                        minJumps[i] = Math.Min(minJumps[i], 1 + minJumps[j]);
+            }
+            return minJumps[len - 1];
+        }
+
+        // Time O(n) || Space O(1)
+        public static int OptimalJumpsToReachLastOn(int[] input, int len)
+        {
+            if (len == 0 || input[0] == 0) return int.MaxValue;
+
+            int jumps = 0, currLadderReach = 0, reserveLadderReach = 0;
+
+            for (int i = 0; i < len; i++)
+            {
+                var ladderAti = input[i];
+
+                // keep updating reserve ladder at each step (if found one with further reach)
+                reserveLadderReach = Math.Max(reserveLadderReach - 1, ladderAti);
+
+                currLadderReach--;
+
+                // break if current ladder long enouf to reach last index
+                if (i + currLadderReach >= len - 1)
+                    return jumps;
+
+                // if current ladder runs out switch to reserve one and increament the jumps counter
+                if (currLadderReach <= 0)
+                {
+                    currLadderReach = reserveLadderReach;
+                    reserveLadderReach = 0;
+                    jumps++;
+                }
+
+                // if ladder at ith index is shorter than currLadderReach ignore it, if greater than check if it also greater than reserveLadderReach
+                if (ladderAti > currLadderReach && ladderAti > reserveLadderReach)
+                    reserveLadderReach = ladderAti;
+            }
+            return jumps;
+        }
     }
 }

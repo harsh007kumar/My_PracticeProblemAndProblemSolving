@@ -87,6 +87,7 @@ namespace InterviewProblemNSolutions
             NoOfTimesStringOccursAsSubsequenceInAnotherString();
             MaxSizeSquareSUbMatrix();
             MaximumSumRectangle();
+            FindingOptimalJumpsToReachLast();
 
             Console.ReadKey();
         }
@@ -994,7 +995,7 @@ namespace InterviewProblemNSolutions
                 var maxWinValue = DynamicProgramming.OptimalStrategy(input, len);                       // Tabulation 
                 //var maxWinValue = DynamicProgramming.OptimalStrategyMemo(input, 0, len - 1, cache);     // Memoization
                 //var maxWinValue = DynamicProgramming.OptimalStrategyGameRecursive(input, 0, len - 1);   // Recursive Brute Force 
-                Console.WriteLine($" Mav value Player1 (us) can get with above set of values : {maxWinValue}\n");
+                Console.WriteLine($" Max value Player1 (us) can get with above set of values : {maxWinValue}\n");
             }
         }
 
@@ -1070,6 +1071,18 @@ namespace InterviewProblemNSolutions
                 input.Print();
                 var maxSum = DynamicProgramming.MaximumSumRectangleSubMatrix(input, input.GetLength(0), input.GetLength(1));
                 Console.WriteLine($" Maximum Sum Rectangular SubMatrix in above Matrix has SUM : {maxSum}\n");
+            }
+        }
+
+        public static void FindingOptimalJumpsToReachLast()
+        {
+            // Problem undestanding https://youtu.be/vBdo7wtwlXs
+            Utility.Print("Problem-45  Finding Optimal Number of Jumps To Reach Last Element:(p. 824)");
+            int[][] inputArr = { new int[] { 1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9 }, new int[] { 1, 1 , 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
+            foreach (var input in inputArr)
+            {
+                input.Print("Jump Array");
+                Console.WriteLine($" Min no of jumps required to reach end in above array is: {DynamicProgramming.OptimalJumpsToReachLastOn(input, input.Length)}\n");
             }
         }
     }
