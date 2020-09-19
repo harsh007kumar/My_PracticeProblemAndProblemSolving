@@ -15,6 +15,7 @@ namespace InterviewProblemNSolutions
             DutchFlagProblem();
             EventAndDelegate();
             CircularPetrolPumpProblem();
+            MultiplyLargeNumbersRepresentedAsString();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -190,6 +191,19 @@ namespace InterviewProblemNSolutions
                 }
                 var startAtIndex = DailyProblem.PetrolPump(pumps, pumps.Count);
                 Console.WriteLine($" To Complete Entire circle Start at Pump with Index: \t{startAtIndex}\n");
+            }
+        }
+
+        public static void MultiplyLargeNumbersRepresentedAsString()
+        {
+            Utility.Print("Given two very big numbers (each more than 500 digits), multiply them.");
+            string[][] numbers = { new string[] { "987", "321" }, new string[] { "4567", "123" }, new string[] { "654154154151454545415415454", "63516561563156316545145146514654" } };
+            foreach (var pair in numbers)
+            {
+                var num1 = pair[0];
+                var num2 = pair[1];
+                var result = DailyProblem.MultiplyLargeNumbersRepresentedAsString(num1, num1.Length, num2, num2.Length);
+                Console.WriteLine($" Multiplication of below numbers\n \tNum1: \t{num1}\n \tNum2: \t{num2}\n \tResult: \t{result}\n");
             }
         }
 
