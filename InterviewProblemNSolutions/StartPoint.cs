@@ -16,6 +16,7 @@ namespace InterviewProblemNSolutions
             EventAndDelegate();
             CircularPetrolPumpProblem();
             MultiplyLargeNumbersRepresentedAsString();
+            IsomorphicStrings();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -204,6 +205,20 @@ namespace InterviewProblemNSolutions
                 var num2 = pair[1];
                 var result = DailyProblem.MultiplyLargeNumbersRepresentedAsString(num1, num1.Length, num2, num2.Length);
                 Console.WriteLine($" Multiplication of below numbers\n \tNum1: \t{num1}\n \tNum2: \t{num2}\n \tResult: \t{result}\n");
+            }
+        }
+
+        public static void IsomorphicStrings()
+        {
+            // https://leetcode.com/problems/isomorphic-strings/submissions/
+            Utility.Print("LeetCode#205. Isomorphic Strings");
+            string[][] inputArr = { new string[] { "ab", "aa" }, new string[] { "egg", "add" }, new string[] { "foo", "bar" }, new string[] { "paper", "title" } };
+            foreach (var pair in inputArr)
+            {
+                var input = pair[0];
+                var pattern = pair[1];
+                var isISO = DailyProblem.IsomorphicStrings(input, pattern);
+                Console.WriteLine($"Str1: {input} & Str2: {pattern} \t are IsoMorhpic: {isISO}");
             }
         }
 

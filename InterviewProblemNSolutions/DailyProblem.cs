@@ -42,7 +42,7 @@ namespace InterviewProblemNSolutions
 
 
         /// <summary>
-        /// Time O(n*m), where n = length of first number and m = length of second number || Space O(1)
+        /// Time O(n*m), where n = length of first number and m = length of second number || Space O(m)
         /// Returns multiplication of two numbers very long numbers(can't fit in memory, numbers can be of 500+ digits long)
         /// </summary>
         /// <param name="num1"></param>
@@ -131,5 +131,32 @@ namespace InterviewProblemNSolutions
                 s1 = "0" + s1;
         }
 
+        // Time O(n) || Space O(1) as N = no of unique characters enteries in HashTable = ASCII value = 256
+        public static bool IsomorphicStrings(string input, string pattern)
+        {
+            Dictionary<char, char> myDict = new Dictionary<char, char>();
+            HashSet<char> valueExist = new HashSet<char>();
+            int len = input.Length;     // pattern length
+            if (pattern.Length != len)
+                return false;
+
+            for (int i = 0; i < len; i++)
+            {
+                if (myDict.ContainsKey(input[i]))
+                {
+                    if (myDict[input[i]] != pattern[i]) return false;       // Key's value doesn'T matches with current character
+                }
+                else                    // new character encountered
+                {
+                    if (valueExist.Contains(pattern[i])) return false;      // T key already associated with another char from S
+                    else
+                    {
+                        myDict.Add(input[i], pattern[i]);                   // add key=char from S & its value=char from T
+                        valueExist.Add(pattern[i]);                         // also add value to HashSet
+                    }
+                }
+            }
+            return true;
+        }
     }
 }
