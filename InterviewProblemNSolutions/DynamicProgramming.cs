@@ -468,7 +468,7 @@ namespace InterviewProblemNSolutions
             int[] tab = new int[len];
             int maxLen = 1;
 
-            // set default value in table as 1 as min len of sequencec can b 1
+            // set default value in table as 1 as min len of sequence can be 1
             for (int i = 0; i < len; i++)
                 tab[i] = 1;
 
@@ -875,7 +875,7 @@ namespace InterviewProblemNSolutions
                 {
                     int j = i + size;
                     if (i == j)                 // base case 1, considering only 1 element in array
-                        cache[i, j] = input[i++];
+                        cache[i, j] = input[i];
                     else
                     {
                         x = i + 2 <= j ? cache[i + 2, j] : 0;
@@ -1004,7 +1004,7 @@ namespace InterviewProblemNSolutions
                     if (m[i, j] > max)
                     {
                         max = m[i, j];      // max size square
-                        maxI = i;           // right most row index
+                        maxI = i;           // bottom most row index
                         maxJ = j;           // right most col index
                     }
                 }

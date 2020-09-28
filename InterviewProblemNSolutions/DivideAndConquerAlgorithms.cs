@@ -109,10 +109,10 @@ namespace InterviewProblemNSolutions
 
             /* 1) sort the points as per X axis using some O(nlogn) sorting technique (Ex-QuickSort)
              * 2) use mid and divide the array into two halfs [0..Mid] & [Mid+1..Last]
-             * 3) recursively call ClosetPair on both halfs, which return closed distance 'minDistanceLeft' & 'minDistanceRight' respectively
+             * 3) recursively call ClosetPair on both halfs, which return closet distance 'minDistanceLeft' & 'minDistanceRight' respectively
              * 4) store min of above as 'D' i.e, D = Math.Min(minDistanceLeft,minDistanceRight)
              * 5) create a Strip which include Points around Median of original array within D distance,
-             *    i.e, points that are max 'D' distance from Median.X either on left side or right side or median
+             *    i.e, points that are max 'D' distance from Median.X either on left side or right side of median
              * 6) Sort the Strip[] of points as per 'Y' axis using some O(nlogn) sorting technique (Ex-QuickSort)
              * 7) Find and return min distance b/w pair of points present in Strip lets call it D'
              *    [ This step takes constant time O(n) as we are checking only point which are D distance apart from given points,
@@ -149,7 +149,7 @@ namespace InterviewProblemNSolutions
             var dDistance = Math.Min(minDistanceLeft, minDistanceRight);    // get min of above
             var strip = Strip(points, points[mid], dDistance);              // create strip which include points at max dDistance apart from mid point
 
-            var yAxisSortedStrip = strip.OrderBy(p1 => p1.X).ToArray();     // sort strip using O(nlogn) sorting algo Ex- QuickSort/MergeSort, for simplicity using LINQ
+            var yAxisSortedStrip = strip.OrderBy(p1 => p1.Y).ToArray();     // sort strip using O(nlogn) sorting algo Ex- QuickSort/MergeSort, for simplicity using LINQ
             var dDash = StripCloset(yAxisSortedStrip, dDistance);           // find min distance among points in Strip || Time O(n)
 
             return Math.Min(dDistance, dDash);

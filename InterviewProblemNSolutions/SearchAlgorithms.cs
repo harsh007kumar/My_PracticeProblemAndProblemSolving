@@ -162,6 +162,7 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" Pair '{input[p1]} {input[p2]}' & '{input[p3]}' matches/closet to Sum : {sum}");
         }
 
+        // Time O(logn)
         public static int IncreasingSequence(int[] input, int start, int last)
         {
             while (start <= last)
@@ -217,9 +218,9 @@ namespace InterviewProblemNSolutions
                 if (low == high)
                 { pivot = low; break; }
                 else if (low == high - 1)
-                { pivot = Math.Max(low, high); break; }
+                { pivot = input[low] > input[high] ? low : high; break; }
 
-                var mid = low + (high + low) / 2;
+                var mid = low + (high - low) / 2;
 
                 if (mid < high && input[mid] > input[mid] + 1) return mid;
                 else if (low < mid && input[mid - 1] > input[mid]) return mid - 1;
