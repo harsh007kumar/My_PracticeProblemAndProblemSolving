@@ -1228,12 +1228,18 @@ namespace InterviewProblemNSolutions
         }
 
         // Bottom-Up Tabulation based solution // Time O(n^3) || Space O(n^2)
+        // Function which returns true if for given input there exists such a set where each substrings is present in dictionary & also prints selected Words
+        // Ex: for string "code" returns true if dictionary contains 'c','od','e' or excat word "code"
         public static bool WordBreakProblemTabulation(string input, HashSet<string> dictionary)
         {
             var len = input.Length;
             if (input == null || len < 1) return false;
 
-            bool[,] tab = new bool[len, len];
+            int[,] tab = new int[len, len];
+
+            for (int i = 0; i < len; i++)
+                for (int j = 0; j < len; j++)
+                    tab[i, j] = -1;                                     // set default -1 to indicate word/substring of words not found in Dictionary
 
             for (int size = 1; size <= len; size++)                     // size of current substring start from 1 to entire length of input
                 for (int i = 0; i <= len - size; i++)                   // start index in input from where we consider substring
@@ -1242,15 +1248,40 @@ namespace InterviewProblemNSolutions
                     var substring = input.Substring(i, size);           // extract string for ease of use
                     
                     if (dictionary.Contains(substring))                 // if given substring exists in dictionary mark this True and continue onto next string
-                    { tab[i, j] = true; continue; }
+                    { tab[i, j] = j; continue; }
 
                     // looking for an index i.e. 'splitAT' so that both left & right substring return true
                     for (int splitAt = i; splitAt <= j; splitAt++)
-                        if (tab[i, splitAt] && tab[splitAt + 1, j])
-                        { tab[i, j] = true; break; }
+                        if (tab[i, splitAt] != -1 && tab[splitAt + 1, j] != -1)
+                        { tab[i, j] = splitAt; break; }
                 }
+            
+            // if subsets of words for input which exists in Dictionary found print them & return True
+            var found = tab[0, len - 1] != -1;
+            if (found) PrintWordsInWordBreakProblem(tab, input, len);
+            return found;
+        }
 
-            return tab[0, len - 1];
+        // Time O(n)
+        public static void PrintWordsInWordBreakProblem(int[,] arr, string input, int len)
+        {
+            Console.Write($"\n Words which were found in dictionary are: \t");
+            int i = 0, j = len - 1, k;
+            while(i<=j)
+            {
+                k = arr[i, j];
+                if (j == k)     // entire word found, print word & exit
+                { 
+                    Console.Write($" \t{input.Substring(i, j - i + 1)}");
+                    break; 
+                }
+                else            // else print left half n continue to search for remaining words in right half
+                { 
+                    var p = Math.Max(k, 1); // needed hence we are printing character on 0th index hence add 1 to length
+                    Console.Write($" \t{input.Substring(i, p)}"); 
+                }
+                i = k + 1;      // keeping interating on right half
+            }
         }
     }
 }
