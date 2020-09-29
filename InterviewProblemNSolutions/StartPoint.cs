@@ -91,6 +91,7 @@ namespace InterviewProblemNSolutions
             MaximumSumRectangle();
             FindingOptimalJumpsToReachLast();
             CircusTowerRoutine();
+            WordBreakProblem();
 
             Console.ReadKey();
         }
@@ -1128,6 +1129,29 @@ namespace InterviewProblemNSolutions
             }
             var maxPersonPossible = DynamicProgramming.CircusTowerRoutine(persons, persons.Count);
             Console.WriteLine($"\n Max person possible with above list of persons is: {maxPersonPossible}");
+        }
+
+        
+        // GFG https://www.geeksforgeeks.org/word-break-problem-dp-32/
+        public static void WordBreakProblem()
+        {
+            /* Problem Statemenet: Given an input string and a dictionary of words,
+             * find out if the input string can be segmented into a space-separated sequence of dictionary words
+             */
+            Utility.Print("WordBreakProblem");
+            HashSet<string>[] dictonaryArr = { new HashSet<string>() { "i", "a", "am", "ace" },
+                                                new HashSet<string>() { "c", "od", "e" } };
+            string[] inputArr = { "code", "iamace" };
+            foreach (var dictionary in dictonaryArr)
+                foreach (var input in inputArr)
+                {
+                    var memo = new Dictionary<string, bool>();
+                    dictionary.Print();
+                    //var result = DynamicProgramming.WordBreakProblemRecursive(input, dictionary);
+                    //var result = DynamicProgramming.WordBreakProblemMemo(input, dictionary, memo);
+                    var result = DynamicProgramming.WordBreakProblemTabulation(input, dictionary);
+                    Console.WriteLine($"\n For above Dictonary given sentence \'{input}\' can be split into words which exists: \t{result}");
+                }
         }
     }
 }

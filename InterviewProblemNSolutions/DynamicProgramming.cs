@@ -1184,5 +1184,73 @@ namespace InterviewProblemNSolutions
             }
             return maxPplPossible;
         }
+
+        // recursive solution // Time O(n^3) || Space O(1)
+        // Function which returns true if in input there exists a such a set when each substrings which is present in dictionary else false
+        // Ex: for string "code" returns true if dictionary contains 'c','od','e' or excat word "code"
+        public static bool WordBreakProblemRecursive(string input, HashSet<string> dictionary)
+        {
+            var len = input.Length;
+            if (input == null || len < 1) return false;                 // null input or blank string
+            if (dictionary.Contains(input)) return true;                // entire give word is present in dictonary
+            // try spliting the string into two part starting with 1 characters only on left if that is present in dictionary
+            // check right half recursively if it yields true
+            for (int i = 0; i < len; i++)
+                if (dictionary.Contains(input.Substring(0, i))          // substring from 0th index of length i present in Dictionary
+                    && WordBreakProblemRecursive(input.Substring(i, len - i), dictionary))   // & check recursively remaining substring excluding above part returns true
+                    return true;
+
+            return false;
+        }
+
+        // Top-Down Memoization based solution // Time O(n^2) || Space O(n^2)
+        public static bool WordBreakProblemMemo(string input, HashSet<string> dictionary, Dictionary<string,bool> memo)
+        {
+            var len = input.Length;
+            if (input == null || len < 1) return false;                 // null input or blank string
+
+            if (dictionary.Contains(input) ||                           // entire word is present in dictonary
+                (memo.ContainsKey(input) && memo[input]))               // or we have previously calculated this sub-problem/string and result was true
+                return true;
+
+            bool result = false;
+            // try spliting the string into two part starting with 1 characters only on left if that is present in dictionary
+            // check right half recursively if it yields true
+            for (int i = 0; i < len; i++)
+                // substring from 0th index of length i present in Dictionary && check recursively remaining substring excluding first half part returns true
+                if (dictionary.Contains(input.Substring(0, i)) && WordBreakProblemMemo(input.Substring(i, len - i), dictionary, memo))
+                {
+                    result = true;
+                    break;
+                }
+            if (result) memo.Add(input, result);
+            return result;
+        }
+
+        // Bottom-Up Tabulation based solution // Time O(n^3) || Space O(n^2)
+        public static bool WordBreakProblemTabulation(string input, HashSet<string> dictionary)
+        {
+            var len = input.Length;
+            if (input == null || len < 1) return false;
+
+            bool[,] tab = new bool[len, len];
+
+            for (int size = 1; size <= len; size++)                     // size of current substring start from 1 to entire length of input
+                for (int i = 0; i <= len - size; i++)                   // start index in input from where we consider substring
+                {
+                    int j = i + size - 1;                               //  last index in input till where we consider substring
+                    var substring = input.Substring(i, size);           // extract string for ease of use
+                    
+                    if (dictionary.Contains(substring))                 // if given substring exists in dictionary mark this True and continue onto next string
+                    { tab[i, j] = true; continue; }
+
+                    // looking for an index i.e. 'splitAT' so that both left & right substring return true
+                    for (int splitAt = i; splitAt <= j; splitAt++)
+                        if (tab[i, splitAt] && tab[splitAt + 1, j])
+                        { tab[i, j] = true; break; }
+                }
+
+            return tab[0, len - 1];
+        }
     }
 }
