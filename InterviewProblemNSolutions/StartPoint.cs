@@ -19,6 +19,8 @@ namespace InterviewProblemNSolutions
             MultiplyLargeNumbersRepresentedAsString();
             IsomorphicStrings();
             SlidingWindowMaximum();
+            SortArrayByParityII();
+
 
             // String Matching Algorithm
             BruteForceWay();
@@ -242,6 +244,16 @@ namespace InterviewProblemNSolutions
                 result.Print("Output");
                 Console.WriteLine();
             }
+        }
+
+        public static void SortArrayByParityII()
+        {
+            // https://leetcode.com/problems/sort-array-by-parity-ii/
+            Utility.Print("922. Sort Array By Parity II");
+            int[] input = { 4, 7, 5, 2 };
+            input.Print("Input");
+            DailyProblem.SortArrayByParityII(input);
+            input.Print("Output");
         }
 
         // Learn Dynamic Programming (Memoization & Tabulation)

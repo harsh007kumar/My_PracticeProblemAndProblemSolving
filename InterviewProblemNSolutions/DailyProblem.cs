@@ -207,5 +207,27 @@ namespace InterviewProblemNSolutions
             }
             return result;
         }
+
+        // Time O(n) || Space O(1)
+        public static void SortArrayByParityII(int[] A)
+        {
+            int len = A.Length, even = 0, odd = 0;
+            // sort array such that all even are on left and all odd r on right
+            while (even < len)
+            {
+                if (A[even] % 2 == 0)
+                { Utility.Swap(ref A[even], ref A[odd]); odd++; }
+                even++;
+            }
+            even = 1;
+            odd = len - 2;
+            // now swap even every 2nd index to make the series even odd
+            while (even < odd)
+            {
+                Utility.Swap(ref A[even], ref A[odd]);
+                even += 2;
+                odd -= 2;
+            }
+        }
     }
 }
