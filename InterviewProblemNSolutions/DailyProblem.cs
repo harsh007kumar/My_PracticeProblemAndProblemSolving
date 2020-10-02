@@ -158,5 +158,54 @@ namespace InterviewProblemNSolutions
             }
             return true;
         }
+
+        // Time O(n) || Space O(n-k)
+        // Returns integer array containing max element for each sliding window for given input
+        public static int[] SlidingWindowMaximum(int[] nums, int k)
+        {
+            var len = nums.Length;
+            List<int> q = new List<int>();   // to hold useful elements in current window 'k'
+            int[] result;
+
+            //if (k >= len)                       // k == entire len of input, means there would be single element in O/P
+            //{
+            //    result = new int[1] { Int32.MinValue };
+            //    foreach (var element in nums)
+            //        result[0] = Math.Max(element, result[0]);
+            //    return result;
+            //}
+
+            result = new int[len - k + 1];     // k < entire len of input, means there would be multiple element in O/P
+            for (int i = 0; i < len; i++)
+            {
+                //// prepare initial Queue for first K elements
+                //if (i < k - 1)
+                //{
+                //    // first remove all elements smallers than current element from back of queue till Queue is not empty
+                //    while (q.Count > 0 && nums[q[q.Count - 1]] < nums[i])
+                //        q.RemoveAt(q.Count - 1);
+                //    // Insert new element index at end of the Queue
+                //    q.Add(i);
+                //}
+                //else
+                //{
+                    // first remove all elements smallers than current element from back of queue till Queue is not empty, also remove element which is out of the window
+                    while (q.Count > 0 && (nums[q[q.Count - 1]] < nums[i] || q.Count == k || q[0] == i - k))
+                        if (nums[q[q.Count - 1]] < nums[i])
+                            q.RemoveAt(q.Count - 1);
+                        else //if (q.Count == k || q[0] == i - k)
+                            q.RemoveAt(0);
+                    // Insert new element at end of the Queue
+                    q.Add(i);
+
+                    // Check to not add elements to result till initial Queue is created
+                    if (i < k - 1) continue;
+
+                    // add largest from last window i.e. Front of Queue to result array
+                    result[i - k + 1] = nums[q[0]];
+                //}
+            }
+            return result;
+        }
     }
 }

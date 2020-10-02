@@ -12,11 +12,13 @@ namespace InterviewProblemNSolutions
     {
         static void Main(string[] args)
         {
+            // Daily Problem
             DutchFlagProblem();
             EventAndDelegate();
             CircularPetrolPumpProblem();
             MultiplyLargeNumbersRepresentedAsString();
             IsomorphicStrings();
+            SlidingWindowMaximum();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -220,6 +222,25 @@ namespace InterviewProblemNSolutions
                 var pattern = pair[1];
                 var isISO = DailyProblem.IsomorphicStrings(input, pattern);
                 Console.WriteLine($"Str1: {input} & Str2: {pattern} \t are IsoMorhpic: {isISO}");
+            }
+        }
+
+        public static void SlidingWindowMaximum()
+        {
+            Utility.Print("LeetCode #239. Sliding Window Maximum");
+            int[][] inputArr = { new int[] { 1, 3, -1, -3, 5, 3, 6, 7 },
+                                new int[] { 1,-1},
+                                new int[] { 7,2,4},
+                                new int[] { 1,3,1,2,0,5},
+                                new int[] {-7,-8,7,5,7,1,6,0}};
+            int[] k = { 3, 1, 2, 3, 4 };
+            for (int i = 0; i < inputArr.Length; i++)
+            {
+                inputArr[i].Print("Input");
+                var result = DailyProblem.SlidingWindowMaximum(inputArr[i], k[i]);
+                Console.Write($" For K = {k[i]}");
+                result.Print("Output");
+                Console.WriteLine();
             }
         }
 
@@ -1131,7 +1152,7 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($"\n Max person possible with above list of persons is: {maxPersonPossible}");
         }
 
-        
+        // Tushar Roy https://youtu.be/WepWFGxiwRs
         // GFG https://www.geeksforgeeks.org/word-break-problem-dp-32/
         public static void WordBreakProblem()
         {

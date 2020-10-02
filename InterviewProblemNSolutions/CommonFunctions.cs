@@ -150,6 +150,7 @@ namespace InterviewProblemNSolutions
 
         public static void Print(this HashSet<string> set)
         {
+            Console.WriteLine();
             foreach (var value in set)
                 Console.Write($" \'{value}\'");
         }
