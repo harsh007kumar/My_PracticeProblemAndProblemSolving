@@ -20,6 +20,7 @@ namespace InterviewProblemNSolutions
             IsomorphicStrings();
             SlidingWindowMaximum();
             SortArrayByParityII();
+            ShortestDistanceFromAllBuildings();
 
 
             // String Matching Algorithm
@@ -254,6 +255,37 @@ namespace InterviewProblemNSolutions
             input.Print("Input");
             DailyProblem.SortArrayByParityII(input);
             input.Print("Output");
+        }
+
+        public static void ShortestDistanceFromAllBuildings()
+        {
+            // https://leetcode.com/explore/interview/card/facebook/52/trees-and-graphs/3026/
+            Utility.Print("Shortest Distance from All Buildings");
+            /* Problem Statement: You want to build a house on an empty land which reaches all buildings in the shortest amount of distance.
+             * You can only move up, down, left and right. You are given a 2D grid of values 0, 1 or 2, where:
+             * Each 0 marks an empty land which you can pass by freely.
+             * Each 1 marks a building which you cannot pass through.
+             * Each 2 marks an obstacle which you cannot pass through.
+             * 
+             * Example:
+             * Input: [[1,0,2,0,1],[0,0,0,0,0],[0,0,1,0,0]]
+             * 1 - 0 - 2 - 0 - 1
+             * |   |   |   |   |
+             * 0 - 0 - 0 - 0 - 0
+             * |   |   |   |   |
+             * 0 - 0 - 1 - 0 - 0
+             * Output: 7 
+             * Explanation: Given three buildings at (0,0), (0,4), (2,2), and an obstacle at (0,2),
+             * the point (1,2) is an ideal empty land to build a house, as the total 
+             * travel distance of 3+3+1=7 is minimal. So return 7.
+             * 
+             * Note:
+             * There will be at least one building. If it is not possible to build such house according to the above rules, return -1.
+             */
+            int[,] input = { { 1, 0, 2, 0, 1 }, { 0, 0, 0, 0, 0 }, { 0, 0, 1, 0, 0 } };
+            input.Print();
+            var minTravelDistance = DailyProblem.ShortestDistanceFromAllBuildings(input, input.GetLength(0), input.GetLength(1));
+            Console.WriteLine($" Minimum Travel Distance to visit all buildings marked as '1' in above Matrix with obstacles marked as '2' is: {minTravelDistance}");
         }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
