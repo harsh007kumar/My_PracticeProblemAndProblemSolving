@@ -21,7 +21,7 @@ namespace InterviewProblemNSolutions
             SlidingWindowMaximum();
             SortArrayByParityII();
             ShortestDistanceFromAllBuildings();
-
+            AlienDictionary();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -286,6 +286,24 @@ namespace InterviewProblemNSolutions
             input.Print();
             var minTravelDistance = DailyProblem.ShortestDistanceFromAllBuildings(input, input.GetLength(0), input.GetLength(1));
             Console.WriteLine($" Minimum Travel Distance to visit all buildings marked as '1' in above Matrix with obstacles marked as '2' is: {minTravelDistance}");
+        }
+
+        public static void AlienDictionary()
+        {
+            // https://leetcode.com/problems/alien-dictionary/
+            Utility.Print("269. Alien Dictionary");
+            string[][] inputArr = { new string[] { "wrt", "wrf", "er", "ett", "rftt" },
+                                    new string[] { "z", "x", "z" },
+                                    new string[] { "z", "z" },
+                                    new string[] { "aac", "aabb", "aaba" },
+                                    new string[] { "aa","abb","aba"},
+                                    new string[] { "abc","ab"},
+                                    new string[] { "bsusz","rhn","gfbrwec","kuw","qvpxbexnhx","gnp","laxutz","qzxccww"} };
+            foreach (var input in inputArr)
+            {
+                input.Print("Alien Dictionary");
+                Console.WriteLine($" Derived Order of characters in above language is: \'{DailyProblem.AlienDictionary(input)}\'\n");
+            }
         }
 
         // Learn Dynamic Programming (Memoization & Tabulation)

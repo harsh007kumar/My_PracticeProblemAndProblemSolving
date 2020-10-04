@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace InterviewProblemNSolutions
 {
@@ -311,6 +312,89 @@ namespace InterviewProblemNSolutions
             visited[r, c] = true;                       // mark this spot as visited
 
             return true;
+        }
+
+        /// <summary>
+        /// Below function Derives the order of letters in alien language from list of non-empty words from the dictionary
+        /// Let N be the total number of strings in the input list.
+        /// Let C be the total length of all the words in the input list, added together.
+        /// Let U be the total number of unique letters in the alien alphabet
+        /// Time O(C) || Space O(U + min(U^2,N))
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string AlienDictionary(string[] input)
+        {
+            string lastword = "";
+            // Stores each character as Graph Vertex(u) and the alphabets which should come after it i.e. its adjacent vertex(v)
+            // Edge(u,v) meants 'u' should come before 'v' in the final ordering
+            Dictionary<char, List<char>> graph = new Dictionary<char, List<char>>();
+            foreach (var word in input)
+            {
+                // Add new Vertex in Graph
+                foreach (char ch in word)
+                    if (!graph.ContainsKey(ch)) graph.Add(ch, new List<char>());
+
+                bool isNewWordPrefix = true;
+                // Add dependencies to lastword with current word (add edges in graph)
+                for (int i = 0; i < lastword.Length && i < word.Length; i++)
+                    if (lastword[i] != word[i])
+                    {
+                        isNewWordPrefix = false;
+                        // first check if reverse/cycle dependencies won't be created by adding edge from lastword[i]] -> Add(word[i]
+                        if (CycleExists(graph, word[i], lastword[i])) return "";
+
+                        // add new edge/dependencies
+                        graph[lastword[i]].Add(word[i]);
+
+                        // BreakOut now since remaining characters won't have impact on the ordering in dictionary
+                        // Ex. for "abcd" & "aezf" so after ignoring starting same char 'a', here we catpure b->e
+                        // but can't say anything about cd & zf relative order
+                        break;
+                    }
+
+                if (isNewWordPrefix && word.Length < lastword.Length) return "";
+                lastword = word;
+            }
+            return TopSort(graph);
+        }
+
+        // Topological Sorting // Time O(V+E), V = no of vertex, E no of edges
+        public static string TopSort(Dictionary<char, List<char>> graph)
+        {
+            HashSet<char> visited = new HashSet<char>();        // to store visited vertices in graphs
+            Stack<char> alienDict = new Stack<char>();
+            foreach (var vertexU in graph)
+                if (!visited.Contains(vertexU.Key))
+                    TopSortUtil(graph, vertexU.Key, visited, alienDict);
+
+            StringBuilder sb = new StringBuilder();
+            while (alienDict.Count > 0)
+                sb.Append(alienDict.Pop());
+
+            return sb.ToString();
+        }
+
+        // Topological Sort using DFS
+        public static void TopSortUtil(Dictionary<char, List<char>> graph, char vertexU, HashSet<char> visited, Stack<char> alienDict)
+        {
+            if (visited.Contains(vertexU)) return;              // if already visited return
+            visited.Add(vertexU);
+
+            foreach (var adjacentVertex in graph[vertexU])      // foreach dependencies/adjacentVertexV recursively call TopSortUtil
+                if (!visited.Contains(adjacentVertex))
+                    TopSortUtil(graph, adjacentVertex, visited, alienDict);
+            
+            alienDict.Push(vertexU);                            // after all adjacent vertex are visited append vertexU to top of stack;
+        }
+
+        public static bool CycleExists(Dictionary<char, List<char>> graph, char startingNode, char LastNode)
+        {
+            foreach (var adjacentVertexV in graph[startingNode])
+                if (adjacentVertexV == LastNode) return true;   // path found
+                else if (CycleExists(graph, adjacentVertexV, LastNode)) return true;    // also check if path exists from adjacent vertices to lastNode
+
+            return false;
         }
     }
 }
