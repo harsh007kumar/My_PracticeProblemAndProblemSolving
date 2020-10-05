@@ -23,6 +23,7 @@ namespace InterviewProblemNSolutions
             ShortestDistanceFromAllBuildings();
             AlienDictionary();
             ProductOfArrayExceptSelf();
+            ContinuousSubarraySum();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -315,6 +316,24 @@ namespace InterviewProblemNSolutions
             nums.Print("Input");
             var result = DailyProblem.ProductOfArrayExceptSelf(nums, nums.Length);
             result.Print("Product of above Array except self");
+        }
+
+        public static void ContinuousSubarraySum()
+        {
+            // https://leetcode.com/problems/continuous-subarray-sum/
+            Utility.Print("523. Continuous Subarray Sum");
+            int[][] numArr = { new int[] { 23, 2, 4, 6, 7 },
+                             new int[] {23, 2, 6, 4, 7}};
+            int[] kArr = { 6, 11, 0 };
+            foreach (var nums in numArr)
+            {
+                foreach (var k in kArr)
+                {
+                    nums.Print("Input");
+                    var ans = DailyProblem.ContinuousSubarraySum(nums, k);
+                    Console.WriteLine($" In Above array subArray whose sum is in multiple of \'{k}\' present: \'{ans.Item1}\' b/w index [{ans.Item2}...{ans.Item3}]");
+                }
+            }
         }
 
         // Learn Dynamic Programming (Memoization & Tabulation)

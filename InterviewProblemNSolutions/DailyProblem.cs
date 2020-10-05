@@ -421,5 +421,32 @@ namespace InterviewProblemNSolutions
 
             return result;
         }
+
+        // Time O(n) || Space O(min(n,k))
+        public static Tuple<bool, int, int> ContinuousSubarraySum(int[] nums, int k)
+        {
+            int sumUptoI = 0;
+            Dictionary<int, int> moduloIndex = new Dictionary<int, int>();
+
+            moduloIndex.Add(0, -1);
+            for (int i = 0; i < nums.Length; i++)
+            {
+                sumUptoI += nums[i];                // update sum of elements till current index
+                var mod = k != 0 ? sumUptoI % k : sumUptoI;
+
+                /* if we have found an sum whose mod with 'k' is already present in HashTable,
+                 * signifies there exists some index i whose sumI % k=x & index j whose sumJ % k=x
+                 * Than there must be numbers in b/w i+1..j which have sum as in multiple of 'k'
+                 * a%k = x
+                 * b%k = x
+                 * (a - b) %k = x -x = 0
+                 * here a - b = the sum between i and j.
+                 */
+                if (moduloIndex.ContainsKey(mod))
+                { if (i - moduloIndex[mod] > 1) return new Tuple<bool, int, int>(true, moduloIndex[mod] + 1, i); }
+                else moduloIndex.Add(mod, i);
+            }
+            return new Tuple<bool, int, int>(false, -1, -1);
+        }
     }
 }
