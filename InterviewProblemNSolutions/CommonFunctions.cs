@@ -93,6 +93,13 @@ namespace InterviewProblemNSolutions
             Console.WriteLine();
         }
         
+        public static void Print(this string[] arr, string msg="")
+        {
+            if (msg != "") Console.Write($" Printing \'{msg}\':");
+            foreach(var word in arr)
+                Console.Write($" \'{word}\'");
+            Console.WriteLine();
+        }
 
         public static void Show(this string str) => Console.WriteLine( str);
 

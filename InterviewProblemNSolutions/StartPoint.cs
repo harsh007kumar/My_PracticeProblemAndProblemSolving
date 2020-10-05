@@ -22,6 +22,7 @@ namespace InterviewProblemNSolutions
             SortArrayByParityII();
             ShortestDistanceFromAllBuildings();
             AlienDictionary();
+            ProductOfArrayExceptSelf();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -304,6 +305,16 @@ namespace InterviewProblemNSolutions
                 input.Print("Alien Dictionary");
                 Console.WriteLine($" Derived Order of characters in above language is: \'{DailyProblem.AlienDictionary(input)}\'\n");
             }
+        }
+
+        public static void ProductOfArrayExceptSelf()
+        {
+            // https://leetcode.com/problems/product-of-array-except-self/
+            Utility.Print("238. Product of Array Except Self");
+            int[] nums = { 1, 2, 3, 4 };
+            nums.Print("Input");
+            var result = DailyProblem.ProductOfArrayExceptSelf(nums, nums.Length);
+            result.Print("Product of above Array except self");
         }
 
         // Learn Dynamic Programming (Memoization & Tabulation)

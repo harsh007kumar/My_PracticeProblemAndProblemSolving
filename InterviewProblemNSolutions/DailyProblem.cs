@@ -231,6 +231,7 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
         // Time O(M*N), M = no of buildings in Matrix and N = no of empty spots in Matrix(time for one BFS traversal) || Space O(rows*cols)
         public static int ShortestDistanceFromAllBuildings(int[,] input, int rows, int cols)
         {
@@ -314,6 +315,7 @@ namespace InterviewProblemNSolutions
             return true;
         }
 
+
         /// <summary>
         /// Below function Derives the order of letters in alien language from list of non-empty words from the dictionary
         /// Let N be the total number of strings in the input list.
@@ -395,6 +397,29 @@ namespace InterviewProblemNSolutions
                 else if (CycleExists(graph, adjacentVertexV, LastNode)) return true;    // also check if path exists from adjacent vertices to lastNode
 
             return false;
+        }
+
+        // Time O(n) || Space O(n)
+        public static int[] ProductOfArrayExceptSelf(int[] nums, int len)
+        {
+            int[] leftProduct = new int[len];
+            int[] rtProduct = new int[len];
+
+            // calculate Product for all elements on the left of given index for each index
+            leftProduct[0] = nums[0];               // copy 1st element directly
+            for (int i = 1; i < len; i++)
+                leftProduct[i] = nums[i] * leftProduct[i - 1];
+
+            // calculate Product for all elements on the rt of given index for each index
+            rtProduct[len - 1] = nums[len - 1];     // copy last element directly
+            for (int i = len - 2; i >= 0; i--)
+                rtProduct[i] = nums[i] * rtProduct[i + 1];
+
+            int[] result = new int[len];
+            for (int i = 0; i < len; i++)
+                result[i] = (i - 1 < 0 ? 1 : leftProduct[i - 1]) * (i + 1 == len ? 1 : rtProduct[i + 1]);
+
+            return result;
         }
     }
 }
