@@ -16,6 +16,7 @@ namespace InterviewProblemNSolutions
             DutchFlagProblem();
             EventAndDelegate();
             CircularPetrolPumpProblem();
+            AddBinary();
             MultiplyLargeNumbersRepresentedAsString();
             IsomorphicStrings();
             SlidingWindowMaximum();
@@ -24,6 +25,7 @@ namespace InterviewProblemNSolutions
             AlienDictionary();
             ProductOfArrayExceptSelf();
             ContinuousSubarraySum();
+            ThreeSum();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -203,6 +205,14 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void AddBinary()
+        {
+            Utility.Print("");
+            string[] str = { "11", "1" };
+            var sumOfBinary = DailyProblem.AddBinary(str[0], str[1]);
+            Console.WriteLine($" Adding Binary nums \'{str[0]}\' & \'{str[1]}\' results in: \'{sumOfBinary}\'");
+        }
+
         public static void MultiplyLargeNumbersRepresentedAsString()
         {
             Utility.Print("Given two very big numbers (each more than 500 digits), multiply them.");
@@ -333,6 +343,20 @@ namespace InterviewProblemNSolutions
                     var ans = DailyProblem.ContinuousSubarraySum(nums, k);
                     Console.WriteLine($" In Above array subArray whose sum is in multiple of \'{k}\' present: \'{ans.Item1}\' b/w index [{ans.Item2}...{ans.Item3}]");
                 }
+            }
+        }
+
+        public static void ThreeSum()
+        {
+            // https://leetcode.com/problems/3sum/
+            Utility.Print("15. 3Sum");
+            int[][] numsArr = { new int[] { -1, 0, 1, 2, -1, -4 }, new int[] { 0, 0, 0, 0 } , new int[] { 1,-1,-1,0} };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Input");
+                var results = DailyProblem.ThreeSum(nums);
+                foreach (var pair in results)
+                    Console.WriteLine($" Nums in above array which evaluate to Zero: {pair[0]} + {pair[1]} + {pair[2]} == '0'\n");
             }
         }
 
@@ -1253,16 +1277,17 @@ namespace InterviewProblemNSolutions
              */
             Utility.Print("WordBreakProblem");
             HashSet<string>[] dictonaryArr = { new HashSet<string>() { "i", "a", "am", "ace" },
-                                                new HashSet<string>() { "c", "od", "e" } };
-            string[] inputArr = { "code", "iamace" };
+                                                new HashSet<string>() { "c", "od", "e" },
+                                                new HashSet<string>() {"leet","code" } };
+            string[] inputArr = { "code", "iamace", "leetcode" };
             foreach (var dictionary in dictonaryArr)
                 foreach (var input in inputArr)
                 {
                     var memo = new Dictionary<string, bool>();
                     dictionary.Print();
                     //var result = DynamicProgramming.WordBreakProblemRecursive(input, dictionary);
-                    //var result = DynamicProgramming.WordBreakProblemMemo(input, dictionary, memo);
-                    var result = DynamicProgramming.WordBreakProblemTabulation(input, dictionary);
+                    var result = DynamicProgramming.WordBreakProblemMemo(input, dictionary, memo);
+                    //var result = DynamicProgramming.WordBreakProblemTabulation(input, dictionary);
                     Console.WriteLine($"\n For above Dictonary given sentence \'{input}\' can be split into words which exists: \t{result}");
                 }
         }

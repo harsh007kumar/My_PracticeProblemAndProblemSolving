@@ -448,5 +448,66 @@ namespace InterviewProblemNSolutions
             }
             return new Tuple<bool, int, int>(false, -1, -1);
         }
+
+        // Function adds two binary represented numbers and returns the binary sum as string
+        // Time O(n) || Space O(n)
+        public static string AddBinary(string a,string b)
+        {
+            var diffLen = a.Length - b.Length;
+            if (diffLen < 0)
+                while (diffLen++ != 0)  // append extra zero's to start of a
+                    a = "0" + a;
+            else if (diffLen > 0)
+                while (diffLen-- != 0)  // append extra zero's to start of b
+                    b = "0" + b;
+
+            int carry = 0;              // carry
+            StringBuilder sb = new StringBuilder();
+            for(int i = a.Length - 1; i >= 0; i--)
+            {
+                var val = Char.GetNumericValue(a[i]) + Char.GetNumericValue(b[i]) + carry;
+                if (val <= 1)           // val is 0 or 1
+                { sb.Append(val); carry = 0; }
+                else if (val == 2)
+                { sb.Append("0"); carry = 1; }
+                else
+                { sb.Append("1"); carry = 1; }
+                /* Instead of above 3 if else just use below
+                 * sb.Append(val%2);
+                 * carry = (val <= 1)? 0 : 1 ;
+                 */
+            }
+            if (carry == 1)
+                sb.Append("1");
+            return new string(sb.ToString().Reverse().ToArray());
+        }
+
+        // Function which returns List of Unique nums in input array whose SUM evaluate to Zero '0'
+        // Time O(n^2) || Space O(1) If just Printing, O(n) if want to return the List of such nums
+        public static IList<IList<int>> ThreeSum(int[] nums)
+        {
+            var len = nums.Length;
+            // Sort Array
+            Sorting.Sort.Heapsort(ref nums);
+
+            List<IList<int>> result = new List<IList<int>>();
+            for (int i = 0; i < len; i++)
+            {
+                // current value is greater than zero, break from the loop. Remaining values cannot sum to zero
+                // If the current value is the same as the one before, skip it
+                if (nums[i] > 0 || (i > 0 && nums[i - 1] == nums[i])) continue;
+                int start = i + 1, last = len - 1;
+                while (start < last)
+                {
+                    if (nums[start] + nums[last] + nums[i] > 0)
+                        last--;
+                    else if (nums[start] + nums[last] + nums[i] < 0)
+                        start++;
+                    else // if(nums[start] + nums[last] + nums[i]==0)
+                        result.Add(new List<int>() { nums[i], nums[start++], nums[last--] });   // to check if other pair all evaluate to 0
+                }
+            }
+            return result;
+        }
     }
 }
