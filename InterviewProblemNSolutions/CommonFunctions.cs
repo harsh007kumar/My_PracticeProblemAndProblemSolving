@@ -164,22 +164,39 @@ namespace InterviewProblemNSolutions
     }
 
     //Custom Delegate
+    // delegate <return type> <delegate-name> <parameter list>
     public delegate void MyFirstDelegate();
+    public delegate void MultiCastingDelegate(int num);
     class EventDemo
     {
-        //Custom Event
+        // Custom Event
         public event MyFirstDelegate MyFirstEvent;
+        // Delegate reference
+        public MultiCastingDelegate TriggeringEvent;
         public EventDemo()
         {
             //Method which matches Signature of Custom Delegate
-            void RegisteredMethod()
-            { Console.WriteLine("RegisteredMethod invoked"); }
+            void RegisteredMethod0() => Console.WriteLine("RegisteredMethod matching 'MyFirstDelegate' invoked");                           // matches 'MyFirstDelegate'
 
-            //Registering "RegisteredMethod" method with event
-            MyFirstEvent += new MyFirstDelegate(RegisteredMethod);
+            void RegisteredMethod1(int num) => Console.WriteLine($" '1st Method' matching 'MultiCastingDelegate' Firing with param: {num}");// matches 'MultiCastingDelegate'
+            void RegisteredMethod2(int num) => Console.WriteLine($" '2nd Method' matching 'MultiCastingDelegate' Firing with param: {num}");// matches 'MultiCastingDelegate'
 
-            //Firing custom event
+            // Registering Methods with event
+            MyFirstEvent += new MyFirstDelegate(RegisteredMethod0);
+
+            TriggeringEvent = new MultiCastingDelegate(RegisteredMethod1);
+            TriggeringEvent += new MultiCastingDelegate(RegisteredMethod2);
+            TriggeringEvent += new MultiCastingDelegate(x => Console.WriteLine($" 'Instantly created Lamda Method' registered with param: {x}"));
+
+            // Firing custom event
             MyFirstEvent();
+            TriggeringEvent(1);
+
+            // De-Registering "RegisteredMethod2" method with delegate
+            TriggeringEvent -= new MultiCastingDelegate(RegisteredMethod2);
+
+            // Firing custom event
+            TriggeringEvent(5);
         }
     }
 }

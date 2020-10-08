@@ -1218,7 +1218,7 @@ namespace InterviewProblemNSolutions
             // check right half recursively if it yields true
             for (int i = 0; i < len; i++)
                 // substring from 0th index of length i present in Dictionary && check recursively remaining substring excluding first half part returns true
-                if (dictionary.Contains(input.Substring(0, i)) && WordBreakProblemMemo(input.Substring(i, len - i), dictionary, memo))
+                if (dictionary.Contains(input.Substring(0, i)) && WordBreakProblemMemo(input.Substring(i), dictionary, memo))
                 {
                     result = true;
                     break;
@@ -1277,7 +1277,7 @@ namespace InterviewProblemNSolutions
                 }
                 else            // else print left half n continue to search for remaining words in right half
                 { 
-                    var p = Math.Max(k, 1); // needed hence we are printing character on 0th index hence add 1 to length
+                    var p = Math.Max(k, 1); // needed since we are printing character on 0th index hence add 1 to length
                     Console.Write($" \t{input.Substring(i, p)}"); 
                 }
                 i = k + 1;      // keeping interating on right half
