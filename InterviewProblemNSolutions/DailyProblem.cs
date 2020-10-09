@@ -482,6 +482,16 @@ namespace InterviewProblemNSolutions
             return new string(sb.ToString().Reverse().ToArray());
         }
 
+        // Time O(n) || Space O(n)
+        public static int[] TwoSum(int[] input, int targetVal)
+        {
+            Dictionary<int, int> dict = new Dictionary<int, int>();                             // Key = Target-currNum,Value = index of currNum
+            for (int i = 0; i < input.Length; i++)
+                if (dict.ContainsKey(input[i])) return new int[] { dict[input[i]], i };
+                else if (!dict.ContainsKey(targetVal - input[i])) dict.Add(targetVal - input[i], i);     // not already present than add
+            return new int[0];
+        }
+
         // Function which returns List of Unique nums in input array whose SUM evaluate to Zero '0'
         // Time O(n^2) || Space O(1) If just Printing, O(n) if want to return the List of such nums
         public static IList<IList<int>> ThreeSum(int[] nums)
@@ -494,8 +504,10 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < len; i++)
             {
                 // current value is greater than zero, break from the loop. Remaining values cannot sum to zero
+                if (nums[i] > 0) break;
                 // If the current value is the same as the one before, skip it
-                if (nums[i] > 0 || (i > 0 && nums[i - 1] == nums[i])) continue;
+                if (i > 0 && nums[i - 1] == nums[i]) continue;
+
                 int start = i + 1, last = len - 1;
                 while (start < last)
                 {
