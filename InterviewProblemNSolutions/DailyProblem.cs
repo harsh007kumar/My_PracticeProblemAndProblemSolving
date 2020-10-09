@@ -51,7 +51,7 @@ namespace InterviewProblemNSolutions
         /// <param name="num2"></param>
         /// <param name="len2"></param>
         /// <returns></returns>
-        public static string MultiplyLargeNumbersRepresentedAsString(string num1,int len1,string num2, int len2)
+        public static string MultiplyLargeNumbersRepresentedAsString(string num1, int len1, string num2, int len2)
         {
             if (len1 < len2)
                 MultiplyLargeNumbersRepresentedAsString(num2, len2, num1, len1);
@@ -84,7 +84,7 @@ namespace InterviewProblemNSolutions
                     carry = carryAdded / 10;
                 }
                 // append any left over carry to the result
-                if(carry>0) listOfMultiplications[i] = carry + listOfMultiplications[i];
+                if (carry > 0) listOfMultiplications[i] = carry + listOfMultiplications[i];
             }
 
             // Now we have the result of multiplications with individual digits at each index,
@@ -94,7 +94,7 @@ namespace InterviewProblemNSolutions
 
         public static string SumUpNumbersStoredAsListOfStrings(string[] numList, int len)
         {
-            for(int i=1;i<len;i++)
+            for (int i = 1; i < len; i++)
             {
                 // if there is difference in len append extra 0 to start of the numbers to make them of same length
                 var diffLen = numList[i].Length - numList[i - 1].Length;
@@ -107,7 +107,7 @@ namespace InterviewProblemNSolutions
                 string sum = "";
                 for (int j = numList[i].Length - 1; j >= 0; j--)
                 {
-                    int digitsSum = (int)Char.GetNumericValue(numList[i][j]) + (int)Char.GetNumericValue(numList[i-1][j]);
+                    int digitsSum = (int)Char.GetNumericValue(numList[i][j]) + (int)Char.GetNumericValue(numList[i - 1][j]);
                     var carryAdded = digitsSum + carry;
                     sum = carryAdded % 10 + sum;
                     carry = carryAdded / 10;
@@ -116,9 +116,9 @@ namespace InterviewProblemNSolutions
                 if (carry > 0) sum = carry + sum;
                 numList[i] = sum;
             }
-            return numList[len-1];          // last string now has sum of all the numbers above it in the list
+            return numList[len - 1];          // last string now has sum of all the numbers above it in the list
         }
-        
+
         public static string ReverseString(string str)
         {
             var charArr = str.ToCharArray();
@@ -190,20 +190,20 @@ namespace InterviewProblemNSolutions
                 //}
                 //else
                 //{
-                    // first remove all elements smallers than current element from back of queue till Queue is not empty, also remove element which is out of the window
-                    while (q.Count > 0 && (nums[q[q.Count - 1]] < nums[i] || q.Count == k || q[0] == i - k))
-                        if (nums[q[q.Count - 1]] < nums[i])
-                            q.RemoveAt(q.Count - 1);
-                        else //if (q.Count == k || q[0] == i - k)
-                            q.RemoveAt(0);
-                    // Insert new element at end of the Queue
-                    q.Add(i);
+                // first remove all elements smallers than current element from back of queue till Queue is not empty, also remove element which is out of the window
+                while (q.Count > 0 && (nums[q[q.Count - 1]] < nums[i] || q.Count == k || q[0] == i - k))
+                    if (nums[q[q.Count - 1]] < nums[i])
+                        q.RemoveAt(q.Count - 1);
+                    else //if (q.Count == k || q[0] == i - k)
+                        q.RemoveAt(0);
+                // Insert new element at end of the Queue
+                q.Add(i);
 
-                    // Check to not add elements to result till initial Queue is created
-                    if (i < k - 1) continue;
+                // Check to not add elements to result till initial Queue is created
+                if (i < k - 1) continue;
 
-                    // add largest from last window i.e. Front of Queue to result array
-                    result[i - k + 1] = nums[q[0]];
+                // add largest from last window i.e. Front of Queue to result array
+                result[i - k + 1] = nums[q[0]];
                 //}
             }
             return result;
@@ -235,7 +235,7 @@ namespace InterviewProblemNSolutions
         // Time O(M*N), M = no of buildings in Matrix and N = no of empty spots in Matrix(time for one BFS traversal) || Space O(rows*cols)
         public static int ShortestDistanceFromAllBuildings(int[,] input, int rows, int cols)
         {
-            if (input == null ) return -1;
+            if (input == null) return -1;
 
             int minDistance = Int32.MaxValue;           // To record 'count of no of buildings' present in matrix
             int buildingCount = 0;
@@ -257,7 +257,7 @@ namespace InterviewProblemNSolutions
                 for (int c = 0; c < cols; c++)
                     if (pass[r, c] == buildingCount)    // paths for no of buildings reachable from given spot match Building count
                         minDistance = Math.Min(minDistance, dist[r, c]);
-            
+
             return minDistance != Int32.MaxValue ? minDistance : -1;
         }
 
@@ -268,7 +268,7 @@ namespace InterviewProblemNSolutions
 
             // Queue for BFS traversal which will store rowId,ColId
             Queue<KeyValuePair<int, int>> q = new Queue<KeyValuePair<int, int>>();
-            
+
             // Add Starting Spot/Cell to Queue and mark it visited
             q.Enqueue(new KeyValuePair<int, int>(rowId, colId));
             visited[rowId, colId] = true;
@@ -277,12 +277,12 @@ namespace InterviewProblemNSolutions
             // Empty Marker to indicate current level is traversed
             q.Enqueue(new KeyValuePair<int, int>(-1, -1));
 
-            while (q.Count>0)
+            while (q.Count > 0)
             {
                 var currSpot = q.Dequeue();
                 var row = currSpot.Key;
                 var col = currSpot.Value;
-                
+
                 // current level Marker found increament distance from starting building
                 if (row == col && col == -1)
                 {
@@ -386,7 +386,7 @@ namespace InterviewProblemNSolutions
             foreach (var adjacentVertex in graph[vertexU])      // foreach dependencies/adjacentVertexV recursively call TopSortUtil
                 if (!visited.Contains(adjacentVertex))
                     TopSortUtil(graph, adjacentVertex, visited, alienDict);
-            
+
             alienDict.Push(vertexU);                            // after all adjacent vertex are visited append vertexU to top of stack;
         }
 
@@ -451,7 +451,7 @@ namespace InterviewProblemNSolutions
 
         // Function adds two binary represented numbers and returns the binary sum as string
         // Time O(n) || Space O(n)
-        public static string AddBinary(string a,string b)
+        public static string AddBinary(string a, string b)
         {
             var diffLen = a.Length - b.Length;
             if (diffLen < 0)
@@ -463,7 +463,7 @@ namespace InterviewProblemNSolutions
 
             int carry = 0;              // carry
             StringBuilder sb = new StringBuilder();
-            for(int i = a.Length - 1; i >= 0; i--)
+            for (int i = a.Length - 1; i >= 0; i--)
             {
                 var val = Char.GetNumericValue(a[i]) + Char.GetNumericValue(b[i]) + carry;
                 if (val <= 1)           // val is 0 or 1
@@ -520,6 +520,50 @@ namespace InterviewProblemNSolutions
                 }
             }
             return result;
+        }
+
+        // Func() returns the most common repeating word in paragraph which is not in set of banned words
+        // Time O(n), n = length of the input paragraph || Space O(n)
+        public static string MostCommonWord(string paragraph, string[] banned)
+        {
+            /* Add all banned words to HashSet to reference later in O(1) time
+             * Take each word in paragraph convert to it lower case and add to Dictionary<string,int> to maintain the count how many times it was seen in paragraph
+             * while adding word to Dictionary escape last char if its ASCII value is <65 i.e. Not a alphabet
+             * Remove all the word in Dictionary which are in Set of Banned words
+             * Iterate thru the Dictionary to find the word with Max occurence
+             */
+
+            HashSet<string> bannedSet = new HashSet<string>(banned);
+            HashSet<char> punctuation = new HashSet<char>(new char[] { '!', '?', '\'', ',', ';', '.' });
+            Dictionary<string, int> dict = new Dictionary<string, int>();
+            int maxCount = 0;
+            string commonWord = "";
+
+            // convert to lower case and split by spaces
+            foreach (var lowersCaseSpaceSplittedWord in paragraph.ToLower().Split(' '))
+            {
+                foreach (var commaSeperatedWord in lowersCaseSpaceSplittedWord.Split(','))
+                {
+                    if (commaSeperatedWord == "") continue;
+
+                    var word = commaSeperatedWord;
+
+                    // check if last char is punctuation symbols !?',;.
+                    while (punctuation.Contains(word[word.Length - 1]))
+                        word = word.Substring(0, word.Length - 1);
+
+                    // skip to next word is current word is banned
+                    if (bannedSet.Contains(word)) continue;
+
+                    // current word already present in dictionary increament count by 1
+                    if (dict.ContainsKey(word)) dict[word]++;
+                    else dict.Add(word, 1);
+
+                    if (dict[word] > maxCount)
+                    { maxCount = dict[word]; commonWord = word; }
+                }
+            }
+            return commonWord;
         }
     }
 }

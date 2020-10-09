@@ -27,6 +27,7 @@ namespace InterviewProblemNSolutions
             ContinuousSubarraySum();
             TwoSum();
             ThreeSum();
+            MostCommonWord();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -368,6 +369,25 @@ namespace InterviewProblemNSolutions
                 var results = DailyProblem.ThreeSum(nums);
                 foreach (var pair in results)
                     Console.WriteLine($" Nums in above array which evaluate to Zero: {pair[0]} + {pair[1]} + {pair[2]} == '0'\n");
+            }
+        }
+
+        public static void MostCommonWord()
+        {
+            // https://leetcode.com/problems/most-common-word/
+            Utility.Print("819. Most Common Word");
+            string[] paragraph = { "a, a, a, a, b,b,b,c, c", "Bob hit a ball, the hit BALL flew far after it was hit." };
+            string[][] banned = { new string[] { "a" }, new string[] { "hit" } };
+
+            for (int i = 0; i < paragraph.Length; i++)
+            {
+                Console.WriteLine($" Input paragraph: \"{paragraph[i]}\"");
+                Console.Write($" List of Banned words: ");
+                foreach (var bannedWord in banned[i])
+                    Console.Write($" \'{bannedWord}\'");
+
+                var mostCommonWord = DailyProblem.MostCommonWord(paragraph[i], banned[i]);
+                Console.WriteLine($"\n Most Common Word which isn't banned is: \'{mostCommonWord}\'\n");
             }
         }
 
