@@ -565,5 +565,45 @@ namespace InterviewProblemNSolutions
             }
             return commonWord;
         }
+
+
+        // Func() returns True is given partially filled board of SUDOKO is valid or not
+        // Time O(n^2) || Space O(n), where n = no of rows/col of Sudoko i.e. 9 on reducing we can express both time & space as O(1) as it's always going to be fixed val of 9x9=81 
+        public static bool ValidSudoku(char[][] board)
+        {
+            int rows = board.Length;
+            int cols = board[0].Length;
+            HashSet<char> rowPresence = new HashSet<char>();
+            HashSet<char>[] colPresence = new HashSet<char>[cols];
+            HashSet<char>[] subGrid = new HashSet<char>[rows];
+
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < cols; c++)
+                    if (board[r][c] == '.') continue;
+                    else
+                    {
+                        var ch = board[r][c];
+
+                        if (rowPresence.Contains(ch)) return false;      // if an char already present in same row return false
+                        else rowPresence.Add(ch);
+
+                        if (colPresence[c] == null) colPresence[c] = new HashSet<char>();
+                        if (colPresence[c].Contains(ch)) return false;      // if an char already present in same col return false
+                        else colPresence[c].Add(ch);
+
+                        var rIndex = r / 3;
+                        var cIndex = c / 3;
+                        var gridID = 3 * rIndex + cIndex;
+                        
+                        if (subGrid[gridID] == null) subGrid[gridID] = new HashSet<char>();
+                        if (subGrid[gridID].Contains(ch)) return false;
+                        else subGrid[gridID].Add(ch);
+                    }
+                // reset row HashSet
+                rowPresence.Clear();
+            }
+            return true;
+        }
     }
 }
