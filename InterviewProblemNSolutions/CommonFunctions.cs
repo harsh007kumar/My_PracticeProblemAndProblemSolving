@@ -94,6 +94,21 @@ namespace InterviewProblemNSolutions
             }
             Console.WriteLine();
         }
+
+        public static void Print(this int[][] arr, string msg="")
+        {
+            var row = arr.Length;
+            var col = arr[0].Length;
+            if (msg != "") Console.WriteLine($" ==== Printing \'{msg}\' 2-D int array with {row}:Row & {col}:Col ====");
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < col; j++)
+                    Console.Write($" {arr[i][j]} ||");
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
+
         public static void Print(this bool[,] arr)
         {
             var row = arr.GetLength(0);
@@ -113,6 +128,14 @@ namespace InterviewProblemNSolutions
             if (msg != "") Console.Write($" Printing \'{msg}\':");
             foreach(var word in arr)
                 Console.Write($" \'{word}\'");
+            Console.WriteLine();
+        }
+
+        public static void Print(this IList<int> iterator, string msg="")
+        {
+            if (msg != "") Console.Write($" Printing \'{msg}\':");
+            foreach (var element in iterator)
+                Console.Write($" \'{element}\'");
             Console.WriteLine();
         }
 
