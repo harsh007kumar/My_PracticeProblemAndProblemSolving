@@ -650,5 +650,62 @@ namespace InterviewProblemNSolutions
         /// <param name="num"></param>
         /// <returns></returns>
         public static int ComplimenetBase10Fastest(int num) => (num == 0) ? 1 : (num ^ ((1 << (int)(Math.Log(num, 2) + 1)) - 1));
+
+        // Reads the elements from all four border n spiralling inwards till no more element is left to read
+        // Time O(N), N = rows*cols i.e, No of elements in matrix || Space O(N)
+        public static IList<int> SpiralMatrix(int[][] matrix)
+        {
+            if (matrix == null || matrix.Length < 1) return new List<int>();
+            var row = matrix.Length;
+            var col = matrix[0].Length;
+            List<int> spiralOrder = new List<int>(row * col);
+            int top = 0, right = col - 1, bottom = row - 1, left = 0;
+            int i = 0, j = 0;
+            while (bottom >= top || right >= left)
+            {
+                // top traversal
+                if (j <= right)
+                {
+                    while (j <= right)
+                        spiralOrder.Add(matrix[i][j++]);
+                    top++;                  // update boundary
+                    i++;
+                    j--;
+                }
+                else break;
+                // right traversal
+                if (i <= bottom)
+                {
+                    while (i <= bottom)
+                        spiralOrder.Add(matrix[i++][j]);
+                    right--;                // update boundary
+                    j--;
+                    i--;
+                }
+                else break;
+                // bottom traversal
+                if (j >= left)
+                {
+                    while (j >= left)
+                        spiralOrder.Add(matrix[i][j--]);
+                    bottom--;               // update boundary
+                    i--;
+                    j++;
+                }
+                else break;
+                // left traversal
+                if (i >= top)
+                {
+                    while (i >= top)
+                        spiralOrder.Add(matrix[i--][j]);
+                    left++;                 // update boundary
+                    j++;
+                    i++;
+                }
+                else break;
+            }
+
+            return spiralOrder;
+        }
     }
 }

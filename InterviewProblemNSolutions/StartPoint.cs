@@ -30,6 +30,7 @@ namespace InterviewProblemNSolutions
             MostCommonWord();
             ValidSudoku();
             ComplimentBase10();
+            SpiralMatrix();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -419,6 +420,21 @@ namespace InterviewProblemNSolutions
             foreach (var num in inputArr)
                 Console.WriteLine($" Compliment of Base10 num: \'{num}\' is: \'{DailyProblem.ComplimenetBase10Fastest(num)}\'");
         }
+
+        public static void SpiralMatrix()
+        {
+            // https://leetcode.com/problems/spiral-matrix/
+            Utility.Print("54. Spiral Matrix");
+            int[][][] matrixArr = { new int[][] { new int[] { 1, 2, 3, }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 } },               // 1st Input
+                                    new int[][] { new int[] { 1, 2, 3, 4 }, new int[] { 5, 6, 7, 8 }, new int[] { 9, 10, 11, 12 } } };  // 2nd Input
+            foreach (var matrix in matrixArr)
+            {
+                matrix.Print("Input Matrix");
+                var spiralOrder = DailyProblem.SpiralMatrix(matrix);
+                spiralOrder.Print("Spiral Order");
+            }
+        }
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
