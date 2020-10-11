@@ -29,6 +29,7 @@ namespace InterviewProblemNSolutions
             ThreeSum();
             MostCommonWord();
             ValidSudoku();
+            ComplimentBase10();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -409,6 +410,15 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" Above partial filed SUDOKU is valid? : {DailyProblem.ValidSudoku(board)}");
         }
 
+
+        public static void ComplimentBase10()
+        {
+            // https://leetcode.com/problems/complement-of-base-10-integer/
+            Utility.Print("1009. Complement of Base 10 Integer");
+            int[] inputArr = { 5, 7, 10 };
+            foreach (var num in inputArr)
+                Console.WriteLine($" Compliment of Base10 num: \'{num}\' is: \'{DailyProblem.ComplimenetBase10Fastest(num)}\'");
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

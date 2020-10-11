@@ -605,5 +605,50 @@ namespace InterviewProblemNSolutions
             }
             return true;
         }
+
+        // Time O(Log2(N)), log of base 2 N || Space O(1)
+        public static int ComplimenetBase10(int num)
+        {
+            if (num == 0) return 1;
+            int ans = 0;
+            int multiplyer = 1;     // for calculating power of 2
+            while(num!=0)
+            {
+                var currBit = num & 1;
+                num >>= 1;          // right shifting the num can also use num/=2;
+                ans += multiplyer * (1 - currBit);  // Number in Base 10 can be represented as sum of powers of 2 (e.g. 5 which in binary is 101 = 2^2 + 2^0 )
+                multiplyer <<= 1;   // for calculating power of 2 (multiplyer *=2)
+            }
+            return ans;
+        }
+
+        public static int ComplimenetBase10Faster(int num)
+        {
+            if (num == 0) return 1;
+            int ans = 0;
+            int multiplyer = 1;     // for calculating power of 2
+            while (multiplyer <= num)
+            {
+                if ((multiplyer & num) == 0) ans += multiplyer;
+                multiplyer <<= 1;   // multiplyer *=2;
+            }
+            return ans;
+        }
+
+        /// <summary>
+        /// Time O(LogBase2(N)) as their can be atmost || Space O(1)
+        /// Explanation for given num ex- 100 LogBase10(num) gives 2 adding 1 to ans gives no of digits required to represent the number in that base.
+        /// Similar for num = 5, LogBase2(num) will give 2 adding 1 to it give 3 which is excatly no of bits required to represent the num in binary
+        /// Now right shifting 1 by no of digits required give a numbers which has just 1 bit set a 1 rest all zero
+        /// For 5 i.e. 101
+        /// 'NoOfBitsToRepresent' = 2 + 1 = 3
+        /// Now 'Mask' can be calculated by right shifting 1 NoOfBitsToRepresent times i.e. 1<< 3 = 8 i.e. 1000 in binary
+        /// Now subtracting 1 from 'Mask' us all bits reversed except the left most bit
+        /// 8 - 1 or 1000 - 1 = 0111
+        /// XOR of (Mask-1) & num = 111 ^ 101 = 010 = 2 in decimal
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public static int ComplimenetBase10Fastest(int num) => (num == 0) ? 1 : (num ^ ((1 << (int)(Math.Log(num, 2) + 1)) - 1));
     }
 }
