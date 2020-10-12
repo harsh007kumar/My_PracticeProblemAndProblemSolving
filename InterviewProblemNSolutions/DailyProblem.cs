@@ -516,7 +516,11 @@ namespace InterviewProblemNSolutions
                     else if (nums[start] + nums[last] + nums[i] < 0)
                         start++;
                     else // if(nums[start] + nums[last] + nums[i]==0)
-                        result.Add(new List<int>() { nums[i], nums[start++], nums[last--] });   // to check if other pair all evaluate to 0
+                    {
+                        result.Add(new List<int>() { nums[i], nums[start++], nums[last--] });
+                        // Increment start prv value is same to avoid duplicates in the result.
+                        while (start < last && nums[start - 1] == nums[start]) start++;
+                    }
                 }
             }
             return result;

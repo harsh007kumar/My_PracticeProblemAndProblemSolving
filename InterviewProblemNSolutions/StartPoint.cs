@@ -366,7 +366,7 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/3sum/
             Utility.Print("15. 3Sum");
-            int[][] numsArr = { new int[] { -1, 0, 1, 2, -1, -4 }, new int[] { 0, 0, 0, 0 } , new int[] { 1,-1,-1,0} };
+            int[][] numsArr = { new int[] { -1, 0, 1, 2, -1, -4 }, new int[] { 0, 0, 0, 0 }, new int[] { 1, -1, -1, 0 }, new int[] { -2, 0, 0, 2, 2 } };
             foreach (var nums in numsArr)
             {
                 nums.Print("Input");
@@ -411,7 +411,6 @@ namespace InterviewProblemNSolutions
             board.Print("SUDOKU BOARD");
             Console.WriteLine($" Above partial filed SUDOKU is valid? : {DailyProblem.ValidSudoku(board)}");
         }
-
 
         public static void ComplimentBase10()
         {
