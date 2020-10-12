@@ -707,5 +707,55 @@ namespace InterviewProblemNSolutions
 
             return spiralOrder;
         }
+
+        // Time O(N), N = no of moves given in input || Space O(9) ~O(1) 
+        public static string WinnerOfTicTacToe(int[][] moves)
+        {
+            // to count A's & B's presense across 3 rows + 3 cols + 2 diagonal
+            Dictionary<string, int>[] direction = new Dictionary<string, int>[8];
+            for (int i = 0; i < moves.Length; i++)
+            {
+                string ch = i % 2 == 0 ? "A" : "B";
+                var row = moves[i][0];
+                var col = moves[i][1];
+
+                if (direction[row] == null) direction[row] = new Dictionary<string, int>();
+                if (direction[col + 3] == null) direction[col + 3] = new Dictionary<string, int>();
+
+                // update rows
+                if (direction[row].ContainsKey(ch)) direction[row][ch]++;
+                else direction[row].Add(ch, 1);
+                // check if any player won
+                if (direction[row][ch] == 3) return ch;
+
+                
+                // update columns
+                if (direction[col + 3].ContainsKey(ch)) direction[col + 3][ch]++;
+                else direction[col + 3].Add(ch, 1);
+                // check if any player won
+                if (direction[col + 3][ch] == 3) return ch;
+
+                // update top left - bottom rt diagonal
+                if (row == col)
+                {
+                    if (direction[6] == null) direction[6] = new Dictionary<string, int>();
+                    if (direction[6].ContainsKey(ch)) direction[6][ch]++;
+                    else direction[6].Add(ch, 1);
+                    // check if any player won
+                    if (direction[6][ch] == 3) return ch;
+                }
+                // update top rt - bottom left diagonal
+                if (row + col == 2)
+                {
+                    if (direction[7] == null) direction[7] = new Dictionary<string, int>();
+                    if (direction[7].ContainsKey(ch)) direction[7][ch]++;
+                    else direction[7].Add(ch, 1);
+                    // check if any player won
+                    if (direction[7][ch] == 3) return ch;
+                }
+            }
+
+            return moves.Length < 9 ? "Pending" : "Draw";
+        }
     }
 }

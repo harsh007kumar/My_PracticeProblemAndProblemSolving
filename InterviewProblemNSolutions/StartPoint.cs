@@ -31,6 +31,7 @@ namespace InterviewProblemNSolutions
             ValidSudoku();
             ComplimentBase10();
             SpiralMatrix();
+            WinnerOfTicTacToe();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -433,6 +434,15 @@ namespace InterviewProblemNSolutions
                 var spiralOrder = DailyProblem.SpiralMatrix(matrix);
                 spiralOrder.Print("Spiral Order");
             }
+        }
+
+        public static void WinnerOfTicTacToe()
+        {
+            // https://leetcode.com/problems/find-winner-on-a-tic-tac-toe-game/
+            Utility.Print("1275. Find Winner on a Tic Tac Toe Game");
+            int[][] moves = { new int[] { 0, 0 }, new int[] { 2, 0 }, new int[] { 1, 1 }, new int[] { 2, 1 }, new int[] { 2, 2 } };
+            moves.Print("TicTac Moves");
+            Console.WriteLine($" Above moves result in : {DailyProblem.WinnerOfTicTacToe(moves)}");
         }
 
 
