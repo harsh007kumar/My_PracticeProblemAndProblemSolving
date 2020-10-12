@@ -27,6 +27,7 @@ namespace InterviewProblemNSolutions
             ContinuousSubarraySum();
             TwoSum();
             ThreeSum();
+            FourSum();
             MostCommonWord();
             ValidSudoku();
             ComplimentBase10();
@@ -373,6 +374,25 @@ namespace InterviewProblemNSolutions
                 var results = DailyProblem.ThreeSum(nums);
                 foreach (var pair in results)
                     Console.WriteLine($" Nums in above array which evaluate to Zero: {pair[0]} + {pair[1]} + {pair[2]} == '0'\n");
+            }
+        }
+
+        public static void FourSum()
+        {
+            // https://leetcode.com/problems/4sum/
+            Utility.Print("18. 4Sum");
+            int[][] numsArr = { new int[] { 1, 0, -1, 0, -2, 2 }, new int[] { }, new int[] { 0, 0, 0, 0 }, new int[] { -2, -1, -1, 1, 1, 2, 2 },
+                                new int[] { 5, 5, 3, 5, 1, -5, 1, -2 }, new int[] { -1, 0, 1, 2, -1, -4 }, new int[] { 1, -2, -5, -4, -3, 3, 3, 5 } };
+            int[] target = { 0, 0, 0, 0, 4, -1, -11 };
+            for (int i = 0; i < target.Length; i++)
+            {
+                if (i == 6)
+                    Console.WriteLine();
+                numsArr[i].Print("Input");
+                var results = DailyProblem.FourSum(numsArr[i],target[i]);
+                foreach (var pair in results)
+                    Console.WriteLine($" Nums in above array which evaluate to \'{target[i]}\': \t{pair[0]} + {pair[1]} + {pair[2]} + {pair[3]} = {target[i]}");
+                Console.WriteLine();
             }
         }
 

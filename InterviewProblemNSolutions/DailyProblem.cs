@@ -492,7 +492,7 @@ namespace InterviewProblemNSolutions
             return new int[0];
         }
 
-        // Function which returns List of Unique nums in input array whose SUM evaluate to Zero '0'
+        // Function which returns List of Three Unique nums in input array whose SUM evaluate to Zero '0'
         // Time O(n^2) || Space O(1) If just Printing, O(n) if want to return the List of such nums
         public static IList<IList<int>> ThreeSum(int[] nums)
         {
@@ -520,6 +520,45 @@ namespace InterviewProblemNSolutions
                         result.Add(new List<int>() { nums[i], nums[start++], nums[last--] });
                         // Increment start prv value is same to avoid duplicates in the result.
                         while (start < last && nums[start - 1] == nums[start]) start++;
+                    }
+                }
+            }
+            return result;
+        }
+
+        // Function which returns List of Four Unique nums in input array whose SUM evaluate to Zero '0'
+        // Time O(n^3) || Space O(1) If just Printing, O(n) if want to return the List of such nums
+        public static IList<IList<int>> FourSum(int[] nums, int target)
+        {
+            var len = nums.Length;
+            // Sort Array
+            Sorting.Sort.Heapsort(ref nums);
+
+            List<IList<int>> result = new List<IList<int>>();
+            for (int first = 0; first < len; first++)
+            {
+                // If the current value is the same as the one before, skip it
+                if (first > 0 && nums[first - 1] == nums[first]) continue;
+
+                for (int second = first + 1; second < len; second++)
+                {
+                    // If the current value is the same as the one before, skip it
+                    if (second > first + 1 && nums[second - 1] == nums[second]) continue;
+
+                    int third = second + 1, fourth = len - 1;
+                    while (third < fourth)
+                    {
+                        int sum = nums[first] + nums[second] + nums[third] + nums[fourth];
+                        if (sum > target)
+                            fourth--;
+                        else if (sum < target)
+                            third++;
+                        else // if(sum==target)
+                        {
+                            result.Add(new List<int>() { nums[first], nums[second], nums[third++], nums[fourth--] });
+                            // Increment start prv value is same to avoid duplicates in the result.
+                            while (third < fourth && nums[third - 1] == nums[third]) third++;
+                        }
                     }
                 }
             }
