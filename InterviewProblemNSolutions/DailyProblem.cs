@@ -877,6 +877,36 @@ namespace InterviewProblemNSolutions
                     return log1[0].CompareTo(log2[0]);      // if values are same compare identifier of log
             }
         }
-         
+
+        // Func returns Two elements with more than length/3 majority if they exists
+        // Time O(n) || Space O(1)
+        public static IList<int> MajorityElementII(int[] nums)
+        {
+            int? m1 = null, m2 = null;
+            int c1 = 0, c2 = 0;
+            foreach (var num in nums)
+            {
+                if (c1 == 0)
+                    if (m2 == null || m2 != num) { c1 = 1; m1 = num; }
+                else if (num == m1) c1++;
+                else if (c2 == 0)
+                    if (m1 == null || m1 != num) { c2 = 1; m2 = num; }
+                else if (num == m2) c2++;
+                // new num doesnt matches either majority number so far
+                else if (num != m1 && num != m2) { c1--; c2--; }
+            }
+
+            c1 = c2 = nums.Length / 3;
+            // verify m1 & m2 are in majority
+            foreach(var num in nums)
+            {
+                if (num == m1) c1--;
+                else if (num == m2) c2--;
+            }
+            var result = new List<int>(2);
+            if (c1 < 0 && m1 != null) result.Add((int)m1);
+            if (c2 < 0 && m2 != null) result.Add((int)m2);
+            return result;
+        }
     }
 }

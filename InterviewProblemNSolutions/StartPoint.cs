@@ -34,6 +34,7 @@ namespace InterviewProblemNSolutions
             SpiralMatrix();
             WinnerOfTicTacToe();
             ReorderDataInLogFiles();
+            MajorityElementII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -519,6 +520,20 @@ namespace InterviewProblemNSolutions
                 for (int i = 0; i < arr1.Length; i++)
                     if (arr1[i] != arr2[i]) { Console.WriteLine($" Result doesnt matches expected output"); return; };
                 Console.WriteLine(" Result matches expected output");
+            }
+        }
+
+        public static void MajorityElementII()
+        {
+            // https://leetcode.com/problems/majority-element-ii/
+            Utility.Print("229. Majority Element II");
+            int[][] numArr = { new int[] { 3, 2, 3 }, new int[] { 1 }, new int[] { 1, 2 }, new int[] { 1, 1, 1, 2, 3, 7, 8, 1, 6, 9 } };
+            foreach (var nums in numArr)
+            {
+                nums.Print("Input Array");
+                var result = DailyProblem.MajorityElementII(nums);
+                foreach (var element in result)
+                    Console.WriteLine($" Majority Element with more than n/3 majority is: {element}\n");
             }
         }
 
