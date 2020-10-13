@@ -512,7 +512,7 @@ namespace InterviewProblemNSolutions
             string[][] expectedOutput = { new string[] {"let1 art can", "let3 art zero", "let2 own kit dig", "dig1 8 1 5 1", "dig2 3 6" },
                                           new string[] { "g1 act car","a8 act zoo","ab1 off key dog","a1 9 2 3 1","zo4 4 7"} };
             for(int i=0;i<logs.Length;i++)
-                ValidateResult(DailyProblem.ReorderDataInLogFiles(logs[i]), expectedOutput[i]);
+                ValidateResult(DailyProblem.ReorderDataInLogFilesByDividingDigitsAndWordLogs(logs[i]), expectedOutput[i]);
 
             void ValidateResult(string[] arr1,string[] arr2)
             {

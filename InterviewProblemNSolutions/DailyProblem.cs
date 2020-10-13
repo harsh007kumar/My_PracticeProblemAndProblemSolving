@@ -839,5 +839,44 @@ namespace InterviewProblemNSolutions
                     return 0;
             }
         }
+
+        /// <summary>
+        /// Time (nlogn) dependent on sorting || Space O(n) since we are using addtional m/r to convert array to list
+        /// 1) Separate strings and digits
+        /// 2) Sort strings with comparer
+        /// 3) Append digits
+        /// 4) Return as array
+        /// </summary>
+        /// <param name="logs"></param>
+        /// <returns></returns>
+        public static string[] ReorderDataInLogFilesByDividingDigitsAndWordLogs(string[] logs)
+        {
+            var digitLog = new List<string>();
+            var aplhabetLog = new List<string>();
+
+            foreach (var log in logs)
+                if (Char.IsDigit(log.Split(' ')[1][0])) digitLog.Add(log);
+                else aplhabetLog.Add(log);
+
+            aplhabetLog.Sort(new LogComparetorWord());
+            aplhabetLog.AddRange(digitLog);
+            return aplhabetLog.ToArray();
+        }
+
+        public class LogComparetorWord: IComparer<String>
+        {
+            public int Compare(String x, String y)
+            {
+                // cast the object into string and splilt the string into 2 halves from 1st space character
+                string[] log1 = x.Split(new char[] { ' ' }, 2);
+                string[] log2 = y.Split(new char[] { ' ' }, 2);
+
+                var cmp = log1[1].CompareTo(log2[1]);       // compare the values
+                if (cmp != 0) return cmp;
+                else
+                    return log1[0].CompareTo(log2[0]);      // if values are same compare identifier of log
+            }
+        }
+         
     }
 }
