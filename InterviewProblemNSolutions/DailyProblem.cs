@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -799,6 +800,44 @@ namespace InterviewProblemNSolutions
             }
 
             return moves.Length < 9 ? "Pending" : "Draw";
+        }
+
+        public static string[] ReorderDataInLogFiles(string[] logs)
+        {
+            var logsList = logs.ToList();
+            logsList.Sort(new LogComparetor());
+            return logsList.ToArray();
+        }
+
+        // Time O(nlogn) || Space O(1)
+        public  class LogComparetor : IComparer<String>
+        {
+            public int Compare(String x, String y)
+            {
+                // cast the object into string and splilt the string into 2 halves from 1st space character
+                string[] log1 = x.Split(new char[] { ' ' }, 2);
+                string[] log2 = y.Split(new char[] { ' ' }, 2);
+
+                // check the first character of 2nd element is digit or not
+                bool is1DigitOrWord = Char.IsDigit(log1[1][0]);
+                bool is2DigitOrWord = Char.IsDigit(log2[1][0]);
+
+                if (!is1DigitOrWord && !is2DigitOrWord)     // both are words logs
+                {
+                    // compare the content
+                    int cmp = log1[1].CompareTo(log2[1]);
+                    if (cmp != 0) return cmp;
+                    
+                    // both logs have same word, than compare the identifiers
+                    return log1[0].CompareTo(log2[0]);
+                }
+                else if (!is1DigitOrWord && is2DigitOrWord) // first is word & second is digit
+                    return -1;
+                else if (is1DigitOrWord && !is2DigitOrWord) // first is digit & second is word
+                    return 1;
+                else                                        // both are digit logs
+                    return 0;
+            }
         }
     }
 }

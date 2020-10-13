@@ -33,6 +33,7 @@ namespace InterviewProblemNSolutions
             ComplimentBase10();
             SpiralMatrix();
             WinnerOfTicTacToe();
+            ReorderDataInLogFiles();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -432,6 +433,44 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" Above partial filed SUDOKU is valid? : {DailyProblem.ValidSudoku(board)}");
         }
 
+        public static void SudokuSolver()
+        {
+            // https://leetcode.com/problems/sudoku-solver/
+            Utility.Print("37. Sudoku Solver");
+            char[][] board = { new char[]{'5','3','.','.','7','.','.','.','.'},
+                                new char[]{'6','.','.','1','9','5','.','.','.'},
+                                new char[]{'.','9','8','.','.','.','.','6','.'},
+                                new char[]{'8','.','.','.','6','.','.','.','3'},
+                                new char[]{'4','.','.','8','.','3','.','.','1'},
+                                new char[]{'7','.','.','.','2','.','.','.','6'},
+                                new char[]{'.','6','.','.','.','.','2','8','.'},
+                                new char[]{'.','.','.','4','1','9','.','.','5'},
+                                new char[]{'.','.','.','.','8','.','.','7','9'} };
+            board.Print("SUDOKU BOARD");
+            char[][] expected= { new char[]{'5','3','4','6','7','8','9','1','2'},
+                                new char[] {'6','7','2','1','9','5','3','4','8'},
+                                new char[] {'1','9','8','3','4','2','5','6','7' },
+                                new char[] {'8','5','9','7','6','1','4','2','3' },
+                                new char[] {'4','2','6','8','5','3','7','9','1' },
+                                new char[] {'7','1','3','9','2','4','8','5','6' },
+                                new char[] {'9','6','1','5','3','7','2','8','4' },
+                                new char[] {'2','8','7','4','1','9','6','3','5' },
+                                new char[] {'3','4','5','2','8','6','1','7','9' } };
+            //var result = DailyProblem.SudokuSolver(board);
+            //ValidateResult(result, expected);
+
+            bool ValidateResult(char[][] c1, char[][] c2)
+            {
+                int row = c1.Length;
+                int col = c1[0].Length;
+                for (int r = 0; r < row; r++)
+                    for (int c = 0; c < col; c++)
+                        if (c1[r][c] != c2[r][c])
+                            return false;
+                return true;
+            }
+        }
+
         public static void ComplimentBase10()
         {
             // https://leetcode.com/problems/complement-of-base-10-integer/
@@ -462,6 +501,25 @@ namespace InterviewProblemNSolutions
             int[][] moves = { new int[] { 0, 0 }, new int[] { 2, 0 }, new int[] { 1, 1 }, new int[] { 2, 1 }, new int[] { 2, 2 } };
             moves.Print("TicTac Moves");
             Console.WriteLine($" Above moves result in : {DailyProblem.WinnerOfTicTacToe(moves)}");
+        }
+
+        public static void ReorderDataInLogFiles()
+        {
+            // https://leetcode.com/problems/reorder-data-in-log-files/
+            Utility.Print("937. Reorder Data in Log Files");
+            string[][] logs = { new string[] { "dig1 8 1 5 1", "let1 art can", "dig2 3 6", "let2 own kit dig", "let3 art zero" },
+                                new string[] { "a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"} };
+            string[][] expectedOutput = { new string[] {"let1 art can", "let3 art zero", "let2 own kit dig", "dig1 8 1 5 1", "dig2 3 6" },
+                                          new string[] { "g1 act car","a8 act zoo","ab1 off key dog","a1 9 2 3 1","zo4 4 7"} };
+            for(int i=0;i<logs.Length;i++)
+                ValidateResult(DailyProblem.ReorderDataInLogFiles(logs[i]), expectedOutput[i]);
+
+            void ValidateResult(string[] arr1,string[] arr2)
+            {
+                for (int i = 0; i < arr1.Length; i++)
+                    if (arr1[i] != arr2[i]) { Console.WriteLine($" Result doesnt matches expected output"); return; };
+                Console.WriteLine(" Result matches expected output");
+            }
         }
 
 
