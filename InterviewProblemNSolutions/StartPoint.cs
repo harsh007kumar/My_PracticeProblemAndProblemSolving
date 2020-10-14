@@ -34,6 +34,7 @@ namespace InterviewProblemNSolutions
             SpiralMatrix();
             WinnerOfTicTacToe();
             ReorderDataInLogFiles();
+            MajorityElement();
             MajorityElementII();
 
             // String Matching Algorithm
@@ -520,6 +521,18 @@ namespace InterviewProblemNSolutions
                 for (int i = 0; i < arr1.Length; i++)
                     if (arr1[i] != arr2[i]) { Console.WriteLine($" Result doesnt matches expected output"); return; };
                 Console.WriteLine(" Result matches expected output");
+            }
+        }
+
+        public static void MajorityElement()
+        {
+            // https://leetcode.com/problems/majority-element/
+            Utility.Print("169. Majority Element");
+            int[][] numsArr = { new int[] { 3, 2, 3 }, new int[] { 2, 2, 1, 1, 1, 2, 2 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Input Array");
+                Console.WriteLine($" Majority Element with more than n/2 majority is: {DailyProblem.MajorityElement(nums)}\n");
             }
         }
 

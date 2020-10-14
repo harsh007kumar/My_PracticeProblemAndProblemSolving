@@ -878,7 +878,32 @@ namespace InterviewProblemNSolutions
             }
         }
 
-        // Func returns Two elements with more than length/3 majority if they exists
+
+        /// <summary>
+        /// Func returns elements with more than length/2 majority, Using Boyer-Moore Voting
+        /// Time O(n) || Space O(1)
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static int MajorityElement(int[] nums)
+        {
+            int? majority = null;
+            int count = 0;
+            // Boyer-Moore Voting Algorithm
+            foreach (var num in nums)
+            {
+                if (count == 0)
+                {
+                    majority = num;
+                    count = 1;
+                }
+                else if (num == majority) count++;
+                else count--;
+            }
+            return (int)majority;
+        }
+
+        // Func returns Two elements with more than length/3 majority if they exists, Using Boyer-Moore Voting
         // Time O(n) || Space O(1)
         public static IList<int> MajorityElementII(int[] nums)
         {
