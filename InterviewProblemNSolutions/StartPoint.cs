@@ -37,6 +37,7 @@ namespace InterviewProblemNSolutions
             MajorityElement();
             MajorityElementII();
             LRUCache();
+            CompressedStringIterator();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -568,6 +569,32 @@ namespace InterviewProblemNSolutions
             Console.WriteLine(lRUCache.Get(4));    // return 4
         }
 
+
+        public static void CompressedStringIterator()
+        {
+            // https://leetcode.com/problems/design-compressed-string-iterator/
+            Utility.Print("604. Design Compressed String Iterator");
+            string[] compressed = { "L1e2t1C1o1d1e1", "L10e2t1C1o1d1e11", "Q2s4n8V18" };
+            string[][] inputType = { new string[] { "StringIterator", "next", "next", "next", "next", "next", "next", "hasNext", "next", "hasNext", "next", "hasNext" },
+                                        new string[] { "StringIterator", "next", "next", "next", "next", "next", "next", "hasNext", "next", "hasNext" },
+                                        new string[] { "StringIterator", "next", "next", "next", "next", "hasNext", "next", "next", "next", "hasNext", "next", "hasNext", "next", "next", "next", "next", "next", "next", "next", "next", "next", "hasNext", "next", "next", "next", "next", "hasNext", "next", "next", "next", "next", "next", "next", "hasNext", "next", "next", "next", "next", "next", "next", "next", "next", "hasNext", "next", "next", "hasNext", "next", "next", "next", "next", "hasNext", "next", "hasNext", "hasNext", "next", "next", "next", "next", "hasNext", "next", "next", "next", "next", "next", "hasNext", "next", "next", "next", "hasNext", "hasNext", "hasNext", "next", "next", "next", "hasNext", "next", "next", "next", "hasNext", "next", "next", "hasNext", "next", "next", "next", "next", "next", "next", "next", "hasNext", "next", "next", "next", "next", "next", "hasNext", "next" } };
+            
+            for (int i = 0; i < compressed.Length; i++)
+            {
+                Console.WriteLine($" Compressed string: \'{compressed[i]}\'");
+                
+                // Create Iterator Obj
+                var iterator = new StringIterator(compressed[i]);
+
+                // to check output
+                for (int j = 1; j < inputType[i].Length; j++)
+                    if (inputType[i][j] == "next")
+                        Console.Write($" {iterator.Next()}");
+                    else
+                        Console.Write($" {iterator.HasNext()}");
+                Console.WriteLine("\n");
+            }
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
