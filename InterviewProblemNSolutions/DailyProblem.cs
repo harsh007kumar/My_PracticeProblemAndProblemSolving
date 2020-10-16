@@ -972,6 +972,7 @@ namespace InterviewProblemNSolutions
                     {
                         NumIslands++;
                         DFS(grid, rows, cols, r, c);
+                        // BFS(grid, rows, cols, r, c);
                     }
             return NumIslands;
         }
@@ -988,6 +989,32 @@ namespace InterviewProblemNSolutions
             DFS(grid, rows, cols, curR + 1, curC);
             DFS(grid, rows, cols, curR, curC - 1);
             DFS(grid, rows, cols, curR, curC + 1);
+        }
+
+        public static void BFS(char[][] grid, int rows, int cols, int curR, int curC)
+        {
+            // if invalid Row               or invalid column               or already visited node
+            if ((curR < 0 || curR >= rows) || (curC < 0 || curC >= cols) || grid[curR][curC] == '0') return;
+
+            Queue<KeyValuePair<int, int>> q = new Queue<KeyValuePair<int, int>>();
+            q.Enqueue(new KeyValuePair<int, int>(curR, curC));
+            grid[curR][curC] = '0';
+
+            while (q.Count > 0)
+            {
+                var node = q.Dequeue();
+                var row = node.Key;
+                var col = node.Value;
+
+                if (!((row - 1 < 0 || row - 1 >= rows) || (col < 0 || col >= cols) || grid[row - 1][col] == '0'))
+                { grid[row - 1][col] = '0'; q.Enqueue(new KeyValuePair<int, int>(row - 1, col)); }
+                if (!((row + 1 < 0 || row + 1 >= rows) || (col < 0 || col >= cols) || grid[row + 1][col] == '0'))
+                { grid[row + 1][col] = '0'; q.Enqueue(new KeyValuePair<int, int>(row + 1, col)); }
+                if (!((row < 0 || row >= rows) || (col - 1 < 0 || col - 1 >= cols) || grid[row][col - 1] == '0'))
+                { grid[row][col - 1] = '0'; q.Enqueue(new KeyValuePair<int, int>(row, col - 1)); }
+                if (!((row < 0 || row >= rows) || (col + 1 < 0 || col + 1 >= cols) || grid[row][col + 1] == '0'))
+                { grid[row][col + 1] = '0'; q.Enqueue(new KeyValuePair<int, int>(row, col + 1)); }
+            }
         }
     }
 }
