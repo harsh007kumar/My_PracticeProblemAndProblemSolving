@@ -641,6 +641,16 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void FindTheCelebrity()
+        {
+            // https://leetcode.com/problems/find-the-celebrity/
+            Utility.Print("277. Find the Celebrity");
+            int noOfPeople = 10;
+            var obj = new Celebrity();
+            obj.FindCelebritySlower(noOfPeople);
+            obj.FindCelebrityOptimized(noOfPeople);
+        }
+
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
         /// <summary>
