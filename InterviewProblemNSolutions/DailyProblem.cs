@@ -1016,5 +1016,45 @@ namespace InterviewProblemNSolutions
                 { grid[row][col + 1] = '0'; q.Enqueue(new KeyValuePair<int, int>(row, col + 1)); }
             }
         }
+
+        // Func() takes input of non-negative integers representing an elevation map where the width of each bar is 1,
+        // and compute how much water it can trap after raining.
+        // Time O(n) || Space O(n)
+        public static int TrapRainWater(int[] height)
+        {
+            /* a) Insert elevation in stack before storing calculate,
+             *      water than could be stored b/w current and stack top
+             *      Calculate the length of tank
+             *      and multiply length with Min of two's height
+             *      add it to the totalWater collected so far
+             *      now remove the Stack Top if its <= current elevation,
+             *      and repeat till we either stack is empty or break out when get elevation > than current
+             * b) Keep updating last Height as we dont want to add vol of water which we have alreaedy calculated previous
+             * c) Repeat above steps till we have reach end of heights array.
+             */
+            Stack<int> st = new Stack<int>(height.Length);
+            int waterCollected = 0;
+            for (int i = 0; i < height.Length; i++)
+            {
+                int lastHeight = 0;
+                // Calculate possible water that got collection by comparing current elevation with ones present in stack
+                while (st.Count > 0)
+                {
+                    var top = st.Peek();
+                    var lengthOfBucket = i - top - 1;
+                    if (lengthOfBucket > 0)
+                        waterCollected += lengthOfBucket * (Math.Min(height[i], height[top]) - lastHeight);
+                    lastHeight = height[top];
+
+                    // if last elevation was smaller we have already calculated water b/w it and current hence pop
+                    if (lastHeight <= height[i]) st.Pop();
+                    // process stop when hit last elevation which is bigger than current
+                    else break;
+                }
+                // Insert new elevation index
+                st.Push(i);
+            }
+            return waterCollected;
+        }
     }
 }

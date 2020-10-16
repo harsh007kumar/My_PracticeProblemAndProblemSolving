@@ -40,6 +40,7 @@ namespace InterviewProblemNSolutions
             CompressedStringIterator();
             MeetingRoomsII();
             NumberOfIslands();
+            TrapRainWater();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -625,6 +626,18 @@ namespace InterviewProblemNSolutions
             {
                 grid.Print("GRID");
                 Console.WriteLine($" No Of Distint Island present in above Grid are : {DailyProblem.NumberOfIslands(grid)}");
+            }
+        }
+
+        public static void TrapRainWater()
+        {
+            // https://leetcode.com/problems/trapping-rain-water/
+            Utility.Print("42. Trapping Rain Water");
+            int[][] heightArr = { new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 }, new int[] { 4, 2, 0, 3, 2, 5 } };
+            foreach (var height in heightArr)
+            {
+                height.Print("Elevation Map");
+                Console.WriteLine($" Maximum Vol of water that can be trapped in above Map is: {DailyProblem.TrapRainWater(height)}");
             }
         }
 
