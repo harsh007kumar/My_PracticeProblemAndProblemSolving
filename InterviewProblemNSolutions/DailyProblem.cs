@@ -933,5 +933,29 @@ namespace InterviewProblemNSolutions
             if (c2 < 0 && m2 != null) result.Add((int)m2);
             return result;
         }
+        
+        // Time O(nlogn) || Spacec O(n)
+        public static int MeetingRoomsII(int[][] intervals)
+        {
+            // Sort by StartTime
+            var sortedStartTime = (from meeting in intervals
+                                   orderby meeting[0]
+                                   select meeting[0]).ToArray();
+
+            // Sort by EndTime
+            var sortedEndTime = (from meeting in intervals
+                                 orderby meeting[1]
+                                 select meeting[1]).ToArray();
+            
+            // ALGO: check each if meeting start time is smaller than last meeting end time if so +1 currNoOfRooms else -1, keep count of max
+            int minNoOfRooms = 0, currNoOfRooms = 0, i = 0, j = 0;
+            while (i < sortedEndTime.Length)
+                if (sortedStartTime[i] < sortedEndTime[j])
+                { i++; minNoOfRooms = Math.Max(minNoOfRooms, ++currNoOfRooms); }
+                else
+                { j++; --currNoOfRooms; }
+            
+            return minNoOfRooms;
+        }
     }
 }

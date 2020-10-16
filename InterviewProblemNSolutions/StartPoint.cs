@@ -38,6 +38,7 @@ namespace InterviewProblemNSolutions
             MajorityElementII();
             LRUCache();
             CompressedStringIterator();
+            MeetingRoomsII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -593,6 +594,19 @@ namespace InterviewProblemNSolutions
                     else
                         Console.Write($" {iterator.HasNext()}");
                 Console.WriteLine("\n");
+            }
+        }
+
+        public static void MeetingRoomsII()
+        {
+            // https://leetcode.com/problems/meeting-rooms-ii/
+            Utility.Print("253. Meeting Rooms II");
+            int[][][] inputArr = { new int[][]{ new int[] { 0, 30 }, new int[] { 5, 10 }, new int[] { 15, 20 } },
+                                new int[][]{ new int[]{ 13, 15 }, new int[] { 1, 13 }, new int[] { 6,9} } };
+            foreach (var input in inputArr)
+            {
+                input.Print("Meetings schedule");
+                Console.WriteLine($" Min no of meeting rooms required to accomodate above listed meetings : {DailyProblem.MeetingRoomsII(input)}");
             }
         }
 
