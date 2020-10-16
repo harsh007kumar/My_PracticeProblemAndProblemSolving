@@ -39,6 +39,7 @@ namespace InterviewProblemNSolutions
             LRUCache();
             CompressedStringIterator();
             MeetingRoomsII();
+            NumberOfIslands();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -608,6 +609,19 @@ namespace InterviewProblemNSolutions
                 input.Print("Meetings schedule");
                 Console.WriteLine($" Min no of meeting rooms required to accomodate above listed meetings : {DailyProblem.MeetingRoomsII(input)}");
             }
+        }
+
+        
+        public static void NumberOfIslands()
+        {
+            // https://leetcode.com/problems/number-of-islands/
+            Utility.Print("200. Number of Islands");
+            char[][] grid = { new char[] { '1', '1', '1', '1', '0' },
+                              new char[] { '1', '1', '0', '1', '0' },
+                              new char[] { '1', '1', '0', '0', '0' },
+                              new char[] { '0', '0', '0', '0', '0' } };
+            grid.Print("GRID");
+            Console.WriteLine($" No Of Distint Island present in above Grid are : {DailyProblem.NumberOfIslands(grid)}");
         }
 
         // Learn Dynamic Programming (Memoization & Tabulation)

@@ -957,5 +957,37 @@ namespace InterviewProblemNSolutions
             
             return minNoOfRooms;
         }
+
+
+        // From given m x n 2D Grid map of '1's (land) and '0's (water), return the number of islands
+        // Time O(n) || Space O(1)
+        public static int NumberOfIslands(char[][] grid)
+        {
+            int NumIslands = 0;
+            var rows = grid.Length;
+            var cols = grid[0].Length;
+            for (int r = 0; r < rows; r++)
+                for (int c = 0; c < cols; c++)
+                    if (grid[r][c] == '1')
+                    {
+                        NumIslands++;
+                        DFS(grid, rows, cols, r, c);
+                    }
+            return NumIslands;
+        }
+
+        public static void DFS(char[][] grid, int rows, int cols, int curR, int curC)
+        {
+            // if invalid Row               or invalid column               or already visited node
+            if ((curR < 0 || curR >= rows) || (curC < 0 || curC >= cols) || grid[curR][curC] == '0') return;
+            // else mark current node visited
+            grid[curR][curC] = '0';
+
+            // since vertical & horizontal directions are allowed, do recursive DFS on these 4 directions
+            DFS(grid, rows, cols, curR - 1, curC);
+            DFS(grid, rows, cols, curR + 1, curC);
+            DFS(grid, rows, cols, curR, curC - 1);
+            DFS(grid, rows, cols, curR, curC + 1);
+        }
     }
 }
