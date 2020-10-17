@@ -6,11 +6,17 @@ namespace InterviewProblemNSolutions
       bool Knows(int a, int b); */
     public class Relation
     {
-        public bool Knows(int a, int b) => true;    // this API was provided in question
+        private readonly int[][] relation;
+        public Relation(int[][] know2d) => relation = know2d;
+
+        // this API was provided in question, return true is edge/connection exists b/w Nodes a & b
+        public bool Knows(int a, int b) => relation[a][b] == 1;
     }
 
     public class Celebrity : Relation
     {
+        public Celebrity(int[][] know2d) : base(know2d) { } // Constructor
+
         public int FindCelebritySlower(int n)
         {
             var celebList = new Dictionary<int, int>(n);
@@ -61,7 +67,7 @@ namespace InterviewProblemNSolutions
             return -1;
         }
 
-        public int FindCelebrityOptimized(int n)
+        public int FindCelebrityEfficient(int n)
         {
             var celebList = new HashSet<int>(n);
             var notACeleb = new HashSet<int>(n);
@@ -105,6 +111,22 @@ namespace InterviewProblemNSolutions
                 if (count >= n - 1) return person;
             }
             return -1;
+        }
+
+        public int FindCelebrityOptimized(int n)
+        {
+            int first = 0, last = n - 1;
+            while(first<last)
+            {
+                if (Knows(first, last)) first++;
+                else last--;
+            }
+
+            for (int i = 0; i < n; i++)
+                if (i == first) continue;
+                else if (!(!Knows(first, i) && Knows(i,first))) return -1;
+
+            return first;
         }
     }
 }

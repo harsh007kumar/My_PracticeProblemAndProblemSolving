@@ -41,6 +41,7 @@ namespace InterviewProblemNSolutions
             MeetingRoomsII();
             NumberOfIslands();
             TrapRainWater();
+            FindTheCelebrity();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -645,10 +646,15 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/find-the-celebrity/
             Utility.Print("277. Find the Celebrity");
-            int noOfPeople = 10;
-            var obj = new Celebrity();
-            obj.FindCelebritySlower(noOfPeople);
-            obj.FindCelebrityOptimized(noOfPeople);
+            int[][] know2d = { new int[] { 1, 1, 0 }, new int[] { 0, 1, 0 }, new int[] { 1, 1, 1 } };
+            know2d.Print("Relations Input");
+            int noOfPeople = 3;
+
+            var obj = new Celebrity(know2d);
+            //var result = obj.FindCelebritySlower(noOfPeople);
+            var result = obj.FindCelebrityEfficient(noOfPeople);
+            //var result = obj.FindCelebrityOptimized(noOfPeople);
+            Console.WriteLine($" Celebrity in above relation-array is: {result}");
         }
 
         // Learn Dynamic Programming (Memoization & Tabulation)

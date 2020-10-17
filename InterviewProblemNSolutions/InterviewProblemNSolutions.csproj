@@ -47,6 +47,7 @@
     <Compile Include="DailyProblem.cs" />
     <Compile Include="DivideAndConquerAlgorithms.cs" />
     <Compile Include="DynamicProgramming.cs" />
+    <Compile Include="FindCelebrity.cs" />
     <Compile Include="LRUCache.cs" />
     <Compile Include="SearchAlgorithms.cs" />
     <Compile Include="SelectionAlgorithms.cs" />
