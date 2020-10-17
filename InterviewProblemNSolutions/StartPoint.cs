@@ -42,6 +42,7 @@ namespace InterviewProblemNSolutions
             NumberOfIslands();
             TrapRainWater();
             FindTheCelebrity();
+            IsPalindrome();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -655,6 +656,15 @@ namespace InterviewProblemNSolutions
             var result = obj.FindCelebrityEfficient(noOfPeople);
             //var result = obj.FindCelebrityOptimized(noOfPeople);
             Console.WriteLine($" Celebrity in above relation-array is: {result}");
+        }
+
+        public static void IsPalindrome()
+        {
+            // https://leetcode.com/problems/valid-palindrome/
+            Utility.Print("125. Valid Palindrome");
+            string[] input = { "0P", "A man, a plan, a canal: Panama" };
+            foreach (var str in input)
+                Console.WriteLine($" \'{str}\' \tis Palindrome: {DailyProblem.IsPalindrome(str.ToLower())}");
         }
 
         // Learn Dynamic Programming (Memoization & Tabulation)

@@ -1056,5 +1056,20 @@ namespace InterviewProblemNSolutions
             }
             return waterCollected;
         }
+
+        // Returns True is string is Palindrome
+        public static bool IsPalindrome(string str)
+        {
+            int start = 0, last = str.Length - 1;
+            while (start < last)
+            {
+                if (!Char.IsLetterOrDigit(str[start])) { start++; continue; }
+                else if (!Char.IsLetterOrDigit(str[last])) { last--; continue; }
+                else if (str[start] != str[last]) return false;
+                start++;
+                last--;
+            }
+            return true;
+        }
     }
 }
