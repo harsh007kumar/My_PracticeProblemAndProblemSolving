@@ -1119,5 +1119,57 @@ namespace InterviewProblemNSolutions
             return false;
         }
 
+        // Function returns all words present in 2D board matching given list of words
+        // Time O(N*(4*3^Min(L-1, N-1)) ~O(N*3^L) for explanation see: WordProblem() above
+        public static IList<string> WordProblemII(char[][] board, string[] words)
+        {
+            /* Generate Trie for list of words
+             * Find all possilbe words in board, essential optimization is to stop when curr Word prefix doesn't matches with any word in above trie
+             * if a word matched insert it into result
+             */
+            if (board == null || board.Length < 0 || words.Length <= 0) return new List<string>();
+            var rows = board.Length;
+            var cols = board[0].Length;
+
+            Trie t = new Trie();
+            foreach (var word in words)
+                t.Add(word.ToCharArray());
+            
+            HashSet<string> result = new HashSet<string>(); // stores output
+            List<char> currWord = new List<char>();             // hold current word in Grid while performing DFS
+
+            for (int r = 0; r < rows; r++)
+                for (int c = 0; c < cols; c++)
+                    DFS(board, currWord, result, t, rows, cols, r, c);
+            
+            return result.ToList<string>();
+        }
+
+        public static void DFS(char[][] board, List<char> currWord, HashSet<string> result, Trie t, int rows, int cols, int r, int c)
+        {
+            // if invalid Row/column or Prefix doesn't exists hence we need not dive deeper to discover new possible words in GRID
+            if ((r < 0 || r >= rows) || (c < 0 || c >= cols) || !t.SearchPrefix(currWord)) return;
+
+            char originalChar = board[r][c];
+            // add current Node character to currWord
+            currWord.Add(originalChar);
+
+            // If current word exists add it to result
+            if (t.SearchWord(currWord)) result.Add(new string(currWord.ToArray()));
+
+            // mark current node as Visited
+            board[r][c] = '#';
+
+            // traverse in all 4 possible directions, return true if any one returns desired result
+            DFS(board, currWord, result, t, rows, cols, r - 1, c);
+            DFS(board, currWord, result, t, rows, cols, r + 1, c);
+            DFS(board, currWord, result, t, rows, cols, r, c - 1);
+            DFS(board, currWord, result, t, rows, cols, r, c + 1);
+
+            // mark current node as Un-Visited
+            board[r][c] = originalChar;
+            // remove current Node character from currWord
+            currWord.RemoveAt(currWord.Count - 1);
+        }
     }
 }

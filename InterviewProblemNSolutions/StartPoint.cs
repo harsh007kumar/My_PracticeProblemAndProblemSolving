@@ -44,6 +44,7 @@ namespace InterviewProblemNSolutions
             FindTheCelebrity();
             IsPalindrome();
             WordSearch();
+            WordSearchII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -681,6 +682,25 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" Search for Given word: \'{searchForWord}\' in above GRID returned: {DailyProblem.WordProblem(board, searchForWord)}");
         }
 
+
+        public static void WordSearchII()
+        {
+            // https://leetcode.com/problems/word-search-ii/
+            Utility.Print("212. Word Search II");
+            char[][] board = { new char[] { 'o', 'a', 'a', 'n' },
+                               new char[] { 'e', 't', 'a', 'e' },
+                               new char[] { 'i', 'h', 'k', 'r' },
+                               new char[] { 'i', 'f', 'l', 'v' } };
+            string[] words = { "oath", "pea", "eat", "rain" };
+            board.Print("GRID");
+            words.Print("Words being searched");
+            var result = DailyProblem.WordProblemII(board, words);
+            Console.Write($" Search for above list of words in above GRID found:");
+            foreach (var matchedWord in result)
+                Console.Write($" \'{matchedWord}\'");
+            
+            Console.WriteLine();
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
