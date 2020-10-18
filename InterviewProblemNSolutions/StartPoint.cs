@@ -43,6 +43,7 @@ namespace InterviewProblemNSolutions
             TrapRainWater();
             FindTheCelebrity();
             IsPalindrome();
+            WordSearch();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -666,6 +667,20 @@ namespace InterviewProblemNSolutions
             foreach (var str in input)
                 Console.WriteLine($" \'{str}\' \tis Palindrome: {DailyProblem.IsPalindrome(str.ToLower())}");
         }
+
+
+        public static void WordSearch()
+        {
+            // https://leetcode.com/problems/word-search/
+            Utility.Print("79. Word Search");
+            char[][] board = { new char[] { 'A', 'B', 'C', 'E' },
+                               new char[] { 'S', 'F', 'C', 'S' },
+                               new char[] { 'A', 'D', 'E', 'E' } };
+            string searchForWord = "ABCCED";
+            board.Print("GRID");
+            Console.WriteLine($" Search for Given word: \'{searchForWord}\' in above GRID returned: {DailyProblem.WordProblem(board, searchForWord)}");
+        }
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

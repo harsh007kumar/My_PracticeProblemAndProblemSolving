@@ -1057,7 +1057,7 @@ namespace InterviewProblemNSolutions
             return waterCollected;
         }
 
-        // Returns True is string is Palindrome
+        // Returns True if string is Palindrome
         public static bool IsPalindrome(string str)
         {
             int start = 0, last = str.Length - 1;
@@ -1071,5 +1071,53 @@ namespace InterviewProblemNSolutions
             }
             return true;
         }
+
+
+
+        /// <summary>
+        /// Returns true if word exists in given grid bny searching for consecutive word in vertical/ horizontal direction
+        /// Time O(N*(4*3^Min(L-1, N-1)) ~O(N*3^L), N = no of cells on board, L = length of word being searched
+        ///     Initially we have at most 4 directions to explore, but further the choices are reduced into 3 (since we won't go back to where we come from.
+        /// Space O(L) for recursion stack + Auxillary Space O(N) for visited Grid
+        ///     Auxillary space can be saved if we can edit original Grid to mark visited cells with '#' while traversing n reverting back when back-tracking
+        /// </summary>
+        /// <param name="board"></param>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public static bool WordProblem(char[][] board, string word)
+        {
+            if (board == null || board.Length < 0) return false;
+            var rows = board.Length;
+            var cols = board[0].Length;
+
+            var visited = new bool[rows, cols];
+
+            for (int r = 0; r < rows; r++)
+                for (int c = 0; c < cols; c++)
+                    if (DFS(board, word, visited, rows, cols, r, c, 0))
+                        return true;
+            return false;
+        }
+        public static bool DFS(char[][] board, string word, bool[,] visited, int rows, int cols, int r, int c, int level = 0)
+        {
+            // Match found
+            if (level >= word.Length) return true;
+
+            // if invalid Row  or invalid column  or already visited node or word doesn't matches
+            if ((r < 0 || r >= rows) || (c < 0 || c >= cols) || visited[r, c] || board[r][c] != word[level]) return false;
+            // mark current node as visited
+            visited[r, c] = true;
+            // traverse in all 4 possible directions, return true if any one returns desired result
+            if (DFS(board, word, visited, rows, cols, r - 1, c, level + 1)) return true;
+            if (DFS(board, word, visited, rows, cols, r + 1, c, level + 1)) return true;
+            if (DFS(board, word, visited, rows, cols, r, c - 1, level + 1)) return true;
+            if (DFS(board, word, visited, rows, cols, r, c + 1, level + 1)) return true;
+
+            // mark current node as Un-Visited
+            visited[r, c] = false;
+
+            return false;
+        }
+
     }
 }
