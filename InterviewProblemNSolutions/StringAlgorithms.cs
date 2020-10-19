@@ -27,7 +27,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < tArr.Length - pArr.Length + 1; i++)
             {
                 var index = 0;
-                while (index < pArr.Length && pArr[index] == tArr[index + i])
+                while (index < pArr.Length && index + i < tArr.Length && pArr[index] == tArr[index + i])
                     index++;
                 if (index == pArr.Length) return i;
             }

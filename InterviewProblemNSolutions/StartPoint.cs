@@ -45,6 +45,7 @@ namespace InterviewProblemNSolutions
             IsPalindrome();
             WordSearch();
             WordSearchII();
+            ImplementIndexOf();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -688,10 +689,10 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/word-search-ii/
             Utility.Print("212. Word Search II");
             char[][] board = { new char[] { 'o', 'a', 'a', 'n' },
-                               new char[] { 'e', 't', 'a', 'e' },
-                               new char[] { 'i', 'h', 'k', 'r' },
+                               new char[] { 'i', 't', 'a', 'e' },
+                               new char[] { 'n', 'g', 'k', 'r' },
                                new char[] { 'i', 'f', 'l', 'v' } };
-            string[] words = { "oath", "pea", "eat", "rain" };
+            string[] words = { "oath", "pea", "eat","eating", "rain" };
             board.Print("GRID");
             words.Print("Words being searched");
             var result = DailyProblem.WordProblemII(board, words);
@@ -701,6 +702,18 @@ namespace InterviewProblemNSolutions
             
             Console.WriteLine();
         }
+
+
+        public static void ImplementIndexOf()
+        {
+            // https://leetcode.com/problems/implement-strstr/
+            Utility.Print("28. Implement strStr()");
+            string[] haystack = { "hello", "", "aaab","mississippi" };
+            string[] needle = { "ll", "", "aaaa", "issip" };
+            for (int i = 0; i < haystack.Length; i++)
+                Console.WriteLine($" \'{needle[i]}\' was found in \t\'{haystack[i]}\' at index: {DailyProblem.ImplementIndexOfRabinKarp(haystack[i], needle[i])}");
+        }
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

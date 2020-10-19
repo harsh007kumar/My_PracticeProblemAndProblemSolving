@@ -1171,5 +1171,59 @@ namespace InterviewProblemNSolutions
             // remove current Node character from currWord
             currWord.RemoveAt(currWord.Count - 1);
         }
+
+        // Time O((N-L)*L), N = len of haystack & L = len of needle being search, Space O(1)
+        public static int ImplementIndexOf(string haystack, string needle)
+        {
+            int nLen = needle.Length, hLen = haystack.Length;
+            if (nLen <= 0) return 0;
+
+            for (int i = 0; i < hLen - nLen + 1; i++)
+            {
+                int index = 0;
+                while (index < nLen && index + i < hLen && haystack[index + i] == needle[index])
+                    index++;
+                if (index == nLen) return i;
+            }
+            return -1;
+        }
+
+        // Time Best case O(N+L) worst O(NxL)|| Space O(1), N = len of haystack & L = len of needle being search, Space O(1)
+        public static int ImplementIndexOfRabinKarp(string haystack, string needle)
+        {
+            int nLen = needle.Length, hLen = haystack.Length;
+            if (nLen <= 0) return 0;
+            if (hLen < nLen) return -1;
+            var mod = 1009;     // PrimeNo can also use something like Math.Powr(2,31);
+            int baseVal = 26;   // as its given in problem only small case letters r present, else use 256 for Full ASCII Set
+            int H = 1;          // Raise by
+            // FORMULA => newRollHash = (base*(prvRollHash-1stCharInWin*H)+newChar)%mod;
+
+            // calculate initial hashValue
+            int hHash = 0, nHash = 0, i = 0;
+            for (i = 0; i < nLen; i++)
+            {
+                hHash = ((hHash * baseVal) + haystack[i]) % mod;
+                nHash = ((nHash * baseVal) + needle[i]) % mod;
+                if (i < nLen - 1) H = (H * baseVal) % mod;     // one less as for needle of length 3 we only want the base^2 thats multiple H with base just twice
+            }
+
+            for (i = 0; i < hLen - nLen + 1; i++)
+            {
+                if (hHash == nHash)
+                {
+                    int k = 0;
+                    while (k < nLen && haystack[k + i] == needle[k])
+                        k++;
+                    if (k == nLen) return i;
+                }
+                // calculate next rolling Hash
+                if (i < hLen - nLen)
+                    hHash = (baseVal * (hHash - (haystack[i] * H)) + haystack[i + nLen]) % mod;
+
+                if (hHash < 0) hHash += mod;
+            }
+            return -1;
+        }
     }
 }
