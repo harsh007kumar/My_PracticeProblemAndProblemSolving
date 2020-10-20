@@ -1225,5 +1225,33 @@ namespace InterviewProblemNSolutions
             }
             return -1;
         }
+
+        // DFS algo which returns Total no of unique paths in a Grid [ROW x COL] starting from Top-Lt ending at Bottom-Rt
+        public static int UniquePaths_Recursion(int row, int col)
+        {
+            if (row < 1 || col < 1) return 0;
+            if (row <= 1 && col <= 1) return 1;
+            return UniquePaths_Recursion(row, col - 1) + UniquePaths_Recursion(row - 1, col);
+        }
+
+        // Returns 'Total no of unique paths' in a Grid [ROW x COL] starting from Top-Lt ending at Bottom-Rt
+        // Time O(row*col) || Space O(col)
+        public static int UniquePaths_DP(int row, int col)
+        {
+            int[] dp = new int[col];
+            dp[0] = 1;      // 1st cell will have just 1 unique path
+            for (int r = 0; r < row; r++)
+                for (int c = 1; c < col; c++)
+                    dp[c] += dp[c - 1];     // visualizing for 2D GRID each cell[row,col] computed as = cell[row-1,col] + cell[row,cell-1],
+                                            // to save space consider prv row value i.e cell[row-1,col] as current value of cell[row,col]
+            return dp[col - 1];
+            /* Space O(row*col) solution below
+             * fill 1st row & 1st col with '1' before starting
+             *  for(int row = 1; row < n; ++row)
+             *      for(int col = 1; col < m; ++col)
+             *          dp[col][row] = dp[row - 1][col] + dp[row][col - 1];
+             * return dp[row-1][col-1];
+             */
+        }
     }
 }

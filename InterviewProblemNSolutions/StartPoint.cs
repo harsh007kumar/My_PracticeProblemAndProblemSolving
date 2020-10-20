@@ -46,6 +46,7 @@ namespace InterviewProblemNSolutions
             WordSearch();
             WordSearchII();
             ImplementIndexOf();
+            UniquePaths();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -712,6 +713,16 @@ namespace InterviewProblemNSolutions
             string[] needle = { "ll", "", "aaaa", "issip" };
             for (int i = 0; i < haystack.Length; i++)
                 Console.WriteLine($" \'{needle[i]}\' was found in \t\'{haystack[i]}\' at index: {DailyProblem.ImplementIndexOfRabinKarp(haystack[i], needle[i])}");
+        }
+
+        public static void UniquePaths()
+        {
+            // https://leetcode.com/problems/unique-paths/
+            Utility.Print("62. Unique Paths");
+            int row = 7, col = 3;
+            var result = DailyProblem.UniquePaths_DP(row, col);
+            //var result = DailyProblem.UniquePaths_Recursion(row, col);
+            Console.WriteLine($" No Of Unqiue Paths for GRID of RowxCol: {row}x{col} from Top-Left to Bottom-Right: {result}");
         }
 
 
