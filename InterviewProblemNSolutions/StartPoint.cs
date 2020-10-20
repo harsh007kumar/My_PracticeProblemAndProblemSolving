@@ -47,6 +47,7 @@ namespace InterviewProblemNSolutions
             WordSearchII();
             ImplementIndexOf();
             UniquePaths();
+            UniquePathsII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -725,6 +726,20 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" No Of Unqiue Paths for GRID of RowxCol: {row}x{col} from Top-Left to Bottom-Right: {result}");
         }
 
+        public static void UniquePathsII()
+        {
+            // https://leetcode.com/problems/unique-paths-ii/
+            Utility.Print("63. Unique Paths II");
+            int[][][] inputArr = { new int[][] { new int[] { 0, 0, 0 }, new int[] { 0, 1, 0 }, new int[] { 0, 0, 0 } },
+                                    new int[][] { new int[] { 1, 0 }, new int[] { 0, 0 } },
+                                    new int[][] { new int[] { 0, 0 }, new int[] { 0, 1 } } };
+            foreach (var input in inputArr)
+            {
+                input.Print("GRID");
+                var result = DailyProblem.UniquePathsWithObstacles(input);
+                Console.WriteLine($" No Of Unqiue Paths for above GRID (with obstacles) starting from Top-Left to Bottom-Right: {result}\n");
+            }
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

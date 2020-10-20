@@ -1247,11 +1247,41 @@ namespace InterviewProblemNSolutions
             return dp[col - 1];
             /* Space O(row*col) solution below
              * fill 1st row & 1st col with '1' before starting
-             *  for(int row = 1; row < n; ++row)
-             *      for(int col = 1; col < m; ++col)
+             *  for(int row = 1; row < n; row++)
+             *      for(int col = 1; col < m; col++)
              *          dp[col][row] = dp[row - 1][col] + dp[row][col - 1];
              * return dp[row-1][col-1];
              */
+        }
+
+        // Returns 'Total no of unique paths' in a Grid [ROW x COL] with Obsctacle, starting from Top-Lt ending at Bottom-Rt
+        // Time O(row*col) || Space O(col)
+        public static int UniquePathsWithObstacles(int[][] obstacleGrid)
+        {
+            var row = obstacleGrid.Length;
+            var col = obstacleGrid[0].Length;
+
+            int[,] tab = new int[row, col];
+            // Starting Cell or Ending Cell is obsctacle return '0' possible paths
+            if (obstacleGrid[0][0] == 1 || obstacleGrid[row - 1][col - 1] == 1) return 0;
+            // Else mark Starting position
+            tab[0, 0] = 1;
+            
+            // 1st row
+            for (int r = 1; r < row; r++)
+                tab[r, 0] = (obstacleGrid[r][0] == 0 && tab[r - 1, 0] == 1) ? 1 : 0;
+            // 1st col
+            for (int c = 1; c < col; c++)
+                tab[0, c] = (obstacleGrid[0][c] == 0 && tab[0, c - 1] == 1) ? 1 : 0;
+
+            for (int r = 1; r < row; r++)
+                for (int c = 1; c < col; c++)
+                {
+                    var fromTop = obstacleGrid[r - 1][c] == 0 ? tab[r - 1, c] : 0;
+                    var fromLeft = obstacleGrid[r][c - 1] == 0 ? tab[r, c - 1] : 0;
+                    tab[r, c] = fromLeft + fromTop;
+                }
+            return tab[row - 1, col - 1];
         }
     }
 }
