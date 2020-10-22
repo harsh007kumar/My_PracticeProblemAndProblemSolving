@@ -639,7 +639,7 @@ namespace InterviewProblemNSolutions
                         var rIndex = r / 3;
                         var cIndex = c / 3;
                         var gridID = 3 * rIndex + cIndex;
-                        
+
                         if (subGrid[gridID] == null) subGrid[gridID] = new HashSet<char>();
                         if (subGrid[gridID].Contains(ch)) return false;
                         else subGrid[gridID].Add(ch);
@@ -656,7 +656,7 @@ namespace InterviewProblemNSolutions
             if (num == 0) return 1;
             int ans = 0;
             int multiplyer = 1;     // for calculating power of 2
-            while(num!=0)
+            while (num != 0)
             {
                 var currBit = num & 1;
                 num >>= 1;          // right shifting the num can also use num/=2;
@@ -772,7 +772,7 @@ namespace InterviewProblemNSolutions
                 // check if any player won
                 if (direction[row][ch] == 3) return ch;
 
-                
+
                 // update columns
                 if (direction[col + 3].ContainsKey(ch)) direction[col + 3][ch]++;
                 else direction[col + 3].Add(ch, 1);
@@ -810,7 +810,7 @@ namespace InterviewProblemNSolutions
         }
 
         // Time O(nlogn) || Space O(1)
-        public  class LogComparetor : IComparer<String>
+        public class LogComparetor : IComparer<String>
         {
             public int Compare(String x, String y)
             {
@@ -827,7 +827,7 @@ namespace InterviewProblemNSolutions
                     // compare the content
                     int cmp = log1[1].CompareTo(log2[1]);
                     if (cmp != 0) return cmp;
-                    
+
                     // both logs have same word, than compare the identifiers
                     return log1[0].CompareTo(log2[0]);
                 }
@@ -863,7 +863,7 @@ namespace InterviewProblemNSolutions
             return aplhabetLog.ToArray();
         }
 
-        public class LogComparetorWord: IComparer<String>
+        public class LogComparetorWord : IComparer<String>
         {
             public int Compare(String x, String y)
             {
@@ -913,17 +913,17 @@ namespace InterviewProblemNSolutions
             {
                 if (c1 == 0)
                     if (m2 == null || m2 != num) { c1 = 1; m1 = num; }
-                else if (num == m1) c1++;
-                else if (c2 == 0)
-                    if (m1 == null || m1 != num) { c2 = 1; m2 = num; }
-                else if (num == m2) c2++;
-                // new num doesnt matches either majority number so far
-                else if (num != m1 && num != m2) { c1--; c2--; }
+                    else if (num == m1) c1++;
+                    else if (c2 == 0)
+                        if (m1 == null || m1 != num) { c2 = 1; m2 = num; }
+                        else if (num == m2) c2++;
+                        // new num doesnt matches either majority number so far
+                        else if (num != m1 && num != m2) { c1--; c2--; }
             }
 
             c1 = c2 = nums.Length / 3;
             // verify m1 & m2 are in majority
-            foreach(var num in nums)
+            foreach (var num in nums)
             {
                 if (num == m1) c1--;
                 else if (num == m2) c2--;
@@ -933,7 +933,7 @@ namespace InterviewProblemNSolutions
             if (c2 < 0 && m2 != null) result.Add((int)m2);
             return result;
         }
-        
+
         // Time O(nlogn) || Spacec O(n)
         public static int MeetingRoomsII(int[][] intervals)
         {
@@ -946,7 +946,7 @@ namespace InterviewProblemNSolutions
             var sortedEndTime = (from meeting in intervals
                                  orderby meeting[1]
                                  select meeting[1]).ToArray();
-            
+
             // ALGO: check each if meeting start time is smaller than last meeting end time if so +1 currNoOfRooms else -1, keep count of max
             int minNoOfRooms = 0, currNoOfRooms = 0, i = 0, j = 0;
             while (i < sortedEndTime.Length)
@@ -954,7 +954,7 @@ namespace InterviewProblemNSolutions
                 { i++; minNoOfRooms = Math.Max(minNoOfRooms, ++currNoOfRooms); }
                 else
                 { j++; --currNoOfRooms; }
-            
+
             return minNoOfRooms;
         }
 
@@ -1134,14 +1134,14 @@ namespace InterviewProblemNSolutions
             Trie t = new Trie();
             foreach (var word in words)
                 t.Add(word.ToCharArray());
-            
+
             HashSet<string> result = new HashSet<string>(); // stores output
             List<char> currWord = new List<char>();             // hold current word in Grid while performing DFS
 
             for (int r = 0; r < rows; r++)
                 for (int c = 0; c < cols; c++)
                     DFS(board, currWord, result, t, rows, cols, r, c);
-            
+
             return result.ToList<string>();
         }
 
@@ -1266,7 +1266,7 @@ namespace InterviewProblemNSolutions
             if (obstacleGrid[0][0] == 1 || obstacleGrid[row - 1][col - 1] == 1) return 0;
             // Else mark Starting position
             tab[0, 0] = 1;
-            
+
             // 1st row
             for (int r = 1; r < row; r++)
                 tab[r, 0] = (obstacleGrid[r][0] == 0 && tab[r - 1, 0] == 1) ? 1 : 0;
@@ -1310,7 +1310,7 @@ namespace InterviewProblemNSolutions
                     // rotate elements
                     for (int swapNo = 0; swapNo < 4; swapNo++)
                     {
-                        switch(swapNo)
+                        switch (swapNo)
                         {
                             case 0:
                                 curRow = prvRow + big;
@@ -1350,5 +1350,20 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Transpose the Matrix and Reverse each row
+        // Time O(Row^2) || Space O(1)
+        public static void RotateImageTransposeAndReverse(int[][] matrix)
+        {
+            if (matrix == null || matrix.Length < 1) return;
+            var rows = matrix.Length;
+            // Transpose
+            for (int r = 0; r < rows; r++)
+                for (int c = r; c < rows; c++)
+                    Utility.Swap(ref matrix[r][c], ref matrix[c][r]);
+            // Reverse each row
+            for (int r = 0; r < rows; r++)
+                for (int c = 0; c < rows / 2; c++)
+                    Utility.Swap(ref matrix[r][c], ref matrix[r][rows - 1 - c]);
+        }
     }
 }

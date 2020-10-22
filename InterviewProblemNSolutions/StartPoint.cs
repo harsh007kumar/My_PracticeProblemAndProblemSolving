@@ -752,7 +752,8 @@ namespace InterviewProblemNSolutions
             foreach (var matrix in matrixArr)
             {
                 matrix.Print("Input Image");
-                DailyProblem.RotateImage(matrix);
+                DailyProblem.RotateImageTransposeAndReverse(matrix);
+                //DailyProblem.RotateImage(matrix);
                 matrix.Print("90 degree rotated image");
             }
         }
