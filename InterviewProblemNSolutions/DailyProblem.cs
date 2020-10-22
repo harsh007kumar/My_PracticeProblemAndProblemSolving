@@ -1349,8 +1349,7 @@ namespace InterviewProblemNSolutions
             }
         }
 
-
-        // Transpose the Matrix and Reverse each row
+        // Best Solution => Transpose the Matrix and Reverse each row
         // Time O(Row^2) || Space O(1)
         public static void RotateImageTransposeAndReverse(int[][] matrix)
         {
@@ -1364,6 +1363,36 @@ namespace InterviewProblemNSolutions
             for (int r = 0; r < rows; r++)
                 for (int c = 0; c < rows / 2; c++)
                     Utility.Swap(ref matrix[r][c], ref matrix[r][rows - 1 - c]);
+        }
+
+        // Don't use below in interview difficult to explain the intution behind the approach
+        // Time O(row) || Space O(1)
+        public static void RotateFourRectangleApproach(int[][] matrix)
+        {
+            if (matrix == null || matrix.Length < 1) return;
+            var rows = matrix.Length;
+            for (int r = 0; r < rows / 2 + rows % 2; r++)       // O(row/2)
+                for (int c = 0; c < rows / 2; c++)              // O(row/2)
+                {
+                    int row = r, col = c;
+                    var temp = new int[4];
+                    // save 4 corner elemens in array
+                    for (int times = 0; times < 4; times++)     // O(1)
+                    {
+                        temp[times] = matrix[row][col];
+                        int swap = row;
+                        row = col;
+                        col = rows - 1 - swap;
+                    }
+                    // store these elements back after rotating array 'backwards by 90 degree'/'forwards by by 270 degree'
+                    for (int times = 0; times < 4; times++)     // O(1)
+                    {
+                        matrix[row][col] = temp[(times + 3) % 4];
+                        int swap = row;
+                        row = col;
+                        col = rows - 1 - swap;
+                    }
+                }
         }
     }
 }
