@@ -1283,5 +1283,61 @@ namespace InterviewProblemNSolutions
                 }
             return tab[row - 1, col - 1];
         }
+
+
+        // Time O(Row*Col) || Space O(1)
+        public static void RotateImage(int[][] matrix)
+        {
+            if (matrix == null || matrix.Length < 1) return;
+
+            var rows = matrix.Length;
+            var noOFSwapsPerDirection = rows;
+
+            /* stop at row/2
+             * start by replacing 1st element in each direction and once all four sides are moved by 90degrees moves on to next element
+             * once all items are replaced move inwards for TotalNoOfRows/2 times (works well for odd or even no of rows)
+             */
+            int times = 0;
+            while (times <= rows / 2)
+            {
+                int elementToRotate = 0;
+                int big = noOFSwapsPerDirection - 1, small = noOFSwapsPerDirection - 1 - big;
+                
+
+                while (elementToRotate < noOFSwapsPerDirection - 1)
+                {
+                    int left = 0 + times, right = 0 + elementToRotate - times;
+                    var temp = matrix[left][right];
+                    // rotate elements
+                    for (int swapNo = 0; swapNo < 4; swapNo++)
+                    {
+                        switch(swapNo)
+                        {
+                            case 0:
+                                Utility.Swap(ref matrix[left][right], ref matrix[left += big][right -= small]);
+                                break;
+                            case 1:
+                                Utility.Swap(ref matrix[left][right], ref matrix[left += big][right += small]);
+                                break;
+                            case 2:
+                                Utility.Swap(ref matrix[left][right], ref matrix[left -= big][right += small]);
+                                break;
+                            case 3:
+                                matrix[left -= big][right -= small] = temp;
+                                break;
+                        }
+                        // Swap Big & Small
+                        Utility.Swap(ref big, ref small);
+                    }
+                    big--;
+                    small++;
+                    elementToRotate++;
+                }
+                noOFSwapsPerDirection -= 2;
+                times++;
+            }
+        }
+
+
     }
 }

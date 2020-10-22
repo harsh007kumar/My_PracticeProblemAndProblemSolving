@@ -48,6 +48,8 @@ namespace InterviewProblemNSolutions
             ImplementIndexOf();
             UniquePaths();
             UniquePathsII();
+            RotateImage();
+
 
             // String Matching Algorithm
             BruteForceWay();
@@ -739,6 +741,17 @@ namespace InterviewProblemNSolutions
                 var result = DailyProblem.UniquePathsWithObstacles(input);
                 Console.WriteLine($" No Of Unqiue Paths for above GRID (with obstacles) starting from Top-Left to Bottom-Right: {result}\n");
             }
+        }
+
+        public static void RotateImage()
+        {
+            // https://leetcode.com/problems/rotate-image/
+            Utility.Print("48. Rotate Image");
+            int[][] matrix = { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 } };
+            matrix.Print("Input Image");
+            DailyProblem.RotateImage(matrix);
+            matrix.Print("90 degree rotated image");
+
         }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
