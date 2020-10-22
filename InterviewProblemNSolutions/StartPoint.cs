@@ -747,11 +747,14 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/rotate-image/
             Utility.Print("48. Rotate Image");
-            int[][] matrix = { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 } };
-            matrix.Print("Input Image");
-            DailyProblem.RotateImage(matrix);
-            matrix.Print("90 degree rotated image");
-
+            int[][][] matrixArr = { new int[][] { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 } },
+                                    new int[][] { new int[] { 5, 1, 9, 11 }, new int[] { 2, 4, 8, 10 }, new int[] { 13, 3, 6, 7 }, new int[] { 15, 14, 12, 16 } } };
+            foreach (var matrix in matrixArr)
+            {
+                matrix.Print("Input Image");
+                DailyProblem.RotateImage(matrix);
+                matrix.Print("90 degree rotated image");
+            }
         }
 
         // Learn Dynamic Programming (Memoization & Tabulation)

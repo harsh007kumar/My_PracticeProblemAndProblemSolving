@@ -1298,34 +1298,43 @@ namespace InterviewProblemNSolutions
              * once all items are replaced move inwards for TotalNoOfRows/2 times (works well for odd or even no of rows)
              */
             int times = 0;
-            while (times <= rows / 2)
+            int big = rows - 1, small = 0;
+            while (times < rows / 2)
             {
                 int elementToRotate = 0;
-                int big = noOFSwapsPerDirection - 1, small = noOFSwapsPerDirection - 1 - big;
-                
-
                 while (elementToRotate < noOFSwapsPerDirection - 1)
                 {
-                    int left = 0 + times, right = 0 + elementToRotate - times;
-                    var temp = matrix[left][right];
+                    int prvRow = 0 + times, prvCol = 0 + elementToRotate + times;
+                    int curRow = 0, curCol = 0;
+                    var temp = matrix[prvRow][prvCol];
                     // rotate elements
                     for (int swapNo = 0; swapNo < 4; swapNo++)
                     {
                         switch(swapNo)
                         {
                             case 0:
-                                Utility.Swap(ref matrix[left][right], ref matrix[left += big][right -= small]);
+                                curRow = prvRow + big;
+                                curCol = prvCol - small;
+                                matrix[prvRow][prvCol] = matrix[curRow][curCol];
                                 break;
                             case 1:
-                                Utility.Swap(ref matrix[left][right], ref matrix[left += big][right += small]);
+                                curRow = prvRow + big;
+                                curCol = prvCol + small;
+                                matrix[prvRow][prvCol] = matrix[curRow][curCol];
                                 break;
                             case 2:
-                                Utility.Swap(ref matrix[left][right], ref matrix[left -= big][right += small]);
+                                curRow = prvRow - big;
+                                curCol = prvCol + small;
+                                matrix[prvRow][prvCol] = matrix[curRow][curCol];
                                 break;
                             case 3:
-                                matrix[left -= big][right -= small] = temp;
+                                curRow = prvRow - big;
+                                curCol = prvCol - small;
+                                matrix[prvRow][prvCol] = temp;
                                 break;
                         }
+                        prvRow = curRow;
+                        prvCol = curCol;
                         // Swap Big & Small
                         Utility.Swap(ref big, ref small);
                     }
@@ -1333,6 +1342,8 @@ namespace InterviewProblemNSolutions
                     small++;
                     elementToRotate++;
                 }
+                Utility.Swap(ref big, ref small);
+                big -= 2;
                 noOFSwapsPerDirection -= 2;
                 times++;
             }
