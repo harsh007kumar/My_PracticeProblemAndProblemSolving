@@ -49,10 +49,20 @@ namespace InterviewProblemNSolutions
             if (msg != "") Console.Write($" Printing '{msg}': \t");
             else Console.WriteLine($" ==== Printing given int array with '{arr.Length}' elements ====");
 
-            for (int i=0;i<arr.Length;i++)
+            for (int i = 0; i < arr.Length; i++)
                 Console.Write($" {arr[i]} >>");
             Console.WriteLine();
         }
+        public static void Print(this char[] arr, string msg = "")
+        {
+            if (msg != "") Console.Write($" Printing '{msg}': \t");
+            else Console.WriteLine($" ==== Printing given int array with '{arr.Length}' elements ====");
+
+            for (int i = 0; i < arr.Length; i++)
+                Console.Write($" {arr[i]} >>");
+            Console.WriteLine();
+        }
+
         public static void Print(this char[,] arr)
         {
             var row = arr.GetLength(0);
