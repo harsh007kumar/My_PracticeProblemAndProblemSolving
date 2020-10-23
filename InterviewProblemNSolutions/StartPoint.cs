@@ -49,6 +49,7 @@ namespace InterviewProblemNSolutions
             UniquePaths();
             UniquePathsII();
             RotateImage();
+            DesignSearchAutocompleteSystem();
 
 
             // String Matching Algorithm
@@ -756,6 +757,37 @@ namespace InterviewProblemNSolutions
                 DailyProblem.RotateImageTransposeAndReverse(matrix);
                 //DailyProblem.RotateImage(matrix);
                 matrix.Print("90 degree rotated image");
+            }
+        }
+
+        public static void DesignSearchAutocompleteSystem()
+        {
+            // https://leetcode.com/problems/design-search-autocomplete-system/
+            Utility.Print("642. Design Search Autocomplete System");
+            string[] sentences = new string[] { "i love you", "island", "ironman", "i love leetcode" };
+            int[] frequency = new int[] { 5, 3, 2, 2 };
+            for (int i = 0; i < sentences.Length; i++)
+                Console.WriteLine($" {sentences[i]} => \tRepeated {frequency[i]} times");
+            char[] input = { 'i', ' ', 'a', '#', 'i', ' ', 'a', '#', 'i', ' ', 'a', '#' };
+            input.Print("Input Character Sequence");
+            Console.WriteLine($"--------------------------------------------------------------------------------------");
+
+            // Create "AutoCompleteSystem" for initiallay provided Sentences & their corrosponding frequencies
+            AutoCompleteSystem system = new AutoCompleteSystem(sentences, frequency);
+            string userInput = "";
+            foreach (var ch in input)
+            {
+                userInput += ch;
+                Console.WriteLine($"Searching with Prefix \'{userInput}\' matching sentences are: \t[Max limit restricted to '3']");
+
+                // autocomplete-system search-engine searching for possible matches with each newly added characters
+                // & returns list of all sentences matching the Prefix entered so far by user
+                foreach (var matches in system.Input(ch))
+                    Console.WriteLine($" Top Matches are \t=> {matches}");
+
+                userInput = ch == '#' ? "" : userInput;
+                if (ch == '#')
+                    Console.WriteLine($"--------------------------------------------------------------------------------------");
             }
         }
 

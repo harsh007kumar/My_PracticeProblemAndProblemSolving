@@ -10,6 +10,7 @@ namespace InterviewProblemNSolutions
     {
         public Dictionary<char, TrieNode> children = null;
         public bool isWord;
+        public int times = 0;
         public TrieNode() => children = new Dictionary<char, TrieNode>();
     }
     public class Trie
@@ -49,6 +50,38 @@ namespace InterviewProblemNSolutions
                 temp = temp.children[ch];
             }
             return temp.isWord;
+        }
+    }
+
+    public class TrieForAutoComplete : Trie
+    {
+        public TrieForAutoComplete() : base() { }
+
+        // Insert for 'Search AutoComplete System'
+        public void Add(string sentence, int count)
+        {
+            TrieNode temp = root;
+            for (int i = 0; i < sentence.Length; i++)
+            {
+                if (!temp.children.ContainsKey(sentence[i])) temp.children.Add(sentence[i], new TrieNode());
+                temp = temp.children[sentence[i]];
+            }
+            if (!temp.isWord)
+            {
+                temp.isWord = true;     // Mark the end of the word
+                temp.times = count;     // Update the times word has appeared previously
+            }
+            else
+                temp.times++;           // same word was already present than update the count
+        }
+
+        // Updates 'matchesFound' List with all Sentences/Words reachable from current 'TrieNode'
+        public void SearchMatch(TrieNode currNode, string prefixSoFar, List<KeyValuePair<string, int>> matchesFound)
+        {
+            if (currNode.isWord)    // currNode.children.Count == 0
+                matchesFound.Add(new KeyValuePair<string, int>(prefixSoFar, currNode.times));
+            foreach (var possibleWord in currNode.children)
+                SearchMatch(possibleWord.Value, prefixSoFar + possibleWord.Key, matchesFound);
         }
     }
 }
