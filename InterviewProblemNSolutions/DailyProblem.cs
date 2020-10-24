@@ -1394,5 +1394,25 @@ namespace InterviewProblemNSolutions
                     }
                 }
         }
+
+        // Returns 1st missing +ve number (i.e. num which is not part of the input array)
+        // Time O(n) || Space O(n)
+        public static int FirstMissingPositive(int[] nums)
+        {
+            if (nums.Length == 0) return 1;
+
+            int largest = 0;
+            HashSet<int> allPositiveNums = new HashSet<int>() { 0 };
+            for (int i = 0; i < nums.Length; i++)           // O(n)
+                if (nums[i] > 0)
+                {
+                    allPositiveNums.Add(nums[i]);
+                    largest = Math.Max(largest, nums[i]);
+                }
+
+            for (int i = 1; i <= largest; i++)              // O(n) will terminate on finding 1st +ve
+                if (!allPositiveNums.Contains(i)) return i;
+            return largest + 1;
+        }
     }
 }

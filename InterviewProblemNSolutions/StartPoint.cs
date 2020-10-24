@@ -50,6 +50,7 @@ namespace InterviewProblemNSolutions
             UniquePathsII();
             RotateImage();
             DesignSearchAutocompleteSystem();
+            FirstMissingPositive();
 
 
             // String Matching Algorithm
@@ -790,6 +791,21 @@ namespace InterviewProblemNSolutions
                     Console.WriteLine($"--------------------------------------------------------------------------------------");
             }
         }
+
+        public static void FirstMissingPositive()
+        {
+            // https://leetcode.com/problems/first-missing-positive/
+            Utility.Print("41. First Missing Positive");
+            int[][] numsArr = { new int[] { 7, 8, 9, 11, 12 }, new int[] { }, new int[] { 0 }, new int[] { 1 }, new int[] { 1, 1000 }, new int[] { 2 }, new int[] { 2, 1 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Input");
+                var firstMissingPositiveNo = DailyProblem.FirstMissingPositive(nums);
+                Console.WriteLine($" First Missing Positive number in above input array is: {firstMissingPositiveNo}\n");
+            }
+        }
+
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
