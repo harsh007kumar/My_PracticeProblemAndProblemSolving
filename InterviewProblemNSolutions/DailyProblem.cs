@@ -1397,7 +1397,7 @@ namespace InterviewProblemNSolutions
 
         // Returns 1st missing +ve number (i.e. num which is not part of the input array)
         // Time O(n) || Space O(n)
-        public static int FirstMissingPositive(int[] nums)
+        public static int FirstMissingPositiveUsingHashSet(int[] nums)
         {
             if (nums.Length == 0) return 1;
 
@@ -1414,5 +1414,35 @@ namespace InterviewProblemNSolutions
                 if (!allPositiveNums.Contains(i)) return i;
             return largest + 1;
         }
+        // Returns 1st missing +ve number (i.e. num which is not part of the input array)
+        // Time O(n) Space O(1) Approach using input array itself as HashTable
+        public static int FirstMissingPositive(int[] nums)
+        {
+            int len = nums.Length;
+            if (len == 0) return 1;
+            //else if (len==1) return nums[0]==1? 2:1;
+
+            // check if '1' not present return 1
+            bool foundOne = false;
+            for (int i = 0; i < len; i++) if (nums[i] == 1) { foundOne = true; break; }
+            if (!foundOne) return 1;
+
+            // update all elements less than 0 or more than len as 1, if len found update nums[0] to -len
+            for (int i = 0; i < len; i++) if (nums[i] <= 0 || nums[i] > len) nums[i] = 1;
+
+
+            // Use all remaining elements value as index and update nums value at those index to -ve if not already -ve
+            for (int i = 0; i < len; i++)
+                if (Math.Abs(nums[i]) == len) nums[0] = -len;
+                else if (nums[Math.Abs(nums[i])] > 0) nums[Math.Abs(nums[i])] *= -1;
+
+            // return 1st non negative index
+            for (int i = 1; i < len; i++) if (nums[i] > 0) return i;
+
+            // check if array had an element with value = len of array than 0th index must be having -len value
+            // hence return len+1, if above is not the case simnply return len
+            return nums[0] < 0 ? len + 1 : len;
+        }
+
     }
 }
