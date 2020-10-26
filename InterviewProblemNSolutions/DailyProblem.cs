@@ -1518,5 +1518,19 @@ namespace InterviewProblemNSolutions
             }
             return result;
         }
+        // Time O(1) Space (1) as there is a finite set of roman numerals, the maximum number possible number can be 3999, which in roman numerals is MMMCMXCIX
+        public static int RomanToInteger(string s)
+        {
+            if (s.Length == 0) return 0;
+            var romanToIntMap = new Dictionary<char, int>() { { 'I', 1 }, { 'V', 5 }, { 'X', 10 }, { 'L', 50 }, { 'C', 100 }, { 'D', 500 }, { 'M', 1000 } };
+            int result = romanToIntMap[s[0]];
+            for (int i = 1; i < s.Length; i++)
+            {
+                if (romanToIntMap[s[i]] > romanToIntMap[s[i - 1]])
+                    result -= 2 * romanToIntMap[s[i - 1]];
+                result += romanToIntMap[s[i]];
+            }
+            return result;
+        }
     }
 }

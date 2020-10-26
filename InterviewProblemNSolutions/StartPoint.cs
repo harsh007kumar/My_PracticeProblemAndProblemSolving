@@ -821,10 +821,15 @@ namespace InterviewProblemNSolutions
         public static void IntegerToRoman()
         {
             // https://leetcode.com/problems/integer-to-roman/
-            Utility.Print("12. Integer to Roman");
+            // https://leetcode.com/problems/roman-to-integer/
+            Utility.Print("12. Integer to Roman && 13. Roman to Integer");
             int[] nums = { 3, 4, 9, 58, 1994 };
             foreach (var num in nums)
-                Console.WriteLine($" Interger to Roman: \t {num} \t{DailyProblem.IntegerToRoman(num)}");
+            {
+                var roman = DailyProblem.IntegerToRoman(num);
+                var no = DailyProblem.RomanToInteger(roman);
+                Console.WriteLine($" Interger to Roman: \t {no} \t{roman}");
+            }
         }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
