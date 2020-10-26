@@ -1444,5 +1444,44 @@ namespace InterviewProblemNSolutions
             return nums[0] < 0 ? len + 1 : len;
         }
 
+
+        // Partition lowercase English letters string into as many parts as possible so that each letter appears in at most one part,
+        // and returns a list of integers representing the size of these parts.
+        // Time O(n) 2 passes || Space O(n), where N length of input string
+        public static List<int> PartitionLabels(string S)
+        {
+            int[] smallCase = new int[26];
+            // Take count of all chartacters in input 'S'
+            foreach (var ch in S)
+                smallCase[ch - 'a']++;
+
+            List<int> result = new List<int>();
+            // Try to make smallest string which includes 1st character also add other characters
+            // which we found in r way while we make sure we have encoutnered all occurences of 1st
+            // and all occurences of other characters in r way so far.
+            HashSet<char> toTrack = new HashSet<char>();
+            int startIndex = 0;
+            for (int i = 0; i < S.Length; i++)
+            {
+                //if(!toTrack.Contains(S[i]))    toTrack.Add(S[i]);
+                toTrack.Add(S[i]);
+
+                // decreament the count
+                smallCase[S[i] - 'a']--;
+
+                // if Count for curr Characters reaches '0' means we have encountered all occurences
+                // and hence can be removed from toTrack set
+                if (smallCase[S[i] - 'a'] == 0)
+                    toTrack.Remove(S[i]);
+
+                // Check if set doesn't cotaines any more characters for which we need to find all occurences
+                if (toTrack.Count == 0)
+                {
+                    result.Add(i - startIndex + 1);
+                    startIndex = i + 1;
+                }
+            }
+            return result;
+        }
     }
 }

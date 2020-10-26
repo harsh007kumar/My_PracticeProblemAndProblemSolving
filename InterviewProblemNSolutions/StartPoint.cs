@@ -51,6 +51,7 @@ namespace InterviewProblemNSolutions
             RotateImage();
             DesignSearchAutocompleteSystem();
             FirstMissingPositive();
+            PartitionLabels();
 
 
             // String Matching Algorithm
@@ -805,6 +806,16 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void PartitionLabels()
+        {
+            // https://leetcode.com/problems/partition-labels/
+            Utility.Print("763. Partition Labels");
+            string S = "ababcbacadefegdehijhklij";
+            Console.WriteLine($" Input string: \t {S}");
+            var parts = DailyProblem.PartitionLabels(S);
+            foreach(var lengthOfPart in parts)
+                Console.Write($" {lengthOfPart}");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
