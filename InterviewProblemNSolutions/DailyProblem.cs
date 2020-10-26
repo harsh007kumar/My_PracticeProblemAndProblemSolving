@@ -1483,5 +1483,40 @@ namespace InterviewProblemNSolutions
             }
             return result;
         }
+
+
+        // Time O(1) Space (1) there is a hard upper limit on how many times the loop can iterate.
+        // This upper limit is 15 times, and it occurs for the number 3888 representated as MMMDCCCLXXXVIII
+        public static string IntegerToRoman(int num)
+        {
+            var romanSet = new KeyValuePair<string, int>[]{
+            new KeyValuePair<string, int>("I", 1),    // 0
+            new KeyValuePair<string, int>("IV",4),
+            new KeyValuePair<string, int>("V", 5),
+            new KeyValuePair<string, int>("IX",9),
+            new KeyValuePair<string, int>("X", 10),
+            new KeyValuePair<string, int>("XL",40),   // 5
+            new KeyValuePair<string, int>("L", 50),
+            new KeyValuePair<string, int>("XC",90),
+            new KeyValuePair<string, int>("C", 100),
+            new KeyValuePair<string, int>("CD",400),
+            new KeyValuePair<string, int>("D", 500),  // 10
+            new KeyValuePair<string, int>("CM",900),
+            new KeyValuePair<string, int>("M", 1000)
+            };
+            
+            string result = "";
+            int currIndex = 12;// romanSet.Length - 1;
+            while (num > 0)
+            {
+                while (num >= romanSet[currIndex].Value)
+                {
+                    result += romanSet[currIndex].Key;
+                    num -= romanSet[currIndex].Value;
+                }
+                currIndex--;
+            }
+            return result;
+        }
     }
 }

@@ -52,6 +52,7 @@ namespace InterviewProblemNSolutions
             DesignSearchAutocompleteSystem();
             FirstMissingPositive();
             PartitionLabels();
+            IntegerToRoman();
 
 
             // String Matching Algorithm
@@ -817,6 +818,14 @@ namespace InterviewProblemNSolutions
                 Console.Write($" {lengthOfPart}");
         }
 
+        public static void IntegerToRoman()
+        {
+            // https://leetcode.com/problems/integer-to-roman/
+            Utility.Print("12. Integer to Roman");
+            int[] nums = { 3, 4, 9, 58, 1994 };
+            foreach (var num in nums)
+                Console.WriteLine($" Interger to Roman: \t {num} \t{DailyProblem.IntegerToRoman(num)}");
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
