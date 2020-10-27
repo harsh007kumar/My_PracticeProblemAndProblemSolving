@@ -1534,7 +1534,7 @@ namespace InterviewProblemNSolutions
         }
 
         // Functions compares 2 versions and returns -1 (ver1 < ver2) or 1 (ver2 < ver1) else 0 (ver1==ver2)
-        // Time O(n) || Space O(1)
+        // Time O(max(N,M)) || Space O(max(N,M))
         public static int CompareVersionNumbers(string version1, string version2)
         {
             var ver1 = version1.Split('.');
@@ -1553,6 +1553,45 @@ namespace InterviewProblemNSolutions
                     return 1;
             }
             return 0;
+        }
+
+
+        // Time O(Max,(N,(V+E)) || Space O(V+E), N = no of prerequisites
+        public static bool CourseSchedule(int numCourses, int[][] prerequisites)
+        {
+            Dictionary<int, List<int>> DiGraph = new Dictionary<int, List<int>>(numCourses);
+            // Create Directed Graph O(n)
+            for (int i = 0; i < prerequisites.Length; i++)
+            {
+                if (!DiGraph.ContainsKey(prerequisites[i][0]))
+                    DiGraph.Add(prerequisites[i][0], new List<int>() { prerequisites[i][1] });
+                else DiGraph[prerequisites[i][0]].Add(prerequisites[i][1]);
+
+                if (!DiGraph.ContainsKey(prerequisites[i][1]))
+                    DiGraph.Add(prerequisites[i][1], new List<int>());
+            }
+
+            // 0 not visited || 1 visited & in-Stack || -1 visited and out of Stack
+            int[] visited = new int[numCourses];
+            foreach (var kvp in DiGraph)
+                if (visited[kvp.Key] == 0)
+                    if (DetectCycleInDAGUsingDFS(DiGraph, kvp.Key, ref visited))
+                        return false;
+            return true;
+        }
+        // Time O(V+E)
+        public static bool DetectCycleInDAGUsingDFS(Dictionary<int, List<int>> g, int start, ref int[] visited)
+        {
+            visited[start] = 1;   // 1 visited & in-Stack
+            foreach (var adjacentVertex in g[start])
+                // 0 not visited, cheeck for cycle
+                if (visited[adjacentVertex] == 0 && DetectCycleInDAGUsingDFS(g, adjacentVertex, ref visited))
+                    return true;
+                // cycle found return true
+                else if (visited[adjacentVertex] == 1)
+                    return true;
+            visited[start] = -1;//-1 visited and out of Stack
+            return false;
         }
     }
 }

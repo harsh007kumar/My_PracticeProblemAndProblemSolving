@@ -54,6 +54,7 @@ namespace InterviewProblemNSolutions
             PartitionLabels();
             IntegerToRoman();
             CompareVersionNumbers();
+            CourseSchedule();
 
 
             // String Matching Algorithm
@@ -840,6 +841,15 @@ namespace InterviewProblemNSolutions
             string[][] versionsArr = { new string[] { "1.01", "1.001" }, new string[] { "1.01", "1.0.0" }, new string[] { "0.1", "1.1" }, new string[] { "1.0.1", "1" }, new string[] { "7.5.2.4", "7.5.3" } };
             foreach (var versionPair in versionsArr)
                 Console.WriteLine($" Version1: {versionPair[0]} || \tVersion2: {versionPair[1]} || \tVersion Comparison result: {DailyProblem.CompareVersionNumbers(versionPair[0], versionPair[1])}");
+        }
+
+        public static void CourseSchedule()
+        {
+            // https://leetcode.com/problems/course-schedule/
+            Utility.Print("207.Course Schedule");
+            int[][] input = new int[][] { new int[] { 1, 0 }, new int[] { 0,1 } };
+            input.Print();
+            Console.WriteLine($" For Above Courses you have to take, is it possible to finish them: {DailyProblem.CourseSchedule(2, input)}");
         }
 
 
