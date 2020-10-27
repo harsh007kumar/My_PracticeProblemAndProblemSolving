@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace InterviewProblemNSolutions
 {
-    class CommonFunctions
+    public class TreeNode
     {
+        public int val = 0;
+        public TreeNode left = null;
+        public TreeNode right = null;
+        public TreeNode(int num) => val = num;
+        public TreeNode() => left = right = null;
     }
 
     public static class Utility

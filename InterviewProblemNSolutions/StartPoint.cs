@@ -55,6 +55,7 @@ namespace InterviewProblemNSolutions
             IntegerToRoman();
             CompareVersionNumbers();
             CourseSchedule();
+            SymmetricTree();
 
 
             // String Matching Algorithm
@@ -850,6 +851,40 @@ namespace InterviewProblemNSolutions
             int[][] input = new int[][] { new int[] { 1, 0 }, new int[] { 0,1 } };
             input.Print();
             Console.WriteLine($" For Above Courses you have to take, is it possible to finish them: {DailyProblem.CourseSchedule(2, input)}");
+        }
+
+
+        public static void SymmetricTree()
+        {
+            // https://leetcode.com/problems/symmetric-tree/
+            Utility.Print("101. Symmetric Tree");
+            TreeNode symmetric = new TreeNode(1)
+            {
+                left = new TreeNode(2)
+                {
+                    left = new TreeNode(3),
+                    right = new TreeNode(4)
+                },
+                right = new TreeNode(2)
+                {
+
+                    left = new TreeNode(4),
+                    right = new TreeNode(3)
+                }
+            };
+            TreeNode notSymmetric = new TreeNode(1)
+            {
+                left = new TreeNode(2)
+                {
+                    right = new TreeNode(3)
+                },
+                right = new TreeNode(2)
+                {
+                    right = new TreeNode(3)
+                }
+            };
+            Console.WriteLine($" Above Tree isSymmetric: {DailyProblem.IsSymmetricRecursive(symmetric.left, symmetric.right)}");    // Recursive Solution
+            Console.WriteLine($" Above Tree isSymmetric: {DailyProblem.IsSymmetricIterativeBFSApproach(notSymmetric)}");            // Iterative Solution
         }
 
 

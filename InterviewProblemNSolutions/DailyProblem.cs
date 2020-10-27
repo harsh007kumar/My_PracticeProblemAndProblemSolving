@@ -1593,5 +1593,63 @@ namespace InterviewProblemNSolutions
             visited[start] = -1;//-1 visited and out of Stack
             return false;
         }
+
+        // Time O(n), n = no of nodes in the binary tree
+        // Recursive Solution
+        public static bool IsSymmetricRecursive(TreeNode t1, TreeNode t2)
+        {
+            if (t1 == null && t2 == null) return true;
+            if (t1 == null || t2 == null) return false;
+            if (t1.val != t2.val) return false;
+            return IsSymmetricRecursive(t1.left, t2.right) && IsSymmetricRecursive(t1.right, t2.left);
+        }
+        // Iterative Solution
+        public static bool IsSymmetricIterativeBFSApproach(TreeNode root)
+        {
+            Queue<TreeNode> q = new Queue<TreeNode>();
+            TreeNode nullTreeNode = null;
+            q.Enqueue(root);
+            q.Enqueue(nullTreeNode);
+            List<int> ls = new List<int>();
+            while (q.Count > 0)
+            {
+                var temp = q.Dequeue();
+                if (temp == null)
+                {
+                    if (!CheckPalindrome(ls)) return false;
+                    if (q.Count > 0)
+                        q.Enqueue(nullTreeNode);
+                    ls.Clear();
+                    continue;
+                }
+                if (temp.left != null)
+                {
+                    q.Enqueue(temp.left);
+                    ls.Add(temp.left.val);
+                }
+                else
+                    ls.Add(-1);
+
+                if (temp.right != null)
+                {
+                    q.Enqueue(temp.right);
+                    ls.Add(temp.right.val);
+                }
+                else
+                    ls.Add(-1);
+
+            }
+            return true;
+        }
+        // Helper function used with iterative Solution
+        public static bool CheckPalindrome(List<int> ls)
+        {
+            if (ls.Count < 2) return true;
+            int start = 0;
+            int last = ls.Count - 1;
+            while (start < last)
+                if (ls[start++] != ls[last--]) return false;
+            return true;
+        }
     }
 }
