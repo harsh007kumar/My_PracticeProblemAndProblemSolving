@@ -53,6 +53,7 @@ namespace InterviewProblemNSolutions
             FirstMissingPositive();
             PartitionLabels();
             IntegerToRoman();
+            CompareVersionNumbers();
 
 
             // String Matching Algorithm
@@ -831,6 +832,16 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Interger to Roman: \t {no} \t{roman}");
             }
         }
+
+        public static void CompareVersionNumbers()
+        {
+            // https://leetcode.com/problems/compare-version-numbers/
+            Utility.Print("165. Compare Version Numbers");
+            string[][] versionsArr = { new string[] { "1.01", "1.001" }, new string[] { "1.01", "1.0.0" }, new string[] { "0.1", "1.1" }, new string[] { "1.0.1", "1" }, new string[] { "7.5.2.4", "7.5.3" } };
+            foreach (var versionPair in versionsArr)
+                Console.WriteLine($" Version1: {versionPair[0]} || \tVersion2: {versionPair[1]} || \tVersion Comparison result: {DailyProblem.CompareVersionNumbers(versionPair[0], versionPair[1])}");
+        }
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

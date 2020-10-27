@@ -1532,5 +1532,27 @@ namespace InterviewProblemNSolutions
             }
             return result;
         }
+
+        // Functions compares 2 versions and returns -1 (ver1 < ver2) or 1 (ver2 < ver1) else 0 (ver1==ver2)
+        // Time O(n) || Space O(1)
+        public static int CompareVersionNumbers(string version1, string version2)
+        {
+            var ver1 = version1.Split('.');
+            var ver2 = version2.Split('.');
+
+            int l1 = ver1.Length;
+            int l2 = ver2.Length;
+
+            for (int i = 0; i < l1 || i < l2; i++)
+            {
+                var cur1 = i < l1 ? int.Parse(ver1[i]) : 0;
+                var cur2 = i < l2 ? int.Parse(ver2[i]) : 0;
+                if (cur1 < cur2)
+                    return -1;
+                else if (cur1 > cur2)
+                    return 1;
+            }
+            return 0;
+        }
     }
 }
