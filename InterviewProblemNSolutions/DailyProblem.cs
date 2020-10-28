@@ -1654,34 +1654,44 @@ namespace InterviewProblemNSolutions
 
 
         // Time O(n) // Space O(n)
-        public static int BasicCalculator(string s)
+        public static int BasicCalculatorII(string s)
         {
             Stack<int> nums = new Stack<int>();
             Stack<char> ops = new Stack<char>();
             Dictionary<char, int> opDict = new Dictionary<char, int>(4) { { '+', 1 }, { '-', 1 }, { '*', 2 }, { '/', 2 } };
-            foreach (var ch in s)
+            
+            for (int i = 0; i < s.Length; i++)
             {
                 // if space character skip
-                if (ch == ' ') continue;
-                // if operand
-                else if (opDict.ContainsKey(ch))
-                    ops.Push(ch);
+                if (s[i] == ' ') continue;
                 // if operator
+                else if (opDict.ContainsKey(s[i]))
+                    ops.Push(s[i]);
+                // if operand
                 else
                 {
-                    // Highest Priority
+                    string num = "";
+                    // Iterator to find the current number which might be more than 1 characters long in input string
+                    do { num += s[i++]; } while (!(i >= s.Length || opDict.ContainsKey(s[i]) || s[i] == ' '));
+                    i--;
+                    // Highest Priority Operator found on Stack Top
                     if (ops.Count > 0 && opDict[ops.Peek()] >= 2)
-                        nums.Push(Apply(ops.Pop(), nums.Pop(), int.Parse(ch + "")));
-                    else nums.Push(int.Parse(ch + ""));
+                        nums.Push(ApplyOperator(ops.Pop(), int.Parse(num), nums.Pop()));
+                    // Stack contains 2 Operators with same Priority, than calculate for operator which came 1st into stack
+                    else if (ops.Count >= 2)
+                    {
+                        var secondOp = ops.Pop();
+                        nums.Push(ApplyOperator(ops.Pop(), nums.Pop(), nums.Pop()));
+                        ops.Push(secondOp);
+                        nums.Push(int.Parse(num));
+                    }
+                    else nums.Push(int.Parse(num));
                 }
             }
-            // Now process remaing low priority operator in stack i.e '+' and '-'
-            while (ops.Count > 0)
-                nums.Push(Apply(ops.Pop(), nums.Pop(), nums.Pop()));
-            return nums.Pop();
+            return nums.Count == 1 ? nums.Pop() : ApplyOperator(ops.Pop(), nums.Pop(), nums.Pop());
         }
         // Time O(1)
-        public static int Apply(char op, int n1, int n2)
+        public static int ApplyOperator(char op, int n2, int n1)
         {
             switch (op)
             {

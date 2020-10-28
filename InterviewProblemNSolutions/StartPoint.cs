@@ -892,11 +892,11 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/basic-calculator-ii/
             Utility.Print("227. Basic Calculator II");
-            string[] inputs = { "3+2*2", " 3/2 ", " 3+5 / 2 " };
+            string[] inputs = { "3+2*2", " 3/2 ", " 3+5 / 2 ", "42", "0-2147483647", "14/3*2", "1-1+1" };
             foreach(var input in inputs)
             {
                 Console.Write($" Input: \'{input}\'");
-                Console.WriteLine($" \t Calculates To: {DailyProblem.BasicCalculator(input)}");
+                Console.WriteLine($" \t Calculates To: {DailyProblem.BasicCalculatorII(input)}");
             }
         }
 
