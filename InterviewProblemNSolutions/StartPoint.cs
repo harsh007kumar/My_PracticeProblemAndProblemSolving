@@ -56,6 +56,7 @@ namespace InterviewProblemNSolutions
             CompareVersionNumbers();
             CourseSchedule();
             SymmetricTree();
+            BasicCalculator();
 
 
             // String Matching Algorithm
@@ -885,6 +886,18 @@ namespace InterviewProblemNSolutions
             };
             Console.WriteLine($" Above Tree isSymmetric: {DailyProblem.IsSymmetricRecursive(symmetric.left, symmetric.right)}");    // Recursive Solution
             Console.WriteLine($" Above Tree isSymmetric: {DailyProblem.IsSymmetricIterativeBFSApproach(notSymmetric)}");            // Iterative Solution
+        }
+
+        public static void BasicCalculator()
+        {
+            // https://leetcode.com/problems/basic-calculator-ii/
+            Utility.Print("227. Basic Calculator II");
+            string[] inputs = { "3+2*2", " 3/2 ", " 3+5 / 2 " };
+            foreach(var input in inputs)
+            {
+                Console.Write($" Input: \'{input}\'");
+                Console.WriteLine($" \t Calculates To: {DailyProblem.BasicCalculator(input)}");
+            }
         }
 
 

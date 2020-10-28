@@ -1651,5 +1651,46 @@ namespace InterviewProblemNSolutions
                 if (ls[start++] != ls[last--]) return false;
             return true;
         }
+
+
+        // Time O(n) // Space O(n)
+        public static int BasicCalculator(string s)
+        {
+            Stack<int> nums = new Stack<int>();
+            Stack<char> ops = new Stack<char>();
+            Dictionary<char, int> opDict = new Dictionary<char, int>(4) { { '+', 1 }, { '-', 1 }, { '*', 2 }, { '/', 2 } };
+            foreach (var ch in s)
+            {
+                // if space character skip
+                if (ch == ' ') continue;
+                // if operand
+                else if (opDict.ContainsKey(ch))
+                    ops.Push(ch);
+                // if operator
+                else
+                {
+                    // Highest Priority
+                    if (ops.Count > 0 && opDict[ops.Peek()] >= 2)
+                        nums.Push(Apply(ops.Pop(), nums.Pop(), int.Parse(ch + "")));
+                    else nums.Push(int.Parse(ch + ""));
+                }
+            }
+            // Now process remaing low priority operator in stack i.e '+' and '-'
+            while (ops.Count > 0)
+                nums.Push(Apply(ops.Pop(), nums.Pop(), nums.Pop()));
+            return nums.Pop();
+        }
+        // Time O(1)
+        public static int Apply(char op, int n1, int n2)
+        {
+            switch (op)
+            {
+                case '+': return n1 + n2;
+                case '-': return n1 - n2;
+                case '*': return n1 * n2;
+                case '/': return n1 / n2;
+            }
+            return 0;
+        }
     }
 }
