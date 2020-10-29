@@ -1702,5 +1702,27 @@ namespace InterviewProblemNSolutions
             }
             return 0;
         }
+
+        // Time O(n) || Space O(n)
+        public static string ReverseWordsInAString(string s)
+        {
+            string result = "";
+            string word = "";
+            bool firstWord = true;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] == ' ')
+                {
+                    if (word != "")
+                    {
+                        result = firstWord ? word : word + ' ' + result;
+                        firstWord = false;
+                        word = "";
+                    }
+                }
+                else word += s[i];
+            }
+            return word == "" ? result : (firstWord ? word : word + ' ' + result);
+        }
     }
 }

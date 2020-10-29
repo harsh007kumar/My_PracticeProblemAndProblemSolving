@@ -57,6 +57,7 @@ namespace InterviewProblemNSolutions
             CourseSchedule();
             SymmetricTree();
             BasicCalculator();
+            ReverseWordsInAString();
 
 
             // String Matching Algorithm
@@ -898,6 +899,18 @@ namespace InterviewProblemNSolutions
                 Console.Write($" Input: \'{input}\'");
                 Console.WriteLine($" \t Calculates To: {DailyProblem.BasicCalculatorII(input)}");
             }
+        }
+
+        public static void ReverseWordsInAString()
+        {
+            // https://leetcode.com/problems/reverse-words-in-a-string/
+            Utility.Print("151. Reverse Words in a String");
+            string[] inputArr = { "the sky is blue", "  hello world  ", "a good   example", "  Bob    Loves  Alice   ", "Alice does not even like bob",
+                "58jQ7q9wVX       R    IpHr  PhhTE a8PVETA6a    8gRZzYIcm0 5e      O0       G0KMWhibvb   3T4xjF     ZVvCk0     RfDxBA4D86   EXPD7DHbt  3e43ty   ttSQf  vrQ3CL       ecN       PvX8HYN4uy       VoTmn9 B8mWctu PDzb8     lJgpP9Ed      u  I   Ks5ehQz1YC   A3WQ    yTx0b      9i      ZxfhD13 V0  0    d       XE  SGQVF  xo      4IW9nR    6b1zL5D6     AiGw Fel       94Ydz   4Z8hUM      Kp7lqan  w  2K   0w8hqDv Eu578UQu VYeUzIfj9       OcVb7MkfT       BWqda0Uv1E     oXK   0m       yX   eSuYZAKvZ      lPCcdP4IqB      OkgWkrgwy       b      Dwocr0S    79RG       dzBvAbNP4      AeYHAp3       tu      Sg4Rl SmaUYK   BiYtjAtEG ONXS0  8YUQZMt RMo2NtE4     6gczG       D7b       jkn   TuDrLd       DNX2WfO   A    FkJNYO GKoxywV8 c    7yH       xmB     x7Lzu73obb  aLe     5TVccMVw       Id0Ro     kLMi80  86sf     4Y3DnBmV       7BcA   ALOOVkYS    S4c       X    JQ1xU6H   zhE4r7     WwsyuPFeqW      7a39  jLH8bUbCe     LBDyvk1Z     BbjlJ   teOn3T4l   zBZUayGq       V0B   odjTY9X3      mTT8G7 RmVAiMT    GGLtvo ye0JDhVNZ     Pu   soF0VFZi5m      2CjbEQO s3CuQ      F  Z4ondG     xkrnqHz cfx      DaTy      PN   MZL      TPq   m0      YCIZg1iYs  FEg  in    NlpKKN4   NgNPwU  xZ6       w5uLUUS  DEGx  Lb4msfrjve     zUYrkt       at     sqXNnWy1U   4SYDWTTvBq  BimhW      5sAm  aU    oJGZQI      pexbXa   dkBmO6TlS       v2439r Yg    4cb59qz9Z  JgWdfo61Q  jstB     HRmHLLgKGl    TvMhGWw       O1dWcLGaDn       nl   EENjJdX     nGxG94eFbq     Mc8H     5oo6MFhyeL       fyc51V6h56      CyVmBnQO       AA6vJ3f  rvDr   GKxqZt4 74PR    iibqCCeJLv      HWipSriC       3ttGuPxF     QF8bTr   WJORgWM       f1Ol3t      8EYkQ  4WGYrc       l2b8  JgjWGxrY      9Dwhbqqm      3SSBywBTc4     9u     YP       P0jLTyGI6      Bp       8ljYOHh     rQz2KKHp7    cYGjLDgbV     CezVSntkSJ     vLMh      k2x  XeSj    pPV3r    DmHNSKy   e       oo  zRyUV     H     Unt0Lplxx      c   Hp    6MA8    eee3lF MD0R5G       b99     I   aLHBPt3We Rv5 41w2qG7    pMv       zQrvIxgKjx  AO28K5BL      4fp     8V       j       jw 74MD       PVyENWdeG     0s      JV     y7C8Ll4   NAtVtTVY5w      siyxBv       wYVzhr zpLg     twb9YWns  XJ gkMQ1       Fe7OT fCF4FBMW     AqSz5    WstY1  Wjwbd      7NPJludT       7jvzV1    CZspKEX    F1QudO    0nEmsbQ     YC   UW8pOdb6k       xfxohy fVHYN       2  R82LIGj TYEz1P4     wfiu2B      ztkrzC       XqUSvoOgK   nU6cB28v8P       C4OFzyAL9  yH3qVYNj   EasJ   DWw      5b    HmtIeUQf     2f     FHWdX6   6XXHL0mDcD   H3W       Szd58e   aIodDIegG      rO    IqQ       K4      tYg y       m3IV1       E7ntocq   x8cq     n     Sgv2Kq   s0P74      yD1s NT       MN20      HX      uS  bxuEvB5p 0CY9oxYs pByJJ0A      yAa8pu5      KAgy N9HW58 h4tcvO5UrD    Xk8Dj       a FGJ       FeMOMslP6       9c2Q      bS    hz0jsT96     OUomibItLQ C2E4yXiKD       iQkPx     NRaNb8i     dsd3J7zm  WDGPJoD uI      4rvAKo    m6ZJT    BH   9GFKSS    5uepU g5 IQm3",
+                "  hello world  " };
+
+            foreach (var input in inputArr)
+                Console.WriteLine($" Input: \t\'{input}\'\n Output: \t\'{DailyProblem.ReverseWordsInAString(input)}\'\n");
         }
 
 
