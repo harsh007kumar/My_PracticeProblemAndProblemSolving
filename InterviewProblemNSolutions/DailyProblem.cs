@@ -1724,5 +1724,51 @@ namespace InterviewProblemNSolutions
             }
             return word == "" ? result : (firstWord ? word : word + ' ' + result);
         }
+
+        // Time O(n) || Space O(1)
+        public static void ReverseWordsInAStringII(char[] s)
+        {
+            int start = 0;
+            int last = s.Length - 1;
+            while (start < last)
+            {
+                var temp = s[start];
+                s[start++] = s[last];
+                s[last--] = temp;
+            }
+            start = 0;
+            int currIndex = 0;
+            while (currIndex < s.Length)
+            {
+                if (s[currIndex] == ' ')
+                {
+                    if (currIndex > start + 1)
+                    {
+                        // reverse word
+                        last = currIndex - 1;
+                        while (start < last)
+                        {
+                            var temp = s[start];
+                            s[start++] = s[last];
+                            s[last--] = temp;
+                        }
+                    }
+                    start = currIndex + 1;
+                }
+                currIndex++;
+            }
+            // reverse last word
+            if (currIndex > start + 1)
+            {
+                // reverse word
+                last = currIndex - 1;
+                while (start < last)
+                {
+                    var temp = s[start];
+                    s[start++] = s[last];
+                    s[last--] = temp;
+                }
+            }
+        }
     }
 }
