@@ -1770,5 +1770,92 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+
+        // Time O(nLogn) Space O(1)
+        public static int MinimumCostToConnectStick(int[] sticks)
+        {
+            /* ALGO
+             * 1) Heapify the 'sticks' array (Convert into MinHeap)
+             * 2) Extract Min() twice add it to sum and insert the sum of back into heap
+             * 3) Repeat Step2# until only single element is left in Min-Heap
+             */
+            var len = sticks.Length;
+            int ltChild = 0, rtChild = 0;
+            // Start Heapification from middle of Array
+            for (int i = (len - 1) / 2; i >= 0; i--)
+            {
+                // Call heapify for each element present at index 'i'
+                int j = i;
+                while (j < len)
+                {
+                    var smallest = j;
+                    ltChild = j * 2 + 1;
+                    rtChild = ltChild + 1;
+                    if (ltChild < len && sticks[ltChild] < sticks[j]) smallest = ltChild;
+                    if (rtChild < len && sticks[rtChild] < sticks[smallest]) smallest = rtChild;
+                    if (smallest != j)
+                    {
+                        var temp = sticks[smallest];
+                        sticks[smallest] = sticks[j];
+                        sticks[j] = temp;
+                        j = smallest;
+                    }
+                    else break;
+                }
+            }
+            int sum = 0;
+            for (int i = 1; i < sticks.Length; i++)
+            {
+                var connectCost = ExtractMin() + ExtractMin();
+                Insert(connectCost);
+                sum += connectCost;
+            }
+            // Extract Min value from Heap
+            int ExtractMin()
+            {
+                var min = sticks[0];
+                // insert last element at root & decrease the length of Heap by '1'
+                sticks[0] = sticks[--len];      
+                // Heapify/Perculate-Down operation
+                int j = 0;
+                while (j < len)
+                {
+                    var smallest = j;
+                    ltChild = j * 2 + 1;
+                    rtChild = ltChild + 1;
+                    if (ltChild < len && sticks[ltChild] < sticks[j]) smallest = ltChild;
+                    if (rtChild < len && sticks[rtChild] < sticks[smallest]) smallest = rtChild;
+                    if (smallest != j)
+                    {
+                        var temp = sticks[smallest];
+                        sticks[smallest] = sticks[j];
+                        sticks[j] = temp;
+                        j = smallest;
+                    }
+                    else break;
+                }
+                return min;
+            }
+            // Perculate-Up operation
+            void Insert(int num)
+            {
+                int i = len++;
+                sticks[i] = num;
+                while (i > 0)
+                {
+                    var parent = (i - 1) / 2;
+                    if (sticks[parent] > sticks[i])
+                    {
+                        var temp = sticks[parent];
+                        sticks[parent] = sticks[i];
+                        sticks[i] = temp;
+                        i = parent;
+                    }
+                    else break;
+                }
+            }
+            return sum;
+        }
     }
 }
