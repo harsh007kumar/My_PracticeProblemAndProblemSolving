@@ -60,6 +60,7 @@ namespace InterviewProblemNSolutions
             ReverseWordsInAString();
             ReverseWordsInAStringII();
             MinimumCostToConnectSticks();
+            MinCostToMergeStones();
 
 
             // String Matching Algorithm
@@ -940,6 +941,20 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Minimum Cost to Connect above Sticks: \t\'{DailyProblem.MinimumCostToConnectStick(input)}\'");
             }
         }
+
+        public static void MinCostToMergeStones()
+        {
+            // https://leetcode.com/problems/minimum-cost-to-merge-stones/
+            Utility.Print("1000. Minimum Cost to Merge Stones");
+            int[][] stones = { new int[] { 3, 2, 4, 1 }, new int[] { 3, 2, 4, 1 }, new int[] { 1 }, new int[] { 6, 4, 4, 6 }, new int[] { 3, 5, 1, 2, 6 }, new int[] { 1, 4, 3, 3, 2 }, new int[] { 1, 4, 3, 3, 2 }, new int[] { 1, 4, 3, 3, 2 } };
+            int[] k = { 2, 3, 2, 2, 3, 3, 4, 5 };
+            for (int i = 0; i < stones.Length; i++)
+            {
+                stones[i].Print("Stones Array");
+                Console.WriteLine($" with Merging K={k[i]} at a time, \tMinimum cost to merge all piles of stones into one pile: {DailyProblem.MinimumCostToMergeStones(stones[i], k[i])}\n");
+            }
+        }
+             
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

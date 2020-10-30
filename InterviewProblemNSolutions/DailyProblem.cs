@@ -1857,5 +1857,49 @@ namespace InterviewProblemNSolutions
             }
             return sum;
         }
+
+        // LC#1000. "Minimum Cost to Merge Stones"
+        // There are N piles of stones arranged in a row.  The i-th pile has stones[i] stones.
+        // A move consists of merging exactly K consecutive piles into one pile, and the cost of this move is equal to the total number of stones in these K piles.
+        // Find the minimum cost to merge all piles of stones into one pile.If it is impossible, return -1
+        // Time O(N^3/K) || Space: O(N^2)
+        public static int MinimumCostToMergeStones(int[] stones, int K)
+        {
+            var len = stones.Length;
+
+            if (len <= 1) return 0;
+            if ((len - 1) % (K - 1) != 0) return -1;
+
+
+            int[,] minMergeCost = new int[len, len];
+            int[] prefixSum = new int[len + 1];
+            // pre-caculate the partial sums for O(1) lookup later
+            for (int i = 1; i <= len; i++)
+                prefixSum[i] = prefixSum[i - 1] + stones[i - 1];
+
+            for (int l = 0; l < len; l++)
+                for (int start = 0; start < len - l; start++)
+                {
+                    var last = start + l;
+                    // cost of merging single stone with itself is 0
+                    if (start == last) minMergeCost[start, last] = 0;
+                    // cost of merging less than K stone is also '0' as we need can merge only K stones at a time
+                    else if (last - start + 1 < K) minMergeCost[start, last] = 0;
+                    // if length is K, cost is simply the sum of all stone in the given range
+                    else if (last - start + 1 == K) minMergeCost[start, last] = prefixSum[last + 1] - prefixSum[start];
+                    // if length > K, try finding min TotalCost by finding a Mid-Point such that (start..mid + mid+1..last) is minimum
+                    else
+                    {
+                        minMergeCost[start, last] = int.MaxValue;
+                        // mid divides start...last into (1, rest), (K, rest), (2K-1, rest), and so on....
+                        for (int mid = start; mid < last; mid += K - 1)
+                            minMergeCost[start, last] = Math.Min(minMergeCost[start, last], minMergeCost[start, mid] + minMergeCost[mid + 1, last]);
+                        
+                        if ((last - start) % (K - 1) == 0)
+                            minMergeCost[start, last] += prefixSum[last + 1] - prefixSum[start];
+                    }
+                }
+            return minMergeCost[0, len - 1];
+        }
     }
 }
