@@ -1901,5 +1901,32 @@ namespace InterviewProblemNSolutions
                 }
             return minMergeCost[0, len - 1];
         }
+        // Explanation https://leetcode.com/problems/minimum-cost-to-merge-stones/discuss/675912/DP-code-decoded-for-non-experts-like-me
+        // Time O(N^3/K) || Space: O(N^2)
+        public static int MinimumCostToMergeStones100Faster(int[] stones, int K)
+        {
+            var len = stones.Length;
+
+            if (len <= 1) return 0;
+            if ((len - 1) % (K - 1) != 0) return -1;
+
+
+            int[,] minMergeCost = new int[len, len];
+            int[] prefixSum = new int[len + 1];
+            for (int i = 1; i <= len; i++)
+                prefixSum[i] = prefixSum[i - 1] + stones[i - 1];
+
+            for (int l = K; l <= len; l++)
+                for (int start = 0; start <= len - l; start++)
+                {
+                    var last = start + l - 1;
+                    minMergeCost[start, last] = int.MaxValue;
+                    for (int mid = start; mid < last; mid += K - 1)
+                        minMergeCost[start, last] = Math.Min(minMergeCost[start, last], minMergeCost[start, mid] + minMergeCost[mid + 1, last]);
+                    if ((last - start) % (K - 1) == 0)
+                        minMergeCost[start, last] += prefixSum[last + 1] - prefixSum[start];
+                }
+            return minMergeCost[0, len - 1];
+        }
     }
 }
