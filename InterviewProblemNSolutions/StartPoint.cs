@@ -61,6 +61,7 @@ namespace InterviewProblemNSolutions
             ReverseWordsInAStringII();
             MinimumCostToConnectSticks();
             MinCostToMergeStones();
+            StringToInteger();
 
 
             // String Matching Algorithm
@@ -953,6 +954,15 @@ namespace InterviewProblemNSolutions
                 stones[i].Print("Stones Array");
                 Console.WriteLine($" with Merging K={k[i]} at a time, \tMinimum cost to merge all piles of stones into one pile: {DailyProblem.MinimumCostToMergeStones(stones[i], k[i])}\n");
             }
+        }
+
+        public static void StringToInteger()
+        {
+            // https://leetcode.com/problems/string-to-integer-atoi/
+            Utility.Print("8. String to Integer (atoi)");
+            string[] inputArr = { "42", "-42", "4193 with words", "words and 987", "-91283472332", "91283472332", "+1", "2147483648", "2147483647", "-2147483648", "-2147483649" };
+            foreach (var str in inputArr)
+                Console.WriteLine($" String to Integer conversion for \t\'{str}\' \tyielded \t\'{DailyProblem.StringToInteger(str)}\'");
         }
              
 

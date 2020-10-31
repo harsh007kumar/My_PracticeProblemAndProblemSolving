@@ -1862,7 +1862,7 @@ namespace InterviewProblemNSolutions
         // There are N piles of stones arranged in a row.  The i-th pile has stones[i] stones.
         // A move consists of merging exactly K consecutive piles into one pile, and the cost of this move is equal to the total number of stones in these K piles.
         // Find the minimum cost to merge all piles of stones into one pile.If it is impossible, return -1
-        // Time O(N^3/K) || Space: O(N^2)
+        // Time O((N^2)*(N/K)) || Space: O(N^2)
         public static int MinimumCostToMergeStones(int[] stones, int K)
         {
             var len = stones.Length;
@@ -1894,7 +1894,9 @@ namespace InterviewProblemNSolutions
                         // mid divides start...last into (1, rest), (K, rest), (2K-1, rest), and so on....
                         for (int mid = start; mid < last; mid += K - 1)
                             minMergeCost[start, last] = Math.Min(minMergeCost[start, last], minMergeCost[start, mid] + minMergeCost[mid + 1, last]);
-                        
+                        // above only calculate cost of merging K piles, i.e. 1 on left * K-1 piles on rt (cost of creating those 2 piles)
+                        // But we still need to add cost of merging left half & right half of the pile to get 1 pile
+                        // Here, len of pile - 1 == last - start
                         if ((last - start) % (K - 1) == 0)
                             minMergeCost[start, last] += prefixSum[last + 1] - prefixSum[start];
                     }
@@ -1902,6 +1904,7 @@ namespace InterviewProblemNSolutions
             return minMergeCost[0, len - 1];
         }
         // Explanation https://leetcode.com/problems/minimum-cost-to-merge-stones/discuss/675912/DP-code-decoded-for-non-experts-like-me
+        // More Explanation https://leetcode.com/problems/minimum-cost-to-merge-stones/discuss/831419/Why-DP-solution-splits-(K-1)-AND-a-bonus-problem-(bottom-up)
         // Time O(N^3/K) || Space: O(N^2)
         public static int MinimumCostToMergeStones100Faster(int[] stones, int K)
         {
@@ -1927,6 +1930,48 @@ namespace InterviewProblemNSolutions
                         minMergeCost[start, last] += prefixSum[last + 1] - prefixSum[start];
                 }
             return minMergeCost[0, len - 1];
+        }
+
+
+        // Time O(n) || Space O(1)
+        public static int StringToInteger(string str)
+        {
+            int num = 0;
+            byte first = 0, isNegative = 0;
+            foreach (var ch in str)
+                if (ch == ' ' && first == 0) continue;
+                else
+                {
+                    // 1st character
+                    if (first == 0)
+                    {
+                        first = 1;
+                        // found -ve sign
+                        if (ch - '-' == 0) isNegative = 1;
+                        // found +ve sign
+                        else if (ch - '+' == 0) continue;
+                        // 1st character is digit
+                        else if (char.IsDigit(ch)) num = ch - '0';
+                        // 1st character is NOT an Digit or -ve sign
+                        else return 0;
+                    }
+                    // remaining characters
+                    else
+                    {
+                        if (char.IsDigit(ch))
+                        {
+                            if (isNegative == 0)
+                            { if (num > int.MaxValue / 10 || (num == int.MaxValue / 10 && ch - '0' > 7)) return int.MaxValue; }
+                            else
+                            { if (num * -1 < int.MinValue / 10 || (num * -1 == int.MinValue / 10 && ch - '0' > 8)) return int.MinValue; }
+                            //{ if (num > (int.MaxValue - 1) / 10 || (num == (int.MaxValue - 1) / 10 && ch - '0' > 8)) return int.MinValue; }
+                            num = num * 10 + ch - '0';
+                        }
+                        // 1st character is NOT an Digit or -ve sign
+                        else break;
+                    }
+                }
+            return isNegative == 0 ? num : num * -1;
         }
     }
 }
