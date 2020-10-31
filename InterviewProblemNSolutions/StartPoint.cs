@@ -62,6 +62,8 @@ namespace InterviewProblemNSolutions
             MinimumCostToConnectSticks();
             MinCostToMergeStones();
             StringToInteger();
+            ReverseNum();
+
 
 
             // String Matching Algorithm
@@ -964,7 +966,15 @@ namespace InterviewProblemNSolutions
             foreach (var str in inputArr)
                 Console.WriteLine($" String to Integer conversion for \t\'{str}\' \tyielded \t\'{DailyProblem.StringToInteger(str)}\'");
         }
-             
+
+        public static void ReverseNum()
+        {
+            // https://leetcode.com/problems/reverse-integer/
+            Utility.Print("7. Reverse Integer");
+            int[] numsArr = { 123, -123, 0, -321, int.MaxValue, int.MinValue, 1534236469 , -2147483412 };
+            foreach (var num in numsArr)
+                Console.WriteLine($" Reverse of Num:\t{num} \t{DailyProblem.ReverseInt(num)}");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

@@ -1973,5 +1973,52 @@ namespace InterviewProblemNSolutions
                 }
             return isNegative == 0 ? num : num * -1;
         }
+
+
+        // Time O(n) || Space O(1)
+        public static int ReverseInt(int num)
+        {
+            if (num == int.MinValue) return 0;
+            bool isPositive = num >= 0;
+            num = Math.Abs(num);
+            int reverse = 0;
+            while (num != 0)
+            {
+                if (isPositive)
+                { if (reverse > int.MaxValue / 10 || (reverse == int.MinValue && num % 10 > 8)) return 0; }
+                else
+                { if (reverse > int.MaxValue / 10 || (reverse == int.MinValue && num % 10 > 7)) return 0; }
+                reverse = reverse * 10 + num % 10;
+                num /= 10;
+            }
+            return isPositive ? reverse : reverse * -1;
+
+            /* FOR EVEN FASTER RUNTIME
+            //if (x == int.MinValue) return 0;
+            bool isPositive = num >= 0;
+            int reverse = 0;
+            // input is +ve
+            if (isPositive)
+            {
+                while (num != 0)
+                {
+                    if (reverse > int.MaxValue / 10 || (reverse == int.MinValue && num % 10 > 8)) return 0;
+                    reverse = reverse * 10 + num % 10;
+                    num /= 10;
+                }
+                return reverse;
+            }
+            // input is -ve
+            if (num == int.MinValue) return 0;
+            num = Math.Abs(num);
+            while (num != 0)
+            {
+                if (reverse > int.MaxValue / 10 || (reverse == int.MinValue && num % 10 > 7)) return 0;
+                reverse = reverse * 10 + num % 10;
+                num /= 10;
+            }
+            return reverse * -1;
+            */
+        }
     }
 }
