@@ -63,6 +63,7 @@ namespace InterviewProblemNSolutions
             MinCostToMergeStones();
             StringToInteger();
             ReverseNum();
+            SearchA2DMatrixII();
 
 
 
@@ -974,6 +975,26 @@ namespace InterviewProblemNSolutions
             int[] numsArr = { 123, -123, 0, -321, int.MaxValue, int.MinValue, 1534236469 , -2147483412 };
             foreach (var num in numsArr)
                 Console.WriteLine($" Reverse of Num:\t{num} \t{DailyProblem.ReverseInt(num)}");
+        }
+
+        public static void SearchA2DMatrixII()
+        {
+            // https://leetcode.com/problems/search-a-2d-matrix-ii/
+            Utility.Print("240. Search a 2D Matrix II");
+            int[][,] matrixArr = {  new int[,]{ { 1, 4, 7, 11, 15 },
+                                                { 2, 5, 8, 12, 19 },
+                                                { 3, 6, 9, 16, 22 },
+                                                { 10, 13, 14, 17, 24 },
+                                                { 18, 19, 23, 26, 30 } },
+                                    new int[,]{ { 1 , 1 } }
+                                 };
+            int[] targetArr = { 5, 20, 19, 2 };
+            foreach (var matrix in matrixArr)
+            {
+                matrix.Print();
+                foreach (var target in targetArr)
+                    Console.WriteLine($" Search for \'{target}\' in above 2D matrix resulted in: \t{DailyProblem.SearchA2DMatrixIIBinarySearch(matrix, target)}");
+            }
         }
 
 

@@ -2020,5 +2020,39 @@ namespace InterviewProblemNSolutions
             return reverse * -1;
             */
         }
+
+        // Time O(NLogN) || Space O(1)
+        public static bool SearchA2DMatrixIIBinarySearch(int[,] matrix, int target)
+        {
+            if (matrix == null || matrix.GetLength(0) < 1) return false;
+            var shortLen = Math.Min(matrix.GetLength(0), matrix.GetLength(1));
+            for (int i = 0; i < shortLen; i++)
+                if (BinarySearchInSorted2D(matrix, target, i, true) || BinarySearchInSorted2D(matrix, target, i, false))
+                    return true;
+            return false;
+        }
+        // Time O(logN) || Space O(1)
+        public static bool BinarySearchInSorted2D(int[,] matrix, int target, int startIndex, bool verticalSearch)
+        {
+            int start = startIndex;
+            var last = (verticalSearch ? matrix.GetLength(0) : matrix.GetLength(1)) - 1;
+            while (start <= last)
+            {
+                var mid = start + (last - start) / 2;
+                if (verticalSearch) // Horizontal/Row-wise Search
+                {
+                    if (matrix[mid, startIndex] < target) start = mid + 1;
+                    else if (matrix[mid, startIndex] > target) last = mid - 1;
+                    else return true;
+                }
+                else // Col-wise Search
+                {
+                    if (matrix[startIndex, mid] < target) start = mid + 1;
+                    else if (matrix[startIndex, mid] > target) last = mid - 1;
+                    else return true;
+                }
+            }
+            return false;
+        }
     }
 }
