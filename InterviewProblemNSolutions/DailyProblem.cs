@@ -2039,19 +2039,33 @@ namespace InterviewProblemNSolutions
             while (start <= last)
             {
                 var mid = start + (last - start) / 2;
-                if (verticalSearch) // Horizontal/Row-wise Search
+                if (verticalSearch) // foreach index in Rows-wise Search
                 {
                     if (matrix[mid, startIndex] < target) start = mid + 1;
                     else if (matrix[mid, startIndex] > target) last = mid - 1;
                     else return true;
                 }
-                else // Col-wise Search
+                else // foreach index in Cols-wise Search
                 {
                     if (matrix[startIndex, mid] < target) start = mid + 1;
                     else if (matrix[startIndex, mid] > target) last = mid - 1;
                     else return true;
                 }
             }
+            return false;
+        }
+        // Search Space Reduction Approach
+        // Time O(R+C) || Space O(1), R = no of rows & C = no of columns
+        public static bool SearchNumberIn2DMatrix(int[,] matrix, int target)
+        {
+            if (matrix == null || matrix.GetLength(0) < 1) return false;
+            var rows = matrix.GetLength(0);
+            var cols = matrix.GetLength(1);
+            int r = rows - 1, c = 0;
+            while (r >= 0 && c < cols)
+                if (matrix[r, c] == target) return true;
+                else if (matrix[r, c] > target) r--;
+                else c++;
             return false;
         }
     }

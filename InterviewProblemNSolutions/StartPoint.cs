@@ -993,7 +993,8 @@ namespace InterviewProblemNSolutions
             {
                 matrix.Print();
                 foreach (var target in targetArr)
-                    Console.WriteLine($" Search for \'{target}\' in above 2D matrix resulted in: \t{DailyProblem.SearchA2DMatrixIIBinarySearch(matrix, target)}");
+                    Console.WriteLine($" Search for \'{target}\' in above 2D matrix resulted in: \t{DailyProblem.SearchNumberIn2DMatrix(matrix, target)}");
+                    //Console.WriteLine($" Search for \'{target}\' in above 2D matrix resulted in: \t{DailyProblem.SearchA2DMatrixIIBinarySearch(matrix, target)}");
             }
         }
 
