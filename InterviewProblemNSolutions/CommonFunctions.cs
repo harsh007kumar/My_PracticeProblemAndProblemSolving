@@ -14,6 +14,15 @@ namespace InterviewProblemNSolutions
         public TreeNode(int num) => val = num;
         public TreeNode() => left = right = null;
     }
+    public class ListNode
+    {
+        public int val = 0;
+        public ListNode prv = null;
+        public ListNode next = null;
+        public IList<ListNode> neighbors = new List<ListNode>();
+        public ListNode(int num) => val = num;
+        public ListNode() => prv = next = null;
+    }
 
     public static class Utility
     {

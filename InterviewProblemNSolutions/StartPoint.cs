@@ -64,7 +64,7 @@ namespace InterviewProblemNSolutions
             StringToInteger();
             ReverseNum();
             SearchA2DMatrixII();
-
+            CloneGraph();
 
 
             // String Matching Algorithm
@@ -996,6 +996,30 @@ namespace InterviewProblemNSolutions
                     Console.WriteLine($" Search for \'{target}\' in above 2D matrix resulted in: \t{DailyProblem.SearchNumberIn2DMatrix(matrix, target)}");
                     //Console.WriteLine($" Search for \'{target}\' in above 2D matrix resulted in: \t{DailyProblem.SearchA2DMatrixIIBinarySearch(matrix, target)}");
             }
+        }
+
+        public static void CloneGraph()
+        {
+            // https://leetcode.com/problems/clone-graph/
+            Utility.Print("133. Clone Graph");
+            ListNode[] nodesArr = new ListNode[4];
+            for (int i = 0; i < nodesArr.Length; i++)
+                nodesArr[i] = new ListNode(i + 1);
+            
+            // Node 1
+            nodesArr[0].neighbors.Add(nodesArr[1]);
+            nodesArr[0].neighbors.Add(nodesArr[3]);
+            // Node 2
+            nodesArr[1].neighbors.Add(nodesArr[0]);
+            nodesArr[1].neighbors.Add(nodesArr[2]);
+            // Node 3
+            nodesArr[2].neighbors.Add(nodesArr[1]);
+            nodesArr[2].neighbors.Add(nodesArr[3]);
+            // Node 4
+            nodesArr[3].neighbors.Add(nodesArr[0]);
+            nodesArr[3].neighbors.Add(nodesArr[2]);
+
+            var clonedGraph = DailyProblem.CloneGraph(nodesArr[0]);
         }
 
 

@@ -2061,12 +2061,55 @@ namespace InterviewProblemNSolutions
             if (matrix == null || matrix.GetLength(0) < 1) return false;
             var rows = matrix.GetLength(0);
             var cols = matrix.GetLength(1);
-            int r = rows - 1, c = 0;
+            int r = rows - 1, c = 0;    // Starting from the bottom left corner
             while (r >= 0 && c < cols)
                 if (matrix[r, c] == target) return true;
-                else if (matrix[r, c] > target) r--;
-                else c++;
+                else if (matrix[r, c] > target) r--;    // move up
+                else c++;                               // move right
             return false;
+        }
+
+
+        // Function return a deep copy (clone) of the graph.
+        // Time O(V+E), V = no of Vertices & E = no of Edges
+        public static ListNode CloneGraph(ListNode node)
+        {
+            if (node == null) return null;
+            // to hold reference of newly created ListListNodes
+            Dictionary<int, ListNode> dict = new Dictionary<int, ListNode>(100);
+            // to maintain set of already copied ListNodes
+            HashSet<int> visited = new HashSet<int>();
+            // Queue for BFS traversal
+            Queue<ListNode> q = new Queue<ListNode>();
+            q.Enqueue(node);
+            // mark this ListNode as visited and Done copying
+            visited.Add(node.val);
+
+            while (q.Count > 0)
+            {
+                var cur = q.Dequeue();
+
+                // create parent ListNode with same value as cur ListNode
+                if (!dict.ContainsKey(cur.val)) dict.Add(cur.val, new ListNode(cur.val));
+
+                foreach (var adjacentListNode in cur.neighbors)
+                {
+                    // add this adjacent ListNode to the queue if not already copied/visited
+                    if (!visited.Contains(adjacentListNode.val))
+                    {
+                        q.Enqueue(adjacentListNode);
+                        // mark this adjacent ListNode as visited and don't add it again to the Queue
+                        visited.Add(adjacentListNode.val);
+                    }
+
+                    // create new ListNode with adjacent value
+                    if (!dict.ContainsKey(adjacentListNode.val)) dict.Add(adjacentListNode.val, new ListNode(adjacentListNode.val));
+
+                    // connect parent -> adjacenet ListNode
+                    dict[cur.val].neighbors.Add(dict[adjacentListNode.val]);
+                }
+            }
+            return dict[node.val];
         }
     }
 }
