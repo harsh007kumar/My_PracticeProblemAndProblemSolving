@@ -2111,5 +2111,43 @@ namespace InterviewProblemNSolutions
             }
             return dict[node.val];
         }
+
+
+        /// <summary>
+        /// Time O(3^N * 4^M) where N is the number of digits in the input that maps to 3 letters (e.g. 2, 3, 4, 5, 6, 8)
+        /// and M is the number of digits in the input that maps to 4 letters (e.g. 7, 9)
+        /// and N+M is the total number digits in the input.
+        /// Space O(3^N * 4^M) ~ O(1)
+        /// </summary>
+        /// <param name="digits"></param>
+        /// <returns></returns>
+        public static IList<string> LetterCombinationsOfPhoneNo(string digits)
+        {
+            IList<string> result = new List<string>();
+            if (digits.Length == 0) return result;
+
+            // Create dict from where letters corrosponding to each num would be stored
+            Dictionary<int, List<char>> dict = new Dictionary<int, List<char>>(8);
+            char startingLetter = 'a';
+            for (int inputDigit = 2; inputDigit < 10; inputDigit++)
+            {
+                dict.Add(inputDigit, new List<char>(3));
+                for (int i = 0; i < (((inputDigit == 7) || (inputDigit == 9)) ? 4 : 3); i++)
+                    dict[inputDigit].Add(startingLetter++);
+            }
+
+            LetterCombinations(digits, 0, dict, "", ref result);
+            return result;
+        }
+        // Helper Recursive Function which goes thru each possible combination and adds them to result list at end
+        public static void LetterCombinations(string digits, int currNumIndex, Dictionary<int, List<char>> dict, string letterComboSoFar, ref IList<string> result)
+        {
+            if (currNumIndex == digits.Length)
+                result.Add(letterComboSoFar);
+            else
+                // For each current num in Dict try combo with all remaining numbers
+                foreach (var currChar in dict[digits[currNumIndex] - '0'])
+                    LetterCombinations(digits, currNumIndex + 1, dict, letterComboSoFar + currChar, ref result);
+        }
     }
 }

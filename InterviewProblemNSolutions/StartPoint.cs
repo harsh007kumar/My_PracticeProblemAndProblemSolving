@@ -65,7 +65,7 @@ namespace InterviewProblemNSolutions
             ReverseNum();
             SearchA2DMatrixII();
             CloneGraph();
-
+            LetterCombinations();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -1020,6 +1020,21 @@ namespace InterviewProblemNSolutions
             nodesArr[3].neighbors.Add(nodesArr[2]);
 
             var clonedGraph = DailyProblem.CloneGraph(nodesArr[0]);
+        }
+
+        public static void LetterCombinations()
+        {
+            // https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+            Utility.Print("17. Letter Combinations of a Phone Number");
+            string[] inputArr = { "23", "", "2", "789" };
+            foreach (var digits in inputArr)
+            {
+                var letterCombos = DailyProblem.LetterCombinationsOfPhoneNo(digits);
+                Console.Write($" For given input digits: \'{digits}\' possible letter combination is are: ");
+                foreach (var combo in letterCombos)
+                    Console.Write($" {combo} ||");
+                Console.WriteLine();
+            }
         }
 
 
