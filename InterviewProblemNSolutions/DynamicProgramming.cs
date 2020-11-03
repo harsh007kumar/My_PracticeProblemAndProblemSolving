@@ -933,10 +933,36 @@ namespace InterviewProblemNSolutions
         // https://youtu.be/UflHuQj6MVA
         // Time O(n^2) || Space O(n^2)
         // DP Tabulation based bottom-up solution
-        public static int LongestPalindromicSubString(string input, int len)
+        public static int LongestPalindromicSubString(string input)
         {
+            var len = input.Length;
+            bool[,] dp = new bool[len, len];
+            string lps = "";
+            int maxLength = 0;
+
+            for (int l = 0; l < len; l++)
+                for (int start = 0; start < len - l; start++)
+                {
+                    int last = start + l;
+                    bool isPalindrome = false;
+
+                    if (start == last) dp[start, last] = isPalindrome = true;
+                    else if (start + 1 == last && input[start] == input[last]) dp[start, last] = isPalindrome = true;
+                    else if (input[start] == input[last]) dp[start, last] = isPalindrome = dp[start + 1, last - 1];
+
+                    if (isPalindrome && last - start + 1 > maxLength)
+                    {
+                        maxLength = l + 1;
+                        lps = input.Substring(start, l + 1);
+                    }
+                }
+            Console.WriteLine($" Longest Palindromic Substring in \'{input}\'\tis: \'{lps}\'\tofLength \'{maxLength}\'");
+            return maxLength;
+
+            /*
             bool[,] lps = new bool[len, len];
             int maxLen = 0;
+            string LPS = "";
 
             for (int size = 0; size < len; size++)
                 for (int i = 0; i < len - size; i++)
@@ -955,6 +981,7 @@ namespace InterviewProblemNSolutions
                     if (isPalindrome) maxLen = Math.Max(maxLen, j - i + 1);
                 }
             return maxLen;
+            */
         }
 
         // Time O(n^2) || Space O(n^2)

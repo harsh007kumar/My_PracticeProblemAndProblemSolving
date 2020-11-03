@@ -1848,14 +1848,11 @@ namespace InterviewProblemNSolutions
 
         public static void LongestPalindromicSubString()
         {
-            Utility.Print("Problem-36  Longest Palindromic Substring (p. 814)");
-            string[] inputArr = { "AAAABBAA", "AGDDDA", "AGCTCBMAACTGGAM", "GEEKSFORGEEKS", "ABAXAABAXABYBAXABYB" };
+            // https://leetcode.com/problems/longest-palindromic-substring/
+            Utility.Print("5. Longest Palindromic Substring || Problem-36  Longest Palindromic Substring (p. 814)");
+            string[] inputArr = { "babad", "AAAABBAA", "AGDDDA", "AGCTCBMAACTGGAM", "GEEKSFORGEEKS", "ABAXAABAXABYBAXABYB" };
             foreach (var input in inputArr)
-            {
-                var len = input.Length;
-                var maxLps = DynamicProgramming.LongestPalindromicSubString(input, len);                    // DP Tabulation
-                Console.WriteLine($" Length of Longest Palindromic SubString LPS in '{input}' is of length: '{maxLps}'");
-            }
+                DynamicProgramming.LongestPalindromicSubString(input);                    // DP Tabulation
         }
 
         public static void NoOfTimesStringOccursAsSubsequenceInAnotherString()
