@@ -2149,5 +2149,28 @@ namespace InterviewProblemNSolutions
                 foreach (var currChar in dict[digits[currNumIndex] - '0'])
                     LetterCombinations(digits, currNumIndex + 1, dict, letterComboSoFar + currChar, ref result);
         }
+
+
+        // Time = Space = O(N), N = no of nodes in tree
+        public static string Serialize(TreeNode root)
+        {
+            if (root == null) return "#,";
+            return root.val + "," + Serialize(root.left) + Serialize(root.right);
+        }
+        public static TreeNode DeSerialize(string serialzedData)
+        {
+            int startIndex = 0;
+            return DeserializeHelper(serialzedData.Split(','), ref startIndex);
+        }
+        // Time = Space = O(N), N = no of nodes in tree
+        public static TreeNode DeserializeHelper(string[] split, ref int index)
+        {
+            if (split[index] == "#") return null;
+
+            var root = new TreeNode(int.Parse(split[index]));
+            if (++index < split.Length) root.left = DeserializeHelper(split, ref index);
+            if (++index < split.Length) root.right = DeserializeHelper(split, ref index);
+            return root;
+        }
     }
 }

@@ -66,6 +66,8 @@ namespace InterviewProblemNSolutions
             SearchA2DMatrixII();
             CloneGraph();
             LetterCombinations();
+            SerializeAndDeserializeBST();
+
 
             // String Matching Algorithm
             BruteForceWay();
@@ -1035,6 +1037,14 @@ namespace InterviewProblemNSolutions
                     Console.Write($" {combo} ||");
                 Console.WriteLine();
             }
+        }
+
+        public static void SerializeAndDeserializeBST()
+        {
+            // https://leetcode.com/problems/serialize-and-deserialize-bst/
+            Utility.Print("449. Serialize and Deserialize BST");
+            TreeNode root = new TreeNode(2) { left = new TreeNode(1), right = new TreeNode(3) };
+            var serialzedDeserialzedRoot = DailyProblem.DeSerialize(DailyProblem.Serialize(root));
         }
 
 
