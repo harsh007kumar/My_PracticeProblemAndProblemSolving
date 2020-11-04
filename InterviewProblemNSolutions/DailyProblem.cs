@@ -2172,5 +2172,61 @@ namespace InterviewProblemNSolutions
             if (++index < split.Length) root.right = DeserializeHelper(split, ref index);
             return root;
         }
+
+
+        // Time = Space = O(V), V = no of Vertex in Graph
+        public static IList<int> FindMinHeightTrees(int[][] edges, int n)
+        {
+            IList<int> result = new List<int>(n);
+            if (n < 3)
+            {
+                for (int i = 0; i < n; i++) result.Add(i);
+                return result;
+            }
+
+            Dictionary<int, List<int>> graph = new Dictionary<int, List<int>>(n);
+
+            // Build the graph
+            for (int i = 0; i < n - 1; i++)     // Time O(V-1)
+            {
+                var vertexU = edges[i][0];
+                var vertexV = edges[i][1];
+                // Edge U->V
+                if (!graph.ContainsKey(vertexU)) graph.Add(vertexU, new List<int>(n - 1) { vertexV });
+                else graph[vertexU].Add(vertexV);
+                // Edge V->U
+                if (!graph.ContainsKey(vertexV)) graph.Add(vertexV, new List<int>(n - 1) { vertexU });
+                else graph[vertexV].Add(vertexU);
+            }
+
+            int remainingNodes = n;
+            HashSet<int> singleEdgeVertices = new HashSet<int>(n);
+
+            // trim out leaf nodes from the Graph until the Graph has more than 2 Vertices
+            while (remainingNodes > 2)
+            {
+                foreach (var vertex in graph.Keys)
+                    // Vertex with single Edge, Add it to list of Vertices to be removed
+                    if (graph[vertex].Count == 1) singleEdgeVertices.Add(vertex);
+
+                // Remove single edge Vertices from the Graph
+                foreach (var singleEdgeVertex in singleEdgeVertices)
+                {
+                    // remove edge V->U
+                    graph[graph[singleEdgeVertex][0]].Remove(singleEdgeVertex);
+                    // remove edge U->V
+                    graph.Remove(singleEdgeVertex);
+                }
+
+                remainingNodes -= singleEdgeVertices.Count();
+                // reset removed Vertices for next iteration
+                singleEdgeVertices.Clear();
+            }
+
+            // Add Remaining Vertices(Max 2 would be left) to result
+            foreach (var centroidVertex in graph.Keys)
+                result.Add(centroidVertex);
+            return result;
+        }
     }
 }
