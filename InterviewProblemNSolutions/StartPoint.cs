@@ -68,6 +68,7 @@ namespace InterviewProblemNSolutions
             LetterCombinations();
             SerializeAndDeserializeBST();
             MinimumHeightTrees();
+            ArrayFormationThroughConcatenation();
 
 
             // String Matching Algorithm
@@ -1070,6 +1071,21 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void ArrayFormationThroughConcatenation()
+        {
+            // https://leetcode.com/problems/check-array-formation-through-concatenation/
+            Utility.Print("1640. Check Array Formation Through Concatenation");
+            int[][] arr = { new int[] { 91, 4, 64, 78 }, new int[] { 1, 2, 3 } };
+            int[][][] pieces = { new int[][] { new int[] { 78 }, new int[] { 4, 64 }, new int[] { 91 } },
+                                 new int[][] { new int[] { 2 } , new int[] { 1, 3 } } };
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i].Print("Given Array to be formed");
+                pieces[i].Print("Using Pieces");
+                Console.WriteLine($" Given Array can be formed using above Pieces: {DailyProblem.ArrayFormationThroughConcatenation(arr[i], pieces[i])}");
+            }
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

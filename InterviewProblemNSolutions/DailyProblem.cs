@@ -2228,5 +2228,30 @@ namespace InterviewProblemNSolutions
                 result.Add(centroidVertex);
             return result;
         }
+
+
+        // Time O(Max(N,M}) || Space O(N)
+        // N = length on arr & M = Sum of length of all sub-arrays within Pieces Array 
+        public static bool ArrayFormationThroughConcatenation(int[] arr, int[][] pieces)
+        {
+            Dictionary<int, int> aNumIndex = new Dictionary<int, int>(100);
+            int i = 0;
+            foreach (var integer in arr) aNumIndex.Add(integer, i++);
+            foreach (var piece in pieces)
+            {
+                if (piece.Length == 1 && aNumIndex.ContainsKey(piece[0]))
+                    aNumIndex.Remove(piece[0]);
+                else
+                {
+                    int lastIndex = -1;
+                    foreach (var num in piece)
+                        if (aNumIndex.ContainsKey(num) && (lastIndex == -1 || aNumIndex[num] == 1 + lastIndex))
+                        { lastIndex = aNumIndex[num]; aNumIndex.Remove(num); }
+                }
+                // arr can be formed using pieces array
+                if (aNumIndex.Count == 0) return true;
+            }
+            return false;
+        }
     }
 }
