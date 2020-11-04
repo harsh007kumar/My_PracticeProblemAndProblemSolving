@@ -26,6 +26,7 @@ namespace InterviewProblemNSolutions
 
     public static class Utility
     {
+        public const string lineDelimeter = "\n--------------------------------------------------------------------------------------";
         public static void Print(string str = "") => Console.WriteLine($"\n===================== {str} =====================");
 
         public static void Swap(ref int a,ref int b)
@@ -135,6 +136,7 @@ namespace InterviewProblemNSolutions
         public static void Print(this int[][] arr, string msg="")
         {
             var row = arr.Length;
+            if (row == 0) return;
             var col = arr[0].Length;
             if (msg != "") Console.WriteLine($" ==== Printing \'{msg}\' 2-D int array with {row}:Row & {col}:Col ====");
             for (int i = 0; i < row; i++)
