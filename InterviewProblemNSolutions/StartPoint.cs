@@ -1427,17 +1427,24 @@ namespace InterviewProblemNSolutions
 
         public static void BinarySearchInRotatedSortedArray()
         {
+            // https://leetcode.com/problems/search-in-rotated-sorted-array/
             Utility.Print("Problem-40  Given a sorted array of n integers that has been rotated an unknown number of times," +
                 " give a O(logn) algorithm that finds an element in the array.(pp. 579 - 580)");
-            int[] input = { 15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14 };
-            int searchFor = 5;
-            input.Print("Input : ");
-            var index = SearchAlgorithms.BinarySearchInRotatedArray(input, searchFor);
-            var indexFast = SearchAlgorithms.BinarySearchInRotatedArraySinglePass(input, 0, input.Length - 1, searchFor);
-            if (index != -1)
-                Console.WriteLine($" Element {searchFor} found at index : {index}");
-            else
-                Console.WriteLine($" Element {searchFor} Not Found in array");
+            int[][] input = { new int[] { 15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14 }, new int[] { 4, 5, 6, 7, 0, 1, 2 }, new int[] { 4, 5, 6, 7, 0, 1, 2 }, new int[] { 1 } };
+            int[] searchFor = { 5, 0, 3, 0 };
+            for (int i = 0; i < input.Length; i++)
+            {
+                input[i].Print("Input : ");
+                //var index = SearchAlgorithms.BinarySearchInRotatedArray(input[i], searchFor[i]);
+                // Recursive
+                //var index = SearchAlgorithms.BinarySearchInRotatedArraySinglePass(input[i], 0, input[i].Length - 1, searchFor[i]);
+                // Iterative
+                var index = SearchAlgorithms.BinarySearchInRotatedArraySinglePassIterative(input[i], 0, input[i].Length - 1, searchFor[i]);
+                if (index != -1)
+                    Console.WriteLine($" Element \t\'{searchFor[i]}\' found at index : \t{index}");
+                else
+                    Console.WriteLine($" Element \'{searchFor[i]}\' Not Found in array");
+            }
         }
 
         public static void FindFirstAndLastOccurenceOfNumInSortedArrayWithDuplicates()
