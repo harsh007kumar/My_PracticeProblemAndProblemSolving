@@ -2267,5 +2267,22 @@ namespace InterviewProblemNSolutions
 
             return evenPositionChips < oddPositionChips ? evenPositionChips : oddPositionChips;
         }
+
+        // Time O(N) || Space O(1)
+        public static int MinInRotatedSortedArrayWithDuplicates(int[] nums)
+        {
+            int start = 0;
+            int last = nums.Length - 1;
+            while (start < last)
+            {
+                var mid = start + (last - start) / 2;
+                /*if(mid<last && nums[mid]>nums[mid+1]) return nums[mid+1];
+                else if(start<mid && nums[mid-1]>nums[mid]) return nums[mid];
+                else */if (nums[mid] > nums[last]) start = mid + 1;
+                else if (nums[mid] < nums[last]) last = mid;
+                else last--;
+            }
+            return nums[start];
+        }
     }
 }

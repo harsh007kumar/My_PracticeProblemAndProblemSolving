@@ -70,6 +70,8 @@ namespace InterviewProblemNSolutions
             MinimumHeightTrees();
             ArrayFormationThroughConcatenation();
             MinCostToMoveChips();
+            FindMinimumInRotatedSortedArrayII();
+
 
             // String Matching Algorithm
             BruteForceWay();
@@ -1099,6 +1101,21 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Minimum cost to move all the above chips at one location is: \t{DailyProblem.MinCostToMoveChips(positions)}");
             }
         }
+
+
+        public static void FindMinimumInRotatedSortedArrayII()
+        {
+            // https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/
+            Utility.Print("154. Find Minimum in Rotated Sorted Array II");
+            int[][] inputArr = { new int[] { 1, 3, 5 }, new int[] { 2, 2, 2, 0, 1 }, new int[] { 3, 3, 3, 1 }, new int[] { 10, 1, 10, 10, 10 }, new int[] { 2, 2, 2, 0, 1 } };
+            foreach (var input in inputArr)
+            {
+                input.Print("Input");
+                Console.WriteLine($" Min element: \t{DailyProblem.MinInRotatedSortedArrayWithDuplicates(input)}");
+            }
+        }
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
