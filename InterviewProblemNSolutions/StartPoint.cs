@@ -69,7 +69,7 @@ namespace InterviewProblemNSolutions
             SerializeAndDeserializeBST();
             MinimumHeightTrees();
             ArrayFormationThroughConcatenation();
-
+            MinCostToMoveChips();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -1086,6 +1086,20 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Given Array can be formed using above Pieces: {DailyProblem.ArrayFormationThroughConcatenation(arr[i], pieces[i])}");
             }
         }
+
+
+        public static void MinCostToMoveChips()
+        {
+            // https://leetcode.com/problems/minimum-cost-to-move-chips-to-the-same-position/
+            Utility.Print("1217. Minimum Cost to Move Chips to The Same Position");
+            int[][] positionsArr = { new int[] { }, new int[] { 1, 2, 3 }, new int[] { 2, 2, 2, 3, 3 }, new int[] { 1, 1000000 } };
+            foreach (var positions in positionsArr)
+            {
+                positions.Print("CHIPS POSITION");
+                Console.WriteLine($" Minimum cost to move all the above chips at one location is: \t{DailyProblem.MinCostToMoveChips(positions)}");
+            }
+        }
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

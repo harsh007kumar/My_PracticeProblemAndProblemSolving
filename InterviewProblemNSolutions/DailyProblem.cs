@@ -2253,5 +2253,19 @@ namespace InterviewProblemNSolutions
             }
             return false;
         }
+
+        // Time O(N) || Space O(1)
+        public static int MinCostToMoveChips(int[] position)
+        {
+            // cost of merging all chips at different even position to any single even position is Zero
+            // cost of merging all chips at different odd position to any single odd position is Zero
+            // Now move small pile of chips and merge it with second pile at cost of 1 x no of chips in smaller pile
+            int evenPositionChips = 0, oddPositionChips = 0;
+            for (int i = 0; i < position.Length; i++)
+                if (position[i] % 2 == 0) evenPositionChips++;
+                else oddPositionChips++;
+
+            return evenPositionChips < oddPositionChips ? evenPositionChips : oddPositionChips;
+        }
     }
 }
