@@ -2268,7 +2268,7 @@ namespace InterviewProblemNSolutions
             return evenPositionChips < oddPositionChips ? evenPositionChips : oddPositionChips;
         }
 
-        // Time O(N) || Space O(1)
+        // Time Best Case O(LogN) Worst Case O(N) || Space O(1)
         public static int MinInRotatedSortedArrayWithDuplicates(int[] nums)
         {
             int start = 0;
