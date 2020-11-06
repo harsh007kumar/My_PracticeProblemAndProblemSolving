@@ -2284,5 +2284,30 @@ namespace InterviewProblemNSolutions
             }
             return nums[start];
         }
+
+        // Time O(n), N = length of nums || Space O(1)
+        // Time can be reduced to LogN if nums array is sorted as we need not find Max in that case
+        public static int SmallestDivisor(int[] nums, int threshold)
+        {
+            int len = nums.Length;
+            int rightBoundry = nums[len - 1];//int.MinValue;
+            //for (int i = 0; i < nums.Length; i++) rightBoundry = Math.Max(rightBoundry, nums[i]);   // O(N) time
+
+            int leftBoundry = (rightBoundry % threshold == 0) ? rightBoundry / threshold : (rightBoundry / threshold) + 1;
+            int divisor = leftBoundry;
+
+            while (true)    // O(LogN) as we are reducing boundry by half with each pass
+            {
+                divisor = leftBoundry + ((rightBoundry - leftBoundry) >> 1);    // right shifting by 1 is same as dividing by 2
+                int sumResultOfDivision = 0;
+                for (int i = 0; i < nums.Length; i++)
+                    sumResultOfDivision += (nums[i] / divisor) + ((nums[i] % divisor == 0) ? 0 : 1);
+                if (leftBoundry == rightBoundry) break;
+                else if (sumResultOfDivision <= threshold) rightBoundry = divisor;
+                else leftBoundry = divisor + 1;
+                
+            }
+            return divisor;
+        }
     }
 }
