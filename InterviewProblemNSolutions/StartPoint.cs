@@ -72,6 +72,7 @@ namespace InterviewProblemNSolutions
             MinCostToMoveChips();
             FindMinimumInRotatedSortedArrayII();
             FindTheSmallestDivisorGivenAThreshold();
+            ConstructTreeFromPreAndInOrderTraversal();
 
 
             // String Matching Algorithm
@@ -1128,6 +1129,18 @@ namespace InterviewProblemNSolutions
                 nums[i].Print("Nums");
                 Console.WriteLine($" Smallest Divisor for Threshold \'{threshold[i]}\' for above arr is: \t{DailyProblem.SmallestDivisor(nums[i], threshold[i])}");
             }
+        }
+
+
+        public static void ConstructTreeFromPreAndInOrderTraversal()
+        {
+            // https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+            Utility.Print("105. Construct Binary Tree from Preorder and Inorder Traversal");
+            int[] preorder = { 3, 9, 20, 15, 7 };
+            int[] inorder = { 9, 3, 15, 20, 7 };
+            preorder.Print("PreOrder");
+            inorder.Print("InOrder");
+            var root = DailyProblem.BuildTree(preorder, inorder);
         }
 
 

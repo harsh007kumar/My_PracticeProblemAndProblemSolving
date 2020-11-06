@@ -2309,5 +2309,24 @@ namespace InterviewProblemNSolutions
             }
             return divisor;
         }
+
+
+        // Time O(n) || Space O(n)
+        public static TreeNode BuildTree(int[] preorder, int[] inorder)
+        {
+            Dictionary<int, int> valueIndex = new Dictionary<int, int>(100);
+            for (int i = 0; i < inorder.Length; i++) valueIndex.Add(inorder[i], i);
+            int preorderIndex = 0;
+            return BuildTreeRecursiveUtil(valueIndex, inorder, preorder, 0, inorder.Length - 1, ref preorderIndex);
+        }
+        public static TreeNode BuildTreeRecursiveUtil(Dictionary<int, int> valueIndex, int[] inorder, int[] preorder, int inOrderStart, int inOrderEnd, ref int preorderIndex)
+        {
+            if (inOrderStart > inOrderEnd) return null;
+            var indexInInOrder = valueIndex[preorder[preorderIndex]];
+            TreeNode root = new TreeNode(preorder[preorderIndex++]);
+            root.left = BuildTreeRecursiveUtil(valueIndex, inorder, preorder, inOrderStart, indexInInOrder - 1, ref preorderIndex);
+            root.right = BuildTreeRecursiveUtil(valueIndex, inorder, preorder, indexInInOrder + 1, inOrderEnd, ref preorderIndex);
+            return root;
+        }
     }
 }
