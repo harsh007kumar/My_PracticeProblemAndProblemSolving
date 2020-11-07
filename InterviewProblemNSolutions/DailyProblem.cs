@@ -2366,5 +2366,21 @@ namespace InterviewProblemNSolutions
         }
         public static bool IsLeapYear(int year) => ((year % 4) == 0) && ((year % 100) != 0) || ((year % 400) == 0);
 
+
+        // Time O(n) || Space O(1)
+        public static bool CanPlaceFlowers(int[] flowerbed, int n)
+        {
+            // we start with 1 emptyPlot instead of 0, as if 1st 2 plots are empty we can plot a flower at inedx=0
+            int emptyPlotCount = 1;
+            for (int i = 0; i < flowerbed.Length; i++)
+            {
+                if (flowerbed[i] == 1) emptyPlotCount = 0;
+                else if (++emptyPlotCount == 3)
+                { n--; emptyPlotCount = 1; }
+                if (n == 0) return true;
+            }
+            // check if last 2 plots are empty we can plan 1 more flower as there is infinite space on right of last
+            return (n == 1 && emptyPlotCount == 2) ? true : false;
+        }
     }
 }

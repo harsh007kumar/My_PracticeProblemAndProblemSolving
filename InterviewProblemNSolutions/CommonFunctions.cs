@@ -65,7 +65,7 @@ namespace InterviewProblemNSolutions
             else Console.WriteLine($" ==== Printing given int array with '{arr.Length}' elements ====");
 
             for (int i = 0; i < arr.Length; i++)
-                Console.Write($" {arr[i]} >>");
+                Console.Write($" {arr[i]} ||");
             Console.WriteLine();
         }
         public static void Print(this char[] arr, string msg = "")
@@ -74,7 +74,7 @@ namespace InterviewProblemNSolutions
             else Console.WriteLine($" ==== Printing given int array with '{arr.Length}' elements ====");
 
             for (int i = 0; i < arr.Length; i++)
-                Console.Write($" {arr[i]} >>");
+                Console.Write($" {arr[i]} ||");
             Console.WriteLine();
         }
 
@@ -86,7 +86,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < row; i++)
             {
                 for (int j = 0; j < col; j++)
-                    Console.Write($" {arr[i, j]} >>");
+                    Console.Write($" {arr[i, j]} ||");
                 Console.WriteLine();
             }
             Console.WriteLine();
@@ -127,7 +127,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < row; i++)
             {
                 for (int j = 0; j < col; j++)
-                    Console.Write($" {arr[i, j]} >>");
+                    Console.Write($" {arr[i, j]} ||");
                 Console.WriteLine();
             }
             Console.WriteLine();

@@ -74,6 +74,8 @@ namespace InterviewProblemNSolutions
             FindTheSmallestDivisorGivenAThreshold();
             ConstructTreeFromPreAndInOrderTraversal();
             DayOfTheWeek();
+            CanPlaceFlowers();
+
 
             // String Matching Algorithm
             BruteForceWay();
@@ -1151,6 +1153,20 @@ namespace InterviewProblemNSolutions
             int[] day = { 28, 7, 31, 18, 15, 31, DateTime.Now.Day }, month = { 12, 11, 8, 7, 8, 8, DateTime.Now.Month }, year = { 1971, 2020, 2019, 1999, 1993, 2100, DateTime.Now.Year };
             for (int i = 0; i < day.Length; i++)
                 Console.WriteLine($" Day{day[i]}\tMonth{month[i]}\tYear{year[i]}\tis \t\'{DailyProblem.DayOfTheWeek(day[i], month[i], year[i])}\'");
+        }
+
+
+        public static void CanPlaceFlowers()
+        {
+            // https://leetcode.com/problems/can-place-flowers/
+            Utility.Print("605. Can Place Flowers");
+            int[][] flowerbed = { new int[] { 1, 0, 0, 0, 1 }, new int[] { 1, 0, 0, 0, 1 }, new int[] { 1 }, new int[] { 0, 0, 0, 0, 0 } };
+            int[] n = { 1, 2, 0, 4 };
+            for (int i = 0; i < flowerbed.Length; i++)
+            {
+                flowerbed[i].Print("FLowerBed");
+                Console.WriteLine($" Placing \'{n[i]}\' flowers in above flower bed is possible: {DailyProblem.CanPlaceFlowers(flowerbed[i], n[i])}");
+            }
         }
 
 
