@@ -73,7 +73,7 @@ namespace InterviewProblemNSolutions
             FindMinimumInRotatedSortedArrayII();
             FindTheSmallestDivisorGivenAThreshold();
             ConstructTreeFromPreAndInOrderTraversal();
-
+            DayOfTheWeek();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -1141,6 +1141,16 @@ namespace InterviewProblemNSolutions
             preorder.Print("PreOrder");
             inorder.Print("InOrder");
             var root = DailyProblem.BuildTree(preorder, inorder);
+        }
+
+
+        public static void DayOfTheWeek()
+        {
+            // https://leetcode.com/problems/day-of-the-week/
+            Utility.Print("1185. Day of the Week");
+            int[] day = { 28, 7, 31, 18, 15, 31, DateTime.Now.Day }, month = { 12, 11, 8, 7, 8, 8, DateTime.Now.Month }, year = { 1971, 2020, 2019, 1999, 1993, 2100, DateTime.Now.Year };
+            for (int i = 0; i < day.Length; i++)
+                Console.WriteLine($" Day{day[i]}\tMonth{month[i]}\tYear{year[i]}\tis \t\'{DailyProblem.DayOfTheWeek(day[i], month[i], year[i])}\'");
         }
 
 
