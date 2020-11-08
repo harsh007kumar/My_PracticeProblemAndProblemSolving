@@ -75,6 +75,7 @@ namespace InterviewProblemNSolutions
             ConstructTreeFromPreAndInOrderTraversal();
             DayOfTheWeek();
             CanPlaceFlowers();
+            TwoSumLessThanK();
 
 
             // String Matching Algorithm
@@ -1166,6 +1167,20 @@ namespace InterviewProblemNSolutions
             {
                 flowerbed[i].Print("FLowerBed");
                 Console.WriteLine($" Placing \'{n[i]}\' flowers in above flower bed is possible: {DailyProblem.CanPlaceFlowers(flowerbed[i], n[i])}");
+            }
+        }
+
+
+        public static void TwoSumLessThanK()
+        {
+            // https://leetcode.com/problems/two-sum-less-than-k/
+            Utility.Print("1099. Two Sum Less Than K");
+            int[][] A = { new int[] { 34, 23, 1, 24, 75, 33, 54, 8 }, new int[] { 10, 20, 30 } };
+            int[] K = { 60, 15 };
+            for (int i = 0; i < A.Length; i++)
+            {
+                A[i].Print("Input");
+                Console.WriteLine($" For K= {K[i]} Two Sum Less Than K such that there exists i < j with A[i] + A[j] = S and S < K is: {DailyProblem.TwoSumLessThanK(A[i], K[i])}");
             }
         }
 

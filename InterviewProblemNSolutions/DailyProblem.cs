@@ -2382,5 +2382,22 @@ namespace InterviewProblemNSolutions
             // check if last 2 plots are empty we can plan 1 more flower as there is infinite space on right of last
             return (n == 1 && emptyPlotCount == 2) ? true : false;
         }
+
+        // Time O(NLogN) || Space O(N)
+        public static int TwoSumLessThanK(int[] A, int K)
+        {
+            int sumLessThanK = -1;
+            if (K < 2) return sumLessThanK;
+            // Sort the array in ascending order
+            Array.Sort(A);          // O(NLogN) || Another way to Sort is A = A.OrderBy(x => x).ToArray<int>();
+
+            int start = 0, last = A.Length - 1;
+            while (start < last)    // O(N)
+            {
+                if (A[start] + A[last] >= K) last--;
+                else sumLessThanK = Math.Max(sumLessThanK, A[start++] + A[last]);
+            }
+            return sumLessThanK;
+        }
     }
 }
