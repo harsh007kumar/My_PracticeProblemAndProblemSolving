@@ -1201,7 +1201,11 @@ namespace InterviewProblemNSolutions
             };
             root.InOrder();
             int target = 9;
-            Console.WriteLine($" In above BST, Two Node with sum equal to Target {target} exist: {DailyProblem.FindTargetInBST(root, target)} ");
+
+            // 2 Pass approach 
+            // Console.WriteLine($" In above BST, Two Node with sum equal to Target {target} exist: {DailyProblem.FindTargetInBST(root, target)} ");
+            // 1 Pass approach
+            Console.WriteLine($" In above BST, Two Node with sum equal to Target {target} exist: {DailyProblem.FindTargetInBSTFaster(root, target)} ");
         }
 
 

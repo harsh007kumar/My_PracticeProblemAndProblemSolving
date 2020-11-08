@@ -2409,9 +2409,9 @@ namespace InterviewProblemNSolutions
         public static bool FindTargetInBST(TreeNode root, int k)
         {
             List<int> numbers = new List<int>();
-            InOrderIterative(root, numbers);
+            InOrderIterative(root, numbers);    // O(N)
             int start = 0, last = numbers.Count - 1;
-            while (start < last)
+            while (start < last)                // O(N)
                 if (numbers[start] + numbers[last] > k) last--;
                 else if (numbers[start] + numbers[last] < k) start++;
                 else return true;
@@ -2435,5 +2435,17 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        // Recursive Approach using HashSet approach
+        // Time O(N) || Space O(N) || 1 Pass
+        public static bool FindTargetInBSTFaster(TreeNode root, int k) => FindTargetInBSTFasterUtil(root, k, new HashSet<int>());
+        public static bool FindTargetInBSTFasterUtil(TreeNode root, int target, HashSet<int> set)
+        {
+            if (root == null) return false;
+            if (set.Contains(target - root.val)) return true;
+            set.Add(root.val);
+            if (FindTargetInBSTFasterUtil(root.left, target, set)) return true;
+            if (FindTargetInBSTFasterUtil(root.right, target, set)) return true;
+            return false;
+        }
     }
 }
