@@ -2474,5 +2474,28 @@ namespace InterviewProblemNSolutions
             if (CheckTwoSumInBSTsExists(root.right, target, set)) return true;
             return false;
         }
+
+
+        /// <summary>
+        /// Returns the sum of every tree node's tilt.
+        /// tilt of a tree node is the absolute difference between the sum of all left subtree node values and all right subtree node values.
+        /// If a node does not have a left child, then the sum of the left subtree node values is treated as 0 same for right child.
+        /// Time O(n) || Space O(1) || 1 Pass
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="oldTreeSum"></param>
+        /// <returns></returns>
+        public static int FindBinaryTreeTilt(TreeNode root, ref int oldTreeSum)
+        {
+            if (root == null) return 0;
+            int oldLeftTreeSum = 0, oldRightTreeSum = 0;
+
+            int newLeftTreeSum = FindBinaryTreeTilt(root.left, ref oldLeftTreeSum);
+            int newRightTreeSum = FindBinaryTreeTilt(root.right, ref oldRightTreeSum);
+
+            oldTreeSum = root.val + oldLeftTreeSum + oldRightTreeSum;
+            root.val = Math.Abs(oldLeftTreeSum - oldRightTreeSum);
+            return root.val + newLeftTreeSum + newRightTreeSum;
+        }
     }
 }
