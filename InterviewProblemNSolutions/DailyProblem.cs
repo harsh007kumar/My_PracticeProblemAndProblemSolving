@@ -1504,7 +1504,7 @@ namespace InterviewProblemNSolutions
             new KeyValuePair<string, int>("CM",900),
             new KeyValuePair<string, int>("M", 1000)
             };
-            
+
             string result = "";
             int currIndex = 12;// romanSet.Length - 1;
             while (num > 0)
@@ -1659,7 +1659,7 @@ namespace InterviewProblemNSolutions
             Stack<int> nums = new Stack<int>();
             Stack<char> ops = new Stack<char>();
             Dictionary<char, int> opDict = new Dictionary<char, int>(4) { { '+', 1 }, { '-', 1 }, { '*', 2 }, { '/', 2 } };
-            
+
             for (int i = 0; i < s.Length; i++)
             {
                 // if space character skip
@@ -1816,7 +1816,7 @@ namespace InterviewProblemNSolutions
             {
                 var min = sticks[0];
                 // insert last element at root & decrease the length of Heap by '1'
-                sticks[0] = sticks[--len];      
+                sticks[0] = sticks[--len];
                 // Heapify/Perculate-Down operation
                 int j = 0;
                 while (j < len)
@@ -2278,7 +2278,8 @@ namespace InterviewProblemNSolutions
                 var mid = start + (last - start) / 2;
                 /*if(mid<last && nums[mid]>nums[mid+1]) return nums[mid+1];
                 else if(start<mid && nums[mid-1]>nums[mid]) return nums[mid];
-                else */if (nums[mid] > nums[last]) start = mid + 1;
+                else */
+                if (nums[mid] > nums[last]) start = mid + 1;
                 else if (nums[mid] < nums[last]) last = mid;
                 else last--;
             }
@@ -2305,7 +2306,7 @@ namespace InterviewProblemNSolutions
                 if (leftBoundry == rightBoundry) break;
                 else if (sumResultOfDivision <= threshold) rightBoundry = divisor;
                 else leftBoundry = divisor + 1;
-                
+
             }
             return divisor;
         }
@@ -2351,7 +2352,7 @@ namespace InterviewProblemNSolutions
                 totalNoOfDays += daysInMonths[currMonth];
 
             // adjust for leap Years
-            for (int yr = 1972; yr < year; yr+=4)
+            for (int yr = 1972; yr < year; yr += 4)
                 totalNoOfDays++;
 
             // add 1 additional day if current year is leap year and input month is > Feb [2100 is not a Leap Year]
@@ -2383,6 +2384,7 @@ namespace InterviewProblemNSolutions
             return (n == 1 && emptyPlotCount == 2) ? true : false;
         }
 
+
         // Time O(NLogN) || Space O(N)
         public static int TwoSumLessThanK(int[] A, int K)
         {
@@ -2399,5 +2401,39 @@ namespace InterviewProblemNSolutions
             }
             return sumLessThanK;
         }
+
+
+
+        // Iterative InOrder traversal + 2 Pointer Approach
+        // Time O(N) || Space O(N) || 2 Pass
+        public static bool FindTargetInBST(TreeNode root, int k)
+        {
+            List<int> numbers = new List<int>();
+            InOrderIterative(root, numbers);
+            int start = 0, last = numbers.Count - 1;
+            while (start < last)
+                if (numbers[start] + numbers[last] > k) last--;
+                else if (numbers[start] + numbers[last] < k) start++;
+                else return true;
+            return false;
+        }
+        // Time O(N)
+        public static void InOrderIterative(TreeNode current, List<int> numbers)
+        {
+            Stack<TreeNode> st = new Stack<TreeNode>();
+            while (true)
+            {
+                while (current != null)
+                {
+                    st.Push(current);
+                    current = current.left;
+                }
+                if (st.Count == 0) break;
+                var top = st.Pop();
+                numbers.Add(top.val);
+                current = top.right;
+            }
+        }
+
     }
 }

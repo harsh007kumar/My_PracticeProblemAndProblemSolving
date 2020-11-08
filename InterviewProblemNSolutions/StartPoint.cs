@@ -76,6 +76,7 @@ namespace InterviewProblemNSolutions
             DayOfTheWeek();
             CanPlaceFlowers();
             TwoSumLessThanK();
+            TwoSumInBST();
 
 
             // String Matching Algorithm
@@ -1182,6 +1183,25 @@ namespace InterviewProblemNSolutions
                 A[i].Print("Input");
                 Console.WriteLine($" For K= {K[i]} Two Sum Less Than K such that there exists i < j with A[i] + A[j] = S and S < K is: {DailyProblem.TwoSumLessThanK(A[i], K[i])}");
             }
+        }
+
+
+        public static void TwoSumInBST()
+        {
+            // https://leetcode.com/problems/two-sum-iv-input-is-a-bst/
+            Utility.Print("653. Two Sum IV - Input is a BST");
+            TreeNode root = new TreeNode(5) 
+            { left = new TreeNode(3)
+              { left = new TreeNode(2),
+                right = new TreeNode(4)
+              },
+              right = new TreeNode(6)
+              { right = new TreeNode(7)
+              }
+            };
+            root.InOrder();
+            int target = 9;
+            Console.WriteLine($" In above BST, Two Node with sum equal to Target {target} exist: {DailyProblem.FindTargetInBST(root, target)} ");
         }
 
 

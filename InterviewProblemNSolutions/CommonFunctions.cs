@@ -178,6 +178,26 @@ namespace InterviewProblemNSolutions
             Console.WriteLine();
         }
 
+        // Iterative InOrder Traversal Time O(N) || Space O(N)
+        public static void InOrder(this TreeNode current)
+        {
+            if (current == null) return;
+            Stack<TreeNode> st = new Stack<TreeNode>();
+            while(true)
+            {
+                while(current!=null)
+                {
+                    st.Push(current);
+                    current = current.left;
+                }
+                if (st.Count == 0) break;
+                var top = st.Pop();
+                Console.Write($" {top.val} ||");
+                current = top.right;
+            }
+        }
+
+
         public static void Show(this string str) => Console.WriteLine( str);
 
         public static int FindPrime(int num)
