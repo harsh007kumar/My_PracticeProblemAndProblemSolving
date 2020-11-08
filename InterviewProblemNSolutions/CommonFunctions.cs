@@ -195,6 +195,7 @@ namespace InterviewProblemNSolutions
                 Console.Write($" {top.val} ||");
                 current = top.right;
             }
+            Console.WriteLine();
         }
 
 

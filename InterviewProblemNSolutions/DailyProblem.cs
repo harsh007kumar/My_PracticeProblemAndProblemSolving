@@ -2447,5 +2447,32 @@ namespace InterviewProblemNSolutions
             if (FindTargetInBSTFasterUtil(root.right, target, set)) return true;
             return false;
         }
+
+
+        // Returns true if there exists 2 nums one in tree1 & second in tree2 such that their sum = target
+        // Time O(N+M) || Space O(Max(N,M)), N & M are no of nodes in first & second tree respectively
+        public static bool FindTargetInTwoBSTs(TreeNode root1, TreeNode root2, int target)
+        {
+            HashSet<int> secondTreeValues = new HashSet<int>(5000);
+            FillSet(root2, secondTreeValues);
+            return CheckTwoSumInBSTsExists(root1, target, secondTreeValues);
+        }
+        // Time O(N), N = no of Nodes in Tree
+        public static void FillSet(TreeNode root, HashSet<int> set)
+        {
+            if (root == null) return;
+            set.Add(root.val);
+            FillSet(root.left, set);
+            FillSet(root.right, set);
+        }
+        // Time O(M), M = no of Nodes in Tree
+        public static bool CheckTwoSumInBSTsExists(TreeNode root, int target, HashSet<int> set)
+        {
+            if (root == null) return false;
+            if (set.Contains(target - root.val)) return true;
+            if (CheckTwoSumInBSTsExists(root.left, target, set)) return true;
+            if (CheckTwoSumInBSTsExists(root.right, target, set)) return true;
+            return false;
+        }
     }
 }

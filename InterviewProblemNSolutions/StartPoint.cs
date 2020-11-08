@@ -77,6 +77,7 @@ namespace InterviewProblemNSolutions
             CanPlaceFlowers();
             TwoSumLessThanK();
             TwoSumInBST();
+            TwoSumInBSTs();
 
 
             // String Matching Algorithm
@@ -1207,6 +1208,31 @@ namespace InterviewProblemNSolutions
             // 1 Pass approach
             Console.WriteLine($" In above BST, Two Node with sum equal to Target {target} exist: {DailyProblem.FindTargetInBSTFaster(root, target)} ");
         }
+
+
+        public static void TwoSumInBSTs()
+        {
+            // https://leetcode.com/problems/two-sum-bsts/
+            Utility.Print("1214. Two Sum BSTs");
+            TreeNode root1 = new TreeNode(2)
+            {
+                left = new TreeNode(1),
+                right = new TreeNode(4)
+            };
+            TreeNode root2 = new TreeNode(1)
+            {
+                left = new TreeNode(0),
+                right = new TreeNode(3)
+                {
+                    right = new TreeNode(7)
+                }
+            };
+            root1.InOrder();
+            root2.InOrder();
+            int target = 5;
+            Console.WriteLine($" In above Two BST, Two Node with sum equal to Target \'{target}\' exist: {DailyProblem.FindTargetInTwoBSTs(root1, root2, target)} ");
+        }
+
 
 
 
