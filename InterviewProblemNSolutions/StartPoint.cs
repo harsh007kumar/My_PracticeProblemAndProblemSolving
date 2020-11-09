@@ -81,6 +81,7 @@ namespace InterviewProblemNSolutions
             BinaryTreeTilt();
             MaxAncestorDiff();
             BinaryTreeLongestConsecutiveSequenceII();
+            SetMatrixZeroes();
 
 
             // String Matching Algorithm
@@ -1306,6 +1307,21 @@ namespace InterviewProblemNSolutions
             int maxSortedLen = 0;
             DailyProblem.BinaryTreeLongestConsecutiveSequence(root, ref maxSortedLen);
             Console.WriteLine($" Longest Consecutive Sequence in above BinaryTree (Ascending/Descending) is of length: {maxSortedLen}");
+        }
+
+
+        public static void SetMatrixZeroes()
+        {
+            // https://leetcode.com/problems/set-matrix-zeroes/
+            Utility.Print("73. Set Matrix Zeroes");
+            int[][] matrix = { new int[] { 0, 1, 2, 0 }, new int[] { 3, 4, 5, 2 }, new int[] { 1, 3, 1, 5 } };
+            matrix.Print("INPUT MATRIX");
+            DailyProblem.SetMatrixZeroes(matrix);
+
+            matrix.Print("OUTPUT MATRIX");
+
+            int[][] output = { new int[] { 0, 0, 0, 0 }, new int[] { 0, 4, 5, 0 }, new int[] { 0, 3, 1, 0 } };
+            output.Print("EXPECTED MATRIX");
         }
 
 
