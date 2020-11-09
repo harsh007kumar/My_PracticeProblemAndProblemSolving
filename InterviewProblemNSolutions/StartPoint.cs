@@ -79,6 +79,7 @@ namespace InterviewProblemNSolutions
             TwoSumInBST();
             TwoSumInBSTs();
             BinaryTreeTilt();
+            MaxAncestorDiff();
 
 
             // String Matching Algorithm
@@ -1247,6 +1248,46 @@ namespace InterviewProblemNSolutions
             root.InOrder();
             int oldTreeSum = 0;
             Console.WriteLine($" Binary Tree Tilt of above tree is: {DailyProblem.FindBinaryTreeTilt(root, ref oldTreeSum)}");
+        }
+
+
+        public static void MaxAncestorDiff()
+        {
+            // https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/
+            Utility.Print("1026. Maximum Difference Between Node and Ancestor");
+            TreeNode root = new TreeNode(8)
+            {
+                left = new TreeNode(3)
+                {
+                    left = new TreeNode(1),
+                    right = new TreeNode(6)
+                    {
+                        left = new TreeNode(4),
+                        right = new TreeNode(7)
+                    }
+                },
+                right = new TreeNode(10)
+                {
+                    right = new TreeNode(14)
+                    {
+                        right = new TreeNode(13)
+                    }
+                }
+            };
+            TreeNode root2 = new TreeNode(1)
+            {
+                right = new TreeNode(2)
+                {
+                    right = new TreeNode(0)
+                    {
+                        left = new TreeNode(3)
+                    }
+                }
+            };
+            
+            root.InOrder();
+            int min = int.MaxValue;
+            Console.WriteLine($" Maximum difference b/w Node and Ansector is: {DailyProblem.MaxAncestorDiff(root, ref min)}");
         }
 
 

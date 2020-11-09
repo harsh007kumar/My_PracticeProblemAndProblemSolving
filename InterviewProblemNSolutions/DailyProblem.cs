@@ -2497,5 +2497,28 @@ namespace InterviewProblemNSolutions
             root.val = Math.Abs(oldLeftTreeSum - oldRightTreeSum);
             return root.val + newLeftTreeSum + newRightTreeSum;
         }
+
+
+        // Functions  returns the maximum value V for which there exist different nodes A and B where V = |A.val - B.val| and A is an ancestor of B
+        // Time O(n) || Space O(1)
+        public static int MaxAncestorDiff(TreeNode root, ref int min)
+        {
+            if (root == null) return 0;
+            // update min if root.val is smaller
+            min = Math.Min(min, root.val);
+            int lMin = min, rMin = min;
+
+            int leftDiff = MaxAncestorDiff(root.left, ref lMin);
+            int rightDiff = MaxAncestorDiff(root.right, ref rMin);
+            
+            // update min if lMin or rMin is smaller
+            min = Math.Min(min, Math.Min(lMin, rMin));
+            
+            // find currRoot max difference
+            int currDiff = Math.Abs(root.val - min);
+
+            // return max of currDiff or diff from left/right subTree
+            return Math.Max(currDiff, Math.Max(leftDiff, rightDiff));
+        }
     }
 }
