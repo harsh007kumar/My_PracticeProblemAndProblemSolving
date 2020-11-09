@@ -2520,5 +2520,149 @@ namespace InterviewProblemNSolutions
             // return max of currDiff or diff from left/right subTree
             return Math.Max(currDiff, Math.Max(leftDiff, rightDiff));
         }
+
+
+        /// <summary>
+        /// Functions return length of Longest Consecutive Path in Binary Tree
+        /// path can be either increasing or decreasing, ex: 1,2,3,4] and [4,3,2,1] are both considered valid, but the path [1,2,4,3] is not valid.
+        /// path can be in the child-Parent-child order, where not necessarily be parent-child order.
+        /// Using PostOrder traversal Approach
+        /// Time O(N) || Space O(1)
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public static int[] BinaryTreeLongestConsecutiveSequence(TreeNode root, ref int maxSortedLen)
+        {
+            if (root == null) return new int[2];
+            int asc = 1, desc = 1;
+            var ltSubTreeMaxLen = BinaryTreeLongestConsecutiveSequence(root.left, ref maxSortedLen);
+            var rtSubTreeMaxLen = BinaryTreeLongestConsecutiveSequence(root.right, ref maxSortedLen);
+
+            // if left is not null and absolute diff is 1
+            if (root.left != null && Math.Abs(root.left.val - root.val) == 1)
+            {
+                // if Ascending order
+                if (root.left.val - 1 == root.val) asc += ltSubTreeMaxLen[0];
+                // if Descending order
+                else desc += ltSubTreeMaxLen[1];
+            }
+            // if right is not null and absolute diff is 1
+            if (root.right != null && Math.Abs(root.right.val - root.val) == 1)
+            {
+                // if Ascending order, and length greater than Ascending order length from left subtree
+                if (root.right.val - 1 == root.val) asc = Math.Max(asc, 1 + rtSubTreeMaxLen[0]);
+                // if Descending order, and length greater than Descending order length from left subtree
+                else desc = Math.Max(desc, 1 + rtSubTreeMaxLen[1]);
+            }
+
+            // Update result if longer sequence found in either left-subtree or right-subtree
+            // or sequence coming from left-subtree and passing thru root and going into right-subtree
+            maxSortedLen = Math.Max(maxSortedLen, asc + desc - 1);
+
+            // return Max Ascending & Descending sequence length possible from current Node
+            return new int[] { asc, desc };
+
+            #region PARTIAL SUCCESS ATTEMPTS
+            /*
+            if (root == null) return 0;
+            int asc = 1, desc = 1;
+            int ltSubTreeMaxLen = BinaryTreeLongestConsecutiveSequence(root.left, ref maxSortedLen);
+            int rtSubTreeMaxLen = BinaryTreeLongestConsecutiveSequence(root.right, ref maxSortedLen);
+
+            if (ltSubTreeMaxLen >= 1 && Math.Abs(root.left.val - root.val) == 1)
+            {
+                if (root.left.val - 1 == root.val) asc += ltSubTreeMaxLen;
+                else desc += ltSubTreeMaxLen;
+            }
+            if (rtSubTreeMaxLen >= 1 && Math.Abs(root.right.val - root.val) == 1)
+            {
+                if (root.right.val - 1 == root.val) asc = Math.Max(asc, 1 + rtSubTreeMaxLen);
+                else desc = Math.Max(desc, 1 + rtSubTreeMaxLen);
+            }
+            maxSortedLen = Math.Max(maxSortedLen, asc + desc - 1);
+            return Math.Max(asc, desc);
+
+            */
+
+            /*
+            if (root == null) return 0;
+            int asc = 1, desc = 1;
+            if (root.left != null) 
+            {
+                int ltSubTreeMaxLen = BinaryTreeLongestConsecutiveSequence(root.left, ref maxSortedLen);
+                if (Math.Abs(root.left.val - root.val) == 1)
+                    if (root.left.val - 1 == root.val) asc += ltSubTreeMaxLen;
+                    else desc += ltSubTreeMaxLen;
+            }
+            if (root.right != null)
+            {
+                int rtSubTreeMaxLen = BinaryTreeLongestConsecutiveSequence(root.right, ref maxSortedLen);
+                if (Math.Abs(root.right.val - root.val) == 1)
+                    if (root.right.val - 1 == root.val) asc += rtSubTreeMaxLen;
+                    else desc += rtSubTreeMaxLen;
+            }
+            maxSortedLen = Math.Max(maxSortedLen, asc + desc - 1);
+            return Math.Max(asc, desc);
+            */
+
+
+            /*
+            if (ascending)
+            {
+                if (parentValue + 1 == root.val) maxSortedLen++;
+                else if (parentValue == 1 + root.val) { maxSortedLen = 2; ascending = !ascending; }
+                else maxSortedLen = 1;
+            }
+            else // Descending
+            {
+                if (parentValue - 1 == root.val) maxSortedLen++;
+                else if (parentValue + 1 == root.val) { maxSortedLen = 2; ascending = !ascending; }
+                else maxSortedLen = 1;
+            }
+
+            return Math.Max(maxSortedLen, Math.Max(ltSubTreeMaxLen, rtSubTreeMaxLen));
+            */
+
+
+            /*
+            //int maxSortedLen = 1, currSortedLen = 1;
+            if (root == null) return 0;
+            Stack<TreeNode> st = new Stack<TreeNode>(100);
+            int maxSortedLen = 1, currSortedLen = 1;
+            TreeNode last = null;
+            bool isAscending = true;
+            while (true)
+            {
+                while (root != null)
+                {
+                    st.Push(root);
+                    root = root.left;
+                }
+                if (st.Count == 0) break;
+                var temp = st.Pop();
+                if (last != null)
+                {
+                    if (isAscending)
+                    {
+                        if (last.val < temp.val)
+                            maxSortedLen = Math.Max(maxSortedLen, ++currSortedLen);
+                        else
+                        { maxSortedLen = Math.Max(maxSortedLen, currSortedLen = 2); isAscending = !isAscending; }
+                    }
+                    else // Descending
+                    {
+                        if (last.val > temp.val)
+                            maxSortedLen = Math.Max(maxSortedLen, ++currSortedLen);
+                        else
+                        { maxSortedLen = Math.Max(maxSortedLen, currSortedLen = 2); isAscending = !isAscending; }
+                    }
+                }
+                last = temp;
+                root = temp.right;
+            }
+            return maxSortedLen;
+            */
+            #endregion
+        }
     }
 }

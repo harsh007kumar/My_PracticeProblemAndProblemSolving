@@ -80,6 +80,7 @@ namespace InterviewProblemNSolutions
             TwoSumInBSTs();
             BinaryTreeTilt();
             MaxAncestorDiff();
+            BinaryTreeLongestConsecutiveSequenceII();
 
 
             // String Matching Algorithm
@@ -1288,6 +1289,23 @@ namespace InterviewProblemNSolutions
             root.InOrder();
             int min = int.MaxValue;
             Console.WriteLine($" Maximum difference b/w Node and Ansector is: {DailyProblem.MaxAncestorDiff(root, ref min)}");
+        }
+
+
+        public static void BinaryTreeLongestConsecutiveSequenceII()
+        {
+            // https://leetcode.com/problems/binary-tree-longest-consecutive-sequence-ii/
+            Utility.Print("549. Binary Tree Longest Consecutive Sequence II");
+            TreeNode root = new TreeNode(1)
+            {
+                left = new TreeNode(2),
+                right = new TreeNode(3) { left = new TreeNode(4) }
+            };
+            TreeNode root2 = new TreeNode(3) { left = new TreeNode(1) { right = new TreeNode(2) } };
+            root.InOrder();
+            int maxSortedLen = 0;
+            DailyProblem.BinaryTreeLongestConsecutiveSequence(root, ref maxSortedLen);
+            Console.WriteLine($" Longest Consecutive Sequence in above BinaryTree (Ascending/Descending) is of length: {maxSortedLen}");
         }
 
 
