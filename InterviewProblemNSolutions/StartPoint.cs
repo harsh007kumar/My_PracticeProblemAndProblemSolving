@@ -82,6 +82,7 @@ namespace InterviewProblemNSolutions
             MaxAncestorDiff();
             BinaryTreeLongestConsecutiveSequenceII();
             SetMatrixZeroes();
+            MergeSortedArray();
 
 
             // String Matching Algorithm
@@ -1322,6 +1323,16 @@ namespace InterviewProblemNSolutions
 
             int[][] output = { new int[] { 0, 0, 0, 0 }, new int[] { 0, 4, 5, 0 }, new int[] { 0, 3, 1, 0 } };
             output.Print("EXPECTED MATRIX");
+        }
+
+
+        public static void MergeSortedArray()
+        {
+            // https://leetcode.com/problems/merge-sorted-array/
+            Utility.Print("88. Merge Sorted Array");
+            int[] nums1 = { 1, 2, 3, 0, 0, 0 }, nums2 = { 2, 5, 6 };
+            int m = 3, n = 3;
+            DailyProblem.MergeSortedArray(nums1, m, nums2, n);
         }
 
 

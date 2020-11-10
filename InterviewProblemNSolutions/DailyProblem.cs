@@ -2695,5 +2695,16 @@ namespace InterviewProblemNSolutions
                 for (int r = 0; r < matrix.Length; r++)
                     matrix[r][0] = 0;
         }
+
+        // Time O(n) || Space O(1)
+        public static void MergeSortedArray(int[] nums1, int m, int[] nums2, int n)
+        {
+            int lastIndex = --m + --n + 1;
+            // while both the arrays still have elements to compare
+            while (m >= 0 && n >= 0)
+                nums1[lastIndex--] = nums2[n] > nums1[m] ? nums2[n--] : nums1[m--];
+            // if second array still has elements to move
+            while (n >= 0) nums1[lastIndex--] = nums2[n--];
+        }
     }
 }
