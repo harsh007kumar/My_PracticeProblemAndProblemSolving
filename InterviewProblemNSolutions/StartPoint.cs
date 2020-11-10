@@ -83,6 +83,7 @@ namespace InterviewProblemNSolutions
             BinaryTreeLongestConsecutiveSequenceII();
             SetMatrixZeroes();
             MergeSortedArray();
+            FlipAndInvertImage();
 
 
             // String Matching Algorithm
@@ -1335,6 +1336,16 @@ namespace InterviewProblemNSolutions
             DailyProblem.MergeSortedArray(nums1, m, nums2, n);
         }
 
+
+        public static void FlipAndInvertImage()
+        {
+            // https://leetcode.com/problems/flipping-an-image/
+            Utility.Print("832. Flipping an Image");
+            int[][] A = { new int[] { 1, 1, 0 }, new int[] { 1, 0, 1 }, new int[] { 0, 0, 0 } };
+            A.Print(" Input Image Matrix");
+            DailyProblem.FlipAndInvertImage(A);
+            A.Print(" Image Matrix after horizontal flip, then invert");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

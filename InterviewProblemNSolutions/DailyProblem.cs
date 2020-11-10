@@ -2706,5 +2706,31 @@ namespace InterviewProblemNSolutions
             // if second array still has elements to move
             while (n >= 0) nums1[lastIndex--] = nums2[n--];
         }
+
+
+        // Time O(N^2) || Space O(1)
+        public static void FlipAndInvertImage(int[][] A)
+        {
+            int len = A[0].Length;
+            bool isOddLen = len % 2 == 1;
+            for (int r = 0; r < A.Length; r++)
+            {
+                int start = -0, last = len - 1;
+                while (start < last)
+                {
+                    var temp = (A[r][last] + 1) % 2;
+                    A[r][last--] = (A[r][start] + 1) % 2;
+                    A[r][start++] = temp;
+                }
+            }
+            // Odd Length
+            if (isOddLen)
+            {
+                // center column
+                len /= 2;
+                for (int r = 0; r < A.Length; r++)
+                    A[r][len] = (A[r][len] + 1) % 2;
+            }
+        }
     }
 }
