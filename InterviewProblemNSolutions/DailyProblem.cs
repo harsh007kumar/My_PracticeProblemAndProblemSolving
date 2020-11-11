@@ -2738,24 +2738,27 @@ namespace InterviewProblemNSolutions
         // Time O(1) || Space O(1)
         public static bool ValidSquare(int[] p1, int[] p2, int[] p3, int[] p4)
         {
-            int[][] coordinate = {  new int[] {p1[0],p1[1]},
-                                    new int[] {p2[0],p2[1]},
-                                    new int[] {p3[0],p3[1]},
-                                    new int[] {p4[0],p4[1]}   };
+            int[][] coordinate = { p1, p2, p3, p4 };
             // Sort first by X axis and than Y-axis
             var sortedCoordinate = coordinate.OrderBy(x => x[0]).OrderBy(y => y[1]).ToArray();
 
+            // bottom edge
             var width1 = GetDistance(sortedCoordinate[0], sortedCoordinate[1]);
             
             // if any one side is of length 0, return false
             // [checking only for 1 side as if its not Zero than check at end will ensure no side equals zero]
             if (width1 == 0) return false;
 
+            // left edge
             var height1 = GetDistance(sortedCoordinate[0], sortedCoordinate[2]);
+            // top edge
             var width2 = GetDistance(sortedCoordinate[3], sortedCoordinate[2]);     // can also skip calculating this as its redundant
+            // right edge
             var height2 = GetDistance(sortedCoordinate[3], sortedCoordinate[1]);
 
+            // right bottom to left top
             var diagonal1 = GetDistance(sortedCoordinate[1], sortedCoordinate[2]);
+            // left bottom to right top
             var diagonal2 = GetDistance(sortedCoordinate[0], sortedCoordinate[3]);
 
             // both diagonal are equal      & height == width   & both heights are same
@@ -2766,5 +2769,47 @@ namespace InterviewProblemNSolutions
         }
         // returns distance b/w 2 coordinates
         public static double GetDistance(int[] p1, int[] p2) => Math.Sqrt(Math.Pow(p1[0] - p2[0], 2) + Math.Pow(p1[1] - p2[1], 2));
+
+
+        // Linear Search // Time O(N) Space O(1) // Slowest Solution
+        public static int MySqrtLinearSearch(int x)
+        {
+            if (x < 2) return x;
+            int last = 1;
+            for (int no = 2; no <= x >> 1; no++)
+            {
+                long square = (long)no * no;
+                if (square == x) return no;
+                else if (square > x) return last;
+                last = no;
+            }
+            return last;
+        }
+        // Binary Search // Time O(LogN) Space O(1) Fastest Solution
+        public static int MySqrtBinarySearch(int x)
+        {
+            if (x < 2) return x;
+            int start = 2, last = x / 2;
+            while (start <= last)
+            {
+                int pivot = start + (last - start) / 2;
+                long square = (long)pivot * pivot;
+                if (square > x) last = pivot - 1;
+                else if (square < x) start = pivot + 1;
+                else return pivot;
+            }
+            return last;
+        }
+        // Recursion Approach using formula Sqrt(x)=2*Sqrt(x/4) // Time O(LogN) Space O(LogN)
+        public static int MySqrtRecursive(int x)
+        {
+            if (x < 2) return x;
+            /* Sqrt(x)=2*Sqrt(x/4)
+             * can be written as below in bit manipulation
+             * Sqrt(x)=*Sqrt(x>>2))<<1
+             */
+            int left = MySqrtRecursive(x >> 2) << 1;
+            return (long)(left + 1) * (left + 1) > x ? left : left + 1;
+        }
     }
 }

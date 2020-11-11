@@ -85,6 +85,7 @@ namespace InterviewProblemNSolutions
             MergeSortedArray();
             FlipAndInvertImage();
             ValidSquare();
+            MySqrt();
 
 
             // String Matching Algorithm
@@ -1381,6 +1382,15 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void MySqrt()
+        {
+            // https://leetcode.com/problems/sqrtx/
+            Utility.Print("69. Sqrt(x)");
+            int[] xArr = { 4, 8, 21, 0, 1, 2, 3, 2147395599, 2147483647, 2147395600 };
+            foreach (var x in xArr)
+                Console.WriteLine($" Sqrt of {x} is {DailyProblem.MySqrtBinarySearch(x)}");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
