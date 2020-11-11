@@ -84,6 +84,7 @@ namespace InterviewProblemNSolutions
             SetMatrixZeroes();
             MergeSortedArray();
             FlipAndInvertImage();
+            ValidSquare();
 
 
             // String Matching Algorithm
@@ -1346,6 +1347,40 @@ namespace InterviewProblemNSolutions
             DailyProblem.FlipAndInvertImage(A);
             A.Print(" Image Matrix after horizontal flip, then invert");
         }
+
+        public static void ValidSquare()
+        {
+            // https://leetcode.com/problems/valid-square/
+            Utility.Print("593. Valid Square");
+            int[][][] pointsArr = { new int[][] {   new int[] { 1, 1 },
+                                                    new int[] { 1, 0 },
+                                                    new int[] { 0, 1 },
+                                                    new int[] { 0, 0 } },
+                                    new int[][] {   new int[] { 1, 0 },
+                                                    new int[] { -1, 0 },
+                                                    new int[] { 0, 1 },
+                                                    new int[] { 0, -1 } },
+                                    new int[][] {   new int[] { 0, 0 },
+                                                    new int[] { 5, 0 },
+                                                    new int[] { 5, 4 },
+                                                    new int[] { 0, 4 } },
+                                    new int[][] {   new int[] { 0, 0 },
+                                                    new int[] { 1, 1 },
+                                                    new int[] { 0, 0 },
+                                                    new int[] { 0, 0 } },
+                                    new int[][] {   new int[] { 0, 0 },
+                                                    new int[] { 0, 0 },
+                                                    new int[] { 0, 0 },
+                                                    new int[] { 0, 0 } }
+                                  };
+            foreach (var pointsSet in pointsArr)
+            {
+                pointsSet.Print("Coordinates");
+                var result = DailyProblem.ValidSquare(pointsSet[0], pointsSet[1], pointsSet[2], pointsSet[3]);
+                Console.WriteLine($" Above given Coodinates form a Valid-Square: {result}\n");
+            }
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
