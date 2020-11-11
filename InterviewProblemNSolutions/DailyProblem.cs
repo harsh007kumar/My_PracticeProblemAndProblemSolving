@@ -2765,6 +2765,6 @@ namespace InterviewProblemNSolutions
             //return diagonal1 == diagonal2 && height1 == width1 && width2 == height2 && height1 == height2 && width1 == width2 && width1 != 0;
         }
         // returns distance b/w 2 coordinates
-        public static double GetDistance(int[] p1, int[] p2) => Math.Sqrt(Math.Abs(Math.Pow(p1[0] - p2[0], 2) + Math.Pow(p1[1] - p2[1], 2)));
+        public static double GetDistance(int[] p1, int[] p2) => Math.Sqrt(Math.Pow(p1[0] - p2[0], 2) + Math.Pow(p1[1] - p2[1], 2));
     }
 }
