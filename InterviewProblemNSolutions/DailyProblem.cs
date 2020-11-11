@@ -2742,20 +2742,29 @@ namespace InterviewProblemNSolutions
                                     new int[] {p2[0],p2[1]},
                                     new int[] {p3[0],p3[1]},
                                     new int[] {p4[0],p4[1]}   };
-
+            // Sort first by X axis and than Y-axis
             var sortedCoordinate = coordinate.OrderBy(x => x[0]).OrderBy(y => y[1]).ToArray();
 
             var width1 = GetDistance(sortedCoordinate[0], sortedCoordinate[1]);
+            
+            // if any one side is of length 0, return false
+            // [checking only for 1 side as if its not Zero than check at end will ensure no side equals zero]
+            if (width1 == 0) return false;
+
             var height1 = GetDistance(sortedCoordinate[0], sortedCoordinate[2]);
-            var width2 = GetDistance(sortedCoordinate[3], sortedCoordinate[2]);
+            var width2 = GetDistance(sortedCoordinate[3], sortedCoordinate[2]);     // can also skip calculating this as its redundant
             var height2 = GetDistance(sortedCoordinate[3], sortedCoordinate[1]);
 
             var diagonal1 = GetDistance(sortedCoordinate[1], sortedCoordinate[2]);
             var diagonal2 = GetDistance(sortedCoordinate[0], sortedCoordinate[3]);
 
-            // both diagonal are equal      &       all sides are equal                                                 & no side is of length 0
-            return diagonal1 == diagonal2 && height1 == width1 && width2 == height2 && height1 == height2 && width1 == width2 && width1 != 0;
+            // both diagonal are equal      & height == width   & both heights are same
+            return diagonal1 == diagonal2 && height1 == width1 && height1 == height2;
+
+            // both diagonal are equal      &       all sides are equal                                                     & no side is of length 0
+            //return diagonal1 == diagonal2 && height1 == width1 && width2 == height2 && height1 == height2 && width1 == width2 && width1 != 0;
         }
+        // returns distance b/w 2 coordinates
         public static double GetDistance(int[] p1, int[] p2) => Math.Sqrt(Math.Abs(Math.Pow(p1[0] - p2[0], 2) + Math.Pow(p1[1] - p2[1], 2)));
     }
 }
