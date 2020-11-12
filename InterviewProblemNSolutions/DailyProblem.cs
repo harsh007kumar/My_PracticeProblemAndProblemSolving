@@ -2813,7 +2813,7 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        // Returns all possible "unique permutations" in any order.
         // Time O(N!) || Space O(N), N = length of input array
         public static IList<IList<int>> PermuteUnique(int[] nums)
         {
@@ -2823,13 +2823,11 @@ namespace InterviewProblemNSolutions
             GetUniquePermutations(nums, new int[nums.Length], uniqueSet, uniquePermut, usedIndex);
             return uniquePermut;
         }
-        public static void GetUniquePermutations(int[] nums, int[] comboSoFar, HashSet<string> uniqueSet, List<IList<int>> uniquePermutation, HashSet<int> usedIndex, int depth = 0)
+        public static void GetUniquePermutations(int[] nums, int[] comboSoFar, HashSet<string> uniqueSet, List<IList<int>> uniquePermutation, HashSet<int> usedIndex, string currCombo = "", int depth = 0)
         {
             if (depth == nums.Length)
             {
-                string currCombo = "";
-                for (int i = 0; i < comboSoFar.Length; i++)
-                    currCombo += i == 0 ? "" + comboSoFar[i] : "," + comboSoFar[i];
+                // below check ensure only UNIQUE combos are allowed, remove check to allow duplicates
                 if (!uniqueSet.Contains(currCombo))
                 {
                     // add to unique set
@@ -2848,11 +2846,19 @@ namespace InterviewProblemNSolutions
                         // update the combination
                         comboSoFar[depth] = nums[currentIndex];
 
+                        /* One possible Optimization may be achieved by Sorting the input nums array
+                         * and during backtracking we can skip to integer if its same as last interteger
+                         * Means on facing duplicate character we simple add it to 'comboSoFar' and don't make recursive call
+                         */
+
+                        // new num which would be added to to 'currCombo' which is used to identify unique permuatations
+                        string addToCombo = depth == 0 ? "" + nums[currentIndex] : "," + nums[currentIndex];
+
                         // mark current index as used
                         usedIndex.Add(currentIndex);
 
                         // Recursive Call
-                        GetUniquePermutations(nums, comboSoFar, uniqueSet, uniquePermutation, usedIndex, depth + 1);
+                        GetUniquePermutations(nums, comboSoFar, uniqueSet, uniquePermutation, usedIndex, currCombo + addToCombo, depth + 1);
 
                         // mark current index back as used
                         usedIndex.Remove(currentIndex);
