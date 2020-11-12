@@ -86,6 +86,7 @@ namespace InterviewProblemNSolutions
             FlipAndInvertImage();
             ValidSquare();
             MySqrt();
+            PermutationsII();
 
 
             // String Matching Algorithm
@@ -1391,6 +1392,26 @@ namespace InterviewProblemNSolutions
             foreach (var x in xArr)
                 Console.WriteLine($" Sqrt of {x} is {DailyProblem.MySqrtBinarySearch(x)}");
         }
+
+
+        public static void PermutationsII()
+        {
+            // https://leetcode.com/problems/permutations-ii/
+            Utility.Print("47. Permutations II");
+            int[][] numsArr = { new int[] { 1, 1, 2 }, new int[] { 1, 2, 3 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                foreach (var uniquePermutation in DailyProblem.PermuteUnique(nums))
+                {
+                    foreach (var num in uniquePermutation)
+                        Console.Write($" {num} ||");
+                    Console.WriteLine();
+                }
+            }
+        }
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

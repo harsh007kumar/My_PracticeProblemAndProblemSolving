@@ -2811,5 +2811,54 @@ namespace InterviewProblemNSolutions
             int left = MySqrtRecursive(x >> 2) << 1;
             return (long)(left + 1) * (left + 1) > x ? left : left + 1;
         }
+
+
+
+        // Time O(N!) || Space O(N), N = length of input array
+        public static IList<IList<int>> PermuteUnique(int[] nums)
+        {
+            List<IList<int>> uniquePermut = new List<IList<int>>();
+            HashSet<string> uniqueSet = new HashSet<string>();
+            HashSet<int> usedIndex = new HashSet<int>();
+            GetUniquePermutations(nums, new int[nums.Length], uniqueSet, uniquePermut, usedIndex);
+            return uniquePermut;
+        }
+        public static void GetUniquePermutations(int[] nums, int[] comboSoFar, HashSet<string> uniqueSet, List<IList<int>> uniquePermutation, HashSet<int> usedIndex, int depth = 0)
+        {
+            if (depth == nums.Length)
+            {
+                string currCombo = "";
+                for (int i = 0; i < comboSoFar.Length; i++)
+                    currCombo += i == 0 ? "" + comboSoFar[i] : "," + comboSoFar[i];
+                if (!uniqueSet.Contains(currCombo))
+                {
+                    // add to unique set
+                    uniqueSet.Add(currCombo);
+                    // add this permutation to the result
+                    uniquePermutation.Add(comboSoFar.ToList<int>());
+                }
+            }
+            else
+            {
+                for (int currentIndex = 0; currentIndex < nums.Length; currentIndex++)
+                {
+                    // If current index is not used
+                    if (!usedIndex.Contains(currentIndex))
+                    {
+                        // update the combination
+                        comboSoFar[depth] = nums[currentIndex];
+
+                        // mark current index as used
+                        usedIndex.Add(currentIndex);
+
+                        // Recursive Call
+                        GetUniquePermutations(nums, comboSoFar, uniqueSet, uniquePermutation, usedIndex, depth + 1);
+
+                        // mark current index back as used
+                        usedIndex.Remove(currentIndex);
+                    }
+                }
+            }
+        }
     }
 }
