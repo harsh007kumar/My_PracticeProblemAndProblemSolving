@@ -87,7 +87,7 @@ namespace InterviewProblemNSolutions
             ValidSquare();
             MySqrt();
             PermutationsII();
-
+            MaxPossibleSumOfProductOfTheIndexesMultipliedByElement();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -1411,6 +1411,19 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void MaxPossibleSumOfProductOfTheIndexesMultipliedByElement()
+        {
+            // 
+            Utility.Print("Max Possible Sum Of => 'Product Of The Indexes Multiplied By Elements'");
+            int[][] arr = { new int[] { -1, 3, 2, -5 }, new int[] { -9, 1, 2, 3, 4, 5, 6, -5, -4, 7, 5, 6, -8, -4, -6, -1 } };
+            foreach (var nums in arr)
+            {
+                nums.Print("Input Array");
+                var MaxIndexProductSum = DailyProblem.MaxPossibleSumOfProductOfTheIndexesMultipliedByElement(nums);
+                Console.WriteLine($" Max Sum Possible in above array is => '{MaxIndexProductSum}'");
+            }
+        }
 
 
 

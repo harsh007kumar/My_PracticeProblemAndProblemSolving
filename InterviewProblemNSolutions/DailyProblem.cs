@@ -2866,5 +2866,52 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+
+
+        // Return Max Possible Sum of "nums[i]*(i+1)" for the input array
+        // Time O(n) || Space O(1)
+        public static int MaxPossibleSumOfProductOfTheIndexesMultipliedByElement(int[] nums)
+        {
+            int last = nums.Length - 1;
+            // skip all -ve values index from the end [these will only decrease Sum]
+            while (last >= 0 && nums[last] <= 0) last--;
+
+            int maxIndexProductSum = int.MinValue;
+            // if only -ve values are present return max value from nums;
+            if (last < 0)
+            {
+                foreach (var num in nums) maxIndexProductSum = Math.Max(maxIndexProductSum, num);
+                return maxIndexProductSum;
+            }
+
+            int possibleSumLost = 0;
+            maxIndexProductSum = 0;
+            // start from end
+            for (int i = last; i >= 0; i--)
+            {
+                if (nums[i] < 0) // -ve value
+                {
+                    // if -ve hit we take by including this number is great than loss of Sum
+                    // we exclude this number and adjust r final Sum
+                    if ((nums[i] * (i + 1)) > possibleSumLost)
+                    {
+                        maxIndexProductSum += -possibleSumLost;
+                    }
+                    else
+                    {
+                        possibleSumLost += nums[i];
+                        maxIndexProductSum += nums[i] * (i + 1);
+                    }
+                }
+                else // +ve value
+                {
+                    possibleSumLost += nums[i];
+                    maxIndexProductSum += nums[i] * (i + 1);
+                }
+            }
+
+            return maxIndexProductSum;
+        }
     }
 }
