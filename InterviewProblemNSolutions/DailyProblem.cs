@@ -2885,28 +2885,32 @@ namespace InterviewProblemNSolutions
                 return maxIndexProductSum;
             }
 
-            int possibleSumLost = 0;
+            int positiveSum = 0, negativeSum = 0;
             maxIndexProductSum = 0;
             // start from end
             for (int i = last; i >= 0; i--)
             {
-                if (nums[i] < 0) // -ve value
+                // -ve value
+                if (nums[i] < 0)
                 {
                     // if -ve hit we take by including this number is great than loss of Sum
                     // we exclude this number and adjust r final Sum
-                    if ((nums[i] * (i + 1)) > possibleSumLost)
+                    if (Math.Abs(nums[i]) > (positiveSum - negativeSum))        // [-ve impact, which further increases as we iterate left]
+                        // Since we skipping this index we will have to subtract all '+ve no sum added so far' to result
+                        // and also increase by all '-ve no sum deducted so far'
+                        maxIndexProductSum += -positiveSum + negativeSum;
+                    else if (Math.Abs(nums[i]) == positiveSum)  // [zero impact, including/excluding this -ve integers makes no diff to final Sum]
+                    { }
+                    else // (Math.Abs(nums[i]) < positiveSum)   // [NO impact, but need tfurther increases as we iterate left]
                     {
-                        maxIndexProductSum += -possibleSumLost;
-                    }
-                    else
-                    {
-                        possibleSumLost += nums[i];
+                        negativeSum += Math.Abs(nums[i]);
                         maxIndexProductSum += nums[i] * (i + 1);
                     }
                 }
-                else // +ve value
+                // +ve value
+                else
                 {
-                    possibleSumLost += nums[i];
+                    positiveSum += nums[i];
                     maxIndexProductSum += nums[i] * (i + 1);
                 }
             }
