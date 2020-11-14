@@ -88,6 +88,8 @@ namespace InterviewProblemNSolutions
             MySqrt();
             PermutationsII();
             MaxPossibleSumOfProductOfTheIndexesMultipliedByElement();
+            PoorPigs();
+
 
             // String Matching Algorithm
             BruteForceWay();
@@ -1423,6 +1425,16 @@ namespace InterviewProblemNSolutions
                 var MaxIndexProductSum = DailyProblem.MaxPossibleSumOfProductOfTheIndexesMultipliedByElement(nums);
                 Console.WriteLine($" Max Sum Possible in above array is => '{MaxIndexProductSum}'");
             }
+        }
+
+
+        public static void PoorPigs()
+        {
+            // https://leetcode.com/problems/poor-pigs/solution/
+            Utility.Print("458. Poor Pigs");
+            int buckets = 1000, minutesToDie = 15, minutesToTest = 60;
+            Console.WriteLine($" To Test =>\t{buckets} buckets\n Within =>\t{minutesToTest} minutes\n Poision kills Pig in =>\t{minutesToDie} minutes" +
+                $"\n WE NEED => \t{DailyProblem.PoorPigs(buckets, minutesToDie, minutesToTest)} Pigs");
         }
 
 
