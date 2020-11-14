@@ -2919,6 +2919,121 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1) // first try
+        [Obsolete("FAILS FOR 406th TC: 'abcdede' , 'ab.* de' ")]
+        public static bool RegularExpressionMatching(string s, string p)
+        {
+            int sIndex = 0, pIndex = 0;
+            bool wildSearchEnabledWithLastChar = false;
+            char lastChar = ' ';
+            // Queue keeps tracks of characters which come with wild char '*' and maintins the FIFO order thats used later during character matching
+            Queue<char> zeroOrMore = new Queue<char>(p.Length);
+            while (sIndex < s.Length && pIndex < p.Length)
+            {
+                // last character was wild char '*' hence check with last character before '*' till we dont see our current character from pattern
+                if (wildSearchEnabledWithLastChar)
+                {
+                    wildSearchEnabledWithLastChar = false;
+                    // if next character is again wild char move to next in pattern as this char would eventually be added to queue for matching later
+                    if (pIndex + 1 < p.Length && p[pIndex + 1] == '*') continue;
+
+                    while (zeroOrMore.Count > 0)
+                    {
+                        lastChar = zeroOrMore.Dequeue();
+                        // if char before * and current pIndex char are not same
+                        if (p[pIndex] != lastChar)
+                            // increament index in string 's' till 'current Pattern Character' is not encountered & last character keeps matching
+                            while (sIndex < s.Length && (s.Length - sIndex > p.Length - pIndex || (p[pIndex] != s[sIndex] && (s[sIndex] == lastChar || lastChar == '.')))) sIndex++;
+                        else
+                            while (sIndex < s.Length - (p.Length - pIndex) && (s[sIndex] == lastChar || lastChar == '.')) sIndex++;
+                    }
+                    continue;
+                    //if (sIndex < s.Length && p[pIndex] != s[sIndex++])
+                    //    return false;
+                }
+                else if (p[pIndex] == '*')
+                {
+                    wildSearchEnabledWithLastChar = true;
+                    lastChar = p[pIndex - 1];
+                    if (zeroOrMore.Count == 0 || zeroOrMore.First() != lastChar)
+                        zeroOrMore.Enqueue(lastChar);
+                }
+                // skip check if next character from pattern is wild character '*'
+                else if (pIndex + 1 < p.Length && p[pIndex + 1] == '*') { }
+                // dot operator matches with any character hence simple move to next character
+                else if (p[pIndex] == '.')
+                {
+                    sIndex++;
+                    if (zeroOrMore.Count == 0 || zeroOrMore.First() != '.')
+                        zeroOrMore.Enqueue('.');
+                }
+                // return false if characters don't match
+                else if (p[pIndex] != s[sIndex++])
+                    return false;
+
+                // move to next char in pattern
+                pIndex++;
+            }
+            // if last character from pattern is '*' wild character
+            if (wildSearchEnabledWithLastChar)
+                while (sIndex < s.Length && (s[sIndex] == lastChar || lastChar == '.'))
+                    sIndex++;
+            // Skip all wild characters left after current index in pattern string
+            if (sIndex == s.Length)
+                while (pIndex + 1 < p.Length && p[pIndex + 1] == '*')
+                    pIndex += 2;
+
+            // return true if we have reached end of both strings
+            return sIndex == s.Length && pIndex == p.Length;
+        }
+
+        public static bool RegularExpressionMatchingRecursive(string s, string p)
+        {
+            if (p.Length == 0) return s.Length == 0;
+            // evaluate 1st character match
+            bool firstMatch = s.Length > 0 && (s[0] == p[0] || p[0] == '.');
+
+            // if next character in pattern is wild character
+            if (p.Length >= 2 && p[1] == '*')
+                // return true if we get regEx match without using wild character (0 times)
+                return RegularExpressionMatchingRecursive(s, p.Substring(2)) || 
+                    // or we get regEx match by using 1 or more times the character before wild character
+                    (firstMatch && RegularExpressionMatchingRecursive(s.Substring(1), p));
+            else
+                return firstMatch && RegularExpressionMatchingRecursive(s.Substring(1), p.Substring(1));
+        }
+        // DP Top-Down Approach
+        public static bool RegularExpressionMatchingMemo(string s, string p, int[,] memo, int sID = 0, int pID = 0)
+        {
+            // 0 denotes we have never solved this sub-problem before,
+            // 1 we have solved and regEx match was Succesfull
+            // -1 we have solved and regEx match was Fail
+            if (memo[sID, pID] != 0)
+                return memo[sID, pID] == 1;
+
+            bool ans = false;
+            // reached end of pattern length
+            if (pID == p.Length)
+                ans = s.Length == sID;
+            else
+            {
+                // evaluate 1st character match
+                bool firstMatch = sID < s.Length && (s[sID] == p[pID] || p[pID] == '.');
+
+                // if next character in pattern is wild character
+                if (pID + 1 < p.Length && p[pID + 1] == '*')
+                    // return true if we get regEx match without using wild character (0 times)
+                    ans = RegularExpressionMatchingMemo(s, p, memo, sID, pID + 2) ||
+                        // or we get regEx match by using 1 or more times the character before wild character
+                        (firstMatch && RegularExpressionMatchingMemo(s, p, memo, sID + 1, pID));
+                else
+                    ans = firstMatch && RegularExpressionMatchingMemo(s, p, memo, sID + 1, pID + 1);
+            }
+            memo[sID, pID] = ans ? 1 : -1;
+            return ans;
+        }
+
+
         // Time O(1) || Space O(1)
         public static int PoorPigs(int buckets, int minutesToDie, int minutesToTest)
         {

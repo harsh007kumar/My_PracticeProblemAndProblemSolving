@@ -88,6 +88,7 @@ namespace InterviewProblemNSolutions
             MySqrt();
             PermutationsII();
             MaxPossibleSumOfProductOfTheIndexesMultipliedByElement();
+            RegularExpressionMatching();
             PoorPigs();
 
 
@@ -1424,6 +1425,22 @@ namespace InterviewProblemNSolutions
                 nums.Print("Input Array");
                 var MaxIndexProductSum = DailyProblem.MaxPossibleSumOfProductOfTheIndexesMultipliedByElement(nums);
                 Console.WriteLine($" Max Sum Possible in above array is => '{MaxIndexProductSum}'");
+            }
+        }
+
+
+        public static void RegularExpressionMatching()
+        {
+            // https://leetcode.com/problems/regular-expression-matching/
+            Utility.Print("10. Regular Expression Matching");
+            string[] strArr = { "aa", "aa", "ab", "aab", "mississippi", "mississippi", "ab", "aaa", "aaa", "a", "ab", "a", "abcdede" };
+            string[] patternArr = { "a", "a*", ".*", "c*a*b", "mis*is*p*.", "mis*is*ip*.", ".*c", "a*a", "ab*a*c*a", "ab*", ".*..", ".*..a*", "ab.*de" };
+            for (int i = 0; i < strArr.Length; i++)
+            {
+                //bool isMatch = DailyProblem.RegularExpressionMatchingRecursive(strArr[i], patternArr[i]);
+                bool isMatch = DailyProblem.RegularExpressionMatchingMemo(strArr[i], patternArr[i], new int[strArr[i].Length + 1, patternArr[i].Length + 1]);
+                //bool isMatch = DailyProblem.RegularExpressionMatchingDP(strArr[i], patternArr[i]);
+                Console.WriteLine($" RegularExp \'{patternArr[i]}\' match with entire string \'{strArr[i]}\' results in: {isMatch}");
             }
         }
 
