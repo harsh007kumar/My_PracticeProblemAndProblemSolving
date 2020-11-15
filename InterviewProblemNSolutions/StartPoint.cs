@@ -90,6 +90,7 @@ namespace InterviewProblemNSolutions
             MaxPossibleSumOfProductOfTheIndexesMultipliedByElement();
             RegularExpressionMatching();
             PoorPigs();
+            RemoveInterval();
 
 
             // String Matching Algorithm
@@ -1452,6 +1453,28 @@ namespace InterviewProblemNSolutions
             int buckets = 1000, minutesToDie = 15, minutesToTest = 60;
             Console.WriteLine($" To Test =>\t{buckets} buckets\n Within =>\t{minutesToTest} minutes\n Poision kills Pig in =>\t{minutesToDie} minutes" +
                 $"\n WE NEED => \t{DailyProblem.PoorPigs(buckets, minutesToDie, minutesToTest)} Pigs");
+        }
+
+
+        public static void RemoveInterval()
+        {
+            // https://leetcode.com/problems/remove-interval/
+            Utility.Print("1272. Remove Interval");
+            int[][][] intervals = { new int[][] { new int[] { 0, 2 }, new int[] { 3, 4 }, new int[] { 5, 7 } },
+                                    new int[][] { new int[] { 0, 5 } },
+                                    new int[][] { new int[] { -5, -4 }, new int[] { -3, -2 }, new int[] { 1, 2 }, new int[] { 3, 5 }, new int[] {8,9} } };
+            int[][] tobeRemoved = { new int[] { 1, 6 },
+                                    new int[] { 2, 3 },
+                                    new int[] { -1, 4 } };
+            for (int i = 0; i < intervals.Length; i++)
+            {
+                intervals[i].Print("INTERVALS");
+                tobeRemoved[i].Print("TO_BE_REMOVED");
+                Console.Write($" After removing all overlapping:");
+                foreach (var sortedInterval in DailyProblem.RemoveInterval(intervals[i], tobeRemoved[i]))
+                    Console.Write($" [{sortedInterval[0]} {sortedInterval[1]}] ||");
+                Console.WriteLine();
+            }
         }
 
 

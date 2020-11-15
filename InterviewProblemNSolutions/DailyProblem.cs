@@ -3032,6 +3032,8 @@ namespace InterviewProblemNSolutions
             memo[sID, pID] = ans ? 1 : -1;
             return ans;
         }
+        // DP Bottom-Up Approach
+        public static bool RegularExpressionMatchingTab(string s, string p) => true;
 
 
         // Time O(1) || Space O(1)
@@ -3069,6 +3071,34 @@ namespace InterviewProblemNSolutions
             
             var states = minutesToTest / minutesToDie + 1;
             return (int)Math.Ceiling((Math.Log(buckets) / Math.Log(states)));
+        }
+
+
+        // Time O(N) || Space O(1)
+        public static IList<IList<int>> RemoveInterval(int[][] intervals, int[] toBeRemoved)
+        {
+            List<IList<int>> sortedIntervals = new List<IList<int>>(intervals.Length);
+
+            for (int i = 0; i < intervals.Length; i++)
+            {
+                // Add input Interval as it is
+                if (intervals[i][1] <= toBeRemoved[0] || intervals[i][0] >= toBeRemoved[1])
+                    sortedIntervals.Add(new List<int>() { intervals[i][0], intervals[i][1] });
+                // Add 2 Intervals
+                else if (intervals[i][0] < toBeRemoved[0] && intervals[i][1] > toBeRemoved[1])
+                {
+                    sortedIntervals.Add(new List<int>() { intervals[i][0], toBeRemoved[0] });
+                    sortedIntervals.Add(new List<int>() { toBeRemoved[1], intervals[i][1] });
+                }
+                // Add 1 || startTime of interval is < startTime_tobeRemoved
+                else if (intervals[i][0] < toBeRemoved[0])
+                    sortedIntervals.Add(new List<int>() { intervals[i][0], toBeRemoved[0] });
+                // Add 1 || endTime of interval is > endTime _tobeRemoved
+                else if (intervals[i][1] > toBeRemoved[1])
+                    sortedIntervals.Add(new List<int>() { toBeRemoved[1], intervals[i][1] });
+            }
+
+            return sortedIntervals;
         }
     }
 }
