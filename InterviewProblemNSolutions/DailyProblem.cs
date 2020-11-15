@@ -3100,5 +3100,37 @@ namespace InterviewProblemNSolutions
 
             return sortedIntervals;
         }
+
+
+
+        // Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+        // Time O(N) || Space O(N)
+        public static IList<IList<string>> GroupAnagrams(string[] strs)
+        {
+            Dictionary<int, Dictionary<int, List<string>>> dict = new Dictionary<int, Dictionary<int, List<string>>>(100);
+            //Dictionary<int, List<string>> dict = new Dictionary<int, List<string>>(strs.Length);
+
+            for (int i = 0; i < strs.Length; i++)
+            {
+                int CODE = 0;
+                for (int j = 0; j < strs[i].Length; j++)
+                    CODE += (strs[i][j] - 'a' + 1) * 101;
+
+                // if sub-dictionary of given length does'nt exists create one
+                if (!dict.ContainsKey(strs[i].Length)) dict.Add(strs[i].Length, new Dictionary<int, List<string>>(strs.Length));
+
+                // if given anagrams doesn't exists create new entry
+                if (!dict[strs[i].Length].ContainsKey(CODE)) dict[strs[i].Length].Add(CODE, new List<string>() { strs[i] });
+                // anagram already exists add new word to list of strings
+                else dict[strs[i].Length][CODE].Add(strs[i]);
+            }
+
+            List<IList<string>> grp = new List<IList<string>>(strs.Length);
+            foreach(var AnagramLengthGrp in dict.Values)
+                foreach (var anagramsGrp in AnagramLengthGrp.Values)
+                    grp.Add(anagramsGrp);
+            
+            return grp;
+        }
     }
 }

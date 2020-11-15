@@ -91,6 +91,7 @@ namespace InterviewProblemNSolutions
             RegularExpressionMatching();
             PoorPigs();
             RemoveInterval();
+            GroupAnagrams();
 
 
             // String Matching Algorithm
@@ -1473,6 +1474,27 @@ namespace InterviewProblemNSolutions
                 Console.Write($" After removing all overlapping:");
                 foreach (var sortedInterval in DailyProblem.RemoveInterval(intervals[i], tobeRemoved[i]))
                     Console.Write($" [{sortedInterval[0]} {sortedInterval[1]}] ||");
+                Console.WriteLine();
+            }
+        }
+
+
+        public static void GroupAnagrams()
+        {
+            // https://leetcode.com/problems/group-anagrams/
+            Utility.Print("49. Group Anagrams");
+            string[][] strsArr = { new string[] { "eat", "tea", "tan", "ate", "nat", "bat" }, new string[] { "" }, new string[] { "a" }, new string[] { "ac", "d" } };
+
+            foreach (var strs in strsArr)
+            {
+                strs.Print("Input");
+                foreach (var grp in DailyProblem.GroupAnagrams(strs))
+                {
+                    Console.Write("[");
+                    foreach (var word in grp)
+                        Console.Write($" \'{word}\'");
+                    Console.WriteLine("]");
+                }
                 Console.WriteLine();
             }
         }
