@@ -3104,6 +3104,7 @@ namespace InterviewProblemNSolutions
 
 
         // Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+        // Categorize by Count, and stored by matching CODE (char and their count) in Dictionary
         // Time O(N) || Space O(N)
         public static IList<IList<string>> GroupAnagrams(string[] strs)
         {
@@ -3137,6 +3138,41 @@ namespace InterviewProblemNSolutions
                     grp.Add(anagramsGrp);
             
             return grp;
+        }
+
+
+        // Time O(N) || Space O(1)
+        public static int LongestMountain(int[] A)
+        {
+            if (A.Length == 0) return 0;
+            /* check for all cases:
+             *      1: start of moutain
+             *      2: continuing ascend
+             *      3: peak found now descending
+             *      4: descend ends, start of new mountain if(last and curr integer r not same)
+             */
+            int max = 0, longestIncreasing = 1;
+            bool decreasing = false;
+            for (int i = 1; i < A.Length; i++)
+            {
+                if (A[i - 1] < A[i])
+                {
+                    // if decreasing is false means we are continuing ascend
+                    longestIncreasing = !decreasing ? longestIncreasing + 1 : 2;
+                    // else it means NEW moutain has started with len = 2
+                    if (longestIncreasing == 2) decreasing = false;
+                }
+                // for descend to start we must have atleast 2 prior element one for start & 2nd for peak, else not valid moutain
+                else if (A[i - 1] > A[i] && longestIncreasing > 1)
+                {
+                    longestIncreasing++;
+                    max = Math.Max(max, longestIncreasing);
+                    decreasing = true;
+                }
+                else // if (A[i-1]==A[i])
+                    longestIncreasing = 1;
+            }
+            return max;
         }
     }
 }

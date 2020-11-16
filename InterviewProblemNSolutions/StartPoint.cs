@@ -92,6 +92,7 @@ namespace InterviewProblemNSolutions
             PoorPigs();
             RemoveInterval();
             GroupAnagrams();
+            LongestMountain();
 
 
             // String Matching Algorithm
@@ -1506,6 +1507,19 @@ namespace InterviewProblemNSolutions
                     Console.WriteLine("]");
                 }
                 Console.WriteLine();
+            }
+        }
+
+
+        public static void LongestMountain()
+        {
+            // https://leetcode.com/problems/longest-mountain-in-array/
+            Utility.Print("845. Longest Mountain in Array");
+            int[][] inputArr = { new int[] { 2, 1, 4, 7, 3, 2, 5 }, new int[] { 2, 2, 2 }, new int[] { 1, 2, 0, 2, 0, 2 }, new int[] { 8, 3, 7, 3, 4, 10, 1, 1, 2, 8 } };
+            foreach(var input in inputArr)
+            {
+                input.Print("Input Array");
+                Console.WriteLine($" Longest Mountain in above has length: \t{DailyProblem.LongestMountain(input)}");
             }
         }
 
