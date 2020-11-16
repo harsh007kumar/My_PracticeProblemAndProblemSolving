@@ -93,6 +93,7 @@ namespace InterviewProblemNSolutions
             RemoveInterval();
             GroupAnagrams();
             LongestMountain();
+            MergeIntervals();
 
 
             // String Matching Algorithm
@@ -1425,7 +1426,7 @@ namespace InterviewProblemNSolutions
         {
             // 
             Utility.Print("Max Possible Sum Of => 'Product Of The Indexes Multiplied By Elements'");
-            int[][] arr = { new int[] { -1, 3, 2, -5 }, new int[] { -5, 4, -9, 3, 5 }, new int[] { -9, 1, 2, 3, 4, 5, 6, -5, -4, 7, 5, 6, -8, -4, -6, -1 }, new int[] { 3, 6, -5, 4, -9, 3, 5 } };
+            int[][] arr = { new int[] { -1, 3, 2, -5 }, new int[] { -5, 4, -9, 3, 5 }, new int[] { -9, 1, 2, 3, 4, 5, 6, -5, -4, 7, 5, 6, -8, -4, -6, -1 }, new int[] { 3, 6, -5, 4, -9, 3, 5 }, new int[] { 3, -4, 5, 1 } };
             foreach (var nums in arr)
             {
                 nums.Print("Input Array");
@@ -1520,6 +1521,22 @@ namespace InterviewProblemNSolutions
             {
                 input.Print("Input Array");
                 Console.WriteLine($" Longest Mountain in above has length: \t{DailyProblem.LongestMountain(input)}");
+            }
+        }
+
+
+        public static void MergeIntervals()
+        {
+            // https://leetcode.com/problems/merge-intervals/
+            Utility.Print("56. Merge Intervals");
+            int[][][] intervalsArr = { new int[][] { new int[] { 1, 3 }, new int[] { 2, 6 }, new int[] { 8, 10 }, new int[] { 15, 18 } },
+                                        new int[][] { new int[] { 1, 4 }, new int[] { 2, 3 } }, 
+                                        new int[][] { new int[] { 2, 3 }, new int[] { 2, 2 }, new int[] { 3, 3 }, new int[] { 1, 3 }, new int[] { 5, 7 }, new int[] { 2, 2 }, new int[] { 4, 6 } } };
+            foreach (var intervals in intervalsArr)
+            {
+                intervals.Print("Input Intervals");
+                var merged = DailyProblem.MergeIntervals(intervals);
+                merged.Print("Merge Intervals");
             }
         }
 

@@ -2895,7 +2895,7 @@ namespace InterviewProblemNSolutions
                 {
                     // if -ve hit we take by including this number is great than loss of Sum
                     // we exclude this number and adjust r final Sum
-                    if (Math.Abs(nums[i]) > (positiveSum - negativeSum))        // [-ve impact, which further increases as we iterate left]
+                    if (Math.Abs(nums[i] * (i + 1)) > (positiveSum - negativeSum))  // [-ve impact, which further increases as we iterate left]
                         // Since we skipping this index we will have to subtract all '+ve no sum added so far' to result
                         // and also increase by all '-ve no sum deducted so far'
                         maxIndexProductSum += -positiveSum + negativeSum;
@@ -3173,6 +3173,27 @@ namespace InterviewProblemNSolutions
                     longestIncreasing = 1;
             }
             return max;
+        }
+
+
+        // Time O(nLogn) || Space O(1)
+        public static int[][] MergeIntervals(int[][] intervals)
+        {
+            intervals = (from pair in intervals
+                         orderby pair[1]
+                         orderby pair[0]
+                         select pair).ToArray();
+
+            List<int[]> merged = new List<int[]>(intervals.Length) { intervals[0] };
+            int currIndex = 0;
+            for (int i = 1; i < intervals.Length; i++)
+            {
+                if (intervals[i][0] > merged[currIndex][1])
+                { merged.Add(intervals[i]); currIndex++; }
+                else if (intervals[i][0] <= merged[currIndex][1])
+                    merged[currIndex][1] = Math.Max(intervals[i][1], merged[currIndex][1]);
+            }
+            return merged.ToArray();
         }
     }
 }
