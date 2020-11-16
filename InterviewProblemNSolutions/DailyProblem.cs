@@ -3195,5 +3195,66 @@ namespace InterviewProblemNSolutions
             }
             return merged.ToArray();
         }
+
+
+        // Time O(n) || Space O(1)
+        public static int[][] InsertIntervals(int[][] intervals, int[] newInterval)
+        {
+            if (intervals.Length == 0) return new int[][] { newInterval };
+
+            List<int[]> sortedIntervals = new List<int[]>(intervals.Length);
+            // newInterval End is smaller than 1st interval
+            if (newInterval[1] < intervals[0][0])
+            {
+                sortedIntervals.Add(newInterval);
+                sortedIntervals.AddRange(intervals);
+                return sortedIntervals.ToArray();
+            }
+            // newInterval Start is larger than last interval
+            else if (newInterval[0] > intervals[intervals.Length - 1][1])
+            {
+                sortedIntervals.AddRange(intervals);
+                sortedIntervals.Add(newInterval);
+                return sortedIntervals.ToArray();
+            }
+
+            int i = 0, lastEnd = intervals[0][1];
+            while (i < intervals.Length)
+            {
+                // newInterval lies b/w two existing intervals
+                if (lastEnd < newInterval[0] && newInterval[1] < intervals[i][0])
+                {
+                    sortedIntervals.Add(newInterval);
+                    sortedIntervals.Add(intervals[i++]);
+                }
+
+                // If input end smaller than newInterval or input start greater than newInterval add input
+                else if (intervals[i][1] < newInterval[0] || intervals[i][0] > newInterval[1])
+                    sortedIntervals.Add(intervals[i++]);
+
+                // If input startTime <= newInterval and endTime >= than newInterval add input Interval
+                else if (intervals[i][0] <= newInterval[0] && intervals[i][1] >= newInterval[1])
+                    sortedIntervals.Add(intervals[i++]);
+
+                // Add 1 || startTime of interval is < startTime newInterval
+                else if (intervals[i][0] <= newInterval[0])
+                {
+                    int startTime = intervals[i][0];
+                    while (i < intervals.Length && intervals[i][0] <= newInterval[1]) i++;
+                    sortedIntervals.Add(new int[] { startTime, Math.Max(intervals[i - 1][1], newInterval[1]) });
+                }
+                // Add 1 || endTime of interval is <= endTime newInterval
+                else //if (intervals[i][1] <= newInterval[1])
+                {
+                    int last = Math.Max(newInterval[1], intervals[i++][1]);
+                    while (i < intervals.Length && intervals[i][0] <= newInterval[1])
+                        last = Math.Max(last, intervals[i++][1]);
+                    sortedIntervals.Add(new int[] { newInterval[0], last });
+                }
+                lastEnd = intervals[i-1][1];
+            }
+            
+            return sortedIntervals.ToArray();
+        }
     }
 }
