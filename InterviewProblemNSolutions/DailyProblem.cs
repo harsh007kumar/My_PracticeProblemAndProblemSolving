@@ -3107,8 +3107,7 @@ namespace InterviewProblemNSolutions
         // Time O(N) || Space O(N)
         public static IList<IList<string>> GroupAnagrams(string[] strs)
         {
-            Dictionary<int, Dictionary<int, List<string>>> dict = new Dictionary<int, Dictionary<int, List<string>>>(100);
-            //Dictionary<int, List<string>> dict = new Dictionary<int, List<string>>(strs.Length);
+            Dictionary<int, Dictionary<string, List<string>>> dict = new Dictionary<int, Dictionary<string, List<string>>>(100);
             SortedDictionary<char, int> alphaDict;
 
             for (int i = 0; i < strs.Length; i++)
@@ -3117,24 +3116,14 @@ namespace InterviewProblemNSolutions
                 alphaDict = new SortedDictionary<char, int>();
                 for (int j = 0; j < strs[i].Length; j++)
                     if (!alphaDict.ContainsKey(strs[i][j])) alphaDict.Add(strs[i][j], 1);
-                    else alphaDict[strs[i][j]] *= strs[i][j] - 'a' + 7;
-                    //else alphaDict[strs[i][j]] += 27 - strs[i][j] - 'a' + ;
-
-                int CODE = 0;
-                char lastCh = '#';
+                    else alphaDict[strs[i][j]]++;
+                
+                string CODE = "";   // ex: B2F1Z3
                 foreach (var character in alphaDict)
-                {
-                    CODE += (character.Key - 'a' + 1) * (101 - character.Key - 'a') * (character.Value + lastCh - '0');
-                    lastCh += character.Key;
-                }
-
-                //int CODE = 0;
-                //for (int j = 0; j < strs[i].Length; j++)
-                //    CODE += (strs[i][j] - 'a' + 1) * (27 - strs[i][j] - 'a');
-
-
+                    CODE += "" + character.Key + character.Value;
+                
                 // if sub-dictionary of given length does'nt exists create one
-                if (!dict.ContainsKey(strs[i].Length)) dict.Add(strs[i].Length, new Dictionary<int, List<string>>(strs.Length));
+                if (!dict.ContainsKey(strs[i].Length)) dict.Add(strs[i].Length, new Dictionary<string, List<string>>(strs.Length));
 
                 // if given anagrams doesn't exists create new entry
                 if (!dict[strs[i].Length].ContainsKey(CODE)) dict[strs[i].Length].Add(CODE, new List<string>() { strs[i] });
