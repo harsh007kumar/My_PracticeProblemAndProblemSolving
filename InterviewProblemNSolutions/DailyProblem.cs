@@ -3109,12 +3109,29 @@ namespace InterviewProblemNSolutions
         {
             Dictionary<int, Dictionary<int, List<string>>> dict = new Dictionary<int, Dictionary<int, List<string>>>(100);
             //Dictionary<int, List<string>> dict = new Dictionary<int, List<string>>(strs.Length);
+            SortedDictionary<char, int> alphaDict;
 
             for (int i = 0; i < strs.Length; i++)
             {
-                int CODE = 0;
+
+                alphaDict = new SortedDictionary<char, int>();
                 for (int j = 0; j < strs[i].Length; j++)
-                    CODE += (strs[i][j] - 'a' + 1) * 101;
+                    if (!alphaDict.ContainsKey(strs[i][j])) alphaDict.Add(strs[i][j], 1);
+                    else alphaDict[strs[i][j]] *= strs[i][j] - 'a' + 7;
+                    //else alphaDict[strs[i][j]] += 27 - strs[i][j] - 'a' + ;
+
+                int CODE = 0;
+                char lastCh = '#';
+                foreach (var character in alphaDict)
+                {
+                    CODE += (character.Key - 'a' + 1) * (101 - character.Key - 'a') * (character.Value + lastCh - '0');
+                    lastCh += character.Key;
+                }
+
+                //int CODE = 0;
+                //for (int j = 0; j < strs[i].Length; j++)
+                //    CODE += (strs[i][j] - 'a' + 1) * (27 - strs[i][j] - 'a');
+
 
                 // if sub-dictionary of given length does'nt exists create one
                 if (!dict.ContainsKey(strs[i].Length)) dict.Add(strs[i].Length, new Dictionary<int, List<string>>(strs.Length));
