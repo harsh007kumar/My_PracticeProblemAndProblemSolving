@@ -3256,5 +3256,22 @@ namespace InterviewProblemNSolutions
             
             return sortedIntervals.ToArray();
         }
+
+
+        // Time O(n) || Space O(1)
+        public static int MaximumProductSubarray(int[] nums)
+        {
+            if (nums.Length == 0) return 0;
+            int maxProduct, currMax, currMin;
+            maxProduct = currMax = currMin = nums[0];
+            for (int i = 1; i < nums.Length; i++)
+            {
+                int tempCurrMax = currMax;
+                currMax = Math.Max(Math.Max(currMax * nums[i], currMin * nums[i]), nums[i]);
+                currMin = Math.Min(Math.Min(tempCurrMax * nums[i], currMin * nums[i]), nums[i]);
+                maxProduct = Math.Max(maxProduct, currMax);
+            }
+            return maxProduct;
+        }
     }
 }

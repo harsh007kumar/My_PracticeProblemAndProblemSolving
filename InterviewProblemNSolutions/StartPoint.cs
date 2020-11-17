@@ -95,6 +95,7 @@ namespace InterviewProblemNSolutions
             LongestMountain();
             MergeIntervals();
             InsertIntervals();
+            MaximumProductSubarray();
 
 
             // String Matching Algorithm
@@ -1569,7 +1570,17 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void MaximumProductSubarray()
+        {
+            // https://leetcode.com/problems/maximum-product-subarray/
+            Utility.Print("152. Maximum Product Subarray");
+            int[][] numsArr = { new int[] { 2, 3, -2, 4 }, new int[] { -2, 0, -1 } };
+            foreach(var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" Max Contiguous Product in above is: {DailyProblem.MaximumProductSubarray(nums)}");
+            }
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
