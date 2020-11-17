@@ -3273,6 +3273,24 @@ namespace InterviewProblemNSolutions
             }
             return maxProduct;
         }
+        // Time O(n^3) || Space O(1)
+        public static int MaximumProductSubarrayBruteForce(int[] nums)
+        {
+            if (nums.Length == 0) return 0;
+
+            int len = nums.Length, maxProduct = nums[0];
+            // to change len of sub-array
+            for (int l = 0; l < len; l++)
+                // to change the starting point of sub-array
+                for (int startFrom = 0; startFrom < len - l; startFrom++)
+                {
+                    int subArrayProduct = nums[startFrom];
+                    for (int index = startFrom + 1; index <= startFrom + l; index++)
+                        subArrayProduct *= nums[index];
+                    maxProduct = Math.Max(maxProduct, subArrayProduct);
+                }
+            return maxProduct;
+        }
 
         // Time O(1) || Space O(1)
         public static int MirroReflection(int p, int q)
