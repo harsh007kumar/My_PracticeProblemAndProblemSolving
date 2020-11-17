@@ -3273,5 +3273,35 @@ namespace InterviewProblemNSolutions
             }
             return maxProduct;
         }
+
+        // Time O(1) || Space O(1)
+        public static int MirroReflection(int p, int q)
+        {
+            /* My Approach good only for half the test-cases
+            if (q == 0) return 0;                   // 0 degree angle
+            else if (q == p) return 1;              // 45 dedgree angle
+            //else if (q == p / 2) return 2;
+            else if ((double)p / 2 % q == 0) return 2;// half the length of side means it will hit the top left cornor
+            else if ((double)p / 3 % q == 0) return 1;// 1/4th the length means it will hit the top right corner
+            return 0;                               // if not above two will hit bottom right
+            */
+            /*  2-------1
+             *  |       |
+             *  |       |
+             *  Source  0
+             */
+            //ulong p = (ulong)p1, q = (ulong)q1;
+            if (q == 0) return 0;
+            var lcm = (p * q) / Utility.GCD(p, q);
+            
+            // even no of bounces and lands on left
+            if ((lcm / q) % 2 == 0)
+                return 2;
+            // odd no of bounces and lands on right & odd no of copies of square
+            if ((lcm / p) % 2 == 0)
+                return 0;
+            // odd no of bounces and lands on right & even no of copies of square
+            return 1;
+        }
     }
 }
