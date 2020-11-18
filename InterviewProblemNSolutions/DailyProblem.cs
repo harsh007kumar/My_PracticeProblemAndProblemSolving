@@ -3357,5 +3357,21 @@ namespace InterviewProblemNSolutions
                     GenerateParenthesisBackTrack(max, validParan + ")", open, close + 1, result);
             }
         }
+
+
+        // Time O(n) || Space O(1)
+        public static int BestTimeToBuyAndSellStockII(int[] prices)
+        {
+            if (prices.Length < 2) return 0;
+            int maxProfit = 0, lastPrice = prices[0];
+            for (int i = 1; i < prices.Length; i++)
+            {
+                if (prices[i] > lastPrice)
+                    maxProfit += prices[i] - lastPrice;
+                lastPrice = prices[i];
+            }
+            return maxProfit;
+        }
+
     }
 }
