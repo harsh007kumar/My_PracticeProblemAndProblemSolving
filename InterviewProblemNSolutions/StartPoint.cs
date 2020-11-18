@@ -99,6 +99,7 @@ namespace InterviewProblemNSolutions
             MirroReflection();
             GenerateParenthesis();
             BestTimeToBuyAndSellStockII();
+            BestTimeToBuyAndSellStockIII();
 
 
             // String Matching Algorithm
@@ -1640,7 +1641,17 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void BestTimeToBuyAndSellStockIII()
+        {
+            // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/
+            Utility.Print("123. Best Time to Buy and Sell Stock III");
+            int[][] pricesArr = { new int[] { 3, 3, 5, 0, 0, 3, 1, 4 }, new int[] { 1, 2, 3, 4, 5 }, new int[] { 7, 6, 4, 3, 1 }, new int[] { 1 }, new int[] { 1, 2, 4, 2, 5, 7, 2, 4, 9, 0 } };
+            foreach (var prices in pricesArr)
+            {
+                prices.Print("PRICES");
+                Console.WriteLine($" After completing at max 2 Buy-Sell on above, MaxProfit: {DailyProblem.BestTimeToBuyAndSellStockIII_DivideAndConquer(prices)}");
+            }
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

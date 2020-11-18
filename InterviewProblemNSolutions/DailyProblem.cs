@@ -3373,5 +3373,77 @@ namespace InterviewProblemNSolutions
             return maxProfit;
         }
 
+        // first attempt, fails when buying price for 1st tranx is best buying price even for 2nd tranx, i.e. making single buy + sell is better than 2
+        // Time O(n) || Space O(1)
+        public static int BestTimeToBuyAndSellStockIII(int[] prices)
+        {
+            if (prices.Length < 2) return 0;
+            int maxProfit1 = 0, maxProfit2 = 0, minPrice = prices[0], i = 1;
+            for (i = 1; i < prices.Length; i++)
+            {
+                if (prices[i] < prices[i - 1])
+                {
+                    if (maxProfit1 == 0) maxProfit1 = prices[i - 1] - minPrice;
+                    else if (maxProfit2 == 0) maxProfit2 = prices[i - 1] - minPrice;
+                    else if (prices[i - 1] - minPrice > maxProfit1)
+                    {
+                        maxProfit1 = maxProfit2;
+                        maxProfit2 = prices[i - 1] - minPrice;
+                    }
+                    minPrice = prices[i];
+                }
+            }
+            if (maxProfit1 == 0) maxProfit1 = prices[i - 1] - minPrice;
+            else if (maxProfit2 == 0) maxProfit2 = prices[i - 1] - minPrice;
+            else if (prices[i - 1] - minPrice > maxProfit1)
+            {
+                maxProfit1 = maxProfit2;
+                maxProfit2 = prices[i - 1] - minPrice;
+            }
+            return maxProfit1 + maxProfit2;
+        }
+
+        // Divide and Conquer Approach || Time O(n) || Space O(n)
+        public static int BestTimeToBuyAndSellStockIII_DivideAndConquer(int[] prices)
+        {
+            /* Divide the problem into 2 parts
+             * 1st tranx in left
+             * 2nd tranx in right
+             * Return maxProfit = left + right
+             * 
+             * create Lmin array which hold min value to BUY at so far
+             * create Rmax array which hold max value to SELL at so far
+             * we try to find maximize profit in left and right half
+             */
+
+            var len = prices.Length;
+            if (len < 2) return 0;
+            int Lmin = prices[0], Rmax = prices[len - 1];
+
+            int[] left = new int[len];
+            // left to right pass [Sell after considering we have previously bought]
+            for (int i = 1; i < len; i++)
+            {
+                // max profit possilble at current index is max of either profit at i-1 or curr selling price my Lmin
+                left[i] = Math.Max(left[i - 1], prices[i] - Lmin);
+                Lmin = Math.Min(Lmin, prices[i]);
+            }
+            
+            int[] right = new int[len];
+            // right to left pass [Buy after considering we have previously sold]
+            for (int i = len - 2; i >= 0; i--)
+            {
+                // max profit possilble at current index is max of either profit at i+1 or curr buying price my Rmax
+                right[i] = Math.Max(right[i + 1], Rmax - prices[i]);
+                Rmax = Math.Max(Rmax, prices[i]);
+            }
+
+            int totalProfit = 0;
+            // taking each index as mid point for dividing the entire array to maximize totalProfit
+            for (int i = 0; i < len; i++)
+                totalProfit = Math.Max(totalProfit, left[i] + right[i]);
+            return totalProfit;
+        }
+
     }
 }
