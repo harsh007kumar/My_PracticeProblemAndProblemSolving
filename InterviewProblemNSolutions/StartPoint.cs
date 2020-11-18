@@ -97,6 +97,7 @@ namespace InterviewProblemNSolutions
             InsertIntervals();
             MaximumProductSubarray();
             MirroReflection();
+            GenerateParenthesis();
 
 
             // String Matching Algorithm
@@ -1605,6 +1606,23 @@ namespace InterviewProblemNSolutions
              */
             Console.WriteLine($" For a 'Square Mirror room' of side len P: {p} and Ray coming from southwest-corner hitting east side wall at distance Q: {q} from bottom" +
                 $"\n Will Hit Receptor No: {DailyProblem.MirroReflection(p, q)}");
+        }
+
+
+        public static void GenerateParenthesis()
+        {
+            // https://leetcode.com/problems/generate-parentheses/
+            Utility.Print("22. Generate Parentheses");
+            int[] nArr = { 1, 2, 3, 4 };
+            foreach (int num in nArr)
+            {
+                Console.WriteLine($" For N: {num} brackets valid parenthesis are:");
+                List<string> result = new List<string>(100);
+                DailyProblem.GenerateParenthesisBackTrack(num, "", 0, 0, result);
+                foreach (var validParan in result)
+                    Console.Write($" '{validParan}'");
+                Console.WriteLine();
+            }
         }
 
 

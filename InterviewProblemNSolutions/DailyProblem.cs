@@ -2996,7 +2996,7 @@ namespace InterviewProblemNSolutions
             // if next character in pattern is wild character
             if (p.Length >= 2 && p[1] == '*')
                 // return true if we get regEx match without using wild character (0 times)
-                return RegularExpressionMatchingRecursive(s, p.Substring(2)) || 
+                return RegularExpressionMatchingRecursive(s, p.Substring(2)) ||
                     // or we get regEx match by using 1 or more times the character before wild character
                     (firstMatch && RegularExpressionMatchingRecursive(s.Substring(1), p));
             else
@@ -3068,7 +3068,7 @@ namespace InterviewProblemNSolutions
              * To simplify the code let's rewrite the equation with the help of natural logarithms :
              * x >= (log(buckets)/ log(states))
              */
-            
+
             var states = minutesToTest / minutesToDie + 1;
             return (int)Math.Ceiling((Math.Log(buckets) / Math.Log(states)));
         }
@@ -3118,11 +3118,11 @@ namespace InterviewProblemNSolutions
                 for (int j = 0; j < strs[i].Length; j++)
                     if (!alphaDict.ContainsKey(strs[i][j])) alphaDict.Add(strs[i][j], 1);
                     else alphaDict[strs[i][j]]++;
-                
+
                 string CODE = "";   // ex: B2F1Z3
                 foreach (var character in alphaDict)
                     CODE += "" + character.Key + character.Value;
-                
+
                 // if sub-dictionary of given length does'nt exists create one
                 if (!dict.ContainsKey(strs[i].Length)) dict.Add(strs[i].Length, new Dictionary<string, List<string>>(strs.Length));
 
@@ -3133,10 +3133,10 @@ namespace InterviewProblemNSolutions
             }
 
             List<IList<string>> grp = new List<IList<string>>(strs.Length);
-            foreach(var AnagramLengthGrp in dict.Values)
+            foreach (var AnagramLengthGrp in dict.Values)
                 foreach (var anagramsGrp in AnagramLengthGrp.Values)
                     grp.Add(anagramsGrp);
-            
+
             return grp;
         }
 
@@ -3251,9 +3251,9 @@ namespace InterviewProblemNSolutions
                         last = Math.Max(last, intervals[i++][1]);
                     sortedIntervals.Add(new int[] { newInterval[0], last });
                 }
-                lastEnd = intervals[i-1][1];
+                lastEnd = intervals[i - 1][1];
             }
-            
+
             return sortedIntervals.ToArray();
         }
 
@@ -3311,7 +3311,7 @@ namespace InterviewProblemNSolutions
             //ulong p = (ulong)p1, q = (ulong)q1;
             if (q == 0) return 0;
             var lcm = (p * q) / Utility.GCD(p, q);
-            
+
             // even no of bounces and lands on left
             if ((lcm / q) % 2 == 0)
                 return 2;
@@ -3320,6 +3320,42 @@ namespace InterviewProblemNSolutions
                 return 0;
             // odd no of bounces and lands on right & even no of copies of square
             return 1;
+        }
+
+
+        // Failed Attempt for Generating Parenthesis, not sure why thou
+        public static void GenerateParenthesis(int n, HashSet<string> alreadyAdded, List<string> result, string startWith = "", string endWith = "")
+        {
+            if (n == 0)
+            {
+                // add current valid is not already added
+                if (!alreadyAdded.Contains(startWith + endWith))
+                { alreadyAdded.Add(startWith + endWith); result.Add(startWith + endWith); }
+            }
+            else
+            {
+                // add opening bracket in startWith and closing bracket in endWith
+                GenerateParenthesis(n - 1, alreadyAdded, result, "(" + startWith, endWith + ")");
+
+                // add opening and closing bracket in startWith
+                GenerateParenthesis(n - 1, alreadyAdded, result, "()" + startWith, endWith);
+
+                // add opening and closing bracket in endtWith
+                GenerateParenthesis(n - 1, alreadyAdded, result, startWith, endWith + "()");
+            }
+        }
+        // Its given that this is nth Catalan Number
+        // Time = Space = 4^n/(n(root n))
+        public static void GenerateParenthesisBackTrack(int max, string validParan, int open, int close, List<string> result)
+        {
+            if (validParan.Length == max << 1) result.Add(validParan);
+            else
+            {
+                if (open < max)
+                    GenerateParenthesisBackTrack(max, validParan + "(", open + 1, close, result);
+                if (close < open)
+                    GenerateParenthesisBackTrack(max, validParan + ")", open, close + 1, result);
+            }
         }
     }
 }
