@@ -3428,7 +3428,7 @@ namespace InterviewProblemNSolutions
                 left[i] = Math.Max(left[i - 1], prices[i] - Lmin);
                 Lmin = Math.Min(Lmin, prices[i]);
             }
-            
+
             int[] right = new int[len];
             // right to left pass [Buy after considering we have previously sold]
             for (int i = len - 2; i >= 0; i--)
@@ -3438,6 +3438,7 @@ namespace InterviewProblemNSolutions
                 Rmax = Math.Max(Rmax, prices[i]);
             }
 
+            /* One optimization is calculating the total profit while calculating max profit for 'right array' above*/
             int totalProfit = 0;
             // taking each index as mid point for dividing the entire array to maximize totalProfit
             for (int i = 0; i < len; i++)
@@ -3445,5 +3446,41 @@ namespace InterviewProblemNSolutions
             return totalProfit;
         }
 
+
+        // Recursive Soln to Decode Strings // Time O(n) || Space O(1)
+        public static string DecodeString(string s)
+        {
+            string result = "";
+            Stack<int> repeatBy = new Stack<int>();
+            for (int i = 0; i < s.Length; i++)
+                if (Char.IsDigit(s[i])) result += GetReaptedString(s, ref i);
+                else result += s[i];
+            return result;
+        }
+        public static string GetReaptedString(string s, ref int currIndex)
+        {
+            string countString = "";
+            // keep iterating thru the digit till we dont find Opening Bracket
+            while (s[currIndex] != '[') countString += s[currIndex++];
+            int count = int.Parse(countString);
+            
+            string repeatedString = "";
+            string result = "";
+            // to skip onto next character after '[' Opening Bracket
+            currIndex++;
+            while (true)
+            {
+                // while ']' Closing bracket is not encoutered
+                if (s[currIndex] == ']') break;
+                // encountered second digit while parsing repeated string, make recursive call
+                else if (char.IsDigit(s[currIndex])) repeatedString += GetReaptedString(s, ref currIndex);
+                else repeatedString += s[currIndex];
+
+                currIndex++;
+            }
+            while (count-- > 0)
+                result += repeatedString;
+            return result;
+        }
     }
 }

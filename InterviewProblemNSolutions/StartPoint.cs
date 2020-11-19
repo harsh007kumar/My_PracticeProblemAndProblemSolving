@@ -100,6 +100,7 @@ namespace InterviewProblemNSolutions
             GenerateParenthesis();
             BestTimeToBuyAndSellStockII();
             BestTimeToBuyAndSellStockIII();
+            DecodeString();
 
 
             // String Matching Algorithm
@@ -1643,6 +1644,7 @@ namespace InterviewProblemNSolutions
 
         public static void BestTimeToBuyAndSellStockIII()
         {
+            // TECH DOSE https://youtu.be/37s1_xBiqH0
             // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/
             Utility.Print("123. Best Time to Buy and Sell Stock III");
             int[][] pricesArr = { new int[] { 3, 3, 5, 0, 0, 3, 1, 4 }, new int[] { 1, 2, 3, 4, 5 }, new int[] { 7, 6, 4, 3, 1 }, new int[] { 1 }, new int[] { 1, 2, 4, 2, 5, 7, 2, 4, 9, 0 } };
@@ -1652,6 +1654,20 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" After completing at max 2 Buy-Sell on above, MaxProfit: {DailyProblem.BestTimeToBuyAndSellStockIII_DivideAndConquer(prices)}");
             }
         }
+
+
+        public static void DecodeString()
+        {
+            // https://leetcode.com/problems/decode-string/
+            Utility.Print("394. Decode String");
+            string[] strArr = { "3[a]2[bc]", "3[a2[c]]", "2[abc]3[cd]ef", "abc3[cd]xyz", "100[leetcode]" };
+            foreach (var s in strArr)
+                Console.WriteLine($" \'{s}\' \t<= Decocde into => \t\'{DailyProblem.DecodeString(s)}\'");
+        }
+
+
+
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
