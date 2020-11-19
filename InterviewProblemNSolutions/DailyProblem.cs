@@ -3482,5 +3482,55 @@ namespace InterviewProblemNSolutions
                 result += repeatedString;
             return result;
         }
+
+        
+        // Time O(NLogK) || Space O(1)
+        public static int FindKthLargest(int[] nums, int k)
+        {
+            // heapify 1st k elements for MinHeap
+            CreateMinHeap(nums,k);
+            // now check for each n-k elements if an num is larger than root,
+            // replace it with root and heapify the K-sized Heap
+            for (int i = k; i < nums.Length; i++)
+                // new no smaller than MinHeap root
+                if (nums[i] > nums[0])
+                {
+                    // make new no the Root & Heapify
+                    int temp = nums[0];
+                    nums[0] = nums[i];
+                    nums[i] = temp;
+                    heapify(nums,k);
+                }
+            // once all elements in nums have been traversed
+            // kth highest element would be root of the MinHeap
+            return nums[0];
+        }
+        public static void CreateMinHeap(int[] minHeap, int len)
+        {
+            for (int i = (len - 1) >> 1; i >= 0; i--)
+                heapify(minHeap, len, i);
+        }
+        // 'Percolate-Down' Operation
+        public static void heapify(int[] minHeap, int len, int index = 0)
+        {
+            while (index < len)
+            {
+                int leftChild = (index << 1) + 1;
+                int rtChild = leftChild + 1;
+                int smaller = index;
+                if (leftChild < len && minHeap[leftChild] < minHeap[index])
+                    smaller = leftChild;
+                if (rtChild < len && minHeap[rtChild] < minHeap[smaller])
+                    smaller = rtChild;
+                if (smaller != index)
+                {
+                    int temp = minHeap[index];
+                    minHeap[index] = minHeap[smaller];
+                    minHeap[smaller] = temp;
+                    index = smaller;
+                }
+                else break;
+            }
+        }
     }
 }

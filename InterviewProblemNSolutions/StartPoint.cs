@@ -101,6 +101,7 @@ namespace InterviewProblemNSolutions
             BestTimeToBuyAndSellStockII();
             BestTimeToBuyAndSellStockIII();
             DecodeString();
+            KthLargestElementInArray();
 
 
             // String Matching Algorithm
@@ -1666,7 +1667,18 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void KthLargestElementInArray()
+        {
+            // https://leetcode.com/problems/kth-largest-element-in-an-array/
+            Utility.Print("215. Kth Largest Element in an Array");
+            int[][] inputArr = { new int[] { 3, 2, 1, 5, 6, 4 }, new int[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 }, new int[] { 7, 6, 5, 4, 3, 2, 1 }, new int[] { 5, 2, 4, 1, 3, 6, 0 } };
+            int[] k = { 2, 7, 5, 4 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                inputArr[i].Print("Nums");
+                Console.WriteLine($" \'{k[i]}\' largest element in above array is : {DailyProblem.FindKthLargest(inputArr[i], k[i])}");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
