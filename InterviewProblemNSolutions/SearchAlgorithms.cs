@@ -231,20 +231,25 @@ namespace InterviewProblemNSolutions
         }
 
         // Time O(Logn) || Space O(1) || 1 pass || Recursive Solution
+        // Time O(n) Worst Case when input array can have duplicate values
         public static int BinarySearchInRotatedArraySinglePass(int[] input, int start, int end, int element)
         {
             if(start<=end)
             {
                 var mid = start + (end - start) / 2;
                 if (input[mid] == element) return mid;
-                else if (input[start] <= input[mid])   // if first half is sorted
+                // [Add this case when duplicates values r possible in inputArr]
+                else if (input[start] == input[mid]) start++;
+                // if first half is sorted
+                else if (input[start] <= input[mid])
                 {
                     if (input[start] <= element && element <= input[mid])
                         return BinarySearchInRotatedArraySinglePass(input, start, mid - 1, element);
                     else
                         return BinarySearchInRotatedArraySinglePass(input, mid + 1, end, element);
                 }
-                else                                // second half must be sorted
+                // second half must be sorted
+                else
                 {
                     if (input[mid] <= element && element <= input[end])
                         return BinarySearchInRotatedArraySinglePass(input, mid + 1, end, element);
@@ -256,12 +261,15 @@ namespace InterviewProblemNSolutions
         }
 
         // Time O(Logn) || Space O(1) || 1 pass
+        // Time O(n) Worst Case when input array can have duplicate values
         public static int BinarySearchInRotatedArraySinglePassIterative(int[] input, int start, int end, int element)
         {
             while (start <= end)
             {
                 var mid = start + (end - start) / 2;
                 if (input[mid] == element) return mid;
+                else if (input[start] == input[mid])    // [Add this case when duplicates values r possible in inputArr]
+                    start++;
                 else if (input[start] <= input[mid])    // if first half is sorted
                     if (input[start] <= element && element < input[mid]) end = mid - 1;
                     else start = mid + 1;
