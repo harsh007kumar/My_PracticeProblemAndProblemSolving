@@ -103,6 +103,7 @@ namespace InterviewProblemNSolutions
             DecodeString();
             KthLargestElementInArray();
             AssignCookies();
+            CousinsInBinaryTree();
 
 
             // String Matching Algorithm
@@ -1700,6 +1701,30 @@ namespace InterviewProblemNSolutions
                 cookiesArr[i].Print("COOKIES");
                 Console.WriteLine($" No Of Content CHilds are {DailyProblem.FindContentChildren(childsArr[i], cookiesArr[i])}");
             }
+        }
+
+
+        public static void CousinsInBinaryTree()
+        {
+            // https://leetcode.com/problems/cousins-in-binary-tree/
+            Utility.Print("993. Cousins in Binary Tree");
+            /* In a binary tree, the root node is at depth 0, and children of each depth k node are at depth k+1.
+             * Two nodes of a binary tree are cousins if they have the same depth, but have different parents.
+             * We are given the root of a binary tree with unique values, and the values x and y of two different nodes in the tree.
+             * Return true if and only if the nodes corresponding to the values x and y are cousins.
+             */
+            TreeNode root = new TreeNode(1)         // Cousins Not-True Example with 2&3 or 3&4
+            {
+                left = new TreeNode(2) { left = new TreeNode(4)},
+                right = new TreeNode(3)
+            };
+            TreeNode root1 = new TreeNode(1)        // Cousins True Example with 4&5
+            {
+                left = new TreeNode(2) { right = new TreeNode(4) },
+                right = new TreeNode(3) { right = new TreeNode(5) }
+            };
+            root1.InOrder();
+            Console.WriteLine($" In above tree, NodeX: {4} NodeY: {3} are Cousins(same depth) & not sibiling (diff parent): {DailyProblem.IsCousins(root1, 4, 5)}");
         }
 
 

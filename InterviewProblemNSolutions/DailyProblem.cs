@@ -3558,5 +3558,36 @@ namespace InterviewProblemNSolutions
             return contentChilds;
         }
 
+
+        // Time O(n) || Space O(1)
+        public static bool IsCousins(TreeNode root, int x, int y)
+        {
+            if (root == null || root.val == x || root.val == y) return false;
+
+            int xDepth = 0, yDepth = 0;
+            TreeNode xParent = null, yParent = null;
+
+            GetParent(x, y, root, ref xParent, ref yParent, ref xDepth, ref yDepth, 0, null);
+            return xDepth == yDepth && xParent != yParent;
+        }
+        public static void GetParent(int x, int y, TreeNode root, ref TreeNode xP, ref TreeNode yP, ref int xDepth, ref int yDepth, int currDepth, TreeNode parent)
+        {
+            if (root == null) return;
+            if (root.val == x)
+            {
+                xP = parent;
+                xDepth = currDepth;
+            }
+            else if (root.val == y)
+            {
+                yP = parent;
+                yDepth = currDepth;
+            }
+            // already found both Nodes no need to search further
+            if (xP != null && yP != null) return;
+
+            GetParent(x, y, root.left, ref xP, ref yP, ref xDepth, ref yDepth, currDepth + 1, root);
+            GetParent(x, y, root.right, ref xP, ref yP, ref xDepth, ref yDepth, currDepth + 1, root);
+        }
     }
 }
