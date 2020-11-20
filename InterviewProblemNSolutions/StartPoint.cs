@@ -102,6 +102,7 @@ namespace InterviewProblemNSolutions
             BestTimeToBuyAndSellStockIII();
             DecodeString();
             KthLargestElementInArray();
+            AssignCookies();
 
 
             // String Matching Algorithm
@@ -1685,6 +1686,22 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" \'{k[i]}\' largest element in above array is : {DailyProblem.FindKthLargest(inputArr[i], k[i])}");
             }
         }
+
+
+        public static void AssignCookies()
+        {
+            // https://leetcode.com/problems/assign-cookies/
+            Utility.Print("455. Assign Cookies");
+            int[][] childsArr = { new int[] { 1, 2, 3 }, new int[] { 1, 2 } };
+            int[][] cookiesArr = { new int[] { 1, 1 }, new int[] { 1, 2, 3 } };
+            for(int i=0;i<childsArr.Length;i++)
+            {
+                childsArr[i].Print("CHILDS");
+                cookiesArr[i].Print("COOKIES");
+                Console.WriteLine($" No Of Content CHilds are {DailyProblem.FindContentChildren(childsArr[i], cookiesArr[i])}");
+            }
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

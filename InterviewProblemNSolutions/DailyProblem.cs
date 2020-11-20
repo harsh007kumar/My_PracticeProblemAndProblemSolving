@@ -3534,5 +3534,29 @@ namespace InterviewProblemNSolutions
                 else break;
             }
         }
+
+
+        // Time O(NlogN) Space O(1)
+        public static int FindContentChildren(int[] g, int[] s)
+        {
+            if (s.Length < 1) return 0;
+            // sort in order of child with smallest need 1st
+            Array.Sort(g);              // O(nlogn)
+            // sort in order of cookie with smallest size 1st
+            Array.Sort(s);              // O(nlogn)
+
+            int contentChilds = 0, childIndex = g.Length - 1, cookieIndex = s.Length - 1;
+            // start iterating from the last
+            while (childIndex >= 0 && cookieIndex >= 0)     // O(n)
+                // if size of biggest cookie can satisfy current child
+                if (g[childIndex--] <= s[cookieIndex])
+                {
+                    cookieIndex--;
+                    contentChilds++;
+                }
+
+            return contentChilds;
+        }
+
     }
 }
