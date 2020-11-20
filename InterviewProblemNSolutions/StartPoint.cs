@@ -267,8 +267,14 @@ namespace InterviewProblemNSolutions
         /// </summary>
         public static void CircularPetrolPumpProblem()
         {
+            // https://leetcode.com/problems/gas-station/
             Utility.Print("Find the first circular tour that visits all petrol pumps");
-            int[][,] petrolsPumpsArr = { new int[,] { { 4, 6 }, { 6, 5 }, { 7, 3 }, { 4, 5 } }, new int[,] { { 6, 4 }, { 3, 6 }, { 7, 3 } } };  // multiple array inputs
+            Utility.Print("134. Gas Station");
+            int[][,] petrolsPumpsArr = {    new int[,] { { 4, 6 }, { 6, 5 }, { 7, 3 }, { 4, 5 } },
+                                            new int[,] { { 6, 4 }, { 3, 6 }, { 7, 3 } },
+                                            new int[,] { { 3, 3 }, { 3, 4 }, { 4, 4 } },
+                                            new int[,] { { 5, 4 } },
+                                            new int[,] { { 5, 8 } } };  // multiple array inputs
             foreach (var petrolsPumps in petrolsPumpsArr)
             {
                 List<PetrolPump> pumps = new List<PetrolPump>();
@@ -2008,6 +2014,7 @@ namespace InterviewProblemNSolutions
         public static void BinarySearchInRotatedSortedArray()
         {
             // https://leetcode.com/problems/search-in-rotated-sorted-array/
+            // https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
             Utility.Print("Problem-40  Given a sorted array of n integers that has been rotated an unknown number of times," +
                 " give a O(logn) algorithm that finds an element in the array.(pp. 579 - 580)");
             int[][] input = { new int[] { 15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14 }, new int[] { 4, 5, 6, 7, 0, 1, 2 }, new int[] { 4, 5, 6, 7, 0, 1, 2 }, new int[] { 1 } };

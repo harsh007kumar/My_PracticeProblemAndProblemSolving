@@ -21,6 +21,8 @@ namespace InterviewProblemNSolutions
         public static int PetrolPump(List<PetrolPump> pumps, int len)
         {
             if (len < 1) return -1;
+            if (len == 1) return pumps[0].Petrol >= pumps[0].Distance ? 0 : -1;
+
             int startAt = 0, endAt = 1;
             int currFuel = (pumps[startAt].Petrol - pumps[startAt].Distance);
 
@@ -31,7 +33,7 @@ namespace InterviewProblemNSolutions
                 {
                     currFuel += (pumps[endAt].Petrol - pumps[endAt].Distance);           // add next pump
                     endAt = (endAt + 1) % len;                  // update end index
-                    if (endAt == startAt) return startAt;       // found the 'starting pump index'
+                    if (endAt == startAt && currFuel >= 0) return startAt;       // found the 'starting pump index'
                 }
                 while (currFuel < 0 && startAt < len)
                 {
