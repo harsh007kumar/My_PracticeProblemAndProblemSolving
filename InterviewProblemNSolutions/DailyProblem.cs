@@ -3589,5 +3589,24 @@ namespace InterviewProblemNSolutions
             GetParent(x, y, root.left, ref xP, ref yP, ref xDepth, ref yDepth, currDepth + 1, root);
             GetParent(x, y, root.right, ref xP, ref yP, ref xDepth, ref yDepth, currDepth + 1, root);
         }
+
+
+        // Time O(n) || Space O(1)
+        public static int MinDepthOfBinaryTree(TreeNode root)
+        {
+            if (root == null) return 0;
+            int depth = int.MaxValue;
+            GetMinDepth(root, ref depth, 1);
+            return depth;
+        }
+        public static void GetMinDepth(TreeNode root, ref int depth, int currDepth)
+        {
+            if (root == null || currDepth >= depth) return;
+            if (root.left == null && root.right == null)
+                depth = currDepth;
+            GetMinDepth(root.left, ref depth, currDepth + 1);
+            GetMinDepth(root.right, ref depth, currDepth + 1);
+        }
+
     }
 }

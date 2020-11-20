@@ -104,6 +104,7 @@ namespace InterviewProblemNSolutions
             KthLargestElementInArray();
             AssignCookies();
             CousinsInBinaryTree();
+            MinDepthOfBinaryTree();
 
 
             // String Matching Algorithm
@@ -1727,6 +1728,19 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" In above tree, NodeX: {4} NodeY: {3} are Cousins(same depth) & not sibiling (diff parent): {DailyProblem.IsCousins(root1, 4, 5)}");
         }
 
+
+        public static void MinDepthOfBinaryTree()
+        {
+            // https://leetcode.com/problems/minimum-depth-of-binary-tree/
+            Utility.Print("111. Minimum Depth of Binary Tree");
+            TreeNode root = new TreeNode(1)         // Cousins Not-True Example with 2&3 or 3&4
+            {
+                left = new TreeNode(2) { left = new TreeNode(4) },
+                right = new TreeNode(3)
+            };
+            root.InOrder();
+            Console.WriteLine($" Minimum Depth of above BinaryTree is: {DailyProblem.MinDepthOfBinaryTree(root)}");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
