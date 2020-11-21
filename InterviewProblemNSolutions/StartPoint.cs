@@ -13,98 +13,99 @@ namespace InterviewProblemNSolutions
         static void Main(string[] args)
         {
             // Daily Problem
-            DutchFlagProblem();
-            EventAndDelegate();
-            CircularPetrolPumpProblem();
-            AddBinary();
-            MultiplyLargeNumbersRepresentedAsString();
-            IsomorphicStrings();
-            SlidingWindowMaximum();
-            SortArrayByParityII();
-            ShortestDistanceFromAllBuildings();
-            AlienDictionary();
-            ProductOfArrayExceptSelf();
-            ContinuousSubarraySum();
-            TwoSum();
-            ThreeSum();
-            FourSum();
-            MostCommonWord();
-            ValidSudoku();
-            ComplimentBase10();
-            SpiralMatrix();
-            WinnerOfTicTacToe();
-            ReorderDataInLogFiles();
-            MajorityElement();
-            MajorityElementII();
-            LRUCache();
-            CompressedStringIterator();
-            MeetingRoomsII();
-            NumberOfIslands();
-            TrapRainWater();
-            FindTheCelebrity();
-            IsPalindrome();
-            WordSearch();
-            WordSearchII();
-            ImplementIndexOf();
-            UniquePaths();
-            UniquePathsII();
-            RotateImage();
-            DesignSearchAutocompleteSystem();
-            FirstMissingPositive();
-            PartitionLabels();
-            IntegerToRoman();
-            CompareVersionNumbers();
-            CourseSchedule();
-            SymmetricTree();
-            BasicCalculator();
-            ReverseWordsInAString();
-            ReverseWordsInAStringII();
-            MinimumCostToConnectSticks();
-            MinCostToMergeStones();
-            StringToInteger();
-            ReverseNum();
-            SearchA2DMatrixII();
-            CloneGraph();
-            LetterCombinations();
-            SerializeAndDeserializeBST();
-            MinimumHeightTrees();
-            ArrayFormationThroughConcatenation();
-            MinCostToMoveChips();
-            FindMinimumInRotatedSortedArrayII();
-            FindTheSmallestDivisorGivenAThreshold();
-            ConstructTreeFromPreAndInOrderTraversal();
-            DayOfTheWeek();
-            CanPlaceFlowers();
-            TwoSumLessThanK();
-            TwoSumInBST();
-            TwoSumInBSTs();
-            BinaryTreeTilt();
-            MaxAncestorDiff();
-            BinaryTreeLongestConsecutiveSequenceII();
-            SetMatrixZeroes();
-            MergeSortedArray();
-            FlipAndInvertImage();
-            ValidSquare();
-            MySqrt();
-            PermutationsII();
-            MaxPossibleSumOfProductOfTheIndexesMultipliedByElement();
-            RegularExpressionMatching();
-            PoorPigs();
-            RemoveInterval();
-            GroupAnagrams();
-            LongestMountain();
-            MergeIntervals();
-            InsertIntervals();
-            MaximumProductSubarray();
-            MirroReflection();
-            GenerateParenthesis();
-            BestTimeToBuyAndSellStockII();
-            BestTimeToBuyAndSellStockIII();
-            DecodeString();
-            KthLargestElementInArray();
-            AssignCookies();
-            CousinsInBinaryTree();
-            MinDepthOfBinaryTree();
+            //DutchFlagProblem();
+            //EventAndDelegate();
+            //CircularPetrolPumpProblem();
+            //AddBinary();
+            //MultiplyLargeNumbersRepresentedAsString();
+            //IsomorphicStrings();
+            //SlidingWindowMaximum();
+            //SortArrayByParityII();
+            //ShortestDistanceFromAllBuildings();
+            //AlienDictionary();
+            //ProductOfArrayExceptSelf();
+            //ContinuousSubarraySum();
+            //TwoSum();
+            //ThreeSum();
+            //FourSum();
+            //MostCommonWord();
+            //ValidSudoku();
+            //ComplimentBase10();
+            //SpiralMatrix();
+            //WinnerOfTicTacToe();
+            //ReorderDataInLogFiles();
+            //MajorityElement();
+            //MajorityElementII();
+            //LRUCache();
+            //CompressedStringIterator();
+            //MeetingRoomsII();
+            //NumberOfIslands();
+            //TrapRainWater();
+            //FindTheCelebrity();
+            //IsPalindrome();
+            //WordSearch();
+            //WordSearchII();
+            //ImplementIndexOf();
+            //UniquePaths();
+            //UniquePathsII();
+            //RotateImage();
+            //DesignSearchAutocompleteSystem();
+            //FirstMissingPositive();
+            //PartitionLabels();
+            //IntegerToRoman();
+            //CompareVersionNumbers();
+            //CourseSchedule();
+            //SymmetricTree();
+            //BasicCalculator();
+            //ReverseWordsInAString();
+            //ReverseWordsInAStringII();
+            //MinimumCostToConnectSticks();
+            //MinCostToMergeStones();
+            //StringToInteger();
+            //ReverseNum();
+            //SearchA2DMatrixII();
+            //CloneGraph();
+            //LetterCombinations();
+            //SerializeAndDeserializeBST();
+            //MinimumHeightTrees();
+            //ArrayFormationThroughConcatenation();
+            //MinCostToMoveChips();
+            //FindMinimumInRotatedSortedArrayII();
+            //FindTheSmallestDivisorGivenAThreshold();
+            //ConstructTreeFromPreAndInOrderTraversal();
+            //DayOfTheWeek();
+            //CanPlaceFlowers();
+            //TwoSumLessThanK();
+            //TwoSumInBST();
+            //TwoSumInBSTs();
+            //BinaryTreeTilt();
+            //MaxAncestorDiff();
+            //BinaryTreeLongestConsecutiveSequenceII();
+            //SetMatrixZeroes();
+            //MergeSortedArray();
+            //FlipAndInvertImage();
+            //ValidSquare();
+            //MySqrt();
+            //PermutationsII();
+            //MaxPossibleSumOfProductOfTheIndexesMultipliedByElement();
+            //RegularExpressionMatching();
+            //PoorPigs();
+            //RemoveInterval();
+            //GroupAnagrams();
+            //LongestMountain();
+            //MergeIntervals();
+            //InsertIntervals();
+            //MaximumProductSubarray();
+            //MirroReflection();
+            //GenerateParenthesis();
+            //BestTimeToBuyAndSellStockII();
+            //BestTimeToBuyAndSellStockIII();
+            //DecodeString();
+            //KthLargestElementInArray();
+            //AssignCookies();
+            //CousinsInBinaryTree();
+            //MinDepthOfBinaryTree();
+            NumbersAtMostNGivenDigitSet();
 
 
             // String Matching Algorithm
@@ -1741,6 +1742,22 @@ namespace InterviewProblemNSolutions
             root.InOrder();
             Console.WriteLine($" Minimum Depth of above BinaryTree is: {DailyProblem.MinDepthOfBinaryTree(root)}");
         }
+
+
+        public static void NumbersAtMostNGivenDigitSet()
+        {
+            // https://leetcode.com/problems/numbers-at-most-n-given-digit-set/
+            Utility.Print("902. Numbers At Most N Given Digit Set");
+            string[][] digits = { new string[] { "1", "3", "5", "7" }, new string[] { "7" }, new string[] { "1", "4", "9" } };
+            int[] n = { 100, 8, 1000000000 };
+            for (int i = 0; i < n.Length; i++)
+            {
+                digits[i].Print("Digits");
+                Console.WriteLine($" No of positive intergers that can be generated that are less than or equal to a given integer n '{n[i]}'" +
+                    $" are {DailyProblem.AtMostNGivenDigitSetDP(digits[i], n[i])} no's");
+            }
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

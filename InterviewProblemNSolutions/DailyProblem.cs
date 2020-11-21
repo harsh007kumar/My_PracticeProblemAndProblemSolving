@@ -3465,7 +3465,7 @@ namespace InterviewProblemNSolutions
             // keep iterating thru the digit till we dont find Opening Bracket
             while (s[currIndex] != '[') countString += s[currIndex++];
             int count = int.Parse(countString);
-            
+
             string repeatedString = "";
             string result = "";
             // to skip onto next character after '[' Opening Bracket
@@ -3485,12 +3485,12 @@ namespace InterviewProblemNSolutions
             return result;
         }
 
-        
+
         // Time O(NLogK) || Space O(1)
         public static int FindKthLargest(int[] nums, int k)
         {
             // heapify 1st k elements for MinHeap
-            CreateMinHeap(nums,k);
+            CreateMinHeap(nums, k);
             // now check for each n-k elements if an num is larger than root,
             // replace it with root and heapify the K-sized Heap
             for (int i = k; i < nums.Length; i++)
@@ -3501,7 +3501,7 @@ namespace InterviewProblemNSolutions
                     int temp = nums[0];
                     nums[0] = nums[i];
                     nums[i] = temp;
-                    heapify(nums,k);
+                    heapify(nums, k);
                 }
             // once all elements in nums have been traversed
             // kth highest element would be root of the MinHeap
@@ -3608,5 +3608,92 @@ namespace InterviewProblemNSolutions
             GetMinDepth(root.right, ref depth, currDepth + 1);
         }
 
+
+        // Recursive Sol || Throws Time Limit Exceeded for large value of 'n'
+        public static int AtMostNGivenDigitSetRecursive(string[] digits, int n)
+        {
+            int count = 0;
+            Array.Sort(digits);
+            FindPositiveNumbers(digits, 0, digits.Length - 1, n, 0, ref count);
+            return count;
+        }
+        public static void FindPositiveNumbers(string[] digits, int start, int last, int maxNumLimit, int numberTillNow, ref int count)
+        {
+            if (numberTillNow > maxNumLimit) return;
+
+            for (int currIndex = start; currIndex <= last; currIndex++)
+            {
+                // if including current index no yields a <= 'maxNumLimit' no increament the count
+                int isValidNumber = (numberTillNow * 10) + digits[currIndex][0] - '0';
+                if (isValidNumber <= maxNumLimit)
+                {
+                    count++;
+                    FindPositiveNumbers(digits, start, last, maxNumLimit, isValidNumber, ref count);
+                }
+                else break;
+            }
+        }
+        // Recursive Sol || Throws Time Limit Exceeded for large value of 'n'
+        public static int AtMostNGivenDigitSetDP(string[] digits, int n)
+        {
+            /* // Dynamic Programming + Counting
+             * Intuition [https://leetcode.com/problems/numbers-at-most-n-given-digit-set/solution/]
+             * First, call a positive integer X valid if X <= N and X only consists of digits from D. Our goal is to find the number of valid integers.
+             * 
+             * Say N has K digits. If we write a valid number with k digits (k < K), then there are (D\text{.length})^k(D.length) 
+             * k possible numbers we could write, since all of them will definitely be less than N.
+             * 
+             * Now, say we are to write a valid K digit number from left to right. For example, N = 2345, K = 4, and D = '1', '2', ..., '9'.
+             * Let's consider what happens when we write the first digit.
+             * 
+             *      If the first digit we write is less than the first digit of N,
+             *      then we could write any numbers after,
+             *      for a total of (D\text{.length})^{K-1}(D.length)^(K−1)
+             *      valid numbers from this one-digit prefix. In our example,
+             *      if we start with 1, we could write any of the numbers 1111 to 1999 from this prefix.
+             *      
+             *      If the first digit we write is the same, 
+             *      then we require that the next digit we write is equal to or lower than the next digit in N.
+             *      In our example (with N = 2345), if we start with 2, 
+             *      the next digit we write must be 3 or less.
+             *      
+             *      We can't write a larger digit, because if we started with eg. 3, 
+             *      then even a number of 3000 is definitely larger than N.
+             */
+            string num = n.ToString();
+            int K = num.Length;
+            int[] dp = new int[K + 1];
+            dp[K] = 1;
+
+            for (int i = K - 1; i >= 0; i--)
+            {
+                /* Compute dp[i] using below formula
+                 * Lets dp[i] be the no of ways to write valid Number if N becomes N[i], N[i+1], N[i+2],...
+                 * Ex int n = 2345 = string num = "2345", then 
+                 * dp[0] would be maximum 2345
+                 * dp[1] would be max 345
+                 * dp[2] would be max 45
+                 * dp[3] would be max 5
+                 * 
+                 * By above we can infer that formula :
+                 *  dp[i] = (no of single_d in digits < num[i]) * Math.Power(digits.Length,K-i-1)
+                 *          +
+                 *          if any single_d in digits == num[i] than add dp[i+1] as well.
+                 */
+                int currNumDigit = num[i] - '0';
+                foreach (var no in digits)
+                {
+                    if (no[0] - '0' < currNumDigit)
+                        dp[i] += (int)Math.Pow(digits.Length, K - i - 1);
+                    else if (no[0] - '0' == currNumDigit)
+                        dp[i] += dp[i + 1];
+                }
+            }
+
+            for (int i = 1; i < K; i++)
+                dp[0] += (int)Math.Pow(digits.Length, i);
+
+            return dp[0];
+        }
     }
 }
