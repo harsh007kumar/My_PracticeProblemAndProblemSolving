@@ -3695,5 +3695,28 @@ namespace InterviewProblemNSolutions
 
             return dp[0];
         }
+
+
+        // Time O(N*K), N = no of words & K = length of 1st word (it's given all words have same length)
+        public static int UniqueMorseRepresentations(string[] words)
+        {
+            // MorseCode representation of 26 english alphabets
+            string[] morseCode = { ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.." };
+            
+            // Set to store unique transformatation
+            HashSet<string> uniqueCode = new HashSet<string>(100);
+            for (int i = 0; i < words.Length; i++)
+            {
+                string transformedWord = "";
+                // create the transformation
+                for (int j = 0; j < words[i].Length; j++)
+                    transformedWord += morseCode[words[i][j] - 'a'];
+                
+                // add to to HashSet, which automatically keeps only unique words
+                uniqueCode.Add(transformedWord);
+            }
+            // return unique Counts
+            return uniqueCode.Count;
+        }
     }
 }

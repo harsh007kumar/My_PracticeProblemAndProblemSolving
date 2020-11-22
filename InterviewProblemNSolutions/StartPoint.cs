@@ -107,6 +107,7 @@ namespace InterviewProblemNSolutions
             //MinDepthOfBinaryTree();
             NumbersAtMostNGivenDigitSet();
             InsertDeleteGetRandomO1();  // RandomizedSet
+            UniqueMorseCodeWords();
 
 
             // String Matching Algorithm
@@ -1772,6 +1773,16 @@ namespace InterviewProblemNSolutions
             Console.WriteLine(randomizedSet.Remove(1));
             Console.WriteLine(randomizedSet.Insert(2));
             Console.WriteLine(randomizedSet.GetRandom());
+        }
+
+
+        public static void UniqueMorseCodeWords()
+        {
+            // https://leetcode.com/problems/unique-morse-code-words/
+            Utility.Print("804. Unique Morse Code Words");
+            string[] words = { "gin", "zen", "gig", "msg" };
+            words.Print("Input Words to be transformed");
+            Console.WriteLine($" Number of unique MorseCode transformation for the above string of words is: {DailyProblem.UniqueMorseRepresentations(words)}");
         }
 
 
