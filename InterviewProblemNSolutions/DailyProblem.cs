@@ -3702,7 +3702,7 @@ namespace InterviewProblemNSolutions
         {
             // MorseCode representation of 26 english alphabets
             string[] morseCode = { ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.." };
-            
+
             // Set to store unique transformatation
             HashSet<string> uniqueCode = new HashSet<string>(100);
             for (int i = 0; i < words.Length; i++)
@@ -3711,12 +3711,132 @@ namespace InterviewProblemNSolutions
                 // create the transformation
                 for (int j = 0; j < words[i].Length; j++)
                     transformedWord += morseCode[words[i][j] - 'a'];
-                
+
                 // add to to HashSet, which automatically keeps only unique words
                 uniqueCode.Add(transformedWord);
             }
             // return unique Counts
             return uniqueCode.Count;
+        }
+
+
+        /// <summary>
+        /// Time = Space = O(M^2 * N), where M is the length of each word and N is the total number of words in the input word list.
+        /// Given two words(beginWord and endWord), and a dictionary's word list, find the length of shortest transformation sequence from beginWord to endWord, such that:
+        ///     Only one letter can be changed at a time.
+        ///     Each transformed word must exist in the word list.
+        /// Note:
+        ///     Return 0 if there is no such transformation sequence.
+        ///     All words have the same length.
+        ///     All words contain only lowercase alphabetic characters.
+        ///     You may assume no duplicates in the word list.
+        ///     You may assume beginWord and endWord are non-empty and are not the same.
+        /// 
+        /// Ex Input:
+        /// beginWord = "hit",
+        /// endWord = "cog",
+        /// wordList = ["hot","dot","dog","lot","log","cog"]
+        /// 
+        /// Output: 5
+        /// 
+        /// Explanation: As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog",
+        /// return its length 5.
+        /// 
+        /// </summary>
+        /// <param name="beginWord"></param>
+        /// <param name="endWord"></param>
+        /// <param name="wordList"></param>
+        /// <returns></returns>
+        public static int WordLadder(string beginWord, string endWord, IList<string> wordList)
+        {
+            int listLen = wordList.Count;
+            if (listLen < 1) return 0;
+            int wordLen = wordList[0].Length;
+            bool endWordFound = false;
+            Dictionary<string, HashSet<string>> wordDict = new Dictionary<string, HashSet<string>>(100);
+
+            string left, right, preProcessWord;
+            // traverse thru all the words in the wordList
+            for (int i = 0; i < listLen; i++)
+            {
+                // traverse thru all the indexes in given word & replace by excatly one index/letter by uniqueChar '*' and create the preProcess Map
+                for (int j = 0; j < wordLen; j++)
+                {
+                    // dog => *og , d*g , do*
+                    left = j > 0 ? wordList[i].Substring(0, j - 0) : "";
+                    right = j < (wordLen - 1) ? wordList[i].Substring(j + 1) : "";
+                    preProcessWord = left + "*" + right;
+
+                    // Ex: *og keys contains => dog & log
+                    if (wordDict.ContainsKey(preProcessWord)) wordDict[preProcessWord].Add(wordList[i]);
+                    else wordDict.Add(preProcessWord, new HashSet<string>() { wordList[i] });
+                }
+                if (endWord == wordList[i]) endWordFound = true;
+            }
+
+            // if endWord is not present return 0 as transformation won't be possible
+            if (!endWordFound) return 0;
+
+            // Add 'beginWord' to wordDict mapping
+            for (int j = 0; j < wordLen; j++)
+            {
+                // dog => *og , d*g , do*
+                left = j > 0 ? beginWord.Substring(0, j - 0) : "";
+                right = j < (wordLen - 1) ? beginWord.Substring(j + 1) : "";
+                preProcessWord = left + "*" + right;
+
+                // Ex: *og keys contains => dog & log
+                if (wordDict.ContainsKey(preProcessWord)) wordDict[preProcessWord].Add(beginWord);
+                else wordDict.Add(preProcessWord, new HashSet<string>() { beginWord });
+            }
+
+            
+            Dictionary<string, List<string>> graph = new Dictionary<string, List<string>>(listLen);
+            // Create UnDirected Graph for all keys in 'wordDict' with more than 1 word as its value list
+            foreach (var hashset in wordDict.Values)
+            {
+                var connections = hashset.ToList<string>();
+                if (connections.Count > 1)
+                    for (int i = 0; i < connections.Count; i++)
+                        for (int j = i + 1; j < connections.Count; j++)
+                        {
+                            // Edge U-->V
+                            if (graph.ContainsKey(connections[i])) graph[connections[i]].Add(connections[j]);
+                            else graph.Add(connections[i], new List<string>() { connections[j] });
+                            // Edge V-->U
+                            if (graph.ContainsKey(connections[j])) graph[connections[j]].Add(connections[i]);
+                            else graph.Add(connections[j], new List<string>() { connections[i] });
+                        }
+            }
+            return FindShortestDistanceInUnDirectedUnWeightedGraph(graph, beginWord, endWord);
+        }
+        // Time O(V+E) || Space O(V)
+        public static int FindShortestDistanceInUnDirectedUnWeightedGraph(Dictionary<string, List<string>> g, string source, string destination)
+        {
+            if (g.Count == 0 || !g.ContainsKey(source) || !g.ContainsKey(destination)) return 0;
+
+            Dictionary<string, int> distance = new Dictionary<string, int>(g.Count);
+            foreach (var vertex in g.Keys)
+                distance.Add(vertex, int.MaxValue);
+
+            Queue<string> q = new Queue<string>();
+            q.Enqueue(source);
+            distance[source] = 1;
+
+            while (q.Count > 0)
+            {
+                var vertexU = q.Dequeue();
+                foreach (var vertexV in g[vertexU])
+                    // new Vertex found, calculate the distance from source
+                    if (distance[vertexV] == int.MaxValue || distance[vertexU] + 1 < distance[vertexV])
+                    {
+                        distance[vertexV] = distance[vertexU] + 1;
+                        q.Enqueue(vertexV);
+                    }
+            }
+
+            // if destination distance is not intMax return the value else return 0 indicating 'path not found'
+            return distance[destination] != int.MaxValue ? distance[destination] : 0;
         }
     }
 }

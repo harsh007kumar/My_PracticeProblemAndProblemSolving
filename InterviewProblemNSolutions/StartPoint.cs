@@ -108,6 +108,7 @@ namespace InterviewProblemNSolutions
             NumbersAtMostNGivenDigitSet();
             InsertDeleteGetRandomO1();  // RandomizedSet
             UniqueMorseCodeWords();
+            WordLadder();
 
 
             // String Matching Algorithm
@@ -1784,6 +1785,25 @@ namespace InterviewProblemNSolutions
             words.Print("Input Words to be transformed");
             Console.WriteLine($" Number of unique MorseCode transformation for the above string of words is: {DailyProblem.UniqueMorseRepresentations(words)}");
         }
+
+
+        public static void WordLadder()
+        {
+            // https://leetcode.com/problems/word-ladder/
+            Utility.Print("127. Word Ladder");
+            string[] beginWord = { "hit", "hot", "talk", "hog" }, endWord = { "cog", "dog", "tail", "cog" };
+            List<string>[] wordList = { new List<string>() { "hot", "dot", "dog", "lot", "log", "cog" },
+                                        new List<string>() { "hot", "dog" },
+                                        new List<string>() { "talk", "tons", "fall", "tail", "gale", "hall", "negs" },
+                                        new List<string>() { "cog" } };
+            for (int i = 0; i < wordList.Length; i++)
+            {
+                wordList[i].ToArray().Print("Word-List");
+                Console.WriteLine($" Length of shortest transformation sequence from beginWord \'{beginWord[i]}\' to endWord \'{endWord[i]}\'" +
+                    $" is: \'{DailyProblem.WordLadder(beginWord[i], endWord[i], wordList[i])}\'");
+            }
+        }
+
 
 
 
