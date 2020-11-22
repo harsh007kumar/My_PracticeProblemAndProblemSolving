@@ -106,6 +106,7 @@ namespace InterviewProblemNSolutions
             //CousinsInBinaryTree();
             //MinDepthOfBinaryTree();
             NumbersAtMostNGivenDigitSet();
+            InsertDeleteGetRandomO1();  // RandomizedSet
 
 
             // String Matching Algorithm
@@ -1756,6 +1757,21 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" No of positive intergers that can be generated that are less than or equal to a given integer n '{n[i]}'" +
                     $" are {DailyProblem.AtMostNGivenDigitSetDP(digits[i], n[i])} no's");
             }
+        }
+
+
+        public static void InsertDeleteGetRandomO1()
+        {
+            // https://leetcode.com/problems/insert-delete-getrandom-o1/ RandomizedSet
+            Utility.Print("380. Insert Delete GetRandom O(1)");
+            var randomizedSet = new InsertDeleteGetRandomO1();
+            Console.WriteLine(randomizedSet.Insert(1));
+            Console.WriteLine(randomizedSet.Remove(2));
+            Console.WriteLine(randomizedSet.Insert(2));
+            Console.WriteLine(randomizedSet.GetRandom());
+            Console.WriteLine(randomizedSet.Remove(1));
+            Console.WriteLine(randomizedSet.Insert(2));
+            Console.WriteLine(randomizedSet.GetRandom());
         }
 
 
