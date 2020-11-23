@@ -1818,6 +1818,19 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void HouseRobberIII()
+        {
+            // https://leetcode.com/problems/house-robber-iii/
+            Utility.Print("337. House Robber III");
+            TreeNode[] rootArr = { new TreeNode(3) { left = new TreeNode(2) { right = new TreeNode(3) },
+                                                   right = new TreeNode(3) { right = new TreeNode(1) } },
+                                 new TreeNode(4) { left = new TreeNode(1) { left = new TreeNode(2) { left = new TreeNode(3) } } } };
+            foreach (var root in rootArr)
+            {
+                root.InOrder();
+                Console.WriteLine($" Maximum amount of money the thief can rob = {DailyProblem.HouseRobberIII(root)}");
+            }
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

@@ -3840,18 +3840,58 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(N)
         public static int HouseRobberI(int[] nums)
         {
             int len = nums.Length;
             if (len == 0) return 0;
-            return MaxNonAdjacentSum(nums, 0, len, new Dictionary<int, int>(100));
+            return MaxNonAdjacentArraySum(nums, 0, len, new Dictionary<int, int>(100));
         }
-        public static int MaxNonAdjacentSum(int[] nums, int i, int len, Dictionary<int, int> memo)
+        // DP Memoization approach (Top-Down)
+        public static int MaxNonAdjacentArraySum(int[] nums, int i, int len, Dictionary<int, int> memo)
         {
             if (i >= len) return 0;
             if (memo.ContainsKey(i)) return memo[i];
-            memo.Add(i, Math.Max(nums[i] + MaxNonAdjacentSum(nums, i + 2, len, memo), MaxNonAdjacentSum(nums, i + 1, len, memo)));
+            /* We have two choice at each index
+             *      1) Either choose current index value and move to current+2 as we cannot select adjacent index
+             *      2) Not selecting current index than we can select current+1
+             */
+            memo.Add(i, Math.Max(nums[i] + MaxNonAdjacentArraySum(nums, i + 2, len, memo), MaxNonAdjacentArraySum(nums, i + 1, len, memo)));
             return memo[i];
+        }
+
+
+        // DP based approach (Top-Down) || Time = Space = O(N) as each Node is visited just once
+        public static int HouseRobberIII(TreeNode root) => MaxNonAdjacentTreeSumDP(root, new Dictionary<TreeNode, int>(100));
+        public static int MaxNonAdjacentTreeSumDP(TreeNode root, Dictionary<TreeNode, int> memo)
+        {
+            if (root == null) return 0;
+            if (memo.ContainsKey(root)) return memo[root];
+            /* Approach is similar to HouseRobberI problem
+             * at every Node we have below two choices to make to maximize the TOTAL SUM
+             *      1) Select "current Root.val" + "SUM of (left + right child) of immediate left" + "SUM of (left + right child) of immediate right"
+             *      2) Exclude current root.val and include "immediate left + right child SUM"
+             *  return Max of above two choice.
+             *  Do this recursively at every node.
+             *  
+             *  As one can notice this problem is ideal candidate for solving using DP as sub-problems are repeating 
+             *  Hence to speed up the execution, save the result of current Node in a data-structure (i used Dictionary/HashTable)
+             *  which can we refer later if we encounter same sub-problem again
+             */
+
+            memo.Add(root, Math.Max(
+                                    root.val
+                                        // SUM of (left + right child) of immediate left
+                                        + MaxNonAdjacentTreeSumDP(root.left != null ? root.left.left : null, memo)
+                                        + MaxNonAdjacentTreeSumDP(root.left != null ? root.left.right : null, memo)
+                                        // SUM of (left + right child) of immediate right
+                                        + MaxNonAdjacentTreeSumDP(root.right != null ? root.right.left : null, memo)
+                                        + MaxNonAdjacentTreeSumDP(root.right != null ? root.right.right : null, memo)
+                                    // immediate left + right child SUM
+                                    , MaxNonAdjacentTreeSumDP(root.left, memo) + MaxNonAdjacentTreeSumDP(root.right, memo)
+                                   )
+                    );
+            return memo[root];
         }
     }
 }
