@@ -3838,5 +3838,20 @@ namespace InterviewProblemNSolutions
             // if destination distance is not intMax return the value else return 0 indicating 'path not found'
             return distance[destination] != int.MaxValue ? distance[destination] : 0;
         }
+
+
+        public static int HouseRobberI(int[] nums)
+        {
+            int len = nums.Length;
+            if (len == 0) return 0;
+            return MaxNonAdjacentSum(nums, 0, len, new Dictionary<int, int>(100));
+        }
+        public static int MaxNonAdjacentSum(int[] nums, int i, int len, Dictionary<int, int> memo)
+        {
+            if (i >= len) return 0;
+            if (memo.ContainsKey(i)) return memo[i];
+            memo.Add(i, Math.Max(nums[i] + MaxNonAdjacentSum(nums, i + 2, len, memo), MaxNonAdjacentSum(nums, i + 1, len, memo)));
+            return memo[i];
+        }
     }
 }

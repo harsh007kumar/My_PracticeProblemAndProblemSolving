@@ -109,6 +109,8 @@ namespace InterviewProblemNSolutions
             InsertDeleteGetRandomO1();  // RandomizedSet
             UniqueMorseCodeWords();
             WordLadder();
+            HouseRobber();
+            HouseRobberIII();
 
 
             // String Matching Algorithm
@@ -1804,7 +1806,17 @@ namespace InterviewProblemNSolutions
             }
         }
 
-
+        public static void HouseRobber()
+        {
+            // https://leetcode.com/problems/house-robber/
+            Utility.Print("198. House Robber");
+            int[][] numsArr = { new int[] { 1, 2, 3, 1 }, new int[] { 2, 7, 9, 3, 1 } };
+            foreach(var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" maximum amount of money you can rob = {DailyProblem.HouseRobberI(nums)}");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
