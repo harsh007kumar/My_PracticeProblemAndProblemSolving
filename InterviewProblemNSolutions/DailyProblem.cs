@@ -1704,6 +1704,70 @@ namespace InterviewProblemNSolutions
             }
             return 0;
         }
+        /// <summary>
+        /// Functions evaluates input expression string containing only non-negative integers
+        /// and +, -, *, / operators and empty spaces.
+        /// Time O(n) || Space O(n)
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static int BasicCalculatorIIFaster(string s)
+        {
+            if (s.Length < 1) return 0;
+            char lastOperator = '+';
+            int currNum = 0;
+            Stack<int> st = new Stack<int>(100);
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                // if current character is an digit 0-9
+                if (Char.IsDigit(s[i])) currNum = currNum * 10 + (s[i] - '0');
+                // else if current character is Not empty space
+                else if (s[i] != ' ')
+                {
+                    switch (lastOperator)
+                    {
+                        case '+':
+                            st.Push(currNum);
+                            break;
+                        case '-':
+                            st.Push(-currNum);
+                            break;
+                        case '*':
+                            st.Push(st.Pop() * currNum);
+                            break;
+                        case '/':
+                            st.Push(st.Pop() / currNum);
+                            break;
+                    }
+                    lastOperator = s[i];
+                    currNum = 0;
+                }
+            }
+            // as we are calculate for previous operator upon reaching next operator,
+            // hence for last operator we need to do explicitly after we have finished pre-processing rest of the data
+            // we can move this above by replacing the else if with => if ((s[i]!=' ' && !Char.IsDigit(s[i])) || i==s.Length-1)
+            switch (lastOperator)
+            {
+                case '+':
+                    st.Push(currNum);
+                    break;
+                case '-':
+                    st.Push(-currNum);
+                    break;
+                case '*':
+                    st.Push(st.Pop() * currNum);
+                    break;
+                case '/':
+                    st.Push(st.Pop() / currNum);
+                    break;
+            }
+            int result = 0;
+            while (st.Count > 0)
+                result += st.Pop();
+            return result;
+        }
+
 
         // Time O(n) || Space O(n)
         public static string ReverseWordsInAString(string s)

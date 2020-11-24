@@ -955,8 +955,9 @@ namespace InterviewProblemNSolutions
             string[] inputs = { "3+2*2", " 3/2 ", " 3+5 / 2 ", "42", "0-2147483647", "14/3*2", "1-1+1" };
             foreach (var input in inputs)
             {
-                Console.Write($" Input: \'{input}\'");
-                Console.WriteLine($" \t Calculates To: {DailyProblem.BasicCalculatorII(input)}");
+                Console.WriteLine($" Input: \'{input}\'");
+                //Console.WriteLine($" \tCalculates To: {DailyProblem.BasicCalculatorII(input)}");
+                Console.WriteLine($" \tCalculates To: {DailyProblem.BasicCalculatorIIFaster(input)}");
             }
         }
 
