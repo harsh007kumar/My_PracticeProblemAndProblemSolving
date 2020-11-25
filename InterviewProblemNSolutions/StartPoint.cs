@@ -111,6 +111,7 @@ namespace InterviewProblemNSolutions
             WordLadder();
             HouseRobber();
             HouseRobberIII();
+            SmallestIntegerDivisibleByK();
 
 
             // String Matching Algorithm
@@ -1832,6 +1833,18 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Maximum amount of money the thief can rob = {DailyProblem.HouseRobberIII(root)}");
             }
         }
+
+
+        public static void SmallestIntegerDivisibleByK()
+        {
+            // https://leetcode.com/problems/smallest-integer-divisible-by-k/
+            Utility.Print("1015. Smallest Integer Divisible by K");
+            int[] kArr = { 1, 2, 3, 5 };
+            foreach (var k in kArr)
+                Console.WriteLine($" Smallest N divisble by K={k} consisting of digit '1' only is of length=\t{DailyProblem.SmallestRepunitDivByK(k)}");
+        }
+
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

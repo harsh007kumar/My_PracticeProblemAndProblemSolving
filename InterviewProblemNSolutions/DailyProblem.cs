@@ -3957,5 +3957,32 @@ namespace InterviewProblemNSolutions
                     );
             return memo[root];
         }
+
+        /// <summary>
+        /// Given a positive integer K, you need to find the length of the smallest positive integer N such that N is divisible by K,
+        /// and N only contains the digit '1', Ex: K = 3 smallest answer is N = 111, which was length 3
+        /// Time O(n) || Space O(1)
+        /// </summary>
+        /// <param name="K"></param>
+        /// <returns></returns>
+        public static int SmallestRepunitDivByK(int K)
+        {
+            if (K % 2 == 0) return -1;
+            int remainder = 0;
+            int count = 0;
+            HashSet<int> set = new HashSet<int>(100);
+            while (true)
+            {
+                if ((remainder * 10 + 1) % K == 0) return count + 1;
+                ++count;
+                remainder = (remainder * 10 + 1) % K;
+                
+                // seen this remainder before than break the loop
+                if (set.Contains(remainder)) break;
+                // else add this remainder to the set
+                else set.Add(remainder);
+            }
+            return -1;
+        }
     }
 }
