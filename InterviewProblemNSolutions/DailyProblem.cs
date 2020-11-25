@@ -3961,7 +3961,7 @@ namespace InterviewProblemNSolutions
         /// <summary>
         /// Given a positive integer K, you need to find the length of the smallest positive integer N such that N is divisible by K,
         /// and N only contains the digit '1', Ex: K = 3 smallest answer is N = 111, which was length 3
-        /// Time O(n) || Space O(1)
+        /// Time O(n) || Space O(N)
         /// </summary>
         /// <param name="K"></param>
         /// <returns></returns>
@@ -3973,10 +3973,10 @@ namespace InterviewProblemNSolutions
             HashSet<int> set = new HashSet<int>(100);
             while (true)
             {
-                if ((remainder * 10 + 1) % K == 0) return count + 1;
-                ++count;
                 remainder = (remainder * 10 + 1) % K;
-                
+                if (remainder == 0) return count + 1;
+                ++count;
+
                 // seen this remainder before than break the loop
                 if (set.Contains(remainder)) break;
                 // else add this remainder to the set
@@ -3984,5 +3984,5 @@ namespace InterviewProblemNSolutions
             }
             return -1;
         }
-    }
+    }-+
 }
