@@ -112,6 +112,7 @@ namespace InterviewProblemNSolutions
             HouseRobber();
             HouseRobberIII();
             SmallestIntegerDivisibleByK();
+            LongestSubstringWithAtLeastKRepeatingCharacters();
 
 
             // String Matching Algorithm
@@ -1844,6 +1845,18 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Smallest N divisble by K={k} consisting of digit '1' only is of length=\t{DailyProblem.SmallestRepunitDivByK(k)}");
         }
 
+
+        public static void LongestSubstringWithAtLeastKRepeatingCharacters()
+        {
+            // https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/solution/
+            Utility.Print("395. Longest Substring with At Least K Repeating Characters");
+            string[] s = { "aaabb", "ababbc", "aabcbacad" };
+            int[] k = { 3, 2, 2 };
+            for (int i = 0; i < s.Length; i++)
+                Console.WriteLine($" Input: {s[i]} & K: {k[i]}" +
+                    $"\n length of the longest substring of s such that the frequency of each character in this substring is greater than or equal to k: {DailyProblem.LongestSubstringWithAtLeastKRepeatingCharacters(s[i], k[i])}");
+        }
+        
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

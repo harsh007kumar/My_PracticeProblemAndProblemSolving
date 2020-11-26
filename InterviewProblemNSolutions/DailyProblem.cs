@@ -3984,5 +3984,64 @@ namespace InterviewProblemNSolutions
             }
             return -1;
         }
-    }-+
+
+
+        /// <summary>
+        /// 2 pointers approach
+        /// Time O(N*26) = O(N) || Space O(26) = O(1)
+        /// There is another intuitive method to solve the problem by using the Sliding Window Approach. The sliding window slides over the string s and validates each character. Based on certain conditions, the sliding window either expands or shrinks.
+        /// A substring is valid if each character has at least k frequency.The main idea is to find all the valid substrings with a different number of unique characters and track the maximum length.Let's look at the algorithm in detail.
+        /// 
+        /// Algorithm
+        /// Find the number of unique characters in the string s and store the count in variable maxUnique. For s = aabcbacad, the unique characters are a, b, c, d and maxUnique = 4.
+        /// Iterate over the string s with the value of currUnique ranging from 1 to maxUnique. In each iteration, currUnique is the maximum number of unique characters that must be present in the sliding window.
+        /// The sliding window starts at index windowStart and ends at index windowEnd and slides over string s until windowEnd reaches the end of string s. At any given point, we shrink or expand the window to ensure that the number of unique characters is not greater than currUnique.
+        /// If the number of unique character in the sliding window is less than or equal to currUnique, expand the window from the right by adding a character to the end of the window given by windowEnd
+        /// Otherwise, shrink the window from the left by removing a character from the start of the window given by windowStart.
+        /// Keep track of the number of unique characters in the current sliding window having at least k frequency given by countAtLeastK. Update the result if all the characters in the window have at least k frequency.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public static int LongestSubstringWithAtLeastKRepeatingCharacters(string s, int k)
+        {
+            int result = 0;
+            int len = s.Length;
+            if (len < k) return result;
+
+            HashSet<char> uniqueChars = new HashSet<char>(26);
+            for (int i = 0; i < len; i++) uniqueChars.Add(s[i]);
+            int[] charCount = null;
+
+            int charsWithCountAtLeastK = 0, currUnique = 1, maxUnique = uniqueChars.Count;
+            while (currUnique <= maxUnique)     // max 26 times
+            {
+                charCount = new int[26];
+                charsWithCountAtLeastK = 0;
+                uniqueChars.Clear();
+                int windowS = 0, windowE = 0;
+                while (windowE < len)           // O(N)
+                {
+                    uniqueChars.Add(s[windowE]);
+
+                    // unique character with count equal to K
+                    if (++charCount[s[windowE] - 'a'] == k) charsWithCountAtLeastK++;
+
+                    while (uniqueChars.Count > currUnique)
+                    {
+                        if (charCount[s[windowS] - 'a']-- == k) charsWithCountAtLeastK--;
+                        if (charCount[s[windowS] - 'a'] == 0) uniqueChars.Remove(s[windowS]);
+                        windowS++;
+                    }
+                    // if all the 'unique characters' in current windows have count more than 'k'
+                    if (charsWithCountAtLeastK == uniqueChars.Count)
+                        result = Math.Max(result, windowE - windowS + 1);
+
+                    windowE++;
+                }
+                currUnique++;
+            }
+            return result;
+        }
+    }
 }
