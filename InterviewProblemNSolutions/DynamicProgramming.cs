@@ -623,11 +623,26 @@ namespace InterviewProblemNSolutions
             if (totalSum % 2 == 1) return false;
 
             // return true if subSet with Half of total sum exists
-            return SubsetSum(input, len, totalSum / 2);                 // DP Tabulation bottom up O(N*S) [Constraint space is very high if totalSum is large]
-            //return SubSetSumRecursive(input, len, totalSum / 2);        // Time Consuming O(2^n) recursive approach
-            //return SubSetSumMemo(input, len, totalSum / 2, new Dictionary<string, bool>());   // DP Memoization top down approach
+            //return SubsetSum(input, len, totalSum / 2);                                             // DP Tabulation bottom up O(N*S) [Constraint space is very high if totalSum is large]
+            //return SubSetSumRecursive(input, len, totalSum / 2);                                    // Time Consuming O(2^n) recursive approach
+            return SubsetSumMemo(input, len, totalSum / 2, 0, new int[len + 1, totalSum / 2]);      // DP Memo Top-Down, FASTEST
+            //return SubSetSumMemo(input, len, totalSum / 2, new Dictionary<string, bool>());         // DP Memoization top down approach Old
         }
+        // Memoization based || Top Down Approach
+        // Time O(2^n) we have 2 decisions to make at every index from 0..N-1 || Recursive Space Required!
+        public static bool SubsetSumMemo(int[] nums, int len, int requiredSum, int currSum, int[,] cache)
+        {
+            if (requiredSum == currSum) return true;
+            if (len <= 0 || requiredSum < currSum) return false;
+            if (cache[len - 1, currSum] != 0) return cache[len - 1, currSum] == 2;
 
+            bool result = false;
+            if (requiredSum >= nums[len - 1]) result = SubsetSumMemo(nums, len - 1, requiredSum, currSum + nums[len - 1], cache);
+            if (!result) result = SubsetSumMemo(nums, len - 1, requiredSum, currSum, cache);
+
+            cache[len - 1, currSum] = result ? 2 : 1;
+            return cache[len - 1, currSum] == 2;
+        }
         // https://youtu.be/3N47yKRDed0
         // Memoization based || Top Down Approach
         // Time O(2^n) we have 2 decisions to make at every index from 0..N-1 || Recursive Space Required!
