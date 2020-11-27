@@ -55,6 +55,7 @@ namespace InterviewProblemNSolutions
             //IntegerToRoman();
             //CompareVersionNumbers();
             //CourseSchedule();
+            CourseScheduleII();
             //SymmetricTree();
             //BasicCalculator();
             //ReverseWordsInAString();
@@ -916,6 +917,24 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" For Above Courses you have to take, is it possible to finish them: {DailyProblem.CourseSchedule(2, input)}");
         }
 
+        public static void CourseScheduleII()
+        {
+            // https://leetcode.com/problems/course-schedule-ii/submissions/
+            Utility.Print("210. Course Schedule II");
+            int[][][] input = { new int[][] { new int[] { 1, 0 }, new int[] { 0, 1 } },
+                                new int[][] { new int[] { 1, 0 }, new int[] { 2, 0 }, new int[] { 3, 1 }, new int[] { 3, 2 } },
+                                new int[][] { new int[] { 1, 0 } } };
+            int[] numCourses = { 2, 4, 3 };
+            for (int i = 0; i < numCourses.Length; i++)
+            {
+                input[i].Print();
+                var orderingOfCourses = DailyProblem.CourseScheduleII(numCourses[i], input[i]);
+                Console.WriteLine($" For Completing above '{numCourses[i]}' Courses you have to start Course in below Order:");
+                foreach (var courseId in orderingOfCourses)
+                    Console.Write($" {courseId} <<");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
         public static void SymmetricTree()
         {

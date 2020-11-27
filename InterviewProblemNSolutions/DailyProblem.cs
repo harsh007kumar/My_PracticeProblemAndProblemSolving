@@ -1596,6 +1596,46 @@ namespace InterviewProblemNSolutions
             return false;
         }
 
+
+        // Time O(Max,(N,(V+E)) || Space O(V+E), N = no of prerequisites
+        public static int[] CourseScheduleII(int numCourses, int[][] prerequisites)
+        {
+            int[] topSort = new int[numCourses];
+            int index = 0;
+
+            Dictionary<int, List<int>> DiGraph = new Dictionary<int, List<int>>(numCourses);
+            // Create Directed Graph O(n)
+            for (int i = 0; i < numCourses; i++) DiGraph.Add(i, new List<int>());
+
+            // Add Adjacent Edges/Dependencies in Graph O(n)
+            for (int i = 0; i < prerequisites.Length; i++)
+                DiGraph[prerequisites[i][0]].Add(prerequisites[i][1]);
+
+            // 0 not visited || 1 visited & in-Stack || -1 visited and out of Stack
+            int[] visited = new int[numCourses];
+            foreach (var kvp in DiGraph)
+                if (visited[kvp.Key] == 0)
+                    if (DetectCycleUsingDFS(DiGraph, kvp.Key, topSort, ref index, visited))
+                        return new int[0];
+            return topSort;
+        }
+        // Time O(V+E)
+        public static bool DetectCycleUsingDFS(Dictionary<int, List<int>> g, int start, int[] topSort, ref int i, int[] visited)
+        {
+            visited[start] = 1;     // 1 visited & in-Stack
+            foreach (var adjacentVertex in g[start])
+                // 0 not visited, cheeck for cycle
+                if (visited[adjacentVertex] == 0 && DetectCycleUsingDFS(g, adjacentVertex, topSort, ref i, visited))
+                    return true;
+                // cycle found return true
+                else if (visited[adjacentVertex] == 1)
+                    return true;
+            visited[start] = -1;    //-1 visited and out of Stack
+            topSort[i++] = start;   // Topological order
+            return false;
+        }
+
+
         // Time O(n), n = no of nodes in the binary tree
         // Recursive Solution
         public static bool IsSymmetricRecursive(TreeNode t1, TreeNode t2)
