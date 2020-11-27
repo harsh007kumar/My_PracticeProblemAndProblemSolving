@@ -111,6 +111,7 @@ namespace InterviewProblemNSolutions
             UniqueMorseCodeWords();
             WordLadder();
             HouseRobber();
+            HouseRobberII();
             HouseRobberIII();
             SmallestIntegerDivisibleByK();
             LongestSubstringWithAtLeastKRepeatingCharacters();
@@ -1837,6 +1838,18 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 Console.WriteLine($" maximum amount of money you can rob = {DailyProblem.HouseRobberI(nums)}");
+            }
+        }
+
+        public static void HouseRobberII()
+        {
+            // https://leetcode.com/problems/house-robber-ii/
+            Utility.Print("213. House Robber II");
+            int[][] numsArr = { new int[] { 1, 2, 3, 1 }, new int[] { 2, 3, 2 }, new int[] { 0 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" maximum amount of money you can rob = {DailyProblem.HouseRobberII(nums)}");
             }
         }
 

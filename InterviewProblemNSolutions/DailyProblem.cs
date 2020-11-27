@@ -3951,6 +3951,16 @@ namespace InterviewProblemNSolutions
             if (len == 0) return 0;
             return MaxNonAdjacentArraySum(nums, 0, len, new Dictionary<int, int>(100));
         }
+        // Time = Space = O(N)
+        public static int HouseRobberII(int[] nums)
+        {
+            int len = nums.Length;
+            if (len == 0) return 0;
+            if (len == 1) return nums[0];
+            // MaxAmt by robbering house 0..N-1 OR robbering house 1..N
+            return Math.Max(MaxNonAdjacentArraySum(nums, 0, len - 1, new Dictionary<int, int>(100)),
+                            MaxNonAdjacentArraySum(nums, 1, len, new Dictionary<int, int>(100)));
+        }
         // DP Memoization approach (Top-Down)
         public static int MaxNonAdjacentArraySum(int[] nums, int i, int len, Dictionary<int, int> memo)
         {
