@@ -116,6 +116,7 @@ namespace InterviewProblemNSolutions
             SmallestIntegerDivisibleByK();
             LongestSubstringWithAtLeastKRepeatingCharacters();
             JumpGame();
+            JumpGameIII();
 
 
             // String Matching Algorithm
@@ -1902,6 +1903,23 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Starting from index 0 in above array, are we able to reach last index: {DailyProblem.JumpGame(nums, new int[nums.Length])}");
             }
         }
+
+
+        public static void JumpGameIII()
+        {
+            // https://leetcode.com/problems/jump-game-iii/
+            Utility.Print("1306. Jump Game III");
+            int[][] nums = { new int[] { 4, 2, 3, 0, 3, 1, 2 }, new int[] { 4, 2, 3, 0, 3, 1, 2 }, new int[] { 3, 0, 2, 1, 2 }, new int[] { 0 } };
+            int[] start = { 5, 0, 2, 0 };
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Nums");
+                Console.WriteLine($" Starting from index {start[i]} in above array, are we able to reach an index with value '0': {DailyProblem.JumpGameIII(nums[i], new int[nums[i].Length], start[i])}");
+            }
+        }
+
+
+
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
         /// <summary>

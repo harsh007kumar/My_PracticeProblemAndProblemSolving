@@ -3894,7 +3894,7 @@ namespace InterviewProblemNSolutions
                 else wordDict.Add(preProcessWord, new HashSet<string>() { beginWord });
             }
 
-            
+
             Dictionary<string, List<string>> graph = new Dictionary<string, List<string>>(listLen);
             // Create UnDirected Graph for all keys in 'wordDict' with more than 1 word as its value list
             foreach (var hashset in wordDict.Values)
@@ -4111,6 +4111,23 @@ namespace InterviewProblemNSolutions
             // no jump permutation leads to last index return false
             cache[curr] = -1;
             return false;
+        }
+        // Time = Space = O(N) as every index is visited just once
+        public static bool JumpGameIII(int[] nums, int[] cache, int curr)
+        {
+            // check boundary
+            if (curr < 0 || curr >= nums.Length || cache[curr] == -1 || cache[curr] == -2) return false;
+
+            // reached index with value 0
+            if (0 == nums[curr] || cache[curr] == 1) return true;
+
+            // special status indicating this index is under process
+            cache[curr] = -2;
+
+            // store actual result
+            cache[curr] = (JumpGameIII(nums, cache, curr + nums[curr]) || JumpGameIII(nums, cache, curr - nums[curr])) ? 1 : -1;
+            
+            return cache[curr] == 1;
         }
     }
 }
