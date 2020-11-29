@@ -4093,5 +4093,24 @@ namespace InterviewProblemNSolutions
             }
             return result;
         }
+
+
+        // Time O(n^2) || Space O(n)
+        public static bool JumpGame(int[] nums, int[] cache, int curr = 0)
+        {
+            // reached last index
+            if (curr == nums.Length - 1) return true;
+
+            // current position has max jump distance Zero
+            if (nums[curr] == 0 || curr >= nums.Length || cache[curr] == -1) return false;
+
+            // try jumping from current index with all possible values <= maxJump
+            for (int jumpDist = 1; jumpDist <= nums[curr]; jumpDist++)
+                if (JumpGame(nums, cache, curr + jumpDist)) return true;
+
+            // no jump permutation leads to last index return false
+            cache[curr] = -1;
+            return false;
+        }
     }
 }

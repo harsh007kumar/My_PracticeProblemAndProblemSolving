@@ -115,6 +115,7 @@ namespace InterviewProblemNSolutions
             HouseRobberIII();
             SmallestIntegerDivisibleByK();
             LongestSubstringWithAtLeastKRepeatingCharacters();
+            JumpGame();
 
 
             // String Matching Algorithm
@@ -1890,7 +1891,17 @@ namespace InterviewProblemNSolutions
         }
         
 
-
+        public static void JumpGame()
+        {
+            // https://leetcode.com/problems/jump-game/
+            Utility.Print("55. Jump Game");
+            int[][] numsArr = { new int[] { 2, 3, 1, 1, 4 }, new int[] { 3, 2, 1, 0, 4 }, new int[] { 0 } };
+            foreach(var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" Starting from index 0 in above array, are we able to reach last index: {DailyProblem.JumpGame(nums, new int[nums.Length])}");
+            }
+        }
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
         /// <summary>
@@ -2637,7 +2648,7 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/partition-equal-subset-sum/
             Utility.Print("416. Partition Equal Subset Sum");
-            Utility.Print("Problem-28  Partition partition problem is to determine whether a given set can be partitioned into two subsets such that the sum of elements in both subsets is the same(p. 800)");
+            Utility.Print("Problem-28  Partition problem is to determine whether a given set can be partitioned into two subsets such that the sum of elements in both subsets is the same(p. 800)");
             int[][] inputArr = { new int[] { 1, 5, 11, 5 }, new int[] { 1, 2, 5 }, new int[] { 1, 1 } };
             foreach (var input in inputArr)
             {
