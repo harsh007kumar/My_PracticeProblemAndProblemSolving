@@ -256,7 +256,7 @@ namespace InterviewProblemNSolutions
         }
 
         // Time O(n+m), n = length of left SkyLine & m = length of right SkyLine || Space O(n+m)
-        public static List<Strip> MergeSkyLine(List<Strip> left, List<Strip> right)
+        public static List<Strip> MergeSkyLineOld(List<Strip> left, List<Strip> right)
         {
             int hLeft = 0, hRight = 0;                                      // to store current height of left & right
             int leftIndex = 0, rightIndex = 0;                              // for iterating thru both the left and right SkyLine
@@ -278,7 +278,7 @@ namespace InterviewProblemNSolutions
                         mergedSkyLine.Add(new Strip(left[leftIndex].X, maxHeight));
                     leftIndex++;
                 }
-                else
+                else if (left[leftIndex].X > right[rightIndex].X)
                 {
                     hRight = right[rightIndex].Ht;
                     maxHeight = Math.Max(hLeft, hRight);
@@ -286,7 +286,70 @@ namespace InterviewProblemNSolutions
                         mergedSkyLine.Add(new Strip(right[rightIndex].X, maxHeight));
                     rightIndex++;
                 }
+                else
+                {
+                    maxHeight = Math.Max(left[leftIndex].Ht, right[rightIndex].Ht);
+                    if (prvHeight != maxHeight)
+                        mergedSkyLine.Add(new Strip(right[rightIndex].X, maxHeight));
+                    leftIndex++;
+                    rightIndex++;
+                }
                 prvHeight = maxHeight;
+            }
+            // remove last points with same X-corrdinates & different height, height should be set to 0 for last
+            while (mergedSkyLine.Count > 1 && mergedSkyLine[mergedSkyLine.Count - 1].X == mergedSkyLine[mergedSkyLine.Count - 2].X)
+            {
+                mergedSkyLine[mergedSkyLine.Count - 2].Ht = 0;
+                mergedSkyLine.RemoveAt(mergedSkyLine.Count - 1);
+            }
+            return mergedSkyLine;
+        }
+        // Time O(n+m), n = length of left SkyLine & m = length of right SkyLine || Space O(n+m)
+        public static List<Strip> MergeSkyLine(List<Strip> firstSkyLine, List<Strip> secondSkyLine)
+        {
+            int firstPrvHt = 0, secondPrvHt = 0;                                 // to store current height of left & right
+            int firstIndex = 0, secondIndex = 0;                            // for iterating thru both the left and right SkyLine
+            int firstL = firstSkyLine.Count, secondL = secondSkyLine.Count; // length of left & right Skyline
+
+            List<Strip> mergedSkyLine = new List<Strip>();
+
+            while (firstIndex < firstL && secondIndex < secondL)
+            {
+                if (firstSkyLine[firstIndex].X < secondSkyLine[secondIndex].X)
+                {
+                    mergedSkyLine.Add(new Strip(firstSkyLine[firstIndex].X, Math.Max(firstSkyLine[firstIndex].Ht, secondPrvHt)));
+                    firstPrvHt = firstSkyLine[firstIndex++].Ht;
+                }
+                else if (firstSkyLine[firstIndex].X > secondSkyLine[secondIndex].X)
+                {
+                    mergedSkyLine.Add(new Strip(secondSkyLine[secondIndex].X, Math.Max(secondSkyLine[secondIndex].Ht, firstPrvHt)));
+                    secondPrvHt = secondSkyLine[secondIndex++].Ht;
+                }
+                else // if (left[leftIndex].X == right[rightIndex].X)
+                {
+                    mergedSkyLine.Add(new Strip(secondSkyLine[secondIndex].X, Math.Max(firstSkyLine[firstIndex].Ht, secondSkyLine[secondIndex].Ht)));
+                    firstPrvHt = firstSkyLine[firstIndex++].Ht;
+                    secondPrvHt = secondSkyLine[secondIndex++].Ht;
+                }
+                // remove duplicates points at same hieght
+                if (mergedSkyLine.Count > 1 && mergedSkyLine[mergedSkyLine.Count - 2].Ht == mergedSkyLine[mergedSkyLine.Count - 1].Ht)
+                    mergedSkyLine.RemoveAt(mergedSkyLine.Count - 1);
+            }
+            while (firstIndex < firstL)
+            {
+                mergedSkyLine.Add(new Strip(firstSkyLine[firstIndex].X, Math.Max(firstSkyLine[firstIndex].Ht, secondPrvHt)));
+                firstIndex++;
+                // remove duplicates points at same hieght
+                if (mergedSkyLine.Count > 1 && mergedSkyLine[mergedSkyLine.Count - 2].Ht == mergedSkyLine[mergedSkyLine.Count - 1].Ht)
+                    mergedSkyLine.RemoveAt(mergedSkyLine.Count - 1);
+            }
+            while (secondIndex < secondL)
+            {
+                mergedSkyLine.Add(new Strip(secondSkyLine[secondIndex].X, Math.Max(secondSkyLine[secondIndex].Ht, firstPrvHt)));
+                secondIndex++;
+                // remove duplicates points at same hieght
+                if (mergedSkyLine.Count > 1 && mergedSkyLine[mergedSkyLine.Count - 2].Ht == mergedSkyLine[mergedSkyLine.Count - 1].Ht)
+                    mergedSkyLine.RemoveAt(mergedSkyLine.Count - 1);
             }
             return mergedSkyLine;
         }

@@ -2478,20 +2478,29 @@ namespace InterviewProblemNSolutions
         // GFG https://www.geeksforgeeks.org/the-skyline-problem-using-divide-and-conquer-algorithm/
         public static void SkyLineProblem()
         {
+            // https://leetcode.com/problems/the-skyline-problem/
+            Utility.Print("218. The Skyline Problem");
             Utility.Print("The Skyline Problem using Divide and Conquer algorithm. " +
                 "Given n rectangular buildings in a 2 - dimensional city, computes the skyline of these buildings, eliminating hidden lines.");
-            //int[,] input = { { 1, 14, 7 }, { 3, 9, 10 }, { 5, 17, 12 }, { 14, 11, 18 }, { 15, 6, 27 }, { 20, 19, 22 }, { 23, 15, 30 }, { 26, 14, 29 } };
-            int[,] input = { { 1, 11, 5 }, { 2, 6, 7 }, { 3, 13, 9 }, { 12, 7, 16 }, { 14, 3, 25 }, { 19, 18, 22 }, { 23, 13, 29 }, { 24, 4, 28 } };
-            Building[] buildArr = new Building[input.GetLength(0)];
+            //int[,] { { 1, 14, 7 }, { 3, 9, 10 }, { 5, 17, 12 }, { 14, 11, 18 }, { 15, 6, 27 }, { 20, 19, 22 }, { 23, 15, 30 }, { 26, 14, 29 } };
+            int[][,] input = { new int[,] { { 1, 14, 7 }, { 3, 9, 10 }, { 5, 17, 12 }, { 14, 11, 18 }, { 15, 6, 27 }, { 20, 19, 22 }, { 23, 15, 30 }, { 26, 14, 29 } },
+                                new int[,] { { 1, 11, 5 }, { 2, 6, 7 }, { 3, 13, 9 }, { 12, 7, 16 }, { 14, 3, 25 }, { 19, 18, 22 }, { 23, 13, 29 }, { 24, 4, 28 } },
+                                new int[,] { { 1, 1, 2 }, { 1, 2, 2 }, { 1, 3, 2 } },
+                                new int[,] { { 2, 7, 4 }, {2, 5, 4}, {2, 6, 4} },
+                                new int[,] { { 3, 8, 7}, {3, 7, 8 }, { 3, 6, 9 }, { 3, 5, 10 }, { 3, 4, 11 }, { 3, 3, 12 }, { 3, 2, 13}, { 3, 1, 14} } };
+            for (int j = 0; j < input.Length; j++)
+            {
+                Building[] buildArr = new Building[input[j].GetLength(0)];
 
-            for (int i = 0; i < input.GetLength(0); i++)
-                buildArr[i] = new Building(input[i, 0], input[i, 1], input[i, 2]);
-            DivideAndConquerAlgorithms.PrintBuildings(buildArr);
+                for (int i = 0; i < input[j].GetLength(0); i++)
+                    buildArr[i] = new Building(input[j][i, 0], input[j][i, 1], input[j][i, 2]);
+                DivideAndConquerAlgorithms.PrintBuildings(buildArr);
 
-            var skyLine = DivideAndConquerAlgorithms.GetSkyLine(buildArr, 0, buildArr.Length - 1);              // O(nlogn)
-            DivideAndConquerAlgorithms.PrintSkyLine(skyLine);
+                var skyLine = DivideAndConquerAlgorithms.GetSkyLine(buildArr, 0, buildArr.Length - 1);              // O(nlogn)
+                DivideAndConquerAlgorithms.PrintSkyLine(skyLine);
 
-            var skyLineSlow = DivideAndConquerAlgorithms.BruteForceSkyLine(buildArr, 0, buildArr.Length - 1);   // O(n^2)
+                var skyLineSlow = DivideAndConquerAlgorithms.BruteForceSkyLine(buildArr, 0, buildArr.Length - 1);   // O(n^2)
+            }
         }
 
 
