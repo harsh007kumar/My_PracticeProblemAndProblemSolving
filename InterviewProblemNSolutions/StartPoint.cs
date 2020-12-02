@@ -117,6 +117,7 @@ namespace InterviewProblemNSolutions
             LongestSubstringWithAtLeastKRepeatingCharacters();
             JumpGame();
             JumpGameIII();
+            LinkedListRandomNode();
 
 
             // String Matching Algorithm
@@ -1916,6 +1917,18 @@ namespace InterviewProblemNSolutions
                 nums[i].Print("Nums");
                 Console.WriteLine($" Starting from index {start[i]} in above array, are we able to reach an index with value '0': {DailyProblem.JumpGameIII(nums[i], new int[nums[i].Length], start[i])}");
             }
+        }
+
+
+        public static void LinkedListRandomNode()
+        {
+            // https://leetcode.com/problems/linked-list-random-node/
+            Utility.Print("382. Linked List Random Node");
+            ListNode head = new ListNode(10) { next = new ListNode(20) { next = new ListNode(30) } };
+            LinkedListRandomNode obj = new LinkedListRandomNode(head);
+            head.Print();
+            for (int i = 0; i < 12; i++)
+                Console.WriteLine($" Random Node from above list: {obj.GetRandom()}");
         }
 
 

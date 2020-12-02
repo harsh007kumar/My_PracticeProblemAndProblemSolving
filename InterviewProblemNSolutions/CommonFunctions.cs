@@ -170,6 +170,18 @@ namespace InterviewProblemNSolutions
             Console.WriteLine();
         }
 
+        public static void Print(this ListNode head, string msg = "")
+        {
+            if (msg != "") Console.Write($" Printing \'{msg}\':");
+            ListNode temp = head;
+            while (temp != null)
+            {
+                Console.Write($" {temp.val} <<");
+                temp = temp.next;
+            }
+            Console.WriteLine();
+        }
+
         public static void Print(this IList<int> iterator, string msg="")
         {
             if (msg != "") Console.Write($" Printing \'{msg}\':");
