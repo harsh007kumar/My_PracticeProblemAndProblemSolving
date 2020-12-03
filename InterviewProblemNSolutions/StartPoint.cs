@@ -118,6 +118,7 @@ namespace InterviewProblemNSolutions
             JumpGame();
             JumpGameIII();
             LinkedListRandomNode();
+            IncreasingOrderSearchTree();
 
 
             // String Matching Algorithm
@@ -1929,6 +1930,22 @@ namespace InterviewProblemNSolutions
             head.Print();
             for (int i = 0; i < 12; i++)
                 Console.WriteLine($" Random Node from above list: {obj.GetRandom()}");
+        }
+
+
+        public static void IncreasingOrderSearchTree()
+        {
+            // https://leetcode.com/problems/increasing-order-search-tree/
+            Utility.Print("897. Increasing Order Search Tree");
+            TreeNode root = new TreeNode(2) 
+            {
+                left = new TreeNode(1),
+                right = new TreeNode(4)
+                { left = new TreeNode(3) }
+            };
+            root.InOrder();
+            root = DailyProblem.IncreasingOrderSearchTree(root);
+            root.InOrder();
         }
 
 

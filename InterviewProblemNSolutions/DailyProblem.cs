@@ -4129,5 +4129,36 @@ namespace InterviewProblemNSolutions
             
             return cache[curr] == 1;
         }
+
+
+        // Iterative InOrder traversal, Time O(N) Space O(H)
+        public static TreeNode IncreasingOrderSearchTree(TreeNode root)
+        {
+            Stack<TreeNode> st = new Stack<TreeNode>();
+            TreeNode newHead = null, prv = null;
+            while (true)
+            {
+                while(root!=null)
+                {
+                    st.Push(root);
+                    root = root.left;
+                }
+                // breaking condition
+                if (st.Count == 0) break;
+
+                root = st.Pop();
+                if (newHead == null) newHead = root;
+
+                // make modification as asked in problem
+                if (prv != null) prv.right = root;
+
+                // set new node as prv now
+                prv = root;
+
+                root.left = null;
+                root = root.right;
+            }
+            return newHead;
+        }
     }
 }
