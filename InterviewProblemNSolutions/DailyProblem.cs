@@ -806,6 +806,7 @@ namespace InterviewProblemNSolutions
 
         public static string[] ReorderDataInLogFiles(string[] logs)
         {
+            // Array.Sort(logs, new LogComparetor());
             var logsList = logs.ToList();
             logsList.Sort(new LogComparetor());
             return logsList.ToArray();
@@ -4212,6 +4213,35 @@ namespace InterviewProblemNSolutions
                 seen_twice = ~seen_once & (seen_twice ^ nums[i]);
             }
             return seen_once;
+        }
+
+
+        // Time O(NLogN) || Space O(N)
+        public static string LargestNumber(int[] nums)
+        {
+            string[] numsArr = new string[nums.Length];
+            // Time O(N)
+            for (int i = 0; i < nums.Length; i++) numsArr[i] = nums[i] + "";
+
+            // Time O(NLogN)
+            Array.Sort(numsArr, new LargeNo());
+
+            // If first char is 0 no need to check further
+            if (numsArr[0] == "0") return "0";
+
+            string result = "";
+            for (int i = 0; i < nums.Length; i++) result += numsArr[i];
+
+            return result;
+        }
+        public class LargeNo : IComparer<string>
+        {
+            public int Compare(string a, string b)
+            {
+                string first = a + b;
+                string second = b + a;
+                return second.CompareTo(first);
+            }
         }
     }
 }

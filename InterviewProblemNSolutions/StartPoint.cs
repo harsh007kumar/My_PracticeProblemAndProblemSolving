@@ -121,6 +121,7 @@ namespace InterviewProblemNSolutions
             IncreasingOrderSearchTree();
             KthFactorOfN();
             SingleNumberII();
+            LargestNumber();
 
 
             // String Matching Algorithm
@@ -1969,6 +1970,20 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Input");
                 Console.WriteLine($" Integer which is repeated just once in above array is: => \'{DailyProblem.SingleNumber(nums)}\'");
+                Console.WriteLine();
+            }
+        }
+
+
+        public static void LargestNumber()
+        {
+            // https://leetcode.com/problems/largest-number/
+            Utility.Print("179. Largest Number");
+            int[][] numsArr = { new int[] { 10, 2 }, new int[] { 3, 30, 34, 5, 9 }, new int[] { 1 }, new int[] { 0, 0 } };
+            foreach(var nums in numsArr)
+            {
+                nums.Print("Input");
+                Console.WriteLine($" Largest No formed by re-arrangeing no's from above array is: \'{DailyProblem.LargestNumber(nums)}\'");
                 Console.WriteLine();
             }
         }
