@@ -119,6 +119,7 @@ namespace InterviewProblemNSolutions
             JumpGameIII();
             LinkedListRandomNode();
             IncreasingOrderSearchTree();
+            KthFactorOfN();
 
 
             // String Matching Algorithm
@@ -1948,6 +1949,15 @@ namespace InterviewProblemNSolutions
             root.InOrder();
         }
 
+
+        public static void KthFactorOfN()
+        {
+            // https://leetcode.com/problems/the-kth-factor-of-n/
+            Utility.Print("1492. The kth Factor of n");
+            int[] n = { 12, 7, 4, 1, 1000 }, k = { 3, 2, 4, 1, 3 };
+            for (int i = 0; i < n.Length; i++)
+                Console.WriteLine($" For N: \'{n[i]}\' the \'{k[i]}\' Kth factor is => {DailyProblem.KthFactorOfN(n[i], k[i])}");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
