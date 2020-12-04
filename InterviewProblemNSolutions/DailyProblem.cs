@@ -4170,5 +4170,48 @@ namespace InterviewProblemNSolutions
                 if (n % i == 0 && --k == 0) return i;
             return -1;
         }
+
+
+
+        // Time O(N) || Space O(N/3)
+        // Issue with HashSet based algo is it fails when we have values close to int.Max which generate garbage when sum*=3;
+        public int SingleNumberHashSet(int[] nums)
+        {
+            HashSet<int> hs = new HashSet<int>(nums.Length / 3 + 2);
+            for (int i = 0; i < nums.Length; i++) hs.Add(nums[i]);
+
+            int sum = 0;
+            foreach (var num in hs) sum += num;
+
+            // triple sum
+            sum *= 3;
+            for (int i = 0; i < nums.Length; i++) sum -= nums[i];
+
+            return sum / 2;
+        }
+        // Dictionary/HashTable based approach
+        // Time O(N) || Space O(N/3)
+        public static int SingleNumberHashTable(int[] nums)
+        {
+            Dictionary<int, int> dict = new Dictionary<int, int>(nums.Length / 3 + 2);
+            for (int i = 0; i < nums.Length; i++)
+                if (dict.ContainsKey(nums[i])) dict[nums[i]]++;
+                else dict.Add(nums[i], 1);
+            foreach (var kvp in dict)
+                if (kvp.Value == 1) return kvp.Key;
+            return -1;
+        }
+        // Bit Manipulation (NOT + AND + XOR) based approach
+        // Time O(N) || Space O(1)
+        public static int SingleNumber(int[] nums)
+        {
+            int seen_once=0, seen_twice = 0;
+            for(int i=0;i<nums.Length;i++)
+            {
+                seen_once = ~seen_twice & (seen_once ^ nums[i]);
+                seen_twice = ~seen_once & (seen_twice ^ nums[i]);
+            }
+            return seen_once;
+        }
     }
 }

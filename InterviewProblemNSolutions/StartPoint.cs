@@ -120,6 +120,7 @@ namespace InterviewProblemNSolutions
             LinkedListRandomNode();
             IncreasingOrderSearchTree();
             KthFactorOfN();
+            SingleNumberII();
 
 
             // String Matching Algorithm
@@ -1958,6 +1959,20 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < n.Length; i++)
                 Console.WriteLine($" For N: \'{n[i]}\' the \'{k[i]}\' Kth factor is => {DailyProblem.KthFactorOfN(n[i], k[i])}");
         }
+
+        public static void SingleNumberII()
+        {
+            // https://leetcode.com/problems/single-number-ii/
+            Utility.Print("137. Single Number II");
+            int[][] numsArr = { new int[] { 2, 2, 3, 2 }, new int[] { 0, 1, 0, 1, 0, 1, 99 }, new int[] { 43, 16, 45, 89, 45, -2147483648, 45, 2147483646, -2147483647, -2147483648, 43, 2147483647, -2147483646, -2147483648, 89, -2147483646, 89, -2147483646, -2147483647, 2147483646, -2147483647, 16, 16, 2147483646, 43 } };
+            foreach(var nums in numsArr)
+            {
+                nums.Print("Input");
+                Console.WriteLine($" Integer which is repeated just once in above array is: => \'{DailyProblem.SingleNumber(nums)}\'");
+                Console.WriteLine();
+            }
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
