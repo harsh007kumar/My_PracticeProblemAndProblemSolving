@@ -122,6 +122,7 @@ namespace InterviewProblemNSolutions
             KthFactorOfN();
             SingleNumberII();
             LargestNumber();
+            NextPermutation();
 
 
             // String Matching Algorithm
@@ -1987,6 +1988,22 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine();
             }
         }
+
+
+        public static void NextPermutation()
+        {
+            // https://leetcode.com/problems/next-permutation/
+            Utility.Print("31. Next Permutation");
+            int[][] numsArr = { new int[] { 1, 2, 3, }, new int[] { 3, 2, 1 }, new int[] { 1, 3, 2 }, new int[] { 2, 5, 1 }, new int[] { 3, 6, 4, 2 } };
+            foreach(var nums in numsArr)
+            {
+                nums.Print("Input Number");
+                DailyProblem.NextPermutation(nums);
+                nums.Print("Next Permutation");
+                Console.WriteLine();
+            }
+        }
+
 
 
 

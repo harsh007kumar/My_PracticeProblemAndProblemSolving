@@ -4243,5 +4243,30 @@ namespace InterviewProblemNSolutions
                 return second.CompareTo(first);
             }
         }
+
+
+        // Time O(NLogN) || Space O(1)
+        public static void NextPermutation(int[] nums)
+        {
+            int len = nums.Length;
+            int i = len - 1;
+            // from 2nd right index till >= 0
+            while (--i >= 0)
+                if (nums[i] < nums[i + 1])
+                {
+                    // search 1st number from last index which is great than nums[i]
+                    for (int j = len - 1; j > i; j--)
+                        if (nums[j] > nums[i])
+                        {
+                            int temp = nums[j];
+                            nums[j] = nums[i];
+                            nums[i] = temp;
+                            break;
+                        }
+                    break;
+                }
+            // Sort the array in ascending from last => i+1 to End
+            Array.Sort(nums, i + 1, len - i - 1);
+        }
     }
 }
