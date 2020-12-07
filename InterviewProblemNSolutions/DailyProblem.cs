@@ -4268,5 +4268,44 @@ namespace InterviewProblemNSolutions
             // Sort the array in ascending from last => i+1 to End
             Array.Sort(nums, i + 1, len - i - 1);
         }
+
+
+        // Generate an n x n square matrix and fill nums in range 1...N^2 spiralling inwards
+        // Time O(N^2) || Space O(1)
+        public static int[][] SpiralMatrixII(int n)
+        {
+            int[][] result = new int[n][];
+            for (int k = 0; k < n; k++) result[k] = new int[n];
+
+            int counter = 1, direction = 0;
+            // 0 move right || 1 move down || 2 move left || 3 move up
+            int top = 0, right = n - 1, bottom = n - 1, left = -1;
+            while (top <= bottom || left <= right)
+            {
+                switch(direction)
+                {
+                    case 0:
+                        for (int c = ++left; c <= right; c++)
+                            result[top][c] = counter++;
+                        break;
+                    case 1:
+                        for (int r = ++top; r <= bottom; r++)
+                            result[r][right] = counter++;
+                        break;
+                    case 2:
+                        for (int c = --right; c >= left; c--)
+                            result[bottom][c] = counter++;
+                        break;
+                    case 3:
+                        for (int r = --bottom; r >= top; r--)
+                            result[r][left] = counter++;
+                        break;
+                }
+                // update direction/ move rt 90 degree
+                direction = (direction + 1) % 4;
+            }
+
+            return result;
+        }
     }
 }

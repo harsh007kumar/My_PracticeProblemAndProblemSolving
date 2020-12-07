@@ -32,6 +32,7 @@ namespace InterviewProblemNSolutions
             //ValidSudoku();
             //ComplimentBase10();
             //SpiralMatrix();
+            SpiralMatrixII();
             //WinnerOfTicTacToe();
             //ReorderDataInLogFiles();
             //MajorityElement();
@@ -123,7 +124,6 @@ namespace InterviewProblemNSolutions
             SingleNumberII();
             LargestNumber();
             NextPermutation();
-
 
             // String Matching Algorithm
             BruteForceWay();
@@ -2005,7 +2005,14 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void SpiralMatrixII()
+        {
+            // https://leetcode.com/problems/spiral-matrix-ii/
+            Utility.Print("59. Spiral Matrix II");
+            int[] nArr = { 3, 1, 5 };
+            foreach (var n in nArr)
+                (DailyProblem.SpiralMatrixII(n)).Print("SPIRAL MATRIX");
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
