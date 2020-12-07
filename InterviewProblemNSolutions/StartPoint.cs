@@ -124,6 +124,7 @@ namespace InterviewProblemNSolutions
             SingleNumberII();
             LargestNumber();
             NextPermutation();
+            MinStack();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -2012,6 +2013,30 @@ namespace InterviewProblemNSolutions
             int[] nArr = { 3, 1, 5 };
             foreach (var n in nArr)
                 (DailyProblem.SpiralMatrixII(n)).Print("SPIRAL MATRIX");
+        }
+
+
+        public static void MinStack()
+        {
+            // https://leetcode.com/problems/min-stack/
+            // https://leetcode.com/problems/max-stack/
+            Utility.Print("155. Min Stack");
+            MinStack minStack = new MinStack();
+            minStack.Push(-2);
+            minStack.Push(0);
+            minStack.Push(-3);
+            var v = minStack.GetMin(); // return -3
+            minStack.Pop();
+            var v2 = minStack.Top();    // return 0
+            var v3 = minStack.GetMin(); // return -2
+
+            MinStack minStack2 = new MinStack();
+            minStack2.Push(0);
+            minStack2.Push(1);
+            minStack2.Push(0);
+            var w = minStack2.GetMin(); // return -3
+            minStack2.Pop();
+            var w3 = minStack2.GetMin(); // return -2
         }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
