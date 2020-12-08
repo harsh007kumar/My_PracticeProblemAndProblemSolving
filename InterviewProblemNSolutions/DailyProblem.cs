@@ -4307,5 +4307,47 @@ namespace InterviewProblemNSolutions
 
             return result;
         }
+
+
+        // Brute Force Soln || Time O(N^2) || Space O(1)
+        public int NumPairsDivisibleBy60(int[] time)
+        {
+            int counter = 0;
+            for (int i = 0; i < time.Length; i++)
+                for (int j = i + 1; j < time.Length; j++)
+                    if ((time[i] + time[j]) % 60 == 0)
+                        counter++;
+            return counter;
+        }
+        // Efficient Soln || Time O(n) || Space O(60) ~O(1)
+        public static int PairOfSongs(int[] time)
+        {
+            /* Since we for each song we need another song which on sum gives total in multiple of 60
+             * we can re-phrase it as we need to find a song j whose time[j]%60 + current song i time[i]%60 is multiple of 60
+             * or in other words (time[i] + time[j]) % 60 == 0
+             * 
+             *      So for each song we check if there exists any song whose reminder on addition to current song time give total sum 60
+             *      if such a song is not present we save current song mod 60 in array, so next this can be used as pair to complete total time in 60s multiple
+             *      
+             * ex:
+             * 1st Song 40 min [update array 40th Index by +1]
+             * 2nd song 35 min , does there exists a song who has 25 min extra, ans NO,
+             *      hence we also increament arr 35th index by 1
+             * 3rd song 20 min, we search is there a song which has 40 min extra, ans yes (1st song)
+             *      this forms 1 pair
+             * 
+             * this way we keep looking entire length of array
+             * also remeber to increament the count with each passing song
+             * 
+             */
+            int[] set = new int[60];
+            int counter = 0;
+            for (int i = 0; i < time.Length; i++)
+            {
+                counter += set[(60 - (time[i] % 60)) % 60];
+                set[time[i] % 60]++;
+            }
+            return counter;
+        }
     }
 }

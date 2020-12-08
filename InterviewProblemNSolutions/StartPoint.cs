@@ -125,6 +125,8 @@ namespace InterviewProblemNSolutions
             LargestNumber();
             NextPermutation();
             MinStack();
+            PairsOfSongsWithTotalDurationsDivisibleBy60();
+
 
             // String Matching Algorithm
             BruteForceWay();
@@ -2038,6 +2040,21 @@ namespace InterviewProblemNSolutions
             minStack2.Pop();
             var w3 = minStack2.GetMin(); // return -2
         }
+
+
+        public static void PairsOfSongsWithTotalDurationsDivisibleBy60()
+        {
+            // https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/
+            Utility.Print("1010. Pairs of Songs With Total Durations Divisible by 60");
+            int[][] timeArr = { new int[] { 30, 20, 150, 100, 40 }, new int[] { 60, 60, 60 } };
+            foreach (var time in timeArr)
+            {
+                time.Print("Songs");
+                Console.WriteLine($" Number of pairs of songs for which their total duration in seconds is divisible by 60: \'{DailyProblem.PairOfSongs(time)}\'\n");
+            }
+        }
+
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
