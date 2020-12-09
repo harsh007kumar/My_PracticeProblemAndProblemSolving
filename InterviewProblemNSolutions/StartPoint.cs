@@ -30,6 +30,7 @@ namespace InterviewProblemNSolutions
             //FourSum();
             //MostCommonWord();
             //ValidSudoku();
+            SudokuSolver();
             //ComplimentBase10();
             //SpiralMatrix();
             SpiralMatrixII();
@@ -555,9 +556,12 @@ namespace InterviewProblemNSolutions
                                 new char[] {'9','6','1','5','3','7','2','8','4' },
                                 new char[] {'2','8','7','4','1','9','6','3','5' },
                                 new char[] {'3','4','5','2','8','6','1','7','9' } };
-            //var result = DailyProblem.SudokuSolver(board);
-            //ValidateResult(result, expected);
-
+            
+            DailyProblem.SudokuSolver(board);
+            if (ValidateResult(board, expected))
+                Console.WriteLine($" Succesfully SOLVED above SUDOKU puzzle by filling the empty cells as below\n");
+            board.Print("SOLVED SUDOKU BOARD");
+            
             bool ValidateResult(char[][] c1, char[][] c2)
             {
                 int row = c1.Length;

@@ -652,6 +652,74 @@ namespace InterviewProblemNSolutions
             return true;
         }
 
+        /// <summary>
+        /// Function which solves a Sudoku puzzle by filling the empty cells.
+        /// Sudoku solution must satisfy all of the following rules:
+        ///     Each of the digits 1-9 must occur exactly once in each row.
+        ///     Each of the digits 1-9 must occur exactly once in each column.
+        ///     Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.
+        /// Time O(9^(N*N)) as every unassigned index has 9 possible options || Space O(3*9*10) ~O(1)
+        /// </summary>
+        /// <param name="board"></param>
+        public static void SudokuSolver(char[][] board)
+        {
+            bool[,] rowValidator = new bool[9, 10];
+            bool[,] colValidator = new bool[9, 10];
+            bool[,] blockValidator = new bool[9, 10];
+            int count = 0;
+            // Read currently present numbers on board
+            for (int r = 0; r < 9; r++)
+                for (int c = 0; c < 9; c++)
+                    if (board[r][c] != '.')
+                    {
+                        count++;
+                        int index = (board[r][c] - '0');
+                        rowValidator[r, index] = true;
+                        colValidator[c, index] = true;
+                        blockValidator[(r / 3) * 3 + c / 3, index] = true;
+                    }
+            // Fill Empty Cells
+            fillUsingDFS(board, 0, 0, rowValidator, colValidator, blockValidator, ref count);
+        }
+        public static void fillUsingDFS(char[][] board, int r, int c, bool[,] rowValidator, bool[,] colValidator, bool[,] blockValidator, ref int count)
+        {
+            // Empty Cell Found
+            while (r < 9 && c < 9)
+            {
+                if (board[r][c] == '.') break;
+
+                // move to next col
+                if (c < 8) c++;
+                // if above move not possible move to next row 1st col
+                else { r++; c = 0; }
+            }
+
+            if (r < 9 && c < 9)
+            {
+                // Try fitting all possible numbers until we fill all empty slots with valid nums
+                for (int no = 1; no <= 9; no++)
+                    // If Current Number Satisfies all three condition
+                    if (rowValidator[r, no] == false && colValidator[c, no] == false && blockValidator[(r / 3) * 3 + c / 3, no] == false)
+                    {
+                        board[r][c] = (char)(no + '0');
+                        // Mark current cell filled
+                        rowValidator[r, no] = colValidator[c, no] = blockValidator[(r / 3) * 3 + c / 3, no] = true;
+                        ++count;
+
+                        fillUsingDFS(board, r, c, rowValidator, colValidator, blockValidator, ref count);
+
+                        if (count >= 81) return;
+
+                        // Mark current cell as Not Filled
+                        rowValidator[r, no] = colValidator[c, no] = blockValidator[(r / 3) * 3 + c / 3, no] = false;
+
+                        --count;
+                    }
+                // BACK-TRACK, If no sutaible number found revert the cell back to empty
+                board[r][c] = '.';
+            }
+        }
+
         // Time O(Log2(N)), log of base 2 N || Space O(1)
         public static int ComplimenetBase10(int num)
         {
