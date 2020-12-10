@@ -127,6 +127,7 @@ namespace InterviewProblemNSolutions
             NextPermutation();
             MinStack();
             PairsOfSongsWithTotalDurationsDivisibleBy60();
+            BullsAndCows();
 
 
             // String Matching Algorithm
@@ -2058,6 +2059,15 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void BullsAndCows()
+        {
+            // https://leetcode.com/problems/bulls-and-cows/
+            Utility.Print("299. Bulls and Cows");
+            string[] secret = { "1807", "1123", "1", "1" }, guess = { "7810", "0111", "0", "1" };
+            for (int i = 0; i < secret.Length; i++)
+                Console.WriteLine($" SECRET {secret[i]}, GUESS {guess[i]}, \tHint in xAyB format is \'{DailyProblem.BullsAndCows(secret[i], guess[i])}\'");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

@@ -4417,5 +4417,27 @@ namespace InterviewProblemNSolutions
             }
             return counter;
         }
+
+        // Time O(n) || Space O(1)
+        public static string BullsAndCows(string secret, string guess)
+        {
+            int[] notMatchedSecret = new int[10];
+            int[] notMatchedGuess = new int[10];
+
+            int bulls = 0, cows = 0;
+            // count bulls => numbers at correct position
+            for (int i = 0; i < secret.Length; i++)        // Time O(n)
+                if (secret[i] == guess[i]) bulls++;
+                else
+                {
+                    notMatchedSecret[secret[i] - '0']++;
+                    notMatchedGuess[guess[i] - '0']++;
+                }
+            // count cows => numbers which are present but out of position
+            for (int i = 0; i < 10; i++)                   // Time O(10)
+                cows += Math.Min(notMatchedSecret[i], notMatchedGuess[i]);
+
+            return bulls + "A" + cows + "B";
+        }
     }
 }
