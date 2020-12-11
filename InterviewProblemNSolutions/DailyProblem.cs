@@ -4460,5 +4460,23 @@ namespace InterviewProblemNSolutions
             }
             return nonDuplicateIndex + 1;
         }
+
+
+        // Time O(N^3) || Space O(N^2)
+        public static int MaxEqualRowsAfterFlips(int[][] matrix)
+        {
+            string[] orginalMatrix = matrix.Select(eachRow => string.Join("", eachRow.Select(eachNum => eachNum))).ToArray();
+
+            int ans = 0;
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                string orginal = orginalMatrix[i];
+                string compliment = new string(orginalMatrix[i].Select(eachChar => eachChar == '0' ? '1' : '0').ToArray());
+                // max no of rows that matched current row original or compliment
+                ans = Math.Max(ans, orginalMatrix.Where(eachRow => eachRow == orginal || eachRow == compliment).Count());
+            }
+            return ans;
+        }
+
     }
 }

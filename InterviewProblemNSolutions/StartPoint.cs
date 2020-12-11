@@ -129,6 +129,7 @@ namespace InterviewProblemNSolutions
             PairsOfSongsWithTotalDurationsDivisibleBy60();
             BullsAndCows();
             RemoveDuplicatesFromSortedArrayII();
+            FlipColumnsForMaximumNumberOfEqualRows();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -2085,6 +2086,17 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine("\n");
             }
         }
+
+
+        public static void FlipColumnsForMaximumNumberOfEqualRows()
+        {
+            // https://leetcode.com/problems/flip-columns-for-maximum-number-of-equal-rows/
+            Utility.Print("1072. Flip Columns For Maximum Number of Equal Rows");
+            int[][] matrix = { new int[] { 0, 1 }, new int[] { 1, 0 } };
+            matrix.Print("Input");
+            Console.WriteLine($" Maximum number of rows that have all values equal after some number of flips. \'{DailyProblem.MaxEqualRowsAfterFlips(matrix)}\'");
+        }
+
 
 
 
