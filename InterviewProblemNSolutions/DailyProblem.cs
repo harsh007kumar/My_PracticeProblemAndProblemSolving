@@ -4439,5 +4439,26 @@ namespace InterviewProblemNSolutions
 
             return bulls + "A" + cows + "B";
         }
+
+
+        // Time O((n) || Space O(1)
+        public static int RemoveDuplicates(int[] nums)
+        {
+            if (nums.Length < 3) return nums.Length;
+
+            int nonDuplicateIndex = 0, counter = 1;
+            for (int i = 1; i < nums.Length; i++)
+            {
+                // new value
+                if (nums[i] != nums[nonDuplicateIndex])
+                {
+                    nums[++nonDuplicateIndex] = nums[i];
+                    counter = 1;
+                }
+                // must be same value
+                else if (++counter <= 2) nums[++nonDuplicateIndex] = nums[i];
+            }
+            return nonDuplicateIndex + 1;
+        }
     }
 }

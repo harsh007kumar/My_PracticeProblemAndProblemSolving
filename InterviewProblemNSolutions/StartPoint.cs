@@ -128,7 +128,7 @@ namespace InterviewProblemNSolutions
             MinStack();
             PairsOfSongsWithTotalDurationsDivisibleBy60();
             BullsAndCows();
-
+            RemoveDuplicatesFromSortedArrayII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -2068,6 +2068,24 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < secret.Length; i++)
                 Console.WriteLine($" SECRET {secret[i]}, GUESS {guess[i]}, \tHint in xAyB format is \'{DailyProblem.BullsAndCows(secret[i], guess[i])}\'");
         }
+
+
+        public static void RemoveDuplicatesFromSortedArrayII()
+        {
+            // https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/
+            Utility.Print("80. Remove Duplicates from Sorted Array II");
+            int[][] numsArr = { new int[] { 1, 1, 1, 2, 2, 3 }, new int[] { 0, 0, 1, 1, 1, 1, 2, 3, 3, } };
+            foreach(var nums in numsArr)
+            {
+                nums.Print("Input Sorted Array");
+                var newLen = DailyProblem.RemoveDuplicates(nums);
+                Console.Write(" Output 'Sorted Array' (Max 2 duplicate)");
+                for (int i = 0; i < newLen; i++)
+                    Console.Write($" {nums[i]} ||");
+                Console.WriteLine("\n");
+            }
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
