@@ -131,6 +131,8 @@ namespace InterviewProblemNSolutions
             RemoveDuplicatesFromSortedArrayII();
             FlipColumnsForMaximumNumberOfEqualRows();
             SubstringWithConcatenationOfAllWords();
+            LowestCommonAncestorDeepestLeaves();
+
 
             // String Matching Algorithm
             BruteForceWay();
@@ -2114,6 +2116,36 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine("\n");
             }
         }
+
+
+        public static void LowestCommonAncestorDeepestLeaves()
+        {
+            // https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/
+            // https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/
+            Utility.Print("1123. Lowest Common Ancestor of Deepest Leaves");
+            Utility.Print("865. Smallest Subtree with all the Deepest Nodes");
+            TreeNode root = new TreeNode(3)
+            {
+                left = new TreeNode(5)
+                {
+                    left = new TreeNode(6),
+                    right = new TreeNode(2)
+                    {
+                        left = new TreeNode(7),
+                        right = new TreeNode(4)
+                    }
+                },
+                right = new TreeNode(1)
+                {
+                    left = new TreeNode(0),
+                    right = new TreeNode(8)
+                }
+            };
+            root.InOrder();
+            Console.WriteLine($" The lowest common ancestor of its deepest leaves is : {DailyProblem.LCADeepestLeaves(root).val} ");
+        }
+
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

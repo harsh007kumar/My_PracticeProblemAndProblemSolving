@@ -4519,5 +4519,43 @@ namespace InterviewProblemNSolutions
             return result;
         }
 
+
+        // Time O(N*K), N = no of Nodes in Tree & K = no of deepest Nodes || Space O(K)
+        public static TreeNode LCADeepestLeaves(TreeNode root)
+        {
+            // Find Max Depth
+            int height = Height(root);          // O(N)
+
+            // Fill List of Deepest Nodes
+            List<TreeNode> ls = new List<TreeNode>(501);
+            FillDeepest(root, ls, height);      // O(N)
+
+            // Find LCA of deepest Nodes
+            TreeNode lca = new TreeNode(int.MaxValue);
+            for (int i = 0; i < ls.Count; i++)         // K times, K = no of deepest Node
+                lca = LCA(root, lca, ls[i]);      // O(N)
+
+            return lca;
+        }
+        public static int Height(TreeNode node) => node == null ? 0 : 1 + Math.Max(Height(node.left), Height(node.right));
+        public static void FillDeepest(TreeNode root, List<TreeNode> ls, int deepest, int depth = 1)
+        {
+            if (root == null) return;
+            if (deepest == depth) ls.Add(root);
+            FillDeepest(root.left, ls, deepest, depth + 1);
+            FillDeepest(root.right, ls, deepest, depth + 1);
+        }
+        public static TreeNode LCA(TreeNode root, TreeNode a, TreeNode b)
+        {
+            if (root == null) return null;
+            if (root.val == a.val || root.val == b.val) return root;
+
+            TreeNode left = LCA(root.left, a, b);
+            TreeNode right = LCA(root.right, a, b);
+            if (left != null && right != null)
+                return root;
+            else
+                return left != null ? left : right;
+        }
     }
 }
