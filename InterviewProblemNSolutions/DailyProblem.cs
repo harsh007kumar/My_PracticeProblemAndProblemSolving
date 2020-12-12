@@ -4478,5 +4478,46 @@ namespace InterviewProblemNSolutions
             return ans;
         }
 
+
+        // Time O(Max(N*K,M)) || Space O(M), N = length of string 's',  M = no of strings in 'words' array & K = M * length of single word in 'words' array.
+        public static IList<int> SubstringWithConcatenationOfAllWords(string s, string[] words)
+        {
+            Dictionary<string, int> uniqCount = new Dictionary<string, int>(5000);
+            // populate the hashTable with words and count
+            // (if only unique words are present in words we can save space by using HashSet)
+            for (int i = 0; i < words.Length; i++)                  // O(M)
+                if (uniqCount.ContainsKey(words[i])) uniqCount[words[i]]++;
+                else uniqCount.Add(words[i], 1);
+
+            int singleWordLen = words[0].Length, concatLen = words.Length * singleWordLen, sLen = s.Length;
+
+            List<int> result = new List<int>(sLen - concatLen + 1);
+
+            Dictionary<string, int> used = new Dictionary<string, int>(5000);
+            for (int i = 0; i < sLen - concatLen + 1; i++)          // O(N)
+            {
+                used.Clear();
+
+                for (int j = i; j < concatLen - singleWordLen + 1 + i; j += singleWordLen)  // O(K)
+                {
+                    string part = s.Substring(j, singleWordLen);
+                    // curr part not present in Dictionary
+                    if (!uniqCount.ContainsKey(part)) break;
+                    // curr part present in Dictionary but all instances have already been used previously
+                    else if (used.ContainsKey(part) && used[part] >= uniqCount[part]) break;
+                    else
+                    {
+                        if (used.ContainsKey(part)) used[part]++;
+                        else used.Add(part, 1);
+                        // once last single Word also matches given requirement add it to output
+                        if (j == concatLen - singleWordLen + i)
+                            result.Add(i);
+                    }
+                }
+            }
+
+            return result;
+        }
+
     }
 }

@@ -130,6 +130,7 @@ namespace InterviewProblemNSolutions
             BullsAndCows();
             RemoveDuplicatesFromSortedArrayII();
             FlipColumnsForMaximumNumberOfEqualRows();
+            SubstringWithConcatenationOfAllWords();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -2098,7 +2099,21 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void SubstringWithConcatenationOfAllWords()
+        {
+            // https://leetcode.com/problems/substring-with-concatenation-of-all-words/
+            Utility.Print("30. Substring with Concatenation of All Words");
+            string[] s = { "barfoothefoobarman", "wordgoodgoodgoodbestword", "barfoofoobarthefoobarman" };
+            string[][] words = { new string[] { "foo", "bar" }, new string[] { "word", "good", "best", "word" }, new string[] { "bar", "foo", "the" } };
+            for (int i = 0; i < s.Length; i++)
+            {
+                words[i].Print("Words");
+                Console.Write($" starting indices of substring(s) in s \'{s[i]}\' that is a concatenation of each word in words exactly once, in any order:");
+                foreach (var index in DailyProblem.SubstringWithConcatenationOfAllWords(s[i], words[i]))
+                    Console.Write($" {index} ||");
+                Console.WriteLine("\n");
+            }
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
