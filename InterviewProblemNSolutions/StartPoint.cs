@@ -59,7 +59,8 @@ namespace InterviewProblemNSolutions
             //CourseSchedule();
             CourseScheduleII();
             //SymmetricTree();
-            //BasicCalculator();
+            BasicCalculator();
+            //BasicCalculatorII();
             //ReverseWordsInAString();
             //ReverseWordsInAStringII();
             //MinimumCostToConnectSticks();
@@ -990,7 +991,19 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" Above Tree isSymmetric: {DailyProblem.IsSymmetricIterativeBFSApproach(notSymmetric)}");            // Iterative Solution
         }
 
+
         public static void BasicCalculator()
+        {
+            // https://leetcode.com/problems/basic-calculator/
+            Utility.Print("224. Basic Calculator");
+            string[] inputArr = { "1 + 1", " 2-1 + 2 ", "(1+(4+5+2)-3)+(6+8)" };
+            foreach (var input in inputArr)
+            {
+                int startingIndex = 0;
+                Console.WriteLine($" Input: \'{input}\' evaluates to : \'{DailyProblem.BasicCalculator(input, ref startingIndex)}\'");
+            }
+        }
+        public static void BasicCalculatorII()
         {
             // https://leetcode.com/problems/basic-calculator-ii/
             Utility.Print("227. Basic Calculator II");
@@ -1002,6 +1015,7 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" \tCalculates To: {DailyProblem.BasicCalculatorIIFaster(input)}");
             }
         }
+
 
         public static void ReverseWordsInAString()
         {
@@ -2144,6 +2158,7 @@ namespace InterviewProblemNSolutions
             root.InOrder();
             Console.WriteLine($" The lowest common ancestor of its deepest leaves is : {DailyProblem.LCADeepestLeaves(root).val} ");
         }
+
 
 
 

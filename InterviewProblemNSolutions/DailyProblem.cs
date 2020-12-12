@@ -1764,6 +1764,44 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(N) || Space O(N)
+        public static int BasicCalculator(string s, ref int i, bool evalTillClosingBrackets = false)
+        {
+            if (evalTillClosingBrackets) i++;
+            List<int> ls = new List<int>(100);
+            bool isPositive = true;
+            while (i < s.Length)
+            {
+                // if current character is Not empty space
+                if (s[i] != ' ')
+                {
+                    // if current character is an digit 0-9
+                    if (Char.IsDigit(s[i]))
+                    {
+                        int num = 0;
+                        while (i < s.Length && Char.IsDigit(s[i]))
+                            num = num * 10 + (s[i++] - '0');
+                        ls.Add(isPositive ? num : -num);
+                        i--;
+                    }
+                    else if (s[i] == '+') isPositive = true;
+                    else if (s[i] == '-') isPositive = false;
+                    // Found Opening Bracket, make recursive call
+                    else if (s[i] == '(')
+                    {
+                        int valueInsideParenthesis = BasicCalculator(s, ref i, true);
+                        ls.Add(isPositive ? valueInsideParenthesis : -valueInsideParenthesis);
+                    }
+                    else if (evalTillClosingBrackets && s[i] == ')') break;
+                }
+                i++;
+            }
+            int result = 0;
+            for (int k = 0; k < ls.Count; k++) 
+                result += ls[k];
+            return result;
+        }
+
         // Time O(n) // Space O(n)
         public static int BasicCalculatorII(string s)
         {
