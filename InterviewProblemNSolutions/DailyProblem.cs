@@ -4219,6 +4219,46 @@ namespace InterviewProblemNSolutions
             cache[curr] = -1;
             return false;
         }
+        // Time O(N^2) || Space O(N) // Optimized DP Approach
+        public static int JumpGameII_DP(int[] nums)
+        {
+            int len = nums.Length;
+            int[] dp = new int[len];
+
+            // Start from 2nd Last Index
+            for (int i = len - 2; i >= 0; i--)
+                // Biggest Jump from current index takes to last index or beyond means we need just 1 jump
+                if (i + nums[i] >= len - 1)
+                    dp[i] = 1;
+                else
+                {
+                    dp[i] = int.MaxValue / 2;
+                    // Find MinJumps starting with Biggest possible jump from current index
+                    for (int k = nums[i]; k >= 1; k--)
+                        dp[i] = Math.Min(dp[i], 1 + dp[i + k]);
+                }
+
+            return dp[0];
+        }
+        // Time O(N) || Space O(1) // Greedy Approach
+        // https://leetcode.com/problems/jump-game-ii/discuss/485780/Python-O(-n-)-sol.-based-on-greedy-of-coverage.-90%2B-With-explanation
+        public static int JumpGameII_Greedy(int[] nums)
+        {
+            if (nums.Length == 1) return 0;
+            int currentCoverage = nums[0], lastJumpedIndex = 0, jumpCount = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                currentCoverage = Math.Max(currentCoverage, i + nums[i]);
+                if (i == lastJumpedIndex)
+                {
+                    lastJumpedIndex = currentCoverage;
+                    jumpCount++;
+                    if (currentCoverage >= nums.Length - 1)
+                        return jumpCount;
+                }
+            }
+            return jumpCount;
+        }
         // Time = Space = O(N) as every index is visited just once
         public static bool JumpGameIII(int[] nums, int[] cache, int curr)
         {

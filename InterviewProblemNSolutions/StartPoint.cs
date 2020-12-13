@@ -119,6 +119,7 @@ namespace InterviewProblemNSolutions
             SmallestIntegerDivisibleByK();
             LongestSubstringWithAtLeastKRepeatingCharacters();
             JumpGame();
+            JumpGameII();
             JumpGameIII();
             LinkedListRandomNode();
             IncreasingOrderSearchTree();
@@ -134,6 +135,8 @@ namespace InterviewProblemNSolutions
             SubstringWithConcatenationOfAllWords();
             LowestCommonAncestorDeepestLeaves();
             BurstBalloons();
+
+
 
             // String Matching Algorithm
             BruteForceWay();
@@ -1936,6 +1939,17 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void JumpGameII()
+        {
+            // https://leetcode.com/problems/jump-game-ii/
+            Utility.Print("45. Jump Game II");
+            int[][] numsArr = { new int[] { 2, 3, 1, 1, 4 }, new int[] { 2, 3, 0, 1, 4 }, new int[] { 2, 1 } };
+            foreach(var nums in numsArr)
+            {
+                nums.Print("Input");
+                Console.WriteLine($" Minimum number of jumps to reach from 0th to last index \'{DailyProblem.JumpGameII_Greedy(nums)}\'");
+            }
+        }
 
         public static void JumpGameIII()
         {
