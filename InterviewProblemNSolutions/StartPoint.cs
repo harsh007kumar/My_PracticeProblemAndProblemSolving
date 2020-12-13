@@ -133,7 +133,7 @@ namespace InterviewProblemNSolutions
             FlipColumnsForMaximumNumberOfEqualRows();
             SubstringWithConcatenationOfAllWords();
             LowestCommonAncestorDeepestLeaves();
-
+            BurstBalloons();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -2157,6 +2157,16 @@ namespace InterviewProblemNSolutions
             };
             root.InOrder();
             Console.WriteLine($" The lowest common ancestor of its deepest leaves is : {DailyProblem.LCADeepestLeaves(root).val} ");
+        }
+
+
+        // Tushar Roy https://youtu.be/IFNibRVgFBo
+        public static void BurstBalloons()
+        {
+            // https://leetcode.com/problems/burst-balloons/
+            Utility.Print("312. Burst Balloons");
+            int[] nums = { 3, 1, 5, 8 };
+            Console.WriteLine($" Max coins collected by bursting the balloons wisely\t\'{DynamicProgramming.BurstBalloons(nums)}\'");
         }
 
 

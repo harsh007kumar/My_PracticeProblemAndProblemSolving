@@ -1325,5 +1325,33 @@ namespace InterviewProblemNSolutions
                 i = k + 1;      // keeping interating on right half
             }
         }
+
+
+        // DP-Tabulation (bottom-Up) approach
+        // Time O(N^3) || Space O(N^2)
+        public static int BurstBalloons(int[] nums)
+        {
+            int len = nums.Length;
+            int[,] dp = new int[len, len];
+
+            for (int l = 1; l <= len; l++)                      // to change the length of sub-array currently being evaluated
+                for (int start = 0; start <= len - l; start++)  // to update starting index of sub-array
+                {
+                    int last = start + l - 1;
+                    // try maximizing sum by trying every balloon b/w start & last (inclusive of boundry) as being last balloon to be bursted
+                    for (int k = start; k <= last; k++)
+                    {
+                        int leftSum = k - 1 < start ? 0 : dp[start, k - 1];
+                        int rightSum = k + 1 > last ? 0 : dp[k + 1, last];
+
+                        int leftNum = start - 1 < 0 ? 1 : nums[start - 1];      // Number on left of current sub-array
+                        int rtNum = last + 1 >= len ? 1 : nums[last + 1];       // Number on right of current sub-array
+
+                        dp[start, last] = Math.Max(dp[start, last], leftSum + (leftNum * nums[k] * rtNum) + rightSum);
+                    }
+                }
+            
+            return dp[0, len - 1];
+        }
     }
 }
