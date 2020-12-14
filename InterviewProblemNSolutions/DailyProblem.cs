@@ -4635,5 +4635,55 @@ namespace InterviewProblemNSolutions
             else
                 return left != null ? left : right;
         }
+
+
+        // Time O(N*2^N) || Space O(N^2)
+        public static void PalindromePartitioning_Recursive(string s, int start, int last, List<IList<string>> finalList, List<string> currlist)
+        {
+            if (start > last)
+                finalList.Add(new List<string>(currlist));
+            for (int end = start; end <= last; end++)
+            {
+                // Checking if sub-string of varying length begining at Index 0 isPalindrome
+                if (isPalindrome(s, start, end))
+                {
+                    // add this sub-string to list
+                    currlist.Add(s.Substring(start, (end - start) + 1));
+                    // Recursively find Palindrome in remaining Half
+                    PalindromePartitioning_Recursive(s, end + 1, last, finalList, currlist);
+                    // backtrack and remove the current substring from currentList
+                    currlist.RemoveAt(currlist.Count - 1);
+                }   
+            }
+        }
+        // Time O(N) || Space O(1)
+        public static bool isPalindrome(string s, int start, int last)
+        {
+            while (start < last)
+                if (s[start++] != s[last--])
+                    return false;
+            return true;
+        }
+        // Time O(N*2^N) || Space O(N^2)
+        public static void PalindromePartitioning_DP(string s, int start, int last, List<IList<string>> finalList, List<string> currlist, bool[,] dp)
+        {
+            if (start > last)
+                finalList.Add(new List<string>(currlist));
+            for (int end = start; end <= last; end++)
+            {
+                // Checking if sub-string of varying length begining at Index 0 isPalindrome
+                if (s[start] == s[end] && (end - start < 2 || dp[start + 1, end - 1]))
+                {
+                    dp[start, end] = true;
+
+                    // add this sub-string to list
+                    currlist.Add(s.Substring(start, (end - start) + 1));
+                    // Recursively find Palindrome in remaining Half
+                    PalindromePartitioning_DP(s, end + 1, last, finalList, currlist, dp);
+                    // backtrack and remove the current substring from currentList
+                    currlist.RemoveAt(currlist.Count - 1);
+                }
+            }
+        }
     }
 }
