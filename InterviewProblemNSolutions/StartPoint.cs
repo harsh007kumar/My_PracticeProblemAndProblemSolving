@@ -136,7 +136,7 @@ namespace InterviewProblemNSolutions
             LowestCommonAncestorDeepestLeaves();
             BurstBalloons();
             PalindromePartitioning();
-
+            SquaresSortedArray();
 
 
             // String Matching Algorithm
@@ -2206,6 +2206,21 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+
+        public static void SquaresSortedArray()
+        {
+            // https://leetcode.com/problems/squares-of-a-sorted-array/
+            Utility.Print("977. Squares of a Sorted Array");
+            int[][] numsArr = { new int[] { -4, -1, 0, 3, 10 }, new int[] { -7, -3, 2, 3, 11 } };
+            foreach(var nums in numsArr)
+            {
+                nums.Print("Input");
+                int[] squared = DailyProblem.SortedSquares(nums);
+                squared.Print("Squared");
+            }
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

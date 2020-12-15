@@ -4685,5 +4685,32 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+
+        // FIRST APPROACH
+        // Time O(nLogn) || Space O(1)
+        public static int[] SortedSquaresSlow(int[] nums)
+        {
+            for (int i = 0; i < nums.Length; i++)
+                nums[i] = nums[i] * nums[i];
+            Array.Sort(nums);
+            return nums;
+        }
+        // Optimized Approach
+        // Time O(N) || Space O(N) for resultant array
+        public static int[] SortedSquares(int[] nums)
+        {
+            int start = 0, last = nums.Length - 1;
+            int[] squared = new int[last + 1];
+            while (start <= last)
+            {
+                if (Math.Abs(nums[start]) > Math.Abs(nums[last]))
+                    squared[last - start] = nums[start] * nums[start++];
+                else
+                    squared[last - start] = nums[last] * nums[last--];
+            }
+            return squared;
+        }
+
     }
 }
