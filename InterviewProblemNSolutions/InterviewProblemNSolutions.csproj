@@ -52,6 +52,7 @@
     <Compile Include="InsertDeleteGetRandomO1.cs" />
     <Compile Include="LinkedListRandomNode.cs" />
     <Compile Include="LRUCache.cs" />
+    <Compile Include="MaxHeap.cs" />
     <Compile Include="MinStack.cs" />
     <Compile Include="SearchAlgorithms.cs" />
     <Compile Include="SelectionAlgorithms.cs" />

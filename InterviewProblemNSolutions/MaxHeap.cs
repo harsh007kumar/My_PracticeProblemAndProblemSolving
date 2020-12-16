@@ -1,0 +1,64 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InterviewProblemNSolutions
+{
+    public class MaxHeap
+    {
+        public int[] arr;
+        int Count = 0;
+        public MaxHeap(int size)
+        {
+            arr = new int[size];
+        }
+        public int LeftChild(int x) => 2 * x + 1;
+        public int RtChild(int x) => LeftChild(x) + 1;
+        public int Parent(int x) => (x - 1) / 2;
+        public void Insert(int val)
+        {
+            int i = Count++;
+            arr[i] = val;
+            while (i != 0 && arr[Parent(i)] < arr[i])
+            {
+                int parent = Parent(i);
+
+                // Swap child node with parent
+                int temp = arr[parent];
+                arr[parent] = arr[i];
+                arr[i] = temp;
+
+                i = parent;
+            }
+        }
+        public void MaxHeapify(int i = 0)
+        {
+            while (i < Count)
+            {
+                //For empty or Heap with single element we need not perform any operation
+                if (Count < 2) return;
+
+                int largest = i;
+                int left = LeftChild(i), rt = RtChild(i);
+
+                if (left < Count && arr[left] > arr[i])
+                    largest = left;
+                if (rt < Count && arr[rt] > arr[largest])
+                    largest = rt;
+                if (largest != i)
+                {
+                    // Swap root node with larger child
+                    int temp = arr[largest];
+                    arr[largest] = arr[i];
+                    arr[i] = temp;
+
+                    // Heapify child nodes to re-order subtree and maintain MinHeap integrity
+                    i = largest;
+                }
+                else break;
+            }
+        }
+    }
+}
