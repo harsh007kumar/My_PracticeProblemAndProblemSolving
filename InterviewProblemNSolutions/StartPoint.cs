@@ -137,6 +137,9 @@ namespace InterviewProblemNSolutions
             BurstBalloons();
             PalindromePartitioning();
             SquaresSortedArray();
+            BinaryTreeRightSideView();
+
+
 
 
             // String Matching Algorithm
@@ -2219,6 +2222,26 @@ namespace InterviewProblemNSolutions
                 int[] squared = DailyProblem.SortedSquares(nums);
                 squared.Print("Squared");
             }
+        }
+
+
+        public static void BinaryTreeRightSideView()
+        {
+            // https://leetcode.com/problems/binary-tree-right-side-view/
+            Utility.Print("199. Binary Tree Right Side View");
+            TreeNode root = new TreeNode(1)
+            {
+                left = new TreeNode(2)
+                { right = new TreeNode(5) },
+                right = new TreeNode(3)
+                { right = new TreeNode(4) }
+            };
+            root.InOrder();
+            IList<int> rtView = DailyProblem.BinaryTreeRightSideView(root);
+            Console.WriteLine($" Right Side View of Above Tree is:");
+            foreach (var rtNode in rtView)
+                Console.Write($" {rtNode} ||");
+            Console.WriteLine();
         }
 
 

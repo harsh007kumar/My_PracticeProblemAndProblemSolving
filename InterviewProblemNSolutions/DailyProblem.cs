@@ -4712,5 +4712,38 @@ namespace InterviewProblemNSolutions
             return squared;
         }
 
+
+        // Function return the values on the rightmost side of Tree, ordered from top to bottom.
+        // Time O(N) || Space O(N)
+        public static IList<int> BinaryTreeRightSideView(TreeNode root)
+        {
+            List<int> rtView = new List<int>();
+            if (root == null) return rtView;
+
+            Queue<TreeNode> q = new Queue<TreeNode>();
+            q.Enqueue(root);
+            q.Enqueue(null);
+            TreeNode last = null;
+            while (q.Count > 0)
+            {
+                root = q.Dequeue();
+                if (root == null)
+                {
+                    rtView.Add(last.val);
+                    if (q.Count > 0)
+                        q.Enqueue(null);
+                }
+                else
+                {
+                    last = root;
+                    if (root.left != null)
+                        q.Enqueue(root.left);
+                    if (root.right != null)
+                        q.Enqueue(root.right);
+                }
+            }
+            return rtView;
+        }
+
     }
 }
