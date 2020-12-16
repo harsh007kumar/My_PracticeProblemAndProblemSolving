@@ -138,7 +138,7 @@ namespace InterviewProblemNSolutions
             PalindromePartitioning();
             SquaresSortedArray();
             BinaryTreeRightSideView();
-
+            MinimumCostToHireKWorkers();
 
 
 
@@ -2243,6 +2243,23 @@ namespace InterviewProblemNSolutions
                 Console.Write($" {rtNode} ||");
             Console.WriteLine();
         }
+
+        // https://youtu.be/FhEbfSRuNNA
+        public static void MinimumCostToHireKWorkers()
+        {
+            // https://leetcode.com/problems/minimum-cost-to-hire-k-workers/
+            Utility.Print("857. Minimum Cost to Hire K Workers");
+            int[][] quality = { new int[] { 10, 20, 5 }, new int[] { 3, 1, 10, 10, 1 } };
+            int[][] wage = { new int[] { 70, 50, 30 }, new int[] { 4, 8, 2, 2, 7 } };
+            int[] k = { 2, 3 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                quality[i].Print("Workers Quality");
+                wage[i].Print("Workers Wage");
+                Console.WriteLine($" Minimum cost to Hire K\'{k[i]}\' workers is: \'{DailyProblem.MincostToHireWorkers(quality[i], wage[i], k[i])}\'\n");
+            }
+        }
+
 
 
 

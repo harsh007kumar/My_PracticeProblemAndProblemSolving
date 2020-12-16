@@ -4745,5 +4745,60 @@ namespace InterviewProblemNSolutions
             return rtView;
         }
 
+
+        // Time O(nLogn) || Space O(n), n = no of workers
+        public static double MincostToHireWorkers(int[] quality, int[] wage, int k)
+        {
+            /* The Problem is to HIRE 'K' workers in least total amt:
+             * Following Rules apply:
+             *      Every worker in the paid group should be paid in the ratio of their quality compared to other workers in the paid group.
+             *      Every worker in the paid group must be paid at least their minimum wage expectation.
+             *  
+             *  first find and sort workers in increasing order of their ratio of 'wage/quality'
+             *  Now add first 'K' workers to MaxHeap (based upon their 'quality'), also keep total sum of their quality
+             *  we can calculate Min Cost to HIRE these first K workers by seleting ratio of highest wage/quality worker i.e. Kth worker(remeber sorted list)
+             *  and multiplying by total quality sum.
+             *  
+             *  After Kth index, now we check new worker has quality smaller than worker on Top of MaxHeap, repalce n Heapify
+             *  also update the sum of quality of K workers
+             *  calculate MinCost = Math.Min(minCost,sumOfQuality * ratioOfKthWorker)
+             */
+            int len = quality.Length;
+            Worker[] workers = new Worker[len];                 // Space O(n)
+            for (int i = 0; i < len; i++)                       // Time O(n)
+                workers[i] = new Worker(quality[i], wage[i]);
+
+            Array.Sort(workers);                                // Time (nLogn)
+
+            int qualitySum = 0;
+            MaxHeap h = new MaxHeap(k);
+            for (int i = 0; i < k; i++)                         // Time O(kLogk)
+            {
+                h.Insert(workers[i].quality);
+                qualitySum += workers[i].quality;
+            }
+            // compute initial result with sum of 0...k-1 index ratio sorted workers
+            double minTotalCost = (double)qualitySum * workers[k - 1].WageQualityRatio();
+
+            for (int i = k; i < len; i++)                       // Time O((n-k)Logk)
+                if (h.arr[0] > workers[i].quality)
+                {
+                    qualitySum += (workers[i].quality - h.arr[0]);
+                    h.arr[0] = workers[i].quality;
+                    h.MaxHeapify();
+                    minTotalCost = Math.Min(minTotalCost, qualitySum * workers[i].WageQualityRatio());
+                }
+            
+            return minTotalCost;
+        }
+        class Worker : IComparable<Worker>
+        {
+            public int quality, wage;
+            public Worker(int q, int w)
+            { quality = q; wage = w; }
+            public double WageQualityRatio() => (double)wage / (double)quality;
+            int IComparable<Worker>.CompareTo(Worker another) => this.WageQualityRatio().CompareTo(another.WageQualityRatio());
+        }
+        
     }
 }
