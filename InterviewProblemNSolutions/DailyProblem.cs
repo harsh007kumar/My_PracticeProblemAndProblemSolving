@@ -568,6 +568,27 @@ namespace InterviewProblemNSolutions
             return result;
         }
 
+        // Given four arrays A, B, C, D of integer values, compute how many tuples (i, j, k, l) there are such that A[i] + B[j] + C[k] + D[l] is zero.
+        // Time O(N^2) || Space O(N^2)
+        public static int FourSumCount(int[] A, int[] B, int[] C, int[] D)
+        {
+            int len = A.Length, zeroSumCount = 0;
+            Dictionary<int, int> sumCount = new Dictionary<int, int>(len * len);
+            // Compute and Store every possible sum from 1st two arrays with their frequency of occurence
+            for (int i = 0; i < len; i++)
+                for (int j = 0; j < len; j++)
+                    if (sumCount.ContainsKey(A[i] + B[j])) sumCount[A[i] + B[j]]++;
+                    else sumCount.Add(A[i] + B[j], 1);
+            // Now check every possible sum of last 2 arrays it its excat -ve is present in Dictionary
+            // than increment 'zeroSumCount' by frequency given for that sum in Dictionary
+            for (int i = 0; i < len; i++)
+                for (int j = 0; j < len; j++)
+                    if (sumCount.ContainsKey(-(C[i] + D[j])))
+                        zeroSumCount += sumCount[-(C[i] + D[j])];
+            return zeroSumCount;
+        }
+
+
         // Func() returns the most common repeating word in paragraph which is not in set of banned words
         // Time O(n), n = length of the input paragraph || Space O(n)
         public static string MostCommonWord(string paragraph, string[] banned)

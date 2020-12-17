@@ -28,6 +28,7 @@ namespace InterviewProblemNSolutions
             //TwoSum();
             //ThreeSum();
             //FourSum();
+            FourSumII();
             //MostCommonWord();
             //ValidSudoku();
             SudokuSolver();
@@ -509,6 +510,19 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine();
             }
         }
+
+        public static void FourSumII()
+        {
+            // https://leetcode.com/problems/4sum-ii/
+            Utility.Print("454. 4Sum II");
+            int[] A = { 1, 2 }, B = { -2, -1 }, C = { -1, 2 }, D = { 0, 2 };
+            A.Print("A");
+            B.Print("B");
+            C.Print("C");
+            D.Print("D");
+            Console.WriteLine($" No Of Tuples such that A[i]+B[j]+C[k]+D[l]==0 are {DailyProblem.FourSumCount(A, B, C, D)}\n");
+        }
+
 
         public static void MostCommonWord()
         {
