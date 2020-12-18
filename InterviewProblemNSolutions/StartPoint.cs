@@ -141,6 +141,7 @@ namespace InterviewProblemNSolutions
             BinaryTreeRightSideView();
             MinimumCostToHireKWorkers();
             IncreasingTripletSubsequence();
+            PermutationInString();
 
 
             // String Matching Algorithm
@@ -2285,6 +2286,19 @@ namespace InterviewProblemNSolutions
                 nums.Print("Input");
                 Console.WriteLine($" There exists a triple of indices (i, j, k) such that i < j < k and nums[i] < nums[j] < nums[k] : {DailyProblem.IncreasingTripletSubsequence(nums)}");
             }
+        }
+
+
+
+        public static void PermutationInString()
+        {
+            // https://leetcode.com/problems/permutation-in-string/
+            Utility.Print("567. Permutation in String");
+            string[] s1 = { "ab", "ab", "hello", "ab", "adc" }, s2 = { "eidbaooo", "eidboaoo", "ooolleoooleh", "eidbaooo", "dcda" };
+            for (int i = 0; i < s1.Length; i++)
+                Console.WriteLine($" s2 \'{s2[i]}\' contains the permutation of s1 \'{s1[i]}\'" +
+                    $"\nIn other words, one of the second string's substring is permutations of the first string:" +
+                    $" {StringAlgorithms.PermutationInString(s1[i], s2[i])}\n");
         }
 
 

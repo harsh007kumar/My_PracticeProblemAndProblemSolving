@@ -665,5 +665,48 @@ namespace InterviewProblemNSolutions
             longestSubstring = Math.Max(longestSubstring, i - j);
             Console.WriteLine($" Longest substring in input : {str}\n Without any repeating character was of length : {longestSubstring}");
         }
+
+
+        // Time O(n) || Space O(26) ~O(1)
+        public static bool PermutationInString(string s1, string s2)
+        {
+            int[] actual = new int[26];
+            int[] expected = new int[26];
+            for (int i = 0; i < s1.Length; i++)
+                expected[s1[i] - 'a']++;
+
+            int count = 0, start = 0;
+            for (int i = 0; i < s2.Length; i++)
+                // character which is not present in s1 encoutered reset 'count' and 'actual' set
+                if (expected[s2[i] - 'a'] == 0)
+                {
+                    count = 0;
+                    actual = new int[26];
+                    // if a permutation exists definatly it will start after the unmatched character
+                    start = i + 1;
+                }
+                // if frequency of current char is less than equals to expected, than increament 'count'
+                else if (++actual[s2[i] - 'a'] <= expected[s2[i] - 'a'])
+                {
+                    // once we have all required character with their matching frequency return true
+                    if (++count == s1.Length)
+                        return true;
+                }
+                // if frequency of current character is more than expected
+                else
+                {
+                    // than remove all characters from from left till we dont get to current 'i' th character
+                    while (s2[start] != s2[i])
+                        actual[s2[start++] - 'a']--;
+                    // now remove 1 more time to match actual and required curr Char frequency
+                    actual[s2[start++] - 'a']--;
+                    
+                    // update the count i.e. length of characters which are still matching the required set
+                    count = i - start + 1;
+                }
+
+            return false;
+        }
+
     }
 }
