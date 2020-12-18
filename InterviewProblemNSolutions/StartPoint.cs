@@ -140,7 +140,7 @@ namespace InterviewProblemNSolutions
             SquaresSortedArray();
             BinaryTreeRightSideView();
             MinimumCostToHireKWorkers();
-
+            IncreasingTripletSubsequence();
 
 
             // String Matching Algorithm
@@ -2275,6 +2275,17 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void IncreasingTripletSubsequence()
+        {
+            // https://leetcode.com/problems/increasing-triplet-subsequence/
+            Utility.Print("334. Increasing Triplet Subsequence");
+            int[][] numsArr = { new int[] { 1, 2, 3, 4, 5 }, new int[] { 5, 4, 3, 2, 1 }, new int[] { 2, 1, 5, 0, 4, 6 } };
+            foreach(var nums in numsArr)
+            {
+                nums.Print("Input");
+                Console.WriteLine($" There exists a triple of indices (i, j, k) such that i < j < k and nums[i] < nums[j] < nums[k] : {DailyProblem.IncreasingTripletSubsequence(nums)}");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

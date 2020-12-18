@@ -4820,6 +4820,25 @@ namespace InterviewProblemNSolutions
             public double WageQualityRatio() => (double)wage / (double)quality;
             int IComparable<Worker>.CompareTo(Worker another) => this.WageQualityRatio().CompareTo(another.WageQualityRatio());
         }
-        
+
+
+        // Time O(n) || Space O(1)
+        public static bool IncreasingTripletSubsequence(int[] nums)
+        {
+            int l1 = int.MaxValue, l2 = int.MaxValue;
+            for (int i = 0; i < nums.Length; i++)
+                // If no greater than level 1
+                if (nums[i] > l1)
+                    // & also greater than level 2 than success
+                    if (nums[i] > l2)
+                        return true;
+                    // if not greater than level 2 than make this level 2
+                    else
+                        l2 = nums[i];
+                // else make it level 1
+                else
+                    l1 = nums[i];
+            return false;
+        }
     }
 }
