@@ -1353,5 +1353,37 @@ namespace InterviewProblemNSolutions
             
             return dp[0, len - 1];
         }
+
+
+        // Recursive Approach
+        // Time = O(Row*(Col^2)) || Space = O(1)
+        public static int CherryPickupII(int[][] grid, int r1Pos, int r2Pos, int firstCol, int lastCol, int currRow = 0)
+        {
+            if (currRow >= grid.Length) return 0;
+            int sum = 0;
+            for (int i = r1Pos - 1; i <= r1Pos + 1; i++)
+                if (i >= firstCol && i <= lastCol)
+                    for (int j = r2Pos - 1; j <= r2Pos + 1; j++)
+                        if (j >= firstCol && j <= lastCol && j != i)
+                            sum = Math.Max(sum, grid[currRow][i] + grid[currRow][j] + CherryPickupII(grid, i, j, firstCol, lastCol, currRow + 1));
+            return sum;
+        }
+        // DP Top-Down Approach
+        // Time = Space = O(Row*(Col^2))
+        public static int CherryPickupII_DP(int[][] grid, int r1Pos, int r2Pos, int firstCol, int lastCol, Dictionary<string, int> cache, int currRow = 0)
+        {
+            if (currRow >= grid.Length) return 0;
+            int sum = 0;
+            for (int i = r1Pos - 1; i <= r1Pos + 1; i++)
+                if (i >= firstCol && i <= lastCol)
+                    for (int j = r2Pos - 1; j <= r2Pos + 1; j++)
+                        if (j >= firstCol && j <= lastCol && j != i)
+                        {
+                            if (!cache.ContainsKey((currRow + 1) + "," + i + "," + j))
+                                cache.Add((currRow + 1) + "," + i + "," + j, CherryPickupII_DP(grid, i, j, firstCol, lastCol, cache, currRow + 1));
+                            sum = Math.Max(sum, grid[currRow][i] + grid[currRow][j] + cache[(currRow + 1) + "," + i + "," + j]);
+                        }
+            return sum;
+        }
     }
 }

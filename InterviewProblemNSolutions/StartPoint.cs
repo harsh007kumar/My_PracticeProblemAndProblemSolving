@@ -142,6 +142,7 @@ namespace InterviewProblemNSolutions
             MinimumCostToHireKWorkers();
             IncreasingTripletSubsequence();
             PermutationInString();
+            CherryPickupII();
 
 
             // String Matching Algorithm
@@ -2300,6 +2301,26 @@ namespace InterviewProblemNSolutions
                     $"\nIn other words, one of the second string's substring is permutations of the first string:" +
                     $" {StringAlgorithms.PermutationInString(s1[i], s2[i])}\n");
         }
+
+
+
+        public static void CherryPickupII()
+        {
+            // https://leetcode.com/problems/cherry-pickup-ii/
+            Utility.Print("1463. Cherry Pickup II");
+            int[][][] gridArr = { new int[][] { new int[] { 3, 1, 1 }, new int[] { 2, 5, 1 }, new int[] { 1, 5, 5 }, new int[] { 2, 1, 1 } },
+                                new int[][] { new int[] { 1, 0, 0, 0, 0, 0, 1 } ,new int[] { 2, 0, 0, 0, 0, 3, 0 } ,new int[] { 2, 0, 9, 0, 0, 0, 0 } ,new int[] { 0, 3, 0, 5, 4, 0, 0 } ,new int[] { 1, 0, 2, 3, 0, 0, 6 } },
+                                new int[][] { new int[] { 1,0,0,3}, new int[] { 0,0,0,3}, new int[] { 0,0,3,3}, new int[] { 9,0,3,3} },
+                                new int[][] { new int[] { 1, 1 }, new int[] { 1, 1 } },
+                                new int[][] { new int[] { 4, 1, 5, 7, 1 }, new int[] { 6, 0, 4, 6, 4 }, new int[] { 0, 9, 6, 3, 5} } };
+            foreach (var grid in gridArr)
+            {
+                grid.Print("FIELD OF CHERRIES");
+                //Console.WriteLine($" Maximum number of cherries collected using both robots: {DynamicProgramming.CherryPickupII(grid, -1, grid[0].Length, 0, grid[0].Length - 1)}\n");
+                Console.WriteLine($" Maximum number of cherries collected using both robots: {DynamicProgramming.CherryPickupII_DP(grid, -1, grid[0].Length, 0, grid[0].Length - 1, new Dictionary<string, int>())}\n\n");
+            }
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
