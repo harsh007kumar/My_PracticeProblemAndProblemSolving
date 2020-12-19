@@ -1385,5 +1385,99 @@ namespace InterviewProblemNSolutions
                         }
             return sum;
         }
+
+
+        public static int MinOperationsToReduceToZero(int[] nums, int start, int last, int reqSum, ref bool is0)
+        {
+            if (reqSum == 0)
+            { is0 = true; return 0; }
+
+            if (start > last || reqSum < 0)
+                return -1;
+
+            int stepsReqL = int.MaxValue, stepsReqR = int.MaxValue;
+            bool got0Left = false, got0Right = false;
+
+            stepsReqL = MinOperationsToReduceToZero(nums, start + 1, last, reqSum - nums[start], ref got0Left);
+            stepsReqR = MinOperationsToReduceToZero(nums, start, last - 1, reqSum - nums[last], ref got0Right);
+
+            // if we got zero either by removing from left or right side num
+            if (got0Left || got0Right)
+            {
+                is0 = true;
+                // if we got zero from both left or right ends
+                if (got0Left && got0Right)
+                    return 1 + Math.Min(stepsReqL, stepsReqR);
+                else
+                    return 1 + (got0Left ? stepsReqL : stepsReqR);
+            }
+            return -1;
+        }
+        public static int MinOperationsToReduceToZero_DP(int[] nums, int start, int last, int reqSum, ref bool is0, Dictionary<string,int> cache)
+        {
+            if (reqSum == 0)
+            { is0 = true; return 0; }
+
+            if (start > last || reqSum < 0)
+                return -1;
+
+            string key = start + "," + last;
+            if (cache.ContainsKey(key))
+            {
+                if (cache[key] != -1) is0 = true; 
+                return cache[key];
+            }
+
+            int stepsReqL = int.MaxValue, stepsReqR = int.MaxValue, value = -1;
+            bool got0Left = false, got0Right = false;
+
+            stepsReqL = MinOperationsToReduceToZero_DP(nums, start + 1, last, reqSum - nums[start], ref got0Left, cache);
+            stepsReqR = MinOperationsToReduceToZero_DP(nums, start, last - 1, reqSum - nums[last], ref got0Right, cache);
+
+            if (got0Left || got0Right)                                  // if we got zero either by removing from left or right side num
+                if (got0Left && got0Right)
+                    value = 1 + Math.Min(stepsReqL, stepsReqR);        // if we got zero from both left or right ends, assign min steps of two
+                else
+                    value = 1 + (got0Left ? stepsReqL : stepsReqR);     // assign steps from where we got zero
+
+            if (value != -1)
+                is0 = true;
+            
+            cache.Add(key, value);
+            return value;
+        }
+        // Time O(n) || Space O(1)
+        public static int MinOperations_SlidingWindow(int[] nums, int x)
+        {
+            /* Algorithm
+             * Step 1: Calculate the total sum of nums. Mark as total.
+             * 
+             * Step 2: Initialize two pointers left and right to 0. 
+             * Initialize an integer current to represent the sum from nums[left] to nums[right], inclusively.
+             * Initialize an integer maxi to record the maximum length that sums up to total - x.
+             * 
+             * Step 3: Iterate right form 0 to the end of nums. In each iteration:
+             * Update current.
+             * If current is greater than total - x, move left to right.
+             * If current is equal to total - x, update the maximum length.
+             * 
+             * Step 4: Return the result.
+             */
+            int start = 0, last = 0, maxLen = -1, currWindowSum = 0, total = 0; ;
+            for (int i = 0; i < nums.Length; i++) total += nums[i];
+
+            while (last < nums.Length)
+            {
+                currWindowSum += nums[last];
+                while (currWindowSum > total - x && start <= last)
+                    currWindowSum -= nums[start++];
+                if (currWindowSum == total - x)
+                    maxLen = Math.Max(maxLen, last - start + 1);
+                last++;
+            }
+            return maxLen != -1 ? nums.Length - maxLen : -1;
+        }
+
+
     }
 }

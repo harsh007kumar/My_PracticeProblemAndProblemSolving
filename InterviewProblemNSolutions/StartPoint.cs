@@ -143,6 +143,7 @@ namespace InterviewProblemNSolutions
             IncreasingTripletSubsequence();
             PermutationInString();
             CherryPickupII();
+            MinOperationsToReduceToZero();
 
 
             // String Matching Algorithm
@@ -2321,6 +2322,24 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+
+        public static void MinOperationsToReduceToZero()
+        {
+            // https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/
+            Utility.Print("1658. Minimum Operations to Reduce X to Zero");
+            int[][] nums = { new int[] { 1, 1, 4, 2, 3 }, new int[] { 5, 6, 7, 8, 9 }, new int[] { 3, 2, 20, 1, 1, 3 } };
+            int[] x = { 2, 4, 10 };
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Input");
+                bool foundZero = false;
+                //int moves = DynamicProgramming.MinOperationsToReduceToZero(nums[i], 0, nums[i].Length - 1, x[i], ref foundZero);
+                //int moves = DynamicProgramming.MinOperationsToReduceToZero_DP(nums[i], 0, nums[i].Length - 1, x[i], ref foundZero, new Dictionary<string, int>(nums[i].Length));
+                int moves = DynamicProgramming.MinOperations_SlidingWindow(nums[i], x[i]);
+                Console.WriteLine($" Minimum number of operations to reduce x \'{x[i]}\' to exactly 0: {moves}");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
