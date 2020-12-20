@@ -4840,5 +4840,85 @@ namespace InterviewProblemNSolutions
                     l1 = nums[i];
             return false;
         }
+
+
+        // Time O(K) || Space O(K)
+        public static char DecodedStringAtIndex(string S, int K)
+        {
+            StringBuilder sb = new StringBuilder(K);
+            int i = 0;
+            while (sb.Length < K)
+                if (Char.IsDigit(S[i]))
+                {
+                    int num = S[i++] - '0';
+                    if (sb.Length * num > K)
+                    {
+                        int mod = K % sb.Length;
+                        // if mod is 0 means current decoded string multiple == K, hence return last char
+                        // else return Mod position char and strings index start with 0 hence subtract 1
+                        return mod == 0 ? sb[sb.Length - 1] : sb[mod - 1];
+                    }
+                    else
+                    {
+                        string decoded = sb.ToString();
+                        while (num-- > 1)
+                            sb.Append(decoded);
+                    }
+                }
+                else
+                    sb.Append(S[i++]);
+            
+            return sb[sb.Length-1];
+        }
+        // Time O(N) || Auxillary Space O(1), N = length of encoded string 'S'|| Algo uses Recursive Space
+        public static char DecodedStringAtIndex_O1Space_Recursive(string S, int K)
+        {
+            if (K == 0) return S[0];
+
+            int i = 0;
+            long len = 0;
+            while (len < K)
+                if (Char.IsDigit(S[i]))
+                {
+                    int digit = S[i++] - '0';
+                    if (len * digit < K) len *= digit;
+                    else if (K % (int)len == 0) return DecodedStringAtIndex_O1Space_Recursive(S, (int)len);
+                    else return DecodedStringAtIndex_O1Space_Recursive(S, K % (int)len);
+                }
+                else
+                {
+                    i++;
+                    len++;
+                }
+
+            return S[i-1];
+        }
+        // Time O(N) || Space O(1), N = length of encoded string 'S'
+        public static char DecodedStringAtIndex_O1Space_Iterative(string S, int K)
+        {
+            int i = 0;
+            long len = 0;
+            while (len < K)
+                if (Char.IsDigit(S[i]))
+                {
+                    int digit = S[i++] - '0';
+                    if (len * digit < K) len *= digit;
+                    else
+                    {
+                        // if mod is Zero means last decoded charater is the required ans
+                        K = (K % len == 0) ? (int)len : K % (int)len;
+                        i = 0;
+                        len = 0;
+                    }
+                }
+                else
+                {
+                    i++;
+                    len++;
+                }
+
+            return (K == 0) ? S[0] : S[i - 1];
+        }
+
     }
 }

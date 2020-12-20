@@ -144,6 +144,7 @@ namespace InterviewProblemNSolutions
             PermutationInString();
             CherryPickupII();
             MinOperationsToReduceToZero();
+            DecodedStringAtIndex();
 
 
             // String Matching Algorithm
@@ -2340,6 +2341,27 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Minimum number of operations to reduce x \'{x[i]}\' to exactly 0: {moves}");
             }
         }
+
+
+
+        public static void DecodedStringAtIndex()
+        {
+            // 
+            Utility.Print("Decoded String at Index");
+            string[] S = { "leet2code3", "ha22", "a2345678999999999999999", "n2f7x7bv4l",
+                "cpmxv8ewnfk3xxcilcmm68d2ygc88daomywc3imncfjgtwj8nrxjtwhiem5nzqnicxzo248g52y72v3yujqpvqcssrofd99lkovg", "a23",
+                "ajx37nyx97niysdrzice4petvcvmcgqn282zicpbx6okybw93vhk782unctdbgmcjmbqn25rorktmu5ig2qn2y4xagtru2nehmsp" };
+            int[] K = { 10, 5, 1, 110, 480551547, 6, 976159153 };
+
+            for (int i = 0; i < S.Length; i++)
+            {
+                //char kth = DailyProblem.DecodedStringAtIndex(S[i], K[i]);
+                //char kth = DailyProblem.DecodedStringAtIndex_O1Space_Recursive(S[i], K[i]);
+                char kth = DailyProblem.DecodedStringAtIndex_O1Space_Iterative(S[i], K[i]);
+                Console.WriteLine($" For encoded string S \'{S[i]}\'\n \'{K[i]}\'th character is:\t\'{kth}\'\n");
+            }
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
