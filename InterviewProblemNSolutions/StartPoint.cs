@@ -146,6 +146,7 @@ namespace InterviewProblemNSolutions
             MinOperationsToReduceToZero();
             DecodedStringAtIndex();
             SmallestRangeII();
+            RotateList();
 
 
             // String Matching Algorithm
@@ -2383,6 +2384,22 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void RotateList()
+        {
+            // https://leetcode.com/problems/rotate-list/
+            Utility.Print("61. Rotate List");
+            ListNode ls = new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) { next = new ListNode(4) { next = new ListNode(5) } } } };
+            int[] kArr = { 2, 1, 305 };
+            
+            foreach (var k in kArr)
+            {
+                ls.Print("Input");
+                Console.WriteLine($" List After k\'{k}\' rotations");
+                ls = DailyProblem.RotateRight(ls, k);
+                ls.Print("Rotated");
+                Console.WriteLine();
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

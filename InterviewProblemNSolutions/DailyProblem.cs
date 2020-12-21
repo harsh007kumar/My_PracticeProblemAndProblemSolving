@@ -4967,5 +4967,41 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1)
+        public static ListNode RotateRight(ListNode head, int k)
+        {
+            if (head == null) return null;
+            int len = GetLength(head);
+            k %= len;
+
+            if (k == 0) return head;        // if K == 0 no rotation required
+
+            ListNode curr = head;
+            while (--len - k > 0)           // get to K-1 th Node
+                curr = curr.next;
+
+            ListNode newHead = curr.next;   // now set Kth Node as 'newHead'
+            curr.next = null;               // mark the now last node next as null
+
+            curr = newHead;
+            while (curr.next != null)       // move to end of the list (this step can be removed if we return last node after calculating length)
+                curr = curr.next;
+
+            curr.next = head;               // append original head at end now
+            return newHead;
+
+            int GetLength(ListNode headNode)
+            {
+                int count = 0;
+                while (headNode != null)
+                {
+                    count++;
+                    headNode = headNode.next;
+                }
+                return count;
+            }
+        }
+
+
     }
 }
