@@ -4920,5 +4920,52 @@ namespace InterviewProblemNSolutions
             return (K == 0) ? S[0] : S[i - 1];
         }
 
+
+        // Time O(n) || Space O(1)
+        [Obsolete("Failing for some edge cases, Ex LC TestCase 63", true)]
+        public static int SmallestRangeII_Faster(int[] A, int K)
+        {
+            int min = int.MaxValue, max = int.MinValue;
+            for (int i = 0; i < A.Length; i++)
+            {
+                min = Math.Min(min, A[i]);
+                max = Math.Max(max, A[i]);
+            }
+
+            int bMin = Math.Min(min + K, max - K), bMax = Math.Max(max - K, min + K);
+
+            for (int i = 0; i < A.Length; i++)
+                if (A[i] == min || A[i] == max) continue;
+                // number can be adjust within new reduced boundry
+                else if (A[i] - K >= bMin || A[i] + K <= bMax) continue;
+                // number cannot be adjust within new reduced boundry
+                // either by performing +k or -k operation
+                else
+                {
+                    if (Math.Abs(bMax - (A[i] + K)) < Math.Abs((A[i] - K) - bMin))
+                        bMax = Math.Max(bMax, A[i] + K);
+                    else
+                        bMin = Math.Min(bMin, A[i] - K);
+                }
+
+            return Math.Min(max - min, Math.Abs(bMax - bMin));
+        }
+        // Time O(nLogn) || Space O(1)
+        public static int SmallestRangeII(int[] A, int K)
+        {
+            Array.Sort(A);
+            int last = A.Length - 1;
+            int ans = A[last] - A[0];
+            for (int i = 0; i < last; i++)
+            {
+                int n1 = A[i], n2 = A[i + 1];
+                int high = Math.Max(A[last] - K, n1 + K);
+                int low = Math.Min(A[0] + K, n2 - K);
+                ans = Math.Min(ans, high - low);
+            }
+            return ans;
+        }
+
+
     }
 }

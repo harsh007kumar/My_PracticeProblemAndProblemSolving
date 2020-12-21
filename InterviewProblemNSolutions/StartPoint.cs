@@ -145,6 +145,7 @@ namespace InterviewProblemNSolutions
             CherryPickupII();
             MinOperationsToReduceToZero();
             DecodedStringAtIndex();
+            SmallestRangeII();
 
 
             // String Matching Algorithm
@@ -2361,6 +2362,26 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" For encoded string S \'{S[i]}\'\n \'{K[i]}\'th character is:\t\'{kth}\'\n");
             }
         }
+
+
+
+        public static void SmallestRangeII()
+        {
+            // https://leetcode.com/problems/smallest-range-ii/
+            Utility.Print("910. Smallest Range II");
+            int[][] A = { new int[] { 1 }, new int[] { 0, 10 }, new int[] { 1, 3, 6 }, new int[] { 7, 8, 8 }, new int[] { 4, 8, 2, 7, 2 }, new int[] { 8038, 9111, 5458, 8483, 5052, 9161, 8368, 2094, 8366, 9164, 53, 7222, 9284, 5059, 4375, 2667, 2243, 5329, 3111, 5678, 5958, 815, 6841, 1377, 2752, 8569, 1483, 9191, 4675, 6230, 1169, 9833, 5366, 502, 1591, 5113, 2706, 8515, 3710, 7272, 1596, 5114, 3620, 2911, 8378, 8012, 4586, 9610, 8361, 1646, 2025, 1323, 5176, 1832, 7321, 1900, 1926, 5518, 8801, 679, 3368, 2086, 7486, 575, 9221, 2993, 421, 1202, 1845, 9767, 4533, 1505, 820, 967, 2811, 5603, 574, 6920, 5493, 9490, 9303, 4648, 281, 2947, 4117, 2848, 7395, 930, 1023, 1439, 8045, 5161, 2315, 5705, 7596, 5854, 1835, 6591, 2553, 8628 } };
+            int[] K = { 0, 2, 3, 5, 5, 4643 };
+            for (int i = 0; i < K.Length; i++)
+            {
+                A[i].Print("Input");
+                //int ans = DailyProblem.SmallestRangeII_Faster(A[i], K[i]);
+                int ans = DailyProblem.SmallestRangeII(A[i], K[i]);
+                Console.WriteLine($" After choosing either x = -K or x = +K for each number in above array," +
+                    $"\n smallest possible difference between the maximum value of B and the minimum value of B is : {ans}\n");
+            }
+
+        }
+
 
 
 
