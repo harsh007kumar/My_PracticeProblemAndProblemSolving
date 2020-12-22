@@ -5054,5 +5054,39 @@ namespace InterviewProblemNSolutions
             else return t.val + "(" + Tree2strUtil(t.left) + ")";
         }
 
+
+        // Time O(n^2) || Space O(n)
+        public static IList<TreeNode> FindDuplicateSubtrees(TreeNode root, HashSet<string> hset, Dictionary<string, TreeNode> ans)
+        {
+            if (root == null) return new List<TreeNode>();
+            if (root.left != null)
+            {
+                string leftSubTree = Tree2strUtil(root.left);
+                if (hset.Contains(leftSubTree))
+                {
+                    if (!ans.ContainsKey(leftSubTree))
+                        ans.Add(leftSubTree, root.left);
+                }
+                else
+                    hset.Add(leftSubTree);
+                FindDuplicateSubtrees(root.left, hset, ans);
+            }
+            if (root.right != null)
+            {
+                string rightSubTree = Tree2strUtil(root.right);
+                if (hset.Contains(rightSubTree))
+                {
+                    if (!ans.ContainsKey(rightSubTree))
+                        ans.Add(rightSubTree, root.right);
+                }
+                else
+                    hset.Add(rightSubTree);
+                FindDuplicateSubtrees(root.right, hset, ans);
+            }
+            List<TreeNode> result = new List<TreeNode>();
+            foreach (var duplicate in ans.Values)
+                result.Add(duplicate);
+            return result;
+        }
     }
 }

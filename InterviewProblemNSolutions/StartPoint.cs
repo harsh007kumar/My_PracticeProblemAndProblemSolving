@@ -2434,6 +2434,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void FindDuplicateSubtrees()
+        {
+            // https://leetcode.com/problems/find-duplicate-subtrees/
+            Utility.Print("652. Find Duplicate Subtrees");
+            TreeNode root = new TreeNode(1)
+            {
+                left = new TreeNode(2) { left = new TreeNode(4)},
+                right = new TreeNode(3)
+                {
+                    left = new TreeNode(2)
+                    { left = new TreeNode(4) },
+                    right = new TreeNode(4)
+                }
+            };
+            foreach (TreeNode duplicateSubtree in DailyProblem.FindDuplicateSubtrees(root, new HashSet<string>(), new Dictionary<string, TreeNode>()))
+                duplicateSubtree.InOrder();
+        }
 
 
 
