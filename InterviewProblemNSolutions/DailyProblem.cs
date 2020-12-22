@@ -5036,6 +5036,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static string Tree2str(TreeNode t)
+        {
+            if (t == null) return "";
+            else return Tree2strUtil(t);
+        }
+        // Time O(n) || Space O(1)
+        public static string Tree2strUtil(TreeNode t)
+        {
+            if (t == null) return "()";
+            if (t.left == null && t.right == null)
+                return t.val + "";
+            else if (t.left != null && t.right != null)
+                return t.val + "(" + Tree2strUtil(t.left) + ")" + "(" + Tree2strUtil(t.right) + ")";
+            else
+                if (t.left == null) return t.val + "()" + "(" + Tree2strUtil(t.right) + ")";
+            else return t.val + "(" + Tree2strUtil(t.left) + ")";
+        }
 
     }
 }

@@ -148,6 +148,8 @@ namespace InterviewProblemNSolutions
             SmallestRangeII();
             RotateList();
             AllPossibleFullBinaryTrees();
+            ConstructStringFromBinaryTree();
+            FindDuplicateSubtrees();
 
 
             // String Matching Algorithm
@@ -2414,6 +2416,21 @@ namespace InterviewProblemNSolutions
                 foreach (TreeNode FullBinaryTree in DailyProblem.AllPossibleFBT(n, new Dictionary<int, List<TreeNode>>()))
                     FullBinaryTree.InOrder();
             }
+        }
+
+
+        public static void ConstructStringFromBinaryTree()
+        {
+            // https://leetcode.com/problems/construct-string-from-binary-tree/
+            Utility.Print("606. Construct String from Binary Tree");
+            TreeNode root = new TreeNode(1)
+            {
+                left = new TreeNode(2) { left = new TreeNode(4) },
+                right = new TreeNode(3)
+            };
+            root.InOrder();
+            Console.WriteLine($" Construct a string consists of parenthesis and integers from a binary tree" +
+                $"\n with the preorder traversal way. => {DailyProblem.Tree2str(root)}");
         }
 
 
