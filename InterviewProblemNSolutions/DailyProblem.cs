@@ -5003,5 +5003,39 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(2^N)
+        public static IList<TreeNode> AllPossibleFBT(int N, Dictionary<int, List<TreeNode>> dict)
+        {
+            /* Every full binary tree T with 3 or more nodes, has 2 children at its root.
+             * Each of those children left and right are themselves full binary trees.
+             * 
+             * Thus, for N≥3, we can formulate the recursion:
+             * FBT(N) = [All trees with left child from FBT(x)and right child from FBT(N−1−x), for all x].
+             */
+            if (!dict.ContainsKey(N))
+            {
+                List<TreeNode> ans = new List<TreeNode>();
+                if (N == 1) ans.Add(new TreeNode(0));
+                else if (N % 2 == 1)
+                {
+                    for (int x = 0; x < N; x++)
+                    {
+                        int y = N - 1 - x;
+                        foreach (var fbtX in AllPossibleFBT(x, dict))
+                            foreach (var fbtY in AllPossibleFBT(y, dict))
+                            {
+                                TreeNode root = new TreeNode(0)
+                                { left = fbtX, right = fbtY };
+                                ans.Add(root);
+                            }
+                    }
+                }
+                dict.Add(N, ans);
+            }
+            return dict[N];
+        }
+
+
+
     }
 }

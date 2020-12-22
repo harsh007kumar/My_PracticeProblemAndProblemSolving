@@ -147,6 +147,7 @@ namespace InterviewProblemNSolutions
             DecodedStringAtIndex();
             SmallestRangeII();
             RotateList();
+            AllPossibleFullBinaryTrees();
 
 
             // String Matching Algorithm
@@ -2400,6 +2401,23 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine();
             }
         }
+
+
+        public static void AllPossibleFullBinaryTrees()
+        {
+            // https://leetcode.com/problems/all-possible-full-binary-trees/submissions/
+            Utility.Print("894. All Possible Full Binary Trees");
+            int[] N = { 0, 1, 5, 8};
+            foreach (var n in N)
+            {
+                Console.WriteLine($"\n Below are no of different FullBinaryTree with N '{n}' total nodes");
+                foreach (TreeNode FullBinaryTree in DailyProblem.AllPossibleFBT(n, new Dictionary<int, List<TreeNode>>()))
+                    FullBinaryTree.InOrder();
+            }
+        }
+
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
