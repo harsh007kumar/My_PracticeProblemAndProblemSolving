@@ -5088,5 +5088,33 @@ namespace InterviewProblemNSolutions
                 result.Add(duplicate);
             return result;
         }
+
+
+        // Time O(n) || Space O(n), where n = no of elements in nums2
+        public static int[] NextGreaterElementI(int[] nums1, int[] nums2)
+        {
+            Dictionary<int, int> nextHighest = new Dictionary<int, int>(nums2.Length);
+            // stores next highest for each element in nums2
+            Stack<int> st = new Stack<int>(nums2.Length);
+
+            // start reading from end of nums2
+            for (int i = nums2.Length - 1; i >= 0; i--)
+            {
+                // remove all smaller or equal to numbers from Stack till stack is not empty
+                while (st.Count > 0 && st.Peek() <= nums2[i])
+                    st.Pop();
+                // no add current number to dictionary along with its nextHighest value is Stack is not empty else append -1
+                nextHighest.Add(nums2[i], st.Count != 0 ? st.Peek() : -1);
+                st.Push(nums2[i]);
+            }
+
+            int[] result = new int[nums1.Length];
+            // fetch nextHighest for all required numbers from dictionary and store in result array
+            for (int i = 0; i < nums1.Length; i++)
+                result[i] = nextHighest[nums1[i]];
+
+            return result;
+        }
+
     }
 }

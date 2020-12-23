@@ -150,6 +150,7 @@ namespace InterviewProblemNSolutions
             AllPossibleFullBinaryTrees();
             ConstructStringFromBinaryTree();
             FindDuplicateSubtrees();
+            NextGreaterElementI();
 
 
             // String Matching Algorithm
@@ -2453,6 +2454,17 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void NextGreaterElementI()
+        {
+            // https://leetcode.com/problems/next-greater-element-i/
+            Utility.Print("496. Next Greater Element I");
+            int[] nums1 = { 4, 1, 2 };
+            int[] nums2 = { 1, 3, 4, 2 };
+            nums1.Print("Nums1");
+            nums2.Print("Nums2");
+            int[] nextHighest = DailyProblem.NextGreaterElementI(nums1, nums2);
+            nextHighest.Print("Next Highest for Nums1");
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
