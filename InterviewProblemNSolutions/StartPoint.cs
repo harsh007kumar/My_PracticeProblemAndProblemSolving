@@ -152,6 +152,9 @@ namespace InterviewProblemNSolutions
             FindDuplicateSubtrees();
             NextGreaterElementI();
             NextGreaterElementII();
+            NextGreaterElementIII();
+
+
 
 
             // String Matching Algorithm
@@ -2476,6 +2479,17 @@ namespace InterviewProblemNSolutions
             nums.Print("Nums");
             int[] nextHighest = DailyProblem.NextGreaterElementII(nums);
             nextHighest.Print("Next Highest for Nums");
+        }
+
+
+        public static void NextGreaterElementIII()
+        {
+            // https://leetcode.com/problems/next-greater-element-iii/
+            Utility.Print("556. Next Greater Element III");
+            int[] nArr = { 12, 21, int.MaxValue, 1332 , 1999999999 };
+            foreach (var n in nArr)
+                Console.WriteLine($" Smallest integer which has exactly the same digits existing in the integer n \'{n}\'" +
+                    $"\n and is greater in value than n is: {DailyProblem.NextGreaterElementIII(n)}\n");
         }
 
 

@@ -5144,5 +5144,64 @@ namespace InterviewProblemNSolutions
             }
             return result;
         }
+
+
+        // Time O(nLogn) || Space O(n) , n = no of digits in input 'n'
+        public static int NextGreaterElementIII(int n)
+        {
+            /* Start from right(least significant digits) find a digit which is smaller than one to its right
+             *      now place bigger digit at current smaller digit place and sort all the remaing digit in asc order to get next highest
+             *  If so such digit exists return -1
+             */
+            int num = n;
+            List<int> ls = new List<int>(10);
+            // Store individual digit starting from least significant ones in list
+            while (num > 0)
+            {
+                ls.Add(num % 10);
+                num /= 10;
+            }
+
+            //// if single digit number or n is intMax value
+            //if (ls.Count == 1 || n = int.MaxValue) return -1;
+
+            bool foundSmaller = false;
+            for (int i = 1; i < ls.Count; i++)
+            {
+                if (ls[i] < ls[i - 1])
+                {
+                    // replace current digit with least significant digit greater than current digit i.e. ls[i]
+                    for (int k = 0; k < i; k++)
+                        if (ls[k] > ls[i])
+                        {
+                            int temp = ls[i];
+                            ls[i] = ls[k];
+                            ls[k] = temp;
+                            break;
+                        }
+                    // now sort all digit (less significant ones to get next smallest number possible)
+                    ls.Sort(0, i, new Desc());
+                    foundSmaller = true;
+                    break;
+                }
+                
+            }
+
+            if (!foundSmaller) return -1;   // all increasing digits only when starting from least significant to most significant
+
+            long result = 0;
+            // build the nextGreaterNumber
+            for (int i = ls.Count - 1; i >= 0; i--)
+                result = result * 10 + ls[i];
+
+            return result <= int.MaxValue ? (int)result : -1;
+        }
+        public class Desc : IComparer<int>
+        {
+            public int Compare(int n1, int n2) => n2.CompareTo(n1);
+        }
+
+
+
     }
 }
