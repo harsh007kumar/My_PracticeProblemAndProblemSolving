@@ -5116,5 +5116,33 @@ namespace InterviewProblemNSolutions
             return result;
         }
 
+
+
+        // Time O(n) || Space O(n), where n = no of elements in nums
+        public static int[] NextGreaterElementII(int[] nums)
+        {
+            int[] result = new int[nums.Length];
+
+            // stores next highest for each element in nums, prepare Stack before start iterating from last element in 2nd loop
+            Stack<int> st = new Stack<int>(nums.Length);
+            for (int i = nums.Length - 1; i >= 0; i--)
+            {
+                // remove all smaller or equal to numbers from Stack till stack is not empty
+                while (st.Count > 0 && st.Peek() <= nums[i])
+                    st.Pop();
+                st.Push(nums[i]);
+            }
+
+            // start reading from end of nums
+            for (int i = nums.Length - 1; i >= 0; i--)
+            {
+                // remove all smaller or equal to numbers from Stack till stack is not empty
+                while (st.Count > 0 && st.Peek() <= nums[i])
+                    st.Pop();
+                result[i] = st.Count > 0 ? st.Peek() : -1;
+                st.Push(nums[i]);
+            }
+            return result;
+        }
     }
 }
