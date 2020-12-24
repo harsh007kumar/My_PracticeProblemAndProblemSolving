@@ -2454,7 +2454,9 @@ namespace InterviewProblemNSolutions
                     right = new TreeNode(4)
                 }
             };
-            foreach (TreeNode duplicateSubtree in DailyProblem.FindDuplicateSubtrees(root, new HashSet<string>(), new Dictionary<string, TreeNode>()))
+            //var duplicates = DailyProblem.FindDuplicateSubtrees(root, new HashSet<string>(), new Dictionary<string, TreeNode>());
+            var duplicates = DailyProblem.FindDuplicateSubtreesFaster(root);
+            foreach (TreeNode duplicateSubtree in duplicates)
                 duplicateSubtree.InOrder();
         }
 

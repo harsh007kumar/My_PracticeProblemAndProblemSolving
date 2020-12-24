@@ -5088,6 +5088,50 @@ namespace InterviewProblemNSolutions
                 result.Add(duplicate);
             return result;
         }
+        // Time O(n) || Space O(n)
+        public static IList<TreeNode> FindDuplicateSubtreesFaster(TreeNode root)
+        {
+            HashSet<string> uniqueTrees = new HashSet<string>();
+            Dictionary<string, TreeNode> duplicates = new Dictionary<string, TreeNode>();
+
+            FindDuplicateSubtreesUtil(root, uniqueTrees, duplicates);
+
+            List<TreeNode> result = new List<TreeNode>(duplicates.Count);
+
+            // remove empty node duplicate if present
+            if (duplicates.ContainsKey("()"))
+                duplicates.Remove("()");
+
+            foreach (var duplicate in duplicates.Values)
+                result.Add(duplicate);
+
+            return result;
+        }
+        // Time O(n) || Space O(1)
+        public static string FindDuplicateSubtreesUtil(TreeNode root, HashSet<string> uniqueTrees, Dictionary<string, TreeNode> duplicates)
+        {
+            if (root == null) return "()";
+            string leftSubTree = FindDuplicateSubtreesUtil(root.left, uniqueTrees, duplicates);
+            string rtSubTree = FindDuplicateSubtreesUtil(root.right, uniqueTrees, duplicates);
+
+            if (uniqueTrees.Contains(leftSubTree))
+            {
+                if (!duplicates.ContainsKey(leftSubTree))
+                    duplicates.Add(leftSubTree, root.left);
+            }
+            else
+                uniqueTrees.Add(leftSubTree);
+
+            if (uniqueTrees.Contains(rtSubTree))
+            {
+                if (!duplicates.ContainsKey(rtSubTree))
+                    duplicates.Add(rtSubTree, root.right);
+            }
+            else
+                uniqueTrees.Add(rtSubTree);
+
+            return root.val + "(" + leftSubTree + rtSubTree + ")";
+        }
 
 
         // Time O(n) || Space O(n), where n = no of elements in nums2
