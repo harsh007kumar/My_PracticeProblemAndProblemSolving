@@ -153,6 +153,7 @@ namespace InterviewProblemNSolutions
             NextGreaterElementI();
             NextGreaterElementII();
             NextGreaterElementIII();
+            InsertIntoBST();
 
 
 
@@ -2493,7 +2494,25 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void InsertIntoBST()
+        {
+            // https://leetcode.com/problems/insert-into-a-binary-search-tree/
+            Utility.Print("701. Insert into a Binary Search Tree");
+            TreeNode root = new TreeNode(4)
+            {
+                left = new TreeNode(2)
+                {
+                    left = new TreeNode(1),
+                    right = new TreeNode(3)
+                },
+                right = new TreeNode(7)
+            };
+            root.InOrder();
+            int val = 5;
+            DailyProblem.InsertIntoBST(root, val);
+            Console.WriteLine($" BST after inserting \'{val}\'");
+            root.InOrder();
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

@@ -5203,5 +5203,22 @@ namespace InterviewProblemNSolutions
 
 
 
+        // Time O(n) || Auxillary Space O(1) || Recursive Space O(n)
+        public static TreeNode InsertIntoBST(TreeNode root, int val)
+        {
+            if (root == null) 
+                return root = new TreeNode(val);
+
+            // if value is bigger than root value, insert in right-Subtree
+            if (root.val < val)
+                root.right = InsertIntoBST(root.right, val);
+            // Insert in left-Subtree
+            else
+                root.left = InsertIntoBST(root.left, val);
+
+            return root;
+        }
+
+
     }
 }
