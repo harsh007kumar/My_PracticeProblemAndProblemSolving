@@ -155,6 +155,7 @@ namespace InterviewProblemNSolutions
             NextGreaterElementIII();
             InsertIntoBST();
             FindDiagonalOrder();
+            NodesAtKDistanceFromGivenNodeInBinaryTree();
 
 
 
@@ -2518,7 +2519,6 @@ namespace InterviewProblemNSolutions
         }
 
 
-
         public static void FindDiagonalOrder()
         {
             // https://leetcode.com/problems/diagonal-traverse/
@@ -2530,7 +2530,35 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void NodesAtKDistanceFromGivenNodeInBinaryTree()
+        {
+            // https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/
+            Utility.Print("863. All Nodes Distance K in Binary Tree");
+            TreeNode root = new TreeNode(3)
+            {
+                left = new TreeNode(5)
+                {
+                    left = new TreeNode(6),
+                    right = new TreeNode(2)
+                    {
+                        left = new TreeNode(7),
+                        right = new TreeNode(4)
+                    }
+                },
+                right = new TreeNode(1)
+                {
+                    left = new TreeNode(0),
+                    right = new TreeNode(8)
+                }
+            };
+            root.InOrder("BINARY TREE");
+            TreeNode target = root.left;
+            int k = 2;
+            Console.WriteLine($" Printing all nodes which are kth:{k} distance away Target:{target.val} below:");
+            foreach (var kthDistNode in DailyProblem.NodesAtKDistanceFromGivenNodeInBinaryTree(root,target,k))
+                Console.Write($" {kthDistNode} ||");
+            Console.WriteLine();
+        }
 
 
 

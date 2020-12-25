@@ -5305,5 +5305,85 @@ namespace InterviewProblemNSolutions
         }
 
 
+        /// <summary>
+        /// Given a binary tree (with root node root), a target node, and an integer value K.
+        /// Return a list of the values of all nodes that have a distance K from the target node.
+        /// The answer can be returned in any order.
+        /// Time O(n) 2-Pass || Space O(n)
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="target"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
+        public static IList<int> NodesAtKDistanceFromGivenNodeInBinaryTree(TreeNode root, TreeNode target, int k)
+        {
+            // DFS
+            Dictionary<TreeNode, TreeNode> nodeParent = new Dictionary<TreeNode, TreeNode>();
+            dfs(root, null);
+
+            // Queue which will eventually hold all kth Distance nodes from given Target Node
+            Queue<TreeNode> q = new Queue<TreeNode>();
+            q.Enqueue(null);        // in case k = 0
+            q.Enqueue(target);      // starting Node for BFS
+
+            // as we don't want to add target node itself or null nodes to ans
+            HashSet<TreeNode> seen = new HashSet<TreeNode>();
+            seen.Add(target);
+            seen.Add(null);
+
+            int distance = 0;
+            List<int> ans = new List<int>();
+            // BFS
+            while (q.Count > 0)
+            {
+                TreeNode curr = q.Dequeue();
+                if (curr == null)
+                {
+                    if (k == distance)
+                        while (q.Count > 0)
+                            ans.Add(q.Dequeue().val);
+                    else
+                    {
+                        q.Enqueue(null);
+                        distance++;
+                    }
+                }
+                else
+                {
+                    if (!seen.Contains(curr.left))          // add left child if not already seen
+                    {
+                        seen.Add(curr.left);
+                        q.Enqueue(curr.left);
+                    }
+                    if (!seen.Contains(curr.right))         // add right child if not already seen
+                    {
+                        seen.Add(curr.right);
+                        q.Enqueue(curr.right);
+                    }
+                    TreeNode parentNode = nodeParent[curr];
+                    if (!seen.Contains(parentNode))         // add node parent if not already seen
+                    {
+                        seen.Add(parentNode);
+                        q.Enqueue(parentNode);
+                    }
+                }
+            }
+
+            return ans;
+
+            // local func to create node-parent mapping
+            void dfs(TreeNode node, TreeNode parent)
+            {
+                if (node != null)
+                {
+                    nodeParent.Add(node, parent);
+                    dfs(node.left, node);
+                    dfs(node.right, node);
+                }
+            }
+        }
+
+
+
     }
 }
