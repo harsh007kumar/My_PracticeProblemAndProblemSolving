@@ -156,7 +156,7 @@ namespace InterviewProblemNSolutions
             InsertIntoBST();
             FindDiagonalOrder();
             NodesAtKDistanceFromGivenNodeInBinaryTree();
-
+            LeafSimilarTrees();
 
 
 
@@ -2559,6 +2559,54 @@ namespace InterviewProblemNSolutions
                 Console.Write($" {kthDistNode} ||");
             Console.WriteLine();
         }
+
+
+        public static void LeafSimilarTrees()
+        {
+            // https://leetcode.com/problems/leaf-similar-trees/
+            Utility.Print("872. Leaf-Similar Trees");
+            TreeNode root1 = new TreeNode(3)
+            {
+                left = new TreeNode(5)
+                {
+                    left = new TreeNode(6),
+                    right = new TreeNode(2)
+                    {
+                        left = new TreeNode(7),
+                        right = new TreeNode(4)
+                    }
+                },
+                right = new TreeNode(1)
+                {
+                    left = new TreeNode(9),
+                    right = new TreeNode(8)
+                }
+            };
+            TreeNode root2 = new TreeNode(3)
+            {
+                left = new TreeNode(5)
+                {
+                    left = new TreeNode(6),
+                    right = new TreeNode(7)
+                },
+                right = new TreeNode(1)
+                {
+                    left = new TreeNode(4),
+                    right = new TreeNode(2)
+                    {
+                        left = new TreeNode(9),
+                        right = new TreeNode(8)
+                    }
+                }
+            };
+            root1.InOrder("BINARY TREE-1");
+            root2.InOrder("BINARY TREE-2");
+            Console.WriteLine($" Leaves of above 2 binary trees, from left to right order," +
+                $" the values of those leaves form a leaf value sequence: {DailyProblem.LeafSimilar(root1, root2)}");
+        }
+
+
+
 
 
 

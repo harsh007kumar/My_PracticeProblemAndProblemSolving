@@ -5384,6 +5384,34 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) 1-Pass thru each Tree || Space O(n)
+        public static bool LeafSimilar(TreeNode root1, TreeNode root2)
+        {
+            List<int> ls1 = new List<int>();
+            GetLeafNodes(root1);
+            int matchWith = 0;
+            // match all leaf nodes from both trees and also check if if we have matched all leafs
+            return MatchSecondLeafWithFirst(root2, ref matchWith) && matchWith == ls1.Count;
+
+            // add all leaf nodes from first Tree to a List
+            void GetLeafNodes(TreeNode root)
+            {
+                if (root == null) return;
+                if (root.left == null && root.right == null)
+                    ls1.Add(root.val);
+                GetLeafNodes(root.left);
+                GetLeafNodes(root.right);
+            }
+            // Now check foreach leaf nodes from second Tree with corrospoding leaf node from first
+            bool MatchSecondLeafWithFirst(TreeNode root, ref int i)
+            {
+                if (root == null) return true;
+                if (root.left == null && root.right == null)
+                    // if 2nd tree has more leafs than 1st or leafs value don't match return false
+                    if (i >= ls1.Count || ls1[i++] != root.val) return false;
+                return MatchSecondLeafWithFirst(root.left, ref i) && MatchSecondLeafWithFirst(root.right, ref i);
+            }
+        }
 
     }
 }
