@@ -191,9 +191,10 @@ namespace InterviewProblemNSolutions
         }
 
         // Iterative InOrder Traversal Time O(N) || Space O(N)
-        public static void InOrder(this TreeNode current)
+        public static void InOrder(this TreeNode current, string msg = "")
         {
             if (current == null) return;
+            if (msg != "") Console.WriteLine($" {msg}");
             Stack<TreeNode> st = new Stack<TreeNode>();
             while(true)
             {
