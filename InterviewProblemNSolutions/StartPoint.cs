@@ -154,6 +154,7 @@ namespace InterviewProblemNSolutions
             NextGreaterElementII();
             NextGreaterElementIII();
             InsertIntoBST();
+            FindDiagonalOrder();
 
 
 
@@ -2515,6 +2516,23 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" BST after inserting \'{val}\'");
             root.InOrder();
         }
+
+
+
+        public static void FindDiagonalOrder()
+        {
+            // https://leetcode.com/problems/diagonal-traverse/
+            Utility.Print("498. Diagonal Traverse");
+            int[][] matrix = { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 } };
+            matrix.Print("Input MATRIX");
+            int[] diagonalOrder = DailyProblem.FindDiagonalOrder(matrix);
+            diagonalOrder.Print("Diagonal Order");
+        }
+
+
+
+
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

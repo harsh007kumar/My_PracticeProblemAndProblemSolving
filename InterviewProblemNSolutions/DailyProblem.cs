@@ -5264,5 +5264,46 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(rows*cols) || Space O(1)
+        public static int[] FindDiagonalOrder(int[][] matrix)
+        {
+            int rows = matrix.Length;
+            if (rows == 0) return new int[0];
+            int cols = matrix[0].Length;
+
+            int[] ans = new int[rows * cols];
+            int i = 0, r = 0, c = 0;
+            bool up = true;
+
+            while (i < ans.Length)
+                if (up)
+                {
+                    if (isValidCell(r, c))
+                        ans[i++] = matrix[r--][c++];
+                    else                    // Change direction
+                    {
+                        up = !up;
+                        if (isValidCell(++r, c)) { }
+                        else { ++r; --c; }
+                    }
+                }
+                else
+                {
+                    if (isValidCell(r, c))
+                        ans[i++] = matrix[r++][c--];
+                    else                    // Change direction
+                    {
+                        up = !up;
+                        if (isValidCell(r, ++c)) { }
+                        else { --r; ++c; }
+                    }
+                }
+
+            return ans;
+            // local func to check validCell
+            bool isValidCell(int row, int col) => (row < 0 || col < 0 || row >= rows || col >= cols) ? false : true;
+        }
+
+
     }
 }
