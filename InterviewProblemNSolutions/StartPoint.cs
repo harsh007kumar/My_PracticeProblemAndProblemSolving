@@ -157,7 +157,8 @@ namespace InterviewProblemNSolutions
             FindDiagonalOrder();
             NodesAtKDistanceFromGivenNodeInBinaryTree();
             LeafSimilarTrees();
-
+            CPU_OptimizationProblem();
+            AmazonShoppingProblem();
 
 
             // String Matching Algorithm
@@ -2607,7 +2608,26 @@ namespace InterviewProblemNSolutions
 
 
 
+        public static void CPU_OptimizationProblem()
+        {
+            Utility.Print("CPU Optimization Problem");
+            int[][] avgUtil = { new int[] { 30, 5, 4, 8, 19, 89 },
+                                new int[] { 5, 10, 88 },
+                                new int[] { 59, 81, 28, 83, 91, 24, 43, 10, 6, 75, 92, 57, 12, 3, 20, 63, 99, 32, 51, 96, 63, 29, 25, 5, 55, 95, 25, 45, 52, 88, 54, 82, 30, 30, 32, 80, 92, 44, 64, 4, 7, 48, 53, 19, 86, 66, 48, 64, 49, 84, 55, 44, 21, 2, 11, 49, 46, 43, 88 } };
+            int[] instance = { 5, 1, 94 };
+            for (int i = 0; i < instance.Length; i++)
+                Console.WriteLine($" {DailyProblem.CPU_OptimizationProblem(instance[i], avgUtil[i].ToList())}\n");
+        }
 
+
+        public static void AmazonShoppingProblem()
+        {
+            Utility.Print("AmazonShoppingProblem:\n Given Count of Products and 2 Array to indicates Connection b/w To-From product,\n Find Min Outer Trio Sum");
+            int[] productsFrom = { 2, 3, 5, 1 };
+            int[] productTo = { 1, 6, 1, 7 };
+            int noOfProducts = 7;
+            Console.WriteLine($" Minimum Outer Trio Sum = {DailyProblem.GetMinTrioSum(noOfProducts, productsFrom.ToList(), productTo.ToList())}");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

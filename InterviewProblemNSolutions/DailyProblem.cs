@@ -5413,5 +5413,68 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+
+        // Time O(n) || Space O(1)
+        // After each increase or decrease operation CPU doesn't monitors utilization for 10 seconds
+        public static int CPU_OptimizationProblem(int instances, List<int> averageUtil)
+        {
+            int i = 0;
+            long upperLimit = long.MaxValue;// (long)(2 * Math.Pow(10, 8));
+
+            while (i < averageUtil.Count)
+            {
+                if (averageUtil[i] < 25)
+                {
+                    if (instances > 1)
+                    {
+                        instances = (int)Math.Ceiling(instances / 2.0);
+                        i += 9;
+                    }
+                }
+                else if (averageUtil[i] > 60)
+                {
+                    if (upperLimit >= 2 * (long)instances)
+                    {
+                        instances *= 2;
+                        i += 9;
+                    }
+                }
+                i++;
+            }
+            return instances;
+        }
+
+
+        // Time O(Max(E,V^3)) || Space O(V), V = no of productsNodes & E = no of edges i.e. Total no of Connections b/w 2 products
+        public static int GetMinTrioSum(int productsNodes, List<int> productsFrom, List<int> productsTo)
+        {
+            int ans = int.MaxValue;
+            HashSet<int>[] graph = new HashSet<int>[productsNodes + 1];
+            // Initialize each Vertex
+            for (int i = 0; i < productsNodes; i++)
+                graph[i + 1] = new HashSet<int>();  // Note: Products are 1 indexed
+
+            // Create the mapping i.e Graph as per given relations
+            for (int i = 0; i < productsFrom.Count; i++)
+            {
+                int u = productsFrom[i];
+                int v = productsTo[i];
+
+                graph[u].Add(v);
+                graph[v].Add(u);
+            }
+
+            for (int i = 1; i <= productsNodes; i++)
+                for (int j = 1; j <= productsNodes; j++)
+                    for (int k = 1; k <= productsNodes; k++)
+                        // given i,j,k form an Trio i.e. Triangle than compute their Outer Product Sum
+                        if (graph[i].Contains(j) && graph[i].Contains(k) &&
+                            graph[j].Contains(i) && graph[j].Contains(k) &&
+                            graph[k].Contains(j) && graph[k].Contains(i))
+                            ans = Math.Min(ans, graph[i].Count + graph[j].Count + graph[k].Count - 6);
+
+            return ans == int.MaxValue ? -1 : ans;
+        }
     }
 }
