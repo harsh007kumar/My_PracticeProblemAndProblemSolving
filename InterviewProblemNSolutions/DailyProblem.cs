@@ -5476,5 +5476,33 @@ namespace InterviewProblemNSolutions
 
             return ans == int.MaxValue ? -1 : ans;
         }
+
+
+
+        // Time (2^N) reduced to O(n) using 'DP/Cache' || Space O(n) // DP Top-Down Approach
+        public static int NumDecodings(string s, Dictionary<int, int> cache, int i = 0)
+        {
+            // reached end of the entire encoded string 's' return 1
+            if (i == s.Length) return 1;
+            // already precomputed ans for given index
+            if (cache.ContainsKey(i))
+                return cache[i];
+
+            int ways = 0;
+            if (i < s.Length && s[i] != '0')
+            {
+                // if we use just single digit now
+                ways += NumDecodings(s, cache, i + 1);
+                // if we use double digits now
+                if (i + 1 < s.Length && ((s[i] - '0') * 10 + s[i + 1] - '0') < 27)
+                    ways += NumDecodings(s, cache, i + 2);
+            }
+            // add current index ans to cache so we can utilize it later
+            cache.Add(i, ways);
+            return ways;
+        }
+
+
+
     }
 }

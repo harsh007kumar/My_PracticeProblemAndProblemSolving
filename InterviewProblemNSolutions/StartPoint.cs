@@ -159,6 +159,9 @@ namespace InterviewProblemNSolutions
             LeafSimilarTrees();
             CPU_OptimizationProblem();
             AmazonShoppingProblem();
+            DecodeWays();
+
+
 
 
             // String Matching Algorithm
@@ -2607,7 +2610,6 @@ namespace InterviewProblemNSolutions
         }
 
 
-
         public static void CPU_OptimizationProblem()
         {
             Utility.Print("CPU Optimization Problem");
@@ -2628,6 +2630,19 @@ namespace InterviewProblemNSolutions
             int noOfProducts = 7;
             Console.WriteLine($" Minimum Outer Trio Sum = {DailyProblem.GetMinTrioSum(noOfProducts, productsFrom.ToList(), productTo.ToList())}");
         }
+
+
+        public static void DecodeWays()
+        {
+            // https://leetcode.com/problems/decode-ways/
+            Utility.Print("91. Decode Ways");
+            string[] sArr = { "12", "226", "0", "02", "1", "2264565647168725731756371537107820" };
+            foreach (var encodedString in sArr)
+                Console.WriteLine($" String \'{encodedString}\' can be decoded in : \'{DailyProblem.NumDecodings(encodedString, new Dictionary<int, int>(encodedString.Length))}\' ways\n");
+        }
+
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
