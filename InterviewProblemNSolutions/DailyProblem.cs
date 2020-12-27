@@ -4299,6 +4299,64 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(n), n = length of arr
+        public static int JumpGameIV(int[] arr)
+        {
+            int l = arr.Length;
+            if (l <= 1) return 0;       // 1st index is last index, No jumps req
+
+            // Create a UnDirected graph, grp of indices with similar values together
+            Dictionary<int, List<int>> graph = new Dictionary<int, List<int>>(l);
+            for (int i = 0; i < l; i++)
+                if (!graph.ContainsKey(arr[i])) graph.Add(arr[i], new List<int>() { i });
+                else graph[arr[i]].Add(i);
+
+
+            int jumps = 0;
+
+            bool[] visited = new bool[l];
+            List<int> curr = new List<int>();
+            curr.Add(0);                // Start from 0th index
+            visited[0] = true;
+            List<int> next = null;      // used to store next layer indices
+            // BFS
+            while (curr.Count > 0)
+            {
+                next = new List<int>();
+                // iterate thru all index in current list
+                foreach (int i in curr)
+                {
+                    // reached last index than return
+                    if (i == l - 1) return jumps;
+                    foreach (int sameValueIndex in graph[arr[i]])
+                        if (!visited[sameValueIndex])    // Not already Visited
+                        {
+                            visited[sameValueIndex] = true;
+                            next.Add(sameValueIndex);
+                        }
+                    // remove all same value index from graph as we have added them to the next list (avoid duplicate efforts)
+                    graph[arr[i]].Clear();
+
+                    // add index on left if not already visited
+                    if (i - 1 >= 0 && !visited[i - 1])
+                    {
+                        next.Add(i - 1);
+                        visited[i - 1] = true;
+                    }
+                    // add index on right if not already visited
+                    if (i + 1 < l && !visited[i + 1])
+                    {
+                        next.Add(i + 1);
+                        visited[i + 1] = true;
+                    }
+                }
+                curr = next;
+                jumps++;
+            }
+            return -1;
+        }
+
+
         // Iterative InOrder traversal, Time O(N) Space O(H)
         public static TreeNode IncreasingOrderSearchTree(TreeNode root)
         {

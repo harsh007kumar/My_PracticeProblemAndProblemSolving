@@ -122,6 +122,7 @@ namespace InterviewProblemNSolutions
             JumpGame();
             JumpGameII();
             JumpGameIII();
+            JumpGameIV();
             LinkedListRandomNode();
             IncreasingOrderSearchTree();
             KthFactorOfN();
@@ -157,6 +158,7 @@ namespace InterviewProblemNSolutions
             FindDiagonalOrder();
             NodesAtKDistanceFromGivenNodeInBinaryTree();
             LeafSimilarTrees();
+            RedundantConnection();
             CPU_OptimizationProblem();
             AmazonShoppingProblem();
             DecodeWays();
@@ -2004,6 +2006,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void JumpGameIV()
+        {
+            // https://leetcode.com/problems/jump-game-iv/
+            Utility.Print("1345. Jump Game IV");
+            int[][] inputArr = { new int[] { 100, -23, -23, 404, 100, 23, 23, 23, 3, 404 },
+                                    new int[] { 7 },
+                                    new int[] { 7, 6, 9, 6, 9, 6, 9, 7 },
+                                    new int[] { 6, 1, 9 },
+                                    new int[] { 11, 22, 7, 7, 7, 7, 7, 7, 7, 22, 13 } };
+            foreach (var arr in inputArr)
+            {
+                arr.Print("Jump Array");
+                Console.WriteLine($" You need min \'{DailyProblem.JumpGameIV(arr)}\' jumps to reach last index from first");
+            }
+        }
+
+
         public static void LinkedListRandomNode()
         {
             // https://leetcode.com/problems/linked-list-random-node/
@@ -2640,7 +2659,6 @@ namespace InterviewProblemNSolutions
             foreach (var encodedString in sArr)
                 Console.WriteLine($" String \'{encodedString}\' can be decoded in : \'{DailyProblem.NumDecodings(encodedString, new Dictionary<int, int>(encodedString.Length))}\' ways\n");
         }
-
 
 
 
