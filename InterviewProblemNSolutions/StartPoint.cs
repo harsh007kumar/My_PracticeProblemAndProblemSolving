@@ -162,7 +162,7 @@ namespace InterviewProblemNSolutions
             CPU_OptimizationProblem();
             AmazonShoppingProblem();
             DecodeWays();
-
+            ReachANumber();
 
 
 
@@ -2675,6 +2675,17 @@ namespace InterviewProblemNSolutions
             foreach (var encodedString in sArr)
                 Console.WriteLine($" String \'{encodedString}\' can be decoded in : \'{DailyProblem.NumDecodings(encodedString, new Dictionary<int, int>(encodedString.Length))}\' ways\n");
         }
+
+
+        public static void ReachANumber()
+        {
+            // https://leetcode.com/problems/reach-a-number/
+            Utility.Print("754. Reach a Number");
+            int[] targetArr = { 3, 2, 1, 8 };
+            foreach (int target in targetArr) 
+                Console.WriteLine($" Min Steps to Reach to Target \'{target}\' is : {DailyProblem.ReachANumber(target)}");
+        }
+
 
 
 
