@@ -2629,6 +2629,22 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void RedundantConnection()
+        {
+
+            // https://leetcode.com/problems/redundant-connection/
+            Utility.Print("684. Redundant Connection");
+            int[][][] edgesArr = { new int[][] { new int[] { 1, 2 }, new int[] { 1, 3 }, new int[] { 2, 3 } },
+                                   new int[][] { new int[] { 1, 2 }, new int[] { 2, 3 }, new int[] { 3, 4 }, new int[] { 1, 4 }, new int[] { 1, 5 } } };
+            foreach (var edges in edgesArr)
+            {
+                edges.Print("UnDirected Graph Edges");
+                int[] redundantEdge = DailyProblem.FindRedundantConnection(edges);
+                Console.WriteLine($" Removing Edge: u({redundantEdge[0]})->v({redundantEdge[1]}) will make above Graph Cycle Free\n");
+            }
+        }
+
+
         public static void CPU_OptimizationProblem()
         {
             Utility.Print("CPU Optimization Problem");

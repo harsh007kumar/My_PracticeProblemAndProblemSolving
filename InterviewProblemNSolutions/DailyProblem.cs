@@ -5472,6 +5472,79 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(N) || Space O(N), N = no of edges
+        public static int[] FindRedundantConnection(int[][] edges)
+        {
+            int V = edges.Length;
+            List<int>[] graph = new List<int>[V + 1];
+            // Since Nodes are 1 indexed
+            for (int i = 0; i < V; i++)
+            {
+                int u = edges[i][0];
+                int v = edges[i][1];
+                if (graph[u] == null) graph[u] = new List<int>();
+                if (graph[v] == null) graph[v] = new List<int>();
+
+                graph[u].Add(v);
+                graph[v].Add(u);
+            }
+            // Find the Cycle and add Nodes in cycle to HashSet
+            HashSet<int> cycle = new HashSet<int>();
+            for (int i = 1; i <= V; i++)
+                if (graph[i].Count > 1)  // In Order for Cycle to Pass thru Node it must have atleast 2 edges
+                    if (DetectCycle(graph, i, cycle, new int[V + 1]))
+                        break;
+
+            for (int i = V - 1; i >= 0; i--)
+            {
+                int u = edges[i][0];
+                int v = edges[i][1];
+                if (cycle.Contains(u) && cycle.Contains(v))
+                    return new int[] { u, v };
+            }
+            return new int[0];
+        }
+        // Time O(V+E) || Space O(V)
+        public static bool DetectCycle(List<int>[] graph, int source, HashSet<int> cycle, int[] visited)
+        {
+            Queue<int> q = new Queue<int>(visited.Length);
+            int[] parent = new int[visited.Length+1];
+
+            q.Enqueue(source);
+            visited[source] = 1;        // Marked Visited & in Queue
+            parent[source] = -1;
+            while (q.Count > 0)
+            {
+                int u = q.Dequeue();
+                visited[source] = -1;   // Mark Visited and Not-in Queue  
+                foreach (int v in graph[u])
+                    if (visited[v] == 0)   // not visited yet
+                    {
+                        parent[v] = u;
+                        visited[v] = 1;
+                        q.Enqueue(v);
+                    }
+                    else if (visited[v] == 1)// already visited, cycle found
+                    {
+                        cycle.Add(u);
+                        int node = v;
+                        while (node != -1)
+                        {
+                            cycle.Add(node);
+                            node = parent[node];
+                        }
+                        //node = u;
+                        //while (node != -1)
+                        //{
+                        //    cycle.Add(node);
+                        //    node = parent[node];
+                        //}
+                        return true;
+                    }
+            }
+            return false;
+        }
+
 
         // Time O(n) || Space O(1)
         // After each increase or decrease operation CPU doesn't monitors utilization for 10 seconds
