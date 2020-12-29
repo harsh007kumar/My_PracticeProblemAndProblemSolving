@@ -5662,9 +5662,48 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Auxiliary Space O(9)=O(1) || Recursive Space O(h), n = no of nodes in tree & h = height of tree
+        public static void PseudoPalindromicPaths(TreeNode root, HashSet<int> digitEncounteredSoFar, ref int pseudoPalindromicCount)
+        {
+            // if current root digit is seen before than remove it 1+1 is even hence palindrome is possible
+            if (digitEncounteredSoFar.Contains(root.val)) digitEncounteredSoFar.Remove(root.val);
+            // if current root digit is never seen before than add it 
+            else digitEncounteredSoFar.Add(root.val);
 
+            // (palindrome is possible if all digits in path from root to leaf have even count and at max 1 digit seen having odd count)
+            if (root.left == null && root.right == null)
+                pseudoPalindromicCount += (digitEncounteredSoFar.Count < 2) ? 1 : 0;
+            else
+            {
+                if (root.left != null) PseudoPalindromicPaths(root.left, digitEncounteredSoFar, ref pseudoPalindromicCount);
+                if (root.right != null) PseudoPalindromicPaths(root.right, digitEncounteredSoFar, ref pseudoPalindromicCount);
+            }
 
+            // Undo the operation done before above recursive call
+            if (digitEncounteredSoFar.Contains(root.val)) digitEncounteredSoFar.Remove(root.val);
+            else digitEncounteredSoFar.Add(root.val);
+        }
+        public static int PseudoPalindromicPaths(TreeNode root, HashSet<int> digitEncounteredSoFar)
+        {
+            if (root == null) return 0;
 
+            // if current root digit is seen before than remove it 1+1 is even hence palindrome is possible
+            if (digitEncounteredSoFar.Contains(root.val)) digitEncounteredSoFar.Remove(root.val);
+            // if current root digit is never seen before than add it 
+            else digitEncounteredSoFar.Add(root.val);
+
+            int pseudoPalindromicCount = PseudoPalindromicPaths(root.left, digitEncounteredSoFar);
+            pseudoPalindromicCount += PseudoPalindromicPaths(root.right, digitEncounteredSoFar);
+            // (palindrome is possible if all digits in path from root to leaf have even count and at max 1 digit seen having odd count)
+            if (root.left == null && root.right == null)
+                pseudoPalindromicCount += (digitEncounteredSoFar.Count < 2) ? 1 : 0;
+
+            // Undo the operation done before above recursive call
+            if (digitEncounteredSoFar.Contains(root.val)) digitEncounteredSoFar.Remove(root.val);
+            else digitEncounteredSoFar.Add(root.val);
+
+            return pseudoPalindromicCount;
+        }
 
     }
 }

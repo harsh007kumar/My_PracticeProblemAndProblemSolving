@@ -163,7 +163,7 @@ namespace InterviewProblemNSolutions
             AmazonShoppingProblem();
             DecodeWays();
             ReachANumber();
-
+            PseudoPalindromicPaths();
 
 
             // String Matching Algorithm
@@ -2687,7 +2687,35 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void PseudoPalindromicPaths()
+        {
+            // https://leetcode.com/problems/pseudo-palindromic-paths-in-a-binary-tree/
+            Utility.Print("1457. Pseudo-Palindromic Paths in a Binary Tree");
+            TreeNode root = new TreeNode(2)
+            {
+                left = new TreeNode(3)
+                {
+                    left = new TreeNode(3),
+                    right = new TreeNode(1)
+                },
+                right = new TreeNode(1)
+                {
+                    left = new TreeNode(1)
+                }
+            };
+            TreeNode root2 = new TreeNode(2)
+            {
+                left = new TreeNode(1)
+                {
+                    left = new TreeNode(1),
+                    right = new TreeNode(3)
+                    { right = new TreeNode(1) }
+                },
+                right = new TreeNode(1)
+            };
+            root.InOrder();
+            Console.WriteLine($" Number of pseudo-palindromic paths going from the root node to leaf nodes are : \'{DailyProblem.PseudoPalindromicPaths(root, new HashSet<int>(9))}\'");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
