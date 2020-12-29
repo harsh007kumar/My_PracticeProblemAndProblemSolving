@@ -2635,7 +2635,9 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/redundant-connection/
             Utility.Print("684. Redundant Connection");
             int[][][] edgesArr = { new int[][] { new int[] { 1, 2 }, new int[] { 1, 3 }, new int[] { 2, 3 } },
-                                   new int[][] { new int[] { 1, 2 }, new int[] { 2, 3 }, new int[] { 3, 4 }, new int[] { 1, 4 }, new int[] { 1, 5 } } };
+                                   new int[][] { new int[] { 1, 2 }, new int[] { 2, 3 }, new int[] { 3, 4 }, new int[] { 1, 4 }, new int[] { 1, 5 } },
+                                   new int[][] { new int[] { 3, 7 }, new int[] { 1, 4 }, new int[] { 2, 8 }, new int[] { 1, 6 }, new int[] { 7, 9 }, new int[] { 6, 10 }, new int[] { 1, 7 }, new int[] { 2, 3 }, new int[] { 8, 9}, new int[] { 5, 9 } },
+                                   new int[][] { new int[] { 9, 10 }, new int[] { 5, 8 }, new int[] { 2, 6 }, new int[] { 1, 5 }, new int[] { 3, 8 }, new int[] { 4, 9 }, new int[] { 8, 10 }, new int[] { 4, 10 }, new int[] { 6, 8 }, new int[] { 7, 9 } } };
             foreach (var edges in edgesArr)
             {
                 edges.Print("UnDirected Graph Edges");

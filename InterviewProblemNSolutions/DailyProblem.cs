@@ -5473,11 +5473,12 @@ namespace InterviewProblemNSolutions
 
 
         // Time O(N) || Space O(N), N = no of edges
-        public static int[] FindRedundantConnection(int[][] edges)
+        public static int[] FindRedundantConnectionFasterButFaulty(int[][] edges)
         {
             int V = edges.Length;
-            List<int>[] graph = new List<int>[V + 1];
             // Since Nodes are 1 indexed
+            List<int>[] graph = new List<int>[V + 1];
+            
             for (int i = 0; i < V; i++)
             {
                 int u = edges[i][0];
@@ -5490,15 +5491,18 @@ namespace InterviewProblemNSolutions
             }
             // Find the Cycle and add Nodes in cycle to HashSet
             HashSet<int> cycle = new HashSet<int>();
-            for (int i = 1; i <= V; i++)
-                if (graph[i].Count > 1)  // In Order for Cycle to Pass thru Node it must have atleast 2 edges
-                    if (DetectCycle(graph, i, cycle, new int[V + 1]))
-                        break;
+
+            //for (int i = 1; i <= V; i++)
+            //    if (graph[i].Count > 1)  // In Order for Cycle to Pass thru Node it must have atleast 2 edges
+            //        if (DetectCycle(graph, i, cycle, new int[V + 1]))
+            //            break;
+            DetectCycle(graph, 1, cycle, new int[V + 1]);
 
             for (int i = V - 1; i >= 0; i--)
             {
                 int u = edges[i][0];
                 int v = edges[i][1];
+                // starting from the end we are looking for the edge whoes both nodes are part of cycle in graph
                 if (cycle.Contains(u) && cycle.Contains(v))
                     return new int[] { u, v };
             }
@@ -5516,7 +5520,7 @@ namespace InterviewProblemNSolutions
             while (q.Count > 0)
             {
                 int u = q.Dequeue();
-                visited[source] = -1;   // Mark Visited and Not-in Queue  
+                visited[u] = -1;   // Mark Visited and Not-in Queue  
                 foreach (int v in graph[u])
                     if (visited[v] == 0)   // not visited yet
                     {
@@ -5526,25 +5530,104 @@ namespace InterviewProblemNSolutions
                     }
                     else if (visited[v] == 1)// already visited, cycle found
                     {
-                        cycle.Add(u);
-                        int node = v;
-                        while (node != -1)
-                        {
-                            cycle.Add(node);
-                            node = parent[node];
-                        }
+                        //// Add all node which led to nodes U &V to find the nodes included in cycle
+                        //int node = v;
+                        //while (node != -1)
+                        //{
+                        //    cycle.Add(node);
+                        //    node = parent[node];
+                        //}
                         //node = u;
                         //while (node != -1)
                         //{
                         //    cycle.Add(node);
                         //    node = parent[node];
                         //}
+                        /* Find out the common parent of U & V
+                         * than fill in all parents of U & V in HasSet cycle till current Node is not equal to common parent
+                         * at last add common parent to list of nodes which form up the cycle
+                         */
+                        List<int> nodeToReachU = new List<int>();
+                        HashSet<int> nodeToReachV = new HashSet<int>();
+                        int node = u;
+                        while (node != -1)
+                        {
+                            nodeToReachU.Add(node);
+                            node = parent[node];
+                        }
+                        node = v;
+                        while (node != -1)
+                        {
+                            nodeToReachV.Add(node);
+                            node = parent[node];
+                        }
+                        foreach (int parentOfU in nodeToReachU)
+                            if (nodeToReachV.Contains(parentOfU))
+                            {
+                                node = u;
+                                while (node != parentOfU)
+                                {
+                                    cycle.Add(node);
+                                    node = parent[node];
+                                }
+                                node = v;
+                                while (node != parentOfU)
+                                {
+                                    cycle.Add(node);
+                                    node = parent[node];
+                                }
+                                cycle.Add(parentOfU);
+                            }
                         return true;
                     }
             }
             return false;
         }
 
+        // Time O(N^2) || Space O(N), N = no of nodes in Graph
+        public static int[] FindRedundantConnection(int[][] edges)
+        {
+            int V = edges.Length;
+            // Since Nodes are 1 indexed
+            List<int>[] graph = new List<int>[V + 1];
+            HashSet<int> visited = new HashSet<int>();
+
+            for (int i = 0; i < V; i++)
+            {
+                int u = edges[i][0];
+                int v = edges[i][1];
+
+                if (graph[u] == null) graph[u] = new List<int>();
+                if (graph[v] == null) graph[v] = new List<int>();
+
+                visited.Clear();
+                // Vertex U and Vertex V both have atleast 1 connection,
+                // check before adding this edge if there is connection b/w U & V?
+                // if so than adding this edge will result in cycle
+                if (graph[u].Count > 0 && graph[v].Count > 0 && DFS(u, v))
+                        return edges[i];
+
+                graph[u].Add(v);
+                graph[v].Add(u);
+            }
+
+            throw new ArgumentException("Adding none of the provided Edge resulted in cycle in Graph");
+
+            // local DFS function
+            bool DFS(int source, int target)
+            {
+                if (!visited.Contains(source))
+                {
+                    if (source == target) return true;
+
+                    visited.Add(source);
+                    foreach (int adjacentNode in graph[source])
+                        if (DFS(adjacentNode, target))
+                            return true;
+                }
+                return false;
+            }
+        }
 
         // Time O(n) || Space O(1)
         // After each increase or decrease operation CPU doesn't monitors utilization for 10 seconds
