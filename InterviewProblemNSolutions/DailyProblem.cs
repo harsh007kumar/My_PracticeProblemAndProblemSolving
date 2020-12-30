@@ -5834,5 +5834,50 @@ namespace InterviewProblemNSolutions
             bool IsValid(int rID, int cID) => rID < 0 || rID >= row || cID < 0 || cID >= col ? false : true;
         }
 
+
+        /// <summary>
+        /// Given a singly linked list L: L0→L1→…→Ln-1→Ln,
+        /// re-order it to:               L0→Ln→L1→Ln-1→L2→Ln-2→…
+        /// Time O(n) || Space O(n)
+        /// </summary>
+        /// <param name="A"></param>
+        public static void ReOrderList(ListNode A)
+        {
+            if (A == null || A.next == null) return;
+
+            Stack<ListNode> st = new Stack<ListNode>();
+            ListNode mid = Mid(A);
+            ListNode curr = mid.next;
+            mid.next = null;
+
+            while (curr != null)
+            {
+                st.Push(curr);
+                curr = curr.next;
+            }
+            ListNode nxt = A;
+            while (st.Count > 0)
+            {
+                st.Peek().next = nxt.next;
+                nxt.next = st.Pop();
+                nxt = nxt.next.next;
+            }
+
+            // local func which returns Mid of the LinkedList
+            ListNode Mid(ListNode root)
+            {
+                ListNode slow = root, fast = root.next;
+                while (fast != null && fast.next != null)
+                {
+                    slow = slow.next;
+                    fast = fast.next.next;
+                }
+                return slow;
+            }
+        }
+        
+
+
+
     }
 }

@@ -165,6 +165,7 @@ namespace InterviewProblemNSolutions
             ReachANumber();
             PseudoPalindromicPaths();
             GameOfLife();
+            ReOrderLinkedList();
 
 
 
@@ -2736,6 +2737,15 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void ReOrderLinkedList()
+        {
+            // https://leetcode.com/problems/reorder-list/
+            Utility.Print("143. Reorder List");
+            ListNode head = new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) { next = new ListNode(4) } } };
+            head.Print("ORIGINAL LINKED LIST");
+            DailyProblem.ReOrderList(head);
+            head.Print("RE-ORDERED LINKED LIST");
+        }
 
 
 
