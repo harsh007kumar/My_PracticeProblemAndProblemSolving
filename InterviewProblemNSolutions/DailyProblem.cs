@@ -5788,5 +5788,51 @@ namespace InterviewProblemNSolutions
             return pseudoPalindromicCount;
         }
 
+
+
+        // Time = Recursive Space = O(MxN) || Auxillary Space O(1)
+        public static void GameOfLife(int[][] board)
+        {
+            int row = board.Length;
+            int col = board[0].Length;
+            // Call Driver Func
+            BackTrack(0, 0);
+
+            // Helper Functions
+
+            void BackTrack(int r, int c)
+            {
+                int liveNeighbour = CountLive(r, c);
+                if (c < col - 1)
+                    BackTrack(r, c + 1);
+                else if (r < row - 1)
+                    BackTrack(r + 1, 0);
+                // While BackTracking apply rule based upon live count calculated before making recursive call
+                ApplyRule(r, c, liveNeighbour);
+            }
+
+            void ApplyRule(int rID, int cID, int liveCellCount)
+            {
+                if (board[rID][cID] == 1)
+                {
+                    // Rule 1 & Rule 3 (LIVE CELL DIES IF DOESNT HAVE EXCATLY 3 LIVE NEIGHBOURS)
+                    if (liveCellCount < 2 || liveCellCount > 3) board[rID][cID] = 0;
+                }
+                // Rule 4 (DEAD CELL WITH EXCATLY 3 LIVE NEIGHBOURS BECOMES LIVE)
+                else if (liveCellCount == 3) board[rID][cID] = 1;
+            }
+
+            int CountLive(int rID, int cID)
+            {
+                int live = 0;
+                for (int r = rID - 1; r <= rID + 1; r++)
+                    for (int c = cID - 1; c <= cID + 1; c++)
+                        if (IsValid(r, c) && board[r][c] == 1)
+                            live++;
+                return live - (board[rID][cID] == 1 ? 1 : 0);
+            }
+            bool IsValid(int rID, int cID) => rID < 0 || rID >= row || cID < 0 || cID >= col ? false : true;
+        }
+
     }
 }

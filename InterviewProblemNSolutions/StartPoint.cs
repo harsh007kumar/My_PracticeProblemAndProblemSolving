@@ -164,6 +164,9 @@ namespace InterviewProblemNSolutions
             DecodeWays();
             ReachANumber();
             PseudoPalindromicPaths();
+            GameOfLife();
+
+
 
 
             // String Matching Algorithm
@@ -2631,7 +2634,6 @@ namespace InterviewProblemNSolutions
 
         public static void RedundantConnection()
         {
-
             // https://leetcode.com/problems/redundant-connection/
             Utility.Print("684. Redundant Connection");
             int[][][] edgesArr = { new int[][] { new int[] { 1, 2 }, new int[] { 1, 3 }, new int[] { 2, 3 } },
@@ -2718,6 +2720,25 @@ namespace InterviewProblemNSolutions
             root.InOrder();
             Console.WriteLine($" Number of pseudo-palindromic paths going from the root node to leaf nodes are : \'{DailyProblem.PseudoPalindromicPaths(root, new HashSet<int>(9))}\'");
         }
+
+
+        public static void GameOfLife()
+        {
+            // https://leetcode.com/problems/game-of-life/
+            Utility.Print("289. Game of Life");
+            int[][] board = {   new int[] { 0, 1, 0 },
+                                new int[] { 0, 0, 1 },
+                                new int[] { 1, 1, 1 },
+                                new int[] { 0, 0, 0 } };
+            board.Print("Initial State");
+            DailyProblem.GameOfLife(board);
+            board.Print("Next State");
+        }
+
+
+
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
