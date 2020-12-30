@@ -5897,7 +5897,27 @@ namespace InterviewProblemNSolutions
             return head;
         }
 
-
+        /// <summary>
+        /// Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list.
+        /// Time O(n) || Space O(1)
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
+        public static ListNode DeleteDuplicatesII(ListNode head)
+        {
+            ListNode dummy = new ListNode(0) { next = head };
+            ListNode curr = dummy;
+            while (curr.next != null && curr.next.next != null)
+                if (curr.next.val == curr.next.next.val)
+                {
+                    int val = curr.next.val;
+                    while (curr.next != null && curr.next.val == val)
+                        curr.next = curr.next.next;
+                }
+                else
+                    curr = curr.next;
+            return dummy.next;
+        }
 
     }
 }

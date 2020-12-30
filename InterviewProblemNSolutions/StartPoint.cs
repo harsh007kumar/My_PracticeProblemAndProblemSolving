@@ -2760,6 +2760,16 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void RemoveDuplicatesFromSortedListII()
+        {
+            // https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
+            Utility.Print("82. Remove Duplicates from Sorted List II");
+            ListNode head = new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) { next = new ListNode(3) { next = new ListNode(4) { next = new ListNode(4) { next = new ListNode(5) } } } } } };
+            head.Print("ORIGINAL LINKED LIST");
+            DailyProblem.DeleteDuplicatesII(head);
+            head.Print("AFTER REMOVING DUPLICATES");
+        }
+
 
 
 
