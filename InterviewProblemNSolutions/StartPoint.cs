@@ -166,7 +166,8 @@ namespace InterviewProblemNSolutions
             PseudoPalindromicPaths();
             GameOfLife();
             ReOrderLinkedList();
-
+            RemoveDuplicatesFromSortedListI();
+            RemoveDuplicatesFromSortedListII();
 
 
 
@@ -2746,6 +2747,19 @@ namespace InterviewProblemNSolutions
             DailyProblem.ReOrderList(head);
             head.Print("RE-ORDERED LINKED LIST");
         }
+
+
+        public static void RemoveDuplicatesFromSortedListI()
+        {
+            // https://leetcode.com/problems/remove-duplicates-from-sorted-list/
+            Utility.Print("83. Remove Duplicates from Sorted List");
+            ListNode head = new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) { next = new ListNode(3) { next = new ListNode(4) { next = new ListNode(4) { next = new ListNode(5) } } } } } };
+            head.Print("ORIGINAL LINKED LIST");
+            DailyProblem.DeleteDuplicatesI(head);
+            head.Print("AFTER REMOVING DUPLICATES");
+        }
+
+
 
 
 

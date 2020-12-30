@@ -5848,19 +5848,22 @@ namespace InterviewProblemNSolutions
             Stack<ListNode> st = new Stack<ListNode>();
             ListNode mid = Mid(A);
             ListNode curr = mid.next;
-            mid.next = null;
+            mid.next = null;    // Mark the lastNode->next as null
 
+            // Push all nodes after mid point into Stack
             while (curr != null)
             {
                 st.Push(curr);
                 curr = curr.next;
             }
+
             ListNode nxt = A;
+            // Start Popping Nodes from Stack and appending in b/w nodes from Start
             while (st.Count > 0)
             {
                 st.Peek().next = nxt.next;
                 nxt.next = st.Pop();
-                nxt = nxt.next.next;
+                nxt = nxt.next.next;    // we move twice since last node is appended in b/w now
             }
 
             // local func which returns Mid of the LinkedList
@@ -5875,7 +5878,24 @@ namespace InterviewProblemNSolutions
                 return slow;
             }
         }
-        
+
+
+        /// <summary>
+        /// Given a sorted linked list, delete all duplicates such that each element appear only once.
+        /// Time O(n) || Space O(1)
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
+        public static ListNode DeleteDuplicatesI(ListNode head)
+        {
+            ListNode curr = head;
+            while (curr != null && curr.next != null)
+                if (curr.val == curr.next.val)
+                    curr.next = curr.next.next;
+                else
+                    curr = curr.next;
+            return head;
+        }
 
 
 
