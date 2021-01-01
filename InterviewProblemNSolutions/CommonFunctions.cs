@@ -194,8 +194,8 @@ namespace InterviewProblemNSolutions
         public static void InOrder(this TreeNode current, string msg = "")
         {
             if (current == null) return;
-            if (msg != "") Console.WriteLine($" {msg}");
-            Stack<TreeNode> st = new Stack<TreeNode>();
+            if (msg != "") Console.Write($" Printing \'{msg}\':");
+            Stack <TreeNode> st = new Stack<TreeNode>();
             while(true)
             {
                 while(current!=null)

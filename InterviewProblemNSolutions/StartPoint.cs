@@ -168,6 +168,7 @@ namespace InterviewProblemNSolutions
             ReOrderLinkedList();
             RemoveDuplicatesFromSortedListI();
             RemoveDuplicatesFromSortedListII();
+            LinkedListiNBinaryTree();
 
 
 
@@ -2774,7 +2775,39 @@ namespace InterviewProblemNSolutions
         }
 
 
-        
+        public static void LinkedListiNBinaryTree()
+        {
+            // https://leetcode.com/problems/linked-list-in-binary-tree/
+            Utility.Print("1367. Linked List in Binary Tree");
+            ListNode head = new ListNode(4) { next = new ListNode(2) { next = new ListNode(8) } };
+            TreeNode root = new TreeNode(1)
+            {
+                left = new TreeNode(4)
+                {
+                    right = new TreeNode(2)
+                    { left = new TreeNode(1) }
+                },
+                right = new TreeNode(4)
+                {
+                    left = new TreeNode(2)
+                    {
+                        left = new TreeNode(6),
+                        right = new TreeNode(8)
+                        {
+                            left = new TreeNode(1),
+                            right = new TreeNode(3)
+                        }
+                    }
+                }
+            };
+            head.Print("LinkedList");
+            root.InOrder("Binary-Tree");
+            Console.WriteLine($" All the elements in the linked list starting from the head correspond " +
+                $"to some downward path connected in the binary tree : \'{DailyProblem.IsSubPath(head, root)}\'");
+        }
+
+
+
 
 
 

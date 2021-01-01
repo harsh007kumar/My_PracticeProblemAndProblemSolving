@@ -5919,5 +5919,21 @@ namespace InterviewProblemNSolutions
             return dummy.next;
         }
 
+
+        // Time O(Min(n^2,m)) || Space O(h), n = no of nodes in List & m = no of nodes in tree & h = hieght of tree
+        public static bool IsSubPath(ListNode head, TreeNode root)
+        {
+            if (Match(head, root)) return true;
+            if (root == null) return false;
+            return IsSubPath(head, root.left) || IsSubPath(head, root.right);
+        }
+        // Time O(n), n = no of nodes in List
+        public static bool Match(ListNode head, TreeNode root)
+        {
+            if (head == null) return true;
+            if (root == null || root.val != head.val) return false;
+            return Match(head.next, root.left) || Match(head.next, root.right);
+        }
+
     }
 }
