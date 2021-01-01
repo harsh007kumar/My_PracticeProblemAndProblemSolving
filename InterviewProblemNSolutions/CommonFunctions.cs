@@ -141,7 +141,7 @@ namespace InterviewProblemNSolutions
             if (msg != "") Console.WriteLine($" ==== Printing \'{msg}\' 2-D int array with {row}:Row & {col}:Col ====");
             for (int i = 0; i < row; i++)
             {
-                for (int j = 0; j < col; j++)
+                for (int j = 0; j < arr[i].Length; j++)
                     Console.Write($" {arr[i][j]} ||");
                 Console.WriteLine();
             }

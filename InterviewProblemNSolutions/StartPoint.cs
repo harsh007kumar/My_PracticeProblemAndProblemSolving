@@ -73,7 +73,7 @@ namespace InterviewProblemNSolutions
             //LetterCombinations();
             //SerializeAndDeserializeBST();
             //MinimumHeightTrees();
-            //ArrayFormationThroughConcatenation();
+            ArrayFormationThroughConcatenation();
             //MinCostToMoveChips();
             //FindMinimumInRotatedSortedArrayII();
             //FindTheSmallestDivisorGivenAThreshold();
@@ -168,6 +168,7 @@ namespace InterviewProblemNSolutions
             ReOrderLinkedList();
             RemoveDuplicatesFromSortedListI();
             RemoveDuplicatesFromSortedListII();
+
 
 
 
@@ -1230,14 +1231,16 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/check-array-formation-through-concatenation/
             Utility.Print("1640. Check Array Formation Through Concatenation");
-            int[][] arr = { new int[] { 91, 4, 64, 78 }, new int[] { 1, 2, 3 } };
+            int[][] arr = { new int[] { 91, 4, 64, 78 }, new int[] { 1, 2, 3 }, new int[] { 15, 88 }, new int[] { 49, 18, 16 } };
             int[][][] pieces = { new int[][] { new int[] { 78 }, new int[] { 4, 64 }, new int[] { 91 } },
-                                 new int[][] { new int[] { 2 } , new int[] { 1, 3 } } };
+                                 new int[][] { new int[] { 2 } , new int[] { 1, 3 } },
+                                 new int[][] { new int[] { 88 }, new int[] { 15 } },
+                                 new int[][] { new int[] { 16, 18, 49 } } };
             for (int i = 0; i < arr.Length; i++)
             {
-                arr[i].Print("Given Array to be formed");
-                pieces[i].Print("Using Pieces");
-                Console.WriteLine($" Given Array can be formed using above Pieces: {DailyProblem.ArrayFormationThroughConcatenation(arr[i], pieces[i])}");
+                arr[i].Print("Arr");
+                pieces[i].Print("Pieces");
+                Console.WriteLine($" 'Arr' can be formed using 'Pieces' : {DailyProblem.ArrayFormationThroughConcatenation(arr[i], pieces[i])}\n\n");
             }
         }
 
@@ -2771,7 +2774,7 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        
 
 
 
