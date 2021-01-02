@@ -169,6 +169,7 @@ namespace InterviewProblemNSolutions
             RemoveDuplicatesFromSortedListI();
             RemoveDuplicatesFromSortedListII();
             LinkedListiNBinaryTree();
+            MergeInBetweenLinkedLists();
 
 
 
@@ -2807,7 +2808,18 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void MergeInBetweenLinkedLists()
+        {
+            // https://leetcode.com/problems/merge-in-between-linked-lists/
+            Utility.Print("1669. Merge In Between Linked Lists");
+            ListNode h1 = new ListNode(0) { next = new ListNode(1) { next = new ListNode(2) } };
+            ListNode h2 = new ListNode(1000000) { next = new ListNode(1000001) { next = new ListNode(1000002) } };
+            int insertFrom = 1, insertTo = 1;
+            h1.Print("List1");
+            h2.Print("List2");
+            DailyProblem.MergeInBetween(h1, insertFrom, insertTo, h2);
+            h1.Print($"List1-After Inserting List2, Starting from {insertFrom}'th index upto {insertTo}'th index ");
+        }
 
 
 

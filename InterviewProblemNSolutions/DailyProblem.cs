@@ -5935,5 +5935,30 @@ namespace InterviewProblemNSolutions
             return Match(head.next, root.left) || Match(head.next, root.right);
         }
 
+
+        // Time O(Min(n,b)+m), b = appendTill & n,m = length of list1 & list2 respectively || Space O(1)
+        public static ListNode MergeInBetween(ListNode list1, int a, int b, ListNode list2)
+        {
+            int counter = 1;
+            ListNode curr = list1, appendFrom = null, list2Head = list2;
+            while (true)
+            {
+                if (counter == a)
+                    appendFrom = curr;
+                if (counter == b)
+                {
+                    while (list2.next != null)
+                        list2 = list2.next;
+                    list2.next = curr.next.next;        // apend 'b.next' to list2 lastNode.next
+                    appendFrom.next = list2Head;        // apend list2->Head at 'a'
+                    break;
+                }
+                counter++;
+                curr = curr.next;
+            }
+            return list1;
+        }
+
+
     }
 }
