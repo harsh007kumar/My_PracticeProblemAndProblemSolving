@@ -5960,5 +5960,25 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Auxillary Space O(1) Recursive Soln
+        public static TreeNode GetTargetCopy(TreeNode original, TreeNode cloned, TreeNode target)
+        {
+            /* Since original and Clone are same structurally,
+             * if we move left in original we move left in Clone tree also, and same if we move right
+             * 
+             * If target matches any node in original tree return equivalent reference from cloned 
+             * If target found in left return it it must be present in right hence return result of right recursive call
+             */
+            if (original == null) return original;
+            if (target == original) return cloned;  // target found in original return equivalent ref from cloned
+            
+            // Search for Target in left-subtree
+            TreeNode left = GetTargetCopy(original.left, cloned.left, target);
+            if (left != null) return left;  // found target return Clone Node Reference
+
+            // else Target must be present in right-subtree of Original
+            return GetTargetCopy(original.right, cloned.right, target);
+        }
+
     }
 }

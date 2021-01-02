@@ -170,6 +170,7 @@ namespace InterviewProblemNSolutions
             RemoveDuplicatesFromSortedListII();
             LinkedListiNBinaryTree();
             MergeInBetweenLinkedLists();
+            FindACorrespondingNodeOfABinaryTreeInACloneOfThatTree();
 
 
 
@@ -2820,6 +2821,36 @@ namespace InterviewProblemNSolutions
             DailyProblem.MergeInBetween(h1, insertFrom, insertTo, h2);
             h1.Print($"List1-After Inserting List2, Starting from {insertFrom}'th index upto {insertTo}'th index ");
         }
+
+
+        public static void FindACorrespondingNodeOfABinaryTreeInACloneOfThatTree()
+        {
+            // https://leetcode.com/problems/find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree/
+            Utility.Print("1379. Find a Corresponding Node of a Binary Tree in a Clone of That Tree");
+            TreeNode original = new TreeNode(7)
+            {
+                left = new TreeNode(4),
+                right = new TreeNode(3)
+                {
+                    left = new TreeNode(6),
+                    right = new TreeNode(19)
+                }
+            };
+            TreeNode clone = new TreeNode(7)
+            {
+                left = new TreeNode(4),
+                right = new TreeNode(3)
+                {
+                    left = new TreeNode(6),
+                    right = new TreeNode(19)
+                }
+            };
+            original.InOrder("Original");
+            clone.InOrder("Clone");
+            Console.WriteLine($" {(DailyProblem.GetTargetCopy(original, clone, original.left)).val} is the reference to the same node from the cloned tree as in Target {original.left.val}");
+        }
+
+
 
 
 
