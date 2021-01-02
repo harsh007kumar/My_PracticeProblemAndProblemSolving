@@ -171,6 +171,7 @@ namespace InterviewProblemNSolutions
             LinkedListiNBinaryTree();
             MergeInBetweenLinkedLists();
             FindACorrespondingNodeOfABinaryTreeInACloneOfThatTree();
+            PartitionList();
 
 
 
@@ -2851,7 +2852,15 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void PartitionList()
+        {
+            // https://leetcode.com/problems/partition-list/
+            Utility.Print("86. Partition List");
+            ListNode head = new ListNode(1) { next = new ListNode(4) { next = new ListNode(3) { next = new ListNode(2) { next = new ListNode(5) { next = new ListNode(2) } } } } };
+            head.Print("LinkedList");
+            DailyProblem.PartitionList(head, 3);
+            head.Print($"LinkedList After Paritiion as per val {3}");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

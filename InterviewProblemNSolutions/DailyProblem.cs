@@ -5980,5 +5980,33 @@ namespace InterviewProblemNSolutions
             return GetTargetCopy(original.right, cloned.right, target);
         }
 
+
+        // Time O(n) || Space O(1), n = no of nodes in List
+        public static ListNode PartitionList(ListNode head, int x)
+        {
+            ListNode dummyNode = new ListNode(0) { next = head };
+            ListNode paritionHead = null, paritionCurr = null;
+            while (head.next != null)
+                if (head.next.val >= x)
+                {
+                    if (paritionCurr != null)
+                    {
+                        paritionCurr.next = head.next;      // add greater/equal to 'x' node in partition list
+                        paritionCurr = paritionCurr.next;   // move ahead in partition list
+                    }
+                    else paritionHead = paritionCurr = head.next;
+                    head.next = head.next.next;             // update original List
+                }
+                else
+                    head = head.next;   // move to next node in Original List
+            
+            head.next = paritionHead;
+            if (paritionCurr != null) paritionCurr.next = null;
+            return dummyNode.next;
+        }
+
+
+
+
     }
 }
