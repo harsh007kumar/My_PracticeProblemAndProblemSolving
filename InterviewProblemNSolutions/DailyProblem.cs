@@ -6006,6 +6006,25 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(k) || Space O(n), K = no of valid permutation
+        public static int BeautifulArrangement(int n) => Try(new bool[n + 1], n);
+        public static int Try(bool[] noUsed, int total, int curr = 1, int count = 0)
+        {
+            if (count == total)
+                return 1;
+            int permutation = 0;
+            for (int i = 1; i <= total; i++)
+                if (!noUsed[i] && IsDivisible(i, curr))
+                {
+                    noUsed[i] = true;
+                    permutation += Try(noUsed, total, curr + 1, count + 1);
+                    noUsed[i] = false;
+                }
+            return permutation;
+        }
+        public static bool IsDivisible(int a, int b) => a % b == 0 || b % a == 0;
+
+
 
 
     }

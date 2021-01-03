@@ -172,6 +172,7 @@ namespace InterviewProblemNSolutions
             MergeInBetweenLinkedLists();
             FindACorrespondingNodeOfABinaryTreeInACloneOfThatTree();
             PartitionList();
+            BeautifulArrangement();
 
 
 
@@ -2861,6 +2862,20 @@ namespace InterviewProblemNSolutions
             DailyProblem.PartitionList(head, 3);
             head.Print($"LinkedList After Paritiion as per val {3}");
         }
+
+
+        public static void BeautifulArrangement()
+        {
+            // https://leetcode.com/problems/beautiful-arrangement/
+            Utility.Print("526. Beautiful Arrangement");
+            int[] nArr = { 2, 1, 3, 15 };
+            foreach (int n in nArr)
+                Console.WriteLine($" No of the beautiful arrangements that you can construct from n={n} is {DailyProblem.BeautifulArrangement(n)} ");
+        }
+
+
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
