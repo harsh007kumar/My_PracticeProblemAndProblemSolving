@@ -173,6 +173,7 @@ namespace InterviewProblemNSolutions
             FindACorrespondingNodeOfABinaryTreeInACloneOfThatTree();
             PartitionList();
             BeautifulArrangement();
+            MakeTheStringGreat();
 
 
 
@@ -2872,6 +2873,17 @@ namespace InterviewProblemNSolutions
             foreach (int n in nArr)
                 Console.WriteLine($" No of the beautiful arrangements that you can construct from n={n} is {DailyProblem.BeautifulArrangement(n)} ");
         }
+
+
+        public static void MakeTheStringGreat()
+        {
+            // https://leetcode.com/problems/make-the-string-great/
+            Utility.Print("1544. Make The String Great");
+            string[] sArr = { "leEeetcode", "abBAcC", "s", "" };
+            foreach (var s in sArr)
+                Console.WriteLine($" String \'{s}\' after making it good: \'{DailyProblem.MakeTheStringGreat(s)}\'");
+        }
+
 
 
 

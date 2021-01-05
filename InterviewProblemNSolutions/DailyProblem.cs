@@ -6025,6 +6025,25 @@ namespace InterviewProblemNSolutions
         public static bool IsDivisible(int a, int b) => a % b == 0 || b % a == 0;
 
 
+        // Time O(n) || Space O(n)
+        public static string MakeTheStringGreat(string s)
+        {
+            Stack<char> lastChar = new Stack<char>();
+            int i = 0;
+            for (i = 0; i < s.Length; i++)
+                if (lastChar.Count > 0 && (lastChar.Peek() == (s[i] - 'a') + 'A' || lastChar.Peek() == (s[i] - 'A') + 'a'))
+                    lastChar.Pop();
+                else
+                    lastChar.Push(s[i]);
+
+            i = lastChar.Count;
+            char[] ch = new char[i--];
+            while (i >= 0)
+                ch[i--] = lastChar.Pop();
+            
+            return new string(ch);
+        }
+
 
 
     }
