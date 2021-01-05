@@ -6045,6 +6045,27 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(n) as we need to create ans string
+        public static string RemoveOutermostParentheses(string S)
+        {
+            int start = 0, curr = 0, openingCount = 0;
+            StringBuilder ans = new StringBuilder();
+            while (curr < S.Length)
+            {
+                openingCount = S[curr] == '(' ? openingCount + 1 : openingCount - 1;
+
+                if (openingCount == 0)
+                {
+                    if (start + 1 != curr)
+                        ans.Append(S.Substring(start + 1, (curr - start) - 1));
+                    start = curr + 1;
+                }
+                curr++;
+            }
+            return ans.ToString();
+        }
+
+
 
     }
 }

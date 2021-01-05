@@ -174,6 +174,7 @@ namespace InterviewProblemNSolutions
             PartitionList();
             BeautifulArrangement();
             MakeTheStringGreat();
+            RemoveOutermostParentheses();
 
 
 
@@ -2885,7 +2886,14 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void RemoveOutermostParentheses()
+        {
+            // https://leetcode.com/problems/remove-outermost-parentheses/
+            Utility.Print("1021. Remove Outermost Parentheses");
+            string[] sArr = { "(()())(())", "(()())(())(()(()))", "()()", "" };
+            foreach (var s in sArr)
+                Console.WriteLine($" \'{s}\' after removing the outermost parentheses: \'{DailyProblem.RemoveOutermostParentheses(s)}\'");
+        }
 
 
 
