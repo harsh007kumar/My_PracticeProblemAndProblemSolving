@@ -177,6 +177,7 @@ namespace InterviewProblemNSolutions
             RemoveOutermostParentheses();
             DailyTemperatures();
             SortCharactersByFrequency();
+            SortArrayByIncreasingFrequency();
 
 
 
@@ -2917,6 +2918,18 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Sorting string \'{s}\' in decreasing order based on the frequency of characters. \'{DailyProblem.FrequencySort(s)}\'");
         }
 
+
+        public static void SortArrayByIncreasingFrequency()
+        {
+            // https://leetcode.com/problems/sort-array-by-increasing-frequency/
+            Utility.Print("1636. Sort Array by Increasing Frequency");
+            int[][] numsArr = { new int[] { 1, 1, 2, 2, 2, 3 }, new int[] { 2, 3, 1, 3, 2 }, new int[] { -1, 1, -6, 4, 5, -6, 1, 4, 1 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                DailyProblem.SortArrayByIncreasingFrequency(nums).Print("Frequency-Value-Sorted");
+            }
+        }
 
 
 

@@ -6102,9 +6102,9 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < s.Length; i++)                      // Time O(n)
                 if (charCount.ContainsKey(s[i])) charCount[s[i]]++;
                 else charCount.Add(s[i], 1);
-            
+
             // Now create a MaxHeap which will store all Characters by their frequency
-            MaxHeap h = new MaxHeap(charCount.Count);
+            CharFreqHeap h = new CharFreqHeap(charCount.Count);
             foreach (var kvp in charCount)                         // O(k), k = Distinct Characters in I/P
                 h.Insert(kvp.Value, kvp.Key);                      // O(logk)
 
@@ -6112,26 +6112,26 @@ namespace InterviewProblemNSolutions
             StringBuilder sb = new StringBuilder(s.Length);
             while (h.size > 0)                                      // O(k)
             {
-                Pair max = h.ExtractMin();                          // O(logk)
+                CharPair max = h.ExtractMin();                      // O(logk)
                 for (int times = max.count; times > 0; times--)
                     sb.Append(max.ch);
             }
             return sb.ToString();
         }
-        class MaxHeap
+        class CharFreqHeap
         {
-            Pair[] arr;
+            CharPair[] arr;
             public int i, size;
-            public MaxHeap(int size)
+            public CharFreqHeap(int size)
             {
                 i = 0;
                 this.size = size;
-                arr = new Pair[size];
+                arr = new CharPair[size];
             }
             public void Insert(int key, char val)
             {
                 int curr = i++;
-                arr[curr] = new Pair(key, val);
+                arr[curr] = new CharPair(key, val);
                 while (curr > 0)
                 {
                     int p = Parent(curr);
@@ -6145,9 +6145,9 @@ namespace InterviewProblemNSolutions
                     else break;
                 }
             }
-            public Pair ExtractMin()
+            public CharPair ExtractMin()
             {
-                Pair ans = arr[0];
+                CharPair ans = arr[0];
                 arr[0] = arr[--size];
                 Heapify();
                 return ans;
@@ -6176,11 +6176,11 @@ namespace InterviewProblemNSolutions
             int Right(int index) => Left(index) + 1;
             int Parent(int index) => (index - 1) / 2;
         }
-        class Pair
+        class CharPair
         {
             public char ch;
             public int count;
-            public Pair(int count, char ch)
+            public CharPair(int count, char ch)
             {
                 this.ch = ch;
                 this.count = count;
@@ -6188,5 +6188,58 @@ namespace InterviewProblemNSolutions
         }
 
 
+        /// <summary>
+        /// Given an array of integers nums, sort the array in increasing order based on the frequency of the values.
+        /// If multiple values have the same frequency, sort them in decreasing order.
+        /// Time O(Max(n,kLogk)) || Space O(k), n = length of nums & k = no of distinct intergers
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static int[] SortArrayByIncreasingFrequency(int[] nums)
+        {
+            int i = 0;
+            // Count the frequency of each distinct num in array nums
+            Dictionary<int, int> valFreq = new Dictionary<int, int>();
+            for (i = 0; i < nums.Length; i++)                   // Time O(n)
+                if (valFreq.ContainsKey(nums[i])) valFreq[nums[i]]++;
+                else valFreq.Add(nums[i], 1);
+
+            i = 0;
+            // Store number and its frequency in array
+            ArrayPair[] intFreq = new ArrayPair[valFreq.Count];
+            foreach (var kvp in valFreq)                        // Time O(k)
+                intFreq[i++] = new ArrayPair(kvp.Key, kvp.Value);
+
+            // Sort in increasing order based on the frequency of the values. If multiple values have the same frequency, sort them in decreasing order.
+            Array.Sort(intFreq, new FrequencyValue());          // Time O(kLogK)
+
+            // update the result array with integer sorted as per probl desc
+            int[] ans = new int[nums.Length];
+            int currI = 0;
+            for (i = 0; i < intFreq.Length; i++)                // Time O(n)
+                for (int j = intFreq[i].count; j > 0; j--)
+                    ans[currI++] = intFreq[i].val;
+            return ans;
+        }
+        class ArrayPair
+        {
+            public int val;
+            public int count;
+            public ArrayPair(int val, int count)
+            {
+                this.val = val;
+                this.count = count;
+            }
+        }
+        class FrequencyValue: IComparer<ArrayPair>
+        {
+            public int Compare(ArrayPair a, ArrayPair b)
+            {
+                if (a.count != b.count)
+                    return a.count.CompareTo(b.count);  // increasing count/frequency
+                else
+                    return b.val.CompareTo(a.val);      // if frequency r same than decreasing value
+            }
+        }
     }
 }
