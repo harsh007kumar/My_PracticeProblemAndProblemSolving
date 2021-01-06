@@ -175,6 +175,7 @@ namespace InterviewProblemNSolutions
             BeautifulArrangement();
             MakeTheStringGreat();
             RemoveOutermostParentheses();
+            DailyTemperatures();
 
 
 
@@ -2894,6 +2895,19 @@ namespace InterviewProblemNSolutions
             foreach (var s in sArr)
                 Console.WriteLine($" \'{s}\' after removing the outermost parentheses: \'{DailyProblem.RemoveOutermostParentheses(s)}\'");
         }
+
+
+        public static void DailyTemperatures()
+        {
+            // https://leetcode.com/problems/daily-temperatures/
+            Utility.Print("739. Daily Temperatures");
+            int[] T = { 73, 74, 75, 71, 69, 72, 76, 73 };
+            T.Print("Daily Temperatures");
+            DailyProblem.DailyTemperatures(T).Print("Next HIgher Temperatures");
+        }
+
+
+
 
 
 

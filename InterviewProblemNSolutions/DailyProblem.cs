@@ -6066,6 +6066,31 @@ namespace InterviewProblemNSolutions
         }
 
 
+        /// <summary>
+        /// Returns a array such that, for each day in the input, tells you how many days you would have to wait until a warmer temperature.
+        /// If there is no future day for which this is possible, put 0 instead
+        /// Time = Space = O(n), n = length of array T
+        /// </summary>
+        /// <param name="T"></param>
+        /// <returns></returns>
+        public static int[] DailyTemperatures(int[] T)
+        {
+            int[] ans = new int[T.Length];
+            Stack<int> nextHigher = new Stack<int>(T.Length);
+            for (int i = T.Length - 1; i >= 0; i--)
+            {
+                while (nextHigher.Count > 0 && T[nextHigher.Peek()] <= T[i])
+                    nextHigher.Pop();
+                // if stack is empty means no higher value exists else take the Stack Top
+                ans[i] = nextHigher.Count > 0 ? nextHigher.Peek() - i : 0;
+                nextHigher.Push(i);      // add current val to Stack
+            }
+            return ans;
+        }
+
+
+
+
 
     }
 }
