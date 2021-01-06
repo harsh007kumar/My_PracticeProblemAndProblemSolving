@@ -6089,7 +6089,103 @@ namespace InterviewProblemNSolutions
         }
 
 
+        /// <summary>
+        /// Given a string, sorts it in decreasing order based on the frequency of characters.
+        /// Time O(Max(n,klogk)), Space O(k), n = length of the input string & k = Distinct Characters in I/P
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string FrequencySort(string s)
+        {
+            // Map All Characters and their total count in Dictionary
+            Dictionary<char, int> charCount = new Dictionary<char, int>();
+            for (int i = 0; i < s.Length; i++)                      // Time O(n)
+                if (charCount.ContainsKey(s[i])) charCount[s[i]]++;
+                else charCount.Add(s[i], 1);
+            
+            // Now create a MaxHeap which will store all Characters by their frequency
+            MaxHeap h = new MaxHeap(charCount.Count);
+            foreach (var kvp in charCount)                         // O(k), k = Distinct Characters in I/P
+                h.Insert(kvp.Value, kvp.Key);                      // O(logk)
 
+            // Now Create answer by appending each char its frequency times, starting with char with max frequency in input string
+            StringBuilder sb = new StringBuilder(s.Length);
+            while (h.size > 0)                                      // O(k)
+            {
+                Pair max = h.ExtractMin();                          // O(logk)
+                for (int times = max.count; times > 0; times--)
+                    sb.Append(max.ch);
+            }
+            return sb.ToString();
+        }
+        class MaxHeap
+        {
+            Pair[] arr;
+            public int i, size;
+            public MaxHeap(int size)
+            {
+                i = 0;
+                this.size = size;
+                arr = new Pair[size];
+            }
+            public void Insert(int key, char val)
+            {
+                int curr = i++;
+                arr[curr] = new Pair(key, val);
+                while (curr > 0)
+                {
+                    int p = Parent(curr);
+                    if (arr[p].count < arr[curr].count)
+                    {
+                        var temp = arr[p];
+                        arr[p] = arr[curr];
+                        arr[curr] = temp;
+                        curr = p;
+                    }
+                    else break;
+                }
+            }
+            public Pair ExtractMin()
+            {
+                Pair ans = arr[0];
+                arr[0] = arr[--size];
+                Heapify();
+                return ans;
+            }
+            public void Heapify(int i = 0)
+            {
+                while (i < size)
+                {
+                    int max = i, left = Left(i), right = Right(i);
+                    if (left < size && arr[left].count > arr[i].count)
+                        max = left;
+                    if (right < size && arr[right].count > arr[max].count)
+                        max = right;
+                    if (max != i)
+                    {
+                        var temp = arr[max];
+                        arr[max] = arr[i];
+                        arr[i] = temp;
+                        i = max;
+                    }
+                    else break;
+                }
+            }
+
+            int Left(int index) => index * 2 + 1;
+            int Right(int index) => Left(index) + 1;
+            int Parent(int index) => (index - 1) / 2;
+        }
+        class Pair
+        {
+            public char ch;
+            public int count;
+            public Pair(int count, char ch)
+            {
+                this.ch = ch;
+                this.count = count;
+            }
+        }
 
 
     }

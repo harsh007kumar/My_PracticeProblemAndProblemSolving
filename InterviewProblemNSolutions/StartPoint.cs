@@ -176,6 +176,7 @@ namespace InterviewProblemNSolutions
             MakeTheStringGreat();
             RemoveOutermostParentheses();
             DailyTemperatures();
+            SortCharactersByFrequency();
 
 
 
@@ -2907,6 +2908,14 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void SortCharactersByFrequency()
+        {
+            // https://leetcode.com/problems/sort-characters-by-frequency/
+            Utility.Print("451. Sort Characters By Frequency");
+            string[] sArr = { "tree", "cccaaa", "Aabb" };
+            foreach (var s in sArr)
+                Console.WriteLine($" Sorting string \'{s}\' in decreasing order based on the frequency of characters. \'{DailyProblem.FrequencySort(s)}\'");
+        }
 
 
 
