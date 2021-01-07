@@ -6241,5 +6241,44 @@ namespace InterviewProblemNSolutions
                     return b.val.CompareTo(a.val);      // if frequency r same than decreasing value
             }
         }
+
+
+        /// <summary>
+        /// Given a 2D array of characters grid of size m x n, return true if there exists any cycle consisting of the same value in grid
+        /// Directions (up, down, left, or right)
+        /// Time = Space = O(row*col), as each cells is traversed once
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <returns></returns>
+        public static bool DetectCyclesIn2DGrid(char[][] grid)
+        {
+            int rows = grid.Length;
+            int cols = grid[0].Length;
+            bool[,] visited = new bool[rows,cols];
+            for (int r = 0; r < rows; r++)
+                for (int c = 0; c < cols; c++)
+                    if (!visited[r,c] && DFS(r, c, grid[r][c]))
+                        return true;
+            return false;
+            // direction 0 = coming from left, 1 = coming from right, 2 = coming from top & 3 = coming from bottom
+            bool DFS(int row, int col, char lastChar, int direction = 0)
+            {
+                if (row < 0 || row >= rows || col < 0 || col >= cols || grid[row][col] != lastChar) return false;
+                if (grid[row][col] == lastChar && visited[row, col]) return true;       // cycle found
+
+                visited[row,col] = true; // mark visited to avoid traversing same cell during different DFS traversal
+                                          // check left
+                if (direction != 0 && DFS(row, col - 1, lastChar, 1)) return true;
+                // check right
+                if (direction != 1 && DFS(row, col + 1, lastChar, 0)) return true;
+                // check top
+                if (direction != 2 && DFS(row - 1, col, lastChar, 3)) return true;
+                // check bottom
+                if (direction != 3 && DFS(row + 1, col, lastChar, 2)) return true;
+
+                return false;
+            }
+        }
+
     }
 }

@@ -178,6 +178,7 @@ namespace InterviewProblemNSolutions
             DailyTemperatures();
             SortCharactersByFrequency();
             SortArrayByIncreasingFrequency();
+            DetectCyclesIn2DGrid();
 
 
 
@@ -2930,6 +2931,23 @@ namespace InterviewProblemNSolutions
                 DailyProblem.SortArrayByIncreasingFrequency(nums).Print("Frequency-Value-Sorted");
             }
         }
+
+
+        public static void DetectCyclesIn2DGrid()
+        {
+            // https://leetcode.com/problems/detect-cycles-in-2d-grid/
+            Utility.Print("1559. Detect Cycles in 2D Grid");
+            char[][][] gridArr = { new char[][] { new char[] { 'a', 'a', 'a', 'a' }, new char[] { 'a', 'b', 'b', 'a' }, new char[] { 'a', 'b', 'b', 'a' }, new char[] { 'a', 'a', 'a', 'a' } },
+                                new char[][] { new char[] {'a','b','b'}, new char[] {'b','z','b'}, new char[] {'b','b','a'} } };
+            foreach (var grid in gridArr)
+            {
+                grid.Print("2D array of characters");
+                Console.WriteLine($" The statement 'any cycle of the same value exists in grid in 4-directions' is {DailyProblem.DetectCyclesIn2DGrid(grid)}\n\n");
+            }
+        }
+
+
+
 
 
 
