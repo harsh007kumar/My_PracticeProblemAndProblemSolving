@@ -6304,7 +6304,24 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        /// <summary>
+        /// Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number.
+        /// An example is the root-to-leaf path 1->2->3 which represents the number 123.
+        /// Return the total sum of all root-to-leaf numbers.
+        /// Time O(n) || Auxiliary Space O(1) || Recusive Space O(h), n = no of nodes in tree, h = height of tree
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="no"></param>
+        /// <returns></returns>
+        public static int SumRootToLeafNumbers(TreeNode root, int no = 0)
+        {
+            if (root == null) return 0;
+            no = no * 10 + root.val;
+            if (root.left == null && root.right == null)
+                return no;
+            else
+                return SumRootToLeafNumbers(root.left, no) + SumRootToLeafNumbers(root.right, no);
+        }
 
     }
 }

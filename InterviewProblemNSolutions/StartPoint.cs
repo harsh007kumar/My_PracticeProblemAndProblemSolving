@@ -180,7 +180,7 @@ namespace InterviewProblemNSolutions
             SortArrayByIncreasingFrequency();
             DetectCyclesIn2DGrid();
             SmallestStringStartingFromLeaf();
-
+            SumRootToLeafNumbers();
 
 
 
@@ -2971,6 +2971,19 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" lexicographically smallest string that starts at a leaf of this tree and ends at the root \'{DailyProblem.SmallestStringStartingFromLeaf(root)}\'");
         }
 
+
+        public static void SumRootToLeafNumbers()
+        {
+            // https://leetcode.com/problems/sum-root-to-leaf-numbers/
+            Utility.Print("129. Sum Root to Leaf Numbers");
+            TreeNode root = new TreeNode(1)
+            {
+                left = new TreeNode(2),
+                right = new TreeNode(3)
+            };
+            root.InOrder("Tree");
+            Console.WriteLine($" Total sum of all root-to-leaf numbers \'{DailyProblem.SumRootToLeafNumbers(root)}\'");
+        }
 
 
 
