@@ -6280,5 +6280,31 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        /// <summary>
+        /// Time O(n) || Auxiliary Space O(1) || Recusive Space O(h), n = no of nodes in tree, h = height of tree
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public static string SmallestStringStartingFromLeaf(TreeNode root)
+        {
+            string ans = "";
+            GetStrings(root, "", ref ans);       // Time O(n)
+            return ans;
+        }
+        static void GetStrings(TreeNode root, string str, ref string ans)
+        {
+            if (root == null) { return; }
+            string pathTillHere = (char)(root.val + 'a') + str;
+
+            if (root.left == null && root.right == null && (pathTillHere.CompareTo(ans) < 0 || ans == ""))
+                ans = pathTillHere;
+            GetStrings(root.left, pathTillHere, ref ans);
+            GetStrings(root.right, pathTillHere, ref ans);
+        }
+
+
+
+
     }
 }

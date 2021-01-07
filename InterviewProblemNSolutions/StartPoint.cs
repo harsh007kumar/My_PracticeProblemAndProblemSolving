@@ -179,6 +179,8 @@ namespace InterviewProblemNSolutions
             SortCharactersByFrequency();
             SortArrayByIncreasingFrequency();
             DetectCyclesIn2DGrid();
+            SmallestStringStartingFromLeaf();
+
 
 
 
@@ -2947,6 +2949,27 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void SmallestStringStartingFromLeaf()
+        {
+            // https://leetcode.com/problems/sum-root-to-leaf-numbers/
+            Utility.Print("988. Smallest String Starting From Leaf");
+            TreeNode root = new TreeNode(0)
+            {
+                left = new TreeNode(1)
+                {
+                    left = new TreeNode(3),
+                    right = new TreeNode(4)
+                },
+                right = new TreeNode(2)
+                {
+                    left = new TreeNode(5),
+                    right = new TreeNode(6)
+                }
+            };
+            TreeNode root2 = new TreeNode(0) { right = new TreeNode(1) };
+            root.InOrder("Input");
+            Console.WriteLine($" lexicographically smallest string that starts at a leaf of this tree and ends at the root \'{DailyProblem.SmallestStringStartingFromLeaf(root)}\'");
+        }
 
 
 
