@@ -182,7 +182,7 @@ namespace InterviewProblemNSolutions
             SmallestStringStartingFromLeaf();
             SumRootToLeafNumbers();
             CheckIfTwoStringArraysAreEquivalent();
-
+            SubtreeOfAnotherTree();
 
 
 
@@ -2998,6 +2998,32 @@ namespace InterviewProblemNSolutions
             //Console.WriteLine($" Above two array represent same string: {DailyProblem.ArrayStringsAreEqual(word1, word2)}");
             Console.WriteLine($" Above two array represent same string: {DailyProblem.ArrayStringsAreEqualFaster(word1, word2)}");
         }
+
+
+        public static void SubtreeOfAnotherTree()
+        {
+            // https://leetcode.com/problems/subtree-of-another-tree/
+            Utility.Print("572. Subtree of Another Tree");
+            TreeNode root = new TreeNode(3)
+            {
+                left = new TreeNode(4)
+                {
+                    left = new TreeNode(1),
+                    right = new TreeNode(2)
+                },
+                right = new TreeNode(5)
+            };
+
+            TreeNode root2 = new TreeNode(1)
+            { right = new TreeNode(1) };
+            root.InOrder("BinaryTree - (s)");
+            root.left.InOrder("SubTree-ToBe-Searched - (t)");
+            TreeNode s = root, t = root.left;
+
+            //Console.WriteLine($" 't' has same structure and node values with a subtree of 's' : \'{DailyProblem.SubtreeOfAnotherTree(s, t)}\'");
+            Console.WriteLine($" 't' has same structure and node values with a subtree of 's' : \'{DailyProblem.SubtreeOfAnotherTreeEfficient(s, t)}\'");
+        }
+
 
 
 

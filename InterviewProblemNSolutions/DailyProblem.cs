@@ -6352,5 +6352,47 @@ namespace InterviewProblemNSolutions
             return currI == len;
         }
 
+
+        // Time O(n*k) || Space O(k) , n = no of nodes in 's' tree and k = no of nodes in 's' whose value match with 't'
+        public static bool SubtreeOfAnotherTree(TreeNode s, TreeNode t)
+        {
+            /* Approach was to get all nodes who's root val matches with 't' while traversing
+             * Than starting Matching from all eligible nodes
+             */
+            List<TreeNode> ls = new List<TreeNode>();
+            GetTMatchingNode(s, t, ls);
+            for (int i = 0; i < ls.Count; i++)      // 'k' times
+                if (Match(ls[i], t)) return true;   // O(n)
+            return false;
+        }
+        // Time O(n), n = no of node in Tree 's'
+        public static void GetTMatchingNode(TreeNode s, TreeNode t, List<TreeNode> ls)
+        {
+            if (s != null)
+            {
+                if (s.val == t.val) ls.Add(s);
+                GetTMatchingNode(s.left, t, ls);
+                GetTMatchingNode(s.right, t, ls);
+            }
+        }
+        // Time O(n), n = no of node in subTreeTree 'a'
+        public static bool Match(TreeNode a, TreeNode b)
+        {
+            if (a == null && b == null) return true;
+            if ((a != null && b == null) || (b != null && a == null)) return false;
+            return a.val == b.val && Match(a.left, b.left) && Match(a.right, b.right);
+        }
+
+        // Time O(n*k) || Space O(1) , n = no of nodes in 's' tree and k = no of nodes in 's' whose value match with 't'
+        public static bool SubtreeOfAnotherTreeEfficient(TreeNode s, TreeNode t)
+        {
+            /* Efficient Approach is to look for SubTree 't' while traversing original tree 's'
+             * if any node matches return true
+             */
+            if (s == null) return false;
+            if (Match(s, t)) return true;
+            return SubtreeOfAnotherTreeEfficient(s.left, t) || SubtreeOfAnotherTreeEfficient(s.right, t);
+        }
+
     }
 }
