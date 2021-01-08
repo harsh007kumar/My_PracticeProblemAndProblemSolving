@@ -181,6 +181,7 @@ namespace InterviewProblemNSolutions
             DetectCyclesIn2DGrid();
             SmallestStringStartingFromLeaf();
             SumRootToLeafNumbers();
+            CheckIfTwoStringArraysAreEquivalent();
 
 
 
@@ -2983,6 +2984,19 @@ namespace InterviewProblemNSolutions
             };
             root.InOrder("Tree");
             Console.WriteLine($" Total sum of all root-to-leaf numbers \'{DailyProblem.SumRootToLeafNumbers(root)}\'");
+        }
+
+
+        public static void CheckIfTwoStringArraysAreEquivalent()
+        {
+            // https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/
+            Utility.Print("1662. Check If Two String Arrays are Equivalent");
+            string[] word1 = { "ab", "c" };
+            string[] word2 = { "a", "bc" };
+            word1.Print("Word1");
+            word2.Print("Word2");
+            //Console.WriteLine($" Above two array represent same string: {DailyProblem.ArrayStringsAreEqual(word1, word2)}");
+            Console.WriteLine($" Above two array represent same string: {DailyProblem.ArrayStringsAreEqualFaster(word1, word2)}");
         }
 
 

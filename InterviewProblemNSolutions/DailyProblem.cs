@@ -6323,5 +6323,34 @@ namespace InterviewProblemNSolutions
                 return SumRootToLeafNumbers(root.left, no) + SumRootToLeafNumbers(root.right, no);
         }
 
+
+        // Time O(Max(n,m)) || Space O(n+m), n = no of characters in word1 & m no of characters in word2
+        public static bool ArrayStringsAreEqual(string[] word1, string[] word2)
+        {
+            StringBuilder sb1 = new StringBuilder();
+            StringBuilder sb2 = new StringBuilder();
+            foreach (var str in word1)
+                sb1.Append(str);
+            foreach (var str in word2)
+                sb2.Append(str);
+            return sb1.ToString().CompareTo(sb2.ToString()) == 0;
+        }
+        // Time O(n) || Space O(n), n = no of characters in word1
+        public static bool ArrayStringsAreEqualFaster(string[] word1, string[] word2)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < word1.Length; i++)
+                sb.Append(word1[i]);
+
+            string finalString = sb.ToString();
+            int currI = 0, len = finalString.Length;
+
+            for (int i = 0; i < word2.Length; i++)
+                for (int j = 0; j < word2[i].Length; j++)
+                    if (currI >= len || finalString[currI++] != word2[i][j])
+                        return false;
+            return currI == len;
+        }
+
     }
 }
