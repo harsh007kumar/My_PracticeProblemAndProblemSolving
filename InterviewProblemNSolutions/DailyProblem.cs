@@ -6394,5 +6394,51 @@ namespace InterviewProblemNSolutions
             return SubtreeOfAnotherTreeEfficient(s.left, t) || SubtreeOfAnotherTreeEfficient(s.right, t);
         }
 
+
+        // Brute Force // Time O(n^2), n = length of nums
+        public static int KDiffPairsInAnArray(int[] nums, int k)
+        {
+            Array.Sort(nums);
+            int pair = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (i > 0 && nums[i - 1] == nums[i]) continue;  // Skipping same left nums as used before
+                for (int j = i + 1; j < nums.Length; j++)
+                    if (Math.Abs(nums[i] - nums[j]) == k && (j == i + 1 || nums[j - 1] != nums[j]))     // Skip right nums if same as before to capture unique pairs
+                        pair++;
+            }
+            return pair;
+        }
+        // 2-Pointer approach // Time O(nlogn), n = length of nums
+        public static int KDiffPairsInAnArrayFaster(int[] nums, int k)
+        {
+            Array.Sort(nums);
+            int pair = 0, left = 0, right = left + 1;
+            while (left < nums.Length && right < nums.Length)
+            {
+                int diff = Math.Abs(nums[left] - nums[right]);
+
+                if (diff < k)
+                    right++;
+                else if (diff > k)
+                    left++;
+                else // if (diff == k)
+                {
+                    pair++;
+                    while (left + 1 < nums.Length && nums[left] == nums[left + 1])
+                        left++;
+                    // Skipping same left nums as used before
+                    left++;
+                    // Skip right nums if same as before to capture unique pairs
+                    while (right + 1 < nums.Length && nums[right] == nums[right + 1])
+                        right++;
+                    right++;
+                }
+                // in case left & right are pointing at same index
+                while (left >= right) right++;
+            }
+            return pair;
+        }
+
     }
 }

@@ -183,6 +183,7 @@ namespace InterviewProblemNSolutions
             SumRootToLeafNumbers();
             CheckIfTwoStringArraysAreEquivalent();
             SubtreeOfAnotherTree();
+            KDiffPairsInAnArray();
 
 
 
@@ -3024,6 +3025,20 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" 't' has same structure and node values with a subtree of 's' : \'{DailyProblem.SubtreeOfAnotherTreeEfficient(s, t)}\'");
         }
 
+
+        public static void KDiffPairsInAnArray()
+        {
+            // https://leetcode.com/problems/k-diff-pairs-in-an-array/
+            Utility.Print("532. K-diff Pairs in an Array");
+            int[][] nums = { new int[] { 3, 1, 4, 1, 5 }, new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 3, 1, 5, 4 }, new int[] { 1, 2, 4, 4, 3, 3, 0, 9, 2, 3 }, new int[] { -1, -2, -3 }, new int[] { 1, 3, 1, 5, 4 } };
+            int[] k = { 2, 1, 0, 3, 1, 0 };
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Nums");
+                //Console.WriteLine($" A k-diff \'{k[i]}\' pair is an integer pair (nums[i], nums[j]), where the following are true: {DailyProblem.KDiffPairsInAnArray(nums[i], k[i])}");
+                Console.WriteLine($" A k-diff \'{k[i]}\' pair is an integer pair (nums[i], nums[j]), where the following are true: {DailyProblem.KDiffPairsInAnArrayFaster(nums[i], k[i])}\n");
+            }
+        }
 
 
 
