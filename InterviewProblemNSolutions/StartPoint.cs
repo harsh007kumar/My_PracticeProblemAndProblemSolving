@@ -184,6 +184,7 @@ namespace InterviewProblemNSolutions
             CheckIfTwoStringArraysAreEquivalent();
             SubtreeOfAnotherTree();
             KDiffPairsInAnArray();
+            StringCompression();
 
 
 
@@ -3043,7 +3044,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void StringCompression()
+        {
+            // https://leetcode.com/problems/string-compression/
+            Utility.Print("443. String Compression");
+            string[] sArr = { "aabbccc", "a", "abbbbbbbbbbbbb", "aaabbaa" };
+            foreach (var str in sArr)
+            {
+                char[] chars = str.ToCharArray();
+                chars.Print("Input Char Array");
+                int len = DailyProblem.StringCompression(chars);
+                Console.Write("Compressed Char Array ");
+                for (int i = 0; i < len; i++)
+                    Console.Write($" {chars[i]} ||");
 
+                Console.WriteLine("\n");
+            }
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

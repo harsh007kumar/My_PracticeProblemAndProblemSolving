@@ -6504,5 +6504,39 @@ namespace InterviewProblemNSolutions
             return pair;
         }
 
+
+        // Time O(n) || Space O(1)
+        public static int StringCompression(char[] chars)
+        {
+            int index = 0, count = 1;
+            char lastChar = chars[0];
+            for (int i = 1; i < chars.Length; i++)
+            {
+                if (chars[i] == lastChar)
+                    count++;
+                else // if(chars[i]!=lastChar)
+                {
+                    if (count > 1)
+                    {
+                        string freq = count.ToString();
+                        for (int k = 0; k < freq.Length; k++)
+                            chars[++index] = freq[k];
+                    }
+                    lastChar = chars[i];
+                    chars[++index] = lastChar;
+                    count = 1;
+                }
+            }
+            if (count > 1)
+            {
+                string freq = count.ToString();
+                for (int k = 0; k < freq.Length; k++)
+                    chars[++index] = freq[k];
+            }
+            return index + 1;
+        }
+
+
+
     }
 }
