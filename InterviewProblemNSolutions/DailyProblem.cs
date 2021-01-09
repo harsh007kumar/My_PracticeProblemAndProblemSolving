@@ -6537,6 +6537,31 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Recursive Space O(h)
+        public static IList<IList<int>> PathSumII(TreeNode root, int sum)
+        {
+            List<IList<int>> ans = new List<IList<int>>();
+            List<int> ls = new List<int>();
+            GetSum(root, sum);
+            return ans;
+            void GetSum(TreeNode r, int s)
+            {
+                if (r == null) return;
+                s -= r.val;
+                ls.Add(r.val);                  // add current node to list
+
+                if (r.left == null && r.right == null && s == 0)
+                {
+                    int[] result = new int[ls.Count];
+                    ls.CopyTo(result);
+                    ans.Add(result);
+                }
+                GetSum(r.left, s);
+                GetSum(r.right, s);
+
+                ls.RemoveAt(ls.Count - 1);    // Remove current node from list
+            }
+        }
 
     }
 }

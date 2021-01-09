@@ -185,6 +185,7 @@ namespace InterviewProblemNSolutions
             SubtreeOfAnotherTree();
             KDiffPairsInAnArray();
             StringCompression();
+            PathSumII();
 
 
 
@@ -3061,6 +3062,46 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine("\n");
             }
         }
+
+
+        public static void PathSumII()
+        {
+            // https://leetcode.com/problems/path-sum-ii/
+            Utility.Print("113. Path Sum II");
+            TreeNode root = new TreeNode(5)
+            {
+                left = new TreeNode(4)
+                {
+                    left = new TreeNode(11)
+                    {
+                        left = new TreeNode(7),
+                        right = new TreeNode(2)
+                    }
+                },
+                right = new TreeNode(8)
+                {
+                    left = new TreeNode(13),
+                    right = new TreeNode(4)
+                    {
+                        left = new TreeNode(5),
+                        right = new TreeNode(1)
+                    }
+                }
+            };
+            root.InOrder("BinaryTree");
+            int sum = 22;
+            IList<IList<int>> ans = DailyProblem.PathSumII(root, sum);
+            Console.WriteLine($" All root-to-leaf paths where each path's sum equals the given sum {sum}");
+            foreach (var matchingSum in ans)
+            {
+                foreach (var num in matchingSum)
+                    Console.Write($" {num} ||");
+                Console.WriteLine();
+            }
+        }
+
+
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
