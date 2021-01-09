@@ -4070,6 +4070,70 @@ namespace InterviewProblemNSolutions
             // if destination distance is not intMax return the value else return 0 indicating 'path not found'
             return distance[destination] != int.MaxValue ? distance[destination] : 0;
         }
+        public static int WordLadderFaster(string beginWord, string endWord, IList<string> wordList)
+        {
+            Dictionary<string, List<string>> graph = new Dictionary<string, List<string>>();
+
+            for (int i = 0; i < wordList.Count; i++)                // O(n)
+                graph.Add(wordList[i], new List<string>());                                 // add other nodes
+            if (!graph.ContainsKey(beginWord)) graph.Add(beginWord, new List<string>());    // add source
+
+            // Create graph => make connections (Join Edges among 1 edit distance words)
+            for (int i = 0; i < wordList.Count; i++)                // O(n)
+            {
+                // Connect all nodes which are 1 edit distance away from beginword
+                if (IsOneCharDiff(wordList[i], beginWord))          // O(m), m = avg length of the each word
+                {
+                    graph[wordList[i]].Add(beginWord);
+                    graph[beginWord].Add(wordList[i]);
+                }
+                // we dont add 'endword' as problem says it must be present in List of words
+
+                // Connect all nodes from list which are 1 edit distance away from each other
+                for (int j = i + 1; j < wordList.Count; j++)        // O(n) & since its under outer loop of 'n' time total time is O(n^2)
+                    if (IsOneCharDiff(wordList[i], wordList[j]))    // O(m), m = avg length of the each word, total time is 
+                    {
+                        graph[wordList[i]].Add(wordList[j]);
+                        graph[wordList[j]].Add(wordList[i]);
+                    }
+            }
+            if (!graph.ContainsKey(endWord)) return 0;  // we can stop check for shortest path if destination is not present in graph
+
+            return ShortestPath(graph, beginWord, endWord);         // O(V+E), V = n+1, E = no of connections
+            
+            // returns true is 2 words differ by max 1 character
+            bool IsOneCharDiff(string a, string b)
+            {
+                int diff = 0;
+                for (int i = 0; i < a.Length; i++)
+                    if (a[i] != b[i] && ++diff > 1)
+                        return false;
+                return true;
+            }
+            // BFS to find Shortest path in undirected graph
+            int ShortestPath(Dictionary<string, List<string>> _graph, string source, string destination)
+            {
+                int V = _graph.Count;    // No of Vertices
+                Dictionary<string, int> dist = new Dictionary<string, int>(V);
+                Queue<string> q = new Queue<string>();
+                q.Enqueue(source);
+                dist.Add(source, 1);     // distance of source should be 0 but keeping it 1 Coz of stupid LeetCode testcases
+
+                while (q.Count > 0)
+                {
+                    string parent = q.Dequeue();
+                    List<string> adjacentNodes = _graph[parent];
+                    for (int i = 0; i < adjacentNodes.Count; i++)
+                        if (!dist.ContainsKey(adjacentNodes[i]))
+                        {
+                            if (adjacentNodes[i] == destination) return dist[parent] + 1;
+                            dist.Add(adjacentNodes[i], dist[parent] + 1);
+                            q.Enqueue(adjacentNodes[i]);
+                        }
+                }
+                return 0;
+            }
+        }
 
 
         // Time = Space = O(N)
