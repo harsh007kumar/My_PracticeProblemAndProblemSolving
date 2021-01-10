@@ -186,7 +186,7 @@ namespace InterviewProblemNSolutions
             KDiffPairsInAnArray();
             StringCompression();
             PathSumII();
-
+            CreateSortedArrayThroughInstructions();
 
 
             // String Matching Algorithm
@@ -3099,6 +3099,20 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine();
             }
         }
+
+
+        public static void CreateSortedArrayThroughInstructions()
+        {
+            // https://leetcode.com/problems/create-sorted-array-through-instructions/
+            Utility.Print("1649. Create Sorted Array through Instructions");
+            int[][] instructionsArr = { new int[] { 1, 5, 6, 2 }, new int[] { 1, 2, 3, 6, 5, 4 }, new int[] { 1, 3, 3, 3, 2, 4, 2, 1, 2 } };
+            foreach (int[] instructions in instructionsArr)
+            {
+                instructions.Print("Instructions");
+                Console.WriteLine($" Total cost to insert all elements from instructions into nums: {DailyProblem.CreateSortedArrayThroughInstructions(instructions)}\n");
+            }
+        }
+
 
 
 

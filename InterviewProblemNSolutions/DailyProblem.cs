@@ -6563,5 +6563,109 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time O(nlogn) as we perform merge sort twice || Space O(n)
+        public static int CreateSortedArrayThroughInstructions(int[] instructions)
+        {
+            long cost = 0;
+            int modulo = 1000000007, n = instructions.Length;
+            int[] smaller = new int[n];
+            int[] larger = new int[n];
+            int[][] temp = new int[n][];
+            int[][] arrSmaller = new int[n][];
+            int[][] arrLarger = new int[n][];
+            
+            for (int i = 0; i < n; i++)
+            {
+                arrSmaller[i] = new int[] { instructions[i], i };
+                arrLarger[i] = new int[] { instructions[i], i };
+            }
+
+            SortSmaller(arrSmaller, 0, n - 1);
+            SortLarger(arrLarger, 0, n - 1);
+
+            // Find Min Cost of adding number
+            for (int i = 0; i < n; i++)
+                cost += Math.Min(smaller[i], larger[i]);
+
+            return (int)(cost % modulo);
+
+
+            // LOCAL FUNCTIONS
+
+            // Total UnStable Sort
+            void SortSmaller(int[][] a, int start, int last)
+            {
+                if (start == last) return;
+                int mid = start + (last - start) / 2;
+                SortSmaller(a, start, mid);
+                SortSmaller(a, mid + 1, last);
+                MergeSmaller(a, start, last, mid);
+            }
+            // Stable Sort
+            void SortLarger(int[][] a, int start, int last)
+            {
+                if (start == last) return;
+                int mid = start + (last - start) / 2;
+                SortLarger(a, start, mid);
+                SortLarger(a, mid + 1, last);
+                MergeLarger(a, start, last, mid);
+            }
+
+            void MergeSmaller(int[][] a, int start, int last, int mid)
+            {
+                int i = start;
+                int j = mid + 1;
+                int k = start;
+                while (i <= mid && j <= last)
+                {
+                    if (a[i][0] < a[j][0])
+                        temp[k++] = a[i++];
+                    else
+                    {
+                        smaller[a[j][1]] += i - start;
+                        temp[k++] = a[j++];
+                    }
+                }
+                while (i <= mid)
+                    temp[k++] = a[i++];
+                while (j <= last)
+                {
+                    smaller[a[j][1]] += i - start;
+                    temp[k++] = a[j++];
+                }
+                // Restore array 'a'
+                for (i = start; i <= last; i++)
+                    a[i] = temp[i];
+            }
+
+            void MergeLarger(int[][] a, int start, int last, int mid)
+            {
+                int i = start;
+                int j = mid + 1;
+                int k = start;
+                while (i <= mid && j <= last)
+                {
+                    if (a[i][0] <= a[j][0])
+                        temp[k++] = a[i++];
+                    else
+                    {
+                        larger[a[j][1]] += mid - i + 1;
+                        temp[k++] = a[j++];
+                    }
+                }
+                while (i <= mid)
+                    temp[k++] = a[i++];
+                while (j <= last)
+                {
+                    larger[a[j][1]] += mid - i + 1;
+                    temp[k++] = a[j++];
+                }
+                // Restore array 'a'
+                for (i = start; i <= last; i++)
+                    a[i] = temp[i];
+            }
+        }
+
     }
 }
