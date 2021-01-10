@@ -6564,6 +6564,20 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n^2) || Auxillary Space O(1) || Recursive Space O(h), n = no of nodes in tree, h = height of tree
+        public static int PathSumIII(TreeNode root, int sum)
+        {
+            if (root == null) return 0;
+            return IsMatchingSum(root, sum) + PathSumIII(root.left, sum) + PathSumIII(root.right, sum);
+        }
+        public static int IsMatchingSum(TreeNode root, int sum)
+        {
+            if (root == null) return 0;
+            sum -= root.val;
+            return ((sum == 0) ? 1 : 0) + IsMatchingSum(root.left, sum) + IsMatchingSum(root.right, sum);
+        }
+
+
         // Time O(nlogn) as we perform merge sort twice || Space O(n)
         public static int CreateSortedArrayThroughInstructions(int[] instructions)
         {

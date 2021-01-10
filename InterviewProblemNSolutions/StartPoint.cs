@@ -186,6 +186,7 @@ namespace InterviewProblemNSolutions
             KDiffPairsInAnArray();
             StringCompression();
             PathSumII();
+            PathSumIII();
             CreateSortedArrayThroughInstructions();
 
 
@@ -3101,6 +3102,44 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void PathSumIII()
+        {
+            // https://leetcode.com/problems/path-sum-iii/
+            Utility.Print("437. Path Sum III");
+            TreeNode root2 = new TreeNode(1)
+            {
+                right = new TreeNode(2)
+                {
+                    right = new TreeNode(3)
+                    {
+                        right = new TreeNode(4)
+                        {
+                            right = new TreeNode(5)
+                        }
+                    }
+                }
+            };
+            TreeNode root = new TreeNode(1)
+            {
+                left = new TreeNode(-2)
+                {
+                    left = new TreeNode(1)
+                    { 
+                        left = new TreeNode(-1)
+                    },
+                    right = new TreeNode(3)
+                },
+                right = new TreeNode(-3)
+                {
+                    left = new TreeNode(-2)
+                }
+            };
+            root.InOrder("BinaryTree");
+            int sum = -1;
+            Console.WriteLine($" number of paths that sum to a \'{sum}\' value are : \t{DailyProblem.PathSumIII(root, sum)}");
+        }
+
+
         public static void CreateSortedArrayThroughInstructions()
         {
             // https://leetcode.com/problems/create-sorted-array-through-instructions/
@@ -3112,7 +3151,6 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Total cost to insert all elements from instructions into nums: {DailyProblem.CreateSortedArrayThroughInstructions(instructions)}\n");
             }
         }
-
 
 
 
