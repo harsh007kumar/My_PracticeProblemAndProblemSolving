@@ -188,6 +188,7 @@ namespace InterviewProblemNSolutions
             PathSumII();
             PathSumIII();
             CreateSortedArrayThroughInstructions();
+            CountAndSay();
 
 
             // String Matching Algorithm
@@ -3150,6 +3151,15 @@ namespace InterviewProblemNSolutions
                 instructions.Print("Instructions");
                 Console.WriteLine($" Total cost to insert all elements from instructions into nums: {DailyProblem.CreateSortedArrayThroughInstructions(instructions)}\n");
             }
+        }
+
+
+        public static void CountAndSay()
+        {
+            // https://leetcode.com/problems/count-and-say/
+            Utility.Print("38. Count and Say");
+            for (int i = 1; i <= 30; i++)
+                Console.WriteLine($" CountAndSay({i}) : {DailyProblem.CountAndSay(i)}");
         }
 
 

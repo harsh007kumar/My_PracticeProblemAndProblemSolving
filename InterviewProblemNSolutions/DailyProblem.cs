@@ -6681,5 +6681,36 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time O(n) || Space O(n), n = 30 as stated in LeetCode Problem
+        public static string CountAndSay(int n)
+        {
+            string startnum = "1";
+            int count = 1;
+            string[] preSolved = new string[31];
+            StringBuilder next = new StringBuilder();
+            preSolved[1] = startnum;
+
+            for (int i = 2; i < preSolved.Length; i++)
+            {
+                next = new StringBuilder();
+                count = 1;
+                char lastDigit = startnum[0];
+                for (int j = 1; j < startnum.Length; j++)
+                    if (startnum[j] == lastDigit)
+                        count++;
+                    else
+                    {
+                        next.Append(count.ToString()).Append(lastDigit);
+                        count = 1;
+                        lastDigit = startnum[j];
+                    }
+                next.Append(count.ToString()).Append(lastDigit);
+                preSolved[i] = next.ToString();
+                startnum = preSolved[i];
+            }
+            return preSolved[n];
+        }
+
     }
 }
