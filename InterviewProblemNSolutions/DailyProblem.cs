@@ -6712,5 +6712,27 @@ namespace InterviewProblemNSolutions
             return preSolved[n];
         }
 
+
+
+        // Time O(nlogn) || Space O(1)
+        public static int NumRescueBoats(int[] people, int limit)
+        {
+            Array.Sort(people);
+            int boats = 0, start = 0, last = people.Length - 1;
+            while (start <= last)
+                if (people[start] + people[last] > limit)
+                {
+                    last--;
+                    boats++;
+                }
+                else if (people[start] + people[last] <= limit)
+                {
+                    boats++;
+                    last--;
+                    start++;
+                }
+            
+            return boats;
+        }
     }
 }

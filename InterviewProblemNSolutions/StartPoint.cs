@@ -189,6 +189,7 @@ namespace InterviewProblemNSolutions
             PathSumIII();
             CreateSortedArrayThroughInstructions();
             CountAndSay();
+            BoatsToSavePeople();
 
 
             // String Matching Algorithm
@@ -3160,6 +3161,20 @@ namespace InterviewProblemNSolutions
             Utility.Print("38. Count and Say");
             for (int i = 1; i <= 30; i++)
                 Console.WriteLine($" CountAndSay({i}) : {DailyProblem.CountAndSay(i)}");
+        }
+
+
+        public static void BoatsToSavePeople()
+        {
+            // https://leetcode.com/problems/boats-to-save-people/
+            Utility.Print("881. Boats to Save People");
+            int[][] people = { new int[] { 1, 2 }, new int[] { 3, 2, 2, 1 }, new int[] { 3, 5, 3, 4 }, new int[] { 5, 1, 4, 2 } };
+            int[] limit = { 3, 3, 5, 6 };
+            for (int i = 0; i < people.Length; i++)
+            {
+                people[i].Print("People Wt");
+                Console.WriteLine($" Minimum number of boats to carry every given person with boat wt carrying limit \'{limit[i]}\' are : {DailyProblem.NumRescueBoats(people[i], limit[i])}");
+            }
         }
 
 
