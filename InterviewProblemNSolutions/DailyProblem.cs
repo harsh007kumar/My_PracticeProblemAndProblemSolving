@@ -6734,5 +6734,63 @@ namespace InterviewProblemNSolutions
             
             return boats;
         }
+
+
+        // Time O(n^2) || Space O(n)
+        // Returns True If Cycle of more than 1 jump is formed by using both forwards and backwards movements
+        public static bool CircularArrayLoop(int[] nums)
+        {
+            int n = nums.Length, jumps = 0;
+            HashSet<int> visited;
+            for (int i = 0; i < n; i++)
+            {
+                int currIndex = i, distCovered = 0;
+                visited = new HashSet<int>();
+                jumps = 0;
+                while (!visited.Contains(currIndex))
+                {
+                    visited.Add(currIndex);
+                    distCovered += nums[currIndex];
+                    jumps++;
+                    currIndex = (currIndex + nums[currIndex]) % n;
+                    while (currIndex < 0) currIndex = n + currIndex;
+
+                    if (distCovered != 0 && Math.Abs(distCovered) % n == 0 && jumps > 1) return true;
+                }
+            }
+            return false;
+        }
+        // Time O(n^2) || Space O(n)
+        // Returns True If Cycle of more than 1 jump is formed by using either forwards and backwards movements only from any index
+        public static bool CircularArrayLoopSingleDirection(int[] nums)
+        {
+            int n = nums.Length;
+            HashSet<int> visited;
+            for (int i = 0; i < n; i++)
+            {
+                int currIndex = i, distCovered = 0, jumps = 0;
+                bool isDirectionFrwd = nums[i] > 0 ? true : false;
+                visited = new HashSet<int>();
+                while (!visited.Contains(currIndex))
+                {
+                    visited.Add(currIndex);
+
+                    if (nums[currIndex] > 0 && !isDirectionFrwd) break;
+                    else if (nums[currIndex] < 0 && isDirectionFrwd) break;
+
+                    distCovered += nums[currIndex];
+                    jumps++;
+                    currIndex = (currIndex + nums[currIndex]) % n;
+                    while (currIndex < 0) currIndex = n + currIndex;
+
+                    if (distCovered != 0 && Math.Abs(distCovered) % n == 0 && jumps > 1) return true;
+                }
+            }
+            return false;
+        }
+
+
+
+
     }
 }

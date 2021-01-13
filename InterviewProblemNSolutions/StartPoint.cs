@@ -190,6 +190,7 @@ namespace InterviewProblemNSolutions
             CreateSortedArrayThroughInstructions();
             CountAndSay();
             BoatsToSavePeople();
+            CircularArrayLoop();
 
 
             // String Matching Algorithm
@@ -3178,7 +3179,19 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void CircularArrayLoop()
+        {
+            // https://leetcode.com/problems/circular-array-loop/
+            Utility.Print("457. Circular Array Loop");
+            int[][] arraysArr = { new int[] { 2, -1, 1, 2, 2 }, new int[] { -1, 2 }, new int[] { -2, 1, -1, -2, -2 },
+                                    new int[] { 1, 1, 2 }, new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 2, 2, -1 }, new int[] { 3, 1, 2} };
+            foreach(var nums in arraysArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" There is a Cycle (Both Frwd Back Allowed):\t{DailyProblem.CircularArrayLoop(nums)}");
+                Console.WriteLine($" There is a Cycle (Either Frwd/Back Allowed):\t{DailyProblem.CircularArrayLoopSingleDirection(nums)}\n");
+            }
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
