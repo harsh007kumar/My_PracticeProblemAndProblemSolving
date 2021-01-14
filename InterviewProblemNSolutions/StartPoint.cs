@@ -191,6 +191,7 @@ namespace InterviewProblemNSolutions
             CountAndSay();
             BoatsToSavePeople();
             CircularArrayLoop();
+            MaximumLengthOfRepeatedSubarray();
 
 
             // String Matching Algorithm
@@ -3196,7 +3197,16 @@ namespace InterviewProblemNSolutions
 
 
 
-
+        public static void MaximumLengthOfRepeatedSubarray()
+        {
+            // https://leetcode.com/problems/maximum-length-of-repeated-subarray/
+            Utility.Print("718. Maximum Length of Repeated Subarray");
+            int[] A = { 1, 2, 3, 2, 1 };
+            int[] B = { 3, 2, 1, 4, 7 };
+            A.Print("A");
+            B.Print("B");
+            Console.WriteLine($" Max length of an subarray that appears in both arrays {DynamicProgramming.MaximumLengthOfRepeatedSubarray(A, B)}");
+        }
 
 
 

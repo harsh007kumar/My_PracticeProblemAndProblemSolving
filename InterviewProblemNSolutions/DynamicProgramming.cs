@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Text;
 using System.Linq;
 
 namespace InterviewProblemNSolutions
@@ -325,7 +325,7 @@ namespace InterviewProblemNSolutions
                         }
                     }
                 }
-            
+
             Console.Write($" Printing Parenthesis for Matrix Multiplication : ");
             PrintParenthesis(p, s, 1, len);
 
@@ -386,7 +386,7 @@ namespace InterviewProblemNSolutions
                     else
                         val[i, w] = val[i - 1, w];
                 }
-            
+
             PrintItemsPicked(val, profit, wt, n, W);
             return val[n, W];                   // Max Profit possible with all possible wt to choose from and under Full Capacity
         }
@@ -503,18 +503,18 @@ namespace InterviewProblemNSolutions
         {
             // sort the cities based on either North or Sourth side cities Number
             cities = cities.OrderBy(c => c.left).ToList<CityPair>();        // LINQ function sorting cities as per left side of river
-            
+
 
             // create table to store intermittent values, max cities possible till given index
             int[] tab = new int[len];
-            
+
 
             // set default values in table for each index as 1 (min 1 bridge can surely be constructed over any pari of cities
             for (int i = 0; i < len; i++)
                 tab[i] = 1;
 
             int maxBridges = 0;     // we can have atleast 1 bridge
-            
+
             // check from left for increasing order
             for (int i = 0; i < len; i++)
             {
@@ -564,7 +564,7 @@ namespace InterviewProblemNSolutions
         // Time O(N*S), N = no of items/no's & S = desired sum || Space O(N*W)
         // This Problem is a variation of 0-1 KnapSack Problem, instead of profit array we have no's whose total sum should match given Sum 'S'
         // Returns true if subset in array exists who's Summation equals Sum
-        public static bool SubsetSum(int[] input, int len, int sum) 
+        public static bool SubsetSum(int[] input, int len, int sum)
         {
             bool[,] tab = new bool[len + 1, sum + 1];   // 1 extra row & col for default values
 
@@ -572,7 +572,7 @@ namespace InterviewProblemNSolutions
                 for (int s = 0; s <= sum; s++)
                 {
                     if (s == 0) tab[i, s] = true;       // default value 'True' for 1st col, which indicates Curr Desired Sum = 0, which is always achievable by not selecting any element
-                    else if(i == 0) tab[i, s] = false;  // default value 'False' for 1st row, which indicates no number is avaliable, hencec can't select any no to make given Sum
+                    else if (i == 0) tab[i, s] = false;  // default value 'False' for 1st row, which indicates no number is avaliable, hencec can't select any no to make given Sum
                     else if (s >= input[i - 1]) tab[i, s] = tab[i - 1, s] || tab[i - 1, s - input[i - 1]];  // set true if either (row above with same col is true) or (row above n col = 'current desired Sum - current no val' is true)
                     else tab[i, s] = tab[i - 1, s];
                 }
@@ -646,10 +646,10 @@ namespace InterviewProblemNSolutions
         // https://youtu.be/3N47yKRDed0
         // Memoization based || Top Down Approach
         // Time O(2^n) we have 2 decisions to make at every index from 0..N-1 || Recursive Space Required!
-        public static bool SubSetSumMemo(int[] input, int len, int requiredSum, Dictionary<string,bool> state, int currentSum = 0)
+        public static bool SubSetSumMemo(int[] input, int len, int requiredSum, Dictionary<string, bool> state, int currentSum = 0)
         {
             // currentSum equals requriedSum
-            if (currentSum == requiredSum) 
+            if (currentSum == requiredSum)
                 return true;
 
             // reached end of array
@@ -657,7 +657,7 @@ namespace InterviewProblemNSolutions
 
             var key = len - 1 + "" + currentSum;    // made key or currentIndex + currentSum
             // if we have precomputed this sub-problem before return from map
-            if (state.ContainsKey("key")) 
+            if (state.ContainsKey("key"))
                 return state[key];
 
             // 2 choice : (Either Not selecting last element) or (select last element n adding it to currentSum value)
@@ -931,7 +931,7 @@ namespace InterviewProblemNSolutions
                 for (int i = 0; i < len - l; i++)
                 {
                     var j = i + l;
-                    
+
                     if (i == j)                                     // base1 case single character string
                         lps[i, j] = 1;
                     else if (i + 1 == j && input[i] == input[j])    // base2 case string of len 2
@@ -1041,7 +1041,7 @@ namespace InterviewProblemNSolutions
                         m[i, j] = 1 + Math.Min(Math.Min(m[i - 1, j], m[i, j - 1]), m[i - 1, j - 1]);
                     else                    // right & bottom most corner has 0, subSquare not possible
                         m[i, j] = 0;
-                    
+
                     // keep updating max square found
                     if (m[i, j] > max)
                     {
@@ -1120,7 +1120,7 @@ namespace InterviewProblemNSolutions
                     onePositiveNoPresent = true;
                 }
             }
-            
+
             // all numbers are -ve (additional check not required if we know for sure their exists atleast one +ve Integers)
             if (!onePositiveNoPresent)                      // Time O(n)
             {
@@ -1246,7 +1246,7 @@ namespace InterviewProblemNSolutions
         }
 
         // Top-Down Memoization based solution // Time O(n^2) || Space O(n^2)
-        public static bool WordBreakProblemMemo(string input, HashSet<string> dictionary, Dictionary<string,bool> memo)
+        public static bool WordBreakProblemMemo(string input, HashSet<string> dictionary, Dictionary<string, bool> memo)
         {
             var len = input.Length;
             if (input == null || len < 1) return false;                 // null input or blank string
@@ -1288,7 +1288,7 @@ namespace InterviewProblemNSolutions
                 {
                     int j = i + size - 1;                               //  last index in input till where we consider substring
                     var substring = input.Substring(i, size);           // extract string for ease of use
-                    
+
                     if (dictionary.Contains(substring))                 // if given substring exists in dictionary mark this True and continue onto next string
                     { tab[i, j] = j; continue; }
 
@@ -1297,7 +1297,7 @@ namespace InterviewProblemNSolutions
                         if (tab[i, splitAt] != -1 && tab[splitAt + 1, j] != -1)
                         { tab[i, j] = splitAt; break; }
                 }
-            
+
             // if subsets of words for input which exists in Dictionary found print them & return True
             var found = tab[0, len - 1] != -1;
             if (found) PrintWordsInWordBreakProblem(tab, input, len);
@@ -1309,18 +1309,18 @@ namespace InterviewProblemNSolutions
         {
             Console.Write($"\n Words which were found in dictionary are: \t");
             int i = 0, j = len - 1, k;
-            while(i<=j)
+            while (i <= j)
             {
                 k = arr[i, j];
                 if (j == k)     // entire word found, print word & exit
-                { 
+                {
                     Console.Write($" \t{input.Substring(i, j - i + 1)}");
-                    break; 
+                    break;
                 }
                 else            // else print left half n continue to search for remaining words in right half
-                { 
+                {
                     var p = Math.Max(k, 1); // needed since we are printing character on 0th index hence add 1 to length
-                    Console.Write($" \t{input.Substring(i, p)}"); 
+                    Console.Write($" \t{input.Substring(i, p)}");
                 }
                 i = k + 1;      // keeping interating on right half
             }
@@ -1350,7 +1350,7 @@ namespace InterviewProblemNSolutions
                         dp[start, last] = Math.Max(dp[start, last], leftSum + (leftNum * nums[k] * rtNum) + rightSum);
                     }
                 }
-            
+
             return dp[0, len - 1];
         }
 
@@ -1413,7 +1413,7 @@ namespace InterviewProblemNSolutions
             }
             return -1;
         }
-        public static int MinOperationsToReduceToZero_DP(int[] nums, int start, int last, int reqSum, ref bool is0, Dictionary<string,int> cache)
+        public static int MinOperationsToReduceToZero_DP(int[] nums, int start, int last, int reqSum, ref bool is0, Dictionary<string, int> cache)
         {
             if (reqSum == 0)
             { is0 = true; return 0; }
@@ -1424,7 +1424,7 @@ namespace InterviewProblemNSolutions
             string key = start + "," + last;
             if (cache.ContainsKey(key))
             {
-                if (cache[key] != -1) is0 = true; 
+                if (cache[key] != -1) is0 = true;
                 return cache[key];
             }
 
@@ -1442,7 +1442,7 @@ namespace InterviewProblemNSolutions
 
             if (value != -1)
                 is0 = true;
-            
+
             cache.Add(key, value);
             return value;
         }
@@ -1498,6 +1498,42 @@ namespace InterviewProblemNSolutions
             }
             return maxLen != -1 ? nums.Length - maxLen : -1;
         }
+
+
+        // Time O(Max(n^2,m^2)) || Space O(n^2), n = length of A & m = length of B
+        public static int MaximumLengthOfRepeatedSubarray(int[] A, int[] B)
+        {
+            HashSet<string> set = new HashSet<string>();
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < B.Length; i++)
+            {
+                for (int j = i; j < B.Length; j++)
+                {
+                    sb.Append(B[j].ToString()).Append(",");
+                    set.Add(sb.ToString());
+                }
+                sb.Clear();
+            }
+            int maxLen = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                for (int j = i; j < A.Length; j++)
+                {
+                    sb.Append(A[j].ToString()).Append(",");
+                    string arr = sb.ToString();
+                    if (set.Contains(arr))
+                        maxLen = Math.Max(maxLen, j - i + 1);
+                }
+                sb.Clear();
+            }
+            return maxLen;
+        }
+        public static int MaximumLengthOfRepeatedSubarray_DP(int[] A, int[] B)
+        {
+
+        }
+
 
 
     }
