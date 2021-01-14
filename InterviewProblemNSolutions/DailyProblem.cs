@@ -7,7 +7,7 @@ using System.Text;
 namespace InterviewProblemNSolutions
 {
     public class PetrolPump
-    { 
+    {
         public int Petrol, Distance;
         public PetrolPump(int petrol, int distance)     // Constructor
         { Petrol = petrol; Distance = distance; }
@@ -1818,7 +1818,7 @@ namespace InterviewProblemNSolutions
                 i++;
             }
             int result = 0;
-            for (int k = 0; k < ls.Count; k++) 
+            for (int k = 0; k < ls.Count; k++)
                 result += ls[k];
             return result;
         }
@@ -4100,7 +4100,7 @@ namespace InterviewProblemNSolutions
             if (!graph.ContainsKey(endWord)) return 0;  // we can stop check for shortest path if destination is not present in graph
 
             return ShortestPath(graph, beginWord, endWord);         // O(V+E), V = n+1, E = no of connections
-            
+
             // returns true is 2 words differ by max 1 character
             bool IsOneCharDiff(string a, string b)
             {
@@ -4358,7 +4358,7 @@ namespace InterviewProblemNSolutions
 
             // store actual result
             cache[curr] = (JumpGameIII(nums, cache, curr + nums[curr]) || JumpGameIII(nums, cache, curr - nums[curr])) ? 1 : -1;
-            
+
             return cache[curr] == 1;
         }
 
@@ -4428,7 +4428,7 @@ namespace InterviewProblemNSolutions
             TreeNode newHead = null, prv = null;
             while (true)
             {
-                while(root!=null)
+                while (root != null)
                 {
                     st.Push(root);
                     root = root.left;
@@ -4495,8 +4495,8 @@ namespace InterviewProblemNSolutions
         // Time O(N) || Space O(1)
         public static int SingleNumber(int[] nums)
         {
-            int seen_once=0, seen_twice = 0;
-            for(int i=0;i<nums.Length;i++)
+            int seen_once = 0, seen_twice = 0;
+            for (int i = 0; i < nums.Length; i++)
             {
                 seen_once = ~seen_twice & (seen_once ^ nums[i]);
                 seen_twice = ~seen_once & (seen_twice ^ nums[i]);
@@ -4571,7 +4571,7 @@ namespace InterviewProblemNSolutions
             int top = 0, right = n - 1, bottom = n - 1, left = -1;
             while (top <= bottom || left <= right)
             {
-                switch(direction)
+                switch (direction)
                 {
                     case 0:
                         for (int c = ++left; c <= right; c++)
@@ -4796,7 +4796,7 @@ namespace InterviewProblemNSolutions
                     PalindromePartitioning_Recursive(s, end + 1, last, finalList, currlist);
                     // backtrack and remove the current substring from currentList
                     currlist.RemoveAt(currlist.Count - 1);
-                }   
+                }
             }
         }
         // Time O(N) || Space O(1)
@@ -4931,7 +4931,7 @@ namespace InterviewProblemNSolutions
                     h.MaxHeapify();
                     minTotalCost = Math.Min(minTotalCost, qualitySum * workers[i].WageQualityRatio());
                 }
-            
+
             return minTotalCost;
         }
         class Worker : IComparable<Worker>
@@ -4989,8 +4989,8 @@ namespace InterviewProblemNSolutions
                 }
                 else
                     sb.Append(S[i++]);
-            
-            return sb[sb.Length-1];
+
+            return sb[sb.Length - 1];
         }
         // Time O(N) || Auxillary Space O(1), N = length of encoded string 'S'|| Algo uses Recursive Space
         public static char DecodedStringAtIndex_O1Space_Recursive(string S, int K)
@@ -5013,7 +5013,7 @@ namespace InterviewProblemNSolutions
                     len++;
                 }
 
-            return S[i-1];
+            return S[i - 1];
         }
         // Time O(N) || Space O(1), N = length of encoded string 'S'
         public static char DecodedStringAtIndex_O1Space_Iterative(string S, int K)
@@ -5350,7 +5350,7 @@ namespace InterviewProblemNSolutions
                     foundSmaller = true;
                     break;
                 }
-                
+
             }
 
             if (!foundSmaller) return -1;   // all increasing digits only when starting from least significant to most significant
@@ -5372,7 +5372,7 @@ namespace InterviewProblemNSolutions
         // Time O(n) || Auxillary Space O(1) || Recursive Space O(n)
         public static TreeNode InsertIntoBST(TreeNode root, int val)
         {
-            if (root == null) 
+            if (root == null)
                 return root = new TreeNode(val);
 
             // if value is bigger than root value, insert in right-Subtree
@@ -5542,7 +5542,7 @@ namespace InterviewProblemNSolutions
             int V = edges.Length;
             // Since Nodes are 1 indexed
             List<int>[] graph = new List<int>[V + 1];
-            
+
             for (int i = 0; i < V; i++)
             {
                 int u = edges[i][0];
@@ -5576,7 +5576,7 @@ namespace InterviewProblemNSolutions
         public static bool DetectCycle(List<int>[] graph, int source, HashSet<int> cycle, int[] visited)
         {
             Queue<int> q = new Queue<int>(visited.Length);
-            int[] parent = new int[visited.Length+1];
+            int[] parent = new int[visited.Length + 1];
 
             q.Enqueue(source);
             visited[source] = 1;        // Marked Visited & in Queue
@@ -5669,7 +5669,7 @@ namespace InterviewProblemNSolutions
                 // check before adding this edge if there is connection b/w U & V?
                 // if so than adding this edge will result in cycle
                 if (graph[u].Count > 0 && graph[v].Count > 0 && DFS(u, v))
-                        return edges[i];
+                    return edges[i];
 
                 graph[u].Add(v);
                 graph[v].Add(u);
@@ -6035,7 +6035,7 @@ namespace InterviewProblemNSolutions
              */
             if (original == null) return original;
             if (target == original) return cloned;  // target found in original return equivalent ref from cloned
-            
+
             // Search for Target in left-subtree
             TreeNode left = GetTargetCopy(original.left, cloned.left, target);
             if (left != null) return left;  // found target return Clone Node Reference
@@ -6063,7 +6063,7 @@ namespace InterviewProblemNSolutions
                 }
                 else
                     head = head.next;   // move to next node in Original List
-            
+
             head.next = paritionHead;
             if (paritionCurr != null) paritionCurr.next = null;
             return dummyNode.next;
@@ -6104,7 +6104,7 @@ namespace InterviewProblemNSolutions
             char[] ch = new char[i--];
             while (i >= 0)
                 ch[i--] = lastChar.Pop();
-            
+
             return new string(ch);
         }
 
@@ -6295,7 +6295,7 @@ namespace InterviewProblemNSolutions
                 this.count = count;
             }
         }
-        class FrequencyValue: IComparer<ArrayPair>
+        class FrequencyValue : IComparer<ArrayPair>
         {
             public int Compare(ArrayPair a, ArrayPair b)
             {
@@ -6318,10 +6318,10 @@ namespace InterviewProblemNSolutions
         {
             int rows = grid.Length;
             int cols = grid[0].Length;
-            bool[,] visited = new bool[rows,cols];
+            bool[,] visited = new bool[rows, cols];
             for (int r = 0; r < rows; r++)
                 for (int c = 0; c < cols; c++)
-                    if (!visited[r,c] && DFS(r, c, grid[r][c]))
+                    if (!visited[r, c] && DFS(r, c, grid[r][c]))
                         return true;
             return false;
             // direction 0 = coming from left, 1 = coming from right, 2 = coming from top & 3 = coming from bottom
@@ -6330,7 +6330,7 @@ namespace InterviewProblemNSolutions
                 if (row < 0 || row >= rows || col < 0 || col >= cols || grid[row][col] != lastChar) return false;
                 if (grid[row][col] == lastChar && visited[row, col]) return true;       // cycle found
 
-                visited[row,col] = true; // mark visited to avoid traversing same cell during different DFS traversal
+                visited[row, col] = true; // mark visited to avoid traversing same cell during different DFS traversal
                                           // check left
                 if (direction != 0 && DFS(row, col - 1, lastChar, 1)) return true;
                 // check right
@@ -6588,7 +6588,7 @@ namespace InterviewProblemNSolutions
             int[][] temp = new int[n][];
             int[][] arrSmaller = new int[n][];
             int[][] arrLarger = new int[n][];
-            
+
             for (int i = 0; i < n; i++)
             {
                 arrSmaller[i] = new int[] { instructions[i], i };
@@ -6731,7 +6731,7 @@ namespace InterviewProblemNSolutions
                     last--;
                     start++;
                 }
-            
+
             return boats;
         }
 
@@ -6788,7 +6788,6 @@ namespace InterviewProblemNSolutions
             }
             return false;
         }
-
 
 
 

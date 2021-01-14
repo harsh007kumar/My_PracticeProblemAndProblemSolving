@@ -2404,6 +2404,7 @@ namespace InterviewProblemNSolutions
                 bool foundZero = false;
                 //int moves = DynamicProgramming.MinOperationsToReduceToZero(nums[i], 0, nums[i].Length - 1, x[i], ref foundZero);
                 //int moves = DynamicProgramming.MinOperationsToReduceToZero_DP(nums[i], 0, nums[i].Length - 1, x[i], ref foundZero, new Dictionary<string, int>(nums[i].Length));
+                //int moves = DynamicProgramming.MinOperationsToReduceXToZero(nums[i], x[i], new Dictionary<string, int>(), 0, nums[i].Length - 1);
                 int moves = DynamicProgramming.MinOperations_SlidingWindow(nums[i], x[i]);
                 Console.WriteLine($" Minimum number of operations to reduce x \'{x[i]}\' to exactly 0: {moves}");
             }
@@ -3192,6 +3193,13 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" There is a Cycle (Either Frwd/Back Allowed):\t{DailyProblem.CircularArrayLoopSingleDirection(nums)}\n");
             }
         }
+
+
+
+
+
+
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

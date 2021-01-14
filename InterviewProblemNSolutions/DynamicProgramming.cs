@@ -1446,6 +1446,27 @@ namespace InterviewProblemNSolutions
             cache.Add(key, value);
             return value;
         }
+        // Slightly Clear n better DP Top-Down // TLE
+        public static int MinOperationsToReduceXToZero(int[] nums, int x, Dictionary<string, int> cache, int start, int last)
+        {
+            if (x == 0) return 0;
+            if (start > last || x < 0) return -1;     // default val informing X -> 0 not possible
+
+            string key = start + "," + last;
+            if (cache.ContainsKey(key)) return cache[key];
+
+            int removeLeft = MinOperationsToReduceXToZero(nums, x - nums[start], cache, start + 1, last);  // remove Start
+            int removeRight = MinOperationsToReduceXToZero(nums, x - nums[last], cache, start, last - 1);  // remove Last
+            int ans = 0;
+
+            if (removeLeft != -1 && removeRight != -1)  // removing from either left or rt side we can reduce 'X' to 0 reduce min operation from each
+                ans = 1 + Math.Min(removeLeft, removeRight);
+            else
+                ans = Math.Max(removeLeft, removeRight) == -1 ? -1 : 1 + Math.Max(removeLeft, removeRight);
+
+            cache.Add(key, ans);
+            return ans;
+        }
         // Time O(n) || Space O(1)
         public static int MinOperations_SlidingWindow(int[] nums, int x)
         {
@@ -1454,7 +1475,7 @@ namespace InterviewProblemNSolutions
              * 
              * Step 2: Initialize two pointers left and right to 0. 
              * Initialize an integer current to represent the sum from nums[left] to nums[right], inclusively.
-             * Initialize an integer maxi to record the maximum length that sums up to total - x.
+             * Initialize an integer maxLen to record the maximum length that sums up to total - x.
              * 
              * Step 3: Iterate right form 0 to the end of nums. In each iteration:
              * Update current.
@@ -1463,7 +1484,7 @@ namespace InterviewProblemNSolutions
              * 
              * Step 4: Return the result.
              */
-            int start = 0, last = 0, maxLen = -1, currWindowSum = 0, total = 0; ;
+            int start = 0, last = 0, maxLen = -1, currWindowSum = 0, total = 0;
             for (int i = 0; i < nums.Length; i++) total += nums[i];
 
             while (last < nums.Length)
