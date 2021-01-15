@@ -1550,6 +1550,37 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Note: You can only move either down or right at any point in time.
+        // Time = Space = O(R*C)
+        public static int MinimumPathSum(int[][] grid)
+        {
+            int n = grid.Length - 1;
+            int m = grid[0].Length - 1;
+
+            int[,] dp = new int[n + 1, m + 1];
+            for (int r = 0; r <= n; r++) for (int c = 0; c <= m; c++) dp[r, c] = -1;
+            dp[n, m] = grid[n][m];
+
+            return MinCostPath(0, 0, dp);
+
+            // LOCAL FUNC
+            int MinCostPath(int r, int c, int[,] cache, int cost = 0)
+            {
+                if (cache[r, c] != -1) return cost + cache[r, c];
+
+                int costFromHere = int.MaxValue;
+                if (isValid(r + 1, c))      // move down
+                    costFromHere = MinCostPath(r + 1, c, cache, grid[r][c]);
+                if (isValid(r, c + 1))      // move right
+                    costFromHere = Math.Min(costFromHere, MinCostPath(r, c + 1, cache, grid[r][c]));
+
+                cache[r, c] = costFromHere;
+                // return cost to reach till here + cost from this cell
+                return cost + costFromHere;
+            }
+            bool isValid(int r, int c) => r <= n && c <= m;
+        }
+
 
     }
 }

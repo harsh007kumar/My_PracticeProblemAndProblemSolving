@@ -193,6 +193,7 @@ namespace InterviewProblemNSolutions
             CircularArrayLoop();
             MaximumLengthOfRepeatedSubarray();
             GetMaximumInGeneratedArray();
+            MinimumPathSum();
 
 
             // String Matching Algorithm
@@ -3206,7 +3207,7 @@ namespace InterviewProblemNSolutions
             int[] B = { 3, 2, 1, 4, 7 };
             A.Print("A");
             B.Print("B");
-            Console.WriteLine($" Max length of an subarray that appears in both arrays {DynamicProgramming.MaximumLengthOfRepeatedSubarray(A, B)}");
+            //Console.WriteLine($" Max length of an subarray that appears in both arrays {DynamicProgramming.MaximumLengthOfRepeatedSubarray(A, B)}");
             Console.WriteLine($" Max length of an subarray that appears in both arrays {DynamicProgramming.MaximumLengthOfRepeatedSubarray_DP(A, B)}");
         }
 
@@ -3221,7 +3222,18 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void MinimumPathSum()
+        {
+            // https://leetcode.com/problems/minimum-path-sum/
+            Utility.Print("64. Minimum Path Sum");
+            int[][][] gridArr = { new int[][] { new int[] { 1, 3, 1 }, new int[] { 1, 5, 1 }, new int[] { 4, 2, 1 } },
+                                  new int[][] { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 } } };
+            foreach (var grid in gridArr)
+            {
+                grid.Print("GRID");
+                Console.WriteLine($" Min Path-Sum to reach from top-left to bottom right cell: {DynamicProgramming.MinimumPathSum(grid)}");
+            }
+            int MinimumPathSum(int[][] grid)}
 
 
 
