@@ -3207,6 +3207,7 @@ namespace InterviewProblemNSolutions
             A.Print("A");
             B.Print("B");
             Console.WriteLine($" Max length of an subarray that appears in both arrays {DynamicProgramming.MaximumLengthOfRepeatedSubarray(A, B)}");
+            Console.WriteLine($" Max length of an subarray that appears in both arrays {DynamicProgramming.MaximumLengthOfRepeatedSubarray_DP(A, B)}");
         }
 
 

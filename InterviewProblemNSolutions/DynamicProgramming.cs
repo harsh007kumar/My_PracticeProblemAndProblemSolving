@@ -1500,13 +1500,13 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time O(Max(n^2,m^2)) || Space O(n^2), n = length of A & m = length of B
+        // Time O(Max(n^2,m^3)) || Space O(n^2), n = length of A & m = length of B
         public static int MaximumLengthOfRepeatedSubarray(int[] A, int[] B)
         {
             HashSet<string> set = new HashSet<string>();
             StringBuilder sb = new StringBuilder();
 
-            for (int i = 0; i < B.Length; i++)
+            for (int i = 0; i < B.Length; i++)          // O(n^2)
             {
                 for (int j = i; j < B.Length; j++)
                 {
@@ -1516,7 +1516,7 @@ namespace InterviewProblemNSolutions
                 sb.Clear();
             }
             int maxLen = 0;
-            for (int i = 0; i < A.Length; i++)
+            for (int i = 0; i < A.Length; i++)          // O(m^3) as 'sb.ToString()' is O(m) operation
             {
                 for (int j = i; j < A.Length; j++)
                 {
@@ -1529,9 +1529,24 @@ namespace InterviewProblemNSolutions
             }
             return maxLen;
         }
+        // Time O(n*m) || Space O(n*m), n = length of A & m = length of B
         public static int MaximumLengthOfRepeatedSubarray_DP(int[] A, int[] B)
         {
-
+            /* subarray of A and B must start at some A[i] and B[j],
+             * let dp[i][j] be the longest common prefix of A[i:] and B[j:].
+             * Whenever A[i] == B[j], we know dp[i][j] = dp[i+1][j+1] + 1.
+             * Also, the answer is max(dp[i][j]) over all i, j
+             */
+            int maxLen = 0, n = A.Length, m = B.Length;
+            int[,] dp = new int[n + 1, m + 1];
+            for (int i = n - 1; i >= 0; i--)
+                for (int j = m - 1; j >= 0; j--)
+                {
+                    if (A[i] == B[j])
+                        dp[i, j] = dp[i + 1, j + 1] + 1;
+                    maxLen = Math.Max(maxLen, dp[i, j]);
+                }
+            return maxLen;
         }
 
 
