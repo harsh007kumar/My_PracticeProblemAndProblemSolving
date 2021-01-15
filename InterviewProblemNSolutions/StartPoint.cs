@@ -3231,9 +3231,9 @@ namespace InterviewProblemNSolutions
             foreach (var grid in gridArr)
             {
                 grid.Print("GRID");
-                Console.WriteLine($" Min Path-Sum to reach from top-left to bottom right cell: {DynamicProgramming.MinimumPathSum(grid)}");
+                Console.WriteLine($" Min Path-Sum to reach from top-left to bottom right cell: {DynamicProgramming.MinimumPathSum(grid)}\n");
             }
-            int MinimumPathSum(int[][] grid)}
+        }
 
 
 
