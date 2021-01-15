@@ -192,6 +192,7 @@ namespace InterviewProblemNSolutions
             BoatsToSavePeople();
             CircularArrayLoop();
             MaximumLengthOfRepeatedSubarray();
+            GetMaximumInGeneratedArray();
 
 
             // String Matching Algorithm
@@ -3207,6 +3208,18 @@ namespace InterviewProblemNSolutions
             B.Print("B");
             Console.WriteLine($" Max length of an subarray that appears in both arrays {DynamicProgramming.MaximumLengthOfRepeatedSubarray(A, B)}");
         }
+
+
+        public static void GetMaximumInGeneratedArray()
+        {
+            // https://leetcode.com/problems/get-maximum-in-generated-array/
+            Utility.Print("1646. Get Maximum in Generated Array");
+            int[] n = { 7, 2, 3, 91, 0, 1 };
+            foreach (var num in n)
+                Console.WriteLine($" nums[{num}] : {DailyProblem.GetMaximumInGeneratedArray(num)}");
+        }
+
+
 
 
 
