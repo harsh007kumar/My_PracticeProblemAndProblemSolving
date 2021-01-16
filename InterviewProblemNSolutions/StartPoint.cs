@@ -194,6 +194,7 @@ namespace InterviewProblemNSolutions
             MaximumLengthOfRepeatedSubarray();
             GetMaximumInGeneratedArray();
             MinimumPathSum();
+            ProductOfLastKNumbers();
 
 
             // String Matching Algorithm
@@ -3234,6 +3235,25 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Min Path-Sum to reach from top-left to bottom right cell: {DynamicProgramming.MinimumPathSum(grid)}\n");
             }
         }
+
+
+        public static void ProductOfLastKNumbers()
+        {
+            // https://leetcode.com/problems/product-of-the-last-k-numbers/
+            Utility.Print("1352. Product of the Last K Numbers");
+            ProductOfNumbers productOfLastKNums = new ProductOfNumbers();
+            productOfLastKNums.Add(3);        // [3]
+            productOfLastKNums.Add(0);        // [3,0]
+            productOfLastKNums.Add(2);        // [3,0,2]
+            productOfLastKNums.Add(5);        // [3,0,2,5]
+            productOfLastKNums.Add(4);        // [3,0,2,5,4]
+            Console.WriteLine(productOfLastKNums.GetProduct(2)); // return 20. The product of the last 2 numbers is 5 * 4 = 20
+            Console.WriteLine(productOfLastKNums.GetProduct(3)); // return 40. The product of the last 3 numbers is 2 * 5 * 4 = 40
+            Console.WriteLine(productOfLastKNums.GetProduct(4)); // return 0. The product of the last 4 numbers is 0 * 2 * 5 * 4 = 0
+            productOfLastKNums.Add(8);        // [3,0,2,5,4,8]
+            Console.WriteLine(productOfLastKNums.GetProduct(2)); // return 32. The product of the last 2 numbers is 4 * 8 = 32 
+        }
+
 
 
 
