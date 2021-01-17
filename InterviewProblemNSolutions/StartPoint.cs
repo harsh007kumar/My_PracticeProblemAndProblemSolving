@@ -195,6 +195,7 @@ namespace InterviewProblemNSolutions
             GetMaximumInGeneratedArray();
             MinimumPathSum();
             ProductOfLastKNumbers();
+            CountSortedVowelStrings();
 
 
             // String Matching Algorithm
@@ -3252,6 +3253,16 @@ namespace InterviewProblemNSolutions
             Console.WriteLine(productOfLastKNums.GetProduct(4)); // return 0. The product of the last 4 numbers is 0 * 2 * 5 * 4 = 0
             productOfLastKNums.Add(8);        // [3,0,2,5,4,8]
             Console.WriteLine(productOfLastKNums.GetProduct(2)); // return 32. The product of the last 2 numbers is 4 * 8 = 32 
+        }
+
+
+        public static void CountSortedVowelStrings()
+        {
+            // https://leetcode.com/problems/count-sorted-vowel-strings/
+            Utility.Print("1641. Count Sorted Vowel Strings");
+            int[] arr = { 1, 2, 33, 50 };
+            foreach (var num in arr)
+                Console.WriteLine($" No of strings of length \'{num}\' that consist only of vowels (a, e, i, o, u) & are lexicographically sorted: {DynamicProgramming.CountSortedVowelStrings(num, new Dictionary<string, int>())}");
         }
 
 

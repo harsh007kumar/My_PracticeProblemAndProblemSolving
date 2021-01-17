@@ -1582,5 +1582,41 @@ namespace InterviewProblemNSolutions
         }
 
 
+        /// <summary>
+        /// Given an integer n, return the number of strings of length n that consist only of vowels (a, e, i, o, u) and are lexicographically sorted.
+        /// A string s is lexicographically sorted if for all valid i, s[i] is the same as or comes before s[i + 1] in the alphabet.
+        /// Time O(n*5) ~O(n) || Space O(n)
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="lastChar"></param>
+        /// <returns></returns>
+        public static int CountSortedVowelStrings(int n, Dictionary<string, int> cache, int lastChar = 0)
+        {
+            /* Since the we need to calculate every string created from combination of 'vowel' that is lexographically sorted
+             * We know for string of length 1 there are only 5 valid results =? "a", "e", "i", "o", "u"
+             * & for string of length 2 we can have any of the vowel at 1st index
+             * followed by all vowel which come after current one including current
+             * 
+             * We try every combination starting with each vowel at 1st index and make a recursive call passing of current letter n deducting the len by 1
+             * 
+             * Finally we make use of Cache to decrease our runtime
+             */
+
+            // when finding lexographically sorted string of length 1 if we start with first letter of vowel i.e. 'a' we get 5 diff combinations
+            // starting with 'e' => 4, 'i' => 3, 'o' => 2 & 'u' => 1
+            int[] vowelMap = { 5, 4, 3, 2, 1 };
+            if (n == 1) return vowelMap[lastChar];
+
+            string key = n + "," + lastChar;
+            if (cache.ContainsKey(key)) return cache[key];
+
+            int ans = 0;
+            for (int i = lastChar; i < 5; i++)
+                ans += CountSortedVowelStrings(n - 1, cache, i);
+
+            cache.Add(key, ans);
+            return ans;
+        }
+
     }
 }
