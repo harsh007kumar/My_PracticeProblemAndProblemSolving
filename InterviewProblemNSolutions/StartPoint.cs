@@ -196,6 +196,7 @@ namespace InterviewProblemNSolutions
             MinimumPathSum();
             ProductOfLastKNumbers();
             CountSortedVowelStrings();
+            MaximumWidthOfBinaryTree();
 
 
             // String Matching Algorithm
@@ -3263,6 +3264,21 @@ namespace InterviewProblemNSolutions
             int[] arr = { 1, 2, 33, 50 };
             foreach (var num in arr)
                 Console.WriteLine($" No of strings of length \'{num}\' that consist only of vowels (a, e, i, o, u) & are lexicographically sorted: {DynamicProgramming.CountSortedVowelStrings(num, new Dictionary<string, int>())}");
+        }
+
+
+        public static void MaximumWidthOfBinaryTree()
+        {
+            // https://leetcode.com/problems/maximum-width-of-binary-tree/
+            Utility.Print("662. Maximum Width of Binary Tree");
+            TreeNode root = new TreeNode(1)
+            {
+                left = new TreeNode(3)
+                { left = new TreeNode(5) },
+                right = new TreeNode(2)
+            };
+            root.InOrder("BinaryTree");
+            Console.WriteLine($"  Maximum Width of above Binary Tree: \'{DailyProblem.WidthOfBinaryTree(root)}\'");
         }
 
 

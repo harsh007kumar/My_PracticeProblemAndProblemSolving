@@ -6807,5 +6807,59 @@ namespace InterviewProblemNSolutions
             return max;
         }
 
+
+        // Time = Space = O(n), n = no of nodes in Tree
+        public static int WidthOfBinaryTree(TreeNode root)
+        {
+            /* Think of Binary Tree as Heap,
+             * left child is at index = dist * 2 + 1
+             * right child is at index = dist * 2 + 2
+             * 
+             * While doing the LevelOrder Traversal keep adding Nodes to queue along with their distance
+             * at end of each level update maxWidth i.e. if distance b/w 1st node in queue n last added node in queue + 1 is greater
+             */
+            int maxWidth = 1;
+            Queue<TreePair> q = new Queue<TreePair>();
+            q.Enqueue(new TreePair(root, 0));
+            q.Enqueue(null);
+            TreePair lastNode = null;
+            while (q.Count > 0)
+            {
+                TreePair curr = q.Dequeue();
+                if (curr == null)
+                {
+                    if (q.Count > 0)
+                    {
+                        maxWidth = Math.Max(maxWidth, 1 + lastNode.distance - q.Peek().distance);
+                        q.Enqueue(null);
+                    }
+                }
+                else
+                {
+                    if (curr.key.left != null)
+                    {
+                        lastNode = new TreePair(curr.key.left, curr.distance * 2 + 1);
+                        q.Enqueue(lastNode);
+                    }
+                    if (curr.key.right != null)
+                    {
+                        lastNode = new TreePair(curr.key.right, curr.distance * 2 + 2);
+                        q.Enqueue(lastNode);
+                    }
+                }
+            }
+            return maxWidth;
+        }
+        class TreePair
+        {
+            public TreeNode key;
+            public int distance;
+            public TreePair(TreeNode t, int d)
+            {
+                key = t;
+                distance = d;
+            }
+        }
+
     }
 }
