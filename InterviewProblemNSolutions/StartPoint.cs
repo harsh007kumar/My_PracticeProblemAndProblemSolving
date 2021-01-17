@@ -197,6 +197,7 @@ namespace InterviewProblemNSolutions
             ProductOfLastKNumbers();
             CountSortedVowelStrings();
             MaximumWidthOfBinaryTree();
+            LongestUnivaluePath();
 
 
             // String Matching Algorithm
@@ -3279,6 +3280,32 @@ namespace InterviewProblemNSolutions
             };
             root.InOrder("BinaryTree");
             Console.WriteLine($"  Maximum Width of above Binary Tree: \'{DailyProblem.WidthOfBinaryTree(root)}\'");
+        }
+
+
+        public static void LongestUnivaluePath()
+        {
+            // https://leetcode.com/problems/longest-univalue-path/
+            Utility.Print("687. Longest Univalue Path");
+            TreeNode root2 = new TreeNode(5)
+            {
+                left = new TreeNode(4)
+                {
+                    left = new TreeNode(1),
+                    right = new TreeNode(1)
+                },
+                right = new TreeNode(5)
+                { right = new TreeNode(5) }
+            };
+            TreeNode root = new TreeNode(4)
+            {
+                left = new TreeNode(4),
+                right = new TreeNode(4)
+            };
+
+            root.InOrder("BinaryTree");
+            Console.WriteLine($" The length of the longest path between two nodes where each node in the path has the same value," +
+                $"\n This path may or may not pass through the root: \'{DailyProblem.LongestUnivaluePath(root)}\'");
         }
 
 

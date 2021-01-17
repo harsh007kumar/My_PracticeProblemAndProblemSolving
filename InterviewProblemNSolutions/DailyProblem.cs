@@ -6861,5 +6861,39 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time O(n) || Auxillary Space O(1) Recursive Soln
+        public static int LongestUnivaluePath(TreeNode r)
+        {
+            int longestPath = 0;
+            GetLongestPath(r);
+            return longestPath;
+
+            // LOCAL FUNC
+            int GetLongestPath(TreeNode root)
+            {
+                if (root == null) return 0;
+                int left = GetLongestPath(root.left);
+                int right = GetLongestPath(root.right);
+
+                int curPath = 0, leftMax = 0, rtMax = 0;
+                if (root.left != null && root.left.val == root.val)
+                {
+                    leftMax = ++left;
+                    curPath = leftMax;
+                }
+                if (root.right != null && root.right.val == root.val)
+                {
+                    rtMax = ++right;
+                    curPath += rtMax;
+                }
+                // Update Global Max
+                longestPath = Math.Max(longestPath, curPath);
+
+                return Math.Max(leftMax, rtMax);
+            }
+        }
+
+
     }
 }
