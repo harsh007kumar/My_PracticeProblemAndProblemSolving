@@ -6921,7 +6921,25 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        // Time O(n) || Space O(1) Soln
+        public static int FindWinnerOfArrayGame(int[] arr, int k)
+        {
+            int larger = arr[0], i = 1, l = arr.Length, winCount = 0;
+            while (true)
+            {
+                if (larger > arr[i])
+                    winCount++;
+                else
+                {
+                    winCount = 1;
+                    larger = arr[i];
+                }
+                if (winCount >= k || winCount > l) break;
+                i = (i + 1) % l;
+                if (arr[i] == larger) i = (i + 1) % l;  // if at any point arr[i]==larger then increament i by 1 more
+            }
+            return larger;
+        }
 
 
     }

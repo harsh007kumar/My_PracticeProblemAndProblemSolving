@@ -199,6 +199,7 @@ namespace InterviewProblemNSolutions
             MaximumWidthOfBinaryTree();
             LongestUnivaluePath();
             MaxNumberOfKSumPairs();
+            FindWinnerOfArrayGame();
 
 
             // String Matching Algorithm
@@ -3320,6 +3321,20 @@ namespace InterviewProblemNSolutions
             {
                 numsArr[i].Print("Nums");
                 Console.WriteLine($" Max operations of removing 2 numbers from the array whose sum equals \'{k[i]}\': \'{DailyProblem.MaxNumberOfKSumPairs(numsArr[i], k[i])}\' ");
+            }
+        }
+
+
+        public static void FindWinnerOfArrayGame()
+        {
+            // https://leetcode.com/problems/find-the-winner-of-an-array-game/
+            Utility.Print("1535. Find the Winner of an Array Game");
+            int[][] numsArr = { new int[] { 2, 1, 3, 5, 4, 6, 7 }, new int[] { 3, 2, 1 }, new int[] { 1, 9, 8, 2, 3, 7, 6, 4, 5 }, new int[] { 1, 11, 22, 33, 44, 55, 66, 77, 88, 99 } };
+            int[] k = { 2, 10, 7, 10000000 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                numsArr[i].Print("Distinct Nums");
+                Console.WriteLine($" Winner Num in above array who won more \'{k[i]}\' times: {DailyProblem.FindWinnerOfArrayGame(numsArr[i], k[i])}");
             }
         }
 
