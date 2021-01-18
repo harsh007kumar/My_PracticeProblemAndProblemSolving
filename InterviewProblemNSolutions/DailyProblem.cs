@@ -6965,5 +6965,62 @@ namespace InterviewProblemNSolutions
             return shifted;
         }
 
+
+        // Time O(n^3) || Space O(1), n = length of arr
+        public static int CountTripletsThatCanFormTwoArraysOfEqualXOR(int[] arr)
+        {
+            int l = arr.Length, triplets = 0, a, b;
+
+            for (int i = 0; i < l; i++)
+            {
+                a = arr[i];             // Assign ith to a
+                for (int j = i + 1; j < l; j++)
+                {
+                    b = arr[j];         // Assign jth to b
+
+                    if (a == b) triplets++;
+                    for (int k = j + 1; k < l; k++)
+                    {
+                        b ^= arr[k];    // ADD kth to b
+                        if (a == b) triplets++;
+                    }
+                    a ^= arr[j];        // ADD jth to a
+                }
+            }
+            return triplets;
+        }
+        // Time O(n^2) || Space O(1), n = length of arr
+        public static int CountTripletsThatCanFormTwoArraysOfEqualXORFaster(int[] arr)
+        {
+            /*  Main idea is that if we fix two points i and j can we do something in between ??
+                considering the fact that `a` and `b` values asked in question are xor values of
+                two consecutive contiguous subarrays(i meant those two subarrays share a border).. if we can somehow find third point which gives us
+                two equal xor values as asked..In that case total xor must be zero(for whatever segment considered by i and j values)
+                this implies we can consider xor for any point k i.e(k > i and k <= j) forming segments[i..k - 1] and[k..j]
+                which are values of `a` and `b` given in question and of course equal as total segment xor is 0   
+                there can be points like(i, k, j), (i, k + 1, j)...(i, k, k) which will all have total xor as 0   
+                i.e xor[i..k - 1] = xor[k..j] and xor[i..k] = xor[k + 1..j] and so on   
+                but they are different triplets.
+            */
+
+            int l = arr.Length, triplets = 0, xor;
+            for (int i = 0; i < l; i++)
+            {
+                // calculate cur_segment_xor between i..j and j > i
+                xor = arr[i];
+                for (int j = i + 1; j < l; j++)
+                {
+                    xor ^= arr[j];
+                    // xor of cur_segment [i..j] is 0
+                    if (xor == 0)
+                        // total number of possible values of k in between as k goes from i + 1..j
+                        // i.e j - (i + 1) + 1 ==> j - i values in total
+                        triplets += j - i;
+                }
+            }
+            return triplets;
+        }
+
+
     }
 }

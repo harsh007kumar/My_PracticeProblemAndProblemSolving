@@ -201,6 +201,7 @@ namespace InterviewProblemNSolutions
             MaxNumberOfKSumPairs();
             FindWinnerOfArrayGame();
             Shift2DGrid();
+            CountTripletsThatCanFormTwoArraysOfEqualXOR();
 
 
 
@@ -3352,6 +3353,25 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" After Shiting \'{k}\' times");
             grid.Print("GRID");
         }
+
+
+        public static void CountTripletsThatCanFormTwoArraysOfEqualXOR()
+        {
+            // https://leetcode.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/
+            Utility.Print("1442. Count Triplets That Can Form Two Arrays of Equal XOR");
+            int[][] arrays = { new int[] { 2, 3, 1, 6, 7 }, new int[] { 1, 1, 1, 1, 1 }, new int[] { 2, 3 }, new int[] { 1, 3, 5, 7, 9 }, new int[] { 7, 11, 12, 9, 5, 2, 7, 17, 22 } };
+            foreach (var arr in arrays)
+            {
+                arr.Print("Array");
+                Console.WriteLine($" Count of 3 indices i, j and k where (0 <= i < j <= k < arr.length), such that a==b, where a & b are defined as below" +
+                    $"\n a = arr[i] ^ arr[i + 1] ^ ... ^ arr[j - 1] " +
+                    $"\n b = arr[j] ^ arr[j + 1] ^ ... ^arr[k]" +
+                    $"\n are: {DailyProblem.CountTripletsThatCanFormTwoArraysOfEqualXORFaster(arr)}\n");
+            }
+        }
+
+
+
 
 
 
