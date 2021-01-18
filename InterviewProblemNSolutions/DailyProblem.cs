@@ -6942,5 +6942,28 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n*m), n = no of rows & m = no of cols
+        public static int[][] Shift2DGrid(int[][] grid, int k)
+        {
+            int rows = grid.Length;
+            int cols = grid[0].Length;
+            int count = rows * cols;
+            k %= (count);
+            if (k == 0) return grid;
+
+            int[][] shifted = new int[rows][];
+            for (int r = 0; r < rows; r++) shifted[r] = new int[cols];
+
+            for (int r = 0; r < rows; r++)
+                for (int c = 0; c < cols; c++)
+                {
+                    int copyTo = ((r * cols) + c + k) % count;
+                    int rID = copyTo / cols;
+                    int cID = copyTo % cols;
+                    shifted[rID][cID] = grid[r][c];
+                }
+            return shifted;
+        }
+
     }
 }

@@ -200,6 +200,8 @@ namespace InterviewProblemNSolutions
             LongestUnivaluePath();
             MaxNumberOfKSumPairs();
             FindWinnerOfArrayGame();
+            Shift2DGrid();
+
 
 
             // String Matching Algorithm
@@ -3338,6 +3340,18 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void Shift2DGrid()
+        {
+            // https://leetcode.com/problems/shift-2d-grid/
+            Utility.Print("1260. Shift 2D Grid");
+            int[][] grid = { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 } };
+            int k = 19;
+            grid.Print("GRID");
+            grid = DailyProblem.Shift2DGrid(grid,k);
+            Console.WriteLine($" After Shiting \'{k}\' times");
+            grid.Print("GRID");
+        }
 
 
 
