@@ -6895,5 +6895,34 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(n)
+        public static int MaxNumberOfKSumPairs(int[] nums, int k)
+        {
+            Dictionary<int, int> numCount = new Dictionary<int, int>(nums.Length / 2);
+            int operations = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int find1 = k - nums[i];
+                if (numCount.ContainsKey(find1)) // Pair Found
+                {
+                    operations++;
+                    numCount[find1]--;
+                    if (numCount[find1] == 0) numCount.Remove(find1);
+                }
+                else                            // Pair Not Found
+                {
+                    if (numCount.ContainsKey(nums[i]))   // Curr Num already exist increament count
+                        numCount[nums[i]]++;
+                    else                                // else Add current num with frequency 1
+                        numCount.Add(nums[i], 1);
+                }
+            }
+            return operations;
+        }
+
+
+
+
+
     }
 }

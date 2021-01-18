@@ -198,6 +198,7 @@ namespace InterviewProblemNSolutions
             CountSortedVowelStrings();
             MaximumWidthOfBinaryTree();
             LongestUnivaluePath();
+            MaxNumberOfKSumPairs();
 
 
             // String Matching Algorithm
@@ -3306,6 +3307,20 @@ namespace InterviewProblemNSolutions
             root.InOrder("BinaryTree");
             Console.WriteLine($" The length of the longest path between two nodes where each node in the path has the same value," +
                 $"\n This path may or may not pass through the root: \'{DailyProblem.LongestUnivaluePath(root)}\'");
+        }
+
+
+        public static void MaxNumberOfKSumPairs()
+        {
+            // https://leetcode.com/problems/max-number-of-k-sum-pairs/
+            Utility.Print("1679. Max Number of K-Sum Pairs");
+            int[][] numsArr = { new int[] { 1, 2, 3, 4 }, new int[] { 3, 1, 3, 4, 3 } };
+            int[] k = { 5, 6 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                numsArr[i].Print("Nums");
+                Console.WriteLine($" Max operations of removing 2 numbers from the array whose sum equals \'{k[i]}\': \'{DailyProblem.MaxNumberOfKSumPairs(numsArr[i], k[i])}\' ");
+            }
         }
 
 
