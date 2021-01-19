@@ -202,6 +202,7 @@ namespace InterviewProblemNSolutions
             FindWinnerOfArrayGame();
             Shift2DGrid();
             CountTripletsThatCanFormTwoArraysOfEqualXOR();
+            RobotBoundedInCircle();
 
 
 
@@ -3371,6 +3372,14 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void RobotBoundedInCircle()
+        {
+            // https://leetcode.com/problems/robot-bounded-in-circle/
+            Utility.Print("1041. Robot Bounded In Circle");
+            string[] instructionsArr = { "GGLLGG", "GG", "GL", "GGGGLGGLGLG", "GGGGLGGLGLGL" };
+            foreach (var instruction in instructionsArr)
+                Console.WriteLine($" For instruction \'{instruction}\' cycle exists: {DailyProblem.IsRobotBounded(instruction)}");
+        }
 
 
 

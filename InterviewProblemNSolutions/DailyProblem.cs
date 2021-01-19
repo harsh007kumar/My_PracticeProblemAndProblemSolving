@@ -7022,5 +7022,32 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1), n = length of instructions
+        public static bool IsRobotBounded(string instructions)
+        {
+            int x = 0, y = 0, direction = 0;
+            foreach (var instruction in instructions)
+                switch (instruction)
+                {
+                    case 'L':
+                        direction = (direction + 1) % 4;
+                        break;
+                    case 'R':
+                        direction = (direction + 3) % 4;
+                        break;
+                    case 'G':
+                        switch (direction)
+                        {
+                            case 0: y++; break;
+                            case 1: x--; break;
+                            case 2: y--; break;
+                            case 3: x++; break;
+                        }
+                        break;
+                }
+            return direction != 0 || (x == 0 && y == 0);
+        }
+
+
     }
 }
