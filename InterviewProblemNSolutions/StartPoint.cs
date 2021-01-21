@@ -205,6 +205,7 @@ namespace InterviewProblemNSolutions
             RobotBoundedInCircle();
             MostCompetitiveSubsequence();
             BinaryPrefixDivisibleBy5();
+            SummaryRanges();
 
 
 
@@ -3414,6 +3415,23 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine();
             }
         }
+
+
+        public static void SummaryRanges()
+        {
+            // https://leetcode.com/problems/summary-ranges/
+            Utility.Print("228. Summary Ranges");
+            int[][] nums = { new int[] { 0, 1, 2, 4, 5, 7 }, new int[] { 0, 2, 3, 4, 6, 8, 9 }, new int[] { }, new int[] { -1 }, new int[] { 0 } };
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Nums");
+                Console.Write(" The ranges are: \t[");
+                foreach (var range in DailyProblem.SummaryRanges(nums[i]))
+                    Console.Write($"{range},");
+                Console.WriteLine("]");
+            }
+        }
+
 
 
 

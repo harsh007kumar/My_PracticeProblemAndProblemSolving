@@ -7087,5 +7087,33 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1)
+        public static IList<string> SummaryRanges(int[] nums)
+        {
+            IList<string> ans = new List<string>();
+            if (nums.Length == 0) return ans;
+
+            int lastNum = nums[0];
+            string first = "" + nums[0];
+            bool multipleNum = false;
+
+            for (int i = 1; i < nums.Length; i++)
+                if (nums[i] == lastNum + 1)
+                {
+                    lastNum = nums[i];
+                    multipleNum = true;
+                }
+                else
+                {
+                    ans.Add(multipleNum ? first + "->" + lastNum : first);
+                    first = "" + nums[i];
+                    lastNum = nums[i];
+                    multipleNum = false;
+                }
+            
+            ans.Add(multipleNum ? first + "->" + lastNum : first);
+            return ans;
+        }
+
     }
 }
