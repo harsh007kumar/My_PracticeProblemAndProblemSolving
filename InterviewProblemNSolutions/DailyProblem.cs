@@ -7072,5 +7072,20 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1)
+        public static IList<bool> PrefixesDivisibleBy5(int[] A)
+        {
+            bool[] ans = new bool[A.Length];
+            int num = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                // we Just store the right most 3 digits which determine if the num is divisible by 5 or not
+                num = ((num << 1) + A[i]) % 5;
+                ans[i] = (num % 5 == 0) ? true : false;
+            }
+            return ans;
+        }
+
+
     }
 }

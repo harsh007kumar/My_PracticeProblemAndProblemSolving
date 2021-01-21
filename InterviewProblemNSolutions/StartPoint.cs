@@ -204,6 +204,7 @@ namespace InterviewProblemNSolutions
             CountTripletsThatCanFormTwoArraysOfEqualXOR();
             RobotBoundedInCircle();
             MostCompetitiveSubsequence();
+            BinaryPrefixDivisibleBy5();
 
 
 
@@ -3394,6 +3395,22 @@ namespace InterviewProblemNSolutions
                 nums[i].Print("nums");
                 Console.Write($" Most Competitive Subsequence of length \'{k[i]}\' is ");
                 DailyProblem.MostCompetitiveSubsequence(nums[i], k[i]).Print();
+                Console.WriteLine();
+            }
+        }
+
+
+        public static void BinaryPrefixDivisibleBy5()
+        {
+            // https://leetcode.com/problems/binary-prefix-divisible-by-5/
+            Utility.Print("1018. Binary Prefix Divisible By 5");
+            int[][] A = { new int[] { 0, 1, 1 }, new int[] { 1, 1, 1 }, new int[] { 0, 1, 1, 1, 1, 1 }, new int[] { 1, 1, 1, 0, 1 }, new int[] { 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1 } };
+            for (int i = 0; i < A.Length; i++)
+            {
+                A[i].Print("Input array");
+                Console.Write("\t\t\t\t");
+                foreach (var ans in DailyProblem.PrefixesDivisibleBy5(A[i]))
+                    Console.Write($" {ans}");
                 Console.WriteLine();
             }
         }
