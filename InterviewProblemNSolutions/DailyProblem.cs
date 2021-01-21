@@ -7049,5 +7049,28 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(k)
+        public static int[] MostCompetitiveSubsequence(int[] nums, int k)
+        {
+            Stack<int> st = new Stack<int>(k);
+            for (int i = 0; i < nums.Length; i++)
+            {
+                // sequence is already formed and new numbers is larger than last number
+                if (st.Count == k && st.Peek() <= nums[i])
+                    continue;
+                // just enouf numbers remaining in array to form the required sequence of length 'k'
+                else if (st.Count + nums.Length - i == k)
+                    st.Push(nums[i]);
+                else
+                {
+                    while (st.Count > 0 && st.Peek() > nums[i] && (st.Count + nums.Length - i) > k)
+                        st.Pop();
+                    st.Push(nums[i]);
+                }
+            }
+            return st.Reverse().ToArray();
+        }
+
+
     }
 }

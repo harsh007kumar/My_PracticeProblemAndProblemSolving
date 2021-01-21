@@ -203,6 +203,7 @@ namespace InterviewProblemNSolutions
             Shift2DGrid();
             CountTripletsThatCanFormTwoArraysOfEqualXOR();
             RobotBoundedInCircle();
+            MostCompetitiveSubsequence();
 
 
 
@@ -3379,6 +3380,22 @@ namespace InterviewProblemNSolutions
             string[] instructionsArr = { "GGLLGG", "GG", "GL", "GGGGLGGLGLG", "GGGGLGGLGLGL" };
             foreach (var instruction in instructionsArr)
                 Console.WriteLine($" For instruction \'{instruction}\' cycle exists: {DailyProblem.IsRobotBounded(instruction)}");
+        }
+
+
+        public static void MostCompetitiveSubsequence()
+        {
+            // https://leetcode.com/problems/find-the-most-competitive-subsequence/
+            Utility.Print("1673. Find the Most Competitive Subsequence");
+            int[][] nums = { new int[] { 3, 5, 2, 6 }, new int[] { 2, 4, 3, 3, 5, 4, 9, 6 }, new int[] { 84, 10, 71, 23, 66, 61, 62, 64, 34, 41, 80, 25, 91, 43, 4, 75, 65, 13, 37, 41, 46, 90, 55, 8, 85, 61, 95, 71 } };
+            int[] k = { 2, 4, 24 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                nums[i].Print("nums");
+                Console.Write($" Most Competitive Subsequence of length \'{k[i]}\' is ");
+                DailyProblem.MostCompetitiveSubsequence(nums[i], k[i]).Print();
+                Console.WriteLine();
+            }
         }
 
 
