@@ -206,6 +206,7 @@ namespace InterviewProblemNSolutions
             MostCompetitiveSubsequence();
             BinaryPrefixDivisibleBy5();
             SummaryRanges();
+            ThirdDistinctMax();
 
 
 
@@ -3432,6 +3433,18 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void ThirdDistinctMax()
+        {
+            // https://leetcode.com/problems/third-maximum-number/
+            Utility.Print("414. Third Maximum Number");
+            int[][] nums = { new int[] { 3, 2, 1 }, new int[] { 1, 2 }, new int[] { 2, 2, 3, 1 }, new int[] { int.MinValue, 1, 2 } };
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Nums");
+                Console.WriteLine($" The third maximum is: {DailyProblem.ThirdDistinctMax(nums[i])}\n");
+            }
+        }
 
 
 
