@@ -207,6 +207,7 @@ namespace InterviewProblemNSolutions
             BinaryPrefixDivisibleBy5();
             SummaryRanges();
             ThirdDistinctMax();
+            DetermineIfTwoStringsAreClose();
 
 
 
@@ -3444,6 +3445,16 @@ namespace InterviewProblemNSolutions
                 nums[i].Print("Nums");
                 Console.WriteLine($" The third maximum is: {DailyProblem.ThirdDistinctMax(nums[i])}\n");
             }
+        }
+
+
+        public static void DetermineIfTwoStringsAreClose()
+        {
+            // https://leetcode.com/problems/determine-if-two-strings-are-close/
+            Utility.Print("1657. Determine if Two Strings Are Close");
+            string[] s1 = { "abc", "a", "cabbba", "cabbba", "xyzz" }, s2 = { "bca", "aa", "abbccc", "aabbss", "xyyz" };
+            for (int i = 0; i < s1.Length; i++)
+                Console.WriteLine($" \'{s1[i]}\' & \'{s2[i]}\'\t\t\tare close: \t\'{DailyProblem.DetermineIfTwoStringsAreClose(s1[i], s2[i])}\'");
         }
 
 

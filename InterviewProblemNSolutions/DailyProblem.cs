@@ -7143,5 +7143,43 @@ namespace InterviewProblemNSolutions
             return (int)(max3rd != long.MinValue ? max3rd : max);
         }
 
+
+        // Time O(n) || Space O(26)~O(1), n = length of word1
+        public static bool DetermineIfTwoStringsAreClose(string word1, string word2)
+        {
+            int l = word1.Length;
+            if (l != word2.Length) return false;    // different length words
+
+
+            int[] map1 = new int[26];
+            int[] map2 = new int[26];
+            for (int i = 0; i < l; i++)
+            {
+                map1[word1[i] - 'a']++;
+                map2[word2[i] - 'a']++;
+            }
+
+            Dictionary<int, int> countMap1 = new Dictionary<int, int>(26);
+            Dictionary<int, int> countMap2 = new Dictionary<int, int>(26);
+            for (int i = 0; i < 26; i++)
+            {
+                // check if all unique characters are same in both strings
+                if ((map1[i] == 0 && map2[i] != 0) || (map2[i] == 0 && map1[i] != 0)) return false;
+
+                if (countMap1.ContainsKey(map1[i])) countMap1[map1[i]]++;
+                else countMap1.Add(map1[i], 1);
+
+                if (countMap2.ContainsKey(map2[i])) countMap2[map2[i]]++;
+                else countMap2.Add(map2[i], 1);
+            }
+            // check if all unique characters have same count i.e. 3 characters from word1
+            // will only match if there is any characters in word2 which is also present 3 times
+            foreach (var kvp in countMap1)
+                if (!countMap2.ContainsKey(kvp.Key) || countMap2[kvp.Key] != kvp.Value) return false;
+
+            return true;
+        }
+
+
     }
 }
