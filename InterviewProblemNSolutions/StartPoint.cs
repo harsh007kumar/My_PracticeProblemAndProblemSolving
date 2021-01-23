@@ -209,6 +209,7 @@ namespace InterviewProblemNSolutions
             ThirdDistinctMax();
             DetermineIfTwoStringsAreClose();
             SortTheMatrixDiagonally();
+            SmallestSubsequenceOfDistinctCharacters();
 
 
 
@@ -3469,6 +3470,15 @@ namespace InterviewProblemNSolutions
             mat.Print("DIAGONAL SORTED MATRIX");
         }
 
+
+        public static void SmallestSubsequenceOfDistinctCharacters()
+        {
+            // https://leetcode.com/problems/smallest-subsequence-of-distinct-characters/
+            Utility.Print("1081. Smallest Subsequence of Distinct Characters");
+            string[] sArr = { "bcabc", "cbacdcbc" };
+            foreach (var str in sArr)
+                Console.WriteLine($" lexicographically smallest subsequence of \'{str}\' that contains all the distinct characters exactly once:\t\'{DailyProblem.SmallestSubsequenceOfDistinctCharacters(str)}\'");
+        }
 
 
 

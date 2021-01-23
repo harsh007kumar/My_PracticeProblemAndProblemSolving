@@ -7223,5 +7223,38 @@ namespace InterviewProblemNSolutions
             { for (int k = 0; k < ls.Count; k++) mat[rID++][cID++] = ls[k]; }
         }
 
+
+        // Time O(n) || Space O(26)~O(1)
+        public static string SmallestSubsequenceOfDistinctCharacters(string s)
+        {
+            int[] map = new int[26];
+            // Get count of all characters in 's'
+            for (int i = 0; i < s.Length; i++)      // O(n)
+                map[s[i] - 'a']++;
+
+            // To known which all characters have been used so far
+            bool[] used = new bool[26];
+
+            Stack<char> st = new Stack<char>();
+            for (int i = 0; i < s.Length; i++)      // O(n)
+            {
+                map[s[i] - 'a']--;      // Decreament Count of current char
+                if (!used[s[i] - 'a'])  // This Character is Not already used
+                {
+                    // While Stack Not Empty && last character is >= current char && last character will come again in future
+                    while (st.Count > 0 && st.Peek() - 'a' >= s[i] - 'a' && map[st.Peek() - 'a'] > 0)
+                    {
+                        used[st.Peek() - 'a'] = false;
+                        st.Pop();
+                    }
+                    st.Push(s[i]);
+                    used[s[i] - 'a'] = true;
+                }
+            }
+            return new string(st.Reverse().ToArray());
+        }
+
+
+
     }
 }
