@@ -210,6 +210,7 @@ namespace InterviewProblemNSolutions
             DetermineIfTwoStringsAreClose();
             SortTheMatrixDiagonally();
             SmallestSubsequenceOfDistinctCharacters();
+            IncreasingDecreasingString();
 
 
 
@@ -3479,6 +3480,17 @@ namespace InterviewProblemNSolutions
             foreach (var str in sArr)
                 Console.WriteLine($" lexicographically smallest subsequence of \'{str}\' that contains all the distinct characters exactly once:\t\'{DailyProblem.SmallestSubsequenceOfDistinctCharacters(str)}\'");
         }
+
+
+        public static void IncreasingDecreasingString()
+        {
+            // https://leetcode.com/problems/increasing-decreasing-string/
+            Utility.Print("1370. Increasing Decreasing String");
+            string[] sArr = { "aaaabbbbcccc", "rat", "leetcode", "gggggg", "spo" };
+            foreach (var s in sArr)
+                Console.WriteLine($" Re-ordering \'{s}\'\tIncreasing Decreasing String:\t\'{DailyProblem.IncreasingDecreasingString(s)}\'");
+        }
+
 
 
 

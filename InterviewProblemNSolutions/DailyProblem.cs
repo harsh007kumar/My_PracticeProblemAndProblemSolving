@@ -7255,6 +7255,47 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(n)
+        public static string IncreasingDecreasingString(string s)
+        {
+            int[] map = new int[26];
+            for (int i = 0; i < s.Length; i++) map[s[i] - 'a']++;
+
+            StringBuilder sb = new StringBuilder();
+            int index = 0;
+            bool direction = true;
+            while (sb.Length < s.Length)
+            {
+                while (map[index] == 0) index = Next(index);
+                sb.Append((char)(index + 'a'));
+                map[index]--;
+                index = Next(index);
+            }
+            return sb.ToString();
+
+            // LOCAL FUNC
+            int Next(int num)
+            {
+                if (direction)
+                {
+                    if (++num == 26)
+                    {
+                        num = 25;
+                        direction = !direction;
+                    }
+                }
+                else
+                {
+                    if (--num == -1)
+                    {
+                        num = 0;
+                        direction = !direction;
+                    }
+                }
+                return num;
+            }
+        }
+
 
     }
 }
