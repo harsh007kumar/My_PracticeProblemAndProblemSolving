@@ -208,6 +208,7 @@ namespace InterviewProblemNSolutions
             SummaryRanges();
             ThirdDistinctMax();
             DetermineIfTwoStringsAreClose();
+            SortTheMatrixDiagonally();
 
 
 
@@ -3455,6 +3456,17 @@ namespace InterviewProblemNSolutions
             string[] s1 = { "abc", "a", "cabbba", "cabbba", "xyzz" }, s2 = { "bca", "aa", "abbccc", "aabbss", "xyyz" };
             for (int i = 0; i < s1.Length; i++)
                 Console.WriteLine($" \'{s1[i]}\' & \'{s2[i]}\'\t\t\tare close: \t\'{DailyProblem.DetermineIfTwoStringsAreClose(s1[i], s2[i])}\'");
+        }
+
+
+        public static void SortTheMatrixDiagonally()
+        {
+            // https://leetcode.com/problems/sort-the-matrix-diagonally/
+            Utility.Print("1329. Sort the Matrix Diagonally");
+            int[][] mat = { new int[] { 3, 3, 1, 1 }, new int[] { 2, 2, 1, 2 }, new int[] { 1, 1, 1, 2 } };
+            mat.Print("MATRIX");
+            mat = DailyProblem.DiagonalSort(mat);
+            mat.Print("DIAGONAL SORTED MATRIX");
         }
 
 

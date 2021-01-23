@@ -7181,5 +7181,47 @@ namespace InterviewProblemNSolutions
         }
 
 
+
+        // Time = O(rows*cols*Log(Min(rows,cols))) || Space = O(rows*cols)
+        public static int[][] DiagonalSort(int[][] mat)
+        {
+            int rows = mat.Length;
+            int cols = mat[0].Length;
+            List<List<int>> mLS = new List<List<int>>(rows + cols - 1);
+            List<int> dg;   // to hold diagonal elements
+            int i = 0, r, c;
+
+            for (c = cols - 1; c >= 0; c--) // Fetch all diagonals starting from 1st col
+            {
+                dg = new List<int>();
+                FetchAll(dg, 0, c);
+                dg.Sort();
+                mLS.Add(dg);
+            }
+            for (r = 1; r < rows; r++)      // Fetch all diagonals starting from 1st row leaving 0th row
+            {
+                dg = new List<int>();
+                FetchAll(dg, r, 0);
+                dg.Sort();
+                mLS.Add(dg);
+            }
+
+            i = 0;
+            c = cols - 1;
+            while (c >= 0)                  // Dump sorted diagonals starting from 1st col
+                DumpAll(mLS[i++], 0, c--);
+            r = 1;
+            while (r < rows)                // Dump sorted diagonals starting from 1st row
+                DumpAll(mLS[i++], r++, 0);
+
+            return mat;
+
+            // LOCAL FUNC
+            void FetchAll(List<int> ls, int rID, int cID)
+            { while (rID < rows && cID < cols) ls.Add(mat[rID++][cID++]); }
+            void DumpAll(List<int> ls, int rID, int cID)
+            { for (int k = 0; k < ls.Count; k++) mat[rID++][cID++] = ls[k]; }
+        }
+
     }
 }
