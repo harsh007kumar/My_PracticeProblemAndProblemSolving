@@ -211,6 +211,7 @@ namespace InterviewProblemNSolutions
             SortTheMatrixDiagonally();
             SmallestSubsequenceOfDistinctCharacters();
             IncreasingDecreasingString();
+            RestoreIPAddresses();
 
 
 
@@ -3489,6 +3490,21 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "aaaabbbbcccc", "rat", "leetcode", "gggggg", "spo" };
             foreach (var s in sArr)
                 Console.WriteLine($" Re-ordering \'{s}\'\tIncreasing Decreasing String:\t\'{DailyProblem.IncreasingDecreasingString(s)}\'");
+        }
+
+
+        public static void RestoreIPAddresses()
+        {
+            // https://leetcode.com/problems/restore-ip-addresses/
+            Utility.Print("93. Restore IP Addresses");
+            string[] sArr = { "25525511135", "0000", "1111", "010010", "101023" };
+            foreach(string s in sArr)
+            {
+                Console.Write($" Valid IP address constructed from \'{s}\'\t");
+                foreach (var validIP in DailyProblem.RestoreIPAddresses(s))
+                    Console.Write($" [{validIP}]");
+                Console.WriteLine();
+            }
         }
 
 

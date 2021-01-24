@@ -7297,5 +7297,40 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(3*4)~O(1) || Auxillary Space O(1) || Recursive Space O(4)~O(1)
+        public static IList<string> RestoreIPAddresses(string str)
+            return ans;
+
+            // Local Func
+            void FindIPs(string s, int i, int currOctet)
+            {
+                if (currOctet == 4)             // all 4 octet found
+                {
+                    if (i == len)               // if valid IP i.e. no more remaining numbers
+                        ans.Add(ip[0] + "." + ip[1] + "." + ip[2] + "." + ip[3]);
+                }
+                else
+                {
+                    if (i >= len) return;       // reached end of string but still all 4 valid octets not found
+                    if (s[i] == '0')
+                    {
+                        ip[currOctet] = 0;
+                        FindIPs(s, i + 1, currOctet + 1);
+                    }
+                    else
+                    {
+                        int num = 0;
+                        while (i < len)
+                        {
+                            num = (num * 10) + s[i++] - '0';
+                            if (num > 255) break;
+                            ip[currOctet] = num;
+                            FindIPs(s, i, currOctet + 1);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
