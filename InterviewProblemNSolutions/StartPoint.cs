@@ -212,6 +212,7 @@ namespace InterviewProblemNSolutions
             SmallestSubsequenceOfDistinctCharacters();
             IncreasingDecreasingString();
             RestoreIPAddresses();
+            MinimumInsertionsToBalanceAParenthesesString();
 
 
 
@@ -3505,6 +3506,16 @@ namespace InterviewProblemNSolutions
                     Console.Write($" [{validIP}]");
                 Console.WriteLine();
             }
+        }
+
+
+        public static void MinimumInsertionsToBalanceAParenthesesString()
+        {
+            // https://leetcode.com/problems/minimum-insertions-to-balance-a-parentheses-string/
+            Utility.Print("1541. Minimum Insertions to Balance a Parentheses String");
+            string[] sArr = { "(()))", "())", "))())(", "((((((", ")))))))", "(((()(()((())))(((()())))()())))(((()(()()((()()))", "(()))(()))()())))" };
+            foreach (var s in sArr)
+                Console.WriteLine($" Min number of insertions needed to make\t\'{s}\' balanced is:\t{DailyProblem.MinimumInsertionsToBalanceAParenthesesString(s)}");
         }
 
 

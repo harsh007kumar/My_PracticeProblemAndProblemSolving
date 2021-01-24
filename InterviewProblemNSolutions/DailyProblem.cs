@@ -7337,5 +7337,47 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time O(n) || Space O(1)
+        public static int MinimumInsertionsToBalanceAParenthesesString(string s)
+        {
+            int opening = 0, closing = 0, toBalance = 0, i = 0;
+            while (i < s.Length)
+            {
+                while (i < s.Length && s[i] == '(')
+                {
+                    opening++;
+                    i++;
+                }
+                while (i < s.Length && s[i] == ')')
+                {
+                    closing++;
+                    i++;
+                }
+
+                if (opening * 2 == closing)
+                    opening = closing = 0;
+                else if (opening * 2 > closing)
+                {
+                    opening -= closing / 2;
+                    if (closing % 2 == 1)
+                    {
+                        toBalance++;
+                        opening--;
+                    }
+                    closing = 0;
+                }
+                else
+                {
+                    closing -= opening * 2;
+                    toBalance += ((closing % 2 == 0) ? closing / 2 : (closing / 2) + 2);
+                    opening = closing = 0;
+                }
+            }
+            return toBalance + opening * 2;
+        }
+
+
+
     }
 }
