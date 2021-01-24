@@ -7299,6 +7299,11 @@ namespace InterviewProblemNSolutions
 
         // Time O(3*4)~O(1) || Auxillary Space O(1) || Recursive Space O(4)~O(1)
         public static IList<string> RestoreIPAddresses(string str)
+        {
+            IList<string> ans = new List<string>();
+            int len = str.Length;
+            int[] ip = new int[4];
+            FindIPs(str, 0, 0);
             return ans;
 
             // Local Func
