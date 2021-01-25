@@ -214,6 +214,7 @@ namespace InterviewProblemNSolutions
             RestoreIPAddresses();
             MinimumInsertionsToBalanceAParenthesesString();
             PrintWordsVertically();
+            LongestSubstringContainingVowelsInEvenCounts();
 
 
 
@@ -3533,6 +3534,17 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine();
             }
         }
+
+
+        public static void LongestSubstringContainingVowelsInEvenCounts()
+        {
+            // https://leetcode.com/problems/find-the-longest-substring-containing-vowels-in-even-counts/
+            Utility.Print("1371. Find the Longest Substring Containing Vowels in Even Counts");
+            string[] sArr = { "eleetminicoworoep", "leetcodeisgreat", "bcbcbc" };
+            foreach (var s in sArr)
+                Console.WriteLine($" Longest Substring of\t\'{s}\' containing Vowels in Even Counts has length: {DailyProblem.LongestSubstringContainingVowelsInEvenCounts(s)}");
+        }
+
 
 
 

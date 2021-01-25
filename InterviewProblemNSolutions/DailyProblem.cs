@@ -7403,5 +7403,45 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n^2) || Space O(1)
+        // BruteForce Soln
+        public static int LongestSubstringContainingVowelsInEvenCounts(string s)
+        {
+            HashSet<char> odd = new HashSet<char>(5), even = new HashSet<char>(5);
+            //even.Add('a'); even.Add('e'); even.Add('i'); even.Add('o'); even.Add('u');
+            int ans = 0;
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                odd.Clear();
+                even.Clear();
+                even.Add('a'); even.Add('e'); even.Add('i'); even.Add('o'); even.Add('u');
+                for (int j = i; j < s.Length; j++)
+                {
+                    char ch = s[j];
+                    if (isVowel(ch))
+                    {
+                        if (even.Contains(ch))
+                        {
+                            even.Remove(ch);
+                            odd.Add(ch);
+                        }
+                        else
+                        {
+                            even.Add(ch);
+                            odd.Remove(ch);
+                        }
+                    }
+                    if (odd.Count == 0) ans = Math.Max(ans, 1 + j - i);
+                }
+            }
+            return ans;
+
+            // LOCAL FUNC
+            bool isVowel(char c) => c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+        }
+
+
+
     }
 }
