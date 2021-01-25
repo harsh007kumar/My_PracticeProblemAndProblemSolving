@@ -7378,6 +7378,30 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n*m) || Space O(n), n = no of space sepeareted words in input string & m = length of longest word
+        public static IList<string> PrintWordsVertically(string s)
+        {
+            string[] spaceSeperated = s.Split(' ');
+            int longestWord = 0;
+            for (int i = 0; i < spaceSeperated.Length; i++) longestWord = Math.Max(longestWord, spaceSeperated[i].Length);
+            string[] ans = new string[longestWord];
+
+            int readTillIndex = -1, lastWordLen = 0, n = spaceSeperated.Length;
+            while (--n >= 0)
+                if (readTillIndex < spaceSeperated[n].Length - 1)
+                {
+                    lastWordLen = spaceSeperated[n].Length;
+                    for (int j = readTillIndex + 1; j < lastWordLen; j++)   // fill words in 'ans' index by index
+                        for (int i = n; i >= 0; i--)                        // traverse and read all word from current word till 0th index word
+                            if (j >= spaceSeperated[i].Length)
+                                ans[j] = ' ' + ans[j];
+                            else
+                                ans[j] = spaceSeperated[i][j] + ans[j];
+                    readTillIndex = lastWordLen - 1;
+                }
+            return ans;
+        }
+
 
     }
 }

@@ -213,6 +213,7 @@ namespace InterviewProblemNSolutions
             IncreasingDecreasingString();
             RestoreIPAddresses();
             MinimumInsertionsToBalanceAParenthesesString();
+            PrintWordsVertically();
 
 
 
@@ -3516,6 +3517,21 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "(()))", "())", "))())(", "((((((", ")))))))", "(((()(()((())))(((()())))()())))(((()(()()((()()))", "(()))(()))()())))" };
             foreach (var s in sArr)
                 Console.WriteLine($" Min number of insertions needed to make\t\'{s}\' balanced is:\t{DailyProblem.MinimumInsertionsToBalanceAParenthesesString(s)}");
+        }
+
+
+        public static void PrintWordsVertically()
+        {
+            // https://leetcode.com/problems/print-words-vertically/
+            Utility.Print("1324. Print Words Vertically");
+            string[] sArr = { "HOW ARE YOU", "TO BE OR NOT TO BE", "CONTEST IS COMING" };
+            foreach (string s in sArr)
+            {
+                Console.Write($" When each word of \'{s}\' is printed vertically:");
+                foreach (string verticalWord in DailyProblem.PrintWordsVertically(s))
+                    Console.Write($" \'{verticalWord}\'");
+                Console.WriteLine();
+            }
         }
 
 
