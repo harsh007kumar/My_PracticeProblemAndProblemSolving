@@ -215,6 +215,7 @@ namespace InterviewProblemNSolutions
             MinimumInsertionsToBalanceAParenthesesString();
             PrintWordsVertically();
             LongestSubstringContainingVowelsInEvenCounts();
+            PathWithMinimumEffort();
 
 
 
@@ -3545,6 +3546,22 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Longest Substring of\t\'{s}\' containing Vowels in Even Counts has length: {DailyProblem.LongestSubstringContainingVowelsInEvenCounts(s)}");
         }
 
+
+        public static void PathWithMinimumEffort()
+        {
+            // https://leetcode.com/problems/path-with-minimum-effort/
+            Utility.Print("1631. Path With Minimum Effort");
+            int[][][] heightsArr = { new int[][] { new int[] { 1, 2, 2 }, new int[] { 3, 8, 2 }, new int[] { 5, 3, 5 } },
+                                new int[][] { new int[] { 1, 2, 3 }, new int[] { 3, 8, 4 }, new int[] { 5, 3, 5 } },
+                                new int[][] { new int[] { 1, 2, 1, 1, 1 }, new int[] { 1, 2, 1, 2, 1 }, new int[] { 1, 2, 1, 2, 1 }, new int[] { 1, 2, 1, 2, 1 }, new int[] { 1, 1, 1, 2, 1 } },
+                                new int[][] { new int[] { 4, 3, 4, 10, 5, 5, 9, 2 }, new int[] { 10, 8,2,10,9,7,5, 6 }, new int[] { 5, 8,10,10,10,7,4, 2 }, new int[] { 5, 1,3,1,1,3,1,9 }, new int[] { 6, 4, 10, 6, 10, 9, 4, 6 } } };
+            foreach(var heights in heightsArr)
+            {
+                heights.Print("Heights");
+                //Console.WriteLine($" Min effort required to travel from the top-left cell to the bottom-right cell.{DailyProblem.MinimumEffortPathBruteForce(heights)}");
+                Console.WriteLine($" Min effort required to travel from the top-left cell to the bottom-right cell.{DailyProblem.MinimumEffortPath(heights)}");
+            }
+        }
 
 
 

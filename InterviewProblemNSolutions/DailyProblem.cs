@@ -7442,6 +7442,112 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Brute Force, Find all path approach with Exponential Time Complexicity
+        // Time O(n^2) || Space O(n), n = rows*cols if input 2D grid
+        public static int MinimumEffortPathBruteForce(int[][] heights)
+        {
+            int rows = heights.Length;
+            int cols = heights[0].Length;
+            bool[,] visited = new bool[rows, cols];
+
+            return GetEffort(0, 0, heights[0][0]);
+
+            // LOCAL FUNC
+            int GetEffort(int r, int c, int lastHt)
+            {
+                // not a valid cell or already visited return -1 to indicate destination not reachable
+                if (r < 0 || r >= rows || c < 0 || c >= cols || visited[r, c]) return -1;
+
+                // Reached destination
+                if (r == rows - 1 && c == cols - 1) 
+                    return Math.Abs(lastHt - heights[r][c]);
+
+                int effort = Int32.MaxValue;
+                visited[r, c] = true;
+
+                int currEffort = 0;
+                currEffort = GetEffort(r - 1, c, heights[r][c]);
+                if (currEffort != -1) effort = Math.Min(effort, currEffort);
+
+                currEffort = GetEffort(r + 1, c, heights[r][c]);
+                if (currEffort != -1) effort = Math.Min(effort, currEffort);
+
+                currEffort = GetEffort(r, c - 1, heights[r][c]);
+                if (currEffort != -1) effort = Math.Min(effort, currEffort);
+
+                currEffort = GetEffort(r, c + 1, heights[r][c]);
+                if (currEffort != -1) effort = Math.Min(effort, currEffort);
+
+                visited[r, c] = false;
+                return effort == Int32.MaxValue ? -1 : (Math.Max(Math.Abs(lastHt - heights[r][c]), effort));
+            }
+        }
+        // Time O(logk*(r*c)) || Space O(r*c), k = 2x10^6 & r = no of rows & c = no of cols
+        public static int MinimumEffortPath(int[][] heights)
+        {
+            /* Instead of finding all the paths from source to destination and than returing the path with min Absolute difference
+             * We restrict our path search with some value 'k' (Max permissible Difference b/w 2 diff cells height)
+             * and if we are not able to reach from source to destination with this restricted value 'k'.
+             * We increament the 'k' by 1. So this way are finding path with by linearly increasing value of K. [K = 1..2..3...]
+             * 
+             * Better approach can we be can take one start and last value and mid of these would be 'k',
+             * if we are able to reach Source->Destination from current mid than we update last to mid, else update start to mid + 1
+             * Return last 'k' which was succes
+             */
+            int rows = heights.Length;
+            int cols = heights[0].Length;
+            bool[,] visited = new bool[rows, cols];
+            int start = 0, last = 2000001, mid;
+
+            int absMinEffort = Int32.MaxValue;
+            while (start <= last)
+            {
+                mid = start + (last - start) / 2;
+                int absDiff = GetEffort(0, 0, heights[0][0]);
+                if (absDiff != -1)
+                {
+                    absMinEffort = absDiff;
+                    if (absMinEffort == 0) break;       // Reached Destination with 0 AbsDiff than break loop
+                    last = Math.Min(mid - 1, absMinEffort - 1);
+                }
+                else start = mid + 1;
+                visited = new bool[rows, cols];         // reset visited Array for next iteration
+            }
+            return absMinEffort;
+
+            // LOCAL FUNC for DFS traversal
+            int GetEffort(int r, int c, int lastHt)
+            {
+                // not a valid cell or already visited or absDiff is greater than current limit return -1 to indicate destination not reachable
+                if (r < 0 || r >= rows || c < 0 || c >= cols || visited[r, c] || Math.Abs(lastHt - heights[r][c]) > mid) return -1;
+
+                // Reached destination
+                if (r == rows - 1 && c == cols - 1)
+                    return Math.Abs(lastHt - heights[r][c]);
+
+                int effort = Int32.MaxValue;
+                visited[r, c] = true;       // mark current cell as visited
+
+                int currEffort = 0;
+                // up
+                currEffort = GetEffort(r - 1, c, heights[r][c]);
+                if (currEffort != -1) effort = Math.Min(effort, currEffort);
+                // down
+                currEffort = GetEffort(r + 1, c, heights[r][c]);
+                if (currEffort != -1) effort = Math.Min(effort, currEffort);
+                // left
+                currEffort = GetEffort(r, c - 1, heights[r][c]);
+                if (currEffort != -1) effort = Math.Min(effort, currEffort);
+                // right
+                currEffort = GetEffort(r, c + 1, heights[r][c]);
+                if (currEffort != -1) effort = Math.Min(effort, currEffort);
+
+                return effort == Int32.MaxValue ? -1 : (Math.Max(Math.Abs(lastHt - heights[r][c]), effort));
+            }
+        }
+
+
+
 
     }
 }
