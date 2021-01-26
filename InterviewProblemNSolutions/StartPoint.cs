@@ -217,6 +217,7 @@ namespace InterviewProblemNSolutions
             LongestSubstringContainingVowelsInEvenCounts();
             PathWithMinimumEffort();
             RotatedDigits();
+            DeleteOperationForTwoStrings();
 
 
 
@@ -3572,6 +3573,16 @@ namespace InterviewProblemNSolutions
             int[] nums = { 10, 21, 5, 512 };
             foreach (var n in nums)
                 Console.WriteLine($" Count of Numbers from 1 to {n} that are good: \'{DailyProblem.RotatedDigits(n)}\'");
+        }
+
+
+        public static void DeleteOperationForTwoStrings()
+        {
+            // https://leetcode.com/problems/delete-operation-for-two-strings/
+            Utility.Print("583. Delete Operation for Two Strings");
+            string[] word1 = { "sea", "seea", "sea" }, word2 = { "eat", "eat", "ate" };
+            for (int i = 0; i < word1.Length; i++)
+                Console.WriteLine($" Min no of steps required to make\t\'{word1[i]}\' & \'{word2[i]}\' the same:\t\'{DailyProblem.MinDistance(word1[i], word2[i])}\'");
         }
 
 

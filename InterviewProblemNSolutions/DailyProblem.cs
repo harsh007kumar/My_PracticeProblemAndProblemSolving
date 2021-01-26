@@ -7571,5 +7571,25 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(Min(n,m)) || Space O(1), n = len of word1 & m = len of word2
+        public static int MinDistance(string word1, string word2)
+        {
+            int l1 = word1.Length, l2 = word2.Length;
+            if (l1 == 0) return l2;
+            if (l2 == 0) return l1;
+
+            // Find longest common subsequence of both words
+            int[,] LCS = new int[l1 + 1, l2 + 1];
+            for (int i = 0; i < l1; i++)
+                for (int j = 0; j < l2; j++)
+                    if (word1[i] == word2[j])
+                        LCS[i + 1, j + 1] = 1 + LCS[i, j];
+                    else
+                        LCS[i + 1, j + 1] = Math.Max(LCS[i + 1, j], LCS[i, j + 1]);
+
+            return (l1 - LCS[l1, l2]) + (l2 - LCS[l1, l2]);
+        }
+
+
     }
 }
