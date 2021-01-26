@@ -4419,8 +4419,10 @@ namespace InterviewProblemNSolutions
 
         public static void LongestPalindromicSubsequence()
         {
+            // https://leetcode.com/problems/longest-palindromic-subsequence/
             Utility.Print("Problem-35  Longest Palindrome Subsequence (p. 813)");
-            string[] inputArr = { "AGDDDA", "AGCTCBMAACTGGAM", "GEEKSFORGEEKS" };
+            Utility.Print("516. Longest Palindromic Subsequence");
+            string[] inputArr = { "AGDDDA", "AGCTCBMAACTGGAM", "GEEKSFORGEEKS", "ABCDEF" };
             foreach (var input in inputArr)
             {
                 var len = input.Length;
