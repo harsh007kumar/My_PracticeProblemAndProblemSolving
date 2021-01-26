@@ -7547,6 +7547,28 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(N) || Space O(1)
+        public static int RotatedDigits(int N)
+        {
+            int ans = 0;
+            for (int i = 1; i <= N; i++)   // O(n)
+                if (IsGoodNum(i))
+                    ans++;
+            return ans;
+            // Local Func to check if no is good after rotation
+            bool IsGoodNum(int num) // O(1)
+            {
+                bool flag = false;
+                while (num > 0)
+                {
+                    int k = num % 10;
+                    if (k == 3 || k == 4 || k == 7) return false;
+                    if (k == 2 || k == 5 || k == 6 || k == 9) flag = true;
+                    num = num / 10;
+                }
+                return flag;
+            }
+        }
 
 
     }

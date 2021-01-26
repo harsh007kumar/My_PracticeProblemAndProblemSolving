@@ -216,6 +216,7 @@ namespace InterviewProblemNSolutions
             PrintWordsVertically();
             LongestSubstringContainingVowelsInEvenCounts();
             PathWithMinimumEffort();
+            RotatedDigits();
 
 
 
@@ -3561,6 +3562,16 @@ namespace InterviewProblemNSolutions
                 //Console.WriteLine($" Min effort required to travel from the top-left cell to the bottom-right cell.{DailyProblem.MinimumEffortPathBruteForce(heights)}");
                 Console.WriteLine($" Min effort required to travel from the top-left cell to the bottom-right cell.{DailyProblem.MinimumEffortPath(heights)}");
             }
+        }
+
+
+        public static void RotatedDigits()
+        {
+            // https://leetcode.com/problems/rotated-digits/
+            Utility.Print("788. Rotated Digits");
+            int[] nums = { 10, 21, 5, 512 };
+            foreach (var n in nums)
+                Console.WriteLine($" Count of Numbers from 1 to {n} that are good: \'{DailyProblem.RotatedDigits(n)}\'");
         }
 
 
