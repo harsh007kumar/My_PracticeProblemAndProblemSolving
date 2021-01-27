@@ -218,6 +218,7 @@ namespace InterviewProblemNSolutions
             PathWithMinimumEffort();
             RotatedDigits();
             DeleteOperationForTwoStrings();
+            ConcatenationOfConsecutiveBinaryNumbers();
 
 
 
@@ -3584,6 +3585,21 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < word1.Length; i++)
                 Console.WriteLine($" Min no of steps required to make\t\'{word1[i]}\' & \'{word2[i]}\' the same:\t\'{DailyProblem.MinDistance(word1[i], word2[i])}\'");
         }
+
+
+        public static void ConcatenationOfConsecutiveBinaryNumbers()
+        {
+            // https://leetcode.com/problems/concatenation-of-consecutive-binary-numbers/
+            Utility.Print("1680. Concatenation of Consecutive Binary Numbers");
+            int[] nums = { 1, 3, 4, 12, 101, 72055, 100000 };
+            foreach (var n in nums)
+            {
+                Console.WriteLine($" Decimal value of the binary string formed by concatenating the binary representations of '1' to \'{n}\' in order: {DailyProblem.ConcatenatConsecutiveBinaryNumbers(n)}");
+                Console.WriteLine($" Decimal value of the binary string formed by concatenating the binary representations of '1' to \'{n}\' in order: {DailyProblem.ConcatenatConsecutiveBinaryNumbersFaster(n)}");
+            }
+                
+        }
+
 
 
 

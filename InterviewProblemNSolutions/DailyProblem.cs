@@ -7591,5 +7591,39 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n*k) || Space O(1), k = avg length of binary representation of numbers
+        public static int ConcatenatConsecutiveBinaryNumbers(int n)
+        {
+            int decimalValue = 0;
+            for (int i = 1; i <= n; i++)
+                foreach (var ch in DecToBinary(i))
+                    decimalValue = ((decimalValue << 1) + ch - '0') % (1000000007);
+
+            return decimalValue;
+
+            // Local func to convert decimal no to its binary representation
+            string DecToBinary(int num)
+            {
+                string s = "";
+                while (num != 0)
+                {
+                    s = (num & 1) + s;
+                    num = num >> 1;
+                }
+                return s;
+            }
+        }
+        // Time O(n) || Space O(1)
+        public static int ConcatenatConsecutiveBinaryNumbersFaster(int n)
+        {
+            long decimalValue = 0;
+            for (int i = 1; i <= n; i++)
+                decimalValue = (((decimalValue << Length(i)) % 1000000007) + i);
+
+            return Convert.ToInt32(decimalValue);
+            // Local func to get length of integer in binary i.e. no of 1's & 0's by using formula => 1 + Log (base2) of Num
+            int Length(int num) => 1 + (int)(Math.Log10(num) / Math.Log10(2));
+        }
+
     }
 }
