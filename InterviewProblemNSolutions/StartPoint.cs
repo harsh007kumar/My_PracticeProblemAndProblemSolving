@@ -219,6 +219,7 @@ namespace InterviewProblemNSolutions
             RotatedDigits();
             DeleteOperationForTwoStrings();
             ConcatenationOfConsecutiveBinaryNumbers();
+            CanConvertStringInKMoves();
 
 
 
@@ -3601,6 +3602,18 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void CanConvertStringInKMoves()
+        {
+            // https://leetcode.com/problems/can-convert-string-in-k-moves/
+            Utility.Print("1540. Can Convert String in K Moves");
+            string[] s = { "input", "abc", "aab" }, t = { "ouput", "bcd", "bbb" };
+            int[] k = { 9, 10, 27 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                Console.WriteLine($" Converting \'{s[i]}\' into \'{t[i]}\' in \'{k[i]}\' moves or less is possible: {DailyProblem.CanConvertString(s[i], t[i], k[i])}");
+                Console.WriteLine($" Converting \'{s[i]}\' into \'{t[i]}\' in \'{k[i]}\' moves or less is possible: {DailyProblem.CanConvertStringFaster(s[i], t[i], k[i])}");
+            }
+        }
 
 
 

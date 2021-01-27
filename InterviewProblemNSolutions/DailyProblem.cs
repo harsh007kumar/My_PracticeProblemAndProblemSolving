@@ -7625,5 +7625,52 @@ namespace InterviewProblemNSolutions
             int Length(int num) => 1 + (int)(Math.Log10(num) / Math.Log10(2));
         }
 
+
+        // Time O(Max(n,k)), n = length of 's' || Space O(26) ~O(1)
+        public static bool CanConvertString(string s, string t, int k)
+        {
+            int sLen = s.Length, tLen = t.Length, currDiff = 0;
+            if (sLen != tLen) return false;    // if strings are not of same length they can't be converted to match
+
+            Dictionary<int, int> shiftDiff = new Dictionary<int, int>(26);
+            for (int i = 0; i < sLen; i++)
+            {
+                currDiff = (t[i] - 'a') - (s[i] - 'a');
+                if (currDiff < 0) currDiff += 26;
+                
+                // Find the shifts required for each index to match char in both strings
+                if (shiftDiff.ContainsKey(currDiff)) shiftDiff[currDiff]++;
+                else shiftDiff.Add(currDiff, 1);
+            }
+
+            shiftDiff.Remove(0);
+            for (int i = 1; i <= k; i++)
+                if (shiftDiff.ContainsKey(i % 26) && --shiftDiff[i % 26] == 0)
+                {
+                    shiftDiff.Remove(i % 26);
+                    if (shiftDiff.Count == 0) return true;
+                }
+
+            return shiftDiff.Count == 0;
+        }
+        // Time O(n), n = length of 's' || Space O(26) ~O(1)
+        public static bool CanConvertStringFaster(string s, string t, int k)
+        {
+            int sLen = s.Length, currDiff = 0;
+            if (sLen != t.Length) return false;     // if strings are not of same length they can't be converted to match
+
+            int[] rotationsReq = new int[26];
+            for (int i = 0; i < sLen; i++)
+            {
+                currDiff = (t[i] - 'a') - (s[i] - 'a');
+                if (currDiff == 0) continue;        // 0 rotation required than move to next index
+                if (currDiff < 0) currDiff += 26;
+
+                if (rotationsReq[currDiff]++ * 26 + currDiff > k)
+                    return false;
+            }
+            return true;
+        }
+
     }
 }
