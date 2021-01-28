@@ -221,6 +221,7 @@ namespace InterviewProblemNSolutions
             ConcatenationOfConsecutiveBinaryNumbers();
             CanConvertStringInKMoves();
             SmallestStringWithAGivenNumericValue();
+            CarPooling();
 
 
 
@@ -3628,6 +3629,27 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Lexicographically smallest string with length equal to \'{n[i]}\' and numeric value equal to \'{k[i]}\' is:\t{DailyProblem.SmallestStringWithAGivenNumericValueIterative(n[i], k[i])}");
             }
         }
+
+
+        public static void CarPooling()
+        {
+            // https://leetcode.com/problems/car-pooling/
+            Utility.Print("1094. Car Pooling");
+            int[][][] trips = { new int[][] { new int[] { 2, 1, 5 }, new int[] { 3, 3, 7 } },
+                                new int[][] { new int[] { 2, 1, 5 }, new int[] { 3, 3, 7 } },
+                                new int[][] { new int[] { 2, 1, 5 }, new int[] { 3, 5, 7 } },
+                                new int[][] { new int[] { 3, 2, 7 }, new int[] { 3, 7, 9 }, new int[] { 8, 3, 9 } },
+                                new int[][] { new int[] { 9, 3, 4 }, new int[] { 9, 1, 7 }, new int[] { 4, 2, 4 }, new int[] { 7, 4, 5 } } };
+            int[] capacity = { 4, 5, 3, 11, 23 };
+            for (int i = 0; i < trips.Length; i++)
+            {
+                trips[i].Print("Trips");
+                Console.WriteLine($" Is it possible to pick up & drop off all passengers with \'{capacity[i]}\' capacity for all the given trips (Using TimeStamp based sorting): \'{DailyProblem.CarPooling(trips[i], capacity[i])}\'");
+                Console.WriteLine($" Is it possible to pick up & drop off all passengers with \'{capacity[i]}\' capacity for all the given trips (Using BucketSort): \'{DailyProblem.CarPoolingBucketSort(trips[i], capacity[i])}\'");
+            }
+        }
+
+
 
 
 

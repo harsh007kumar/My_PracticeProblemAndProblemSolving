@@ -7727,7 +7727,89 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(nLogn) || Space O(1), n is no of trips
+        public static bool CarPooling(int[][] trips, int capacity)
+        {
+            ///* First Sort the trips by Drop-Off Time
+            // * Than Sort it again by Pick-Up Time
+            // * Now Start iterating from 1st to last trip,
+            // *      pickup people (decrease capacity)
+            // *      dropoff people (increase capacity)
+            // * If at any point capacity goes -ve return false
+            // * else return true at end
+            // */
+            //Array.Sort(trips, new CarPoolSortByDropOffTime());
+            //Array.Sort(trips, new CarPoolSortByPickUpTime());
 
+            ////int start = trips[0][1], last = trips[trips.Length - 1][1];
+            //int picking = 0, dropping = 0;
+
+
+            //while (picking < trips.Length)
+            //{
+            //    if (trips[picking][1] < trips[dropping][2])     // if ith trip pickTime is less than jth trip drop time, pick passenger and reduce capacity
+            //        capacity -= trips[picking++][0];
+            //    else                                            // else drop-off passenger and increase capacity
+            //        capacity += trips[dropping++][0];
+            //    // At any point capcity goes -ve return false
+            //    if (capacity < 0) return false;
+            //}
+            //return true;
+
+            //-- Above algo yields wrong result when departure time of lets say 1st trip is highest than rest all
+            // dropping index will stack stuck at 1st trip and return false even though
+            // passengers who boarded after 1st trip have dropped off earlier than 1st trip passengers--//
+
+            /* Another Approach is to add passengers in List by their start timestamp
+             * and also add -ve passenger passengers in list by their departure timestamp
+             * Sort the list by timestamp and iterate thru it,
+             * at any point current capacity exceeds total capacity return false else true
+             */
+
+            SortedDictionary<int, int> sortedTimeStamp = new SortedDictionary<int, int>();
+            for (int i = 0; i < trips.Length; i++)                  // O(n)
+            {
+                if (!sortedTimeStamp.ContainsKey(trips[i][1])) sortedTimeStamp.Add(trips[i][1], 0);
+                sortedTimeStamp[trips[i][1]] += trips[i][0];
+                if (!sortedTimeStamp.ContainsKey(trips[i][2])) sortedTimeStamp.Add(trips[i][2], 0);
+                sortedTimeStamp[trips[i][2]] -= trips[i][0];
+            }
+            foreach (var passengerCount in sortedTimeStamp.Values)  // O(2n)~O(n)
+            {
+                capacity -= passengerCount;
+                if (capacity < 0) return false;
+            }
+            return true;
+        }
+        //public class CarPoolSortByPickUpTime : IComparer<int[]>
+        //{ public int Compare(int[] a, int[] b) => a[1] - b[1]; }
+        //public class CarPoolSortByDropOffTime : IComparer<int[]>
+        //{ public int Compare(int[] a, int[] b) => a[2] - b[2]; }
+
+        // Time O(Max(n,1001) || Space O(1001)~O(1), n is no of trips
+        public static bool CarPoolingBucketSort(int[][] trips, int capacity)
+        {
+            /* Since Max pick-up/drop-off time is given as 1000 in problem
+             * we create 1001 buckets and add +passengers for given pick-up time
+             * we create 1001 buckets and subtract -passengers for given drop-off time
+             * 
+             * Than we traverse the buckets array if at any moment capacity goes -ve return false else true
+             */
+            int k = 1001;   // max pick-up/drop-off time
+            int[] buckects = new int[k];
+            for (int i = 0; i < trips.Length; i++)
+            {
+                buckects[trips[i][1]] += trips[i][0];
+                buckects[trips[i][2]] -= trips[i][0];
+            }
+            for (int i = 0; i < k; i++)
+            {
+                capacity -= buckects[i];
+                if (capacity < 0)
+                    return false;
+            }
+            return true;
+        }
 
     }
 }
