@@ -220,6 +220,7 @@ namespace InterviewProblemNSolutions
             DeleteOperationForTwoStrings();
             ConcatenationOfConsecutiveBinaryNumbers();
             CanConvertStringInKMoves();
+            SmallestStringWithAGivenNumericValue();
 
 
 
@@ -3614,6 +3615,20 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Converting \'{s[i]}\' into \'{t[i]}\' in \'{k[i]}\' moves or less is possible: {DailyProblem.CanConvertStringFaster(s[i], t[i], k[i])}");
             }
         }
+
+
+        public static void SmallestStringWithAGivenNumericValue()
+        {
+            // https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/
+            Utility.Print("1663. Smallest String With A Given Numeric Value");
+            int[] n = { 3, 5, 100, 100000 }, k = { 27, 73, 2503, 100005 };
+            for (int i = 0; i < n.Length; i++)
+            {
+                //Console.WriteLine($" Lexicographically smallest string with length equal to \'{n[i]}\' and numeric value equal to \'{k[i]}\' is:\t{DailyProblem.SmallestStringWithAGivenNumericValueRecursive(n[i], k[i])}");
+                Console.WriteLine($" Lexicographically smallest string with length equal to \'{n[i]}\' and numeric value equal to \'{k[i]}\' is:\t{DailyProblem.SmallestStringWithAGivenNumericValueIterative(n[i], k[i])}");
+            }
+        }
+
 
 
 

@@ -7672,5 +7672,62 @@ namespace InterviewProblemNSolutions
             return true;
         }
 
+
+        // Time O(n) || Auxillary Space O(1) || Recursive Space O(n)
+        public static string SmallestStringWithAGivenNumericValueRecursive(int n, int k)
+        {
+            char[] ans = new char[n];
+            string smallestStr = "";
+            GetSmallestString(k, n - 1);
+            return smallestStr;
+
+            // Local Func
+            bool GetSmallestString(int sumRequired, int currIndex)
+            {
+                if (currIndex == -1)
+                {
+                    if (sumRequired == 0)               // smallest string found
+                    {
+                        smallestStr = new string(ans);
+                        return true;
+                    }
+                }
+                else
+                    // Try using highest value(26=='z') first, if doesn't results in valid string than try smaller value till (1=='a')
+                    for (int val = Math.Min(26, sumRequired - currIndex); val >= 1; val++)
+                    {
+                        ans[currIndex] = (char)(val - 1 + 'a');       // since chars are 0 indexed
+                        if (GetSmallestString(sumRequired - val, currIndex - 1)) return true;
+                    }
+                return false;
+            }
+        }
+        // Time O(n) || Space O(1)
+        public static string SmallestStringWithAGivenNumericValueIterative(int n, int k)
+        {
+            char[] ans = new char[n];
+            return GetSmallestString(k, n - 1);
+
+            // Local Func
+            string GetSmallestString(int sumRequired, int currIndex)
+            {
+                int valUsed = 0;
+                while (currIndex != -1)
+                {
+                    // Use Minimum of 
+                    // a) highest possible value either (26=='z')
+                    // b) sumRequired - no of indexes left to fill
+                    valUsed = Math.Min(26, sumRequired - currIndex);
+                    ans[currIndex] = (char)(valUsed - 1 + 'a');
+                    sumRequired -= valUsed;
+                    currIndex--;
+                }
+                return new string(ans);
+            }
+        }
+
+
+
+
     }
 }
