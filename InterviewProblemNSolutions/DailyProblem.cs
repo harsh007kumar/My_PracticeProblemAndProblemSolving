@@ -7812,7 +7812,7 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time = Space = O(n), n = no of nodes in Binary Tree
+        // Time O(xAxis*hlogh) || Space = O(n), n = no of nodes in Binary Tree, xAxis no or different xAxis & h = avg length of List at given xAxis
         public static IList<IList<int>> VerticalTraversal(TreeNode root)
         {
             Dictionary<int, List<VerticalTreePair>> dict = new Dictionary<int, List<VerticalTreePair>>();
@@ -7848,8 +7848,8 @@ namespace InterviewProblemNSolutions
         {
             public int Compare(VerticalTreePair a, VerticalTreePair b)
             {
-                int sort = b.vPos - a.vPos;
-                return sort != 0 ? sort : a.val - b.val;
+                int sort = b.vPos - a.vPos;                 // Sort by y Axis (HighYAxis has higher priority)
+                return sort != 0 ? sort : a.val - b.val;    // if both have same YAxis than choose smaller value
             }
         }
         public class VerticalTreePair
