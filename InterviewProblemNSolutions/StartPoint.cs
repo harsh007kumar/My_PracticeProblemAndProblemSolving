@@ -222,6 +222,7 @@ namespace InterviewProblemNSolutions
             CanConvertStringInKMoves();
             SmallestStringWithAGivenNumericValue();
             CarPooling();
+            VerticalOrderTraversalABinaryTree();
 
 
 
@@ -3650,6 +3651,29 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void VerticalOrderTraversalABinaryTree()
+        {
+            // https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/
+            Utility.Print("987. Vertical Order Traversal of a Binary Tree");
+            TreeNode root = new TreeNode(3)
+            {
+                left = new TreeNode(9),
+                right = new TreeNode(20)
+                {
+                    left = new TreeNode(15),
+                    right = new TreeNode(7)
+                }
+            };
+            root.InOrder("BinaryTree");
+            Console.WriteLine($" Vertical order traversal of the above binary tree");
+            foreach (var xAxis in DailyProblem.VerticalTraversal(root))
+            {
+                Console.Write("[");
+                foreach (var element in xAxis)
+                    Console.Write($" {element},");
+                Console.WriteLine("]");
+            }
+        }
 
 
 

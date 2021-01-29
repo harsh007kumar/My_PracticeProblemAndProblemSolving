@@ -7811,5 +7811,59 @@ namespace InterviewProblemNSolutions
             return true;
         }
 
+
+        // Time = Space = O(n), n = no of nodes in Binary Tree
+        public static IList<IList<int>> VerticalTraversal(TreeNode root)
+        {
+            Dictionary<int, List<VerticalTreePair>> dict = new Dictionary<int, List<VerticalTreePair>>();
+            int min = int.MaxValue, max = int.MinValue;
+            VerticalTraversal(root, 0, 0);              // O(n)
+
+            List<IList<int>> ans = new List<IList<int>>();
+            for (int i = min; i <= max; i++)            // O(xAxis)
+            {
+                dict[i].Sort(new VerticalSort());       // Sort Vertically
+                ans.Add(new List<int>());
+                for (int j = 0; j < dict[i].Count; j++) // O(yAxis)
+                    ans[ans.Count - 1].Add(dict[i][j].val);
+            }
+            return ans;
+
+            // Local Func
+            void VerticalTraversal(TreeNode r, int xAxis, int yAxis)        // InOrder
+            {
+                if (r == null) return;
+                VerticalTraversal(r.left, xAxis - 1, yAxis - 1);
+
+                min = Math.Min(min, xAxis);
+                max = Math.Max(max, xAxis);
+
+                if (!dict.ContainsKey(xAxis)) dict.Add(xAxis, new List<VerticalTreePair>());
+                dict[xAxis].Add(new VerticalTreePair(r.val, yAxis));
+
+                VerticalTraversal(r.right, xAxis + 1, yAxis - 1);
+            }
+        }
+        public class VerticalSort : IComparer<VerticalTreePair>
+        {
+            public int Compare(VerticalTreePair a, VerticalTreePair b)
+            {
+                int sort = b.vPos - a.vPos;
+                return sort != 0 ? sort : a.val - b.val;
+            }
+        }
+        public class VerticalTreePair
+        {
+            public int val, vPos;
+            public VerticalTreePair(int val, int vPos)
+            {
+                this.val = val;
+                this.vPos = vPos;
+            }
+        }
+
+
+
+
     }
 }
