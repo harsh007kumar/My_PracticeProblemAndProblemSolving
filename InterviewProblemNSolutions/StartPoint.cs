@@ -223,6 +223,7 @@ namespace InterviewProblemNSolutions
             SmallestStringWithAGivenNumericValue();
             CarPooling();
             VerticalOrderTraversalABinaryTree();
+            MinimumDeviationInArray();
 
 
 
@@ -3674,6 +3675,21 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine("]");
             }
         }
+
+
+        public static void MinimumDeviationInArray()
+        {
+            // https://leetcode.com/problems/minimize-deviation-in-array/
+            Utility.Print("1675. Minimize Deviation in Array");
+            int[][] numsArr = { new int[] { 1, 2, 3, 4 }, new int[] { 4, 1, 5, 20, 3 }, new int[] { 2, 10, 8 }, new int[] { 10, 4, 3 }, new int[] { 2, 12, 13 }, new int[] { 5, 9 }, new int[] { 1700, 1325, 8456975, 91, 3200000 } };
+            foreach(var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" Min deviation in above array can have after performing some number of operation: \'{DailyProblem.MinimumDeviation(nums)}\'\n");
+            }
+        }
+
+
 
 
 

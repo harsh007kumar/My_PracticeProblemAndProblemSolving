@@ -7863,6 +7863,100 @@ namespace InterviewProblemNSolutions
         }
 
 
+        /// <summary>
+        /// You are given an array nums of n positive integers.
+        /// 
+        /// You can perform two types of operations on any element of the array any number of times:
+        /// If the element is even, divide it by 2.
+        ///     For example, if the array is [1,2,3,4], then you can do this operation on the last element, and the array will be[1, 2, 3, 2].
+        /// If the element is odd, multiply it by 2.
+        ///     For example, if the array is [1,2,3,4], then you can do this operation on the first element, and the array will be[2, 2, 3, 4].
+        /// 
+        /// The deviation of the array is the maximum difference between any two elements in the array.
+        /// 
+        /// Return the minimum deviation the array can have after performing some number of operations.
+        /// 
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static int MinimumDeviation(int[] nums)
+        {
+            #region FIRST ATTEMPT
+            /* FIRST ATTEMPT, FAILED for arr {10,4,3} deviation should be => 2
+            if (nums.Length < 2) return 0;
+            int max = nums[0], min = nums[0];
+
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (nums[i] < min)
+                    // if curr num is odd try multiple by 2 to reduce deviation
+                    if (nums[i] % 2 == 1 && (nums[i] <= max / 2 || Math.Abs(nums[i] * 2 - max) < Math.Abs(nums[i] - min))) nums[i] *= 2;
+                else if (nums[i] > max)
+                    // if curr num is even try reducing by half to reduce deviation
+                    while (nums[i] % 2 == 0 && (nums[i] / 2 >= min || Math.Abs(nums[i] / 2 - min) < Math.Abs(nums[i] - max))) nums[i] /= 2;
+                min = Math.Min(min, nums[i]);
+                max = Math.Max(max, nums[i]);
+            }
+            while (max % 2 == 0 && Math.Abs(max / 2 - min) < Math.Abs(max - min)) max /= 2;
+            while (min % 2 == 1 && Math.Abs(max - min * 2) < Math.Abs(max - min)) min *= 2;
+            return Math.Abs(max - min);
+            */
+            #endregion
+
+            /* Since we have two options to transform array by either to dividing even nums by 2
+             * or we can multiple odd nums by 2 (max 1 opteration as num becomes even than)
+             * 
+             * Approach is to stick to any one of the 2 avaliable options,
+             * Below approach uses first option (even no can be divided by 2, untill they become odd)
+             * 
+             * Traverse thru array and add each element to MaxHeap based upon:
+             *      if odd => multiple num*2 & add to MaxHeap (as it can we reduced later)
+             *      if even simply add to heap
+             * also maintain MinValue which is added to Heap
+             * 
+             * Set deviation to int.MaxValue
+             * Now Extract top from MaxHeap untill Heap is Not empty
+             *      ans = Math.Min(ans,HeapTop-min)
+             *  
+             *  if HeapTop is even reinsert it back to heap as HeapTop/2
+             *      also update min = Math.Min(min,HeapTop/2);
+             *  else if HeapTop is odd, break out of loop as odd number can't be further reduced
+             */
+
+            int min = int.MaxValue;
+            MaxHeap h = new MaxHeap(nums.Length);
+            for (int i = 0; i < nums.Length; i++)                   // O(n)
+                if (nums[i] % 2 == 0)
+                {
+                    h.Insert(nums[i]);                              // O(logn)
+                    min = Math.Min(min, nums[i]);
+                }
+                else
+                {
+                    h.Insert(nums[i] * 2);                          // O(logn)
+                    min = Math.Min(min, nums[i] * 2);
+                }
+
+            int deviation = int.MaxValue;
+            // Worst case time complexity would be when all nums are maximum possible numbers of powers of 2
+            // Lets we consider that large possible number high power of 2 is 'm'
+            // we would extract and reinsert 'm' logm times untill its finally reduced '1'
+            // and since there are total 'n' nums Heapify operation would take logn time
+            // Time Complexity => (n*logm*logn)
+            // Space Complexity => O(n)
+            while (h.Count > 0)
+            {
+                int max = h.ExtractMax();
+                deviation = Math.Min(deviation, max - min);
+
+                // found odd number break out
+                if (max % 2 == 1) break;
+
+                h.Insert(max / 2);
+                min = Math.Min(min, max / 2);
+            }
+            return deviation;
+        }
 
 
     }
