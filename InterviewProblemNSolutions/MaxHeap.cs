@@ -9,7 +9,7 @@ namespace InterviewProblemNSolutions
     public class MaxHeap
     {
         public int[] arr;
-        int Count = 0;
+        public int Count = 0;
         public MaxHeap(int size)
         {
             arr = new int[size];
@@ -59,6 +59,14 @@ namespace InterviewProblemNSolutions
                 }
                 else break;
             }
+        }
+        public int ExtractMax()
+        {
+            if (Count <= 0) throw new InvalidOperationException("Extract-Max cannot be performed on Empty Heap");
+            var ans = arr[0];
+            arr[0] = arr[--Count];
+            MaxHeapify();
+            return ans;
         }
     }
 }
