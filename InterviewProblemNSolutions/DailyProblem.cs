@@ -7959,5 +7959,42 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(n), n = length of 'num'
+        public static string RemoveKDigits(string num, int k)
+        {
+            /* Traversing from the starting index
+             * if stack is empty add current digit to stack if num is not '0'
+             * else if check while Last Inserted digit is > current digit than remove stack top and decreament 'k'
+             * 
+             * Now if k > 0 remove st.Top() & decreament 'k' untill k == 0
+             * 
+             * at end pull out all digits from stack and reverse & return
+             */
+            int l = num.Length;
+            if (k >= l) return "0";
+            Stack<char> st = new Stack<char>();
+
+            for (int i = 0; i < l; i++)
+                if (k > 0)
+                {
+                    // while we have digit greater than current digit as stack top, Pop stack
+                    while (st.Count > 0 && st.Peek() - '0' > num[i] - '0')
+                    {
+                        st.Pop();
+                        if (--k == 0) break;
+                    }
+
+                    // if stack is empty and next digit to be pushed it 0 than skip adding leading zeros
+                    while (st.Count == 0 && num[i] == '0' && i < l - 1) i++;
+                    st.Push(num[i]);
+                }
+                else st.Push(num[i]);
+            
+            while (k-- > 0 && st.Count > 1) st.Pop();
+
+            return new string(st.Reverse().ToArray());
+        }
+
+
     }
 }

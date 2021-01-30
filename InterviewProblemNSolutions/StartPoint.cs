@@ -224,6 +224,7 @@ namespace InterviewProblemNSolutions
             CarPooling();
             VerticalOrderTraversalABinaryTree();
             MinimumDeviationInArray();
+            RemoveKDigits();
 
 
 
@@ -3690,6 +3691,15 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void RemoveKDigits()
+        {
+            // https://leetcode.com/problems/remove-k-digits/
+            Utility.Print("402. Remove K Digits");
+            string[] nums = { "1432219", "10200", "10", "987654321", "123456789", "1229", "1229", "10", "10000" };
+            int[] k = { 3, 1, 2, 5, 5, 2, 1, 1, 3 };
+            for (int i = 0; i < k.Length; i++)
+                Console.WriteLine($" After removeing \'{k[i]}\' digits from the \'{nums[i]}\' new smallest possible is:\t{DailyProblem.RemoveKDigits(nums[i], k[i])}");
+        }
 
 
 
