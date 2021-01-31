@@ -225,7 +225,7 @@ namespace InterviewProblemNSolutions
             VerticalOrderTraversalABinaryTree();
             MinimumDeviationInArray();
             RemoveKDigits();
-
+            StampingTheSequence();
 
 
             // String Matching Algorithm
@@ -3700,6 +3700,22 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < k.Length; i++)
                 Console.WriteLine($" After removeing \'{k[i]}\' digits from the \'{nums[i]}\' new smallest possible is:\t{DailyProblem.RemoveKDigits(nums[i], k[i])}");
         }
+
+
+        public static void StampingTheSequence()
+        {
+            // https://leetcode.com/problems/stamping-the-sequence/
+            Utility.Print("936. Stamping The Sequence");
+            string[] stamp = { "abc", "abca" ,"abcd" }, target = { "ababc", "aabcaca" ,"abcdc"};
+            for (int i = 0; i < stamp.Length; i++)
+            {
+                Console.Write($" For Stamp \'{stamp[i]}\'\t & Target \'{target[i]}\'\t[");
+                foreach (var stampStartingIndex in DailyProblem.MovesToStamp(stamp[i], target[i]))
+                    Console.Write($" {stampStartingIndex},");
+                Console.WriteLine("]");
+            }
+        }
+
 
 
 

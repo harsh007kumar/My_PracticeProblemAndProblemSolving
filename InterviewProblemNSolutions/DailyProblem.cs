@@ -7996,5 +7996,106 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O((n-m)*m), n & m = lengths of target & stamp respectively
+        public static int[] MovesToStamp(string stamp, string target)
+        {
+            /* Keep track of all windows which match stamp by having 2 list for each valid window of stamp.Length
+             *      => made list(matching letters from target found in stamp)
+             *      => todo list(matching letters from target not found in stamp)
+             * we calculate this list for each valid window index in target,
+             * if todo list of letters is empty meaning all letters already found that add starting index of this list to an Stack of ans
+             * and also add & mark done all(in boolean array) index of the matched window indicies to Queue.
+             * 
+             * after populating all the 'made' & 'todo' list of letters for each index,
+             * starting Enqueuing Queue untill its empty
+             * and for each index that comes out from Front, do below
+             *      => for each index that is pulled out find all valid windows to which this index is part of
+             *      => than remove the index from each of these list if current index is present in todo list
+             *      => if todo list of given index gets empty at any point, than add starting index of current window to 'ans'
+             *          and all indicies in window which are not already marked done to Queue as well.
+             * 
+             * now check if all the index are not already marked done than result empty array stating stamping not possible to creating target
+             * 
+             * else add all the starting index from Stack 'ans' to int array and return the desired result
+             */
+            int n = target.Length, m = stamp.Length;
+            Stack<int> ans = new Stack<int>();
+            Queue<int> q = new Queue<int>();
+            List<StampWindow> ls = new List<StampWindow>(1 + n - m);
+            bool[] stamped = new bool[n];
+            int indiciesStamped = 0, i = 0;
+
+            HashSet<int> made, todo;
+            for (i = 0; i <= n - m; i++)            // O(n-m)
+            {
+                made = new HashSet<int>();
+                todo = new HashSet<int>();
+                // Now check each letter for window starting at index 'i' and ending at 'i+m-1'
+                for (int j = 0; j < m; j++)         // O(m)
+                    if (target[i + j] == stamp[j])
+                        made.Add(i + j);
+                    else
+                        todo.Add(i + j);
+                
+                ls.Add(new StampWindow(made, todo));// update made and todo list for window starting at 'i' index in list
+
+                if (todo.Count == 0)                // all letters matched
+                {
+                    ans.Push(i);                    // push starting index of window in 'ans' Stack
+                    foreach (int index in made)     // also mark all the indicies in Target which have been stamped now
+                        if(!stamped[index])
+                        {
+                            indiciesStamped++;
+                            q.Enqueue(index);
+                            stamped[index] = true;
+                        }
+                }
+            }
+            
+            while(q.Count>0)
+            {
+                i = q.Dequeue();
+                // For all valid windows this index is part of
+                for (int k = Math.Max(0, 1 + i - m); k <= Math.Min(n - m, i); k++)
+                {
+                    if (ls[k].todo.Contains(i))
+                    {
+                        ls[k].todo.Remove(i);
+                        ls[k].made.Add(i);
+                        if (ls[k].todo.Count == 0)              // all letters matched
+                        {
+                            ans.Push(k);                        // push starting index of window in 'ans' Stack
+                            foreach (int index in ls[k].made)   // also mark all the indicies in Target which have been stamped now
+                                if (!stamped[index])
+                                {
+                                    indiciesStamped++;
+                                    q.Enqueue(index);
+                                    stamped[index] = true;
+                                }
+                        }
+                    }
+                }
+                if (indiciesStamped == n) break;    // This optimization avoid adding un-necessary starting index and also helps save time if all indicies r stamped
+            }
+
+            if (indiciesStamped < n)                // not all indicies could be stamped than return empty array to indicate stamping to create target not possible
+                return new int[0];
+
+            int[] result = new int[ans.Count];
+            i = 0;
+            while (ans.Count > 0) result[i++] = ans.Pop();      // starting indicies are saved into result in reverse order i.e from first stamp to last stamp made
+
+            return result;
+        }
+        public class StampWindow
+        {
+            public HashSet<int> made, todo;
+            public StampWindow(HashSet<int> m, HashSet<int> t)
+            {
+                made = m;
+                todo = t;
+            }
+        }
+
     }
 }
