@@ -226,6 +226,7 @@ namespace InterviewProblemNSolutions
             MinimumDeviationInArray();
             RemoveKDigits();
             StampingTheSequence();
+            NumberOf1Bits();
 
 
             // String Matching Algorithm
@@ -3716,6 +3717,15 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void NumberOf1Bits()
+        {
+            // https://leetcode.com/problems/number-of-1-bits/
+            Utility.Print("191. Number of 1 Bits");
+            uint[] arr = new uint[] { 7, 1 << 6, (1 << 4) + (1 << 3) + (1 << 2) };
+            foreach (uint n in arr)
+                Console.WriteLine($" For unsigned integer \'{n}\' number of '1' bits is has: {DailyProblem.HammingWeight(n)}");
+        }
 
 
 

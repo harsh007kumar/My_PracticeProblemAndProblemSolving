@@ -8097,5 +8097,19 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        // Time = Space = O(1), as max it would take 32 left shifts before n becomes zero
+        public static int HammingWeight(uint n)
+        {
+            int oneBits = 0;
+            while (n != 0)
+            {
+                oneBits += (int)n & 1;
+                n >>= 1;
+            }
+            return oneBits;
+        }
+
+
+
     }
 }
