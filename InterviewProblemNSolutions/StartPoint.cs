@@ -227,6 +227,8 @@ namespace InterviewProblemNSolutions
             RemoveKDigits();
             StampingTheSequence();
             NumberOf1Bits();
+            TrimBinarySearchTree();
+
 
 
             // String Matching Algorithm
@@ -3725,6 +3727,26 @@ namespace InterviewProblemNSolutions
             uint[] arr = new uint[] { 7, 1 << 6, (1 << 4) + (1 << 3) + (1 << 2) };
             foreach (uint n in arr)
                 Console.WriteLine($" For unsigned integer \'{n}\' number of '1' bits is has: {DailyProblem.HammingWeight(n)}");
+        }
+
+
+        public static void TrimBinarySearchTree()
+        {
+            // https://leetcode.com/problems/trim-a-binary-search-tree/
+            Utility.Print("669. Trim a Binary Search Tree");
+            TreeNode root = new TreeNode(3)
+            {
+                left = new TreeNode(0)
+                {
+                    right = new TreeNode(2)
+                    { left = new TreeNode(1) }
+                },
+                right = new TreeNode(4)
+            };
+            root.InOrder("BST");
+            int low = 1, high = 3;
+            Console.WriteLine($" Trimmed binary search tree having Nodes only b/w [{low}...{high}]");
+            DailyProblem.TrimBST(root, low, high).InOrder("BST");
         }
 
 
