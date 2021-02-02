@@ -8151,6 +8151,19 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(nlogn) || Space O(n)
+        public static void WiggleSort(int[] nums)
+        {
+            int l = nums.Length, last = nums.Length-1;
+            int[] copy = new int[l];
+            Array.Copy(nums, copy, l);
+            Array.Sort(copy);
+            // copy odd no's
+            for (int i = 1; i < l; i += 2) nums[i] = copy[last--];
+            // copy even no's
+            for (int i = 0; i < l; i += 2) nums[i] = copy[last--];
+        }
+
 
     }
 }

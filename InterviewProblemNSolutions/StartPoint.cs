@@ -229,6 +229,7 @@ namespace InterviewProblemNSolutions
             NumberOf1Bits();
             TrimBinarySearchTree();
             CheckArithmeticSubarrays();
+            WiggleSortII();
 
 
 
@@ -3763,6 +3764,22 @@ namespace InterviewProblemNSolutions
                 Console.Write($" {isSubarrayArthematic} ||");
             Console.WriteLine();
         }
+
+
+        public static void WiggleSortII()
+        {
+            // https://leetcode.com/problems/wiggle-sort-ii/
+            Utility.Print("324. Wiggle Sort II");
+            int[][] numsArr = { new int[] { 1, 5, 1, 1, 6, 4 }, new int[] { 1, 3, 2, 2, 3, 1 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Original NUMS");
+                DailyProblem.WiggleSort(nums);
+                nums.Print("Wiggles Sorted NUMS");
+            }
+        }
+
+
 
 
 
