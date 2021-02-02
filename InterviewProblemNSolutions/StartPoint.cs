@@ -228,6 +228,7 @@ namespace InterviewProblemNSolutions
             StampingTheSequence();
             NumberOf1Bits();
             TrimBinarySearchTree();
+            CheckArithmeticSubarrays();
 
 
 
@@ -3747,6 +3748,20 @@ namespace InterviewProblemNSolutions
             int low = 1, high = 3;
             Console.WriteLine($" Trimmed binary search tree having Nodes only b/w [{low}...{high}]");
             DailyProblem.TrimBST(root, low, high).InOrder("BST");
+        }
+
+
+        public static void CheckArithmeticSubarrays()
+        {
+            // https://leetcode.com/problems/arithmetic-subarrays/
+            Utility.Print("1630. Arithmetic Subarrays");
+            int[] nums = { 4, 6, 5, 9, 3, 7 }, l = { 0, 0, 2 }, r = { 2, 3, 5 };
+            nums.Print("Nums");
+            l.Print("Starting Indicies");
+            r.Print("Ending Indicies");
+            foreach (var isSubarrayArthematic in DailyProblem.CheckArithmeticSubarrays(nums, l, r))
+                Console.Write($" {isSubarrayArthematic} ||");
+            Console.WriteLine();
         }
 
 

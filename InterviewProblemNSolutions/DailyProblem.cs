@@ -8123,6 +8123,34 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(m*klogk) Space O(n), n = length of nums, m = length of l, k = avg diff r[i]-l[i]
+        public static IList<bool> CheckArithmeticSubarrays(int[] nums, int[] l, int[] r)
+        {
+            bool[] ans = new bool[l.Length];
+            int[] original = new int[nums.Length];
+            for (int i = 0; i < nums.Length; i++) original[i] = nums[i];    // keep copy of original array
+
+            for (int i = 0; i < l.Length; i++)
+                if (IsArthematic(l[i], r[i]))
+                    ans[i] = true;
+            return ans;
+
+            // Local Func
+            bool IsArthematic(int start, int last)
+            {
+                if (last == start) return false;                            // base case
+                for (int i = start; i <= last; i++) nums[i] = original[i];  // copy back from the original array
+
+                Array.Sort(nums, start, 1 + last - start);                  // sort in asc order from [start...last]
+                int diff = nums[start + 1] - nums[start];
+                for (int i = start + 1; i < last; i++)
+                    if (nums[i + 1] - nums[i] != diff)
+                        return false;
+                return true;
+            }
+        }
+
+
 
     }
 }
