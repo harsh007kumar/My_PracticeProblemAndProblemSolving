@@ -230,6 +230,8 @@ namespace InterviewProblemNSolutions
             TrimBinarySearchTree();
             CheckArithmeticSubarrays();
             WiggleSortII();
+            RandomPickWithBlacklist();
+
 
 
 
@@ -3780,7 +3782,23 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void RandomPickWithBlacklist()
+        {
+            // https://leetcode.com/problems/random-pick-with-blacklist/
+            Utility.Print("710. Random Pick with Blacklist");
+            int[] n = { 1, 2, 3, 4 ,10};
+            int[][] blacklisted = { new int[0], new int[0], new int[] { 1 }, new int[] { 2 }, new int[] { 2, 3, 4, 5, 6, 7, 8, 9, 10 } };
+            for (int i = 0; i < n.Length; i++)
+            {
+                Console.WriteLine($" Finding Random with upperbound '{n[i]}");
+                blacklisted[i].Print("BlackListed Nums");
+                RandomPickWithBlacklisted obj = new RandomPickWithBlacklisted(n[i], blacklisted[i]);
+                Console.Write($" RandomPick: [");
+                for (int pickCount = 100; pickCount> 0; pickCount--)
+                    Console.Write($" {obj.Pick()} || ");
+                Console.WriteLine(" ]\n");
+            }
+        }
 
 
 
