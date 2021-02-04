@@ -231,6 +231,7 @@ namespace InterviewProblemNSolutions
             CheckArithmeticSubarrays();
             WiggleSortII();
             RandomPickWithBlacklist();
+            LongestHarmoniousSubsequence();
 
 
 
@@ -3799,6 +3800,23 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(" ]\n");
             }
         }
+
+
+        public static void LongestHarmoniousSubsequence()
+        {
+            // https://leetcode.com/problems/longest-harmonious-subsequence/
+            Utility.Print("594. Longest Harmonious Subsequence");
+            int[][] nums = { new int[] { 1, 3, 2, 2, 5, 2, 3, 7 }, new int[] { 1, 2, 3, 4 }, new int[] { 1, 1, 1, 1 } };
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Nums");
+                Console.WriteLine($" Max Length Harmonious subseqence in of length: {DailyProblem.FindLHS(nums[i])}");
+                Console.WriteLine($" Max Length Harmonious subseqence in of length: {DailyProblem.FindLHSFaster(nums[i])}\n");
+            }
+        }
+
+
+
 
 
 

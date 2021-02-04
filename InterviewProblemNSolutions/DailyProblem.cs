@@ -8165,5 +8165,41 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n), 1 Pass Algo
+        public static int FindLHS(int[] nums)
+        {
+            Dictionary<int, int> numCount = new Dictionary<int, int>();
+            int maxHarmonious = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!numCount.ContainsKey(nums[i])) numCount.Add(nums[i], 1);
+                else numCount[nums[i]]++;
+
+                if (numCount.ContainsKey(nums[i] - 1))      // if number with 1 lessor value present
+                    maxHarmonious = Math.Max(maxHarmonious, numCount[nums[i]] + numCount[nums[i] - 1]);
+                if (numCount.ContainsKey(nums[i] + 1))      // if number with 1 bigger value present
+                    maxHarmonious = Math.Max(maxHarmonious, numCount[nums[i]] + numCount[nums[i] + 1]);
+            }
+
+            return maxHarmonious;
+        }
+        // Time = Space = O(n), 2 Pass
+        public static int FindLHSFaster(int[] nums)
+        {
+            Dictionary<int, int> numCount = new Dictionary<int, int>();
+            int maxHarmonious = 0;
+            for (int i = 0; i < nums.Length; i++)
+                if (!numCount.ContainsKey(nums[i])) numCount.Add(nums[i], 1);
+                else numCount[nums[i]]++;
+
+            foreach (int n in numCount.Keys)
+                if (numCount.ContainsKey(n + 1))      // if number with 1 bigger value present
+                    maxHarmonious = Math.Max(maxHarmonious, numCount[n] + numCount[n + 1]);
+
+            return maxHarmonious;
+        }
+
+
+
     }
 }
