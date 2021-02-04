@@ -232,6 +232,7 @@ namespace InterviewProblemNSolutions
             WiggleSortII();
             RandomPickWithBlacklist();
             LongestHarmoniousSubsequence();
+            KeyBoardRow();
 
 
 
@@ -3816,7 +3817,20 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void KeyBoardRow()
+        {
+            //  https://leetcode.com/problems/keyboard-row/
+            Utility.Print("500. Keyboard Row");
+            string[][] wordsArr = { new string[] { "Hello", "Alaska", "Dad", "Peace" }, new string[] { "omk" }, new string[] { "adsdf", "sfd" }, new string[] { "asdfghjkl", "qwertyuiop", "zxcvbnm" } };
+            foreach(var words in wordsArr)
+            {
+                words.Print("Words");
+                Console.Write("[");
+                foreach (var word in DailyProblem.KeyBoardRow(words))
+                    Console.Write($" {word},");
+                Console.WriteLine("]\n");
+            }
+        }
 
 
 

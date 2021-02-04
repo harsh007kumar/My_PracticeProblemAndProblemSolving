@@ -8200,6 +8200,29 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1), n = sum of total no of characters for each word in words
+        public static string[] KeyBoardRow(string[] words)
+        {
+            int[] chSet = new int[26];
+            foreach (var ch in "qwertyuiop") chSet[ch - 'a'] = 1;
+            foreach (var ch in "asdfghjkl") chSet[ch - 'a'] = 2;
+            foreach (var ch in "zxcvbnm") chSet[ch - 'a'] = 3;
+            
+            List<string> ans = new List<string>();
+            for (int i = 0; i < words.Length; i++)
+                if (HasSameRowLetters(words[i].ToLower()))
+                    ans.Add(words[i]);
+            return ans.ToArray();
 
+            // Local Func
+            bool HasSameRowLetters(string word)
+            {
+                int rowID = chSet[word[0] - 'a'];
+                for (int i = 1; i < word.Length; i++)
+                    if (chSet[word[i] - 'a'] != rowID)
+                        return false;
+                return true;
+            }
+        }
     }
 }
