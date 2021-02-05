@@ -3562,7 +3562,11 @@ namespace InterviewProblemNSolutions
             Utility.Print("1371. Find the Longest Substring Containing Vowels in Even Counts");
             string[] sArr = { "eleetminicoworoep", "leetcodeisgreat", "bcbcbc" };
             foreach (var s in sArr)
-                Console.WriteLine($" Longest Substring of\t\'{s}\' containing Vowels in Even Counts has length: {DailyProblem.LongestSubstringContainingVowelsInEvenCounts(s)}");
+            {
+                //Console.WriteLine($" Longest Substring of\t\'{s}\' containing Vowels in Even Counts has length: {DailyProblem.LongestSubstringContainingVowelsInEvenCounts(s)}");
+                //Console.WriteLine($" Longest Substring of\t\'{s}\' containing Vowels in Even Counts has length: {DailyProblem.LongestSubstringContainingVowelsInEvenCountsEfficient(s)}");
+                Console.WriteLine($" Longest Substring of\t\'{s}\' containing Vowels in Even Counts has length: {DailyProblem.LongestSubstringContainingVowelsInEvenCountsFastest(s)}");
+            }
         }
 
 

@@ -7440,6 +7440,94 @@ namespace InterviewProblemNSolutions
             // LOCAL FUNC
             bool isVowel(char c) => c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
         }
+        // Time O(n^2) || Space O(1)
+        public static int LongestSubstringContainingVowelsInEvenCountsEfficient(string s)
+        {
+            /* We start with evenStatus as 0 indicating even no of vowels 'a' 'e' 'i' 'o' 'u'
+             * Now we traverse thru all possible substrings of 's'
+             * while traversing each substring we do below
+             *  if vowel
+             *      a => xor 1 to 1st bit
+             *      e => xor 1 to 2nd bit
+             *      i => xor 1 to 3rd bit
+             *      o => xor 1 to 4th bit
+             *      u => xor 1 to 5th bit
+             *  else do nothing
+             * Reason for XOR is it flips 1 to 0 and 0 to 1
+             * so only thing we have to check, if evenStatus equals 'zero' means al vowels encountered so far are in even count
+             */
+            int ans = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                int evenStatus = 0;
+                for (int j = i; j < s.Length; j++)
+                {
+                    switch (s[j] - 'a')
+                    {
+                        case 0:
+                            evenStatus ^= 1;
+                            break;
+                        case 4:
+                            evenStatus ^= 1 << 2;
+                            break;
+                        case 8:
+                            evenStatus ^= 1 << 3;
+                            break;
+                        case 14:
+                            evenStatus ^= 1 << 4;
+                            break;
+                        case 20:
+                            evenStatus ^= 1 << 5;
+                            break;
+                        default:
+                            break;
+                    }
+                    if (evenStatus == 0) ans = Math.Max(ans, 1 + j - i);
+                }
+            }
+            return ans;
+        }
+        // Time O(n) || Space O(1)
+        public static int LongestSubstringContainingVowelsInEvenCountsFastest(string s)
+        {
+            /* Clearing last algo was taking 'quadratic time' since we were going thru all substrings of input
+             * 
+             * One way to get same result in linear time is by traversing from 0th to last index,
+             * 
+             * and if we see an non zero value we save it in HashTable along with 1st index it was seen at
+             * next time we encounter same value we know all letters we added b/w that index and current index summed up to zero thats only way same value is possible again
+             * hence now by update 'ans' if its greater than current index - last index seen with same value,
+             */
+            int ans = 0, evenStatus = 0;
+            Dictionary<int, int> valSeenAtIdx = new Dictionary<int, int>();
+            for (int i = 0; i < s.Length; i++)
+            {
+                switch (s[i])
+                {
+                    case 'a':
+                        evenStatus ^= 1;
+                        break;
+                    case 'e':
+                        evenStatus ^= 1 << 2;
+                        break;
+                    case 'i':
+                        evenStatus ^= 1 << 3;
+                        break;
+                    case 'o':
+                        evenStatus ^= 1 << 4;
+                        break;
+                    case 'u':
+                        evenStatus ^= 1 << 5;
+                        break;
+                    default:
+                        break;
+                }
+                if (evenStatus == 0) ans = Math.Max(ans, 1 + i);        // Vowel are even starting from 0th
+                else if (valSeenAtIdx.ContainsKey(evenStatus)) ans = Math.Max(ans, i - valSeenAtIdx[evenStatus]);   // current evenStatus was seen before
+                else valSeenAtIdx.Add(evenStatus, i);                   // else add this new evenStatus along with current index
+            }
+            return ans;
+        }
 
 
         // Brute Force, Find all path approach with Exponential Time Complexicity
