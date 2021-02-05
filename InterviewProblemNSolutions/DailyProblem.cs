@@ -8224,5 +8224,58 @@ namespace InterviewProblemNSolutions
                 return true;
             }
         }
+
+
+        /// <summary>
+        /// Given a string path, which is an absolute path, return the simplified canonical path.
+        /// Constraints:
+        ///     1 <= path.length <= 3000
+        ///     path consists of English letters, digits, period '.', slash '/' or '_'.
+        ///     path is a valid absolute Unix path.
+        /// Time = Space = O(n)
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string SimplifyPath(string path)
+        {
+            int l = path.Length;
+            StringBuilder sb = new StringBuilder();
+            Stack<string> st = new Stack<string>();
+            for (int i = 0; i < l; i++)
+            {
+                if (path[i] == '/')
+                    continue;
+                else if (path[i] == '.')
+                {
+                    while (i < l && path[i] != '/')
+                        sb.Append(path[i++]);
+
+                    if (sb.Length >= 3)
+                        st.Push(sb.ToString());             // Push new folder to Stack
+                    else if (sb.Length == 2)
+                        if (path[i - 1] != '.') st.Push(sb.ToString());// Push new folder to Stack
+                        else if (st.Count > 0) st.Pop();    // move 1 directory up
+
+                    sb.Clear();
+                }
+                else    // folder/file name
+                {
+                    while (i < l && path[i] != '/')         // get the full name of current folder
+                        sb.Append(path[i++]);
+                    st.Push(sb.ToString());                 // Push new folder to Stack
+                    sb.Clear();
+                }
+
+            }
+            if (st.Count == 0) return "/";                  // if stack Empty
+
+            sb.Clear();
+            foreach(var p in st.Reverse().ToArray()) sb.Append('/').Append(p);
+            return sb.ToString();
+        }
+
+
+
+
     }
 }

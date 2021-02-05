@@ -233,6 +233,7 @@ namespace InterviewProblemNSolutions
             RandomPickWithBlacklist();
             LongestHarmoniousSubsequence();
             KeyBoardRow();
+            SimplifyPath();
 
 
 
@@ -3825,12 +3826,23 @@ namespace InterviewProblemNSolutions
             foreach(var words in wordsArr)
             {
                 words.Print("Words");
-                Console.Write("[");
+                Console.Write(" [");
                 foreach (var word in DailyProblem.KeyBoardRow(words))
                     Console.Write($" {word},");
                 Console.WriteLine("]\n");
             }
         }
+
+
+        public static void SimplifyPath()
+        {
+            // https://leetcode.com/problems/simplify-path/
+            Utility.Print("71. Simplify Path");
+            string[] paths = { "/home/", "/../", "/home//foo/", "/a/./b/../../c/", "/.//", "/.//harsh_kumar_with_a_dot./second", "/..hidden" };
+            foreach (var path in paths)
+                Console.WriteLine($" For absolute path\t\'{path}\'\n the simplified canonical path is:\t\'{DailyProblem.SimplifyPath(path)}\'\n");
+        }
+
 
 
 
