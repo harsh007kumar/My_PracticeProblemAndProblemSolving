@@ -235,7 +235,7 @@ namespace InterviewProblemNSolutions
             KeyBoardRow();
             SimplifyPath();
             StudentAttendanceRecordII();
-
+            ClimbingStairs();
 
 
 
@@ -3857,6 +3857,17 @@ namespace InterviewProblemNSolutions
             foreach (var n in nums)
                 Console.WriteLine($" For n: \'{n}\' possible valid attendance records are: {DailyProblem.StudentAttendanceRecordII_DP(n)}");
         }
+
+
+        public static void ClimbingStairs()
+        {
+            // https://leetcode.com/problems/climbing-stairs/
+            Utility.Print("70. Climbing Stairs");
+            int[] nums = { 1, 2, 3, 4, 5, 30, 45 };
+            foreach (var n in nums)
+                Console.WriteLine($" Distinct ways can you climb to the top of staircase of len \'{n}\' are: {DailyProblem.ClimbStairs(n)}");
+        }
+
 
 
 

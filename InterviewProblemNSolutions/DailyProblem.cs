@@ -8447,5 +8447,30 @@ namespace InterviewProblemNSolutions
             return (int)ans;
         }
 
+
+        // Time O(n) || Space O(1) || 71.61% Faster || 66.44% Efficient
+        public static int ClimbStairs(int n)
+        {
+            int num1 = 1, num2 = 1, temp;
+            for (int i = 2; i <= n; i++)
+            {
+                temp = num1 + num2;
+                num1 = num2;
+                num2 = temp;
+            }
+            return num2;
+        }
+        // Time O(n) || Space O(n) || 71.61% Faster || 11.82% Efficient
+        public static int ClimbStairs_ExtraMemory(int n)
+        {
+            int[] dp = new int[n + 1];
+            dp[0] = dp[1] = 1;
+            for (int i = 2; i <= n; i++)
+                dp[i] = dp[i - 1] + dp[i - 2];
+            return dp[n];
+        }
+
+
+
     }
 }
