@@ -8363,7 +8363,89 @@ namespace InterviewProblemNSolutions
         }
 
 
+        
+        // DP Bottom-Up Approach
+        // Time = Space = O(n)
+        public static int StudentAttendanceRecordII_DP(int n)
+        {
+            #region FIRST RECURSIVE APPROACH, FAILED
+            //public static int StudentAttendanceRecordII(int n, int continuousLate = 0, int oneAbsentUsed = 0)
+            //{
+            //    if (n == 0) return 1;
+            //    int mod = 1000000007;
+            //    long ans = 0;
 
+            //    foreach (var ch in new char[] { 'A', 'L', 'P' })
+            //        if (oneAbsentUsed == 0 && ch == 'A')                    // 1 absent not used and current day attendance is 'A'
+            //            ans += StudentAttendanceRecordII(n - 1, 0, 1) % mod;
+            //        else if (ch == 'L' && continuousLate + 1 < 3)           // continous late should not be > 2
+            //            ans += StudentAttendanceRecordII(n - 1, continuousLate + 1, oneAbsentUsed) % mod;
+            //        else if (ch == 'P')
+            //            ans += StudentAttendanceRecordII(n - 1, 0, oneAbsentUsed) % mod;
+            //    return (int)ans;
+            //}
+            #endregion
+            
+            /* This question is a very difficult question. 
+             * If you think about the number, you will definitely time out by searching for something.
+             * You can only try to push to the recursion relationship, and then use the dynamic programming method to solve.
+             * Since A has only 0 and 1 possibilities, the results are added by considering A == 0 and A==1, respectively.
+             * 
+             * When A == 0, there is only a combination of L and P at this time.
+             * In order to satisfy no more than two consecutive Ls, L and P have only three cases at the end: LL, PL, XP. X stands for both L and P.
+             * Use a, b, and c respectively to represent the above three cases.
+             * 
+             * Then you can get the following relationship:
+             * a[i] = b[i-1]，b[i] = c[i-1], c[i] = a[i-1] + b[i-1] + c[i-1]
+             * 
+             * Then the total num[i] = a[i] + b[i] + c[i]
+             * 
+             * When A==1, A can be at any position of [1, n].
+             * When A is placed at i position, the possible numbers of the corresponding left and right sides are num[i-1], num[ni], respectively.
+             * Then the total number of A in the i position is num[i-1] * num[ni].
+             * 
+             * The most important thing about this question is to find the final recursive relationship,
+             * but when looking for a recursive relationship, you need to take A out of consideration,
+             * otherwise the recursive relationship is difficult to write.
+             */
+
+            if (n < 3)
+            {
+                if (n == 0) return 1;
+                if (n == 1) return 3;       // P, L, A
+                if (n == 2) return 8;       // PP, PL, PA, LP, LL, LA, AP, AL
+            }
+            int mod = 1000000007;           // mod is 10^9 + 7
+
+            long[] a = new long[n + 1];
+            long[] b = new long[n + 1];
+            long[] c = new long[n + 1];
+            long[] LateAndPresentCombo = new long[n + 1];
+
+            // Possible combination of attendance to be marked
+            LateAndPresentCombo[0] = 1;     // for 0 days there is only 1 valid attendance record that is empty
+            LateAndPresentCombo[1] = 2;     // for 1 days => student can either be Late or Present hence 2
+            LateAndPresentCombo[2] = 4;     // for 2 days => student can either be LL, PL, XP (x can be either L or P) hence total 4
+            a[2] = 1;       // LL
+            b[2] = 1;       // PL
+            c[2] = 2;       // XP i.e. LP & PP
+
+            for (int i = 3; i <= n; i++)
+            {
+                a[i] = b[i - 1];
+                b[i] = c[i - 1];
+                c[i] = (a[i - 1] + b[i - 1] + c[i - 1]) % mod;
+                LateAndPresentCombo[i] = (a[i] + b[i] + c[i]) % mod;
+            }
+
+            // Now since we can have 2 states Absent == 0  or Absent == 1
+            long ans = LateAndPresentCombo[n];      // Abscent == 0
+            for (int i = 1; i <= n; i++)            // for Abscent == 1, try marking abscent at each possible day from Day-1 to Day-N
+                // placing 'A' at i index and finding all valid combo's on left multiplied by valid combo's on right
+                ans = ((LateAndPresentCombo[i - 1] * LateAndPresentCombo[n - i]) % mod + ans) % mod;
+
+            return (int)ans;
+        }
 
     }
 }

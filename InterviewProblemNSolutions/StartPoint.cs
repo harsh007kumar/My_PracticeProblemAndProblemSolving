@@ -234,6 +234,7 @@ namespace InterviewProblemNSolutions
             LongestHarmoniousSubsequence();
             KeyBoardRow();
             SimplifyPath();
+            StudentAttendanceRecordII();
 
 
 
@@ -3847,6 +3848,15 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" For absolute path\t\'{path}\'\n the simplified canonical path is:\t\'{DailyProblem.SimplifyPath(path)}\'\n");
         }
 
+
+        public static void StudentAttendanceRecordII()
+        {
+            // https://leetcode.com/problems/student-attendance-record-ii/
+            Utility.Print("552. Student Attendance Record II");
+            int[] nums = { 0, 1, 2, 3, 4, 5, 42, 100, 100000 };
+            foreach (var n in nums)
+                Console.WriteLine($" For n: \'{n}\' possible valid attendance records are: {DailyProblem.StudentAttendanceRecordII_DP(n)}");
+        }
 
 
 
