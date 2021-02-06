@@ -236,6 +236,7 @@ namespace InterviewProblemNSolutions
             SimplifyPath();
             StudentAttendanceRecordII();
             ClimbingStairs();
+            SplitArrayIntoFibonacciSequence();
 
 
 
@@ -3866,6 +3867,21 @@ namespace InterviewProblemNSolutions
             int[] nums = { 1, 2, 3, 4, 5, 30, 45 };
             foreach (var n in nums)
                 Console.WriteLine($" Distinct ways can you climb to the top of staircase of len \'{n}\' are: {DailyProblem.ClimbStairs(n)}");
+        }
+
+
+        public static void SplitArrayIntoFibonacciSequence()
+        {
+            // https://leetcode.com/problems/split-array-into-fibonacci-sequence/
+            Utility.Print("842. Split Array into Fibonacci Sequence");
+            string[] inputArr = { "123456579", "11235813", "112358130", "0123", "1101111", "01123", "1110111", "1230123", "00000" };
+            foreach (var input in inputArr)
+            {
+                Console.Write($" Spliting string \'{input}\' into Fibonnaci:\t[");
+                foreach (var fibonnaciNum in DailyProblem.SplitIntoFibonacci(input))
+                    Console.Write($" {fibonnaciNum} ||");
+                Console.WriteLine("]\n");
+            }
         }
 
 
