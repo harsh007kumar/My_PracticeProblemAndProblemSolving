@@ -8511,5 +8511,28 @@ namespace InterviewProblemNSolutions
                 return false;
             }
         }
+
+
+        // Time = Space = O(n)
+        public static int[] ShortestToChar(string s, char c)
+        {
+            int l = s.Length, closet = int.MaxValue;
+            int[] closetLeft = new int[l], closetRight = new int[l];
+            for (int i = 0; i < l; i++) // Find Closet from left
+            {
+                if (s[i] == c) closet = i;
+                closetLeft[i] = Math.Abs(i - closet);
+            }
+            closet = int.MaxValue;
+            for (int i = l - 1; i >= 0; i--) // Find Closet from right
+            {
+                if (s[i] == c) closet = i;
+                closetRight[i] = Math.Abs(i - closet);
+            }
+            for (int i = 0; i < l; i++) // Ans is Math.Min of left & right
+                closetLeft[i] = Math.Min(closetLeft[i], closetRight[i]);
+            return closetLeft;
+        }
+
     }
 }

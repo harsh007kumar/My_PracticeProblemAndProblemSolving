@@ -237,6 +237,7 @@ namespace InterviewProblemNSolutions
             StudentAttendanceRecordII();
             ClimbingStairs();
             SplitArrayIntoFibonacciSequence();
+            ShortestDistanceToACharacter();
 
 
 
@@ -3883,6 +3884,22 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine("]\n");
             }
         }
+
+
+        public static void ShortestDistanceToACharacter()
+        {
+            // https://leetcode.com/problems/shortest-distance-to-a-character/
+            Utility.Print("821. Shortest Distance to a Character");
+            string[] sArr = { "loveleetcode", "aaab" };
+            char[] cArr = { 'e', 'b' };
+            for (int i = 0; i < sArr.Length; i++)
+            {
+                Console.WriteLine($" The shortest distance from each s[i] to the character \'{cArr[i]}\' in \'{sArr[i]}\'");
+                DailyProblem.ShortestToChar(sArr[i], cArr[i]).Print();
+                Console.WriteLine();
+            }
+        }
+
 
 
 
