@@ -239,6 +239,7 @@ namespace InterviewProblemNSolutions
             SplitArrayIntoFibonacciSequence();
             ShortestDistanceToACharacter();
             AdditiveNumber();
+            DesignAddAndSearchWordsDataStructure();
 
 
 
@@ -3910,6 +3911,23 @@ namespace InterviewProblemNSolutions
             string[] inputArr = { "123456579", "11235813", "112358130", "0123", "1101111", "01123", "1110111", "1230123", "00000", "199100199", "121474836472147483648" };
             foreach (var input in inputArr)
                 Console.WriteLine($" Digits in \'{input}\' can form Fibonnaci sequence:\t {DailyProblem.IsAdditiveNumber(input)}\n");
+        }
+
+
+        public static void DesignAddAndSearchWordsDataStructure()
+        {
+            // https://leetcode.com/problems/design-add-and-search-words-data-structure/
+            Utility.Print("211. Design Add and Search Words Data Structure");
+            WordDictionary ob = new WordDictionary();
+            // add words
+            ob.AddWord("bad");
+            ob.AddWord("dad");
+            ob.AddWord("mad");
+            // search words
+            ob.Search("pad");   // return False
+            ob.Search("bad");   // return True
+            ob.Search(".ad");   // return True
+            ob.Search("b..");   // return True
         }
 
 

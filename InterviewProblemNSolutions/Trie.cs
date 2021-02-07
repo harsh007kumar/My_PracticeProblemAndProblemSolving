@@ -84,4 +84,54 @@ namespace InterviewProblemNSolutions
                 SearchMatch(possibleWord.Value, prefixSoFar + possibleWord.Key, matchesFound);
         }
     }
+
+    public class WordDictionary
+    {
+        private TrieNode root;
+        /** Initialize your data structure here. */
+        public WordDictionary() => root = new TrieNode();
+        
+        // Adds word to the data structure, it can be matched later.
+        public void AddWord(string word)
+        {
+            Console.WriteLine($" adding \'{word}\' to Trie");
+            TrieNode temp = root;
+            foreach (var ch in word)
+            {
+                if (!temp.children.ContainsKey(ch)) temp.children.Add(ch, new TrieNode());
+                temp = temp.children[ch];
+            }
+            temp.isWord = true; // mark end node as true
+        }
+
+        /// <summary>
+        /// Returns true if there is any string in the data structure that matches word or false otherwise.
+        /// word may contain dots '.' where dots can be matched with any letter.
+        /// </summary>
+        /// <param name="word"></param>
+        /// <param name="temp"></param>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public bool Search(string word, TrieNode temp = null, int i = -1)
+        {
+            Console.WriteLine($" Searching for \'{word.Substring(i + 1, word.Length - (i + 1))}\' in Trie");
+            if (temp == null) temp = root;
+            while (++i < word.Length)
+            {
+                var ch = word[i];
+                if (ch != '.')
+                {
+                    if (!temp.children.ContainsKey(ch)) return false;
+                    temp = temp.children[ch];
+                }
+                else
+                {
+                    foreach (var possibleChild in temp.children.Values)
+                        if (Search(word, possibleChild, i)) return true;
+                    return false;
+                }
+            }
+            return temp.isWord;
+        }
+    }
 }
