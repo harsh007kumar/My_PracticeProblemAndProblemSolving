@@ -8534,5 +8534,38 @@ namespace InterviewProblemNSolutions
             return closetLeft;
         }
 
+
+        // Time O(n) || Space O(n)
+        public static bool IsAdditiveNumber(string s)
+        {
+            return FindFibonacci(0);
+
+            // Local Func
+            bool FindFibonacci(int i, int count = 0, long fn0 = -1, long fn1 = -1)
+            {
+                if (i == s.Length)
+                { if (count >= 3) return true; }
+                else if (s[i] != '0')                          // if current digit is Zero than return false as we dont want any leading zeros
+                {
+                    long currNum = 0;
+                    for (int k = i; k < s.Length; k++)
+                    {
+                        currNum = (currNum * 10) + s[k] - '0';
+                        if (fn0 == -1 || currNum == fn0 + fn1)
+                        {
+                            if (FindFibonacci(k + 1, count + 1, fn1, currNum))     // if fibonnaci split found than return true, else continue searching
+                                return true;
+                        }
+                        // current no is greater than sum of last 2 fibonnaci nums than exit out as adding more digits is only going to increase the currNum further
+                        if (fn0 != -1 && currNum > fn0 + fn1)
+                            break;
+                    }
+                }
+                else if (fn0 == -1 || 0 == fn0 + fn1)           // only leading zero is allowed it the currNumber itself is 0
+                { if (FindFibonacci(i + 1, count + 1, fn1, 0)) return true; }
+                return false;
+            }
+        }
+
     }
 }

@@ -238,6 +238,7 @@ namespace InterviewProblemNSolutions
             ClimbingStairs();
             SplitArrayIntoFibonacciSequence();
             ShortestDistanceToACharacter();
+            AdditiveNumber();
 
 
 
@@ -3900,6 +3901,16 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void AdditiveNumber()
+        {
+            // https://leetcode.com/problems/additive-number/
+            // same as LC #842 just instead of returning the entire series here we return true or false (change data type to Long)
+            Utility.Print("306. Additive Number");
+            string[] inputArr = { "123456579", "11235813", "112358130", "0123", "1101111", "01123", "1110111", "1230123", "00000", "199100199", "121474836472147483648" };
+            foreach (var input in inputArr)
+                Console.WriteLine($" Digits in \'{input}\' can form Fibonnaci sequence:\t {DailyProblem.IsAdditiveNumber(input)}\n");
+        }
 
 
 
