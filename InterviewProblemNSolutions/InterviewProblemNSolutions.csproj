@@ -54,6 +54,7 @@
     <Compile Include="LRUCache.cs" />
     <Compile Include="MaxHeap.cs" />
     <Compile Include="MinStack.cs" />
+    <Compile Include="PeekingIterator.cs" />
     <Compile Include="ProductOfNumbers.cs" />
     <Compile Include="RandomPickWithBlacklisted.cs" />
     <Compile Include="SearchAlgorithms.cs" />

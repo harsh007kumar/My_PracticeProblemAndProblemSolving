@@ -240,7 +240,7 @@ namespace InterviewProblemNSolutions
             ShortestDistanceToACharacter();
             AdditiveNumber();
             DesignAddAndSearchWordsDataStructure();
-
+            PeekingIterator();
 
 
             // String Matching Algorithm
@@ -3930,6 +3930,30 @@ namespace InterviewProblemNSolutions
             ob.Search("b..");   // return True
         }
 
+
+        public static void PeekingIterator()
+        {
+            // https://leetcode.com/problems/peeking-iterator/
+            Utility.Print("284. Peeking Iterator");
+            int[] ob = { 1, 2, 3 };
+            ob.Print("Input IEnumerator<int>");
+            PeekingIterator pIterat = new PeekingIterator(ob.GetEnumerator());
+            //Leetcode does a strange thing and passes in an Enumerator already initialized to the 1st element (actually one cannot access any 1st element till MoveNext is called)
+            //Console.WriteLine($" Next() Operation: {pIterat.Next()}");
+            //Console.WriteLine($" Peek() Operation: {pIterat.Peek()}");
+            //Console.WriteLine($" Next() Operation: {pIterat.Next()}");
+            //Console.WriteLine($" Next() Operation: {pIterat.Next()}");
+            //Console.WriteLine($" HasNext() Operation: {pIterat.HasNext()}");
+                        
+            bool peek = true;
+            while (pIterat.HasNext())
+            {
+                if (peek) Console.WriteLine($" Peek() Operation: {pIterat.Peek()}");
+                else Console.WriteLine($" Next() Operation: {pIterat.Next()}");
+                Console.WriteLine($" Peek() Operation: {pIterat.Peek()}");
+                peek = !peek;
+            }
+        }
 
 
 
