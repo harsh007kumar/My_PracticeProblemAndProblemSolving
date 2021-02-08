@@ -8567,5 +8567,76 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static bool CanIWin(int maxChoosableInteger, int desiredTotal)
+        {
+            if (desiredTotal <= 0) return true;
+
+            int tSum = 0;
+            //for (int i = 1; i <= maxChoosableInteger; i++) tSum += i;
+            tSum = (1 + maxChoosableInteger) * maxChoosableInteger / 2;     // (n+1)*n/2
+            if (tSum < desiredTotal) return false;      // if sum of all numbers still is less than desired than return false
+
+            Dictionary<int, bool> cache = new Dictionary<int, bool>();
+            return FirstToMoveWins(0, desiredTotal);
+
+            // Local Func
+            bool FirstToMoveWins(int choices, int remainingTotal)
+            {
+                if (cache.ContainsKey(choices)) return cache[choices];
+                int bitMask = 0;
+                for (int i = maxChoosableInteger; i >= 1; i--)
+                {
+                    // Mark ith bit ON to indicate ith number is being used, Ex: 100 in binary means num 3 is used, 10000 in binary means num 5 is used
+                    bitMask = 1 << (i - 1);
+
+                    if ((choices & bitMask) == 0)   // If Number 'i+1' is not already used
+                    {
+                        choices ^= bitMask;         // mark current number as used
+                        remainingTotal -= i;        // decrease remaining total by currently choosen num
+
+                        if (remainingTotal <= 0) return true;
+                        // if 2nd player doesnt wins, than it means P1 wins using num 'i'
+                        if (!FirstToMoveWins(choices, remainingTotal)) return true;
+
+                        remainingTotal += i;        // reset remaining total
+                        choices ^= bitMask;         // mark back current number as Not used
+                    }
+                }
+                cache.Add(choices, false);
+                return false;
+            }
+
+            #region 1st Attempt
+            //bool[] choices = new bool[maxChoosableInteger + 1];
+            //return FirstToMoveWins(choices, desiredTotal);
+
+            //bool FirstToMoveWins(bool[] chooseFrom, int leftSum)
+            //{
+            //    if (leftSum <= 0)
+            //        return true;
+            //    for (int i = chooseFrom.Length - 1; i >= 0; i--)
+            //        if (!chooseFrom[i])     // not already Used
+            //        {
+            //            chooseFrom[i] = true;          // mark as Used
+            //            // if 2nd player doesnt wins, than it means P1 wins using num 'i'
+            //            if (leftSum - i <= 0)
+            //            {
+            //                chooseFrom[i] = false;     // mark back as Not Used
+            //                return true;
+            //            }
+            //            if (!FirstToMoveWins(chooseFrom, leftSum - i))
+            //            {
+            //                chooseFrom[i] = false;     // mark back as Not Used
+            //                return true;
+            //            }
+            //            chooseFrom[i] = false;         // mark back as Not Used
+            //        }
+            //    return false;
+            //}
+            #endregion
+        }
+
+
     }
 }

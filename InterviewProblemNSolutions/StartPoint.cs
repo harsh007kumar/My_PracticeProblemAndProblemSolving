@@ -241,6 +241,7 @@ namespace InterviewProblemNSolutions
             AdditiveNumber();
             DesignAddAndSearchWordsDataStructure();
             PeekingIterator();
+            CanIWin();
 
 
             // String Matching Algorithm
@@ -3954,6 +3955,16 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Peek() Operation: {pIterat.Peek()}");
                 peek = !peek;
             }
+        }
+
+
+        public static void CanIWin()
+        {
+            // https://leetcode.com/problems/can-i-win/
+            Utility.Print("464. Can I Win");
+            int[] maxChoosableInteger = { 10, 10, 10, 5, 4 }, desiredTotal = { 11, 0, 1, 70, 6 };
+            for (int i = 0; i < maxChoosableInteger.Length; i++)
+                Console.WriteLine($" Player1 can win when maxNum: {maxChoosableInteger[i]} & desiredTotal: {desiredTotal[i]} \t\'{DailyProblem.CanIWin(maxChoosableInteger[i], desiredTotal[i])}\'");
         }
 
 
