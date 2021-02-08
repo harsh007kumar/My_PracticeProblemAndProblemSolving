@@ -3939,12 +3939,13 @@ namespace InterviewProblemNSolutions
             ob.Print("Input IEnumerator<int>");
             PeekingIterator pIterat = new PeekingIterator(ob.GetEnumerator());
             //Leetcode does a strange thing and passes in an Enumerator already initialized to the 1st element (actually one cannot access any 1st element till MoveNext is called)
+            //https://leetcode.com/problems/peeking-iterator/discuss/1056007/88.37-Faster
             //Console.WriteLine($" Next() Operation: {pIterat.Next()}");
             //Console.WriteLine($" Peek() Operation: {pIterat.Peek()}");
             //Console.WriteLine($" Next() Operation: {pIterat.Next()}");
             //Console.WriteLine($" Next() Operation: {pIterat.Next()}");
             //Console.WriteLine($" HasNext() Operation: {pIterat.HasNext()}");
-                        
+
             bool peek = true;
             while (pIterat.HasNext())
             {
@@ -4771,7 +4772,9 @@ namespace InterviewProblemNSolutions
         public static void OptimalStrategyForACoinGame()
         {
             Utility.Print("Problem-33  Optimal Strategy for a Game(p. 810)");
-            int[][] inputs = { new int[] { 8, 15, 3, 7 }, new int[] { 2, 2, 2, 2 }, new int[] { 20, 30, 2, 2, 2, 10 } };
+            // https://leetcode.com/problems/predict-the-winner/submissions/
+            Utility.Print("486. Predict the Winner");
+            int[][] inputs = { new int[] { 8, 15, 3, 7 }, new int[] { 2, 2, 2, 2 }, new int[] { 20, 30, 2, 2, 2, 10 }, new int[] { 1, 5, 2 }, new int[] { 1, 5, 233, 7 } };
 
             foreach (var input in inputs)
             {
