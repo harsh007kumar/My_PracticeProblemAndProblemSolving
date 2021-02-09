@@ -242,6 +242,7 @@ namespace InterviewProblemNSolutions
             DesignAddAndSearchWordsDataStructure();
             PeekingIterator();
             CanIWin();
+            BinarySearchTreeToGreaterSumTree();
 
 
             // String Matching Algorithm
@@ -3966,6 +3967,39 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < maxChoosableInteger.Length; i++)
                 Console.WriteLine($" Player1 can win when maxNum: {maxChoosableInteger[i]} & desiredTotal: {desiredTotal[i]} \t\'{DailyProblem.CanIWin(maxChoosableInteger[i], desiredTotal[i])}\'");
         }
+
+
+        public static void BinarySearchTreeToGreaterSumTree()
+        {
+            // https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/
+            // https://leetcode.com/problems/convert-bst-to-greater-tree/
+            Utility.Print("1038. Binary Search Tree to Greater Sum Tree");
+            Utility.Print("538. Convert BST to Greater Tree");
+            TreeNode root = new TreeNode(4)
+            {
+                left = new TreeNode(1)
+                {
+                    left = new TreeNode(0),
+                    right = new TreeNode(2)
+                    {
+                        right = new TreeNode(3)
+                    }
+                },
+                right = new TreeNode(6)
+                {
+                    left = new TreeNode(5),
+                    right = new TreeNode(7)
+                    {
+                        right = new TreeNode(8)
+                    }
+                }
+            };
+            root.InOrder("Original BST");
+            DailyProblem.BstToGst(root);
+            root.InOrder("GreaterSum BST");
+        }
+
+
 
 
 

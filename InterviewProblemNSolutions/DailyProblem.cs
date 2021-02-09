@@ -8638,5 +8638,26 @@ namespace InterviewProblemNSolutions
         }
 
 
+
+        // Time O(n) || Recursive Space O(h), n = no of nodes, h = depth of tree worstcase equal to 'n'
+        public static TreeNode BstToGst(TreeNode r)
+        {
+            int greaterSum = 0;
+            GetSum(r);
+            return r;
+
+            // Right->Root->Left Traversal
+            void GetSum(TreeNode root)
+            {
+                if (root == null) return;
+                GetSum(root.right);
+
+                greaterSum += root.val;
+                root.val = greaterSum;
+
+                GetSum(root.left);
+            }
+        }
+
     }
 }
