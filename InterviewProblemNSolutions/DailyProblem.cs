@@ -8659,5 +8659,44 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time Complexity: O(k^{N-k}*k!), where N is the length of nums, and k is as given || Recursive Space O(n)
+        public static bool CanPartitionKSubsets(int[] nums, int k)
+        {
+            int sum = 0; foreach (int n in nums) sum += n;
+
+            if (sum % k > 0) return false;          // Can't divide total sum in equal 'k' parts return false
+            int target = sum / k;
+
+            Array.Sort(nums);                       // O(nlogn)
+            int idx = nums.Length - 1;
+            if (nums[idx] > target) return false;   // biggest val is larger than target sum of each grp
+
+            while (nums[idx] == target)
+            {
+                idx--;
+                k--;
+            }
+            return bruteForceSearch(new int[k], idx);
+
+            // Local Func
+            bool bruteForceSearch(int[] grps, int i)
+            {
+                if (i < 0) return true;             // all values are already places succefully in 'k' grps
+                int currNum = nums[i--];
+                for (int j = 0; j < grps.Length; j++)
+                {
+                    if (grps[j] + currNum <= target)
+                    {
+                        grps[j] += currNum;         // add
+                        if (bruteForceSearch(grps, i)) return true;
+                        grps[j] -= currNum;         // remove back
+                    }
+                    if (grps[j] == 0) break;        // skipping Zero's in grp
+                }
+                return false;
+            }
+        }
+
     }
 }

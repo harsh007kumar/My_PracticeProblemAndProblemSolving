@@ -243,6 +243,7 @@ namespace InterviewProblemNSolutions
             PeekingIterator();
             CanIWin();
             BinarySearchTreeToGreaterSumTree();
+            PartitionToKEqualSumSubsets();
 
 
             // String Matching Algorithm
@@ -3997,6 +3998,17 @@ namespace InterviewProblemNSolutions
             root.InOrder("Original BST");
             DailyProblem.BstToGst(root);
             root.InOrder("GreaterSum BST");
+        }
+
+
+        public static void PartitionToKEqualSumSubsets()
+        {
+            // https://leetcode.com/problems/partition-to-k-equal-sum-subsets/
+            Utility.Print("698. Partition to K Equal Sum Subsets");
+            int[] nums = { 4, 3, 2, 3, 5, 2, 1 };
+            int k = 4;
+            nums.Print("Nums");
+            Console.WriteLine($" It's possible to divide above array into \'{k}\' subsets Ex: (5), (1, 4), (2,3), (2,3) with equal sums: \'{DailyProblem.CanPartitionKSubsets(nums, k)}\'");
         }
 
 
