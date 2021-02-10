@@ -8698,5 +8698,39 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time = Space = O(n), n is length of deliciousness array
+        public static int CountPairs(int[] d)
+        {
+            Dictionary<int, long> numCount = new Dictionary<int, long>();
+            for (int i = 0; i < d.Length; i++)
+                if (!numCount.ContainsKey(d[i])) numCount.Add(d[i], 1);
+                else numCount[d[i]]++;
+
+            long goodMeal = 0;
+            foreach (var kvp in numCount)
+            {
+                // maximum sum will be 2^20 + 2^20 = 2^21
+                // iterate through all possible powers of two
+                int power = 1;
+                for (int i = 0; i < 22; i++)
+                {
+                    int target = power - kvp.Key;
+                    if (numCount.ContainsKey(target))
+                    {
+                        if (kvp.Key != target)
+                            goodMeal += kvp.Value * numCount[target];
+                        else// (kvp.Key==secondNum)
+                            goodMeal += kvp.Value * (kvp.Value - 1);
+                    }
+                    power = power << 1;     // sane as power*=2
+                }
+            }
+            // since each pair is counted twice hence half the final value and mod by 10^9+7
+            return (int)(goodMeal / 2 % 1000000007);
+        }
+
+
+
     }
 }

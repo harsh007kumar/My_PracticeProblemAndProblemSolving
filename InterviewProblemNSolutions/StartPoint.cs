@@ -244,6 +244,7 @@ namespace InterviewProblemNSolutions
             CanIWin();
             BinarySearchTreeToGreaterSumTree();
             PartitionToKEqualSumSubsets();
+            CountGoodMeals();
 
 
             // String Matching Algorithm
@@ -4012,6 +4013,18 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void CountGoodMeals()
+        {
+            // https://leetcode.com/problems/count-good-meals/
+            Utility.Print("1711. Count Good Meals");
+            int[][] deliciousnessArr = { new int[] { 1, 3, 5, 7, 9 }, new int[] { 1, 1, 1, 3, 3, 3, 7 } };
+            foreach(var deliciousness in deliciousnessArr)
+            {
+                deliciousness.Print("Deliciousness");
+                Console.WriteLine($" No of different good meals pairs one can make from this list who's total sum is Power Of 2: \'{DailyProblem.CountPairs(deliciousness)}\'");
+            }
+        }
+        
 
 
 
