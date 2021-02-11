@@ -8731,6 +8731,40 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(nlogn) || Space O(n)
+        public static int[] RelativeSortArray(int[] arr1, int[] arr2)
+        {
+            int l1 = arr1.Length, l2 = arr2.Length;
+            if (l1 < 2) return arr1;
+            if (l2 == 0) { Array.Sort(arr1); return arr1; }
+
+            Dictionary<int, int> numCount = new Dictionary<int, int>();
+            int idx = -1, fillAt = 0;
+            while (++idx < l1)
+                if (!numCount.ContainsKey(arr1[idx])) numCount.Add(arr1[idx], 1);
+                else numCount[arr1[idx]]++;
+
+            idx = -1;
+            while (++idx < l2)
+                if (numCount.ContainsKey(arr2[idx])) // found one of the distinct number from arr2 in arr1
+                {
+                    int times = numCount[arr2[idx]];
+                    while (--times >= 0)               // add matched number at the next index in sorted array
+                        arr1[fillAt++] = arr2[idx];
+                    numCount.Remove(arr2[idx]);     // remove the number from the HashTable
+                }
+            int sortRemaingFrom = fillAt;
+            foreach (var unMatchedNum in numCount)
+            {
+                int times = unMatchedNum.Value;
+                while (--times >= 0)                   // add UnMatched number at the next index in sorted array
+                    arr1[fillAt++] = unMatchedNum.Key;
+            }
+            Array.Sort(arr1, sortRemaingFrom, l1 - sortRemaingFrom);
+            return arr1;
+        }
+
+
 
     }
 }
