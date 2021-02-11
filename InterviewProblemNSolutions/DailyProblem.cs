@@ -8806,5 +8806,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Recursive Space = O(row*col)
+        public static int MaxAreaOfIsland(int[][] grid)
+        {
+            int row = grid.Length, col = grid[0].Length, maxArea = 0;
+            for (int i = 0; i < row; i++)
+                for (int j = 0; j < col; j++)
+                    if (grid[i][j] == 1)
+                        maxArea = Math.Max(maxArea, DFS(i, j));
+            return maxArea;
+
+            // Local Func
+            int DFS(int r, int c)
+            {
+                if (r < 0 || r >= row || c < 0 || c >= col || grid[r][c] == 0) return 0;
+                grid[r][c] = 0;   // mark visited
+                return 1 + DFS(r - 1, c) + DFS(r + 1, c) + DFS(r, c - 1) + DFS(r, c + 1);
+            }
+        }
     }
 }

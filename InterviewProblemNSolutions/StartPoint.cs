@@ -247,6 +247,7 @@ namespace InterviewProblemNSolutions
             CountGoodMeals();
             RelativeSortArray();
             IslandPerimeter();
+            MaxAreaOfIsland();
 
 
             // String Matching Algorithm
@@ -4050,6 +4051,16 @@ namespace InterviewProblemNSolutions
                 grid.Print("GRID");
                 Console.WriteLine($" Total perimeter of the above island is: \'{DailyProblem.IslandPerimeter(grid)}\'\n");
             }
+        }
+
+
+        public static void MaxAreaOfIsland()
+        {
+            // https://leetcode.com/problems/max-area-of-island/
+            Utility.Print("695. Max Area of Island");
+            int[][] grid = { new int[] { 0, 1 } };
+            grid.Print("GRID");
+            Console.WriteLine($" {DailyProblem.MaxAreaOfIsland(grid)}");
         }
 
 
