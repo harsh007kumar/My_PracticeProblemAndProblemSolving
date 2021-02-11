@@ -246,6 +246,7 @@ namespace InterviewProblemNSolutions
             PartitionToKEqualSumSubsets();
             CountGoodMeals();
             RelativeSortArray();
+            IslandPerimeter();
 
 
             // String Matching Algorithm
@@ -4036,6 +4037,19 @@ namespace InterviewProblemNSolutions
             arr2.Print("Arr2");
             Console.WriteLine($"Relative Sorted Arr1 becomes");
             DailyProblem.RelativeSortArray(arr1, arr2).Print("Relative Sorted");
+        }
+
+
+        public static void IslandPerimeter()
+        {
+            // https://leetcode.com/problems/island-perimeter/
+            Utility.Print("463. Island Perimeter");
+            int[][][] gridArr = { new int[][] { new int[] { 0, 1, 0, 0 }, new int[] { 1, 1, 1, 0 }, new int[] { 0, 1, 0, 0 }, new int[] { 1, 1, 0, 0 } }, new int[][] { new int[] { 1, 1 }, new int[] { 1, 1 } } };
+            foreach (var grid in gridArr)
+            {
+                grid.Print("GRID");
+                Console.WriteLine($" Total perimeter of the above island is: \'{DailyProblem.IslandPerimeter(grid)}\'\n");
+            }
         }
 
 

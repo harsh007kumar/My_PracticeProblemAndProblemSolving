@@ -8765,6 +8765,46 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(n), n = no of cells in grid
+        public static int IslandPerimeter(int[][] grid)
+        {
+            /* Traverse thru each Cell inside GRID
+             * if cell is land (value == 1)
+             *      than set perimeter as 4 & now check for each valid adjacent cell which is also land decreament 1 from current cell perimeter
+             *      after calculating above for all 4 direction add current cell perimieter to total perimeter
+             *  if cell is water (value == 0)
+             *      do nothing & return
+             */
+            int row = grid.Length;
+            int col = grid[0].Length;
+            int peri = 0;
+            for (int i = 0; i < row; i++)
+                for (int j = 0; j < col; j++)
+                    GetPerimeter(i, j);
+            return peri;
+
+            // Local Func
+            void GetPerimeter(int r, int c)
+            {
+                if (grid[r][c] == 0) return;
+
+                int perimeter = 4;
+                // Up
+                if (r - 1 >= 0 && grid[r - 1][c] == 1) perimeter--;
+
+                // Down
+                if (r + 1 < row && grid[r + 1][c] == 1) perimeter--;
+
+                // Left
+                if (c - 1 >= 0 && grid[r][c - 1] == 1) perimeter--;
+
+                // Right
+                if (c + 1 < col && grid[r][c + 1] == 1) perimeter--;
+
+                peri += perimeter;
+            }
+        }
+
 
     }
 }
