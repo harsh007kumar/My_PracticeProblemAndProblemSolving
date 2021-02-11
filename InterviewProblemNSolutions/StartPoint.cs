@@ -248,6 +248,7 @@ namespace InterviewProblemNSolutions
             RelativeSortArray();
             IslandPerimeter();
             MaxAreaOfIsland();
+            MagicSquaresInGrid();
 
 
             // String Matching Algorithm
@@ -4063,6 +4064,30 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" {DailyProblem.MaxAreaOfIsland(grid)}");
         }
 
+
+        public static void MagicSquaresInGrid()
+        {
+            // https://leetcode.com/problems/magic-squares-in-grid/
+            Utility.Print("840. Magic Squares In Grid");
+            int[][][] gridArr = {   new int[][] {   new int[] { 4, 3, 8, 4 },
+                                                    new int[] { 9, 5, 1, 9 },
+                                                    new int[] { 2, 7, 6, 2 } },
+                                    new int[][] {   new int[] { 10, 3, 5 },
+                                                    new int[] { 1, 6, 11 },
+                                                    new int[] { 7, 9, 2 } },
+                                    new int[][] {   new int[] { 3, 2, 9, 2, 7 },
+                                                    new int[] { 6, 1, 8, 4, 2 },
+                                                    new int[] { 7, 5, 3, 2, 7 },
+                                                    new int[] { 2, 9, 4, 9, 6 },
+                                                    new int[] { 4, 3, 8, 2, 5 } }
+                                };
+            foreach (var grid in gridArr)
+            {
+                grid.Print("GRID");
+                Console.WriteLine($" No of Magic Squares of 3x3 size in above Grid with all unique values\n" +
+                    $" & all rows sum equalling all columns sum and both diagonals sum: {DailyProblem.NumMagicSquaresInside(grid)}");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

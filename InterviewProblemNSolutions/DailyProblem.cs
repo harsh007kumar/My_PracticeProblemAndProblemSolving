@@ -8824,5 +8824,71 @@ namespace InterviewProblemNSolutions
                 return 1 + DFS(r - 1, c) + DFS(r + 1, c) + DFS(r, c - 1) + DFS(r, c + 1);
             }
         }
+
+
+        // Time O(row*col) || Space O(1)
+        public static int NumMagicSquaresInside(int[][] grid)
+        {
+            int row = grid.Length, col = grid[0].Length, magicSq = 0;
+            if (row < 3 || col < 3) return magicSq;
+
+            HashSet<int> s = new HashSet<int>(9);
+            for (int r = 0; r < row - 2; r++)
+                for (int c = 0; c < col - 2; c++)
+                    if (IsMagicFaster(r, c))
+                        magicSq++;
+            return magicSq;
+
+            // Local Func
+            bool IsMagic(int i, int j)  // Time O(9) ~O(1)
+            {
+                s.Clear();
+                for (int a = i; a < i + 3; a++)
+                    for (int b = j; b < j + 3; b++)
+                        if (s.Contains(grid[a][b]) || grid[a][b] > 9 || grid[a][b] < 1) return false;
+                        else s.Add(grid[a][b]);
+                int r1 = grid[i][j] + grid[i][j + 1] + grid[i][j + 2];
+                int r2 = grid[i + 1][j] + grid[i + 1][j + 1] + grid[i + 1][j + 2];
+                int r3 = grid[i + 2][j] + grid[i + 2][j + 1] + grid[i + 2][j + 2];
+                int c1 = grid[i][j] + grid[i + 1][j] + grid[i + 2][j];
+                int c2 = grid[i][j + 1] + grid[i + 1][j + 1] + grid[i + 2][j + 1];
+                int c3 = grid[i][j + 2] + grid[i + 1][j + 2] + grid[i + 2][j + 2];
+                int d1 = grid[i][j] + grid[i + 1][j + 1] + grid[i + 2][j + 2];
+                int d2 = grid[i][j + 2] + grid[i + 1][j + 1] + grid[i + 2][j];
+                return r1 == r2 && r2 == r3 && r3 == c1 && c1 == c2 && c2 == c3 && c3 == d1 && d1 == d2;
+            }
+            bool IsMagicFaster(int i, int j)  // Time O(9) ~O(1)
+            {
+                s.Clear();
+                int r1, r2, r3, c1, c2, c3, d1, d2;
+                r1 = r2 = r3 = c1 = c2 = c3 = d1 = d2 = 0;
+
+                for (int a = i; a < i + 3; a++)
+                    for (int b = j; b < j + 3; b++)
+                        if (s.Contains(grid[a][b]) || grid[a][b] > 9 || grid[a][b] < 1) return false;
+                        else
+                        {
+                            s.Add(grid[a][b]);  // add new value to HashSet
+
+                            switch (a - i)      // for rows
+                            {
+                                case 0: r1 += grid[a][b]; break;
+                                case 1: r2 += grid[a][b]; break;
+                                case 2: r3 += grid[a][b]; break;
+                            }
+                            switch (b - j)      // for cols
+                            {
+                                case 0: c1 += grid[a][b]; break;
+                                case 1: c2 += grid[a][b]; break;
+                                case 2: c3 += grid[a][b]; break;
+                            }
+                            if (a - i == b - j)         // for 1st diagonal 
+                                d1 += grid[a][b];
+                            if ((b - j) + a - i == 2)   // for 2nd diagonal 
+                                d2 += grid[a][b];
+                        }
+                return r1 == r2 && r2 == r3 && r3 == c1 && c1 == c2 && c2 == c3 && c3 == d1 && d1 == d2;
+            }
+        }
     }
 }
