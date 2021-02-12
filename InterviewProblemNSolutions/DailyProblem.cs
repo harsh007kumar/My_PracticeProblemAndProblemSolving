@@ -8958,6 +8958,37 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(N*(2^N)) || Lexicographic based approach
+        public static IList<IList<int>> Subsets_LexicographicBinarySorted(int[] nums)
+        {
+            List<IList<int>> powerSet = new List<IList<int>>();
+            int n = nums.Length;
+            IList<int> currSet;
+            // generate bitmask, from 0..00 to 1..11
+            for (int i = (int)Math.Pow(2, n); i < (int)Math.Pow(2, n + 1); i++)
+            {
+                currSet = new List<int>();
+                string bitMask = BinaryString(i);
+                // Map a subset to each bitmask: 1 on the ith position in bitmask means the presence of nums[i] in the subset, and 0 means its absence.
+                for (int j = 0; j < n; j++)
+                    if (bitMask[j] == '1')
+                        currSet.Add(nums[j]);
+                powerSet.Add(currSet);
+            }
+            return powerSet;
+
+            // Converts Integer into its equivalant binary representation
+            string BinaryString(int number)
+            {
+                Stack<char> st = new Stack<char>();
+                while (number > 0)
+                {
+                    st.Push((number & 1) == 1 ? '1' : '0');
+                    number = number >> 1;
+                }
+                return new string(st.Reverse().ToArray());
+            }
+        }
 
     }
 }

@@ -4130,6 +4130,14 @@ namespace InterviewProblemNSolutions
                         Console.Write($" {num},");
                     Console.Write("] ||");
                 }
+                Console.WriteLine($"\n Lexicographic (Binary Sorted) based approach");
+                foreach (var subset in DailyProblem.Subsets_LexicographicBinarySorted(nums))
+                {
+                    Console.Write(" [");
+                    foreach (var num in subset)
+                        Console.Write($" {num},");
+                    Console.Write("] ||");
+                }
                 Console.WriteLine("\n");
             }
         }
