@@ -249,6 +249,7 @@ namespace InterviewProblemNSolutions
             IslandPerimeter();
             MaxAreaOfIsland();
             MagicSquaresInGrid();
+            PreviousPermutationWithOneSwap();
 
 
             // String Matching Algorithm
@@ -4086,6 +4087,20 @@ namespace InterviewProblemNSolutions
                 grid.Print("GRID");
                 Console.WriteLine($" No of Magic Squares of 3x3 size in above Grid with all unique values\n" +
                     $" & all rows sum equalling all columns sum and both diagonals sum: {DailyProblem.NumMagicSquaresInside(grid)}");
+            }
+        }
+
+
+        public static void PreviousPermutationWithOneSwap()
+        {
+            // https://leetcode.com/problems/previous-permutation-with-one-swap/
+            Utility.Print("1053. Previous Permutation With One Swap");
+            int[][] arrays = { new int[] { 3, 2, 1 }, new int[] { 1, 1, 5 }, new int[] { 1, 9, 4, 6, 7 }, new int[] { 3, 1, 1, 3 } };
+            foreach (var arr in arrays)
+            {
+                arr.Print("Input");
+                Console.WriteLine($" lexicographically largest permutation that is smaller than above arr, that can be made with exactly one swap");
+                DailyProblem.PrevPermOpt1(arr).Print("NextBiggest");
             }
         }
 

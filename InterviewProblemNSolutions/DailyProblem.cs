@@ -8890,5 +8890,27 @@ namespace InterviewProblemNSolutions
                 return r1 == r2 && r2 == r3 && r3 == c1 && c1 == c2 && c2 == c3 && c3 == d1 && d1 == d2;
             }
         }
+
+
+        // Time O(n) || Space O(1)
+        public static int[] PrevPermOpt1(int[] arr)
+        {
+            int i = arr.Length - 1;
+            while (--i >= 0)
+                if (arr[i] > arr[i + 1]) // num on left is greater than one on rt
+                {
+                    int j = i, replaceWith = i + 1;
+                    while (++j < arr.Length)
+                    {
+                        if (arr[i] <= arr[j]) break;
+                        else if (arr[replaceWith] < arr[j]) replaceWith = j;
+                    }
+                    int t = arr[replaceWith];
+                    arr[replaceWith] = arr[i];
+                    arr[i] = t;
+                    return arr;
+                }
+            return arr;
+        }
     }
 }
