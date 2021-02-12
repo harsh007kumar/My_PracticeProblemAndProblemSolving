@@ -8912,5 +8912,30 @@ namespace InterviewProblemNSolutions
                 }
             return arr;
         }
+
+
+        // Time = Space = O(N*(2^N)) || Cascading based approach
+        public static IList<IList<int>> Subsets(int[] nums)
+        {
+            List<IList<int>> powerSet = new List<IList<int>>();
+            powerSet.Add(new List<int>());          // add empty set
+            foreach (int number in nums)            // O(n)
+            {
+                int start = 0, last = powerSet.Count - 1;
+                while (start <= last)               // O(2^N)
+                {
+                    // create new subset from each existing subSet in powerSet
+                    // now add current number and insert this new subSet back in powerSet
+                    var newSet = powerSet[start].ToList();
+                    newSet.Add(number);
+                    powerSet.Add(newSet);
+                    start++;
+                }
+            }
+            return powerSet;
+        }
+
+
+
     }
 }

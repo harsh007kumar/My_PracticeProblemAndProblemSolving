@@ -250,6 +250,7 @@ namespace InterviewProblemNSolutions
             MaxAreaOfIsland();
             MagicSquaresInGrid();
             PreviousPermutationWithOneSwap();
+            Subsets();
 
 
             // String Matching Algorithm
@@ -4103,6 +4104,28 @@ namespace InterviewProblemNSolutions
                 DailyProblem.PrevPermOpt1(arr).Print("NextBiggest");
             }
         }
+
+
+        public static void Subsets()
+        {
+            // https://leetcode.com/problems/subsets/
+            Utility.Print("78. Subsets");
+            int[][] numsArr = { new int[] { 1, 2, 3 }, new int[] { 0 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                foreach (var subset in DailyProblem.Subsets(nums))
+                {
+                    Console.Write(" [");
+                    foreach (var num in subset)
+                        Console.Write($" {num}");
+                    Console.Write("],");
+                }
+                Console.WriteLine("\n");
+            }
+        }
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
