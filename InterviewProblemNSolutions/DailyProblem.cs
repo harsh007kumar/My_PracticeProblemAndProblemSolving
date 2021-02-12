@@ -8934,6 +8934,28 @@ namespace InterviewProblemNSolutions
             }
             return powerSet;
         }
+        // Time = Space = O(N*(2^N)) || BackTracking based approach
+        public static IList<IList<int>> Subsets_BackTrack(int[] nums)
+        {
+            List<IList<int>> powerSet = new List<IList<int>>();
+            for (int l = 0; l <= nums.Length; l++)
+                BackTrack(0, new List<int>(), l);
+            return powerSet;
+
+            // Local Func
+            void BackTrack(int startFrom, List<int> subSet, int len)
+            {
+                if (subSet.Count == len)
+                    powerSet.Add(subSet.ToArray());
+                else
+                    for (int idx = startFrom; idx < nums.Length; idx++)
+                    {
+                        subSet.Add(nums[idx]);              // add num
+                        BackTrack(idx + 1, subSet, len);    // back recursive call to fill remaining numbers in subSet
+                        subSet.RemoveAt(subSet.Count - 1);  // remove num while backtracking
+                    }
+            }
+        }
 
 
 

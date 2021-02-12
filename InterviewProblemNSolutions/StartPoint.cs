@@ -4114,12 +4114,21 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
+                Console.WriteLine($" Cascading based approach");
                 foreach (var subset in DailyProblem.Subsets(nums))
                 {
                     Console.Write(" [");
                     foreach (var num in subset)
-                        Console.Write($" {num}");
-                    Console.Write("],");
+                        Console.Write($" {num},");
+                    Console.Write("] ||");
+                }
+                Console.WriteLine($"\n BackTracking based approach");
+                foreach (var subset in DailyProblem.Subsets_BackTrack(nums))
+                {
+                    Console.Write(" [");
+                    foreach (var num in subset)
+                        Console.Write($" {num},");
+                    Console.Write("] ||");
                 }
                 Console.WriteLine("\n");
             }
