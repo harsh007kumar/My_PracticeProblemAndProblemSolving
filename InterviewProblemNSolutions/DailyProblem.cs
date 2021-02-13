@@ -9023,5 +9023,39 @@ namespace InterviewProblemNSolutions
             }
             return -1;
         }
+
+
+        // Time O(n^2) || Space O(n)
+        public static int FindNumberOfLIS(int[] nums)
+        {
+            int l = nums.Length, timeMaxLenFound = 0, maxLen = 1;
+            int[,] dp = new int[l, 2];          // 1st row stores maxLen for each index and 2nd stores times its achievable
+            
+            for (int i = 0; i < l; i++)         // index for which we are updating maxLen
+            {
+                // base value for maxLen for curr index & times this maxLen for current index is achievable
+                dp[i, 0] = dp[i, 1] = 1;
+                for (int j = 0; j < i; j++)     // iterate thru each index from 0 to i-1 to find max len for i
+                    if (nums[j] < nums[i])
+                        if (dp[i, 0] < dp[j, 0] + 1)        // bigger maxLen found, update maxLen for index and time achievable
+                        {
+                            dp[i, 0] = dp[j, 0] + 1;
+                            dp[i, 1] = dp[j, 1];
+                        }
+                        else if (dp[i, 0] == dp[j, 0] + 1)  // same maxLen found again update times achievable
+                            dp[i, 1] += dp[j, 1];
+
+                if (maxLen < dp[i, 0])
+                {
+                    maxLen = dp[i, 0];
+                    timeMaxLenFound = dp[i, 1];
+                }
+                else if (maxLen == dp[i, 0])
+                    timeMaxLenFound += dp[i, 1];
+            }
+            return timeMaxLenFound;
+        }
+
+
     }
 }

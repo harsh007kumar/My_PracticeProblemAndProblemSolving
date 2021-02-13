@@ -252,6 +252,7 @@ namespace InterviewProblemNSolutions
             PreviousPermutationWithOneSwap();
             Subsets();
             ShortestPathBinaryMatrix();
+            NumberOfLongestIncreasingSubsequence();
 
 
             // String Matching Algorithm
@@ -4153,6 +4154,18 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" Shortest Path from Top Left to Bottom Right in above grid has length: {DailyProblem.ShortestPathBinaryMatrix(grid)}");
         }
 
+
+        public static void NumberOfLongestIncreasingSubsequence()
+        {
+            // https://leetcode.com/problems/number-of-longest-increasing-subsequence/
+            Utility.Print("673. Number of Longest Increasing Subsequence");
+            int[][] numsArr = { new int[] { 1, 3, 5, 4, 7 }, new int[] { 2, 2, 2, 2, 2 }, new int[] { 1, 2, 3, -3, -2, -1 }, new int[] { 5, 8, 9, 4, 5, 7, 8 }, new int[] { 5, 8, 9, 4, 5, 7 }, new int[] { 1, 2, 4, 3, 5, 4, 7, 2 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" In above integer array, the no of longest increasing subsequences: {DailyProblem.FindNumberOfLIS(nums)}\n");
+            }
+        }
 
 
 
