@@ -251,6 +251,7 @@ namespace InterviewProblemNSolutions
             MagicSquaresInGrid();
             PreviousPermutationWithOneSwap();
             Subsets();
+            ShortestPathBinaryMatrix();
 
 
             // String Matching Algorithm
@@ -4141,6 +4142,17 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine("\n");
             }
         }
+
+
+        public static void ShortestPathBinaryMatrix()
+        {
+            // https://leetcode.com/problems/shortest-path-in-binary-matrix/
+            Utility.Print("1091. Shortest Path in Binary Matrix");
+            int[][] grid = { new int[] { 0, 0, 0 }, new int[] { 1, 1, 0 }, new int[] { 1, 1, 0 } };
+            grid.Print("BINARY GRID");
+            Console.WriteLine($" Shortest Path from Top Left to Bottom Right in above grid has length: {DailyProblem.ShortestPathBinaryMatrix(grid)}");
+        }
+
 
 
 

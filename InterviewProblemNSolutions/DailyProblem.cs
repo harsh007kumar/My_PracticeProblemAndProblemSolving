@@ -8990,5 +8990,38 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time = Space = O(row*col)
+        public static int ShortestPathBinaryMatrix(int[][] grid)
+        {
+            int row = grid.Length, col = grid[0].Length;
+            if (grid[0][0] == 1 || grid[row - 1][col - 1] == 1) return -1;   // if start or end is blocked
+
+            Queue<int[]> q = new Queue<int[]>();
+            q.Enqueue(new int[] { 0, 0, 1 });
+            grid[0][0] = 1;
+
+            int r, c, dist;
+            while (q.Count > 0)    // BFS Traversal
+            {
+                int[] currPos = q.Dequeue();
+                r = currPos[0];
+                c = currPos[1];
+                dist = currPos[2];
+                // reached destination
+                if (r == row - 1 && c == col - 1) return dist;
+
+                // spread in all 8 valid direction
+                for (int i = r - 1; i <= r + 1; i++)
+                    for (int j = c - 1; j <= c + 1; j++)
+                        // if valid row & col index and cell is empty
+                        if (i >= 0 && i < row && j >= 0 && j < col && grid[i][j] == 0)
+                        {
+                            grid[i][j] = 1;  // mark visited, so it is not picked up again
+                            q.Enqueue(new int[] { i, j, dist + 1 });
+                        }
+            }
+            return -1;
+        }
     }
 }
