@@ -49,6 +49,7 @@
     <Compile Include="DivideAndConquerAlgorithms.cs" />
     <Compile Include="DynamicProgramming.cs" />
     <Compile Include="FindCelebrity.cs" />
+    <Compile Include="HitCounter.cs" />
     <Compile Include="InsertDeleteGetRandomO1.cs" />
     <Compile Include="LinkedListRandomNode.cs" />
     <Compile Include="LRUCache.cs" />

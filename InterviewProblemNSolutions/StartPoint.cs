@@ -255,6 +255,7 @@ namespace InterviewProblemNSolutions
             NumberOfLongestIncreasingSubsequence();
             TaskScheduler();
             IsGraphBipartite();
+            DesignHitCounter();
 
 
             // String Matching Algorithm
@@ -4199,7 +4200,32 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void DesignHitCounter()
+        {
+            // https://leetcode.com/problems/design-hit-counter/
+            Utility.Print("362. Design Hit Counter");
+            HitCounter counter = new HitCounter();
+            // hit at timestamp 1.
+            counter.Hit(1);
 
+            // hit at timestamp 2.
+            counter.Hit(2);
+
+            // hit at timestamp 3.
+            counter.Hit(3);
+
+            // get hits at timestamp 4, should return 3.
+            Console.WriteLine(counter.GetHits(4));
+
+            // hit at timestamp 300.
+            counter.Hit(300);
+
+            // get hits at timestamp 300, should return 4.
+            Console.WriteLine(counter.GetHits(300));
+
+            // get hits at timestamp 301, should return 3.
+            Console.WriteLine(counter.GetHits(301));
+        }
 
 
 
