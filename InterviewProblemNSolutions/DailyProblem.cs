@@ -8535,7 +8535,14 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time O(n) || Space O(n)
+        /// <summary>
+        /// Time O(n^3) || Space O(n)
+        /// The first two levels have breadth O(n) because all for loop iterations of the single recursive call result in a child recursive call.
+        /// From the third level on, there is only one decision per recursive call, but we still have to visit the reminder of the string so the depth is O(n).
+        /// In total the first two levels have O(n^2) nodes and each leaf has O(n) descendants so it's O(n^3)
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public static bool IsAdditiveNumber(string s)
         {
             return FindFibonacci(0);
@@ -9055,6 +9062,80 @@ namespace InterviewProblemNSolutions
             }
             return timeMaxLenFound;
         }
+
+
+        // Time O(n) || Space O(1)
+        public static int LeastInterval(char[] tasks, int coolDownTime)
+        {
+            #region 1st Attempt
+            /* Count & store the different task to be done along with their frequency
+             * Now Sort them in Descending order as per their frequency
+             * Add All tasks with more than 0 frequency in Queue and "cannot be completed Time value as 0"
+             * 
+             * Start the timer and increament it every time we complete an task or stay idle
+             * 
+             * Start picking task from front and if their 'cannot be picked up time' is less than current timer pick them
+             * 
+             * repeat above step till Queue is empty
+             */
+
+            //int l = tasks.Length, timer = 0;
+            //if (n == 0) return l;
+            //int[] charCount = new int[26];
+            //for (int i = 0; i < l; i++) charCount[tasks[i] - 'A']--;
+            //Array.Sort(charCount);      // sorted in descending order
+
+            //Queue<int[]> q = new Queue<int[]>();
+            //for (int i = 0; i < 26; i++)
+            //    if (charCount[i] != 0)
+            //        // 1st index indicates frequency of task and 2nd informs about time till it cannot be picked up next
+            //        q.Enqueue(new int[] { -charCount[i], 0 });
+
+            //while (q.Count > 0)
+            //{
+            //    var currTask = q.Dequeue();
+            //    if (currTask[1] > timer)    // if current task cannot be picked time is greater than timer
+            //        timer += currTask[1] - timer;   // CPU stays idle for the difference amt of time
+            //    timer++;
+            //    if (--currTask[0] > 0)      // currTask JobCount still greater than 0
+            //    {
+            //        currTask[1] = timer + n;    // update time till currTask cannot be picked up next
+            //        q.Enqueue(currTask);
+            //    }
+            //}
+            //return timer;
+            #endregion
+            
+            /* The maximum number of tasks is 26. Let's allocate an array frequencies of 26 elements to keep the frequency of each task.
+             * 
+             * Iterate over the input array and store the frequency of task A at index 0, the frequency of task B at index 1, etc.
+             * 
+             * Sort the array and retrieve the maximum frequency f_max. This frequency defines the max possible idle time: idle_time = (f_max - 1) * n.
+             * 
+             * Pick the elements in the descending order one by one. At each step,
+             * decrease the idle time by min(f_max - 1, f) where f is a current frequency. Remember, that idle_time is greater or equal to 0.
+             * 
+             * Return busy slots + idle slots: len(tasks) + idle_time.
+             */
+            int l = tasks.Length;
+            if (coolDownTime == 0) return l;
+
+            // calculate frequencies of the tasks
+            int[] frequency = new int[26];
+            for (int i = 0; i < l; i++) frequency[tasks[i] - 'A']++;// O(n)
+
+            Array.Sort(frequency);                                  // O(26log26)
+
+            int maxFreqTask = frequency[25], maxIdleTime = (maxFreqTask - 1) * coolDownTime;
+
+            // not we try reducing idleTime by iterating over remaining tasks and see how many can be completed within coolDown time for maxFreqTask
+            for (int i = 24; i >= 0 && maxIdleTime > 0; i--)        // O(25)
+                maxIdleTime -= Math.Min(maxFreqTask - 1, frequency[i]);
+
+            // idle time can be >= 0
+            return l + Math.Max(0, maxIdleTime);
+        }
+
 
 
     }
