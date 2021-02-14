@@ -9137,6 +9137,36 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(V+E) || Space O(V), V = no of nodes & E = total no of edges
+        public static bool IsBipartite(int[][] graph)
+        {
+            int v = graph.Length, parent;
+            Stack<int> st = new Stack<int>();
+            int[] color = new int[v];
 
+            for (int i = 0; i < v; i++)     // traverse every node to cover case of disconnected graphs
+                if (color[i] == 0)          // Current Node not Colored yet
+                {
+                    color[i] = 1;           // color every new un-colored node as 'blue'
+                    st.Push(i);             // Push newNode to Stack
+                    // Start DFS
+                    while (st.Count > 0)
+                    {
+                        parent = st.Pop();
+                        // traverse each adjacent node of current node
+                        foreach (var adjacentNode in graph[parent])
+                            // if adjacentNode not is not colored, assign opposite color to current node
+                            if (color[adjacentNode] == 0)
+                            {
+                                st.Push(adjacentNode);  // add new node to Stack of nodees
+                                color[adjacentNode] = color[parent] == 1 ? 2 : 1;
+                            }
+                            // else if adjacentNode has same color as parent return false
+                            else if (color[adjacentNode] == color[parent])
+                                return false;
+                    }
+                }
+            return true;
+        }
     }
 }

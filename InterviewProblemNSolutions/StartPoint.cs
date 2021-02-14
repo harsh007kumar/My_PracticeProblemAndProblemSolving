@@ -254,6 +254,7 @@ namespace InterviewProblemNSolutions
             ShortestPathBinaryMatrix();
             NumberOfLongestIncreasingSubsequence();
             TaskScheduler();
+            IsGraphBipartite();
 
 
             // String Matching Algorithm
@@ -4182,6 +4183,23 @@ namespace InterviewProblemNSolutions
                     $" is: {DailyProblem.LeastInterval(tasks[i], sameTaskWaitTime[i])}\n");
             }
         }
+
+
+        public static void IsGraphBipartite()
+        {
+            // https://leetcode.com/problems/is-graph-bipartite/
+            Utility.Print("785. Is Graph Bipartite?");
+            int[][][] graphsArr = { new int[][] { new int[] { 1, 3 }, new int[] { 0, 2 }, new int[] { 1, 3 }, new int[] { 0, 2 } }, new int[][] { new int[] { 1, 2, 3 }, new int[] { 0, 2 }, new int[] { 0, 1, 3 }, new int[] { 0, 2 } } };
+            foreach (var graph in graphsArr)
+            {
+                graph.Print("UnDirected Graph");
+                Console.WriteLine($" Above UnDirected graph is Bipartite (i.e. We can divide the vertices into two groups," +
+                    $"\n such that every edge in graph has one node/end in Grp A & 2nd in B): {DailyProblem.IsBipartite(graph)}\n");
+            }
+        }
+
+
+
 
 
 
