@@ -256,6 +256,7 @@ namespace InterviewProblemNSolutions
             TaskScheduler();
             IsGraphBipartite();
             DesignHitCounter();
+            DesignALeaderboard();
 
 
             // String Matching Algorithm
@@ -4226,6 +4227,26 @@ namespace InterviewProblemNSolutions
             // get hits at timestamp 301, should return 3.
             Console.WriteLine(counter.GetHits(301));
         }
+
+
+        public static void DesignALeaderboard()
+        {
+            // https://leetcode.com/problems/design-a-leaderboard/
+            Utility.Print("1244. Design A Leaderboard");
+            Leaderboard leaderboard = new Leaderboard();
+            leaderboard.AddScore(1, 73);   // leaderboard = [[1,73]];
+            leaderboard.AddScore(2, 56);   // leaderboard = [[1,73],[2,56]];
+            leaderboard.AddScore(3, 39);   // leaderboard = [[1,73],[2,56],[3,39]];
+            leaderboard.AddScore(4, 51);   // leaderboard = [[1,73],[2,56],[3,39],[4,51]];
+            leaderboard.AddScore(5, 4);    // leaderboard = [[1,73],[2,56],[3,39],[4,51],[5,4]];
+            Console.WriteLine(leaderboard.Top(1));           // returns 73;
+            leaderboard.Reset(1);         // leaderboard = [[2,56],[3,39],[4,51],[5,4]];
+            leaderboard.Reset(2);         // leaderboard = [[3,39],[4,51],[5,4]];
+            leaderboard.AddScore(2, 51);   // leaderboard = [[2,51],[3,39],[4,51],[5,4]];
+            Console.WriteLine(leaderboard.Top(3));           // returns 141 = 51 + 51 + 39;
+        }
+
+
 
 
 

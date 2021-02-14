@@ -51,9 +51,11 @@
     <Compile Include="FindCelebrity.cs" />
     <Compile Include="HitCounter.cs" />
     <Compile Include="InsertDeleteGetRandomO1.cs" />
+    <Compile Include="Leaderboard.cs" />
     <Compile Include="LinkedListRandomNode.cs" />
     <Compile Include="LRUCache.cs" />
     <Compile Include="MaxHeap.cs" />
+    <Compile Include="MinHeap.cs" />
     <Compile Include="MinStack.cs" />
     <Compile Include="PeekingIterator.cs" />
     <Compile Include="ProductOfNumbers.cs" />
