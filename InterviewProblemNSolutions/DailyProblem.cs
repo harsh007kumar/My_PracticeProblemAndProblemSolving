@@ -9253,5 +9253,27 @@ namespace InterviewProblemNSolutions
             return longestPalindrome + oddValueLetter;
         }
 
+
+        // Time O(n) || Space O(n)
+        public static int FindMaxLength(int[] nums)
+        {
+            int balance = 0, maxLen = 0;
+            Dictionary<int, int> ht = new Dictionary<int, int>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                // we add 1 to balance if curr number is 1 else we decrease by 1
+                balance += nums[i] == 1 ? 1 : -1;
+                if (balance == 0)
+                    maxLen = Math.Max(maxLen, i + 1);
+                else if (ht.ContainsKey(balance))
+                    maxLen = Math.Max(maxLen, i - ht[balance]);
+                else
+                    ht.Add(balance, i);
+            }
+            return maxLen;
+        }
+
+
+
     }
 }

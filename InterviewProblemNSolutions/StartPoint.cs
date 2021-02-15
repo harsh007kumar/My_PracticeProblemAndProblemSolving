@@ -261,6 +261,7 @@ namespace InterviewProblemNSolutions
             SmallestCommonElement();
             LongestPalindrome();
             TwoSumIIIDataStructureDesign();
+            BinaryContiguousArray();
 
 
             // String Matching Algorithm
@@ -4312,6 +4313,19 @@ namespace InterviewProblemNSolutions
 
             // ["TwoSum","add","find"]
             // [[],[0],[0]] should return false
+        }
+
+
+        public static void BinaryContiguousArray()
+        {
+            // https://leetcode.com/problems/contiguous-array/
+            Utility.Print("525. Contiguous Array");
+            int[][] arrays = { new int[] { 0, 1 }, new int[] { 0, 1, 0 } };
+            foreach (var binaryArr in arrays)
+            {
+                binaryArr.Print("Binary Array");
+                Console.WriteLine($" The max length of a contiguous subarray with equal number of 0 and 1: \'{DailyProblem.FindMaxLength(binaryArr)}\'\n");
+            }
         }
 
 
