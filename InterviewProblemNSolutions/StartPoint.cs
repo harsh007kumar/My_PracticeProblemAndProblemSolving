@@ -259,6 +259,7 @@ namespace InterviewProblemNSolutions
             DesignALeaderboard();
             TheKWeakestRowsInAMatrix();
             SmallestCommonElement();
+            LongestPalindrome();
 
 
             // String Matching Algorithm
@@ -4281,6 +4282,16 @@ namespace InterviewProblemNSolutions
             int[][] mat = { new int[] { 1, 2, 3, 4, 5 }, new int[] { 2, 4, 5, 8, 10 }, new int[] { 3, 5, 7, 9, 11 }, new int[] { 1, 3, 5, 7, 9 } };
             mat.Print("Matrix");
             Console.WriteLine($" Smallest common element in all rows: \'{DailyProblem.SmallestCommonElement(mat)}\'");
+        }
+
+
+        public static void LongestPalindrome()
+        {
+            // https://leetcode.com/problems/longest-palindrome/
+            Utility.Print("409. Longest Palindrome");
+            string[] sArr = { "abccccdd", "a", "ccc", "bb" };
+            foreach (var s in sArr)
+                Console.WriteLine($" The longest palindrome that can be built with \'{s}\' letters has length: \'{DailyProblem.LongestPalindrome(s)}\'");
         }
 
 

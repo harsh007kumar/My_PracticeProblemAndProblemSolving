@@ -9224,6 +9224,34 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n)
+        public static int LongestPalindrome(string s)
+        {
+            /* Get the frequency of all unique letters in string
+             *  Now for each even frequency letter add its count to answer
+             * 
+             *  and for each odd frequency letter add its count-1 to answer,
+             *  as keeping 1 aside all other count can be used to make even larger palindrome
+             *  also set oddValue to 1 if even a single letter with odd count is encountered as we can atleast use 1 odd value in middle
+             *  
+             * return ans+oddValue
+             */
+            Dictionary<char, int> ht = new Dictionary<char, int>();
+            for (int i = 0; i < s.Length; i++)
+                if (!ht.ContainsKey(s[i])) ht.Add(s[i], 1);
+                else ht[s[i]]++;
+
+            int longestPalindrome = 0, oddValueLetter = 0;
+            foreach (var count in ht.Values)
+                if (count % 2 != 0)  // odd count
+                {
+                    oddValueLetter = 1;
+                    longestPalindrome += count - 1;
+                }
+                else                // even count
+                    longestPalindrome += count;
+            return longestPalindrome + oddValueLetter;
+        }
 
     }
 }
