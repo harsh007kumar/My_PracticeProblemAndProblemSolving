@@ -257,6 +257,7 @@ namespace InterviewProblemNSolutions
             IsGraphBipartite();
             DesignHitCounter();
             DesignALeaderboard();
+            TheKWeakestRowsInAMatrix();
 
 
             // String Matching Algorithm
@@ -4247,7 +4248,29 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void TheKWeakestRowsInAMatrix()
+        {
+            // https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/
+            Utility.Print("1337. The K Weakest Rows in a Matrix");
+            int[][][] mat = {   new int[][] {   new int[] { 1, 1, 0, 0, 0 },
+                                                new int[] { 1, 1, 1, 1, 0 },
+                                                new int[] { 1, 0, 0, 0, 0 },
+                                                new int[] { 1, 1, 0, 0, 0 },
+                                                new int[] { 1, 1, 1, 1, 1 } },
+                                new int[][] {   new int[] { 1, 0, 0, 0 },
+                                                new int[] { 1, 1, 1, 1 },
+                                                new int[] { 1, 0, 0, 0 },
+                                                new int[] { 1, 0, 0, 0 } } };
+            int[] k = { 3, 2 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                mat[i].Print("soldiers-civilians MARTIX");
+                Console.Write($" \'{k[i]}\' Rows ordered from the weakest to the strongest are=>");
+                foreach (var rowIndex in DailyProblem.KWeakestRows(mat[i], k[i]))
+                    Console.Write($" {rowIndex} ||");
+                Console.WriteLine("\n");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

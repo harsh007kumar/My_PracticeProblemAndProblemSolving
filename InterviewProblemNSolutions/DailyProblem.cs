@@ -9168,5 +9168,41 @@ namespace InterviewProblemNSolutions
                 }
             return true;
         }
+
+
+        // Time O(Max(nlogn,n*m) || Space O(n), n = no of rows & m = no of columns in matrix
+        public static int[] KWeakestRows(int[][] mat, int k)
+        {
+            int l = mat.Length, sCount = 0;
+            List<int[]> soldiersCount = new List<int[]>(l);
+            for (int i = 0; i < l; i++)                // O(n)
+            {
+                sCount = 0;
+                for (int j = 0; j < mat[i].Length; j++)// O(m)
+                    if (mat[i][j] == 0) break;
+                    else sCount++;
+                // update index & soldiers count in List
+                soldiersCount.Add(new int[] { i, sCount });
+            }
+            soldiersCount.Sort(new SoldierComparator());
+            int[] ans = new int[k];
+            for (int i = 0; i < k; i++)
+                ans[i] = soldiersCount[i][0];
+            return ans;
+        }
+        public class SoldierComparator : IComparer<int[]>
+        {
+            public int Compare(int[] x, int[] y)
+            {
+                if (x[1] != y[1])   // case when soldier count is diff, sort by soldier count
+                    return x[1].CompareTo(y[1]);
+                else                // if count is same order by index
+                    return x[0].CompareTo(y[0]);
+            }
+        }
+
+
+
+
     }
 }
