@@ -9274,6 +9274,24 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n)
+        public static int MaxSubArrayLen(int[] nums, int k)
+        {
+            Dictionary<int, int> sumAtIndex = new Dictionary<int, int>();
+            int sum = 0, maxLen = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                sum += nums[i];
+                if (sum == k)
+                    maxLen = Math.Max(maxLen, i + 1);
+                else if (sumAtIndex.ContainsKey(sum - k))
+                    maxLen = Math.Max(maxLen, i - sumAtIndex[sum - k]);
+                
+                if (!sumAtIndex.ContainsKey(sum))
+                    sumAtIndex.Add(sum, i);
+            }
+            return maxLen;
+        }
 
     }
 }

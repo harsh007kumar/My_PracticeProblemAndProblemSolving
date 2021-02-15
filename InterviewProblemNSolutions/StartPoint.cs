@@ -262,6 +262,7 @@ namespace InterviewProblemNSolutions
             LongestPalindrome();
             TwoSumIIIDataStructureDesign();
             BinaryContiguousArray();
+            MaximumSizeSubarraySumEqualsk();
 
 
             // String Matching Algorithm
@@ -4327,6 +4328,21 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" The max length of a contiguous subarray with equal number of 0 and 1: \'{DailyProblem.FindMaxLength(binaryArr)}\'\n");
             }
         }
+
+
+        public static void MaximumSizeSubarraySumEqualsk()
+        {
+            // https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/
+            Utility.Print("325. Maximum Size Subarray Sum Equals k");
+            int[][] nums = { new int[] { 1, -1, 5, -2, 3 }, new int[] { -2, -1, 2, 1 }, new int[] { 1, 1, 0 }, new int[] { -5, 8, 2, 0, -6 } };
+            int[] k = { 3, 1, 1, 4 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                nums[i].Print("Print");
+                Console.WriteLine($" \'{DailyProblem.MaxSubArrayLen(nums[i], k[i])}\'\n");
+            }
+        }
+
 
 
 
