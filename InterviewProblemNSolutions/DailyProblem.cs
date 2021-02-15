@@ -9354,6 +9354,39 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(n)
+        public static int SubarraysDivByK(int[] nums, int k)
+        {
+            /* Intuition
+             * As is typical with problems involving subarrays, we use prefix sums to add each subarray.
+             * Let P[i+1] = A[0] + A[1] + ... + A[i]. Then, each subarray can be written as P[j] - P[i] (for j > i).
+             * Thus, we have P[j] - P[i] equal to 0 modulo K, or equivalently P[i] and P[j] are the same value modulo K.
+             * 
+             * Algorithm
+             * Count all the P[i]'s modulo K.
+             * For example, take A = [4,5,0,-2,-3,1] and K = 5.
+             * Then P = [0,4,9,9,7,4,5], and C_0 = 2, C_2 = 1, C_4 = 4
+             * With C_0 = 2 (at P[0], P[6]), we get no of pairs using formula => n*(n-1)/2
+             * subarray with sum divisible by K, namely A[0:6] = [4, 5, 0, -2, -3, 1].
+             * 
+             * With C_4 = 4 (at P[1], P[2], P[3], P[5]) , using formula => n*(n-1)/2 we get 6 subarrays which can be observed as below
+             * subarrays with sum divisible by K, namely A[1:2], A[1:3], A[1:5], A[2:3], A[2:5], A[3:5].
+             */
+            int l = nums.Length;
+            // get preFixSum
+            int[] p = new int[l + 1];
+            for (int i = 0; i < l; i++)
+                p[i + 1] = p[i] + nums[i];
 
+            // get mod value for each PrefixSum
+            int[] modK = new int[k];
+            foreach (var prefixSum in p)
+                modK[(prefixSum % k + k) % k]++;    // we add l again after 1st mod to compensate for -ve values
+
+            int ans = 0;
+            foreach (var modValue in modK)
+                ans += modValue * (modValue - 1) / 2;
+            return ans;
+        }
     }
 }

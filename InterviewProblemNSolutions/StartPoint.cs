@@ -265,6 +265,7 @@ namespace InterviewProblemNSolutions
             MaximumSizeSubarraySumEqualsk();
             SubarrayProductLessThanK();
             SubarraySumEqualsK();
+            SubarraySumsDivisibleByK();
 
 
             // String Matching Algorithm
@@ -4370,6 +4371,21 @@ namespace InterviewProblemNSolutions
             {
                 nums[i].Print("Nums");
                 Console.WriteLine($" Total no of continuous subarrays whose sum equals to \'{k[i]}\': \'{DailyProblem.SubArraySumEqualsK(nums[i], k[i])}\'\n");
+            }
+        }
+
+
+
+        public static void SubarraySumsDivisibleByK()
+        {
+            // https://leetcode.com/problems/subarray-sums-divisible-by-k/
+            Utility.Print("974. Subarray Sums Divisible by K");
+            int[][] nums = { new int[] { 4, 5, 0, -2, -3, 1 } };
+            int[] k = { 5 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                nums[i].Print("Nums");
+                Console.WriteLine($" Total no of continuous subarrays whose sum equals to \'{k[i]}\': \'{DailyProblem.SubarraysDivByK(nums[i], k[i])}\'\n");
             }
         }
 
