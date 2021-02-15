@@ -264,6 +264,7 @@ namespace InterviewProblemNSolutions
             BinaryContiguousArray();
             MaximumSizeSubarraySumEqualsk();
             SubarrayProductLessThanK();
+            SubarraySumEqualsK();
 
 
             // String Matching Algorithm
@@ -4355,6 +4356,20 @@ namespace InterviewProblemNSolutions
             {
                 nums[i].Print("Nums");
                 Console.WriteLine($" No of (contiguous) subarrays where the product of all the elements in the subarray is less than \'{k[i]}\': {DailyProblem.NumSubarrayProductLessThanK(nums[i], k[i])}\n");
+            }
+        }
+
+
+        public static void SubarraySumEqualsK()
+        {
+            // https://leetcode.com/problems/subarray-sum-equals-k/
+            Utility.Print("560. Subarray Sum Equals K");
+            int[][] nums = { new int[] { 1, 1, 1 }, new int[] { 1, 2, 3 }, new int[] { 1, -1, 0 }, new int[] { -1, -1, 1 } };
+            int[] k = { 2, 3, 0, 0 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                nums[i].Print("Nums");
+                Console.WriteLine($" Total no of continuous subarrays whose sum equals to \'{k[i]}\': \'{DailyProblem.SubArraySumEqualsK(nums[i], k[i])}\'\n");
             }
         }
 

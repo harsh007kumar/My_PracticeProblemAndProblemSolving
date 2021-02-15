@@ -9317,5 +9317,43 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(n)
+        public static int SubArraySumEqualsK(int[] nums, int k)
+        {
+            /* 
+             * Algo: If the cumulative sum(represented by sum[i] for sum up to ith index) is same as some sum[j]
+             * the sum of the elements lying in between those indices is zero. 
+             * 
+             * Extending the same thought further, 
+             * if the cumulative sum up to two indices, say i & j is at a difference of k i.e. if sum[i]−sum[j]=k,
+             * the sum of elements lying between indices i & j is k.
+             * 
+             * Based on this, we make use of a hashmap mapmap which is used to store the cumulative sum up to all the indices possible
+             * along with the number of times the same sum occurs.
+             * 
+             * We store the data in the form: (sum_i, no. of occurrences of sum_i).
+             * 
+             * We traverse over the array nums and keep on finding the cumulative sum.
+             * 
+             * Every time we encounter a new sum, we make a new entry in the hashmap corresponding to that sum.
+             * If the same sum occurs again, we increment the count by 1
+             */
+            Dictionary<int, int> uniqueSumFrequency = new Dictionary<int, int>();
+            uniqueSumFrequency.Add(0, 1);       // base condition
+            int totalSum = 0, count = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                totalSum += nums[i];
+                if (uniqueSumFrequency.ContainsKey(totalSum - k))
+                    count += uniqueSumFrequency[totalSum - k];
+
+                if (!uniqueSumFrequency.ContainsKey(totalSum)) uniqueSumFrequency.Add(totalSum, 1);
+                else uniqueSumFrequency[totalSum]++;
+            }
+            return count;
+        }
+
+
+
     }
 }
