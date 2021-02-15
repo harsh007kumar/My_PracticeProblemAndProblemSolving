@@ -258,6 +258,7 @@ namespace InterviewProblemNSolutions
             DesignHitCounter();
             DesignALeaderboard();
             TheKWeakestRowsInAMatrix();
+            SmallestCommonElement();
 
 
             // String Matching Algorithm
@@ -4271,6 +4272,18 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine("\n");
             }
         }
+
+
+        public static void SmallestCommonElement()
+        {
+            // https://leetcode.com/problems/find-smallest-common-element-in-all-rows/
+            Utility.Print("1198. Find Smallest Common Element in All Rows");
+            int[][] mat = { new int[] { 1, 2, 3, 4, 5 }, new int[] { 2, 4, 5, 8, 10 }, new int[] { 3, 5, 7, 9, 11 }, new int[] { 1, 3, 5, 7, 9 } };
+            mat.Print("Matrix");
+            Console.WriteLine($" Smallest common element in all rows: \'{DailyProblem.SmallestCommonElement(mat)}\'");
+        }
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

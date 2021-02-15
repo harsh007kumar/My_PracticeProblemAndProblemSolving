@@ -9202,6 +9202,27 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(rows*cols) || Space O(row)
+        public static int SmallestCommonElement(int[][] mat)
+        {
+            Dictionary<int, int> numFreq = new Dictionary<int, int>(mat[0].Length);
+            foreach (var num in mat[0])
+                numFreq.Add(num, 1);
+
+            // Update the Frequency of common elements from each row
+            for (int i = 1; i < mat.Length; i++)
+                foreach (var num in mat[i])
+                    if (numFreq.ContainsKey(num))
+                        numFreq[num]++;
+
+            int result = int.MaxValue;
+            // find all nums whose frequency is equal to no of rows and update result with Minimun of all
+            foreach (var kvp in numFreq)
+                if (kvp.Value == mat.Length)
+                    result = Math.Min(result, kvp.Key);
+            return result != int.MaxValue ? result : -1;
+        }
+
 
 
     }
