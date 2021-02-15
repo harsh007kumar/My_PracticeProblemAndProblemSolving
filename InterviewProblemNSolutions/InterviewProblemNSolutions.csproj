@@ -67,6 +67,7 @@
     <Compile Include="StringAlgorithms.cs" />
     <Compile Include="StringIterator.cs" />
     <Compile Include="Trie.cs" />
+    <Compile Include="TwoSum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

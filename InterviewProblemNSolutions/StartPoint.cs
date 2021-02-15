@@ -260,6 +260,7 @@ namespace InterviewProblemNSolutions
             TheKWeakestRowsInAMatrix();
             SmallestCommonElement();
             LongestPalindrome();
+            TwoSumIIIDataStructureDesign();
 
 
             // String Matching Algorithm
@@ -4292,6 +4293,25 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "abccccdd", "a", "ccc", "bb" };
             foreach (var s in sArr)
                 Console.WriteLine($" The longest palindrome that can be built with \'{s}\' letters has length: \'{DailyProblem.LongestPalindrome(s)}\'");
+        }
+
+
+        public static void TwoSumIIIDataStructureDesign()
+        {
+            // https://leetcode.com/problems/two-sum-iii-data-structure-design/
+            Utility.Print("170. Two Sum III - Data structure design");
+            TwoSum twoSum = new TwoSum();
+            twoSum.Add(1);   // [] --> [1]
+            twoSum.Add(3);   // [1] --> [1,3]
+            twoSum.Add(5);   // [1,3] --> [1,3,5]
+            Console.WriteLine($" {twoSum.Find(4)}");  // 1 + 3 = 4, return true
+            Console.WriteLine($" {twoSum.Find(7)}");  // No two integers sum up to 7, return false
+            // Some Other Examples
+            // ["TwoSum","add","add","find"]
+            // [[],[1],[-1],[0]] should return true
+
+            // ["TwoSum","add","find"]
+            // [[],[0],[0]] should return false
         }
 
 
