@@ -9293,5 +9293,29 @@ namespace InterviewProblemNSolutions
             return maxLen;
         }
 
+
+        // Time O(n) || Space O(1)
+        public static int NumSubarrayProductLessThanK(int[] nums, int k)
+        {
+            /* Using the example nums = [10,5,2,6]:
+             * 
+             * If we start at the 0th index, [10,5,2,6], the number of intervals is obviously 1.
+             * If we move to the 1st index, the window is now [10,5,2,6]. The new intervals created are [5] and [10,5], so we add 2.
+             * Now, expand the window to the 2nd index: [10,5,2,6]. The new intervals are [2], [5,2], and [10,5,2], so we add 3.
+             * The pattern should be obvious by now; we add right - left + 1 to the output variable every loop.
+             */
+            if (k <= 1) return 0;
+            int product = 1, right = -1, left = 0, subArrCount = 0;
+            while (++right < nums.Length)
+            {
+                product *= nums[right];
+                while (left < nums.Length && product >= k)  // keep dividing the value by nums[left] till product is not less than 'K'
+                    product /= nums[left++];
+                subArrCount += right - left + 1;
+            }
+            return subArrCount;
+        }
+
+
     }
 }

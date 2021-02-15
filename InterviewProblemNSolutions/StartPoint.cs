@@ -263,6 +263,7 @@ namespace InterviewProblemNSolutions
             TwoSumIIIDataStructureDesign();
             BinaryContiguousArray();
             MaximumSizeSubarraySumEqualsk();
+            SubarrayProductLessThanK();
 
 
             // String Matching Algorithm
@@ -4343,6 +4344,19 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void SubarrayProductLessThanK()
+        {
+            // https://leetcode.com/problems/subarray-product-less-than-k/
+            Utility.Print("713. Subarray Product Less Than K");
+            int[][] nums = { new int[] { 10, 5, 2, 6 }, new int[] { 1, 1, 1 } };
+            int[] k = { 100, 1 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                nums[i].Print("Nums");
+                Console.WriteLine($" No of (contiguous) subarrays where the product of all the elements in the subarray is less than \'{k[i]}\': {DailyProblem.NumSubarrayProductLessThanK(nums[i], k[i])}\n");
+            }
+        }
 
 
 
