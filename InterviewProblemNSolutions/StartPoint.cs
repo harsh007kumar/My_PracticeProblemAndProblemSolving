@@ -266,6 +266,7 @@ namespace InterviewProblemNSolutions
             SubarrayProductLessThanK();
             SubarraySumEqualsK();
             SubarraySumsDivisibleByK();
+            LetterCasePermutation();
 
 
             // String Matching Algorithm
@@ -4389,6 +4390,20 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void LetterCasePermutation()
+        {
+            // https://leetcode.com/problems/letter-case-permutation/
+            Utility.Print("784. Letter Case Permutation");
+            string[] sArr = { "a1B2", "3z4", "12345", "0" };
+            foreach (var s in sArr)
+            {
+                Console.WriteLine($" Below is list of all possible strings we could create from \'{s}\':");
+                foreach (var permutation in DailyProblem.LetterCasePermutation(s))
+                    Console.Write($" {permutation} ||");
+                Console.WriteLine("\n");
+            }
+        }
 
 
 

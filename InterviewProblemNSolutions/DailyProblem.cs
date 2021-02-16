@@ -9388,5 +9388,40 @@ namespace InterviewProblemNSolutions
                 ans += modValue * (modValue - 1) / 2;
             return ans;
         }
+
+
+        // Time = O((2^N)*N) || Space = O(n), since the decision tree has 2 option at every level/index we encounter an alphabet
+        public static IList<string> LetterCasePermutation(string S)
+        {
+            List<string> ans = new List<string>();
+            int l = S.Length;
+            S = S.ToLower();
+            GetTransformation(0, new char[l]);
+            return ans;
+
+            // Local Recursive Func
+            void GetTransformation(int idx, char[] arr)
+            {
+                if (idx == l)  // entire word is formed
+                    ans.Add(new string(arr));
+                else if (Char.IsDigit(S[idx]))
+                {
+                    arr[idx] = S[idx];
+                    GetTransformation(idx + 1, arr);
+                }
+                else
+                {
+                    // once with Smallcase
+                    arr[idx] = S[idx];
+                    GetTransformation(idx + 1, arr);
+                    // once with Uppercase
+                    arr[idx] = (char)((S[idx] - 'a') + 'A');
+                    GetTransformation(idx + 1, arr);
+                }
+            }
+        }
+
+
+
     }
 }
