@@ -60,6 +60,7 @@
     <Compile Include="PeekingIterator.cs" />
     <Compile Include="ProductOfNumbers.cs" />
     <Compile Include="RandomPickWithBlacklisted.cs" />
+    <Compile Include="RangeSumQuery2DImmutable.cs" />
     <Compile Include="SearchAlgorithms.cs" />
     <Compile Include="SelectionAlgorithms.cs" />
     <Compile Include="StartPoint.cs" />
