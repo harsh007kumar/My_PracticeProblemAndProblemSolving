@@ -9499,5 +9499,22 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(2^n), n = total no of bits
+        public static IList<int> GrayCode(int totalBits)
+        {
+            List<int> grayCode = new List<int> { 0, 1 };
+            int ithBit = 1, lastIdx;
+            while (ithBit < totalBits)
+            {
+                lastIdx = grayCode.Count - 1;
+                // turn on the leftMost 1 bit for all the pre existing no's to get list of no's with 1 additional bit
+                for (int i = lastIdx; i >= 0; i--)
+                    grayCode.Add(grayCode[i] + (1 << ithBit));
+                ithBit++;
+            }
+            return grayCode;
+        }
+
+
     }
 }

@@ -270,6 +270,7 @@ namespace InterviewProblemNSolutions
             RangeSumQuery2DImmutable();
             ContainerWithMostWater();
             ThekStrongestValuesInAnArray();
+            GrayCode();
 
 
             // String Matching Algorithm
@@ -4455,6 +4456,22 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine("]\n");
             }
         }
+
+
+        public static void GrayCode()
+        {
+            // https://leetcode.com/problems/gray-code/
+            Utility.Print("89. Gray Code");
+            int[] n = { 1, 2, 3, 4 };
+            foreach (var bitCount in n)
+            {
+                Console.Write($" Gray Code sequence must beginning with 0 & having at most \'{bitCount}\' bits is: [");
+                foreach (var num in DailyProblem.GrayCode(bitCount))
+                    Console.Write($" {num} ||");
+                Console.WriteLine("\n");
+            }
+        }
+
 
 
 
