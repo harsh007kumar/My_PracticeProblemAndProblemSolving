@@ -9422,6 +9422,41 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n^2), n = length of height
+        public static int ContainerWithMostWater_DP(int[] height)
+        {
+            int l = height.Length, minH = 0;
+            int[,] dp = new int[l, l];
+            return GetMax(0, l - 1);
+            // local func
+            int GetMax(int left, int right)
+            {
+                if (left > right || left == right)
+                    return 0;
+                if (dp[left, right] != 0)
+                    return dp[left, right];
 
+                minH = Math.Min(height[left], height[right]);
+                return dp[left, right] = Math.Max(  minH * (right - left),
+                                                    Math.Max(   GetMax(left + 1, right),
+                                                                GetMax(left, right - 1)
+                                                            )
+                                                 );
+            }
+        }
+        // Time = O(n) || Space = O(1), n = length of height
+        public static int ContainerWithMostWater_TwoPointer(int[] height)
+        {
+            int left = 0, right = height.Length - 1, maxCapacity = 0;
+            while (left < right)
+            {
+                maxCapacity = Math.Max(maxCapacity, (right - left) * Math.Min(height[left], height[right]));
+                // We move left pointer forwd if its the one with lessor height
+                if (height[left] < height[right]) left++;
+                // else we move right pointer
+                else right--;
+            }
+            return maxCapacity;
+        }
     }
 }

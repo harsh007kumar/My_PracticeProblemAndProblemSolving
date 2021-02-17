@@ -268,6 +268,7 @@ namespace InterviewProblemNSolutions
             SubarraySumsDivisibleByK();
             LetterCasePermutation();
             RangeSumQuery2DImmutable();
+            ContainerWithMostWater();
 
 
             // String Matching Algorithm
@@ -4421,6 +4422,20 @@ namespace InterviewProblemNSolutions
             obj_dp.SumRegion(1, 1, 2, 2);  // -> 11
             obj.SumRegion(1, 2, 2, 4);  // -> 12
             obj_dp.SumRegion(1, 2, 2, 4);  // -> 12
+        }
+
+
+        public static void ContainerWithMostWater()
+        {
+            // https://leetcode.com/problems/container-with-most-water/
+            Utility.Print("11. Container With Most Water");
+            int[][] heightsArr = { new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 }, new int[] { 1, 1 }, new int[] { 4, 3, 2, 1, 4 }, new int[] { 1, 2, 1 }, new int[] { 1, 3, 2, 5, 25, 24, 5 } };
+            foreach (var heights in heightsArr)
+            {
+                heights.Print("Heights");
+                Console.WriteLine($" (DP) The container which contains the most water has capacity: \'{DailyProblem.ContainerWithMostWater_DP(heights)}\'");
+                Console.WriteLine($" (2-Pointer) The container which contains the most water has capacity: \'{DailyProblem.ContainerWithMostWater_TwoPointer(heights)}\'\n");
+            }
         }
 
 
