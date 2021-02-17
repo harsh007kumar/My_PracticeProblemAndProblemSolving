@@ -269,6 +269,7 @@ namespace InterviewProblemNSolutions
             LetterCasePermutation();
             RangeSumQuery2DImmutable();
             ContainerWithMostWater();
+            ThekStrongestValuesInAnArray();
 
 
             // String Matching Algorithm
@@ -4435,6 +4436,23 @@ namespace InterviewProblemNSolutions
                 heights.Print("Heights");
                 Console.WriteLine($" (DP) The container which contains the most water has capacity: \'{DailyProblem.ContainerWithMostWater_DP(heights)}\'");
                 Console.WriteLine($" (2-Pointer) The container which contains the most water has capacity: \'{DailyProblem.ContainerWithMostWater_TwoPointer(heights)}\'\n");
+            }
+        }
+
+
+        public static void ThekStrongestValuesInAnArray()
+        {
+            // https://leetcode.com/problems/the-k-strongest-values-in-an-array/
+            Utility.Print("1471. The k Strongest Values in an Array");
+            int[][] numsArr = { new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 1, 3, 5, 5 }, new int[] { 6, 7, 11, 7, 6, 8 }, new int[] { 6, -3, 7, 2, 11 }, new int[] { -7, 22, 17, 3 } };
+            int[] k = { 2, 2, 5, 3, 2 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                numsArr[i].Print("Nums");
+                Console.Write($" List of the strongest \'{k[i]}\' values in the array: [");
+                foreach (var num in DailyProblem.GetKStrongestValues(numsArr[i], k[i]))
+                    Console.Write($" {num} ||");
+                Console.WriteLine("]\n");
             }
         }
 

@@ -9458,5 +9458,46 @@ namespace InterviewProblemNSolutions
             }
             return maxCapacity;
         }
+
+
+        // Time O(nlogn) || Space O(k)
+        public static int[] GetKStrongestValues(int[] arr, int k)
+        {
+            // sort to find the median
+            Array.Sort(arr);
+
+            // sort array again as mentioned in problem
+            /* A value arr[i] is said to be stronger than a value arr[j] if |arr[i] - m| > |arr[j] - m| where m is the median of the array.
+             * If |arr[i] - m| == |arr[j] - m|, then arr[i] is said to be stronger than arr[j] if arr[i] > arr[j].
+             * 
+             * Median is the middle value in an ordered integer list. More formally,
+             * if the length of the list is n, the median is the element in position ((n - 1) / 2) in the sorted list (0-indexed).
+             * 
+             * For arr = [6, -3, 7, 2, 11], n = 5 and the median is obtained by sorting the array arr = [-3, 2, 6, 7, 11] &
+             * the median is arr[m] where m = ((5 - 1) / 2) = 2. The median is 6.
+             * 
+             * For arr = [-7, 22, 17, 3], n = 4 and the median is obtained by sorting the array arr = [-7, 3, 17, 22] &
+             * the median is arr[m] where m = ((4 - 1) / 2) = 1. The median is 3.
+             */
+            Array.Sort(arr, new StrongComparator(arr[(arr.Length - 1) / 2]));
+
+            int[] kStrong = new int[k];
+            for (int i = 0; i < k; i++) kStrong[i] = arr[i];
+            return kStrong;
+        }
+        public class StrongComparator : IComparer<int>
+        {
+            int m, a1, b1;
+            public StrongComparator(int median) => m = median;
+            public int Compare(int a, int b)
+            {
+                a1 = Math.Abs(a - m);
+                b1 = Math.Abs(b - m);
+                if (a1 != b1) return a1 > b1 ? -1 : 1;
+                else return a > b ? -1 : 1;
+            }
+        }
+
+
     }
 }
