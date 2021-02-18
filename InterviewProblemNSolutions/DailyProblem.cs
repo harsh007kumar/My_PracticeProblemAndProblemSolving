@@ -9571,5 +9571,31 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n)
+        public static IList<int> KillProcess(IList<int> pid, IList<int> ppid, int kill)
+        {
+            Dictionary<int, List<int>> graph = new Dictionary<int, List<int>>(pid.Count);
+            for (int i = 0; i < pid.Count; i++)
+            {
+                if (!graph.ContainsKey(ppid[i])) graph.Add(ppid[i], new List<int>() { pid[i] });
+                else graph[ppid[i]].Add(pid[i]);
+
+                if (!graph.ContainsKey(pid[i])) graph.Add(pid[i], new List<int>());
+            }
+
+            IList<int> ans = new List<int>();
+            DFS(kill);
+            return ans;
+
+            // Local Func
+            void DFS(int p)
+            {
+                ans.Add(p);
+                foreach (var childProcess in graph[p])
+                    DFS(childProcess);
+            }
+        }
+
+
     }
 }

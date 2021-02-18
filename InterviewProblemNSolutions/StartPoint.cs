@@ -272,6 +272,7 @@ namespace InterviewProblemNSolutions
             ThekStrongestValuesInAnArray();
             GrayCode();
             ArithmeticSlices();
+            KillProcess();
 
 
             // String Matching Algorithm
@@ -4485,6 +4486,22 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" [DP algo Time O(N^2)] No of arithmetic slices in the above array: \'{DailyProblem.NumberOfArithmeticSlices_DP(nums)}\'");
                 Console.WriteLine($" [Liner algo Time O(N)] No of arithmetic slices in the above array: \'{DailyProblem.NumberOfArithmeticSlices_Faster(nums)}\'\n");
             }
+        }
+
+
+        public static void KillProcess()
+        {
+            // https://leetcode.com/problems/kill-process/
+            Utility.Print("582. Kill Process");
+            int[] pid = { 1, 3, 10, 5 };
+            int[] ppid = { 3, 0, 5, 3 };
+            int kill = 5;
+            pid.Print("PID");
+            ppid.Print("PPID");
+            Console.Write($" Processes Killed while killing process with Id: {kill} : [");
+            foreach (var process in DailyProblem.KillProcess(pid, ppid, kill))
+                Console.Write($" {process} ||");
+            Console.WriteLine("]");
         }
 
 
