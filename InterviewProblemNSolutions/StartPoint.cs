@@ -271,6 +271,7 @@ namespace InterviewProblemNSolutions
             ContainerWithMostWater();
             ThekStrongestValuesInAnArray();
             GrayCode();
+            ArithmeticSlices();
 
 
             // String Matching Algorithm
@@ -4472,6 +4473,19 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void ArithmeticSlices()
+        {
+            // https://leetcode.com/problems/arithmetic-slices/
+            Utility.Print("413. Arithmetic Slices");
+            int[][] numsArrays = new int[][] { new int[] { 1, 2, 3, 4 }, new int[] { 0, 1, 2, 3, 4, 5 }, new int[] { 0, 1, 2, 8, 7, 6 } };
+            foreach (var nums in numsArrays)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" [DP algo Time O(N^2)] No of arithmetic slices in the above array: \'{DailyProblem.NumberOfArithmeticSlices_DP(nums)}\'");
+                Console.WriteLine($" [Liner algo Time O(N)] No of arithmetic slices in the above array: \'{DailyProblem.NumberOfArithmeticSlices_Faster(nums)}\'\n");
+            }
+        }
 
 
 

@@ -9516,5 +9516,60 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n^2)
+        public static int NumberOfArithmeticSlices_DP(int[] A)
+        {
+            /* Since we need to count Arithmetic Sequence of length = 3 or more
+             * Brute Force soln is simply finding all sub-arrays in O(n^2) & checking each if its Arithmetic seq or not in O(n),
+             * hence Brute force total Time complexicity is O(n^2) || Space O(1)
+             * 
+             * Its clear in above algo that we would be verifying multiple subarrays again and again un-neccessarily
+             * Hence we can optimize this by saving state of an sub-array in cahe and then build the soln from bottoms-up
+             * 
+             * i.e. first mark all 1 & 2 length arrays as valid sequence,
+             * now for each sequence of 3 of more we only have to check if the diff b/w 1st 2 elements is same as diff b/w 2nd & 3rd element
+             * and sub-array from 2nd element to last is valid sequence, if so we increament counter by 1
+             */
+            int l = A.Length, count = 0, ArithmeticSeq = 0;
+            bool[,] dp = new bool[l, l];
+            for (int len = 1; len <= l; len++)
+                for (int start = 0; start <= l - len; start++)
+                {
+                    ArithmeticSeq = 0;
+                    int last = start + len - 1;
+                    if (start == last) dp[start, last] = true;
+                    else if (start + 1 == last) dp[start, last] = true;
+                    else if (A[start + 1] - A[start] == A[start + 2] - A[start + 1] && dp[start + 1, last])
+                    {
+                        dp[start, last] = true;
+                        count++;
+                    }
+                }
+            return count;
+        }
+        // Time = O(n) || Space = O(1)
+        public static int NumberOfArithmeticSlices_Faster(int[] A)
+        {
+            /* we can have 1-D dp array which stores and no of valid arthimetic sequence till given index,
+             * we start from 3rd element in array (we are only counting sequences of length >=3)
+             * now for each new element we check if its different with last is same as the diff b/w last and last to last element, if so
+             * we know adding this new element to existing sequences would return all prv valid sequences again + 1 more as last 2 elements n this new num forms additional seq
+             * 
+             * hence we update count of sequences at this index i as dp[i] = 1+dp[i-1]
+             * also we increament counter by value of dp[i]
+             * 
+             * QuickNote: instead of using O(n) space we can achieve same result by just using an variable to store last dp[i-1] value
+             * and when adding new number breaks sequence we update this dp value to '0'
+             */
+            int noOfArthimeticSequence = 0, count = 0;
+            for (int i = 2; i < A.Length; i++)
+                if (A[i] - A[i - 1] == A[i - 1] - A[i - 2])
+                    count += ++noOfArthimeticSequence;
+                else
+                    noOfArthimeticSequence = 0;
+            return count;
+        }
+
+
     }
 }
