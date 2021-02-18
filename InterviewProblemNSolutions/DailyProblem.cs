@@ -9596,6 +9596,47 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        // Time = Recursive Space = O(row*col)
+        public static int NumDistinctIslands(int[][] grid)
+        {
+            int rows = grid.Length, cols = grid[0].Length, maxR, maxC, r, c;
+            HashSet<string> types = new HashSet<string>();  // to store uniqye island shapes found so far
+            StringBuilder sb = new StringBuilder(); // to create the map of the shape of the island
+            for (r = 0; r < rows; r++)
+                for (c = 0; c < cols; c++)
+                    if (grid[r][c] == 1)
+                    {
+                        maxR = r;
+                        maxC = c;
+                        sb.Append('S'); // to mark the start of mapping island
+                        GetUniqueIsland(r, c);
+                        types.Add(sb.ToString());
+                        sb.Clear();
+                    }
+            return types.Count;
+
+            // Local Func
+            bool GetUniqueIsland(int i, int j)
+            {
+                if (i < 0 || i >= rows || j < 0 || j >= cols || grid[i][j] == 0) return false;
+                grid[i][j] = 0;   // mark current cell visited
+                
+                // We map the shape of the Island by add the direction we got the next piece of land from and its relative distance from the starting cell
+                
+                // Direction 'R'
+                if (GetUniqueIsland(i, j + 1)) sb.Append("R" + (i - r) + (j - c));
+                // Direction 'D'
+                if (GetUniqueIsland(i + 1, j)) sb.Append("D" + (i - r) + (j - c));
+                // Direction 'L'
+                if (GetUniqueIsland(i, j - 1)) sb.Append("L" + (i - r) + (j - c));
+                // Direction 'U'
+                if (GetUniqueIsland(i - 1, j)) sb.Append("U" + (i - r) + (j - c));
+
+                return true;
+            }
+        }
+
+
 
     }
 }

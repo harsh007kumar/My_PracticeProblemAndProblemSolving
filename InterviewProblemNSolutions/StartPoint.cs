@@ -273,6 +273,7 @@ namespace InterviewProblemNSolutions
             GrayCode();
             ArithmeticSlices();
             KillProcess();
+            NumberOfDistinctIslands();
 
 
             // String Matching Algorithm
@@ -4504,6 +4505,32 @@ namespace InterviewProblemNSolutions
             Console.WriteLine("]");
         }
 
+
+        public static void NumberOfDistinctIslands()
+        {
+            // https://leetcode.com/problems/number-of-distinct-islands/
+            Utility.Print("694. Number of Distinct Islands");
+            int[][][] gridArr = {new int[][] {  new int[] { 1, 1, 0, 0, 0 },
+                                                new int[] { 1, 1, 0, 0, 0 },
+                                                new int[] { 0, 0, 0, 1, 1 },
+                                                new int[] { 0, 0, 0, 1, 1 } },
+                                 new int[][] {  new int[] { 1, 1, 0, 1, 1 },
+                                                new int[] { 1, 0, 0, 0, 0 }, 
+                                                new int[] { 0, 0, 0, 0, 1 },
+                                                new int[] { 1, 1, 0, 1, 1 } },
+                                 new int[][] {  new int[] { 1, 1, 0},
+                                                new int[] { 0, 1, 1},
+                                                new int[] { 0, 0, 0},
+                                                new int[] { 1, 1, 1},
+                                                new int[] { 0, 1, 0}
+                                                }
+                                };
+            foreach (var grid in gridArr)
+            {
+                grid.Print("GRID");
+                Console.WriteLine($" No of unique islands in above GRID are: \'{DailyProblem.NumDistinctIslands(grid)}\'");
+            }
+        }
 
 
 
