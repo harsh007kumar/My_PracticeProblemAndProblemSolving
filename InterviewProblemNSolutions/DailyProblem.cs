@@ -9637,6 +9637,173 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(l*height*width), l = length of array nuts || Space O(height, width)
+        public static int SquirrelSimulation_BFS(int height, int width, int[] tree, int[] squirrel, int[][] nuts)
+        {
+            /* Here we have just 1 squirrel & 1 Tree and 1 or more nuts and none of the position overlap
+             * 1st Goal is to find closet nuts from squirrel since we can only collect one nut at a time.
+             * next find the shortest distance for each of the nut to the tree.
+             * 
+             * Now we simply return distTravelBySquirrelToReachClosetNut + distances from 1st nut to tree + (2 * Sum of all min distances from remaining nuts to tree)
+             * Here we double the distance for remaining nuts except 1st as we also need to travel back to the tree to deposit the nut before collecting any other nut
+             */
+            int closetNutFromSquirrel = 0, distancesOffirstNutTotree = 0, l = nuts.Length, totalDist = 0;
+            Dictionary<int, int> nutsDistanceToTree = new Dictionary<int, int>(l);
+
+            bool[,] addedToQueue;
+            int[,] grid = new int[height, width];
+            Queue<int[]> q = new Queue<int[]>();
+            int[] closetTreeDist = new int[l];
+            for (int i = 0; i < l; i++)
+            {
+                totalDist += closetTreeDist[i] = GetMinDistanceToTree(nuts[i]);
+                grid[nuts[i][0], nuts[i][1]] = 1;        // mark presense of nut
+            }
+
+            int closetSquirreRow, closetSquirreCol;
+            closetNutFromSquirrel = FindClosetNutFromSquirrel();
+            distancesOffirstNutTotree = GetFromClosetTreeDist();
+            
+            return closetNutFromSquirrel + (2 * totalDist - distancesOffirstNutTotree);
+
+            // Local func
+            int GetMinDistanceToTree(int[] nutPos)
+            {
+                addedToQueue = new bool[height, width];      // to keep track of visited cells
+                q.Clear();
+                q.Enqueue(new int[] { nutPos[0], nutPos[1], 0 });
+                addedToQueue[nutPos[0], nutPos[1]] = true;   // mark current cell as visited
+                int r, c, dist;
+                int[] currPos;
+                while (true)
+                {
+                    currPos = q.Dequeue();
+                    r = currPos[0];
+                    c = currPos[1];
+                    dist = currPos[2];
+                    if (r == tree[0] && c == tree[1])       // found tree
+                        return dist;
+
+                    // Search for Tree in all Four Direction
+
+                    // up
+                    if (r - 1 >= 0 && !addedToQueue[r - 1, c])
+                    {
+                        q.Enqueue(new int[] { r - 1, c, dist + 1 });
+                        addedToQueue[r - 1, c] = true;
+                    }
+                    // down
+                    if (r + 1 < height && !addedToQueue[r + 1, c])
+                    {
+                        q.Enqueue(new int[] { r + 1, c, dist + 1 });
+                        addedToQueue[r + 1, c] = true;
+                    }
+                    // left
+                    if (c - 1 >= 0 && !addedToQueue[r, c - 1])
+                    {
+                        q.Enqueue(new int[] { r, c - 1, dist + 1 });
+                        addedToQueue[r, c - 1] = true;
+                    }
+                    // right
+                    if (c + 1 < width && !addedToQueue[r, c + 1])
+                    {
+                        q.Enqueue(new int[] { r, c + 1, dist + 1 });
+                        addedToQueue[r, c + 1] = true;
+                    }
+                }
+                
+            }
+
+            int FindClosetNutFromSquirrel()
+            {
+                q.Clear();
+                q.Enqueue(new int[] { squirrel[0], squirrel[1], 0 });
+                addedToQueue = new bool[height, width];      // to keep track of visited cells
+                addedToQueue[squirrel[0], squirrel[1]] = true;// mark current cell as visited
+                int r, c, dist;
+                int[] currPos;
+                while (true)
+                {
+                    currPos = q.Dequeue();
+                    r = currPos[0];
+                    c = currPos[1];
+                    dist = currPos[2];
+                    if (grid[r, c] == 1)                    // found nut
+                    {
+                        closetSquirreRow = r;
+                        closetSquirreCol = c;
+                        return dist;
+                    }
+
+                    // Search for Nuts in all Four Direction
+
+                    // up
+                    if (r - 1 >= 0 && !addedToQueue[r - 1, c])
+                    {
+                        q.Enqueue(new int[] { r - 1, c, dist + 1 });
+                        addedToQueue[r - 1, c] = true;
+                    }
+                    // down
+                    if (r + 1 < height && !addedToQueue[r + 1, c])
+                    {
+                        q.Enqueue(new int[] { r + 1, c, dist + 1 });
+                        addedToQueue[r + 1, c] = true;
+                    }
+                    // left
+                    if (c - 1 >= 0 && !addedToQueue[r, c - 1])
+                    {
+                        q.Enqueue(new int[] { r, c - 1, dist + 1 });
+                        addedToQueue[r, c - 1] = true;
+                    }
+                    // right
+                    if (c + 1 < width && !addedToQueue[r, c + 1])
+                    {
+                        q.Enqueue(new int[] { r, c + 1, dist + 1 });
+                        addedToQueue[r, c + 1] = true;
+                    }
+                }
+            }
+
+            int GetFromClosetTreeDist()
+            {
+                for (int i = 0; i < l; i++)
+                    if (nuts[i][0] == closetSquirreRow && nuts[i][1] == closetSquirreCol)
+                        return closetTreeDist[i];
+                return 0;
+            }
+        }
+        // Time O(n) || Space O(1), n = length of array nuts
+        public static int SquirrelSimulation(int height, int width, int[] tree, int[] squirrel, int[][] nuts)
+        {
+            /* the distance between any two points(tree, squirrel, nut) is given by the absolute difference b/w
+             * the corresponding x-coordinates and the corresponding y-coordinates.
+             * 
+             * Now, in order to determine the required minimum distance, we need to observe a few points. Firstly,
+             * the order in which the nuts are picked doesn't affect the final result, except one of the nuts which needs to be visited first from the squirrel's starting position. For the rest of the nuts, it is mandatory to go from the tree to the nut and then come back as well.
+             * 
+             * For the first visited nut, the saving obtained, given by dd, is the difference between the distance b/w
+             * the tree and the current nut & the distance between the current nut and the squirrel. 
+             * This is because for this nut, we need not travel from the tree to the nut,
+             * but need to travel an additional distance from the squirrel's original position to the nut.
+             * 
+             * While traversing over the nutsnuts array and adding the to-and-fro distance,
+             * we find out the saving, dd, which can be obtained if the squirrel goes to the current nut first. Out of all the nuts, we find out the nut which maximizes the saving and then deduct this maximum saving from the sum total of the to-and-fro distance of all the nuts.
+             * 
+             * Note that the first nut to be picked needs not necessarily be the nut closest to the squirrel's start point,
+             * but it's the one which maximizes the savings.
+             */
+            int totalDistance = 0, d = int.MinValue;
+            for (int i = 0; i < nuts.Length; i++)
+            {
+                totalDistance += GetDistance(nuts[i], tree);
+                d = Math.Max(d, GetDistance(nuts[i], tree) - GetDistance(nuts[i], squirrel));
+            }
+            return (totalDistance * 2) - d;
+            // Local Func
+            int GetDistance(int[] start, int[] destination) => Math.Abs(start[0] - destination[0]) + Math.Abs(start[1] - destination[1]);
+        }
+
+
 
     }
 }

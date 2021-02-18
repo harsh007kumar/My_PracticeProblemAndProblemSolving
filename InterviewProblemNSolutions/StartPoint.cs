@@ -274,6 +274,7 @@ namespace InterviewProblemNSolutions
             ArithmeticSlices();
             KillProcess();
             NumberOfDistinctIslands();
+            SquirrelSimulation();
 
 
             // String Matching Algorithm
@@ -4532,6 +4533,18 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void SquirrelSimulation()
+        {
+            // https://leetcode.com/problems/squirrel-simulation/
+            Utility.Print("573. Squirrel Simulation");
+            int height = 5, width = 7;
+            int[] treePos = { 2, 2 }, squirrelPos = { 4, 4 };
+            int[][] nutsPosArray = { new int[] { 3, 0 }, new int[] { 2, 5 } };
+            Console.WriteLine($" Minimal distance for the squirrel at Position \tx: {squirrelPos[0]} || y: {squirrelPos[1]}\n" +
+                $" to collect all the nuts and put them under the tree at position \tx: {treePos[0]} || y: {treePos[1]}\n" +
+                $" one by one is: \'{DailyProblem.SquirrelSimulation(height,width,treePos,squirrelPos,nutsPosArray)}\'");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
