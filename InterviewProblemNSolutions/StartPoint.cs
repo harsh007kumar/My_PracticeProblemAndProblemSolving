@@ -275,6 +275,7 @@ namespace InterviewProblemNSolutions
             KillProcess();
             NumberOfDistinctIslands();
             SquirrelSimulation();
+            MinimumRemoveToMakeValidParentheses();
 
 
             // String Matching Algorithm
@@ -4545,6 +4546,23 @@ namespace InterviewProblemNSolutions
                 $" to collect all the nuts and put them under the tree at position \tx: {treePos[0]} || y: {treePos[1]}\n" +
                 $" one by one is: \'{DailyProblem.SquirrelSimulation(height,width,treePos,squirrelPos,nutsPosArray)}\'");
         }
+
+
+        public static void MinimumRemoveToMakeValidParentheses()
+        {
+            // https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/
+            Utility.Print("1249. Minimum Remove to Make Valid Parentheses");
+            string[] sArr = { "lee(t(c)o)de)", "a)b(c)d", "))((", "(a(b(c)d)" };
+            foreach (var str in sArr)
+            {
+                Console.WriteLine($" \'{str}\' after removing min no of parentheses," +
+                    $"\n Resulting valid parentheses string is: \'{DailyProblem.MinRemoveToMakeValid_Stack_HashSet(str)}\'\n");
+                Console.WriteLine($" \'{str}\' after removing min no of parentheses," +
+                    $"\n Resulting valid parentheses string is: \'{DailyProblem.MinRemoveToMakeValid_List(str)}\'\n");
+            }
+        }
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

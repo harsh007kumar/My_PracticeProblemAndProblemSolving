@@ -9804,6 +9804,85 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n), 3 pass solution
+        public static string MinRemoveToMakeValid_Stack_HashSet(string s)
+        {
+            /* Keep Inserting indices of the in stack for every open bracket encountered,
+             * and remove one from list wheneve closing bracket is encountered,
+             * 
+             * but if stack is empty then add closing bracking index to DontInclude HashSet
+             * at end if any open bracket our remaining add them to DontInclude set as well
+             * 
+             * Now append all character of input in a StringBuilder, which are not in 'DontInclude' set
+             * and return sb.ToString()
+             */
+            Stack<int> st = new Stack<int>();
+            HashSet<int> dontInclude = new HashSet<int>();
+            for (int i = 0; i < s.Length; i++)          // O(n)
+                if (s[i] == '(') st.Push(i);
+                else if (s[i] == ')')
+                    if (st.Count > 0) st.Pop();
+                    else dontInclude.Add(i);
+
+            while (st.Count > 0) dontInclude.Add(st.Pop());
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < s.Length; i++)          // O(n)
+                if (!dontInclude.Contains(i)) 
+                    sb.Append(s[i]);
+
+            return sb.ToString();                       // O(n)
+        }
+        // Time = Space = O(n), 3 pass solution
+        public static string MinRemoveToMakeValid_List(string s)
+        {
+            /* Set a balancer counter increament it by 1 when open bracket is encountered,
+             * and decreament if by 1 when closing is encountered
+             * 
+             * Start traversing from Left-to-Right
+             * Keep inserting the characters all along except when balance becomes -ve,
+             * and reset the balance to 0
+             * 
+             * Now repeat the above operation when traversing from Right-To-Left
+             */
+            List<char> ls = new List<char>();
+            int balance = 0;
+
+            // Left to Right
+            for (int i = 0; i < s.Length; i++)          // O(n)
+            {
+                if (s[i] == ')' && --balance < 0)
+                {
+                    balance = 0;
+                    continue;
+                }
+                else if (s[i] == '(') balance++;
+                ls.Add(s[i]);
+            }
+
+            if (balance == 0)
+                return new string(ls.ToArray());
+
+            // Right to Left
+            balance = 0;
+            Stack<char> ans = new Stack<char>();
+            for (int i = ls.Count - 1; i >= 0; i--)     // O(n)
+            {
+                if (ls[i] == '(' && --balance < 0)
+                {
+                    balance = 0;
+                    continue;
+                }
+                else if (ls[i] == ')') balance++;
+                ans.Push(ls[i]);
+            }
+
+            return new string(ans.ToArray());           // O(n)
+        }
+
+
+
+
 
     }
 }
