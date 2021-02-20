@@ -9893,6 +9893,72 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = O(K*Min(N,2^K)) || Space = O(2^K), K = number of cells(i.e. 8) & N = number of steps
+        public static int[] PrisonAfterNDays(int[] cells, int N)
+        {
+            /* once we can find out the anser using Brute force,
+             * we can think how can we speed this up?
+             * Patterns likely repeat, hence cache them.
+             * If the patterns repeat and we know at what index it does,
+             * we can work out where the answer is by calculating how far we are from N when the repetition occurs.
+             */
+            Dictionary<int, int> cachedState = new Dictionary<int, int>();
+            int l = cells.Length, idx, nextState;
+            int currState = GetCurrState(cells);
+            while (N > 0)
+            {
+                if (!cachedState.ContainsKey(currState))        // new state found
+                    cachedState.Add(currState, N--);
+                else
+                {
+                    // find out after how many steps current state was repeated
+                    int cycleLength = cachedState[currState] - N;
+                    N %= cycleLength;
+                    while (N-- > 0)
+                        currState = GetNextState(currState);
+                    break;
+                }
+                currState = GetNextState(currState);
+            }
+            return ConvertCurrState(currState);
+
+            // Local Func
+            int GetCurrState(int[] c)
+            {
+                nextState = 0;
+                for (idx = 0; idx < l; idx++)
+                    nextState |= c[idx] << ((l - idx) - 1);     // applying 'OR' operator to iThBit while reading from first to last
+                return nextState;
+            }
+            int GetNextState(int c)
+            {
+                nextState = 0;
+                int leftCell, rtCell;
+                for (idx = 1; idx < l - 1; idx++)
+                {
+                    rtCell = (c & (1 << (idx - 1)));
+                    leftCell = c & (1 << (idx + 1));
+                    // Either Both left & Right cells are empty or both are occupied
+                    if ((leftCell > 0 && rtCell > 0) || (leftCell == 0 && rtCell == 0))
+                        nextState |= 1 << idx;
+                }
+                        
+                return nextState;
+            }
+            int[] ConvertCurrState(int s)
+            {
+                for (idx = 0; idx < l; idx++)
+                    cells[idx] = (s &  1 << l - (idx + 1)) > 0 ? 1 : 0;
+                ////Another Method by applying AND operator with every bit position
+                //for (idx = l - 1; idx >= 0; idx--)
+                //{
+                //    cells[idx] = s & 1;
+                //    s >>= 1;        // right shift all bits by one
+                //}
+                return cells;
+            }
+        }
+
 
 
 

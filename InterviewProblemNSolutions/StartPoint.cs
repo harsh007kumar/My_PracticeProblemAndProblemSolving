@@ -276,6 +276,7 @@ namespace InterviewProblemNSolutions
             NumberOfDistinctIslands();
             SquirrelSimulation();
             MinimumRemoveToMakeValidParentheses();
+            PrisonCellsAfterNDays();
 
 
             // String Matching Algorithm
@@ -4566,6 +4567,20 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void PrisonCellsAfterNDays()
+        {
+            // https://leetcode.com/problems/prison-cells-after-n-days/
+            Utility.Print("957. Prison Cells After N Days");
+            int[][] cellsArr = { new int[] { 0, 1, 0, 1, 1, 0, 0, 1 }, new int[] { 1, 0, 0, 1, 0, 0, 1, 0 }, new int[] { 0, 0, 0, 1, 1, 0, 1, 0 } };
+            int[] daysArr = { 7, 1000000000, 574 };
+            for (int i = 0; i < cellsArr.Length; i++)
+            {
+                cellsArr[i].Print("Prison Cells Starting State");
+                DailyProblem.PrisonAfterNDays(cellsArr[i], daysArr[i]).Print($"Prison Cells after \'{daysArr[i]}\' days");
+                Console.WriteLine();
+            }
+        }
 
 
 
