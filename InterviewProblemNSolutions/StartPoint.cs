@@ -1065,17 +1065,21 @@ namespace InterviewProblemNSolutions
 
         public static void IntegerToRoman()
         {
-            // https://leetcode.com/problems/integer-to-roman/
-            // https://leetcode.com/problems/roman-to-integer/
-            Utility.Print("12. Integer to Roman && 13. Roman to Integer");
+            // https://leetcode.com/problems/integer-to-roman/ IntegerToRoman()
+            // https://leetcode.com/problems/roman-to-integer/ RomanToInteger()
+            Utility.Print("12. Integer to Roman");
+            Utility.Print("13. Roman to Integer");
             int[] nums = { 3, 4, 9, 58, 1994 };
             foreach (var num in nums)
             {
                 var roman = DailyProblem.IntegerToRoman(num);
-                var no = DailyProblem.RomanToInteger(roman);
-                Console.WriteLine($" Interger to Roman: \t {no} \t{roman}");
+                //var no = DailyProblem.RomanToInteger(roman);
+                var no = DailyProblem.RomanToInteger_ReadingFromLast(roman);
+                Console.WriteLine($" \'{num}\' in Integer Translates to \'{roman}\' in Roman");
+                Console.WriteLine($" \'{roman}\' in Roman Translates to \'{no}\' in Integer\n");
             }
         }
+
 
         public static void CompareVersionNumbers()
         {

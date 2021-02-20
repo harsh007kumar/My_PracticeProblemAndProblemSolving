@@ -1624,6 +1624,18 @@ namespace InterviewProblemNSolutions
             }
             return result;
         }
+        public static int RomanToInteger_ReadingFromLast(string s)
+        {
+            if (s.Length == 0) return 0;
+            var v = new Dictionary<char, int>() { { 'I', 1 }, { 'V', 5 }, { 'X', 10 }, { 'L', 50 }, { 'C', 100 }, { 'D', 500 }, { 'M', 1000 } };
+            int ans = v[s[s.Length - 1]];
+            for (int i = s.Length - 2; i >= 0; i--)
+                if (v[s[i]] < v[s[i + 1]])
+                    ans -= v[s[i]];
+                else
+                    ans += v[s[i]];
+            return ans;
+        }
 
         // Functions compares 2 versions and returns -1 (ver1 < ver2) or 1 (ver2 < ver1) else 0 (ver1==ver2)
         // Time O(max(N,M)) || Space O(max(N,M))
