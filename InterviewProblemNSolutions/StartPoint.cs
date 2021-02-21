@@ -279,6 +279,7 @@ namespace InterviewProblemNSolutions
             PrisonCellsAfterNDays();
             FlipStringToMonotoneIncreasing();
             BrokenCalculator();
+            TwoKeysKeyboard();
 
 
             // String Matching Algorithm
@@ -4605,6 +4606,14 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void TwoKeysKeyboard()
+        {
+            // https://leetcode.com/problems/2-keys-keyboard/
+            Utility.Print("650. 2 Keys Keyboard");
+            int[] nArr = { 1000, 500, 2 };
+            foreach (var n in nArr)
+                Console.WriteLine($" Min no of steps to get {n} A's from single 'A' are: {DailyProblem.TwoStepsKeyboard(n)}");
+        }
 
 
 

@@ -10060,5 +10060,23 @@ namespace InterviewProblemNSolutions
             return (X - Y) + steps;
         }
 
+
+        // Time O(sq root n) || Space O(1)
+        public static int TwoStepsKeyboard(int n)
+        {
+            int minSteps = 0, primeNo = 2;
+            while (n > 1)
+            {
+                while (n % primeNo == 0)
+                {
+                    n /= primeNo;
+                    minSteps += primeNo;
+                }
+                primeNo++;
+            }
+            return minSteps;
+        }
+
+
     }
 }
