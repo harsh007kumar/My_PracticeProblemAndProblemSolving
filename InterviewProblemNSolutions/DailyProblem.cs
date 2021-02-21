@@ -10016,7 +10016,49 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(logY) || Space O(1)
+        public static int BrokenCalculator(int X, int Y)
+        {
+            #region 1st ATTEMPT, fails at x = 1, y = 1000000000, O/P should be 39
+            //if (X >= Y) return X - Y;
+            //long steps = 0, doublingEffort = 0, reducingEffort;
+            //while (X != Y)
+            //{
+            //    doublingEffort = Math.Abs(Y - X * 2);
+            //    reducingEffort = Math.Abs(Y - (X - 1) * 2);
+            //    if (doublingEffort <= reducingEffort)
+            //        X *= 2;
+            //    else
+            //        X--;
+            //    steps++;
+            //}
+            //return (int)steps;
+            #endregion 
 
+            /* Instead of multiplying by 2 or subtracting 1 from X, we could divide by 2 (when Y is even) or add 1 to Y.
+             * 
+             * The motivation for this is that it turns out we always greedily divide by 2:
+             * If say Y is even,
+             *      then if we perform 2 additions and one division,
+             *      we could instead perform one division & one addition for less operations [(Y+2) / 2 vs Y/2 + 1].
+             * If say Y is odd,
+             *      then if we perform 3 additions and one division,
+             *      we could instead perform 1 addition, 1 division, and 1 addition for less operations [(Y+3) / 2 vs (Y+1) / 2 + 1].
+             * 
+             * While Y is larger than X, add 1 if it is odd, else divide by 2.
+             * Afterwards, we need to do X - Y additions to reach X.
+             */
+            int steps = 0;
+            while (Y > X)
+            {
+                if (Y % 2 == 0)     // if 'Y' is even divided in half
+                    Y /= 2;
+                else                // else add 1 to 'Y'
+                    Y++;
+                steps++;
+            }
+            return (X - Y) + steps;
+        }
 
     }
 }

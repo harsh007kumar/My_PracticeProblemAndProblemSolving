@@ -278,6 +278,7 @@ namespace InterviewProblemNSolutions
             MinimumRemoveToMakeValidParentheses();
             PrisonCellsAfterNDays();
             FlipStringToMonotoneIncreasing();
+            BrokenCalculator();
 
 
             // String Matching Algorithm
@@ -4592,6 +4593,17 @@ namespace InterviewProblemNSolutions
             foreach (var s in sArr)
                 Console.WriteLine($" Min no of flips to make \'{s}\' into monotone increasing sequence are: {DailyProblem.MinFlipsMonoIncr(s)}\n");
         }
+
+
+        public static void BrokenCalculator()
+        {
+            // https://leetcode.com/problems/broken-calculator/
+            Utility.Print("991. Broken Calculator");
+            int[] x = { 2, 5, 3, 1024, 1 }, y = { 3, 8, 10, 1, 1000000000 };
+            for (int i = 0; i < x.Length; i++)
+                Console.WriteLine($" Min no of operations needed to convert \'{x[i]}\' to \'{y[i]}\': '{DailyProblem.BrokenCalculator(x[i], y[i])}\'\n");
+        }
+
 
 
 
