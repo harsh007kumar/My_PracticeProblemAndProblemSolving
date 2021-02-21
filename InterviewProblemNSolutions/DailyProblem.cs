@@ -9960,6 +9960,62 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1)
+        public static int MinFlipsMonoIncr(string S)
+        {
+            #region FAILED 1st ATTEMPT 72nd of 81 cases
+            //int zerosAfterFirst1 = 0, ones = 0, i = 0;
+            //while (i < S.Length && S[i] == '0')   // skip all starting zero's
+            //    i++;
+            //while (i < S.Length)
+            //    if (S[i++] == '1')
+            //        ones++;
+            //    else
+            //        zerosAfterFirst1++;
+
+            //if (zerosAfterFirst1 <= 0)     // string is already monotone increasing.
+            //    return zerosAfterFirst1;
+            //else                        // we encountered some zero's after 1st one.
+            //{
+            //    i = S.Length - 1;
+            //    while (i >= 0 && S[i--] == '1')
+            //        ones--;
+            //    return Math.Min(zerosAfterFirst1, ones);
+            //}
+            #endregion
+
+            /* 
+             * Basically we go through string and found out how much 1 before index much be flipped to 0
+             * plus how many 0's after index need to be flipped to 1 to make monotone increasing sequence.
+             * 
+             * Add them up and get min for result
+             * 
+             * For example, with S = "010110": we have P = [0, 0, 1, 1, 2, 3, 3]. Now say we want to evaluate having x=3 zeros.
+             * There are P[3] = 1 ones in the first 3 characters, and P[6] - P[3] = 2 ones in the later N-x = 3 characters.
+             * So, there is (N-x) - (P[N] - P[x]) = 1 zero in the later N-x characters.
+             * We take the minimum among all candidate answers to arrive at the final answer.
+             */
+            int totalOnes = 0, l = S.Length, onesOnLeft = 0, onesOnRight, elementsOnRtOfCurrentIdx = 0;
+            for (int i = 0; i < l; i++)
+                if (S[i] == '1')
+                    totalOnes++;
+
+            // inititate 'minFlips' with case when we flip all '1' to '0' on right to make monotone increasing sequence
+            int minFlips = l - totalOnes;
+            for (int i = 0; i < l; i++)
+            {
+                if (S[i] == '1') onesOnLeft++;
+                minFlips = Math.Min(minFlips, onesOnLeft + (l - i - 1) - (totalOnes - onesOnLeft));
+
+                // Above expression can be expanded as below for better understanding
+                //elementsOnRtOfCurrentIdx = (l - i - 1);
+                //onesOnRight = totalOnes - onesOnLeft;
+                //minFlips = Math.Min(minFlips, onesOnLeft + elementsOnRtOfCurrentIdx - onesOnRight);
+            }
+            return minFlips;
+        }
+
+
 
 
     }

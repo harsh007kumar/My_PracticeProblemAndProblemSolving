@@ -277,6 +277,7 @@ namespace InterviewProblemNSolutions
             SquirrelSimulation();
             MinimumRemoveToMakeValidParentheses();
             PrisonCellsAfterNDays();
+            FlipStringToMonotoneIncreasing();
 
 
             // String Matching Algorithm
@@ -4581,6 +4582,17 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine();
             }
         }
+
+
+        public static void FlipStringToMonotoneIncreasing()
+        {
+            // https://leetcode.com/problems/flip-string-to-monotone-increasing/
+            Utility.Print("926. Flip String to Monotone Increasing");
+            string[] sArr = { "00110", "010110", "00011000", "11011", "0101100011", "10011111110010111011" };
+            foreach (var s in sArr)
+                Console.WriteLine($" Min no of flips to make \'{s}\' into monotone increasing sequence are: {DailyProblem.MinFlipsMonoIncr(s)}\n");
+        }
+
 
 
 
