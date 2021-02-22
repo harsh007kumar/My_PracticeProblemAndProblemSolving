@@ -10078,5 +10078,27 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(Max(n*l)) || Space O(l), n is length of dictionary 'd' & l is avg length of words in dictionary
+        public static string FindLongestWord(string s, IList<string> d)
+        {
+            string ans = "";
+            foreach (var word in d)
+            {
+                int i, j = 0;
+                // check if current word is subsequence of 's'
+                for (i = 0; i < s.Length && j < word.Length; i++)
+                    if (s[i] == word[j]) j++;
+
+                if (j == word.Length)
+                    if (word.Length > ans.Length)           // new match is longer
+                        ans = word;
+                    else if (word.Length == ans.Length)     // new match of same length comes lexographically earlier
+                        ans = word.CompareTo(ans) < 0 ? word : ans;
+            }
+            return ans;
+        }
+
+
+
     }
 }

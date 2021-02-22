@@ -280,6 +280,7 @@ namespace InterviewProblemNSolutions
             FlipStringToMonotoneIncreasing();
             BrokenCalculator();
             TwoKeysKeyboard();
+            LongestWordInDictionaryThroughDeleting();
 
 
             // String Matching Algorithm
@@ -4614,6 +4615,23 @@ namespace InterviewProblemNSolutions
             foreach (var n in nArr)
                 Console.WriteLine($" Min no of steps to get {n} A's from single 'A' are: {DailyProblem.TwoStepsKeyboard(n)}");
         }
+
+
+        public static void LongestWordInDictionaryThroughDeleting()
+        {
+            // https://leetcode.com/problems/longest-word-in-dictionary-through-deleting/
+            Utility.Print("524. Longest Word in Dictionary through Deleting");
+            string[] s = { "abpcplea", "abpcplea","aewfafwafjlwajflwajflwafj" };
+            string[][] dArr = { new string[] { "ale", "apple", "monkey", "plea" }, new string[] { "a", "b", "c" }, new string[] { "apple", "ewaf", "awefawfwaf", "awef", "awefe", "ewafeffewafewf" } };
+            for (int i = 0; i < s.Length; i++)
+            {
+                dArr[i].Print("Dictionary");
+                Console.WriteLine($" longest word with the smallest lexicographical order in the dictionary," +
+                    $" that can be formed by deleting some characters of the given string \'{s[i]}\'\n" +
+                    $" is: \'{DailyProblem.FindLongestWord(s[i], dArr[i])}\'\n");
+            }
+        }
+
 
 
 
