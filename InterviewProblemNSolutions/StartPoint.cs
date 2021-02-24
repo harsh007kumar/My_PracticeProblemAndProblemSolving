@@ -282,6 +282,7 @@ namespace InterviewProblemNSolutions
             TwoKeysKeyboard();
             LongestWordInDictionaryThroughDeleting();
             ScoreOfParentheses();
+            AndroidUnlockPatterns();
 
 
             // String Matching Algorithm
@@ -4641,6 +4642,17 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "()", "(())", "()()", "(()(()))" };
             foreach (var s in sArr)
                 Console.WriteLine($" score of the string \'{s}\' based on the given rule is: \'{DailyProblem.ScoreOfParentheses(s)}\'");
+        }
+
+
+        public static void AndroidUnlockPatterns()
+        {
+            // https://leetcode.com/problems/android-unlock-patterns/
+            Utility.Print("351. Android Unlock Patterns");
+            int[] m = { 1, 1, 1, 5 }, n = { 1, 2, 3, 6 };
+            for (int i = 0; i < m.Length; i++)
+                Console.WriteLine($" No of unique-valid unlock patterns of the Android grid lock screen," +
+                    $"\n that consist of at least \'{m[i]}\' keys and at most \'{n[i]}\' keys are: \'{DailyProblem.AndroidUnlockPatterns(m[i], n[i])}\'\n");
         }
 
 

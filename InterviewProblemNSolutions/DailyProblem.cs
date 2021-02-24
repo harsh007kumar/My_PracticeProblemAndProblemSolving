@@ -10137,5 +10137,90 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time O(n)! || Space O(1) || Recursive Space O(n), n os maximum pattern length
+        public static int AndroidUnlockPatterns(int m, int n)
+        {
+            /* Android devices have a special lock screen with a 3 x 3 grid of dots.
+             * Users can set an "unlock pattern" by connecting the dots in a specific sequence, 
+             * forming a series of joined line segments where each segment's endpoints are two consecutive dots in the sequence.
+             * A sequence of k dots is a valid unlock pattern if both of the following are true:
+             *      >> All the dots in the sequence are distinct.
+             *      >> If the line segment connecting two consecutive dots in the sequence passes through any other dot, 
+             *          the other dot must have previously appeared in the sequence. No jumps through non-selected dots are allowed.
+             * 
+             * Here are some example valid and invalid unlock patterns:
+             * The 1st pattern [4,1,3,6] is invalid because the line connecting dots 1 and 3 pass through dot 2, but dot 2 did not previously appear in the sequence.
+             * The 2nd pattern [4,1,9,2] is invalid because the line connecting dots 1 and 9 pass through dot 5, but dot 5 did not previously appear in the sequence.
+             * The 3rd pattern [2,4,1,3,6] is valid because it follows the conditions.
+             *      The line connecting dots 1 and 3 meets the condition because dot 2 previously appeared in the sequence.
+             * The 4th pattern [6,5,4,1,9,2] is valid because it follows the conditions.
+             *      The line connecting dots 1 and 9 meets the condition because dot 5 previously appeared in the sequence.
+             * 
+             * Given two integers m and n, return the number of unique and valid unlock patterns of the Android grid lock screen
+             * that consist of at least m keys and at most n keys.
+             * 
+             * Two unlock patterns are considered unique if there is a dot in one sequence that is not in the other, or the order of the dots is different.
+             * 
+             * 
+             * IMPORTANT NOTE:
+             *      The algorithm above could be optimized if we consider the symmetry property of the problem.
+             *      We notice that the number of valid patterns with first digit 1, 3, 7, 9 are the same.
+             *      A similar observation is true for patterns which starts with digit 2, 4, 6, 8.
+             *      Hence we only need to calculate one among each group and multiply by 
+             */
+
+            // to mark digits from 1 to 9 which are used or not
+            bool[] used = new bool[9];
+            int unqiuePatterns = 0, mid;
+            for (int patternLen = m; patternLen <= n; patternLen++)
+                unqiuePatterns += GetPattern(-1, patternLen);
+            return unqiuePatterns;
+
+            // local func
+            int GetPattern(int last, int len)
+            {
+                if (len == 0) return 1;
+
+                int patternsOfGivenLen = 0;
+                for (int curr = 0; curr < 9; curr++)
+                    if (IsValid(last, curr))
+                    {
+                        used[curr] = true;
+                        patternsOfGivenLen += GetPattern(curr, len - 1);
+                        used[curr] = false;
+                    }
+                return patternsOfGivenLen;
+            }
+            bool IsValid(int last, int curr)
+            {
+                // newly selected digit is already used before
+                if (used[curr]) return false;
+
+                // if first digit is being selected, can select any digit
+                if (last == -1) return true;
+
+                // Knight Move (as in chess) or (adjacent cells in a row) or (adjacent cells in a column)
+                if ((last + curr) % 2 == 1)
+                    return true;
+
+                // if its a diagonal move from ex: Digit 1 to 9 or moving from 3 to 7 or vice versa
+                mid = (last + curr) / 2;
+                if (mid == 4)       // middle num will be 5 in such a move
+                    return used[mid];
+
+                // all other adjacent cells cases, ex: moving from 1 to 5 or moving from 5 to 7
+                if (last % 3 != curr % 3 && last / 3 != curr / 3)
+                    return true;
+
+                // remaining moves accross a row or column, ex: moving frrom 3 to 9 or moving from 4 to 6
+                return used[mid];
+            }
+        }
+
+
+
+
+
     }
 }
