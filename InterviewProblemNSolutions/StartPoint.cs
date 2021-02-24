@@ -281,6 +281,7 @@ namespace InterviewProblemNSolutions
             BrokenCalculator();
             TwoKeysKeyboard();
             LongestWordInDictionaryThroughDeleting();
+            ScoreOfParentheses();
 
 
             // String Matching Algorithm
@@ -4632,6 +4633,15 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void ScoreOfParentheses()
+        {
+            // https://leetcode.com/problems/score-of-parentheses/
+            Utility.Print("856. Score of Parentheses");
+            string[] sArr = { "()", "(())", "()()", "(()(()))" };
+            foreach (var s in sArr)
+                Console.WriteLine($" score of the string \'{s}\' based on the given rule is: \'{DailyProblem.ScoreOfParentheses(s)}\'");
+        }
 
 
 

@@ -10099,6 +10099,43 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1) || Recursive Soln
+        public static int ScoreOfParentheses(string S)
+        {
+            /* Given a balanced parentheses string S, compute the score of the string based on the following rule:
+             *      () has score 1
+             *      AB has score A + B, where A and B are balanced parentheses strings.
+             *      (A) has score 2 * A, where A is a balanced parentheses string.
+             */
+            int i = 0, l = S.Length;
+            return Score();
+            // Local Func
+            int Score()
+            {
+                int curScore = 0;
+                if (i >= l) return curScore;
+                while (i < l)
+                    if (S[i] == '(')
+                    {
+                        if (S[i + 1] == ')')
+                        {
+                            i += 2;
+                            curScore++;
+                        }
+                        else
+                        {
+                            i++;
+                            curScore += 2 * Score();
+                        }
+                    }
+                    else
+                    {
+                        i++;
+                        break;
+                    }
+                return curScore;
+            }
+        }
 
     }
 }
