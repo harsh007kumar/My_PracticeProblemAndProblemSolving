@@ -10219,7 +10219,37 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1)
+        public static int FindUnsortedSubarray(int[] nums)
+        {
+            int sortFrom = -1, sortTill = -1, compareIdx, maxTillNow, smallestNum = int.MaxValue, lastSmallest = int.MaxValue;
+            for (int i = 1; i < nums.Length; i++)
+                if (nums[i - 1] > nums[i])      // not ascending order
+                {
+                    compareIdx = i - 1;
+                    maxTillNow = nums[i - 1];
+                    // find out how many elements on right are strictly smaller than 'maxTillNow'
+                    while (i < nums.Length && maxTillNow > nums[i])
+                        smallestNum = Math.Min(smallestNum, nums[i++]);     // also keep track of minimum num encountered
+                    sortTill = i;
 
+                    if (sortFrom == -1 || smallestNum < lastSmallest)
+                    {
+                        // if encountered unsorted subarray previously than update the compareIdx to earlier sortFrom index
+                        if (sortFrom != -1)
+                            compareIdx = sortFrom;
+                        smallestNum = Math.Min(smallestNum, lastSmallest);  // also update the if min num to smallest Num from either prv or current unsorted subarray
+
+                        // find out how many elements on left are strictly larger than 'smallestNum'
+                        while (compareIdx >= 0 && nums[compareIdx] > smallestNum)
+                            compareIdx--;
+
+                        sortFrom = compareIdx + 1;
+                        lastSmallest = smallestNum;
+                    }
+                }
+            return sortTill - sortFrom;
+        }
 
 
     }

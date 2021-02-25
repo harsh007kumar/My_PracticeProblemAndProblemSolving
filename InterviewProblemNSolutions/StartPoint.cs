@@ -283,6 +283,7 @@ namespace InterviewProblemNSolutions
             LongestWordInDictionaryThroughDeleting();
             ScoreOfParentheses();
             AndroidUnlockPatterns();
+            ShortestUnsortedContinuousSubarray();
 
 
             // String Matching Algorithm
@@ -4654,6 +4655,21 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" No of unique-valid unlock patterns of the Android grid lock screen," +
                     $"\n that consist of at least \'{m[i]}\' keys and at most \'{n[i]}\' keys are: \'{DailyProblem.AndroidUnlockPatterns(m[i], n[i])}\'\n");
         }
+
+
+        public static void ShortestUnsortedContinuousSubarray()
+        {
+            // https://leetcode.com/problems/shortest-unsorted-continuous-subarray/
+            Utility.Print("581. Shortest Unsorted Continuous Subarray");
+            int[][] numsArr = { new int[] { 2, 6, 4, 8, 10, 9, 15 }, new int[] { 1, 2, 3, 4 }, new int[] { 1 }, new int[] { 2, 3, 3, 2, 4 }, new int[] { 4, 5, 6, 6, 7, 8, 9, 5, 12, 13, 18, 4, 20, 22, 1, 25 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" Length of one continuous subarray that if we only sort this subarray in ascending order" +
+                    $"\n entire 'nums' array is sorted in ascending order is: \'{DailyProblem.FindUnsortedSubarray(nums)}\'\n");
+            }
+        }
+
 
 
 
