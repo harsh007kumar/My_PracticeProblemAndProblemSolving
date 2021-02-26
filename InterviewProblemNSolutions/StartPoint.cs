@@ -284,6 +284,7 @@ namespace InterviewProblemNSolutions
             ScoreOfParentheses();
             AndroidUnlockPatterns();
             ShortestUnsortedContinuousSubarray();
+            ValidateStackSequences();
 
 
             // String Matching Algorithm
@@ -2104,7 +2105,8 @@ namespace InterviewProblemNSolutions
             foreach(var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" Starting from index 0 in above array, are we able to reach last index: {DailyProblem.JumpGame(nums, new int[nums.Length])}");
+                Console.WriteLine($" Starting from index 0 in above array, are we able to reach last index [DP Approach]: {DailyProblem.JumpGame(nums, new int[nums.Length])}");
+                Console.WriteLine($" Starting from index 0 in above array, are we able to reach last index [Greedy Approach]: {DailyProblem.JumpGame_LinearTime(nums)}");
             }
         }
 
@@ -4669,8 +4671,6 @@ namespace InterviewProblemNSolutions
                     $"\n entire 'nums' array is sorted in ascending order is: \'{DailyProblem.FindUnsortedSubarray(nums)}\'\n");
             }
         }
-
-
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

@@ -4316,6 +4316,26 @@ namespace InterviewProblemNSolutions
             cache[curr] = -1;
             return false;
         }
+
+        // Time O(n) || Space O(1)
+        public static bool JumpGame_LinearTime(int[] nums)
+        {
+            /* Iterating right-to-left, for each position we check if there is a potential jump that reaches a GOOD index
+             * (currPosition + nums[currPosition] >= leftmostGoodIndex).
+             * 
+             * If we can reach a GOOD index, then our position is itself GOOD.
+             * Also, this new GOOD position will be the new leftmost GOOD index. 
+             * Iteration continues until the beginning of the array.
+             * If first position is a GOOD index then we can reach the last index from the first position.
+             */
+            int toReachIndex = nums.Length - 1, i = nums.Length - 2;
+            while (i >= 0)
+                if (nums[i] + i >= toReachIndex)
+                    toReachIndex = i--;
+                else
+                    i--;
+            return toReachIndex == 0;
+        }
         // Time O(N^2) || Space O(N) // Optimized DP Approach
         public static int JumpGameII_DP(int[] nums)
         {
@@ -10250,6 +10270,9 @@ namespace InterviewProblemNSolutions
                 }
             return sortTill - sortFrom;
         }
+
+
+
 
 
     }
