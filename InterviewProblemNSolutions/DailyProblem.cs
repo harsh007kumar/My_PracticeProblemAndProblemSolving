@@ -10272,6 +10272,31 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n)
+        public static bool ValidateStackSequences(int[] pushed, int[] popped)
+        {
+            Stack<int> st = new Stack<int>();
+            int i = 0, j = 0, l = pushed.Length;
+            while (i < l || st.Count > 0)
+            {
+                while (i < l)
+                {
+                    st.Push(pushed[i]);             // Keep Pushing elements into Stack till we dont find 1st elements thats matches popped num at 'j' index
+                    if (pushed[i++] == popped[j])
+                        break;
+                }
+
+                while (st.Count > 0)
+                    if (popped[j] == st.Peek())     // while stack is not keep popping nums from stack till they matches popped num at 'j' index
+                    { j++; st.Pop(); }
+                    else if (i < l)                 // if we still have more elements to push to Stack, go back to inserting
+                        break;
+                    else                            // we dont have more elements to push to stack and current stack top doesnt matches next element that should be popped
+                        return false;
+            }
+            return st.Count == 0;                   // all nums were successfully pushed and popped from Stack
+        }
+
 
 
 

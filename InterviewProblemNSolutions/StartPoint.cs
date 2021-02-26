@@ -4673,6 +4673,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void ValidateStackSequences()
+        {
+            // https://leetcode.com/problems/validate-stack-sequences/
+            Utility.Print("946. Validate Stack Sequences");
+            int[][] pushedSequence = { new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 2, 3, 4, 5 } };
+            int[][] poppedSequence = { new int[] { 4, 5, 3, 2, 1 }, new int[] { 4, 3, 5, 1, 2 }, new int[] { 3, 2, 1, 4, 5 } };
+            for (int i = 0; i < pushedSequence.Length; i++)
+            {
+                pushedSequence[i].Print("Pushed Sequence");
+                poppedSequence[i].Print("Popped Sequence");
+                Console.WriteLine($" above could have been the result of a sequence of push and pop operations on an initially empty stack: \'{DailyProblem.ValidateStackSequences(pushedSequence[i], poppedSequence[i])}\'\n");
+            }
+        }
+
+
+
+
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
         /// <summary>
