@@ -10298,7 +10298,34 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n*m) || Space O(1), n = length of 'A' & m = avg len of strings
+        public static IList<string> CommonChars(string[] A)
+        {
+            int[] ansMap = new int[26], charMap = new int[26];
+            // Initialize the Max count from 1st string
+            foreach (var ch in A[0])
+                ansMap[ch - 'a']++;
 
+            // iterate thru remaining strings
+            for (int i = 1; i < A.Length; i++)
+            {
+                // Create the charCount for each string
+                foreach (var ch in A[i])
+                    charMap[ch - 'a']++;
+                // Now update each index of ansMap with minimum of (ansMap[i],charMap[i])
+                for (int j = 0; j < ansMap.Length; j++)
+                {
+                    ansMap[j] = Math.Min(ansMap[j], charMap[j]);
+                    charMap[j] = 0;       // resetting for next iteration
+                }
+            }
+
+            IList<string> ls = new List<string>();
+            for (int i = 0; i < ansMap.Length; i++)
+                while (ansMap[i]-- > 0)
+                    ls.Add("" + (char)(i + 'a'));
+            return ls;
+        }
 
     }
 }

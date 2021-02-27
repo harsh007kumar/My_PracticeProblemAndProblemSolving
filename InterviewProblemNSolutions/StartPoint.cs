@@ -285,6 +285,7 @@ namespace InterviewProblemNSolutions
             AndroidUnlockPatterns();
             ShortestUnsortedContinuousSubarray();
             ValidateStackSequences();
+            FindCommonCharacters();
 
 
             // String Matching Algorithm
@@ -4685,6 +4686,19 @@ namespace InterviewProblemNSolutions
                 poppedSequence[i].Print("Popped Sequence");
                 Console.WriteLine($" above could have been the result of a sequence of push and pop operations on an initially empty stack: \'{DailyProblem.ValidateStackSequences(pushedSequence[i], poppedSequence[i])}\'\n");
             }
+        }
+
+
+        public static void FindCommonCharacters()
+        {
+            // https://leetcode.com/problems/find-common-characters/
+            Utility.Print("1002. Find Common Characters");
+            string[] arr = { "bella", "label", "roller" };
+            arr.Print("Input List");
+            Console.Write(" List of all characters that show up in all strings within the list (including duplicates): [");
+            foreach (var ch in DailyProblem.CommonChars(arr))
+                Console.Write($" {ch} ||");
+            Console.WriteLine("]\n");
         }
 
 
