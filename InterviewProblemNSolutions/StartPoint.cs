@@ -287,6 +287,7 @@ namespace InterviewProblemNSolutions
             ValidateStackSequences();
             FindCommonCharacters();
             DivideTwoIntegers();
+            CompareStringsByFrequencyOfTheSmallestCharacter();
 
 
             // String Matching Algorithm
@@ -4713,6 +4714,24 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Dividing integer \'{divident[i]}\' by \'{divisor[i]}\', without using multiplication, division, and mod operator" +
                     $"\n gives Quotient:\t\'{DailyProblem.DivideFaster(divident[i], divisor[i])}\'\n");
         }
+
+
+        public static void CompareStringsByFrequencyOfTheSmallestCharacter()
+        {
+            // https://leetcode.com/problems/compare-strings-by-frequency-of-the-smallest-character/
+            Utility.Print("1170. Compare Strings by Frequency of the Smallest Character");
+            string[][] queries = { new string[] { "cbd" }, new string[] { "bbb", "cc" } };
+            string[][] words = { new string[] { "zaaaz" }, new string[] { "a", "aa", "aaa", "aaaa" } };
+            for (int i = 0; i < queries.Length; i++)
+            {
+                queries[i].Print("Queries");
+                words[i].Print("Words");
+                Console.WriteLine(" For each query queries[i], count of the number of words in words such that f(queries[i]) < f(W) for each W in words");
+                DailyProblem.NumSmallerByFrequency(queries[i], words[i]).Print("frequency of the lexicographically smallest character");
+                Console.WriteLine();
+            }
+        }
+
 
 
 

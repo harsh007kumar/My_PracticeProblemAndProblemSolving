@@ -10454,8 +10454,49 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n*(k+m) + m*l) || Space O(m)
+        // n = len of queries & k = avg len of strings in queries
+        // m = len of words & l = avg len of strings in words
+        public static int[] NumSmallerByFrequency(string[] queries, string[] words)
+        {
+            int[] ans = new int[queries.Length];
+            int smallest, frequencyQ;
+            int[] frequencyW = new int[words.Length];
+            for (int j = 0; j < words.Length; j++)              // O(m)
+            {
+                smallest = 'z' - 'a';
+                foreach (var ch in words[j])                    // O(l)
+                    if (ch - 'a' < smallest)
+                    {
+                        smallest = ch - 'a';
+                        frequencyW[j] = 1;
+                    }
+                    else if (ch - 'a' == smallest)
+                        frequencyW[j]++;
+            }
 
-
+            // Iterate thru each queries
+            for (int i = 0; i < queries.Length; i++)            // O(n)
+            {
+                smallest = 'z' - 'a';
+                frequencyQ = 0;
+                // fetch the frequency of smallest characters for each query
+                foreach (var ch in queries[i])                  // O(k)
+                    if (ch - 'a' < smallest)
+                    {
+                        smallest = ch - 'a';
+                        frequencyQ = 1;
+                    }
+                    else if (ch - 'a' == smallest)
+                        frequencyQ++;
+                
+                for (int j = 0; j < frequencyW.Length; j++)     // O(m)
+                    // f(queries[i]) < f(W)
+                    if (frequencyQ < frequencyW[j])
+                        ans[i]++;
+            }
+            return ans;
+        }
 
 
     }
