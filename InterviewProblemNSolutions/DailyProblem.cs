@@ -10327,5 +10327,136 @@ namespace InterviewProblemNSolutions
             return ls;
         }
 
+
+        // Time O(n) || Space O(1), n = dividend (worst case when dividend is int.Max/Min and divisor is 1)
+        public static int Divide(int dividend, int divisor)
+        {
+            /* 
+             * The key observation to make is that the problems are occurring because there are more negative signed 32-bit integers
+             * than there are positive signed 32-bit integers.
+             * Each positive signed 32-bit integer has a corresponding negative signed 32-bit integer.
+             * However, the same is not true for negative signed 32-bit integers. The smallest one, -2147483648, is alone.
+             * It is this number that causes the problems.
+             * 
+             * The best solution is to work with negative, instead of positive, numbers.
+             * This is allows us to use the largest possible range of numbers, and it covers all the ones we need.
+             * 
+             * At the start of the algorithm, we'll instead convert both inputs to negative.
+             * Then, we'll need to modify the loop so that it subtracts the negative divisor from the negative dividend.
+             * At the end, we'll need to convert the result back to a positive if the number of negative signs in the input was not 1.
+             * 
+             * Remember that we're converting the inputs to negative numbers.
+             * This is because we don't want separate code for all the possible combinations of positive/negative divisor and dividend.
+             * We converted them to negative instead of positive because the range of valid negative numbers is bigger,
+             * and therefore overflows can be cleanly avoided.
+             */
+
+            //if (dividend == int.MinValue && divisor == -1)
+            //    return -int.MaxValue;
+
+            //int isNegativeCount = 0, substraction = 0;
+            //if (dividend < 0)
+            //{
+            //    isNegativeCount++;
+            //    dividend = -dividend;
+            //}
+            //if (divisor < 0)
+            //{
+            //    isNegativeCount++;
+            //    divisor = -divisor;
+            //}
+            //// algo
+            //while (dividend - divisor >= 0)
+            //{
+            //    substraction++;
+            //    dividend -= divisor;
+            //}
+            //return isNegativeCount == 1 ? -substraction : substraction;
+
+            if (dividend == int.MinValue && divisor == -1)
+                return int.MaxValue;
+
+            int isNegativeCount = 2, quotient = 0;
+            if (dividend > 0)
+            {
+                isNegativeCount--;
+                dividend = -dividend;
+            }
+            if (divisor > 0)
+            {
+                isNegativeCount--;
+                divisor = -divisor;
+            }
+            // algo
+            while (dividend - divisor <= 0)
+            {
+                quotient--;
+                dividend -= divisor;
+            }
+            return isNegativeCount != 1 ? -quotient : quotient;
+        }
+        // Time O(log base 2 (n)) || Space O(1), n = max absoulte value of divident
+        public static int DivideFaster(int dividend, int divisor)
+        {
+            // ALGO
+            //while (dividend >= divisor)
+            //{
+            //    // Now that we're in the loop, we know it'll fit at least once as divivend >= divisor
+            //    value = divisor;
+            //    powerOfTwo = 1;
+            //    // Check if double the current value is too big. If not, continue doubling.
+            //    // If it is too big, stop doubling and continue with the next step */
+            //    while (dividend >= (value + value))      // value >> 1 or value*2
+            //    {
+            //        value <<= 1;        // value +=value or value*=2
+            //        powerOfTwo <<= 1;   // powerOfTwo +=powerOfTwo or powerOfTwo*=2
+            //    }
+
+            //    // We have been able to subtract divisor another powerOfTwo times.
+            //    quotient += powerOfTwo;
+            //    // Remove value so far so that we can continue the process with remainder.
+            //    dividend -= value;
+            //}
+            if (dividend == int.MinValue && divisor == -1)
+                return int.MaxValue;
+
+            int isNegativeCount = 2, quotient = 0, powerOfTwo, value;
+            if (dividend > 0)
+            {
+                isNegativeCount--;
+                dividend = -dividend;
+            }
+            if (divisor > 0)
+            {
+                isNegativeCount--;
+                divisor = -divisor;
+            }
+            // algo
+            while (dividend <= divisor)
+            {
+                value = divisor;
+                // Note: We use a negative powerOfTwo as it's possible we might have the case divide(INT_MIN, 1)
+                powerOfTwo = -1;
+                while (value >= (int.MinValue >> 1) && dividend <= (value + value))
+                {
+                    value <<= 1;        // value +=value or value*=2
+                    powerOfTwo <<= 1;   // powerOfTwo +=powerOfTwo or powerOfTwo*=2
+                }
+
+                // We have been able to subtract divisor another powerOfTwo times.
+                quotient += powerOfTwo;
+                // Remove value so far so that we can continue the process with remainder.
+                dividend -= value;
+            }
+            // If there was originally one negative sign, then the quotient remains negative.
+            // Otherwise, switch it to positive.
+            return isNegativeCount != 1 ? -quotient : quotient;
+        }
+
+
+
+
+
+
     }
 }

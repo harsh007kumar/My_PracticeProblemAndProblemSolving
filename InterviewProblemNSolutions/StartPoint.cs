@@ -286,6 +286,7 @@ namespace InterviewProblemNSolutions
             ShortestUnsortedContinuousSubarray();
             ValidateStackSequences();
             FindCommonCharacters();
+            DivideTwoIntegers();
 
 
             // String Matching Algorithm
@@ -4701,6 +4702,17 @@ namespace InterviewProblemNSolutions
             Console.WriteLine("]\n");
         }
 
+
+        public static void DivideTwoIntegers()
+        {
+            // https://leetcode.com/problems/divide-two-integers/
+            Utility.Print("29. Divide Two Integers");
+            int[] divident = { 10, 7, 0, 1, int.MinValue, int.MinValue, int.MaxValue, int.MaxValue };
+            int[] divisor = { 3, -3, 1, 1, 1, -1, int.MaxValue, int.MinValue };
+            for (int i = 0; i < divident.Length; i++)
+                Console.WriteLine($" Dividing integer \'{divident[i]}\' by \'{divisor[i]}\', without using multiplication, division, and mod operator" +
+                    $"\n gives Quotient:\t\'{DailyProblem.DivideFaster(divident[i], divisor[i])}\'\n");
+        }
 
 
 
