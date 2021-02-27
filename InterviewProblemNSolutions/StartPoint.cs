@@ -288,6 +288,7 @@ namespace InterviewProblemNSolutions
             FindCommonCharacters();
             DivideTwoIntegers();
             CompareStringsByFrequencyOfTheSmallestCharacter();
+            FindAllDuplicatesInArray();
 
 
             // String Matching Algorithm
@@ -4732,6 +4733,16 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void FindAllDuplicatesInArray()
+        {
+            // https://leetcode.com/problems/find-all-duplicates-in-an-array/
+            Utility.Print("442. Find All Duplicates in an Array");
+            int[] arr = { 4, 3, 2, 7, 8, 2, 3, 1 };
+            arr.Print("Input");
+            Console.WriteLine($" Below are all the elements that appear twice in above array.");
+            SearchAlgorithms.FindDuplicates(arr).Print("Duplicates");
+        }
 
 
 

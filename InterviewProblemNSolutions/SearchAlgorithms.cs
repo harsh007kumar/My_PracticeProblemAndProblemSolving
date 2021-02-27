@@ -26,6 +26,27 @@ namespace InterviewProblemNSolutions
             // METHOD 2 : Sort array and search for next value is same or not                               // Time O(nlogn) || Space O(1)
             // METHOD 3 : using Hashtable to store already seen values                                      // Time O(n) || Space O(n)
         }
+
+
+        // Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), return elements which appear twice.
+        // Time O(n) || Space O(1)
+        public static IList<int> FindDuplicates(int[] nums)
+        {
+            IList<int> ls = new List<int>();
+            // foreach num 'x' in nums update Abs(x)-1 with -ve value
+            for (int i = 0; i < nums.Length; i++)
+                nums[Math.Abs(nums[i]) - 1] *= -1;
+            // now again check for each num 'x' it its corrosponding Abs(x)-1 > 0 mean negation was done twice
+            for (int i = 0; i < nums.Length; i++)
+                if (nums[Math.Abs(nums[i]) - 1] > 0)
+                {
+                    ls.Add(Math.Abs(nums[i]));
+                    nums[Math.Abs(nums[i]) - 1] *= -1; // mark -ve so its not added again
+                }
+            return ls;
+        }
+
+
         public static void MaxRecurrence(int[] input)
         {
             var len = input.Length;
