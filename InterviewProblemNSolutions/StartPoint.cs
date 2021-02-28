@@ -292,6 +292,7 @@ namespace InterviewProblemNSolutions
             FindAllNumbersDisappearedInAnArray();
             MaximumFrequencyStack();
             OneEditDistance();
+            LongestSubstringWithAtMostKDistinctCharacters();
 
 
             // String Matching Algorithm
@@ -4784,6 +4785,20 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < s.Length; i++)
                 Console.WriteLine($" String \'{s[i]}\' & \'{t[i]}\' are one edit distance apart: \'{StringAlgorithms.IsOneEditDistance(s[i], t[i])}\'\n");
         }
+
+
+        public static void LongestSubstringWithAtMostKDistinctCharacters()
+        {
+            // https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/
+            Utility.Print("340. Longest Substring with At Most K Distinct Characters");
+            string[] s = { "eceba", "aa" };
+            int[] k = { 2, 1 };
+            for (int i = 0; i < s.Length; i++)
+                Console.WriteLine($" Given string \'{s[i]}\' and an integer \'{k[i]}\'," +
+                    $"\n the length of the longest substring of s that contains at most k distinct characters is: \'{StringAlgorithms.LengthOfLongestSubstringKDistinct(s[i], k[i])}\'\n");
+        }
+
+
 
 
 

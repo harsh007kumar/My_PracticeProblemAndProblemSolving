@@ -749,5 +749,29 @@ namespace InterviewProblemNSolutions
                     }
             return true;
         }
+
+
+        // Time O(n) || Space O(1)
+        public static int LengthOfLongestSubstringKDistinct(string s, int k)
+        {
+            int[] charMap = new int[256];
+            int i = 0, j = 0, max = -1, distinct = 0;
+            for (i = 0; i < s.Length; i++)
+            {
+                if (charMap[s[i]]++ == 0)       // New Char found
+                    if (++distinct > k)         // check if increase distinct count has crossed 'k' threshold
+                    {
+                        // remove characters from start till we dont find a character whos total count now becomes 0
+                        while (--charMap[s[j++]] > 0)
+                        { }
+                        --distinct;
+                    }
+                max = Math.Max(max, 1 + i - j); // update max
+            }
+            return max;
+        }
+
+
+
     }
 }
