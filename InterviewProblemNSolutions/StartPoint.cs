@@ -289,6 +289,7 @@ namespace InterviewProblemNSolutions
             DivideTwoIntegers();
             CompareStringsByFrequencyOfTheSmallestCharacter();
             FindAllDuplicatesInArray();
+            FindAllNumbersDisappearedInAnArray();
 
 
             // String Matching Algorithm
@@ -4742,6 +4743,16 @@ namespace InterviewProblemNSolutions
             arr.Print("Input");
             Console.WriteLine($" Below are all the elements that appear twice in above array.");
             SearchAlgorithms.FindDuplicates(arr).Print("Duplicates");
+        }
+
+        public static void FindAllNumbersDisappearedInAnArray()
+        {
+            // https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/
+            Utility.Print("448. Find All Numbers Disappeared in an Array");
+            int[] arr = { 4, 3, 2, 7, 8, 2, 3, 1 };
+            arr.Print("Input");
+            Console.WriteLine($" Below are all the elements in the range [1..N] which are missing in above array.");
+            SearchAlgorithms.FindDisappearedNumbers(arr).Print("Numbers Disappeared");
         }
 
 

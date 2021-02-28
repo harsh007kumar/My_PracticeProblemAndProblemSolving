@@ -81,6 +81,22 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($"Missing value in above array is {XOR}");
         }
 
+
+        // Time O(n) || Space O(1)
+        public static IList<int> FindDisappearedNumbers(int[] nums)
+        {
+            for (int i = 0; i < nums.Length; i++)
+                if (nums[Math.Abs(nums[i]) - 1] > 0)       // NOT -ve
+                    nums[Math.Abs(nums[i]) - 1] *= -1;
+
+            IList<int> ls = new List<int>();
+            for (int i = 0; i < nums.Length; i++)
+                if (nums[i] > 0)
+                    ls.Add(i + 1);
+            return ls;
+        }
+
+
         /// <summary>
         /// Time O(n) || Space O(1)
         /// 
