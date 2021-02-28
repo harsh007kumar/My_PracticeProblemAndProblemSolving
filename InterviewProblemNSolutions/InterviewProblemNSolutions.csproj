@@ -54,6 +54,7 @@
     <Compile Include="Leaderboard.cs" />
     <Compile Include="LinkedListRandomNode.cs" />
     <Compile Include="LRUCache.cs" />
+    <Compile Include="MaxFreqStack.cs" />
     <Compile Include="MaxHeap.cs" />
     <Compile Include="MinHeap.cs" />
     <Compile Include="MinStack.cs" />

@@ -290,6 +290,7 @@ namespace InterviewProblemNSolutions
             CompareStringsByFrequencyOfTheSmallestCharacter();
             FindAllDuplicatesInArray();
             FindAllNumbersDisappearedInAnArray();
+            MaximumFrequencyStack();
 
 
             // String Matching Algorithm
@@ -4753,6 +4754,24 @@ namespace InterviewProblemNSolutions
             arr.Print("Input");
             Console.WriteLine($" Below are all the elements in the range [1..N] which are missing in above array.");
             SearchAlgorithms.FindDisappearedNumbers(arr).Print("Numbers Disappeared");
+        }
+
+
+        public static void MaximumFrequencyStack()
+        {
+            // https://leetcode.com/problems/maximum-frequency-stack/
+            Utility.Print("895. Maximum Frequency Stack");
+            MaxFreqStack MFS = new MaxFreqStack();
+            MFS.Push(5);
+            MFS.Push(7);
+            MFS.Push(5);
+            MFS.Push(7);
+            MFS.Push(4);
+            MFS.Push(5);
+            MFS.Pop();      // 5
+            MFS.Pop();      // 7
+            MFS.Pop();      // 5
+            MFS.Pop();      // 4
         }
 
 
