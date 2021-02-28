@@ -708,5 +708,46 @@ namespace InterviewProblemNSolutions
             return false;
         }
 
+
+
+        // Time O(n) || Space O(1)
+        public static bool IsOneEditDistance(string s, string t)
+        {
+            /* A string s is said to be one distance apart from a string t if you can:
+             * Insert exactly one character into s to get t.
+             * Delete exactly one character from s to get t.
+             * Replace exactly one character of s with a different character to get t.
+             */
+
+            int sl = s.Length, tl = t.Length;
+            if (Math.Abs(sl - tl) > 1) return false;
+
+            // we want to keep shorter string as 's'
+            if (sl > tl) return IsOneEditDistance(t, s);
+
+            int diff = 0, j = 0;
+            if (sl == tl)
+            {
+                // Compare both same length strings, if at any point diff in characters is more than 1 return false
+                for (int i = 0; i < sl; i++)
+                    if (s[i] != t[i] && ++diff > 1)
+                        return false;
+                // if no difference was found means string of same length are excatly same hence not excat 1 dist apart
+                if (diff == 0)
+                    return false;
+            }
+            else
+                for (int i = 0; i < sl; i++)
+                    if (s[i] == t[j + diff])
+                        j++;
+                    else // s[i] != t[j]
+                    {
+                        // when characters of 1 length different string mismatch, try comparing next character from longer string with same character from 's' string
+                        i--;
+                        if (++diff > 1)
+                            return false;
+                    }
+            return true;
+        }
     }
 }

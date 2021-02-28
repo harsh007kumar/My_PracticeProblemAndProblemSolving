@@ -291,6 +291,7 @@ namespace InterviewProblemNSolutions
             FindAllDuplicatesInArray();
             FindAllNumbersDisappearedInAnArray();
             MaximumFrequencyStack();
+            OneEditDistance();
 
 
             // String Matching Algorithm
@@ -4772,6 +4773,16 @@ namespace InterviewProblemNSolutions
             MFS.Pop();      // 7
             MFS.Pop();      // 5
             MFS.Pop();      // 4
+        }
+
+
+        public static void OneEditDistance()
+        {
+            // https://leetcode.com/problems/one-edit-distance/
+            Utility.Print("161. One Edit Distance");
+            string[] s = { "ab", "", "a", "" }, t = { "acb", "", "", "A" };
+            for (int i = 0; i < s.Length; i++)
+                Console.WriteLine($" String \'{s[i]}\' & \'{t[i]}\' are one edit distance apart: \'{StringAlgorithms.IsOneEditDistance(s[i], t[i])}\'\n");
         }
 
 
