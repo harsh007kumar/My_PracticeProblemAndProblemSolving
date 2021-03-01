@@ -294,6 +294,7 @@ namespace InterviewProblemNSolutions
             //OneEditDistance();
             //LongestSubstringWithAtMostKDistinctCharacters();
             DistributeCandies();
+            SingleRowKeyboard();
 
 
             // String Matching Algorithm
@@ -4810,6 +4811,18 @@ namespace InterviewProblemNSolutions
                 candyType.Print("Candy-Types");
                 Console.WriteLine($" With Max Limit of len/2, Alice can have max \'{DailyProblem.DistributeCandies(candyType)}\' distinct candies\n");
             }
+        }
+
+
+        public static void SingleRowKeyboard()
+        {
+            // https://leetcode.com/problems/single-row-keyboard/
+            Utility.Print("1165. Single-Row Keyboard");
+            string[] keyboards = { "abcdefghijklmnopqrstuvwxyz", "pqrstuvwxyzabcdefghijklmno" };
+            string[] words = { "cba", "leetcode" };
+            for (int i = 0; i < keyboards.Length; i++)
+                Console.WriteLine($" To type a string \'{words[i]}\' using Single-Line-Keyboard \'{keyboards[i]}\'." +
+                    $"\n Time it takes to type it with one finger: \'{DailyProblem.CalculateTime(keyboards[i], words[i])}\'");
         }
 
 

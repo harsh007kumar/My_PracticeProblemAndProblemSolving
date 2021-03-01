@@ -10520,5 +10520,29 @@ namespace InterviewProblemNSolutions
             //    uniqueCandy.Add(candyType[i]);
             //return Math.Min(candyType.Length / 2, uniqueCandy.Count);
         }
+
+
+        // Time O(n) || Space O(1)
+        public static int CalculateTime(string keyboard, string word)
+        {
+            int[] charMap = new int[26];
+            // create mapping of which alphabet is placed at which position/index in keyboard
+            for (int i = 0; i < keyboard.Length; i++)
+                charMap[keyboard[i] - 'a'] = i;
+
+            // update the starting position of finger on the 1st character of keyboard
+            int pos = charMap[keyboard[0] - 'a'], time = 0;
+
+            // Calculate the total travel time b/w each char in words from last position finger was placed
+            for (int i = 0; i < word.Length; i++)
+            {
+                time += Math.Abs(charMap[word[i] - 'a'] - pos);
+                pos = charMap[word[i] - 'a'];
+            }
+            return time;
+        }
+
+
+
     }
 }
