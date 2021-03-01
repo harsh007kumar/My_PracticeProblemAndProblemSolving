@@ -10499,5 +10499,26 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n)
+        public static int DistributeCandies(int[] candyType)
+        {
+            /* Count no of different candies avaliable,
+             * if the distinct candy count reach length/2 than return length/2 as that is max allowed limit
+             * else return the whatever distinct count we get after traversing entire array
+             */
+            HashSet<int> uniqueCandy = new HashSet<int>();
+            for (int i = 0; i < candyType.Length; i++)
+            {
+                uniqueCandy.Add(candyType[i]);
+                if (uniqueCandy.Count == candyType.Length / 2)
+                    return uniqueCandy.Count;
+            }
+            return uniqueCandy.Count;
+
+            // Another O(n) but slightly slower approach is to return Math.Min(l/2,uniqueCandy.Count) after traversing entire array
+            //for (int i = 0; i < candyType.Length; i++)
+            //    uniqueCandy.Add(candyType[i]);
+            //return Math.Min(candyType.Length / 2, uniqueCandy.Count);
+        }
     }
 }
