@@ -295,6 +295,7 @@ namespace InterviewProblemNSolutions
             //LongestSubstringWithAtMostKDistinctCharacters();
             DistributeCandies();
             SingleRowKeyboard();
+            OrderOfSplitOfLoafOfBread();
 
 
             // String Matching Algorithm
@@ -4823,6 +4824,23 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < keyboards.Length; i++)
                 Console.WriteLine($" To type a string \'{words[i]}\' using Single-Line-Keyboard \'{keyboards[i]}\'." +
                     $"\n Time it takes to type it with one finger: \'{DailyProblem.CalculateTime(keyboards[i], words[i])}\'");
+        }
+
+
+        public static void OrderOfSplitOfLoafOfBread()
+        {
+            /* Given an input which is List<string> where each entry is in the format 'donor-recipient' which means
+             * donor split the piece of bread he has into two half's keeps right half for himself and gives left half to recipient.
+             * this continues till all attendies in the party recieve a piece of bread,
+             * find out the order of from left to right who got which part of bread,
+             * Host who is starting the process with full loaf of bread is on Right side (as donor always gives left half of bread after splitting)
+             * 
+             * There are (2 to the power k) total attendees in the party
+             */
+            Utility.Print("Google R2: Order Of Split Of Loaf-Of-Bread");
+            string[] input = { "host-harsh", "alice-yash", "host-alice" };
+            input.Print("List of Donor-Recipent Mapping");
+            DailyProblem.OrderOfSplitOfLoafOfBread(input.ToList()).Print("Recipent of ith Piece of Bread from Left to Right:");
         }
 
 

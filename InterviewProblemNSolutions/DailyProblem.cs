@@ -10543,6 +10543,57 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(nlogn) || Space O(n), n = length of input i.e. Total no of ppl attending party
+        public static List<string> OrderOfSplitOfLoafOfBread(List<string> input)
+        {
+            if (input == null || input.Count == 0) return new List<string>();
+
+            Dictionary<string, List<string>> dRMap = new Dictionary<string, List<string>>();
+
+            foreach (var donorReciepentPair in input)
+            {
+                var map = donorReciepentPair.Split('-');
+                // add donor to dictionary
+                if (!dRMap.ContainsKey(map[0]))
+                    dRMap.Add(map[0], new List<string>());
+
+                // add recipent to dictionary
+                if (!dRMap.ContainsKey(map[1]))
+                    dRMap.Add(map[1], new List<string>());
+
+                // add donor-recipent mapping
+                dRMap[map[0]].Add(map[1]);
+            }
+
+            return FindOrderRecursively("host");
+
+            // Local Func
+            List<string> FindOrderRecursively(string donor)
+            {
+                List<List<string>> rMap = new List<List<string>>();
+
+                foreach (var recipent in dRMap[donor])
+                {
+                    rMap.Add(new List<string>());
+                    rMap[rMap.Count - 1] = FindOrderRecursively(recipent);      // add recipent
+                }
+                rMap.Sort(new SortDonor());
+                
+                List<string> sortedList = new List<string>();
+                foreach (var list in rMap)
+                    foreach (var recipent in list)
+                        sortedList.Add(recipent);
+
+                sortedList.Add(donor);                                          // add donor at last
+                return sortedList;
+            }
+        }
+
+        public class SortDonor : IComparer<List<string>>
+        {
+            public int Compare(List<string> a, List<string> b) => b.Count - a.Count;
+        }
+
 
     }
 }
