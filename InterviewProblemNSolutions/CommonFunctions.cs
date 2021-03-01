@@ -182,7 +182,14 @@ namespace InterviewProblemNSolutions
             Console.WriteLine();
         }
 
-        public static void Print(this IList<int> iterator, string msg="")
+        public static void Print(this IList<int> iterator, string msg = "")
+        {
+            if (msg != "") Console.Write($" Printing \'{msg}\':");
+            foreach (var element in iterator)
+                Console.Write($" \'{element}\'");
+            Console.WriteLine();
+        }
+        public static void Print(this IList<String> iterator, string msg = "")
         {
             if (msg != "") Console.Write($" Printing \'{msg}\':");
             foreach (var element in iterator)
