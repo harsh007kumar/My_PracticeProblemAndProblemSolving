@@ -5585,16 +5585,18 @@ namespace InterviewProblemNSolutions
 
         public static void CoinChangingMinimumNoOfCoins()
         {
+            // https://leetcode.com/problems/coin-change/
             Utility.Print("Problem-19 Making Change (p. 789)");
-            int[] coins = { 1, 5, 6, 8 };
-            int[] changeReqFor = { 2, 6, 9, 11 };
-            int noOfCoins = coins.Length;
-            coins.Print("Coins Array");
+            Utility.Print("322. Coin Change");
+            int[] coins = { 1, 2, 5 };
+            int[] changeAmt = { 2, 6, 9, 11 };
 
-            foreach (var changeAmt in changeReqFor)
+            foreach (var changeReq in changeAmt)
             {
-                var minNoOfCoins = DynamicProgramming.CoinChangeMinimumNoOfCoins(changeAmt, coins, noOfCoins);
-                Console.WriteLine($" Min No of coins to get '{changeAmt}' in change is : '{minNoOfCoins}'\n");
+                coins.Print("Coins Array");
+                var minNoOfCoins = DynamicProgramming.CoinChangeMinimumNoOfCoins(coins, changeReq);
+                //var minNoOfCoins = DynamicProgramming.CoinChange_DP_BottomUp(coins, changeReq);
+                Console.WriteLine($" Min No of coins to get '{changeReq}' in change is : '{minNoOfCoins}'\n");
             }
         }
 

@@ -411,34 +411,32 @@ namespace InterviewProblemNSolutions
         }
 
         // Tushar Roy https://youtu.be/Y0ZqKpToTic
-        // Time O(N*C), N = no of coins & W = Change required for Value || Space O(N*C)
+        // Time = Space = O(n*amt), n = no of coins & amt = Change required for Value
         // this problem is very similar to 0-1 knapsack problem just consider value of each coin to be same(ex: -1)
-        public static int CoinChangeMinimumNoOfCoins(int C, int[] coins, int n)
+        public static int CoinChangeMinimumNoOfCoins(int[] coins, int amt)
         {
+            int n = coins.Length;
             // Create Table to store are intermediate results
             // Step1. Create Table to store are intermediate results min coins req, rows = noOfCoins + 1 & col = totalChange required + 1
-            int[,] m = new int[n + 1, C + 1];
+            int[,] dp = new int[n + 1, amt + 1];
 
             // Step2. start filling from i=1 row at each row try to minimize the coins(row no indicates no of items we can choose from start of coins array),
             // (under given constrait of change required for Value indicated by column no, last col indicated max value for which Change is requied i.e, C)
             for (int i = 0; i <= n; i++)
-                for (int c = 1; c <= C; c++)
+                for (int c = 1; c <= amt; c++)
                 {
-                    if (i == 0)                 // Extra Row, Set Int.Max value here so its not picked when we are picking Min value later
-                        m[i, c] = int.MaxValue;
-                    else if (i == 1)            // As first row is of 1.Re coin filling same no of coins as the 'Total Amt/Buck' required fr that column (Ex- Amt=5, 1.Re x 5 coins)
-                        m[i, c] = c;
-                    else if (c == 0)            // As first column represents 'Total Amt = 0' hence no coins should be selected to get 0 bucks
-                        m[i, c] = c;
-                    // Min of coins either (value from last row & same col) or (picking curr row coin + value from last row & (current col Amt - picked coin value))
+                    if (i == 0)                 // Extra Row, Set MaxChangeAmt+1 / Int.Max/4 value here so its not picked when we are picking Min value later
+                        dp[i, c] = amt + 1;
+                    //else if (c == 0)            // As 1st column represents 'Total Amt = 0' hence no coins should be selected to get 0 bucks
+                    //    dp[i, c] = 0;
+                    // Min of coins either (value from last row & same col) or (picking curr row coin + value from current row & (current col Amt - picked coin value))
                     else if (c >= coins[i - 1])
-                        m[i, c] = Math.Min(m[i - 1, c], 1 + m[i - 1, c - coins[i - 1]]);
+                        dp[i, c] = Math.Min(dp[i - 1, c], 1 + dp[i, c - coins[i - 1]]);
                     else
-                        m[i, c] = m[i - 1, c];
-
+                        dp[i, c] = dp[i - 1, c];
                 }
-            PrintCoinsPicked(m, coins, n, C);
-            return m[n, C];                     // Min Coins Requierd to make change with all possible coins to choose from
+            PrintCoinsPicked(dp, coins, n, amt);
+            return dp[n, amt] <= amt ? dp[n, amt] : -1;// Min Coins Requierd to make change with all possible coins to choose from
         }
 
         public static void PrintCoinsPicked(int[,] val, int[] coins, int row, int col)
@@ -453,11 +451,30 @@ namespace InterviewProblemNSolutions
                 else
                 {
                     Console.WriteLine($" Coins {coins[row - 1]} \tSelected : \t1");
-                    row--;
-                    col -= coins[row];
+                    col -= coins[row - 1];
                 }
             }
         }
+
+
+        // Time = O(n*amt) || Space = O(amt), n = no of coins
+        public static int CoinChange_DP_BottomUp(int[] coins, int amt)
+        {
+            int[] dp = new int[amt + 1];
+
+            for (int i = 0; i < dp.Length; i++)
+                dp[i] = amt + 1;
+
+            dp[0] = 0;      // base case as to fetch 0 amt we need 0 coins
+            for (int c = 1; c <= amt; c++)
+                for (int i = 0; i < coins.Length; i++)
+                    if (c >= coins[i])      // if current amt is greater or equal to ith coinType
+                        // Min of either current no of coins or taking ith coin and value at current amt - coinValue which is picked
+                        dp[c] = Math.Min(dp[c], 1 + dp[c - coins[i]]);
+            
+            return dp[amt] <= amt ? dp[amt] : -1;
+        }
+
 
         // Time O(n^2) || Space O(n)
         public static int LongestIncreasingSubsequence(int[] input)
