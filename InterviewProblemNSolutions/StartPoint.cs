@@ -296,6 +296,7 @@ namespace InterviewProblemNSolutions
             DistributeCandies();
             SingleRowKeyboard();
             OrderOfSplitOfLoafOfBread();
+            FlipEquivalentBinaryTrees();
 
 
             // String Matching Algorithm
@@ -4841,6 +4842,49 @@ namespace InterviewProblemNSolutions
             string[] input = { "host-harsh", "alice-yash", "host-alice" };
             input.Print("List of Donor-Recipent Mapping");
             DailyProblem.OrderOfSplitOfLoafOfBread(input.ToList()).Print("Recipent of ith Piece of Bread from Left to Right:");
+        }
+
+
+        public static void FlipEquivalentBinaryTrees()
+        {
+            // https://leetcode.com/problems/flip-equivalent-binary-trees/
+            Utility.Print("951. Flip Equivalent Binary Trees");
+            TreeNode root1 = new TreeNode(1)
+            {
+                left = new TreeNode(2)
+                {
+                    left = new TreeNode(4),
+                    right = new TreeNode(5)
+                    {
+                        left = new TreeNode(7),
+                        right = new TreeNode(8)
+                    }
+                },
+                right = new TreeNode(3)
+                {
+                    left = new TreeNode(6)
+                }
+
+            };
+            TreeNode root2 = new TreeNode(1)
+            {
+                left = new TreeNode(3)
+                {
+                    right = new TreeNode(6)
+                },
+                right = new TreeNode(2)
+                {
+                    left = new TreeNode(4),
+                    right = new TreeNode(5)
+                    {
+                        left = new TreeNode(8),
+                        right = new TreeNode(7)
+                    }
+                }
+            };
+            root1.InOrder("1st Binary-Tree");
+            root2.InOrder("2nd Binary-Tree");
+            Console.WriteLine($" Above Tree's are flip equivelent: \'{DailyProblem.FlipEquiv(root1, root2)}\'");
         }
 
 
