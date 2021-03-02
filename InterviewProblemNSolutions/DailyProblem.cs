@@ -10605,5 +10605,22 @@ namespace InterviewProblemNSolutions
                 || (FlipEquiv(root1.left, root2.right) && FlipEquiv(root1.right, root2.left)));
         }
 
+
+        // Time O(n) || Recursive Space O(h) Soln
+        public static int DiameterOfBinaryTree(TreeNode root)
+        {
+            int diameter = 0;
+            GetMaxDia(root);
+            return diameter;
+            // Local func
+            int GetMaxDia(TreeNode r)
+            {
+                if (r == null) return 0;
+                int leftLen = GetMaxDia(r.left);
+                int rightLen = GetMaxDia(r.right);
+                diameter = Math.Max(diameter, leftLen + rightLen);
+                return Math.Max(leftLen, rightLen) + 1;
+            }
+        }
     }
 }

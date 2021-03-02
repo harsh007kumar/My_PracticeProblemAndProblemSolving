@@ -297,6 +297,7 @@ namespace InterviewProblemNSolutions
             SingleRowKeyboard();
             OrderOfSplitOfLoafOfBread();
             FlipEquivalentBinaryTrees();
+            DiameterOfBonaryTree();
 
 
             // String Matching Algorithm
@@ -4885,6 +4886,24 @@ namespace InterviewProblemNSolutions
             root1.InOrder("1st Binary-Tree");
             root2.InOrder("2nd Binary-Tree");
             Console.WriteLine($" Above Tree's are flip equivelent: \'{DailyProblem.FlipEquiv(root1, root2)}\'");
+        }
+
+
+        public static void DiameterOfBonaryTree()
+        {
+            // https://leetcode.com/problems/diameter-of-binary-tree/
+            Utility.Print("543. Diameter of Binary Tree");
+            TreeNode root = new TreeNode(1)
+            {
+                left = new TreeNode(2)
+                {
+                    left = new TreeNode(4),
+                    right = new TreeNode(5)
+                },
+                right = new TreeNode(3)
+            };
+            root.InOrder("Binary-Tree");
+            Console.WriteLine($" Max Diameter of above binary Tree is: \'{DailyProblem.DiameterOfBinaryTree(root)}\'");
         }
 
 
