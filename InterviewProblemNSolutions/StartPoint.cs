@@ -299,6 +299,7 @@ namespace InterviewProblemNSolutions
             FlipEquivalentBinaryTrees();
             DiameterOfBonaryTree();
             ClosestBinarySearchTreeValue();
+            MissingRanges();
 
 
             // String Matching Algorithm
@@ -4924,6 +4925,23 @@ namespace InterviewProblemNSolutions
             double target = 3.714286;
             root.InOrder("Binary-Search-Tree");
             Console.WriteLine($" Closet node value to \'{target}\' in above BST is: \'{DailyProblem.ClosestToDoubleValue(root, target)}\'");
+        }
+
+
+        public static void MissingRanges()
+        {
+            // https://leetcode.com/problems/missing-ranges/
+            Utility.Print("163. Missing Ranges");
+            int[][] numsArr = { new int[] { 0, 1, 3, 50, 75 }, new int[] { }, new int[] { }, new int[] { -1 }, new int[] { -1 }, new int[] { -1000000000, -9999, 0, 1, 2, 10, 100, 1000, 999999999, 1000000000 } };
+            int[] lower = { 0, 1, -3, -1, -2, -1000000000 }, upper = { 99, 1, -1, -1, -1, 1000000000 };
+            for (int i = 0; i < numsArr.Length; i++)
+            {
+                numsArr[i].Print("Nums");
+                Console.Write($" Smallest sorted list of ranges that cover every missing number in range [{lower[i]}...{upper[i]}]: [");
+                foreach (var range in DailyProblem.FindMissingRanges(numsArr[i], lower[i], upper[i]))
+                    Console.Write($" {range},");
+                Console.WriteLine("]\n");
+            }
         }
 
 

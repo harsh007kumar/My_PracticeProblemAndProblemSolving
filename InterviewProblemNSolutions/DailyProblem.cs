@@ -10638,5 +10638,65 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = O(n) || Space = O(1)
+        public static IList<string> FindMissingRanges(int[] nums, int lower, int upper)
+        {
+            /* FIRST APPROACH => TLE
+            IList<string> ans = new List<string>();
+            int l = nums.Length, missingTill;
+            for (int i = 0; i < l; i++)
+                if (nums[i] == lower)
+                    lower++;
+                else    // found a missing no
+                {
+                    missingTill = lower;
+                    while (missingTill != nums[i])
+                        missingTill++;
+
+                    if (lower == missingTill - 1)       // single num was missing
+                        ans.Add(lower.ToString());
+                    else                                // range of numbers are missing
+                        ans.Add(lower.ToString() + "->" + (missingTill - 1).ToString());
+                    
+                    lower = missingTill + 1;
+                }
+            
+            if (lower > upper)      // entire range of numbers is traversed
+                return ans;
+            else                    // few numbers at end are still missing
+            {
+                if (lower == upper) ans.Add(lower.ToString());
+                else ans.Add(lower.ToString() + "->" + upper.ToString());
+            }
+            return ans;
+            */
+            IList<string> ans = new List<string>();
+            int l = nums.Length;
+            for (int i = 0; i < l; i++)
+                if (nums[i] == lower)
+                    lower++;
+                else    // found a missing no
+                {
+                    if (lower + 1 == nums[i])       // single num was missing
+                        ans.Add(lower.ToString());
+                    else                            // range of numbers are missing
+                        ans.Add(lower.ToString() + "->" + (nums[i] - 1).ToString());
+                    // update lower bound
+                    lower = nums[i] + 1;
+                }
+            
+            if (lower > upper)      // entire range of numbers is traversed
+                return ans;
+            // few numbers at end are still missing
+            else if (lower == upper)
+                ans.Add(lower.ToString());
+            else 
+                ans.Add(lower.ToString() + "->" + upper.ToString());
+
+            return ans;
+        }
+
+
+
     }
 }
