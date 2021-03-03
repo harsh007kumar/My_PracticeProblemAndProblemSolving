@@ -10622,5 +10622,21 @@ namespace InterviewProblemNSolutions
                 return Math.Max(leftLen, rightLen) + 1;
             }
         }
+
+
+        // Time = O(h) || Space O(1)
+        public static int ClosestToDoubleValue(TreeNode r, double target)
+        {
+            int closet = r.val;
+            while (r != null)
+            {
+                closet = Math.Abs(r.val - target) < Math.Abs(closet - target) ? r.val : closet;
+                if (r.val > target) r = r.left;
+                else r = r.right;
+            }
+            return closet;
+        }
+
+
     }
 }

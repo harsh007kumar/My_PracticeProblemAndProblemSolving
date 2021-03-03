@@ -298,6 +298,7 @@ namespace InterviewProblemNSolutions
             OrderOfSplitOfLoafOfBread();
             FlipEquivalentBinaryTrees();
             DiameterOfBonaryTree();
+            ClosestBinarySearchTreeValue();
 
 
             // String Matching Algorithm
@@ -4906,6 +4907,24 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" Max Diameter of above binary Tree is: \'{DailyProblem.DiameterOfBinaryTree(root)}\'");
         }
 
+
+        public static void ClosestBinarySearchTreeValue()
+        {
+            // https://leetcode.com/problems/closest-binary-search-tree-value/
+            Utility.Print("270. Closest Binary Search Tree Value");
+            TreeNode root = new TreeNode(4)
+            {
+                left = new TreeNode(2)
+                {
+                    left = new TreeNode(1),
+                    right = new TreeNode(3)
+                },
+                right = new TreeNode(5)
+            };
+            double target = 3.714286;
+            root.InOrder("Binary-Search-Tree");
+            Console.WriteLine($" Closet node value to \'{target}\' in above BST is: \'{DailyProblem.ClosestToDoubleValue(root, target)}\'");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
