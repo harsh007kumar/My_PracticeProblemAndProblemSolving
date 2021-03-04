@@ -10697,6 +10697,42 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(Max(n,m)) || Space O(m), n = len of 'S' & m = len of 'indexes'
+        public static string FindReplaceString(string S, int[] indexes, string[] sources, string[] targets)
+        {
+            if (S.Length < 1) return S;
+            Dictionary<int, int> validReplacements = new Dictionary<int, int>();
+            for (int i = 0; i < indexes.Length; i++)
+                if (IsValid(indexes[i], sources[i]))
+                    // 'key' index in S & Value is position of this replacement in indexes
+                    validReplacements.Add(indexes[i], i);
+
+            // check if there are no valid replacements to be made
+            if (validReplacements.Count == 0)
+                return S;
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < S.Length; i++)
+                if (validReplacements.ContainsKey(i))
+                {
+                    sb.Append(targets[validReplacements[i]]);
+                    i += sources[validReplacements[i]].Length - 1;// frwd the idx to point where next comparsion r 2 b made
+                }
+                else
+                    sb.Append(S[i]);
+
+            return sb.ToString();
+
+            // Local Func
+            bool IsValid(int idx, string s)
+            {
+                for (int k = 0; k < s.Length; k++)
+                    if (S[idx + k] != s[k])  // letters don't match
+                        return false;
+                return true;
+            }
+
+        }
 
     }
 }

@@ -300,6 +300,7 @@ namespace InterviewProblemNSolutions
             DiameterOfBonaryTree();
             ClosestBinarySearchTreeValue();
             MissingRanges();
+            FindAndReplaceInString();
 
 
             // String Matching Algorithm
@@ -4941,6 +4942,26 @@ namespace InterviewProblemNSolutions
                 foreach (var range in DailyProblem.FindMissingRanges(numsArr[i], lower[i], upper[i]))
                     Console.Write($" {range},");
                 Console.WriteLine("]\n");
+            }
+        }
+
+
+        public static void FindAndReplaceInString()
+        {
+            // https://leetcode.com/problems/find-and-replace-in-string/
+            Utility.Print("833. Find And Replace in String");
+            String[] S = { "abcd", "abcd" };
+            int[][] indexesArr = { new int[] { 0, 2 }, new int[] { 0, 2 } };
+            string[][] sourcesArr = { new string[] { "a", "cd" }, new string[] { "ab", "ec" } };
+            string[][] targetArr = { new string[] { "eee", "ffff" }, new string[] { "eee", "ffff" } };
+            for (int i = 0; i < S.Length; i++)
+            {
+                Console.WriteLine($" Input String: \'{S[i]}\'");
+                indexesArr[i].Print("Indexes");
+                sourcesArr[i].Print("sources");
+                targetArr[i].Print("target");
+                Console.WriteLine($" After applying Find And Replace in above String as per given 'indexes', 'sources' & 'target' its:" +
+                    $" \'{DailyProblem.FindReplaceString(S[i], indexesArr[i], sourcesArr[i], targetArr[i])}\'\n");
             }
         }
 
