@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoCompleteSystem.cs" />
+    <Compile Include="Codec.cs" />
     <Compile Include="CommonFunctions.cs" />
     <Compile Include="DailyProblem.cs" />
     <Compile Include="DivideAndConquerAlgorithms.cs" />

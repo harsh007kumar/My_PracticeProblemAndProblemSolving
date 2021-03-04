@@ -302,6 +302,7 @@ namespace InterviewProblemNSolutions
             MissingRanges();
             FindAndReplaceInString();
             BuddyStrings();
+            EncodeAndDecodeStrings();
 
 
             // String Matching Algorithm
@@ -4975,6 +4976,21 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < A.Length; i++)
                 Console.WriteLine($" \'{A[i]}\' & \'{B[i]}\' are buddy strings: \'{DailyProblem.BuddyStrings(A[i], B[i])}\'\n");
         }
+
+
+        public static void EncodeAndDecodeStrings()
+        {
+            // https://leetcode.com/problems/encode-and-decode-strings/
+            Utility.Print("271. Encode and Decode Strings");
+            string[] listOfStrings = { "", "@#$!@", "123abhaLKHKU!@#", ((char)257).ToString(), "AnyASCIICharacter", "OrEmptyString" };
+            listOfStrings.Print("List Of Strings before Encoding");
+
+            // Chunked Transfer Encoding
+            Codec codec = new Codec();
+            codec.Decode(codec.Encode(listOfStrings)).Print("List Of Strings after Decoding");
+        }
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
