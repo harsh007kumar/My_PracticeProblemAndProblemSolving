@@ -301,6 +301,7 @@ namespace InterviewProblemNSolutions
             ClosestBinarySearchTreeValue();
             MissingRanges();
             FindAndReplaceInString();
+            BuddyStrings();
 
 
             // String Matching Algorithm
@@ -4963,6 +4964,16 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" After applying Find And Replace in above String as per given 'indexes', 'sources' & 'target' its:" +
                     $" \'{DailyProblem.FindReplaceString(S[i], indexesArr[i], sourcesArr[i], targetArr[i])}\'\n");
             }
+        }
+
+
+        public static void BuddyStrings()
+        {
+            // https://leetcode.com/problems/buddy-strings/
+            Utility.Print("859. Buddy Strings");
+            string[] A = { "ab", "ab", "aa", "aaaaaaabc", "", "abac" }, B = { "ba", "ab", "aa", "aaaaaaacb", "aa", "abad" };
+            for (int i = 0; i < A.Length; i++)
+                Console.WriteLine($" \'{A[i]}\' & \'{B[i]}\' are buddy strings: \'{DailyProblem.BuddyStrings(A[i], B[i])}\'\n");
         }
 
 

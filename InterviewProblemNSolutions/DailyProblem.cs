@@ -7142,7 +7142,7 @@ namespace InterviewProblemNSolutions
                     lastNum = nums[i];
                     multipleNum = false;
                 }
-            
+
             ans.Add(multipleNum ? first + "->" + lastNum : first);
             return ans;
         }
@@ -7579,7 +7579,7 @@ namespace InterviewProblemNSolutions
                 if (r < 0 || r >= rows || c < 0 || c >= cols || visited[r, c]) return -1;
 
                 // Reached destination
-                if (r == rows - 1 && c == cols - 1) 
+                if (r == rows - 1 && c == cols - 1)
                     return Math.Abs(lastHt - heights[r][c]);
 
                 int effort = Int32.MaxValue;
@@ -7757,7 +7757,7 @@ namespace InterviewProblemNSolutions
             {
                 currDiff = (t[i] - 'a') - (s[i] - 'a');
                 if (currDiff < 0) currDiff += 26;
-                
+
                 // Find the shifts required for each index to match char in both strings
                 if (shiftDiff.ContainsKey(currDiff)) shiftDiff[currDiff]++;
                 else shiftDiff.Add(currDiff, 1);
@@ -8109,7 +8109,7 @@ namespace InterviewProblemNSolutions
                     st.Push(num[i]);
                 }
                 else st.Push(num[i]);
-            
+
             while (k-- > 0 && st.Count > 1) st.Pop();
 
             return new string(st.Reverse().ToArray());
@@ -8156,14 +8156,14 @@ namespace InterviewProblemNSolutions
                         made.Add(i + j);
                     else
                         todo.Add(i + j);
-                
+
                 ls.Add(new StampWindow(made, todo));// update made and todo list for window starting at 'i' index in list
 
                 if (todo.Count == 0)                // all letters matched
                 {
                     ans.Push(i);                    // push starting index of window in 'ans' Stack
                     foreach (int index in made)     // also mark all the indicies in Target which have been stamped now
-                        if(!stamped[index])
+                        if (!stamped[index])
                         {
                             indiciesStamped++;
                             q.Enqueue(index);
@@ -8171,8 +8171,8 @@ namespace InterviewProblemNSolutions
                         }
                 }
             }
-            
-            while(q.Count>0)
+
+            while (q.Count > 0)
             {
                 i = q.Dequeue();
                 // For all valid windows this index is part of
@@ -8274,7 +8274,7 @@ namespace InterviewProblemNSolutions
         // Time O(nlogn) || Space O(n)
         public static void WiggleSort(int[] nums)
         {
-            int l = nums.Length, last = nums.Length-1;
+            int l = nums.Length, last = nums.Length - 1;
             int[] copy = new int[l];
             Array.Copy(nums, copy, l);
             Array.Sort(copy);
@@ -8327,7 +8327,7 @@ namespace InterviewProblemNSolutions
             foreach (var ch in "qwertyuiop") chSet[ch - 'a'] = 1;
             foreach (var ch in "asdfghjkl") chSet[ch - 'a'] = 2;
             foreach (var ch in "zxcvbnm") chSet[ch - 'a'] = 3;
-            
+
             List<string> ans = new List<string>();
             for (int i = 0; i < words.Length; i++)
                 if (HasSameRowLetters(words[i].ToLower()))
@@ -8390,12 +8390,12 @@ namespace InterviewProblemNSolutions
             if (st.Count == 0) return "/";                  // if stack Empty
 
             sb.Clear();
-            foreach(var p in st.Reverse().ToArray()) sb.Append('/').Append(p);
+            foreach (var p in st.Reverse().ToArray()) sb.Append('/').Append(p);
             return sb.ToString();
         }
 
 
-        
+
         // DP Bottom-Up Approach
         // Time = Space = O(n)
         public static int StudentAttendanceRecordII_DP(int n)
@@ -8417,7 +8417,7 @@ namespace InterviewProblemNSolutions
             //    return (int)ans;
             //}
             #endregion
-            
+
             /* This question is a very difficult question. 
              * If you think about the number, you will definitely time out by searching for something.
              * You can only try to push to the recursion relationship, and then use the dynamic programming method to solve.
@@ -9069,7 +9069,7 @@ namespace InterviewProblemNSolutions
         {
             int l = nums.Length, timeMaxLenFound = 0, maxLen = 1;
             int[,] dp = new int[l, 2];          // 1st row stores maxLen for each index and 2nd stores times its achievable
-            
+
             for (int i = 0; i < l; i++)         // index for which we are updating maxLen
             {
                 // base value for maxLen for curr index & times this maxLen for current index is achievable
@@ -9137,7 +9137,7 @@ namespace InterviewProblemNSolutions
             //}
             //return timer;
             #endregion
-            
+
             /* The maximum number of tasks is 26. Let's allocate an array frequencies of 26 elements to keep the frequency of each task.
              * 
              * Iterate over the input array and store the frequency of task A at index 0, the frequency of task B at index 1, etc.
@@ -9318,7 +9318,7 @@ namespace InterviewProblemNSolutions
                     maxLen = Math.Max(maxLen, i + 1);
                 else if (sumAtIndex.ContainsKey(sum - k))
                     maxLen = Math.Max(maxLen, i - sumAtIndex[sum - k]);
-                
+
                 if (!sumAtIndex.ContainsKey(sum))
                     sumAtIndex.Add(sum, i);
             }
@@ -9469,8 +9469,8 @@ namespace InterviewProblemNSolutions
                     return dp[left, right];
 
                 minH = Math.Min(height[left], height[right]);
-                return dp[left, right] = Math.Max(  minH * (right - left),
-                                                    Math.Max(   GetMax(left + 1, right),
+                return dp[left, right] = Math.Max(minH * (right - left),
+                                                    Math.Max(GetMax(left + 1, right),
                                                                 GetMax(left, right - 1)
                                                             )
                                                  );
@@ -9652,9 +9652,9 @@ namespace InterviewProblemNSolutions
             {
                 if (i < 0 || i >= rows || j < 0 || j >= cols || grid[i][j] == 0) return false;
                 grid[i][j] = 0;   // mark current cell visited
-                
+
                 // We map the shape of the Island by add the direction we got the next piece of land from and its relative distance from the starting cell
-                
+
                 // Direction 'R'
                 if (GetUniqueIsland(i, j + 1)) sb.Append("R" + (i - r) + (j - c));
                 // Direction 'D'
@@ -9695,7 +9695,7 @@ namespace InterviewProblemNSolutions
             int closetSquirreRow, closetSquirreCol;
             closetNutFromSquirrel = FindClosetNutFromSquirrel();
             distancesOffirstNutTotree = GetFromClosetTreeDist();
-            
+
             return closetNutFromSquirrel + (2 * totalDist - distancesOffirstNutTotree);
 
             // Local func
@@ -9743,7 +9743,7 @@ namespace InterviewProblemNSolutions
                         addedToQueue[r, c + 1] = true;
                     }
                 }
-                
+
             }
 
             int FindClosetNutFromSquirrel()
@@ -9860,7 +9860,7 @@ namespace InterviewProblemNSolutions
 
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < s.Length; i++)          // O(n)
-                if (!dontInclude.Contains(i)) 
+                if (!dontInclude.Contains(i))
                     sb.Append(s[i]);
 
             return sb.ToString();                       // O(n)
@@ -9962,13 +9962,13 @@ namespace InterviewProblemNSolutions
                     if ((leftCell > 0 && rtCell > 0) || (leftCell == 0 && rtCell == 0))
                         nextState |= 1 << idx;
                 }
-                        
+
                 return nextState;
             }
             int[] ConvertCurrState(int s)
             {
                 for (idx = 0; idx < l; idx++)
-                    cells[idx] = (s &  1 << l - (idx + 1)) > 0 ? 1 : 0;
+                    cells[idx] = (s & 1 << l - (idx + 1)) > 0 ? 1 : 0;
                 ////Another Method by applying AND operator with every bit position
                 //for (idx = l - 1; idx >= 0; idx--)
                 //{
@@ -10489,7 +10489,7 @@ namespace InterviewProblemNSolutions
                     }
                     else if (ch - 'a' == smallest)
                         frequencyQ++;
-                
+
                 for (int j = 0; j < frequencyW.Length; j++)     // O(m)
                     // f(queries[i]) < f(W)
                     if (frequencyQ < frequencyW[j])
@@ -10578,7 +10578,7 @@ namespace InterviewProblemNSolutions
                     rMap[rMap.Count - 1] = FindOrderRecursively(recipent);      // add recipent
                 }
                 rMap.Sort(new SortDonor());
-                
+
                 List<string> sortedList = new List<string>();
                 foreach (var list in rMap)
                     foreach (var recipent in list)
@@ -10684,13 +10684,13 @@ namespace InterviewProblemNSolutions
                     // update lower bound
                     lower = nums[i] + 1;
                 }
-            
+
             if (lower > upper)      // entire range of numbers is traversed
                 return ans;
             // few numbers at end are still missing
             else if (lower == upper)
                 ans.Add(lower.ToString());
-            else 
+            else
                 ans.Add(lower.ToString() + "->" + upper.ToString());
 
             return ans;
@@ -10733,6 +10733,59 @@ namespace InterviewProblemNSolutions
             }
 
         }
+
+
+        // Time O(n) || Space O(1)
+        // Given two strings A and B of lowercase letters, return true if you can swap two letters in A so the result is equal to B, otherwise, return false
+        public static bool BuddyStrings(string A, string B)
+        {
+            /* if len of A != len of B return false at start
+             * 
+             * Traverse thru the A & B & match each index A[i] with B[i]
+             * also keep count of no of distinct characters along with their frquencies.
+             * once any character appears more than once update sameCharSwapPossible to true
+             * 
+             * if A[i]!=B[i]
+             * update a varaible misMatchAt which was initially set to -1 with current 'i'
+             * if misMatchAt != -1 mean we can previously encountered one more misMatch
+             * 
+             * check for A[misMatchAt]!=B[i] || B[misMatchAt]!=A[i] than return false as swap cannot be completed
+             * else update oneSwapMade to true
+             * 
+             * at any point if no off diff characters are > 2 return false
+             * 
+             * else return diff%2 == 0 && (oneSwapMade || sameCharSwapPossible)
+             */
+            if (A.Length != B.Length) return false;     // different length match not possible
+            
+            int[] charCount = new int[26];              // to count frequencies of each letter in A
+
+            int diff = 0, misMatchAt = -1;
+            bool sameLetterSwapPossible = false, oneSwapMade = false;
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (++charCount[A[i] - 'a'] > 1)
+                    sameLetterSwapPossible = true;
+                if (A[i] != B[i])
+                {
+                    if (++diff > 2)                     // no of different characters more than 2
+                        return false;
+                    
+                    if (misMatchAt == -1)               // 1st misMatch
+                        misMatchAt = i;
+                    else                                // 2nd misMatch
+                    {
+                        // if swap not possible return false
+                        if (A[misMatchAt] != B[i] || B[misMatchAt] != A[i])
+                            return false;
+                        oneSwapMade = true;             // else update one SwapMade
+                    }
+                }
+            }
+
+            return diff % 2 == 0 && (oneSwapMade || sameLetterSwapPossible);
+        }
+
 
     }
 }
