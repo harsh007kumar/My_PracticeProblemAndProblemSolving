@@ -10787,5 +10787,46 @@ namespace InterviewProblemNSolutions
         }
 
 
+        /// <summary>
+        /// Time O(n) || Space O(1)
+        /// 
+        /// Give a string s, count the number of non-empty (contiguous) substrings that have the same number of 0's and 1's,
+        /// and all the 0's and all the 1's in these substrings are grouped consecutively.
+        /// Substrings that occur multiple times are counted the number of times they occur.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static int CountBinarySubstrings(string s)
+        {
+            int zero = 0, one = 0, ans = 0, i = 1;
+
+            if (s[0] == '0') zero++;
+            else one++;
+            bool firstCharIsOne = one > 0 ? true : false;
+
+            while (i < s.Length)
+            {
+                if (!firstCharIsOne)
+                {
+                    while (i < s.Length && s[i] == '0')
+                    { zero++; i++; }
+
+                    ans += Math.Min(zero, one);
+                    one = 0;
+                }
+                firstCharIsOne = false;
+
+                while (i < s.Length && s[i] == '1') // counting ones
+                { one++; i++; }
+
+                ans += Math.Min(zero, one);
+                zero = 0;
+            }
+            //ans += Math.Min(zero, one);
+            return ans;
+        }
+
+
+
     }
 }

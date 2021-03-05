@@ -303,6 +303,7 @@ namespace InterviewProblemNSolutions
             FindAndReplaceInString();
             BuddyStrings();
             EncodeAndDecodeStrings();
+            CountBinarySubstrings();
 
 
             // String Matching Algorithm
@@ -4991,6 +4992,14 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void CountBinarySubstrings()
+        {
+            // https://leetcode.com/problems/count-binary-substrings/
+            Utility.Print("696. Count Binary Substrings");
+            string[] sArr = { "00110011", "10101", "1110000100" };
+            foreach (var str in sArr)
+                Console.WriteLine($" No of non-empty (contiguous) substrings in \'{str}\' that have the same number of 0's and 1's: \'{DailyProblem.CountBinarySubstrings(str)}\'\n");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
