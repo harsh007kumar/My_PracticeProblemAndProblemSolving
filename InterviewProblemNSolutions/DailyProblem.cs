@@ -10827,6 +10827,60 @@ namespace InterviewProblemNSolutions
         }
 
 
+        /// <summary>
+        /// Time = Space = O(n*m), n = len of words & m = avg length of each word
+        /// A valid encoding of an array of words is any reference string s and array of indices indices such that:
+        ///         words.length == indices.length
+        ///         The reference string s ends with the '#' character.
+        ///         For each index indices[i], the substring of s starting from indices[i] and up to(but not including) the next '#' character is equal to words[i].
+        /// </summary>
+        /// <param name="words"></param>
+        /// <returns></returns>
+        public static int MinimumLengthEncoding(string[] words)
+        {
+            /* We find whether different words have the same suffix,
+             * let's put them backwards into a trie (prefix tree).
+             * For example, if we have "time" and "me", we will put "emit" and "em" into our trie.
+             * 
+             * After, the leaves of this trie (nodes with no children) represent words that have no suffix,
+             * and we will count sum(word.length + 1 for word in words)
+             */
+            Dictionary<TrieNode, int> lastNodeIdxMap = new Dictionary<TrieNode, int>();
+            TrieNode trie = new TrieNode();
+
+            for (int i = 0; i < words.Length; i++)          // O(n)
+            {
+                TrieNode temp = trie;
+                // Add words in reverse to the Trie
+                for (int j = words[i].Length - 1; j >= 0; j--)//O(m)
+                    temp = temp.Get(words[i][j]);
+
+                // make sure same word is not added multiple times
+                if (!lastNodeIdxMap.ContainsKey(temp))
+                    lastNodeIdxMap.Add(temp, i);
+            }
+            int ans = 0;
+            foreach (var kvp in lastNodeIdxMap)             // O(n)
+                if (kvp.Key.child.Count == 0)
+                    ans += 1 + words[kvp.Value].Length;
+
+            return ans;
+        }
+        public class TrieNode
+        {
+            public Dictionary<char, TrieNode> child;
+            public TrieNode() => child = new Dictionary<char, TrieNode>();
+            // to add a node and return ref node of node which contains curr character
+            public TrieNode Get(char ch)
+            {
+                if (!child.ContainsKey(ch))
+                    child.Add(ch, new TrieNode());
+                return child[ch];
+            }
+        }
+
+
+
 
     }
 }

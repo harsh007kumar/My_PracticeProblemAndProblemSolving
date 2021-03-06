@@ -304,6 +304,7 @@ namespace InterviewProblemNSolutions
             BuddyStrings();
             EncodeAndDecodeStrings();
             CountBinarySubstrings();
+            ShortEncodingOfWords();
 
 
             // String Matching Algorithm
@@ -5000,6 +5001,22 @@ namespace InterviewProblemNSolutions
             foreach (var str in sArr)
                 Console.WriteLine($" No of non-empty (contiguous) substrings in \'{str}\' that have the same number of 0's and 1's: \'{DailyProblem.CountBinarySubstrings(str)}\'\n");
         }
+
+
+        public static void ShortEncodingOfWords()
+        {
+            // 820. Short Encoding of Words
+            Utility.Print("820. Short Encoding of Words");
+            string[][] wordsArr = { new string[] { "time", "me", "bell" }, new string[] { "t" }, new string[] { "time", "time", "time", "time" } };
+            foreach (var words in wordsArr)
+            {
+                words.Print("Words");
+                Console.WriteLine($" Length of the shortest reference string 's' possible of any valid encoding of above words is: \'{DailyProblem.MinimumLengthEncoding(words)}\'\n");
+            }
+        }
+
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
