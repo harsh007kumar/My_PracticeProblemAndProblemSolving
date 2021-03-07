@@ -309,6 +309,7 @@ namespace InterviewProblemNSolutions
             DesignHashMap();
             DesignHashSet();
             LongestSubarrayOf1sAfterDeletingOneElement();
+            MaximumSwap();
 
 
             // String Matching Algorithm
@@ -5081,6 +5082,15 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MaximumSwap()
+        {
+            // https://leetcode.com/problems/maximum-swap/
+            Utility.Print("670. Maximum Swap");
+            int[] nums = { 2736, 9973, 987652791 };
+            foreach (var num in nums)
+                Console.WriteLine($" Max value number possible from \'{num}\' by swapping two digits at most once is: \'{DailyProblem.MaximumSwap(num)}\'\n");
+        }
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
@@ -5336,6 +5346,7 @@ namespace InterviewProblemNSolutions
         public static void DetectDuplicate()
         {
             Utility.Print("Problem-4 Detect Duplicates in Array containing Positive values in the range [0 .. N-1] (p. 562)");
+            Utility.Print("287. Find the Duplicate Number");
             int[] input = { 3, 2, 1, 3, 4, 5, 1 };
             input.Print("Input Array");
             SearchAlgorithms.DetectDuplicate(input);

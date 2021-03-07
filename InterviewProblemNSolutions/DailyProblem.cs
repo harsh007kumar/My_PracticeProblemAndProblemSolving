@@ -10902,5 +10902,39 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n) || Greedy Approach
+        public static int MaximumSwap(int num)
+        {
+            /* 
+             * At each digit of the input number in order, if there is a larger digit that occurs later,
+             * we know that the best swap must occur with the digit we are currently considering.
+             * 
+             * Algorithm:
+             * We will compute \text{last[d] = i}last[d] = i, the index \text{i}i of the last occurrence of digit \text{d}d (if it exists).
+             * Afterwards, when scanning the number from left to right, if there is a larger digit in the future,
+             * we will swap it with the largest such digit.
+             * if there are multiple such digits, we will swap it with the one that occurs the latest/closet idx from end.
+             */
+            char[] n = num.ToString().ToCharArray();
+            int[] dMap = new int[10];
+            // get the latest idx of each digit present in number (last/max idx it was last seen at)
+            for (int i = 0; i < n.Length; i++)
+                dMap[n[i] - '0'] = i;
+
+            for (int i = 0; i < n.Length; i++)
+                for (int d = 9; d > n[i] - '0'; d--)
+                    // if biggest possible digit than current digit was found at idx greater than curr digit idx, swap digits
+                    if (dMap[d] > i)
+                    {
+                        char temp = n[dMap[d]];
+                        n[dMap[d]] = n[i];
+                        n[i] = temp;
+                        return Convert.ToInt32(new string(n));
+                    }
+            return num;
+        }
+
+
+
     }
 }
