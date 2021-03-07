@@ -308,6 +308,7 @@ namespace InterviewProblemNSolutions
             FindFirstAndLastPositionOfElementInSortedArray();
             DesignHashMap();
             DesignHashSet();
+            LongestSubarrayOf1sAfterDeletingOneElement();
 
 
             // String Matching Algorithm
@@ -5065,6 +5066,20 @@ namespace InterviewProblemNSolutions
             myHashSet.Remove(2);   // set = [1]
             Console.WriteLine($" {myHashSet.Contains(2)}"); // return False, (already removed)
         }
+
+
+        public static void LongestSubarrayOf1sAfterDeletingOneElement()
+        {
+            // https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/
+            Utility.Print("1493. Longest Subarray of 1's After Deleting One Element");
+            int[][] numsArr = { new int[] { 1, 1, 0, 1 }, new int[] { 0, 1, 1, 1, 0, 1, 1, 0, 1 }, new int[] { 1, 1, 1 }, new int[] { 1, 1, 0, 0, 1, 1, 1, 0, 1 }, new int[] { 0, 0, 0 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" longest non-empty subarray containing only 1's in the resulting array after one deletion:  \'{DailyProblem.LongestSubarrayOfOnes(nums)}\'");
+            }
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

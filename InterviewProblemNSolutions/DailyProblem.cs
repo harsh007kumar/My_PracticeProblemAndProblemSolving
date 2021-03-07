@@ -10880,6 +10880,26 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1)
+        public static int LongestSubarrayOfOnes(int[] nums)
+        {
+            int currOnes = 0, prvOnes = 0, i = 0, ans = 0, l = nums.Length;
+            bool oneNumDeleted = false;
+            while (i < l)
+            {
+                while (i < l && nums[i] == 1)
+                { i++; currOnes++; }
+                
+                // update ans
+                ans = Math.Max(ans, currOnes + prvOnes);
+
+                prvOnes = currOnes;
+                currOnes = 0;
+                i++;
+                if (i < l) oneNumDeleted = true;
+            }
+            return Math.Max(0, ans - (oneNumDeleted ? 0 : 1));
+        }
 
 
     }
