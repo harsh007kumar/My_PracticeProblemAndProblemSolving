@@ -306,6 +306,7 @@ namespace InterviewProblemNSolutions
             CountBinarySubstrings();
             ShortEncodingOfWords();
             FindFirstAndLastPositionOfElementInSortedArray();
+            DesignHashMap();
 
 
             // String Matching Algorithm
@@ -5029,6 +5030,23 @@ namespace InterviewProblemNSolutions
                 int[] pos = SearchAlgorithms.SearchRange(numsArr[i], target[i]);
                 Console.WriteLine($" Target: \'{target[i]}\' is present b/w the index/in the range [{pos[0]}...{pos[1]}]\n");
             }
+        }
+
+
+        public static void DesignHashMap()
+        {
+            // https://leetcode.com/problems/design-hashmap/
+            Utility.Print("706. Design HashMap");
+            HashMap hashMap = new HashMap();
+            hashMap.Put(1, 1);
+            hashMap.Put(2, 2);
+            Console.WriteLine($" {hashMap.Get(1)}");            // returns 1
+            Console.WriteLine($" {hashMap.Get(3)}");            // returns -1 (not found)
+            hashMap.Put(2, 1);          // update the existing value
+            Console.WriteLine($" {hashMap.Get(2)}");            // returns 1 
+            hashMap.Remove(2);          // remove the mapping for 2
+            Console.WriteLine($" {hashMap.Get(2)}");            // returns -1 (not found) 
+
         }
 
 
