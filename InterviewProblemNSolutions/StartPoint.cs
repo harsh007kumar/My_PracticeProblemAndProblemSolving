@@ -305,6 +305,7 @@ namespace InterviewProblemNSolutions
             EncodeAndDecodeStrings();
             CountBinarySubstrings();
             ShortEncodingOfWords();
+            FindFirstAndLastPositionOfElementInSortedArray();
 
 
             // String Matching Algorithm
@@ -5016,6 +5017,19 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void FindFirstAndLastPositionOfElementInSortedArray()
+        {
+            // https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+            Utility.Print("34. Find First and Last Position of Element in Sorted Array");
+            int[][] numsArr = { new int[] { 5, 7, 7, 8, 8, 10 }, new int[] { 5, 7, 8, 8, 10 }, new int[] { } };
+            int[] target = { 8, 6, 0 };
+            for (int i = 0; i < target.Length; i++)
+            {
+                numsArr[i].Print("Nums");
+                int[] pos = SearchAlgorithms.SearchRange(numsArr[i], target[i]);
+                Console.WriteLine($" Target: \'{target[i]}\' is present b/w the index/in the range [{pos[0]}...{pos[1]}]\n");
+            }
+        }
 
 
 

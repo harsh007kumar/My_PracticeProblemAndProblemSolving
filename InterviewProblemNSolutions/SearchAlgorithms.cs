@@ -349,6 +349,56 @@ namespace InterviewProblemNSolutions
             return -1;
         }
 
+        // Time O(logn) || Space O(1)
+        public static int[] SearchRange(int[] nums, int target)
+        {
+            /* Search for left-most/ smallest idx in array that matches nums[idx]==target using binary search 
+             * If so such index ecists return -1, -1
+             * else we know target is present and hence can continue our search for biggest/right-most idx such that nums[idx]==target
+             * we can further optimize/minimize searched space for last idx for 'target'
+             * by setting start this time from 'first idx' where target was found instead of starting from 0 again.
+             */
+            int start = 0, last = nums.Length - 1;
+            int tStart = int.MaxValue, tEnd = int.MinValue;
+
+            // find the first idx
+            while (start <= last)
+            {
+                int mid = start + (last - start) / 2;
+                if (nums[mid] == target)
+                {
+                    tStart = Math.Min(tStart, mid);
+                    last = mid - 1;
+                }
+                else if (nums[mid] > target)
+                    last = mid - 1;
+                else // if (nums[mid]<target)
+                    start = mid + 1;
+            }
+            // Target not found
+            if (tStart == int.MaxValue) return new int[] { -1, -1 };
+
+            
+
+            start = tStart; last = nums.Length - 1;
+            // find the last idx
+            while (start <= last)
+            {
+                int mid = start + (last - start) / 2;
+                if (nums[mid] == target)
+                {
+                    tEnd = Math.Max(tEnd, mid);
+                    start = mid + 1;
+                }
+                else if (nums[mid] > target)
+                    last = mid - 1;
+                else // if (nums[mid]<target)
+                    start = mid + 1;
+            }
+
+            return new int[] { tStart, tEnd };
+        }
+
         // Time O(n) || Space O(1)
         // Similar problem is seperating O's & 1's which is also similar to 'Dutch National Flag' problem or '3-Way Quick-Sort'
         public static void SeperateEvenOdd(int[] input)
