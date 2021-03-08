@@ -310,6 +310,7 @@ namespace InterviewProblemNSolutions
             DesignHashSet();
             LongestSubarrayOf1sAfterDeletingOneElement();
             MaximumSwap();
+            StrobogrammaticNumber();
 
 
             // String Matching Algorithm
@@ -5089,6 +5090,16 @@ namespace InterviewProblemNSolutions
             int[] nums = { 2736, 9973, 987652791 };
             foreach (var num in nums)
                 Console.WriteLine($" Max value number possible from \'{num}\' by swapping two digits at most once is: \'{DailyProblem.MaximumSwap(num)}\'\n");
+        }
+
+
+        public static void StrobogrammaticNumber()
+        {
+            // https://leetcode.com/problems/strobogrammatic-number/
+            Utility.Print("246. Strobogrammatic Number");
+            string[] nums = { "69", "88", "962", "1", "502", "8008" };
+            foreach (var num in nums)
+                Console.WriteLine($" \'{num}\' is Strobogrammatic Number: \'{StringAlgorithms.IsStrobogrammatic(num)}\'\n");
         }
 
 

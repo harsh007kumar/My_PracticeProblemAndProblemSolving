@@ -772,6 +772,27 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1)
+        public static bool IsStrobogrammatic(string num)
+        {
+            // 0 : 0, 1 : 1, 6 : 9, 8: 8, 9 : 6
+            int start = 0, last = num.Length - 1;
+            while (start <= last)
+                if (!Strobogrammatic(num[start++], num[last--]))
+                    return false;
+            return true;
+
+            // local func
+            bool Strobogrammatic(char c1, char c2)  // Time O(1)
+            {
+                if (c1 == '1' && c2 == '1') return true;
+                else if (c1 == '0' && c2 == '0') return true;
+                else if (c1 == '8' && c2 == '8') return true;
+                else if (c1 == '6' && c2 == '9') return true;
+                else if (c1 == '9' && c2 == '6') return true;
+                else return false;
+            }
+        }
 
     }
 }
