@@ -10935,6 +10935,36 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Recursive Space O(n) || Auxillary Space O(1)
+        // Given the root of a binary tree, then value v and depth d, you need to add a row of nodes with value v at the given depth d. The root node is at depth 1.
+        public static TreeNode AddOneRowToTree(TreeNode root, int v, int d)
+        {
+            return UpdatedTree(root, true, d - 1);
+            // local func
+            TreeNode UpdatedTree(TreeNode r, bool isleft, int depth)
+            {
+                if (depth == 0)
+                {
+                    TreeNode addOne = new TreeNode(v);
+
+                    if (isleft) addOne.left = r;
+                    else addOne.right = r;
+
+                    return addOne;
+                }
+                else
+                {
+                    if (r == null) return r;
+
+                    r.left = UpdatedTree(r.left, true, depth - 1);
+                    r.right = UpdatedTree(r.right, false, depth - 1);
+
+                    return r;
+                }
+
+            }
+        }
+
 
     }
 }

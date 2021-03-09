@@ -311,6 +311,7 @@ namespace InterviewProblemNSolutions
             LongestSubarrayOf1sAfterDeletingOneElement();
             MaximumSwap();
             StrobogrammaticNumber();
+            AddOneRowToTree();
 
 
             // String Matching Algorithm
@@ -5101,6 +5102,30 @@ namespace InterviewProblemNSolutions
             foreach (var num in nums)
                 Console.WriteLine($" \'{num}\' is Strobogrammatic Number: \'{StringAlgorithms.IsStrobogrammatic(num)}\'\n");
         }
+
+
+        public static void AddOneRowToTree()
+        {
+            // https://leetcode.com/problems/add-one-row-to-tree/
+            Utility.Print("623. Add One Row to Tree");
+            TreeNode root = new TreeNode(4)
+            {
+                left = new TreeNode(2)
+                {
+                    left = new TreeNode(3),
+                    right = new TreeNode(1)
+                },
+                right = new TreeNode(6)
+                {
+                    left = new TreeNode(5)
+                }
+            };
+            int v = 1, d = 2;
+            root.InOrder("Binary-Tree");
+            Console.WriteLine($" Tree after adding nodes with value {v} at depth {d}:");
+            DailyProblem.AddOneRowToTree(root, v, d).InOrder("Updated Binary-Tree");
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
