@@ -10965,6 +10965,51 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        // Time O(5^(n/2)) || Space O(1)
+        public static IList<string> FindStrobogrammatic(int n)
+        {
+            KeyValuePair<char, char>[] sPair = new KeyValuePair<char, char>[]
+            {
+                    new KeyValuePair<char,char>('0','0'),
+                    new KeyValuePair<char,char>('1','1'),
+                    new KeyValuePair<char,char>('6','9'),
+                    new KeyValuePair<char,char>('8','8'),
+                    new KeyValuePair<char,char>('9','6')
+            };
+            int startFrom;
 
+            IList<string> ans = new List<string>();
+            char[] num = new char[n];
+            GetStroNums(0, n - 1);
+            return ans;
+
+            // Local func
+            void GetStroNums(int start, int last)
+            {
+                if (start == last)
+                {
+                    num[start] = sPair[0].Key;  // 0
+                    GetStroNums(start + 1, last - 1);
+
+                    num[start] = sPair[1].Key;  // 1
+                    GetStroNums(start + 1, last - 1);
+
+                    num[start] = sPair[3].Key;  // 8
+                    GetStroNums(start + 1, last - 1);
+                }
+                else if (start < last)
+                {
+                    startFrom = start == 0 ? 1 : 0;
+                    for (int i = startFrom; i < 5; i++)
+                    {
+                        num[start] = sPair[i].Key;
+                        num[last] = sPair[i].Value;
+                        GetStroNums(start + 1, last - 1);
+                    }
+                }
+                else
+                    ans.Add(new string(num));
+            }
+        }
     }
 }

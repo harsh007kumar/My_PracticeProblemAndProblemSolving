@@ -312,6 +312,7 @@ namespace InterviewProblemNSolutions
             MaximumSwap();
             StrobogrammaticNumber();
             AddOneRowToTree();
+            StrobogrammaticNumberII();
 
 
             // String Matching Algorithm
@@ -5126,6 +5127,20 @@ namespace InterviewProblemNSolutions
             DailyProblem.AddOneRowToTree(root, v, d).InOrder("Updated Binary-Tree");
         }
 
+
+        public static void StrobogrammaticNumberII()
+        {
+            // https://leetcode.com/problems/strobogrammatic-number-ii/
+            Utility.Print("247. Strobogrammatic Number II");
+            int[] nums = { 1, 2, 3, 4 }; // max n given in problem was <=14
+            foreach (var n in nums)
+            {
+                Console.WriteLine($" No of possible Strobogrammatic Number of length: \'{n}\' are");
+                foreach (var strobogrammaticNum in DailyProblem.FindStrobogrammatic(n))
+                    Console.Write($" \'{strobogrammaticNum}\'");
+                Console.WriteLine("\n");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
