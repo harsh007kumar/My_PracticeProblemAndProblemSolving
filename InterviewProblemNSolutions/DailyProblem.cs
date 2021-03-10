@@ -3444,7 +3444,7 @@ namespace InterviewProblemNSolutions
 
 
         // Time O(n) || Space O(1)
-        public static int[][] InsertIntervals(int[][] intervals, int[] newInterval)
+        public static int[][] InsertIntervalsOld(int[][] intervals, int[] newInterval)
         {
             if (intervals.Length == 0) return new int[][] { newInterval };
 
@@ -3502,7 +3502,50 @@ namespace InterviewProblemNSolutions
 
             return sortedIntervals.ToArray();
         }
+        // Time O(n) || Space O(1)
+        public static int[][] InsertIntervals(int[][] intervals, int[] newInterval)
+        {
+            bool intervalAdded = false;
+            List<int[]> ls = new List<int[]>();
 
+            int i = 0, j, l = intervals.Length;
+
+            // all intervals who's end-time smaller than newInterval start-time
+            while (i < l && intervals[i][1] < newInterval[0])
+                ls.Add(intervals[i++]);
+
+            if (i < l)
+            {
+                intervalAdded = true;
+                int[] merge = new int[2];
+
+                j = i;
+
+                // start-time should from Minimum of current interval or newInterval
+                merge[0] = Math.Min(intervals[j][0], newInterval[0]);
+
+                // skip thru all interval who's start-time is smaller than equal to newInterval end-time
+                while (j < l && intervals[j][0] <= newInterval[1])
+                    j++;
+
+                if (j > i)      // we have atleast skipped one interval
+                    merge[1] = Math.Max(intervals[j - 1][1], newInterval[1]);
+                else            // all intervals have start-time larger than newInterval end-time
+                    merge[1] = newInterval[1];
+
+                ls.Add(merge);
+                i = j;  // update i
+            }
+
+            // add any remaining intervals who's start-time greater than newInterval end-time
+            while (i < l)
+                ls.Add(intervals[i++]);
+
+            // still newInterval not added than add at the end
+            if (!intervalAdded) ls.Add(newInterval);
+
+            return ls.ToArray();
+        }
 
         // Time O(n) || Space O(1)
         public static int MaximumProductSubarray(int[] nums)

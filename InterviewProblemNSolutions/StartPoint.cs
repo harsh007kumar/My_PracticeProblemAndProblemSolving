@@ -1840,7 +1840,9 @@ namespace InterviewProblemNSolutions
             {
                 intervalsArr[i].Print("Input INTERVALS");
                 newInterval[i].Print("New INTERVAL");
-                var merged = DailyProblem.InsertIntervals(intervalsArr[i], newInterval[i]);
+                var merged = DailyProblem.InsertIntervalsOld(intervalsArr[i], newInterval[i]);
+                merged.Print("Merged INTERVALS");
+                merged = DailyProblem.InsertIntervals(intervalsArr[i], newInterval[i]);
                 merged.Print("Merged INTERVALS");
                 Console.WriteLine(Utility.lineDelimeter);
             }
