@@ -11071,7 +11071,92 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O((n*m)^2), n = no of rows & m = no of columns
+        public static int[][] CandyCrush(int[][] board)
+        {
+            /* first mark all the cells which fits the given conditions of 3 or more continous cells of same candyType either Horizontally or vertically
+             * Than Crush/Mark those cells as 0
+             * Than Stabalize the board so all cells with value zero bubble up to top and all cells with some value settle towards bottom of Board
+             * 
+             * repeat above step till we can find cells/Candies to Crush
+             * 
+             * Note:
+             *      if the numbers are only +ve integers instead of using seperate 2D array to mark cell to be crushed later
+             *      we can simply set the value to -value and always read value using Math.Abs() when reading the board
+             */
 
+            int row = board.Length, col = board[0].Length;
+            bool[,] toCrush = new bool[row, col];
+            while (TryCrushingBoard())
+                StabalizeBoard();
+            return board;
+
+            // Local Func
+            bool TryCrushingBoard()
+            {
+                bool someCandyToBeCrushed = false;
+                for (int r = 0; r < row; r++)
+                    for (int c = 0; c < col; c++)
+                        // not empty
+                        if (board[r][c] != 0)
+                            if (MarkedForBeingCrushed(r, c))
+                                someCandyToBeCrushed = true;
+
+                // Crush all the Candy which are marked to be crushed
+                if (someCandyToBeCrushed)
+                    Crush();
+
+                return someCandyToBeCrushed;
+            }
+            bool MarkedForBeingCrushed(int rID, int cID)
+            {
+                int i = rID, j = cID, candyType = board[i][j];
+                // check if can be crushed from current idx towards right
+                if (j + 2 < col && candyType == board[rID][j + 1] && candyType == board[rID][j + 2])
+                    while (j < col && candyType == board[rID][j])
+                        toCrush[rID, j++] = true;
+
+                // check if can be crushed from current idx towards downwards direction
+                if (i + 2 < row && candyType == board[i + 1][cID] && candyType == board[i + 2][cID])
+                    while (i < row && candyType == board[i][cID])
+                        toCrush[i++, cID] = true;
+
+                return i > rID || j > cID;
+            }
+            void Crush()
+            {
+                for (int r = 0; r < row; r++)
+                    for (int c = 0; c < col; c++)
+                        if (toCrush[r, c])
+                        {
+                            board[r][c] = 0;            // mark cell empty
+                            toCrush[r, c] = false;      // reset for next iteration
+                        }
+            }
+            void StabalizeBoard()
+            {
+                int r;
+                Queue<int> q = new Queue<int>();
+                for (int c = 0; c < col; c++)   // for each column do below
+                {
+                    // Gather all the non empty Candies from the bottom towards the top
+                    for (r = row - 1; r >= 0; r--)
+                        if (board[r][c] != 0)
+                        {
+                            q.Enqueue(board[r][c]);
+                            board[r][c] = 0;
+                        }
+
+
+                    r = row - 1;
+                    // If there is atleast 1 cell which was empty than Candy count would be less than column length i.e no of rows
+                    //if (q.Count != row)
+                    while (q.Count > 0)
+                        // updates cells from bottom till Queue in not empty
+                        board[r--][c] = q.Dequeue();
+                }
+            }
+        }
 
 
     }
