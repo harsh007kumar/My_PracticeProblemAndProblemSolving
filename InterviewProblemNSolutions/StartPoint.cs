@@ -313,6 +313,7 @@ namespace InterviewProblemNSolutions
             StrobogrammaticNumber();
             AddOneRowToTree();
             StrobogrammaticNumberII();
+            CheckIfAStringContainsAllBinaryCodesOfSizeK();
 
 
             // String Matching Algorithm
@@ -5142,6 +5143,17 @@ namespace InterviewProblemNSolutions
                     Console.Write($" \'{strobogrammaticNum}\'");
                 Console.WriteLine("\n");
             }
+        }
+
+
+        public static void CheckIfAStringContainsAllBinaryCodesOfSizeK()
+        {
+            // https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k/
+            Utility.Print("1461. Check If a String Contains All Binary Codes of Size K");
+            string[] s = { "00110110", "00110", "0110", "0110", "0000000001011100" };
+            int[] k = { 2, 2, 1, 2, 4 };
+            for (int i = 0; i < k.Length; i++)
+                Console.WriteLine($" Every binary code of length \'{k[i]}\' is a substring of s\'{s[i]}\': {DailyProblem.HasAllCodes(s[i], k[i])}\n");
         }
 
 

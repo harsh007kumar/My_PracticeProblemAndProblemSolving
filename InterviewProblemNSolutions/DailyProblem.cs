@@ -11054,5 +11054,25 @@ namespace InterviewProblemNSolutions
                     ans.Add(new string(num));
             }
         }
+
+
+        // Time O(n*k) || Space O(2^k), n = len of 's'
+        public static bool HasAllCodes(string s, int k)
+        {
+            HashSet<string> set = new HashSet<string>();
+            var distinctSubStrings = Math.Pow(2, k);
+            for (int start = 0; start <= s.Length - k; start++)
+            {
+                set.Add(s.Substring(start, k));
+                if (set.Count == distinctSubStrings)
+                    return true;
+            }
+            return false;
+        }
+
+
+
+
+
     }
 }
