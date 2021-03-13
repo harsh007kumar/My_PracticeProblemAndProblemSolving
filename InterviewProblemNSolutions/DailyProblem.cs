@@ -11159,5 +11159,50 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(r*c)
+        public static int LongestLine(int[][] M)
+        {
+            if (M.Length < 1) return 0;
+            int row = M.Length, col = M[0].Length, ans = 0;
+            int maxLenPossible = Math.Max(row, col);
+            // check all rows & columns + diagonals running from (left-top to rt-bottom) & (right-top to left-bottom)
+
+            Direction[,] grid = new Direction[row, col];
+            for (int r = 0; r < row; r++)
+                for (int c = 0; c < col; c++)
+                    if (M[r][c] == 1)
+                    {
+                        grid[r, c] = new Direction();
+                        // set default value 1 in all 4 direction
+                        for (int i = 0; i < grid[r, c].d.Length; i++) grid[r, c].d[i] = 1; // O(1)
+
+                        // add count of adjacent 1's found on left of current pos(r,c))
+                        if (c - 1 >= 0 && M[r][c - 1] == 1)
+                            grid[r, c].d[0] = Math.Max(grid[r, c].d[0], grid[r, c - 1].d[0] + 1);
+                        // add count of adjacent 1's found on top of current pos(r,c))
+                        if (r - 1 >= 0 && M[r - 1][c] == 1)
+                            grid[r, c].d[1] = Math.Max(grid[r, c].d[1], grid[r - 1, c].d[1] + 1);
+                        // add count of adjacent 1's found on diag (left-top to rt-bottom) of current pos(r,c))
+                        if (r - 1 >= 0 && c - 1 >= 0 && M[r - 1][c - 1] == 1)
+                            grid[r, c].d[2] = Math.Max(grid[r, c].d[2], grid[r - 1, c - 1].d[2] + 1);
+                        // add count of adjacent 1's found on diag (right-top to left-bottom) of current pos(r,c))
+                        if (r - 1 >= 0 && c + 1 < col && M[r - 1][c + 1] == 1)
+                            grid[r, c].d[3] = Math.Max(grid[r, c].d[3], grid[r - 1, c + 1].d[3] + 1);
+
+                        // update ans based upon Max Value found in either direction
+                        for (int i = 0; i < grid[r, c].d.Length; i++) ans = Math.Max(ans, grid[r, c].d[i]);  // O(1)
+
+                        if (ans == maxLenPossible) return ans;
+                    }
+            return ans;
+        }
+        public class Direction
+        {
+            public int[] d;
+            public Direction() => d = new int[4];
+        }
+
+
+
     }
 }

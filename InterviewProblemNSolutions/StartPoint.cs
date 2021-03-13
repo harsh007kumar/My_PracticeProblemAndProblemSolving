@@ -315,6 +315,7 @@ namespace InterviewProblemNSolutions
             StrobogrammaticNumberII();
             CheckIfAStringContainsAllBinaryCodesOfSizeK();
             CandyCrush();
+            LongestLineOfConsecutiveOneInMatrix();
 
 
             // String Matching Algorithm
@@ -5176,6 +5177,22 @@ namespace InterviewProblemNSolutions
             board.Print("Candy Board - Start State");
             DailyProblem.CandyCrush(board).Print("Candy Board - Final State");
         }
+
+
+        public static void LongestLineOfConsecutiveOneInMatrix()
+        {
+            // https://leetcode.com/problems/longest-line-of-consecutive-one-in-matrix/
+            Utility.Print("562. Longest Line of Consecutive One in Matrix");
+            int[][][] gridArr = {   new int[][] { new int[] { 0, 1, 1, 0 }, new int[] { 0, 1, 1, 0 }, new int[] { 0, 0, 0, 1 } },
+                                    new int[][] { new int[] { 1, 1, 1, 1 }, new int[] { 0, 1, 1, 0 }, new int[] { 0, 0, 0, 1 } },
+                                    new int[][] { } };
+            foreach (var grid in gridArr)
+            {
+                grid.Print("MATRIX");
+                Console.WriteLine($"  longest line of consecutive one in the above matrix has len: \'{DailyProblem.LongestLine(grid)}\'\n");
+            }
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
