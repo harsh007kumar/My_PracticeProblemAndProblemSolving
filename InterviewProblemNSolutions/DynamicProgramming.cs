@@ -1635,5 +1635,33 @@ namespace InterviewProblemNSolutions
             return ans;
         }
 
+
+        // Time O(n^2) || Space O(n)
+        public static int NumFactoredBinaryTrees(int[] A)
+        {
+            int mod = 1000000007, l = A.Length;
+            Array.Sort(A);              // O(nlogn)
+
+            long[] dp = new long[l];
+            Dictionary<int, int> valIdx = new Dictionary<int, int>(l);
+            for (int i = 0; i < l; i++)
+            {
+                dp[i] = 1;  // set default value (atleast one tree can be made by using value as root node)
+                valIdx.Add(A[i], i);
+            }
+
+            for (int i = 1; i < l; i++)        // O(n^2)
+                for (int j = 0; j < i; j++)
+                    if (A[i] % A[j] == 0)
+                        if (valIdx.ContainsKey(A[i] / A[j]))
+                            dp[i] = (dp[i] + (dp[j] * dp[valIdx[A[i] / A[j]]]) % mod) % mod;
+            long ans = 0;
+            for (int i = 0; i < l; i++)
+                ans = (ans + (dp[i] % mod)) % mod;
+            return (int)(ans % mod);
+        }
+
+
+
     }
 }

@@ -316,6 +316,7 @@ namespace InterviewProblemNSolutions
             CheckIfAStringContainsAllBinaryCodesOfSizeK();
             CandyCrush();
             LongestLineOfConsecutiveOneInMatrix();
+            BinaryTreesWithFactors();
 
 
             // String Matching Algorithm
@@ -5190,6 +5191,19 @@ namespace InterviewProblemNSolutions
             {
                 grid.Print("MATRIX");
                 Console.WriteLine($"  longest line of consecutive one in the above matrix has len: \'{DailyProblem.LongestLine(grid)}\'\n");
+            }
+        }
+
+
+        public static void BinaryTreesWithFactors()
+        {
+            // https://leetcode.com/problems/binary-trees-with-factors/
+            Utility.Print("823. Binary Trees With Factors");
+            int[][] arrays = { new int[] { 2, 4 }, new int[] { 2, 4, 5, 10 } };
+            foreach (var arr in arrays)
+            {
+                arr.Print("Distinct Values Array");
+                Console.WriteLine($" number of binary trees we can make such that root.val = root.left * root.right = \'{DynamicProgramming.NumFactoredBinaryTrees(arr)}\'\n");
             }
         }
 
