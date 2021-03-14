@@ -11203,6 +11203,86 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = O(n) || Space = O(1)
+        public static ListNode SwapNodes(ListNode head, int k)
+        {
+            /* Simple Soln with O(n) Space Convert LinkedList to List and swap nodes at given index and convert back list to LinkedList
+             * 
+             * 
+             * Constant Space soln
+             * 
+             * First create dummy node and point its next to LinkedList head, to simplyfy edge cases
+             * 
+             * Now all we need to do is to keep track to nodes whose next node is 'toSwap' and also prv of 'swapWith' node
+             * Than Swap those two and return dummy.Next as new List Head
+             */
+            ListNode dummy = new ListNode(0) { next = head };
+            ListNode kthFront = dummy, kthEnd = dummy, curr = dummy.next;
+            int count = 1;
+            /*
+            if (k == 1)
+                while (curr.next != null)
+                {
+                    kthEnd = curr;
+                    curr = curr.next;
+                }
+            else
+                while (curr.next != null)
+                {
+                    // update kthFront prv node
+                    if (count == k - 1)
+                        kthFront = curr;
+
+                    // update kthEnd prv node
+                    if (count >= k)
+                        kthEnd = kthEnd.next;
+
+                    curr = curr.next;
+                    count++;
+                }
+            */
+            // => Above if else Can be further simplyfied to just below
+            while (curr.next != null)
+            {
+                // update kthFront prv node
+                if (count == k - 1)
+                    kthFront = curr;
+
+                // update kthEnd prv node
+                if (count >= k)
+                    kthEnd = kthEnd.next;
+
+                curr = curr.next;
+                count++;
+            }
+
+
+            // swap kth nodes from front and end
+            if (kthFront != kthEnd)
+            {
+                // A -> B -> C-> D
+                ListNode toSwap = kthFront.next;
+                ListNode swapWith = kthEnd.next;
+                ListNode toSwapNext = null;
+
+                if (kthEnd.next == kthFront) //if(swapWith.next == toSwap)
+                {
+                    toSwapNext = toSwap.next;
+                    kthEnd.next = toSwap;
+                    toSwap.next = swapWith;
+                }
+                else
+                {
+                    kthEnd.next = toSwap;
+                    toSwapNext = toSwap.next;
+                    toSwap.next = swapWith.next;
+
+                    kthFront.next = swapWith;
+                }
+                swapWith.next = toSwapNext;
+            }
+            return dummy.next;
+        }
 
     }
 }

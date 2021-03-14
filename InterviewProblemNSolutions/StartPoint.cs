@@ -317,6 +317,7 @@ namespace InterviewProblemNSolutions
             CandyCrush();
             LongestLineOfConsecutiveOneInMatrix();
             BinaryTreesWithFactors();
+            SwappingNodesInALinkedList();
 
 
             // String Matching Algorithm
@@ -5204,6 +5205,29 @@ namespace InterviewProblemNSolutions
             {
                 arr.Print("Distinct Values Array");
                 Console.WriteLine($" number of binary trees we can make such that root.val = root.left * root.right = \'{DynamicProgramming.NumFactoredBinaryTrees(arr)}\'\n");
+            }
+        }
+
+
+        public static void SwappingNodesInALinkedList()
+        {
+            // https://leetcode.com/problems/swapping-nodes-in-a-linked-list/
+            Utility.Print("1721. Swapping Nodes in a Linked List");
+            ListNode[] head = new ListNode[] {
+                                    new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) { next = new ListNode(4) { next = new ListNode(5) } } } },
+                                    new ListNode(7) { next = new ListNode(9) { next = new ListNode(6) { next = new ListNode(6) { next = new ListNode(7) { next = new ListNode(8){next = new ListNode(3){ next = new ListNode(0){ next = new ListNode(9){ next = new ListNode(5)} } } } } } } } },
+                                    new ListNode(1) ,
+                                    new ListNode(1) { next = new ListNode(2) },
+                                    new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) } },
+                                    new ListNode(100) { next = new ListNode(90) }
+                                            };
+            int[] k = { 2, 5, 1, 1, 2, 2 };
+            for (int i = 0; i < head.Length; i++)
+            {
+                head[i].Print("Singly-Linked List");
+                Console.WriteLine($" After Swapping \'{k[i]}\'kth Nodes from Start & End");
+                DailyProblem.SwapNodes(head[i], k[i]).Print("Linked List After Swapping ");
+                Console.WriteLine(Utility.lineDelimeter);
             }
         }
 
