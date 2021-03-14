@@ -318,6 +318,7 @@ namespace InterviewProblemNSolutions
             LongestLineOfConsecutiveOneInMatrix();
             BinaryTreesWithFactors();
             SwappingNodesInALinkedList();
+            FlipGameII();
 
 
             // String Matching Algorithm
@@ -5226,9 +5227,19 @@ namespace InterviewProblemNSolutions
             {
                 head[i].Print("Singly-Linked List");
                 Console.WriteLine($" After Swapping \'{k[i]}\'kth Nodes from Start & End");
-                DailyProblem.SwapNodes(head[i], k[i]).Print("Linked List After Swapping ");
+                DailyProblem.SwapNodes(head[i], k[i]).Print("Linked List After Swapping");
                 Console.WriteLine(Utility.lineDelimeter);
             }
+        }
+
+
+        public static void FlipGameII()
+        {
+            // https://leetcode.com/problems/flip-game-ii/
+            Utility.Print("294. Flip Game II");
+            string[] currentStateArr = { "++++", "+", "++-++", "++++-++" };
+            foreach (var currentState in currentStateArr)
+                Console.WriteLine($" by starting 1st in game of \'{currentState}\' its possible to win: {DailyProblem.FlipGameII(currentState)}");
         }
 
 

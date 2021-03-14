@@ -11284,5 +11284,27 @@ namespace InterviewProblemNSolutions
             return dummy.next;
         }
 
+
+        // Time O(n^2) || Recursive Space O(n)
+        public static bool FlipGameII(string currentState)
+        {
+            /* First check if we can make a valid move if not return false as we are not making the last move
+             * 
+             * next check if after making a valid move and passed the nextstate to our opponent
+             * and than our opponent cannot win with that state means we can win the game.
+             * 
+             * keep trying above step for each consecutive "++" if our opponent loses at any stepafter any of those move
+             * means we can win the game.
+             * 
+             * else return false at we could not win the game
+             */
+            for (int i = 0; i < currentState.Length - 1; i++)
+                if (currentState[i] == '+' && currentState[i + 1] == '+')   // valid move of converting '++' to '--'
+                    if (!FlipGameII(currentState.Substring(0, i) + "--" + currentState.Substring(i + 2)))   // if opp cannot win i.e. we won
+                        return true;
+            return false;
+        }
+
+
     }
 }
