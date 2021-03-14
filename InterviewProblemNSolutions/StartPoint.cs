@@ -319,6 +319,7 @@ namespace InterviewProblemNSolutions
             BinaryTreesWithFactors();
             SwappingNodesInALinkedList();
             FlipGameII();
+            WaysToMakeAFairArray();
 
 
             // String Matching Algorithm
@@ -5242,6 +5243,19 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" by starting 1st in game of \'{currentState}\' its possible to win: {DailyProblem.FlipGameII(currentState)}");
         }
 
+
+        public static void WaysToMakeAFairArray()
+        {
+            // https://leetcode.com/problems/ways-to-make-a-fair-array/
+            Utility.Print("1664. Ways to Make a Fair Array");
+            int[][] numsArr = { new int[] { 2, 1, 6, 4 }, new int[] { 1, 1, 1 }, new int[] { 1, 2, 3 }, new int[] { 1 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                //Console.WriteLine($" No Indicies which upon removing yields equal even-odd num sum: \'{DailyProblem.WaysToMakeFair(nums)}\'\n");
+                Console.WriteLine($" No Indicies which upon removing yields equal even-odd num sum: \'{DailyProblem.WaysToMakeFairFaster(nums)}\'\n");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

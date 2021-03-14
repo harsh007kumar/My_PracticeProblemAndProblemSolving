@@ -11306,5 +11306,71 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n^2) || Space O(1)
+        public static int WaysToMakeFair(int[] nums)
+        {
+            int count = 0, removed = -1;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                removed = i;
+                if (IsBalanced())
+                    count++;
+            }
+            return count;
+
+            // Local Func
+            bool IsBalanced()
+            {
+                int odd = 0, even = 0;
+                for (int k = 0; k < nums.Length; k++)
+                    if (k < removed)
+                    {
+                        if (k % 2 == 1) odd += nums[k];
+                        else even += nums[k];
+                    }
+                    else if (k > removed)
+                    {
+                        if (k % 2 == 0) odd += nums[k];
+                        else even += nums[k];
+                    }
+                return odd == even;
+            }
+        }
+
+        // Time O(n) || Space O(n)
+        public static int WaysToMakeFairFaster(int[] nums)
+        {
+            int l = nums.Length, count = 0, oddSum = 0, evenSum = 0;
+            int[] preFixSum = new int[l];
+            // calculate prefix sum seperately for all odd and even numbers
+            for (int i = 0; i < l; i++)
+                if (i % 2 == 1)                 // odd sum
+                {
+                    oddSum += nums[i];
+                    preFixSum[i] += oddSum;
+                }
+                else                            // even sum
+                {
+                    evenSum += nums[i];
+                    preFixSum[i] += evenSum;
+                }
+
+            int leftOddSum = 0, rtOddSum = oddSum, leftEvenSum = 0, rtEvenSum = evenSum;
+            for (int i = 0; i < l; i++)
+            {
+                if (i % 2 == 1)                 // if index is odd
+                    rtOddSum -= nums[i];
+                else
+                    rtEvenSum -= nums[i];
+
+                // parity of the indices after the removed element changes.
+                if (leftOddSum + rtEvenSum == leftEvenSum + rtOddSum)
+                    count++;
+
+                if (i % 2 == 1) leftOddSum += nums[i];
+                else leftEvenSum += nums[i];
+            }
+            return count;
+        }
     }
 }
