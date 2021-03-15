@@ -320,6 +320,7 @@ namespace InterviewProblemNSolutions
             SwappingNodesInALinkedList();
             FlipGameII();
             WaysToMakeAFairArray();
+            EncodeAndDecodeTinyURL();
 
 
             // String Matching Algorithm
@@ -5256,6 +5257,19 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" No Indicies which upon removing yields equal even-odd num sum: \'{DailyProblem.WaysToMakeFairFaster(nums)}\'\n");
             }
         }
+
+
+        public static void EncodeAndDecodeTinyURL()
+        {
+            // https://leetcode.com/problems/encode-and-decode-tinyurl/
+            Utility.Print("535. Encode and Decode TinyURL");
+            TinyURL obj = new TinyURL();
+            string longURL = "https://leetcode.com/problems/design-tinyurl";
+            string shortURL = obj.Encode(longURL);  // Encode long to short
+            Console.WriteLine($" Encoding longURL: \'{longURL}\'\n to shortURl yields: \'{shortURL}\'\n");
+            Console.WriteLine($" De-Coding shortURL: \'{shortURL}\'\n back to original URL yields: \'{obj.Decode(shortURL)}\'\n"); // decode long from short
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
