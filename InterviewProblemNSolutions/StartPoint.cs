@@ -321,6 +321,7 @@ namespace InterviewProblemNSolutions
             FlipGameII();
             WaysToMakeAFairArray();
             EncodeAndDecodeTinyURL();
+            BestTimeToBuyAndSellStockWithTransactionFee();
 
 
             // String Matching Algorithm
@@ -5268,6 +5269,23 @@ namespace InterviewProblemNSolutions
             string shortURL = obj.Encode(longURL);  // Encode long to short
             Console.WriteLine($" Encoding longURL: \'{longURL}\'\n to shortURl yields: \'{shortURL}\'\n");
             Console.WriteLine($" De-Coding shortURL: \'{shortURL}\'\n back to original URL yields: \'{obj.Decode(shortURL)}\'\n"); // decode long from short
+        }
+
+
+        public static void BestTimeToBuyAndSellStockWithTransactionFee()
+        {
+            // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/
+            Utility.Print("714. Best Time to Buy and Sell Stock with Transaction Fee");
+            int[][] pricesArr = { new int[] { 1, 3, 2, 8, 4, 9 }, new int[] { 1, 3, 7, 5, 10, 3 }, new int[] { 2, 1, 4, 4, 2, 3, 2, 5, 1, 2 } };
+            int[] transactionFees = { 2, 3, 1 };
+            for (int i = 0; i < pricesArr.Length; i++)
+            {
+                pricesArr[i].Print("Prices");
+                //int profit = DynamicProgramming.BestTimeToBuyAndSellStockWithTransactionFee_Depricated(pricesArr[i], transactionFees[i]); // Fails for 3rd input
+                int profit = DynamicProgramming.BestTimeToBuyAndSellStockWithTransactionFee(pricesArr[i], transactionFees[i]);
+                Console.WriteLine($" Max profit we can achieve by completing multiple transactions & paying the transaction fee of \'{transactionFees[i]}\'" +
+                    $" for each transaction: \'{profit}\'\n");
+            }
         }
 
 

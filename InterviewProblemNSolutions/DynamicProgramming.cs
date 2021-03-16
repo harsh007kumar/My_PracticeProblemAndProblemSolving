@@ -1662,6 +1662,54 @@ namespace InterviewProblemNSolutions
         }
 
 
+        [Obsolete("Doesnt works for all cases+ Algo is not efficient Time = O(n^2)",true)]
+        public static int BestTimeToBuyAndSellStockWithTransactionFee_Depricated(int[] prices, int fee)
+        {
+            int l = prices.Length;
+            int[,] dp = new int[l, l];
+
+            for (int tradingPeriod = 1; tradingPeriod <= l; tradingPeriod++)
+                for (int startD = 0; startD < l - tradingPeriod; startD++)
+                {
+                    int lastD = startD + tradingPeriod;
+                    if (startD == lastD)
+                        dp[startD, lastD] = -fee;
+                    else if (startD + 1 == lastD)
+                        dp[startD, lastD] = Math.Max(-fee, prices[lastD] - prices[startD] - fee);
+                    else
+                    {
+                        int maxProfit = Math.Max(-fee, prices[lastD] - prices[startD] - fee);
+                        for (int k = startD + 1; k < lastD; k++)
+                            maxProfit = Math.Max(maxProfit, dp[startD, k] + dp[k + 1, lastD]);
+
+                        dp[startD, lastD] = maxProfit;
+                    }
+                }
+
+            return Math.Max(dp[0, l - 1], 0);
+        }
+        // Time O(n) || Space O(1)
+        public static int BestTimeToBuyAndSellStockWithTransactionFee(int[] prices, int fee)
+        {
+            /* If I am holding a share after today,
+             * then either I am just continuing holding the share I had yesterday,
+             * or that I held no share yesterday, but bought in one share today: hold = max(hold, cash - prices[i])
+             * 
+             * If I am not holding a share after today,
+             * then either I did not hold a share yesterday, 
+             * or that I held a share yesterday but I decided to sell it out today: cash = max(cash, hold + prices[i] - fee).
+             * 
+             * Make sure fee is only incurred once i.e. while selling.
+             */
+            int cash = 0, boughtPrice = -prices[0];
+            for (int i = 1; i < prices.Length; i++)
+            {
+                cash = Math.Max(cash, boughtPrice + prices[i] - fee);
+                boughtPrice = Math.Max(boughtPrice, cash - prices[i]);
+            }
+            return cash;
+        }
+
 
     }
 }
