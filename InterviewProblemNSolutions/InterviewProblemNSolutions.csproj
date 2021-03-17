@@ -50,6 +50,7 @@
     <Compile Include="DivideAndConquerAlgorithms.cs" />
     <Compile Include="DynamicProgramming.cs" />
     <Compile Include="FindCelebrity.cs" />
+    <Compile Include="GenerateRandomPointInACircle.cs" />
     <Compile Include="HashMap.cs" />
     <Compile Include="HitCounter.cs" />
     <Compile Include="InsertDeleteGetRandomO1.cs" />
