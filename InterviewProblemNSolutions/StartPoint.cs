@@ -5294,20 +5294,34 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/generate-random-point-in-a-circle/
             Utility.Print("478. Generate Random Point in a Circle");
-            double[][] radiusCenterXCenterYArray = { new double[] { 1, 0, 0 }, new double[] { 10, 5, -7.5 }, new double[] { 10.0, 5.0, -7.5 }, new double[] { 7.5, 1.5, 2.5 } };
-            GenerateRandomPointInACircle obj;
+            double[][] radiusCenterXCenterYArray = {new double[] { 1, 0, 0 },
+                                                    new double[] { 10, 5, -7.5 },
+                                                    new double[] { 10.0, 5.0, -7.5 },
+                                                    new double[] { 7.5, 1.5, 2.5 } };
+            GenerateRandomPointInACircle normalRandomGenerator;
+            RandomPointInACircle extremeRandomGenerator;
             foreach (var rad_X_Y in radiusCenterXCenterYArray)
             {
-                Console.WriteLine($" Creating Circle with Radius: {rad_X_Y[0]} & Centroid is at X-Axis: {rad_X_Y[1]} || Y-Axis:{rad_X_Y[2]}");
-                obj = new GenerateRandomPointInACircle(rad_X_Y[0], rad_X_Y[1], rad_X_Y[2]);
-                for (int i = 0; i < 10; i++)
+                Console.WriteLine($" Create Circle with Radius: {rad_X_Y[0]} & Centroid is at X-Axis: {rad_X_Y[1]} || Y-Axis:{rad_X_Y[2]}");
+
+                Console.WriteLine("Normal Random Coordinate:");
+                normalRandomGenerator = new GenerateRandomPointInACircle(rad_X_Y[0], rad_X_Y[1], rad_X_Y[2]);
+                for (int i = 0; i < 5; i++)
                 {
-                    var xy = obj.RandPointInsideCircle();
-                    Console.WriteLine($" X-Axis: {xy[0]} Y-Axis: {xy[1]}");
+                    var xy = normalRandomGenerator.RandPointInsideCircle();
+                    Console.WriteLine($" X-Axis: {xy[0]} || Y-Axis: {xy[1]}");
+                }
+
+                Console.WriteLine("Extremely Random Coordinate:");
+                extremeRandomGenerator = new RandomPointInACircle(rad_X_Y[0], rad_X_Y[1], rad_X_Y[2]);
+                for (int i = 0; i < 5; i++)
+                {
+                    var random_xy = extremeRandomGenerator.RandPoint();
+                    Console.WriteLine($" X-Axis: {random_xy[0]} || Y-Axis: {random_xy[1]}");
                 }
                 Console.WriteLine();
             }
-        }
+         }
 
 
 
