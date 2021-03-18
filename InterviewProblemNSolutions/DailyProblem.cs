@@ -11372,5 +11372,37 @@ namespace InterviewProblemNSolutions
             }
             return count;
         }
+
+
+        // Time O(n) || Space O(1)
+        public static int WiggleMaxLength(int[] nums)
+        {
+            int ans = 1, i = 1, l = nums.Length;
+            while (i < l && nums[i] == nums[i - 1])
+                i++;
+
+            if (i == l) return ans;
+
+            bool isDiffPositive = nums[i - 1] > nums[i++];
+            ans++;
+            while (i < l)
+            {
+                if (isDiffPositive && nums[i - 1] < nums[i])
+                {
+                    isDiffPositive = !isDiffPositive;
+                    ans++;
+                }
+                else if (!isDiffPositive && nums[i - 1] > nums[i])
+                {
+                    isDiffPositive = !isDiffPositive;
+                    ans++;
+                }
+                i++;
+            }
+            return ans;
+        }
+
+
+
     }
 }

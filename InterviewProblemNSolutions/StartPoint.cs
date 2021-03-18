@@ -323,6 +323,7 @@ namespace InterviewProblemNSolutions
             EncodeAndDecodeTinyURL();
             BestTimeToBuyAndSellStockWithTransactionFee();
             GenerateRandomPointInACircle();
+            WiggleSubsequence();
 
 
             // String Matching Algorithm
@@ -5323,6 +5324,21 @@ namespace InterviewProblemNSolutions
             }
          }
 
+
+        public static void WiggleSubsequence()
+        {
+            // https://leetcode.com/problems/wiggle-subsequence/
+            Utility.Print("376. Wiggle Subsequence");
+            int[][] numsArr = { new int[] { 1, 7, 4, 9, 2, 5 },
+                                new int[] { 1, 17, 5, 10, 13, 15, 10, 5, 16, 8 },
+                                new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                                new int[] { 0, 0 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" longest wiggle sequence of alternatine +ve & -ve difference is of len: \'{DailyProblem.WiggleMaxLength(nums)}\'\n");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
