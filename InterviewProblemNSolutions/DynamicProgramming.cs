@@ -1711,5 +1711,55 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Recursive Soln
+        public static int MaxUncrossedLines_Recursive(int[] A, int[] B, int i = 0, int j = 0)
+        {
+            if (i >= A.Length || j >= B.Length) return 0;
+            if (A[i] == B[j]) return 1 + MaxUncrossedLines_Recursive(A, B, i + 1, j + 1);
+            else return Math.Max(MaxUncrossedLines_Recursive(A, B, i, j + 1), MaxUncrossedLines_Recursive(A, B, i + 1, j));
+        }
+        // DP Top-Down Approach || Time = Space = O(n*m), n = len of A & m = len of B
+        public static int MaxUncrossedLines_DP(int[] A, int[] B, int i, int j, int[,] cache)
+        {
+            if (i >= A.Length || j >= B.Length)
+                return 0;
+            
+            // if sub-problem is pre-computed return stored answer
+            if (cache[i, j] != -1)
+                return cache[i, j];
+
+            if (A[i] == B[j])
+                return cache[i, j] = 1 + MaxUncrossedLines_DP(A, B, i + 1, j + 1, cache);
+            else 
+                return cache[i, j] = Math.Max(  MaxUncrossedLines_DP(A, B, i, j + 1, cache),
+                                                MaxUncrossedLines_DP(A, B, i + 1, j, cache));
+        }
+        // DP Top-Down Approach || Time = Space = O(n*m), n = len of A & m = len of B
+        public static int MaxUncrossedLines_DP_DictionaryCache(int[] A, int[] B)
+        {
+            return FindMax(0, 0, new Dictionary<string, int>());
+            // Local Func
+            int FindMax(int i, int j, Dictionary<string, int> cache)
+            {
+                if (i >= A.Length || j >= B.Length)
+                    return 0;
+
+                string key = i + "," + j;
+                // if sub-problem is pre-computed return stored answer
+                if (cache.ContainsKey(key))
+                    return cache[key];
+
+                int ans = 0;
+                if (A[i] == B[j])
+                    ans = 1 + FindMax(i + 1, j + 1, cache);
+                else
+                    ans = Math.Max(FindMax(i, j + 1, cache),
+                                    FindMax(i + 1, j, cache));
+                cache.Add(key, ans);
+                return ans;
+            }
+        }
+
+
     }
 }

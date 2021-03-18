@@ -324,6 +324,7 @@ namespace InterviewProblemNSolutions
             BestTimeToBuyAndSellStockWithTransactionFee();
             GenerateRandomPointInACircle();
             WiggleSubsequence();
+            UncrossedLines();
 
 
             // String Matching Algorithm
@@ -5339,6 +5340,32 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" longest wiggle sequence of alternatine +ve & -ve difference is of len: \'{DailyProblem.WiggleMaxLength(nums)}\'\n");
             }
         }
+
+
+        public static void UncrossedLines()
+        {
+            // https://leetcode.com/problems/uncrossed-lines/
+            Utility.Print("1035. Uncrossed Lines");
+            int[][] A = { new int[] { 1, 4, 2 }, new int[] { 2, 5, 1, 2, 5 }, new int[] { 1, 3, 7, 1, 7, 5 } };
+            int[][] B = { new int[] { 1, 2, 4 }, new int[] { 10, 5, 2, 1, 5, 2 }, new int[] { 1, 9, 2, 5, 1 } };
+            for (int idx = 0; idx < A.Length; idx++)
+            {
+                A[idx].Print("A");
+                B[idx].Print("B");
+
+                int lenA = A[idx].Length;
+                int lenB = B[idx].Length;
+
+                int[,] cache = new int[lenA, lenB];
+                for (int i = 0; i < lenA; i++)
+                    for (int j = 0; j < lenB; j++)
+                        cache[i, j] = -1;  // Set Default Value
+
+                Console.WriteLine($" Max number of connecting lines we can draw in above arrays \'{DynamicProgramming.MaxUncrossedLines_DP(A[idx], B[idx], 0, 0, cache)}\'\n");
+            }
+        }
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
