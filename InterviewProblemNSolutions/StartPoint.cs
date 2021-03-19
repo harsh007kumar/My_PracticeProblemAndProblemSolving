@@ -325,6 +325,7 @@ namespace InterviewProblemNSolutions
             GenerateRandomPointInACircle();
             WiggleSubsequence();
             UncrossedLines();
+            KeysAndRooms();
 
 
             // String Matching Algorithm
@@ -5365,6 +5366,19 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void KeysAndRooms()
+        {
+            // https://leetcode.com/problems/keys-and-rooms/
+            Utility.Print("841. Keys and Rooms");
+            int[][][] roomsArr = {  new int[][] { new int[] { 1 }, new int[] { 2 }, new int[] { 3 }, new int[] { } },
+                                    new int[][] { new int[] { 1, 3 }, new int[] { 3, 0, 1 }, new int[] { 2 }, new int[] { 0 } } };
+            foreach (var rooms in roomsArr)
+            {
+                rooms.Print("Rooms");
+                Console.WriteLine($" Starting from unlocked room '0' its possible to unlocke every other room: \'{DailyProblem.CanVisitAllRooms(rooms)}\'\n");
+            }
+        }
 
 
 

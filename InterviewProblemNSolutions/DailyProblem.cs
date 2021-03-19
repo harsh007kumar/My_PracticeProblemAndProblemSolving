@@ -11403,6 +11403,34 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n*m) || Space O(n), n = no of rooms & m = toal no of keys
+        public static bool CanVisitAllRooms(IList<IList<int>> rooms)
+        {
+            int l = rooms.Count;
+            List<int> keys = new List<int>() { 0 };
+            bool[] visited = new bool[l];
+            int count = l;
+            // for all keys we have
+            for (int i = 0; i < keys.Count; i++)
+                // visited each of those rooms which are not already visited
+                if (!visited[keys[i]])
+                {
+                    // all rooms visited
+                    if (--count == 0) return true;
+
+                    // mark current room visited
+                    visited[keys[i]] = true;
+
+                    // append newly found keys from each room to list of keys we have
+                    foreach (var newKey in rooms[keys[i]])
+                        // if that room is not already visited.
+                        if (!visited[newKey])
+                            keys.Add(newKey);
+                }
+            return false;
+        }
+
+
 
     }
 }
