@@ -326,6 +326,7 @@ namespace InterviewProblemNSolutions
             WiggleSubsequence();
             UncrossedLines();
             KeysAndRooms();
+            DesignUndergroundSystem();
 
 
             // String Matching Algorithm
@@ -5379,6 +5380,50 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Starting from unlocked room '0' its possible to unlocke every other room: \'{DailyProblem.CanVisitAllRooms(rooms)}\'\n");
             }
         }
+
+
+        public static void DesignUndergroundSystem()
+        {
+            // https://leetcode.com/problems/design-underground-system/
+            Utility.Print("1396. Design Underground System");
+            double ans = 0;
+
+            // Example 1
+            UndergroundSystem undergroundSystem = new UndergroundSystem();
+            undergroundSystem.CheckIn(45, "Leyton", 3);
+            undergroundSystem.CheckIn(32, "Paradise", 8);
+            undergroundSystem.CheckIn(27, "Leyton", 10);
+            undergroundSystem.CheckOut(45, "Waterloo", 15);
+            undergroundSystem.CheckOut(27, "Waterloo", 20);
+            undergroundSystem.CheckOut(32, "Cambridge", 22);
+            ans = undergroundSystem.GetAverageTime("Paradise", "Cambridge");       // return 14.00000. There was only one travel from "Paradise" (at time 8) to "Cambridge" (at time 22)
+            Console.WriteLine($" Avg travel time b/w 'Paradise' 'Cambridge' is {ans}");
+            ans = undergroundSystem.GetAverageTime("Leyton", "Waterloo");          // return 11.00000. There were two travels from "Leyton" to "Waterloo", a customer with id=45 from time=3 to time=15 and a customer with id=27 from time=10 to time=20. So the average time is ( (15-3) + (20-10) ) / 2 = 11.00000
+            Console.WriteLine($" Avg travel time b/w 'Leyton' 'Waterloo' is {ans}");
+            undergroundSystem.CheckIn(10, "Leyton", 24);
+            ans = undergroundSystem.GetAverageTime("Leyton", "Waterloo");          // return 11.00000
+            Console.WriteLine($" Avg travel time b/w 'Leyton' 'Waterloo' is {ans}");
+            undergroundSystem.CheckOut(10, "Waterloo", 38);
+            ans = undergroundSystem.GetAverageTime("Leyton", "Waterloo");          // return 12.00000
+            Console.WriteLine($" Avg travel time b/w 'Leyton' 'Waterloo' is {ans}");
+
+            // Example 2
+            undergroundSystem = new UndergroundSystem();
+            undergroundSystem.CheckIn(10, "Leyton", 3);
+            undergroundSystem.CheckOut(10, "Paradise", 8);
+            ans = undergroundSystem.GetAverageTime("Leyton", "Paradise"); // return 5.00000
+            Console.WriteLine($" Avg travel time b/w 'Leyton' 'Paradise' is {ans}");
+            undergroundSystem.CheckIn(5, "Leyton", 10);
+            undergroundSystem.CheckOut(5, "Paradise", 16);
+            ans = undergroundSystem.GetAverageTime("Leyton", "Paradise"); // return 5.50000
+            Console.WriteLine($" Avg travel time b/w 'Leyton' 'Paradise' is {ans}");
+            undergroundSystem.CheckIn(2, "Leyton", 21);
+            undergroundSystem.CheckOut(2, "Paradise", 30);
+            ans = undergroundSystem.GetAverageTime("Leyton", "Paradise"); // return 6.66667
+            Console.WriteLine($" Avg travel time b/w 'Leyton' 'Paradise' is {ans}");
+        }
+
+
 
 
 
