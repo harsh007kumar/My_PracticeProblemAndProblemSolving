@@ -327,6 +327,7 @@ namespace InterviewProblemNSolutions
             UncrossedLines();
             KeysAndRooms();
             DesignUndergroundSystem();
+            ReorderedPowerOf2();
 
 
             // String Matching Algorithm
@@ -5423,6 +5424,15 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" Avg travel time b/w 'Leyton' 'Paradise' is {ans}");
         }
 
+
+        public static void ReorderedPowerOf2()
+        {
+            // https://leetcode.com/problems/reordered-power-of-2/
+            Utility.Print("869. Reordered Power of 2");
+            int[] nums = { 1, 10, 16, 24, 46, 123452345, 0 };
+            foreach (var n in nums)
+                Console.WriteLine($" By reordering the digits of Num: \'{n}\' in any order such that resulting num is 'PowerOf2' possible: \'{DailyProblem.ReorderedPowerOf2(n)}\'\n");
+        }
 
 
 

@@ -11431,6 +11431,56 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(2^n) || Auxiliary Space O(1) || Recursive Space O(n), n = no of digits in number
+        public static bool ReorderedPowerOf2(int N)
+        {
+            if (IsPowerOfTwo(N)) return true;
+            // Fetch all the digits and their frequency from 'N'
+            int[] digits = new int[10];
+            int count = 0;
+            while (N > 0)
+            {
+                digits[N % 10]++;
+                N /= 10;
+                count++;
+            }
+            N = 0;
+            return FindAllNumsRecursively();
+
+            // local func
+            bool IsPowerOfTwo(int num)
+            {
+                while (num % 2 == 0)    // additionally check for num > 0 not required since problem states, 1 <= N <= 10^9
+                    num /= 2;
+                return num == 1;
+            }
+            // Recursive func which generates all possible combination of numbers from avaliable set of digits
+            bool FindAllNumsRecursively(int i = 0)
+            {
+                // once we have addded all avaliable digits check if this num is 'power of 2'
+                if (i == count)
+                    return IsPowerOfTwo(N);
+                else
+                {
+                    for (int k = 0; k < digits.Length; k++)
+                        // if kth digit should have to use count greater than 0 &
+                        // (we are not adding first digit to Num or if we are adding 1st digit it should not be '0')
+                        if (digits[k] > 0 && (i > 0 || k != 0))
+                        {
+                            N = N * 10 + k;     // add new digit to number
+                            digits[k]--;        // reduce count of digit just used
+                            
+                            if (FindAllNumsRecursively(i + 1))
+                                return true;
+
+                            N /= 10;            // remove last added digit from the number
+                            digits[k]++;        // reset back the count of digit
+                        }
+                }
+                return false;
+            }
+        }
+
 
     }
 }
