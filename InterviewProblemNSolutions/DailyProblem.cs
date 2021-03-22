@@ -11482,5 +11482,116 @@ namespace InterviewProblemNSolutions
         }
 
 
+
+        // Time = O(n+m) || Space = O(n), n = no of words in 'wordlist' & m = no of words in 'queries'
+        public static string[] Spellchecker(string[] wordlist, string[] queries)
+        {
+            /* Given a wordlist, we want to implement a spellchecker that converts a query word into a correct word.
+             * 
+             * For a given query word, the spell checker handles two categories of spelling mistakes:
+             * 
+             * Capitalization: If the query matches a word in the wordlist (case-insensitive), then the query word is returned with the same case as the case in the wordlist.
+             *      Example: wordlist = ["yellow"], query = "YellOw": correct = "yellow"
+             *      Example: wordlist = ["Yellow"], query = "yellow": correct = "Yellow"
+             *      Example: wordlist = ["yellow"], query = "yellow": correct = "yellow"
+             * 
+             * Vowel Errors: If after replacing the vowels ('a', 'e', 'i', 'o', 'u') of the query word with any vowel individually,
+             * it matches a word in the wordlist (case-insensitive), then the query word is returned with the same case as the match in the wordlist.
+             *      Example: wordlist = ["YellOw"], query = "yollow": correct = "YellOw"
+             *      Example: wordlist = ["YellOw"], query = "yeellow": correct = "" (no match)
+             *      Example: wordlist = ["YellOw"], query = "yllw": correct = "" (no match)
+             * 
+             * 
+             * In addition, the spell checker operates under the following precedence rules:
+             *      When the query exactly matches a word in the wordlist (case-sensitive), you should return the same word back.
+             *      When the query matches a word up to capitlization, you should return the first such match in the wordlist.
+             *      When the query matches a word up to vowel errors, you should return the first such match in the wordlist.
+             *      If the query has no matches in the wordlist, you should return the empty string.
+             * 
+             * 
+             * Given some queries, return a list of words answer, where answer[i] is the correct word for query = queries[i].
+             */
+
+
+            /* ALGO => We analyze the 3 cases that the algorithm needs to consider:
+             *      when the query is an exact match,
+             *      when the query is a match up to capitalization,
+             *      and when the query is a match up to vowel errors.
+             *      
+             * In all 3 cases, we can use a hash table to query the answer.
+             *      For the first case (exact match),
+             *          we hold a set of words to efficiently test whether our query is in the set.
+             *          
+             *      For the second case (capitalization),
+             *          we hold a hash table that converts the word from its lowercase version to the original word (with correct capitalization).
+             *          
+             *      For the third case (vowel replacement),
+             *          we hold a hash table that converts the word from its lowercase version with the vowels masked out, to the original word.
+             */
+            HashSet<String> words_perfect;
+            Dictionary<String, String> words_cap;
+            Dictionary<String, String> words_vow;
+            StringBuilder sb = new StringBuilder();
+
+            words_perfect = new HashSet<String>();
+            words_cap = new Dictionary<String, String>();
+            words_vow = new Dictionary<String, String>();
+            string lower, vowelLess;
+
+            // Fill respective Dictionary
+            for (int i = 0; i < wordlist.Length; i++)
+            {
+                words_perfect.Add(wordlist[i]);
+
+                lower = wordlist[i].ToLower();
+                if (!words_cap.ContainsKey(lower))
+                    words_cap.Add(lower, wordlist[i]);
+
+                vowelLess = DeVowel(lower);
+                if (!words_vow.ContainsKey(vowelLess))
+                    words_vow.Add(vowelLess, wordlist[i]);
+            }
+
+            string[] ans = new string[queries.Length];
+            // Find Matching word for each query
+            for (int i = 0; i < queries.Length; i++)
+                ans[i] = GetMatch(queries[i]);
+
+            return ans;
+
+            // Local Func
+            // Time O(l), l = len of 'str'
+            string DeVowel(string str)
+            {
+                sb.Clear();
+                foreach (var ch in str)
+                    sb.Append(IsVowel(ch) ? '*' : ch);
+                return sb.ToString();
+            }
+
+            // Time O(1)
+            bool IsVowel(char ch) => ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
+
+            // Time O(1)
+            string GetMatch(string toSearch)
+            {
+                // Case 1: excat match
+                if (words_perfect.Contains(toSearch))
+                    return toSearch;
+
+                // Case 2: Cap mis-match
+                lower = toSearch.ToLower();
+                if (words_cap.ContainsKey(lower))
+                    return words_cap[lower];
+
+                // Case 3: Vowel mis-match
+                vowelLess = DeVowel(lower);
+                if (words_vow.ContainsKey(vowelLess))
+                    return words_vow[vowelLess];
+
+                // Deafult case: Return empty string
+                return "";
+            }
+        }
     }
 }

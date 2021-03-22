@@ -68,6 +68,7 @@
     <Compile Include="RangeSumQuery2DImmutable.cs" />
     <Compile Include="SearchAlgorithms.cs" />
     <Compile Include="SelectionAlgorithms.cs" />
+    <Compile Include="Spellchecker.cs" />
     <Compile Include="StartPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringAlgorithms.cs" />

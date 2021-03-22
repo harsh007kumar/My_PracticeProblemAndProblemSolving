@@ -328,6 +328,8 @@ namespace InterviewProblemNSolutions
             KeysAndRooms();
             DesignUndergroundSystem();
             ReorderedPowerOf2();
+            //CreateMaximumNumber();
+            VowelSpellchecker();
 
 
             // String Matching Algorithm
@@ -5429,12 +5431,30 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/reordered-power-of-2/
             Utility.Print("869. Reordered Power of 2");
-            int[] nums = { 1, 10, 16, 24, 46, 123452345, 0 };
+            int[] nums = { 1, 10, 16, 24, 46, 123452345 };
             foreach (var n in nums)
                 Console.WriteLine($" By reordering the digits of Num: \'{n}\' in any order such that resulting num is 'PowerOf2' possible: \'{DailyProblem.ReorderedPowerOf2(n)}\'\n");
         }
 
 
+
+
+        public static void VowelSpellchecker()
+        {
+            // https://leetcode.com/problems/vowel-spellchecker/
+            Utility.Print("966. Vowel Spellchecker");
+            string[][] wordlist = { new string[] { "KiTe", "kite", "hare", "Hare" }, new string[] { "YellOw" }, new string[] { "ae", "aa" }, new string[] { "wg", "uo", "as", "kv", "ra", "mw", "gi", "we", "og", "zu" } };
+            string[][] queries = { new string[] { "kite", "Kite", "KiTe", "Hare", "HARE", "Hear", "hear", "keti", "keet", "keto" }, new string[] { "yeellow" }, new string[] { "UU" }, new string[] { "AS", "in", "yc", "kv", "mw", "ov", "lc", "os", "wm", "Mw" } };
+            for (int i = 0; i < wordlist.Length; i++)
+            {
+                wordlist[i].Print("WordList");
+                queries[i].Print("Queries");
+                Console.WriteLine(" List of matching ans in the order of Query");
+                DailyProblem.Spellchecker(wordlist[i], queries[i]).Print("Answers");        // Using Dictionary
+                //Spellchecker.VowelSpellchecker(wordlist[i], queries[i]).Print("Answers"); // Using Trie Data-Structure
+                Console.WriteLine("\n");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
