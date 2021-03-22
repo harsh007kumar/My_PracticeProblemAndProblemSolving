@@ -11482,6 +11482,52 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static int[] CreateMaximumNumber(int[] nums1, int[] nums2, int k)
+        {
+            int[] maxNum = new int[k], currNum = new int[k];
+            int l1 = nums1.Length, l2 = nums2.Length;
+            CreateMax();
+            //CreateMax2();
+            return maxNum;
+            // local func
+            // Works fine but slow algo
+            void CreateMax(int i = 0, int j = 0, int idx = 0)
+            {
+                if (idx == k)
+                {
+                    bool newNumIsBigger = false;
+                    // find out if there is atleast one leading digit which is not same in both max and curr array
+                    // and if that digit is greater in currNum array than update the max array
+                    for (int index = 0; index < k; index++)
+                        if (maxNum[index] != currNum[index])
+                        {
+                            if (maxNum[index] < currNum[index])
+                                newNumIsBigger = true;
+                            break;
+                        }
+
+                    if (newNumIsBigger)
+                        for (int index = 0; index < k; index++)
+                            maxNum[index] = currNum[index];
+                }
+                else
+                {
+                    for (int i1 = i; i1 < l1; i1++)
+                    {
+                        currNum[idx] = nums1[i1];
+                        CreateMax(i1 + 1, j, idx + 1);
+                    }
+
+                    for (int j1 = j; j1 < l2; j1++)
+                    {
+                        currNum[idx] = nums2[j1];
+                        CreateMax(i, j1 + 1, idx + 1);
+                    }
+                }
+            }
+            
+        }
+
 
         // Time = O(n+m) || Space = O(n), n = no of words in 'wordlist' & m = no of words in 'queries'
         public static string[] Spellchecker(string[] wordlist, string[] queries)

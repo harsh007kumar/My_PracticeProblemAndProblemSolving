@@ -5437,6 +5437,22 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void CreateMaximumNumber()
+        {
+            // https://leetcode.com/problems/create-maximum-number/
+            Utility.Print("321. Create Maximum Number");
+            int[][] nums1 = { new int[] { 3, 4, 6, 5 }, new int[] { 6, 7 }, new int[] { 3, 9 }, new int[] { 1, 6, 5, 4, 7, 3, 9, 5, 3, 7, 8, 4, 1, 1, 4 } };
+            int[][] nums2 = { new int[] { 9, 1, 2, 5, 8, 3 }, new int[] { 6, 0, 4 }, new int[] { 8, 9 }, new int[] { 4, 3, 1, 3, 5, 9 } };
+            int[] k = { 5, 5, 3, 21 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                nums1[i].Print("Nums1");
+                nums2[i].Print("Nums2");
+                Console.WriteLine($" Maximum possible number of length k \'{k[i]}\' after prevserving the order of digits in num1 & num2");
+                DailyProblem.CreateMaximumNumber(nums1[i], nums2[i], k[i]).Print("Maximum Number");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
         public static void VowelSpellchecker()
