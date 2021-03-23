@@ -11639,5 +11639,99 @@ namespace InterviewProblemNSolutions
                 return "";
             }
         }
+
+
+        // Time O(n^2) || Space O(n), n = length of array
+        public static int ThreeSumMulti(int[] arr, int target)
+        {
+            long mod = 1000000007, ans = 0;
+            int l = arr.Length, currTarget;
+            Dictionary<int, int> numFreq = new Dictionary<int, int>();
+            for (int i = 0; i < l - 2; i++)
+            {
+                numFreq.Clear();
+                currTarget = target - arr[i];
+                if (currTarget >= 0)
+                    for (int j = i + 1; j < l; j++)
+                    {
+                        if (numFreq.ContainsKey(currTarget - arr[j]))
+                            ans = (ans + (numFreq[currTarget - arr[j]]) % mod) % mod;
+                        
+                        if (!numFreq.ContainsKey(arr[j]))
+                            numFreq.Add(arr[j], 1);
+                        else
+                            numFreq[arr[j]]++;
+                    }
+            }
+
+            return (int)(ans % mod);
+        }
+        // Time O(n^2) || Space O(1)
+        public static int ThreeSumMultiConstantSpacec(int[] arr, int target)
+        {
+            /* Sort Array
+             * Traverse ith index in the outer loop from 0th to len - 2 index,
+            *      Traverse the inner loop with start = i+1 & last = len-1
+            *      if at any point arr[i] + arr[j] + arr[k] == target
+            *      
+            *      find no of index after jth index which have value equal to arr[j]
+            *      also find no of index before kth index which have value equal to arr[k]
+            *      
+            *      add ( count of nums with same value arr[j] * count of nums with same value arr[k]) % mod
+            * return ans
+            * 
+            * Note:
+            *   Interesting point is that we don't care about the order of the values,
+            *   meaning A[i] does not necessarily have to be smaller than A[j], therefore sorting doesn't harm,
+            *   because i < j < k just wants us to no have any duplicates, like tuple i,j,k and k,j,i should be counted twice
+            */
+            Array.Sort(arr);    // nlogn
+            long mod = 1000000007, ans = 0;
+            int start, last, l = arr.Length, sum, j, k, sameValNums;
+            for (int i = 0; i < l; i++)
+            {
+                start = i + 1;
+                last = l - 1;
+                while (start < last)
+                {
+                    sum = arr[i] + arr[start] + arr[last];
+                    if (sum == target)
+                    {
+                        if (arr[start] == arr[last])
+                        {
+                            sameValNums = 1 + last - start;
+                            // ans+ = (n)*(n-1)/2
+                            ans = (ans + (sameValNums * (sameValNums - 1) >> 1) % mod) % mod;
+                            start = last;
+                        }
+                        else
+                        {
+                            // count no of nums equal arr[start]
+                            j = start;
+                            while (j < last && arr[j] == arr[start])
+                                j++;
+                            // count no of nums equal arr[last]
+                            k = last;
+                            while (k > start && arr[k] == arr[last])
+                                k--;
+
+                            ans += ((j - start) * (last - k)) % mod;
+
+                            // update 'start' & 'last' to search next tuple
+                            start = j;
+                            last = k;
+                        }
+                    }
+                    else if (sum < target)
+                        start++;
+                    else
+                        last--;
+                }
+            }
+
+            return (int)(ans % mod);
+        }
+
+
     }
 }

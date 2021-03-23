@@ -330,6 +330,7 @@ namespace InterviewProblemNSolutions
             ReorderedPowerOf2();
             //CreateMaximumNumber();
             VowelSpellchecker();
+            ThreeSumWithMultiplicity();
 
 
             // String Matching Algorithm
@@ -5469,6 +5470,25 @@ namespace InterviewProblemNSolutions
                 DailyProblem.Spellchecker(wordlist[i], queries[i]).Print("Answers");        // Using Dictionary
                 //Spellchecker.VowelSpellchecker(wordlist[i], queries[i]).Print("Answers"); // Using Trie Data-Structure
                 Console.WriteLine("\n");
+            }
+        }
+
+
+        public static void ThreeSumWithMultiplicity()
+        {
+            // https://leetcode.com/problems/3sum-with-multiplicity/
+            Utility.Print("923. 3Sum With Multiplicity");
+            int[][] arrays = {  new int[] { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5 },
+                                new int[] { 1, 1, 2, 2, 2, 2 },
+                                new int[] { 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
+                                new int[] { 2, 2, 3, 2 },
+                                new int[] { 0, 0, 0 } };
+            int[] k = { 8, 5, 5, 7, 0 };
+            for (int i = 0; i < arrays.Length; i++)
+            {
+                arrays[i].Print("Input Arr");
+                //Console.WriteLine($" No of tuples i, j, k such that i < j < k and arr[i] + arr[j] + arr[k] == {k[i]}, are: \'{DailyProblem.ThreeSumMulti(arrays[i], k[i])}\'\n");
+                Console.WriteLine($" No of tuples i, j, k such that i < j < k and arr[i] + arr[j] + arr[k] == {k[i]}, are: \'{DailyProblem.ThreeSumMultiConstantSpacec(arrays[i], k[i])}\'\n");
             }
         }
 
