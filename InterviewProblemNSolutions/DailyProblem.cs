@@ -11733,5 +11733,63 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(nlogn) || Space O(n), n = length of Array 'A'
+        public static int[] AdvantageCount(int[] A, int[] B)
+        {
+            int l = B.Length, i, j = 0;
+            int[][] bIndex = new int[l][];
+            // save nums and their original index from array 'B'
+            for (i = 0; i < l; i++)
+                bIndex[i] = new int[] { B[i], i };
+            
+            // Sort in Ascending order based upon value
+            int[][] sortedB = (from pair in bIndex
+                               orderby pair[0]              // O(nlogn)
+                               select pair).ToArray();
+            
+            Array.Sort(A);                                  // O(nlogn)
+
+            // Step3: Check the smallest num in sorted 'A' if it beats nums at same index in sorted 'B' append it to ans list
+            //      as we are trying to maximum future chance to use bigger cards from 'A' to beat possible bigger cards in 'B'
+            // else if num in A is <= num in 'B' than move to next index in 'A' to check if new bigger num can beat current num in 'B'
+            // once we finish this step we would have 'list of nums' which beats atleast one card in 'B'
+            List<int> ans = new List<int>(l);
+            j = 0;
+            for (i = 0; i < l; i++)                     // O(n)
+            {
+                while (i + j < l && A[i + j] <= sortedB[i][0])
+                    j++;
+                
+                if (i + j < l)
+                    ans.Add(A[i + j]);
+            }
+
+            // append all nums if any from 'A' which didnt beat any card in 'B' to the end of 'ans' list
+            if (ans.Count < l)
+            {
+                i = j = 0;
+                for (i = 0; i < ans.Count; i++)         // O(n)
+                    while (i + j < l && ans[i] != A[i + j])
+                        ans.Add(A[i + j++]);
+                
+                while (i + j < l)
+                    ans.Add(A[i + j++]);
+            }
+
+
+            // Step4: Reconstruct the answer, by replacing the final list of nums against the numbers the beat
+            // all nums which didn't beat any card would be placed at the end
+            for (i = 0; i < l; i++)                     // O(n)
+                sortedB[i][0] = ans[i];
+            
+            // Now Sort 'nums' based upon original index of nums they beat/didn't beat in 'B'
+            int[] result = (from pair in sortedB
+                            orderby pair[1]                 // O(nlogn)
+                            select pair[0]).ToArray();
+            
+            return result.ToArray();
+        }
+
+
     }
 }

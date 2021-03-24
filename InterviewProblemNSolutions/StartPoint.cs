@@ -331,6 +331,7 @@ namespace InterviewProblemNSolutions
             //CreateMaximumNumber();
             VowelSpellchecker();
             ThreeSumWithMultiplicity();
+            AdvantageShuffle();
 
 
             // String Matching Algorithm
@@ -5489,6 +5490,23 @@ namespace InterviewProblemNSolutions
                 arrays[i].Print("Input Arr");
                 //Console.WriteLine($" No of tuples i, j, k such that i < j < k and arr[i] + arr[j] + arr[k] == {k[i]}, are: \'{DailyProblem.ThreeSumMulti(arrays[i], k[i])}\'\n");
                 Console.WriteLine($" No of tuples i, j, k such that i < j < k and arr[i] + arr[j] + arr[k] == {k[i]}, are: \'{DailyProblem.ThreeSumMultiConstantSpacec(arrays[i], k[i])}\'\n");
+            }
+        }
+
+
+        public static void AdvantageShuffle()
+        {
+            // https://leetcode.com/problems/advantage-shuffle/
+            Utility.Print("870. Advantage Shuffle");
+            int[][] A = { new int[] { 2, 7, 11, 15 }, new int[] { 12, 24, 8, 32 }, new int[] { 5621, 1743, 5532, 3549, 9581 } };
+            int[][] B = { new int[] { 1, 10, 4, 11 }, new int[] { 13, 25, 32, 11 }, new int[] { 913, 9787, 4121, 5039, 1481 } };
+            for (int i = 0; i < A.Length; i++)
+            {
+                A[i].Print("A");
+                B[i].Print("B");
+                Console.WriteLine("Permutation of 'A' that maximizes its advantage with respect to 'B'");
+                DailyProblem.AdvantageCount(A[i], B[i]).Print("ReShuffled A");
+                Console.WriteLine("\n");
             }
         }
 
