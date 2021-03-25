@@ -333,6 +333,7 @@ namespace InterviewProblemNSolutions
             ThreeSumWithMultiplicity();
             AdvantageShuffle();
             PacificAtlanticWaterFlow();
+            NumberOfEnclaves();
 
 
             // String Matching Algorithm
@@ -5535,6 +5536,21 @@ namespace InterviewProblemNSolutions
                 foreach (var coordinate in DailyProblem.PacificAtlantic(matrix))
                     Console.Write($" \'{coordinate[0]}, {coordinate[1]}\' ||");
                 Console.WriteLine("\n");
+            }
+        }
+
+
+        public static void NumberOfEnclaves()
+        {
+            // https://leetcode.com/problems/number-of-enclaves/
+            Utility.Print("1020. Number of Enclaves");
+            int[][][] gridArr = {   new int[][] { new int[] { 0, 0, 0, 0 }, new int[] { 1, 0, 1, 0 }, new int[] { 0, 1, 1, 0 }, new int[] { 0, 0, 0, 0 } },
+                                    new int[][] { new int[] { 0, 1, 1, 0 }, new int[] { 0, 0, 1, 0 }, new int[] { 0, 0, 1, 0 }, new int[] { 0, 0, 0, 0 } },
+                                    new int[][] { new int[] { 0, 0, 0, 1, 1, 1, 0, 1, 0, 0 }, new int[] { 1, 1, 0, 0, 0, 1, 0, 1, 1, 1 }, new int[] { 0, 0, 0, 1, 1, 1, 0, 1, 0, 0 }, new int[] { 0, 1, 1, 0, 0, 0, 1, 0, 1, 0 }, new int[] { 0, 1, 1, 1, 1, 1, 0, 0, 1, 0 }, new int[] { 0, 0, 1, 0, 1, 1, 1, 1, 0, 1 }, new int[] { 0, 1, 1, 0, 0, 0, 1, 1, 1, 1 }, new int[] { 0, 0, 1, 0, 0, 1, 0, 1, 0, 1 }, new int[] { 1, 0, 1, 0, 1, 1, 0, 0, 0, 0 }, new int[] { 0, 0, 0, 0, 1, 1, 0, 0, 0, 1 } } };
+            foreach (var grid in gridArr)
+            {
+                grid.Print("GRID");
+                Console.WriteLine($" No of cells in grid for which we cannot walk off the boundary of the grid in any number of moves: \'{DailyProblem.NumberOfEnclaves(grid)}\'\n");
             }
         }
 

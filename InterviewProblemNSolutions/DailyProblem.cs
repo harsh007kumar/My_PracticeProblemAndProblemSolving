@@ -11890,5 +11890,60 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+
+        // Time O(m*n) || Auxiliary Space O(1) || Recursive Space O(m*n)
+        public static int NumberOfEnclaves(int[][] grid)
+        {
+            int ans = 0, land;
+            int row = grid.Length, col = grid[0].Length;
+            for (int i = 0; i < row; i++)
+                for (int j = 0; j < col; j++)
+                {
+                    land = CanFall(i, j);
+                    if (land != -1)
+                        ans += land;
+                }
+            return ans;
+
+            // Local Func
+            int CanFall(int r, int c)   // DFS
+            {
+                // if reached boundry or this cell has been marked as 'CanFall' than return -1
+                if (r < 0 || r >= row || c < 0 || c >= col || grid[r][c] == -1)
+                    return -1;
+
+                if (grid[r][c] == 0)    // Sea encoutered
+                    return 0;
+
+                grid[r][c] = 0;         // mark visited
+                int lt, rt, top, down;
+
+                // left
+                lt = CanFall(r, c - 1);
+                if (lt == -1) return grid[r][c] = -1;
+
+                // right
+                rt = CanFall(r, c + 1);
+                if (rt == -1) return grid[r][c] = -1;
+
+                // top
+                top = CanFall(r - 1, c);
+                if (top == -1) return grid[r][c] = -1;
+
+                // down
+                down = CanFall(r + 1, c);
+                if (down == -1) return grid[r][c] = -1;
+
+                return 1 + lt + rt + top + down;
+            }
+        }
+
+
+
+
+
+
+
     }
 }
