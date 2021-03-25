@@ -11738,6 +11738,7 @@ namespace InterviewProblemNSolutions
         {
             int l = B.Length, i, j = 0;
             int[][] bIndex = new int[l][];
+            // Step1:
             // save nums and their original index from array 'B'
             for (i = 0; i < l; i++)
                 bIndex[i] = new int[] { B[i], i };
@@ -11747,6 +11748,7 @@ namespace InterviewProblemNSolutions
                                orderby pair[0]              // O(nlogn)
                                select pair).ToArray();
             
+            // Step2: Sort 'A'
             Array.Sort(A);                                  // O(nlogn)
 
             // Step3: Check the smallest num in sorted 'A' if it beats nums at same index in sorted 'B' append it to ans list
@@ -11791,5 +11793,102 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(m*n), m = no of rows & n = no of columns in 'matrix' || DFS based approach
+        public static IList<IList<int>> PacificAtlantic(int[][] matrix)
+        {
+            List<IList<int>> coordinateList = new List<IList<int>>();
+            int row = matrix.Length;
+            if (row < 1) return coordinateList;         // check for empty input matrix
+
+            int col = matrix[0].Length;
+            int[,] pas_Atlan_Flow = new int[row, col];
+
+            // check for Pacific ocean flow
+            bool[,] isVisited = new bool[row, col];
+            DFS(true);
+
+            // check for Atlantic ocean flow
+            isVisited = new bool[row, col];
+            DFS(false);
+
+            // update the ans list
+            for (int r = 0; r < row; r++)
+                for (int c = 0; c < col; c++)
+                    if (pas_Atlan_Flow[r, c] == 3)
+                        coordinateList.Add(new int[] { r, c });
+
+            return coordinateList;
+
+            // local func
+            bool IsBoundry(int r, int c, bool forPacificFlow)
+            {
+                if (forPacificFlow)
+                {
+                    if (r == 0 || c == 0)
+                        return true;
+                }
+                else // Atlantic Flow
+                {
+                    if (r == row - 1 || c == col - 1)
+                        return true;
+                }
+
+                return false;
+            }
+
+            // DFS
+            void DFS(bool forPacificFlow = true)
+            {
+                int r, c;
+
+                if (forPacificFlow)
+                    r = c = 0;
+                else
+                {
+                    r = row - 1;
+                    c = col - 1;
+                }
+
+                Queue<int[]> q = new Queue<int[]>();
+                q.Enqueue(new int[] { r, c });
+                isVisited[r, c] = true;
+
+                int[] curr = null;
+                
+                while (q.Count > 0)
+                {
+                    curr = q.Dequeue();
+                    r = curr[0];
+                    c = curr[1];
+                    pas_Atlan_Flow[r, c] += forPacificFlow ? 1 : 2;
+
+                    // check all 4 sides
+                    // top
+                    if (r - 1 >= 0 && !isVisited[r - 1, c] && (matrix[r - 1][c] >= matrix[r][c] || IsBoundry(r - 1, c, forPacificFlow)))
+                    {
+                        q.Enqueue(new int[] { r - 1, c });
+                        isVisited[r - 1, c] = true;
+                    }
+                    // left
+                    if (c - 1 >= 0 && !isVisited[r, c - 1] && (matrix[r][c - 1] >= matrix[r][c] || IsBoundry(r, c - 1, forPacificFlow)))
+                    {
+                        q.Enqueue(new int[] { r, c - 1 });
+                        isVisited[r, c - 1] = true;
+                    }
+                    // bottom
+                    if (r + 1 <= row - 1 && !isVisited[r + 1, c] && (matrix[r + 1][c] >= matrix[r][c] || IsBoundry(r + 1, c, forPacificFlow)))
+                    {
+                        q.Enqueue(new int[] { r + 1, c });
+                        isVisited[r + 1, c] = true;
+                    }
+                    // right
+                    if (c + 1 <= col - 1 && !isVisited[r, c + 1] && (matrix[r][c + 1] >= matrix[r][c] || IsBoundry(r, c + 1, forPacificFlow)))
+                    {
+                        q.Enqueue(new int[] { r, c + 1 });
+                        isVisited[r, c + 1] = true;
+                    }
+                }
+            }
+        }
     }
 }

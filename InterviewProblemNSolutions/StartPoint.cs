@@ -332,6 +332,7 @@ namespace InterviewProblemNSolutions
             VowelSpellchecker();
             ThreeSumWithMultiplicity();
             AdvantageShuffle();
+            PacificAtlanticWaterFlow();
 
 
             // String Matching Algorithm
@@ -5506,6 +5507,33 @@ namespace InterviewProblemNSolutions
                 B[i].Print("B");
                 Console.WriteLine("Permutation of 'A' that maximizes its advantage with respect to 'B'");
                 DailyProblem.AdvantageCount(A[i], B[i]).Print("ReShuffled A");
+                Console.WriteLine("\n");
+            }
+        }
+
+
+        public static void PacificAtlanticWaterFlow()
+        {
+            // https://leetcode.com/problems/pacific-atlantic-water-flow/
+            Utility.Print("417. Pacific Atlantic Water Flow");
+            int[][][] matrixArr = { new int[][] {   new int[] { 1, 2, 2, 3, 5 },
+                                                    new int[] { 3, 2, 3, 4, 4 },
+                                                    new int[] { 2, 4, 5, 3, 1 },
+                                                    new int[] { 6, 7, 1, 4, 5 },
+                                                    new int[] { 5, 1, 1, 2, 4 } },
+                                    new int[][] {   new int[] { 9, 8, 7, 6, 5 },
+                                                    new int[] { 9, 2, 3, 4, 4 },
+                                                    new int[] { 2, 4, 5, 3, 1 },
+                                                    new int[] { 6, 7, 1, 4, 5 },
+                                                    new int[] { 5, 1, 1, 2, 4 } },
+                                    new int[][] {   new int[] { 1 } }
+                                  };
+            foreach (var matrix in matrixArr)
+            {
+                matrix.Print("Continent");
+                Console.Write($" List of grid coordinates where water can flow to both the Pacific and Atlantic ocean are: ");
+                foreach (var coordinate in DailyProblem.PacificAtlantic(matrix))
+                    Console.Write($" \'{coordinate[0]}, {coordinate[1]}\' ||");
                 Console.WriteLine("\n");
             }
         }
