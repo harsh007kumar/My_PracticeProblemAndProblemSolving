@@ -11988,7 +11988,29 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(h), n = no of nodes & h = ht of binary tree
+        public static int MaxProduct(TreeNode root)
+        {
+            long totalSum = GetSum(root), maxProduct = 0;
+            UpdateMax(root);
+            return (int)(maxProduct % 1000000007);
 
+            // local func
+            long GetSum(TreeNode r)
+            {
+                if (r == null) return 0;
+                return r.val + GetSum(r.left) + GetSum(r.right);
+            }
+            long UpdateMax(TreeNode r)
+            {
+                if (r == null) return 0;
+                long lSum = UpdateMax(r.left);
+                maxProduct = Math.Max(maxProduct, lSum * (totalSum - lSum));
+                long rSum = UpdateMax(r.right);
+                maxProduct = Math.Max(maxProduct, rSum * (totalSum - rSum));
+                return r.val + lSum + rSum;
+            }
+        }
 
     }
 }

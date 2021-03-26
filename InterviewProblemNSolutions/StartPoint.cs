@@ -335,6 +335,7 @@ namespace InterviewProblemNSolutions
             PacificAtlanticWaterFlow();
             NumberOfEnclaves();
             WordSubsets();
+            MaximumProductOfSplittedBinaryTree();
 
 
             // String Matching Algorithm
@@ -5569,6 +5570,27 @@ namespace InterviewProblemNSolutions
                 DailyProblem.WordSubsets(A, B).Print("Universals Words in 'A'");
                 Console.WriteLine("\n");
             }
+        }
+
+
+        public static void MaximumProductOfSplittedBinaryTree()
+        {
+            // https://leetcode.com/problems/maximum-product-of-splitted-binary-tree/
+            Utility.Print("1339. Maximum Product of Splitted Binary Tree");
+            TreeNode root = new TreeNode(1)
+            {
+                right = new TreeNode(2)
+                {
+                    left = new TreeNode(3),
+                    right = new TreeNode(4)
+                    {
+                        left = new TreeNode(5),
+                        right = new TreeNode(6)
+                    }
+                }
+            };
+            root.InOrder("Binary Tree");
+            Console.WriteLine($" Max product of the sums of the subtrees possible after removing 1 edge is: \'{DailyProblem.MaxProduct(root)}\'");
         }
 
 
