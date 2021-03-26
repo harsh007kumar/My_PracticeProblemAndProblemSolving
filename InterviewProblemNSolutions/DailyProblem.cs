@@ -11940,7 +11940,52 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(Max(n*l,m*l)) || Space O(1), n = len of B, m = len of A & l = avg length of words in respective arrays
+        public static IList<string> WordSubsets(string[] A, string[] B)
+        {
+            int[] allWordsIn_B_CharMap = new int[26], currWordMap = new int[26];
 
+            foreach (var word in B)                             // O(n)
+            {
+                // get all characters & frequency for current word in B
+                for (int i = 0; i < word.Length; i++)           // O(l)
+                    currWordMap[word[i] - 'a']++;
+
+                // update final CharMap which would ultimately be used to check universals words in A
+                for (int i = 0; i < currWordMap.Length; i++)    // O(26)
+                {
+                    allWordsIn_B_CharMap[i] = Math.Max(allWordsIn_B_CharMap[i], currWordMap[i]);
+                    currWordMap[i] = 0;    // reset so it can be used for next word in B
+                }
+            }
+
+            List<string> universalWords = new List<string>();
+
+            for (int i = 0; i < A.Length; i++)
+                // if current word has all required character and atleast min required count
+                if (IsUniversalWord(A[i]))
+                    universalWords.Add(A[i]);
+
+            return universalWords;
+
+            // local func
+            bool IsUniversalWord(string word)                       // O(m)
+            {
+                // get all characters & frequency for current word
+                for (int i = 0; i < word.Length; i++)               // O(l)
+                    currWordMap[word[i] - 'a']++;
+
+                bool result = true;
+                // check if curr word is universals words
+                for (int i = 0; i < currWordMap.Length; i++)
+                {
+                    if (allWordsIn_B_CharMap[i] > currWordMap[i])   // O(26)
+                        result = false;
+                    currWordMap[i] = 0;    // reset so it can be used for next word in A
+                }
+                return result;
+            }
+        }
 
 
 

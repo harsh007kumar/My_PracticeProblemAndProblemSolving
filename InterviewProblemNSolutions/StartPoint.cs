@@ -334,6 +334,7 @@ namespace InterviewProblemNSolutions
             AdvantageShuffle();
             PacificAtlanticWaterFlow();
             NumberOfEnclaves();
+            WordSubsets();
 
 
             // String Matching Algorithm
@@ -5551,6 +5552,22 @@ namespace InterviewProblemNSolutions
             {
                 grid.Print("GRID");
                 Console.WriteLine($" No of cells in grid for which we cannot walk off the boundary of the grid in any number of moves: \'{DailyProblem.NumberOfEnclaves(grid)}\'\n");
+            }
+        }
+
+
+        public static void WordSubsets()
+        {
+            // https://leetcode.com/problems/word-subsets/
+            Utility.Print("916. Word Subsets");
+            string[] A = { "amazon", "apple", "facebook", "google", "leetcode" };
+            string[][] B_Array = { new string[] { "e", "o" }, new string[] { "l", "e" }, new string[] { "e", "oo" }, new string[] { "lo", "eo" }, new string[] { "ec", "oc", "ceo" } };
+            foreach (var B in B_Array)
+            {
+                A.Print("A");
+                B.Print("B");
+                DailyProblem.WordSubsets(A, B).Print("Universals Words in 'A'");
+                Console.WriteLine("\n");
             }
         }
 
