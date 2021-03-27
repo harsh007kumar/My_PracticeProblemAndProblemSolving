@@ -12012,5 +12012,51 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time O(Max(V*KLogK,V+E)) || Recusrive Space O(V), K = avg no of flights from each airport & V = no of airports, E = no of edges/flights
+        public static IList<string> FindItinerary(IList<IList<string>> tickets)
+        {
+            Dictionary<string, List<string>> g = new Dictionary<string, List<string>>();
+            string s, d;
+            foreach (var ticket in tickets)      // O(n)
+            {
+                s = ticket[0];
+                d = ticket[1];
+                // add source
+                if (!g.ContainsKey(s)) g.Add(s, new List<string>());
+                // add destination
+                if (!g.ContainsKey(d)) g.Add(d, new List<string>());
+                // add mapping source -> destination
+                g[s].Add(d);
+            }
+
+            //Sort 'departing flight' in 'lexical order' at each Airport
+            foreach (var listOfAirport in g.Values)  // O(V*KLogK)
+                listOfAirport.Sort(new SortDepartingFlights());
+
+            LinkedList<string> itinerary = new LinkedList<string>();
+            // start journey from 'JFK' airport
+            DFS("JFK");                         // O(V+E)
+
+            return itinerary.ToList();
+
+            // Local Func
+            void DFS(string airport)
+            {
+                string flight;
+                while (g[airport].Count > 0)
+                {
+                    flight = g[airport][0];
+                    g[airport].RemoveAt(0);     // took the flight to lexographically smallest destination
+                    DFS(flight);
+                }
+                itinerary.AddFirst(airport);    // after taking all the flight add curr Airport to list
+            }
+        }
+        public class SortDepartingFlights : IComparer<string>
+        {
+            public int Compare(string a, string b) => a.CompareTo(b);
+        }
+
     }
 }

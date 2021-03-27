@@ -336,6 +336,7 @@ namespace InterviewProblemNSolutions
             NumberOfEnclaves();
             WordSubsets();
             MaximumProductOfSplittedBinaryTree();
+            ReconstructItinerary();
 
 
             // String Matching Algorithm
@@ -5592,6 +5593,23 @@ namespace InterviewProblemNSolutions
             root.InOrder("Binary Tree");
             Console.WriteLine($" Max product of the sums of the subtrees possible after removing 1 edge is: \'{DailyProblem.MaxProduct(root)}\'");
         }
+
+
+        public static void ReconstructItinerary()
+        {
+            // https://leetcode.com/problems/reconstruct-itinerary/
+            Utility.Print("332. Reconstruct Itinerary");
+            string[][][] ticketsArr = {    new string[][] { new string[] { "MUC", "LHR" }, new string[] { "JFK", "MUC" }, new string[] { "SFO", "SJC" }, new string[] { "LHR", "SFO" } },
+                                        new string[][] { new string[] { "JFK", "SFO" }, new string[] { "JFK", "ATL" }, new string[] { "SFO", "ATL" }, new string[] { "ATL", "JFK" }, new string[] { "ATL", "SFO" } } };
+            foreach (var tickets in ticketsArr)
+            {
+                tickets.Print("Tickets");
+                DailyProblem.FindItinerary(tickets).Print("Itinerary");
+                Console.WriteLine("\n");
+            }
+        }
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
