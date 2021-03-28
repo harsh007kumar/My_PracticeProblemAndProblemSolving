@@ -337,6 +337,7 @@ namespace InterviewProblemNSolutions
             WordSubsets();
             MaximumProductOfSplittedBinaryTree();
             ReconstructItinerary();
+            ReconstructOriginalDigitsFromEnglish();
 
 
             // String Matching Algorithm
@@ -5610,6 +5611,14 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void ReconstructOriginalDigitsFromEnglish()
+        {
+            // https://leetcode.com/problems/reconstruct-original-digits-from-english/
+            Utility.Print("423. Reconstruct Original Digits from English");
+            string[] input = { "zeroonetwothreefourfivesixseveneightnine", "owoztneoer", "fviefuro", "zerozerooneonetwozeroonefviefuro" };
+            foreach (var str in input)
+                Console.WriteLine($" Output of the digits in ascending order: \'{DailyProblem.OriginalDigits(str)}\'\n");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

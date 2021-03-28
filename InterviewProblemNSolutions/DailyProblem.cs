@@ -12058,5 +12058,228 @@ namespace InterviewProblemNSolutions
             public int Compare(string a, string b) => a.CompareTo(b);
         }
 
+
+        public static string OriginalDigitsSlow(string s)
+        {
+            int[] charSet = new int[26];
+            // fetch all the alphabets and their frequencies in 's'
+            for (int i = 0; i < s.Length; i++)
+                charSet[s[i] - 'a']++;
+
+            int[] digitSet = new int[10];
+            GetDigitsCount();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < digitSet.Length; i++)
+                while (digitSet[i]-- > 0)
+                    sb.Append(i);
+
+            return sb.ToString();
+
+            // Local Func
+            bool GetDigitsCount(int charUsed = 0)
+            {
+                if (charUsed == s.Length)
+                    return true;
+                else
+                {
+                    // check for 'zero'
+                    if (charSet['z' - 'a'] > 0 && charSet['e' - 'a'] > 0 && charSet['r' - 'a'] > 0 && charSet['o' - 'a'] > 0)
+                    {
+                        charSet['z' - 'a']--;
+                        charSet['e' - 'a']--;
+                        charSet['r' - 'a']--;
+                        charSet['o' - 'a']--;
+                        if (GetDigitsCount(charUsed + 4))
+                        {
+                            digitSet[0]++;
+                            return true;
+                        }
+                        charSet['z' - 'a']++;
+                        charSet['e' - 'a']++;
+                        charSet['r' - 'a']++;
+                        charSet['o' - 'a']++;
+                    }
+                    // check for 'one'
+                    if (charSet['o' - 'a'] > 0 && charSet['n' - 'a'] > 0 && charSet['e' - 'a'] > 0)
+                    {
+                        charSet['o' - 'a']--;
+                        charSet['n' - 'a']--;
+                        charSet['e' - 'a']--;
+                        if (GetDigitsCount(charUsed + 3))
+                        {
+                            digitSet[1]++;
+                            return true;
+                        }
+                        charSet['o' - 'a']++;
+                        charSet['n' - 'a']++;
+                        charSet['e' - 'a']++;
+                    }
+                    // check for 'two'
+                    if (charSet['t' - 'a'] > 0 && charSet['w' - 'a'] > 0 && charSet['o' - 'a'] > 0)
+                    {
+                        charSet['t' - 'a']--;
+                        charSet['w' - 'a']--;
+                        charSet['o' - 'a']--;
+                        if (GetDigitsCount(charUsed + 3))
+                        {
+                            digitSet[2]++;
+                            return true;
+                        }
+                        charSet['t' - 'a']++;
+                        charSet['w' - 'a']++;
+                        charSet['o' - 'a']++;
+                    }
+                    // check for 'three'
+                    if (charSet['t' - 'a'] > 0 && charSet['h' - 'a'] > 0 && charSet['r' - 'a'] > 0 && charSet['e' - 'a'] > 1)
+                    {
+                        charSet['t' - 'a']--;
+                        charSet['h' - 'a']--;
+                        charSet['r' - 'a']--;
+                        charSet['e' - 'a'] -= 2;
+                        if (GetDigitsCount(charUsed + 5))
+                        {
+                            digitSet[3]++;
+                            return true;
+                        }
+                        charSet['t' - 'a']++;
+                        charSet['h' - 'a']++;
+                        charSet['r' - 'a']++;
+                        charSet['e' - 'a'] += 2;
+                    }
+                    // check for 'four'
+                    if (charSet['f' - 'a'] > 0 && charSet['o' - 'a'] > 0 && charSet['u' - 'a'] > 0 && charSet['r' - 'a'] > 0)
+                    {
+                        charSet['f' - 'a']--;
+                        charSet['o' - 'a']--;
+                        charSet['u' - 'a']--;
+                        charSet['r' - 'a']--;
+                        if (GetDigitsCount(charUsed + 4))
+                        {
+                            digitSet[4]++;
+                            return true;
+                        }
+                        charSet['f' - 'a']++;
+                        charSet['o' - 'a']++;
+                        charSet['u' - 'a']++;
+                        charSet['r' - 'a']++;
+                    }
+                    // check for 'five'
+                    if (charSet['f' - 'a'] > 0 && charSet['i' - 'a'] > 0 && charSet['v' - 'a'] > 0 && charSet['e' - 'a'] > 0)
+                    {
+                        charSet['f' - 'a']--;
+                        charSet['i' - 'a']--;
+                        charSet['v' - 'a']--;
+                        charSet['e' - 'a']--;
+                        if (GetDigitsCount(charUsed + 4))
+                        {
+                            digitSet[5]++;
+                            return true;
+                        }
+                        charSet['f' - 'a']++;
+                        charSet['i' - 'a']++;
+                        charSet['v' - 'a']++;
+                        charSet['e' - 'a']++;
+                    }
+                    // check for 'six'
+                    if (charSet['s' - 'a'] > 0 && charSet['i' - 'a'] > 0 && charSet['x' - 'a'] > 0)
+                    {
+                        charSet['s' - 'a']--;
+                        charSet['i' - 'a']--;
+                        charSet['x' - 'a']--;
+                        if (GetDigitsCount(charUsed + 3))
+                        {
+                            digitSet[6]++;
+                            return true;
+                        }
+                        charSet['s' - 'a']++;
+                        charSet['i' - 'a']++;
+                        charSet['x' - 'a']++;
+                    }
+                    // check for 'seven'
+                    if (charSet['s' - 'a'] > 0 && charSet['e' - 'a'] > 1 && charSet['v' - 'a'] > 0 && charSet['n' - 'a'] > 0)
+                    {
+                        charSet['s' - 'a']--;
+                        charSet['e' - 'a'] -= 2;
+                        charSet['v' - 'a']--;
+                        charSet['n' - 'a']--;
+                        if (GetDigitsCount(charUsed + 5))
+                        {
+                            digitSet[7]++;
+                            return true;
+                        }
+                        charSet['s' - 'a']++;
+                        charSet['e' - 'a'] += 2;
+                        charSet['v' - 'a']++;
+                        charSet['n' - 'a']++;
+                    }
+                    // check for 'eight'
+                    if (charSet['e' - 'a'] > 0 && charSet['i' - 'a'] > 0 && charSet['g' - 'a'] > 0 && charSet['h' - 'a'] > 0 && charSet['t' - 'a'] > 0)
+                    {
+                        charSet['e' - 'a']--;
+                        charSet['i' - 'a']--;
+                        charSet['g' - 'a']--;
+                        charSet['h' - 'a']--;
+                        charSet['t' - 'a']--;
+                        if (GetDigitsCount(charUsed + 5))
+                        {
+                            digitSet[8]++;
+                            return true;
+                        }
+                        charSet['e' - 'a']++;
+                        charSet['i' - 'a']++;
+                        charSet['g' - 'a']++;
+                        charSet['h' - 'a']++;
+                        charSet['t' - 'a']++;
+                    }
+                    // check for 'nine'
+                    if (charSet['n' - 'a'] > 1 && charSet['i' - 'a'] > 0 && charSet['e' - 'a'] > 0)
+                    {
+                        charSet['n' - 'a']--;
+                        charSet['i' - 'a']--;
+                        charSet['n' - 'a']--;
+                        charSet['e' - 'a']--;
+                        if (GetDigitsCount(charUsed + 4))
+                        {
+                            digitSet[9]++;
+                            return true;
+                        }
+                        charSet['n' - 'a']++;
+                        charSet['i' - 'a']++;
+                        charSet['n' - 'a']++;
+                        charSet['e' - 'a']++;
+                    }
+                    return false;
+                }
+            }
+        }
+        // Time O(n) || Space O(1), n = len of 's'
+        public static string OriginalDigits(string s)
+        {
+            int[] charSet = new int[26];
+            // fetch all the alphabets and their frequencies in 's'
+            for (int i = 0; i < s.Length; i++)
+                charSet[s[i] - 'a']++;
+
+            int[] digit = new int[10];
+            digit[0] = charSet['z' - 'a'];     // only zero contains letter 'z'
+            digit[2] = charSet['w' - 'a'];     // only two contains letter 'w'
+            digit[6] = charSet['x' - 'a'];     // only six contains letter 'x'
+            digit[8] = charSet['g' - 'a'];     // only eight contains letter 'g'
+            digit[4] = charSet['u' - 'a'];     // only four contains letter 'u'
+            digit[5] = charSet['f' - 'a'] - digit[4]; // only five & four contains letter 'f', we already know no of 4s hence subtracting that from no of 'f' gives us 5s
+            digit[7] = charSet['v' - 'a'] - digit[5]; // only five & seven contains letter 'v', we already know no of 5s hence subtracting that from no of 'v' gives us 7s
+            digit[3] = charSet['r' - 'a'] - digit[4] - digit[0];  // only four, zero & three contains letter 'r', we already know no of 4s & os hence subtracting that from no of 'r' gives us 3s
+            digit[9] = charSet['i' - 'a'] - digit[8] - digit[6] - digit[5];
+            digit[1] = charSet['o' - 'a'] - digit[4] - digit[2] - digit[0];
+
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < digit.Length; i++)
+                while (digit[i]-- > 0)  // append count of each individual digit
+                    sb.Append(i);
+
+            return sb.ToString();
+        }
     }
 }
