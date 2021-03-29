@@ -12382,5 +12382,31 @@ namespace InterviewProblemNSolutions
 
             return sb.ToString();
         }
+
+
+        // Time = O(n) || Space = O(h), n = length of 'voyage'
+        public static IList<int> FlipMatchVoyage(TreeNode root, int[] voyage)
+        {
+            List<int> flips = new List<int>();
+            int idx = 0;
+            return DFS(root) ? flips : new List<int>() { -1 };
+
+            // Local Func
+            bool DFS(TreeNode r)
+            {
+                if (r == null) return true;
+                if (r.val != voyage[idx++]) return false;
+                if (idx < voyage.Length && r.left != null && r.left.val != voyage[idx])
+                {
+                    flips.Add(r.val);
+                    return DFS(r.right) && DFS(r.left);
+                }
+                else
+                    return DFS(r.left) && DFS(r.right);
+            }
+        }
+
+
+
     }
 }

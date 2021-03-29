@@ -338,6 +338,7 @@ namespace InterviewProblemNSolutions
             MaximumProductOfSplittedBinaryTree();
             ReconstructItinerary();
             ReconstructOriginalDigitsFromEnglish();
+            FlipBinaryTreeToMatchPreorderTraversal();
 
 
             // String Matching Algorithm
@@ -5619,6 +5620,21 @@ namespace InterviewProblemNSolutions
             string[] input = { "zeroonetwothreefourfivesixseveneightnine", "owoztneoer", "fviefuro", "zerozerooneonetwozeroonefviefuro" };
             foreach (var str in input)
                 Console.WriteLine($" Output of the digits in ascending order: \'{DailyProblem.OriginalDigits(str)}\'\n");
+        }
+
+
+        public static void FlipBinaryTreeToMatchPreorderTraversal()
+        {
+            // https://leetcode.com/problems/flip-binary-tree-to-match-preorder-traversal/
+            Utility.Print("971. Flip Binary Tree To Match Preorder Traversal");
+            TreeNode r = new TreeNode(1)
+            {
+                left = new TreeNode(2),
+                right = new TreeNode(3)
+            };
+            r.InOrder("Binary Tree");
+            int[] preOrderTraversal = { 1, 3, 2 };
+            DailyProblem.FlipMatchVoyage(r, preOrderTraversal).Print("list of the values of all flipped nodes");
         }
 
 
