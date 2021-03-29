@@ -11482,7 +11482,7 @@ namespace InterviewProblemNSolutions
         }
 
 
-        public static int[] CreateMaximumNumber(int[] nums1, int[] nums2, int k)
+        public static int[] CreateMaximumNumberBruteForce(int[] nums1, int[] nums2, int k)
         {
             int[] maxNum = new int[k], currNum = new int[k];
             int l1 = nums1.Length, l2 = nums2.Length;
@@ -11514,18 +11514,119 @@ namespace InterviewProblemNSolutions
                 {
                     for (int i1 = i; i1 < l1; i1++)
                     {
+                        if ((l1 - i1) + (l2 - j) < k - idx) break;
                         currNum[idx] = nums1[i1];
                         CreateMax(i1 + 1, j, idx + 1);
                     }
 
                     for (int j1 = j; j1 < l2; j1++)
                     {
+                        if ((l1 - i) + (l2 - j1) < k - idx) break;
                         currNum[idx] = nums2[j1];
                         CreateMax(i, j1 + 1, idx + 1);
                     }
                 }
             }
             
+        }
+        // Time O(k^2*(n+m)) || Space O(Max(n,m,k))
+        public static int[] CreateMaximumNumberTrimAndMerge(int[] nums1, int[] nums2, int k)
+        {
+            /* First we trim the original arrays(if possible)
+             * than we try every combination of removing i,j elements from A & B
+             * ex: if k = 3 we try these >> i=0 j=3 >> i=1 j=2 >> i=2 j =1 >> i=3 j =0
+             * after trying removing minimum digits from both array we merge trimmed A & B to check if we have landed upon biggest number possible
+             */
+            nums1 = Trim(nums1, k);     // O(n)
+            nums2 = Trim(nums2, k);     // O(m)
+
+            if (nums1.Length + nums2.Length <= k)
+                return Merge(nums1, nums2, k);      // O((n+m)*k)
+
+            int[] max = null, curr;
+            for (int i = k, j = 0; i >= 0; i--, j++)// O(k^2*(n+m))
+                // Make sure we can remove i & j no of nums from A & B respectively
+                if (nums1.Length >= i && nums2.Length >= j)
+                {
+                    curr = Merge(Trim(nums1, i), Trim(nums2, j), k);
+
+                    if (max == null)
+                        max = curr;
+                    else
+                        for (int idx = 0; idx < k; idx++)
+                            // Atleast one non-equal digit is bigger in max
+                            if (max[idx] > curr[idx])
+                                break;
+                            // Atleast one non-equal digit is bigger in curr
+                            else if (max[idx] < curr[idx])
+                            {
+                                max = curr;
+                                break;
+                            }
+                }
+            return max;
+
+            // local helper functions
+
+            // Function which trims 'k' elements to maximimze array 'A'
+            // Time = Space = O(n), n = len of 'A"
+            int[] Trim(int[] A, int toTrim)
+            {
+                toTrim = A.Length - toTrim;
+                // Not enouf elements to trim, return original array
+                if (toTrim <= 0) return A;
+
+                Stack<int> st = new Stack<int>();
+                for (int i = 0; i < A.Length; i++)
+                {
+                    // stack top num is smaller than curr than remove stack top
+                    while (st.Count > 0 && st.Peek() < A[i] && toTrim > 0)
+                    {
+                        st.Pop();
+                        toTrim--;
+                    }
+                    st.Push(A[i]);
+                }
+                // if still nums left to trim
+                while (toTrim-- > 0) st.Pop();
+
+                return st.Reverse().ToArray();
+            }
+
+            // Merge max possible digits from 'A' & 'B' and return merged max possible array of size 'l'
+            // Time = O(n+m)*l, n = len of A, m = len of 'B', l = len of Merged Arr
+            int[] Merge(int[] A, int[] B, int l)
+            {
+                int[] merged = new int[l];
+                int i = 0, j = 0, idx = 0, lenA = A.Length, lenB = B.Length, n1, n2;
+                while (idx < l)
+                {
+                    n1 = i < lenA ? A[i] : -1;
+                    n2 = j < lenB ? B[j] : -1;
+                    if (n1 > n2)
+                        merged[idx] = A[i++];
+                    else if (n1 < n2)
+                        merged[idx] = B[j++];
+                    else
+                    {
+                        // find next num which is not equal
+                        int i1 = i + 1, j1 = j + 1;
+                        while (i1 < lenA && j1 < lenB && A[i1] == B[j1])
+                        { i1++; j1++; }
+
+                        if (i1 == lenA)
+                            merged[idx] = B[j++];
+                        else if (j1 == lenB)
+                            merged[idx] = A[i++];
+                        else if (A[i1] < B[j1])
+                            merged[idx] = B[j++];
+                        else // if (A[i1] >= B[j1])
+                            merged[idx] = A[i++];
+                    }
+                    idx++;
+                }
+                return merged;
+            }
         }
 
 
