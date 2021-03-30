@@ -1761,5 +1761,26 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = O(n^2) || Space = O(n), n = len of array 'envelopes' || LongestIncreasingSubsequence
+        public static int MaxEnvelopes(int[][] envelopes)
+        {
+            envelopes = (from e in envelopes // sort by width O(nlogn)
+                         orderby e[0]
+                         select e).ToArray();
+            //envelopes = envelopes.OrderBy(x => x[0]).ToArray();
+            int[] dp = new int[envelopes.Length];
+            int maxRussianDoll = 0;
+            for (int i = 0; i < envelopes.Length; i++)
+            {
+                dp[i] = 1;
+                for (int j = 0; j < i; j++)
+                    if (envelopes[j][1] < envelopes[i][1] && envelopes[j][0] < envelopes[i][0] && dp[i] < 1 + dp[j])
+                        dp[i] = 1 + dp[j];
+                maxRussianDoll = Math.Max(maxRussianDoll, dp[i]);
+            }
+            return maxRussianDoll;
+        }
+
+
     }
 }

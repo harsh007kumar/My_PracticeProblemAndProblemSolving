@@ -339,6 +339,7 @@ namespace InterviewProblemNSolutions
             ReconstructItinerary();
             ReconstructOriginalDigitsFromEnglish();
             FlipBinaryTreeToMatchPreorderTraversal();
+            RussianDollEnvelopes();
 
 
             // String Matching Algorithm
@@ -5635,6 +5636,22 @@ namespace InterviewProblemNSolutions
             r.InOrder("Binary Tree");
             int[] preOrderTraversal = { 1, 3, 2 };
             DailyProblem.FlipMatchVoyage(r, preOrderTraversal).Print("list of the values of all flipped nodes");
+        }
+
+
+        public static void RussianDollEnvelopes()
+        {
+            // https://leetcode.com/problems/russian-doll-envelopes/
+            Utility.Print("354. Russian Doll Envelopes");
+            int[][][] envelopesArr = {  new int[][] { new int[] { 5, 4 }, new int[] { 6, 4 }, new int[] { 6, 7 }, new int[] { 2, 3 } },
+                                        new int[][] { new int[] { 1, 1 }, new int[] { 1, 1 }, new int[] { 1, 1 } },
+                                        new int[][] { new int[] { 11, 4 }, new int[] { 11, 5 }, new int[] { 6, 7 }, new int[] { 7, 8 } },
+                                        new int[][] { new int[] { 30, 50 }, new int[] { 12, 2 }, new int[] { 3, 4 }, new int[] { 12, 15 } } };
+            foreach(var envelopes in envelopesArr)
+            {
+                envelopes.Print("Envelopes");
+                Console.WriteLine($" Max no of envelopes can you Russian doll (i.e., put one inside the other) in above is: \'{DynamicProgramming.MaxEnvelopes(envelopes)}\'\n");
+            }
         }
 
 
