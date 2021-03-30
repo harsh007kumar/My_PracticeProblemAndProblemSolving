@@ -12407,6 +12407,18 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(Max(n,m)) || Space O(1), n = len of 'left' & m = len of 'right'
+        public static int GetLastMoment(int n, int[] left, int[] right)
+        {
+            // KEY POINT : 2 Ants collinding & changing direction has same effect as 2 ants virtually crossing each other without any effect
+            int leftMost = 0, rightMost = int.MaxValue;
+            for (int i = 0; i < left.Length; i++)
+                leftMost = Math.Max(leftMost, left[i]);     // max distance ant travelling left wud need to cover (moving towards 0)
+            for (int i = 0; i < right.Length; i++)
+                rightMost = Math.Min(rightMost, right[i]);  // max distance ant travelling right wud need to cover (moving towards 'n')
+            return Math.Max(leftMost, n - rightMost);
+        }
+
 
     }
 }

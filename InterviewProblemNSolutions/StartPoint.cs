@@ -340,6 +340,7 @@ namespace InterviewProblemNSolutions
             ReconstructOriginalDigitsFromEnglish();
             FlipBinaryTreeToMatchPreorderTraversal();
             RussianDollEnvelopes();
+            LastMomentBeforeAllAntsFallOutOfAPlank();
 
 
             // String Matching Algorithm
@@ -5651,6 +5652,22 @@ namespace InterviewProblemNSolutions
             {
                 envelopes.Print("Envelopes");
                 Console.WriteLine($" Max no of envelopes can you Russian doll (i.e., put one inside the other) in above is: \'{DynamicProgramming.MaxEnvelopes(envelopes)}\'\n");
+            }
+        }
+
+
+        public static void LastMomentBeforeAllAntsFallOutOfAPlank()
+        {
+            // https://leetcode.com/problems/last-moment-before-all-ants-fall-out-of-a-plank/
+            Utility.Print("1503. Last Moment Before All Ants Fall Out of a Plank");
+            int[] n = { 4, 7, 7, 9, 6 };
+            int[][] left = { new int[] { 4, 3 }, new int[0], new int[] { 0, 1, 2, 3, 4, 5, 6, 7 }, new int[] { 5 }, new int[] { 6 } };
+            int[][] right = { new int[] { 0, 1 }, new int[] { 0, 1, 2, 3, 4, 5, 6, 7 }, new int[0], new int[] { 4 }, new int[] { 0 } };
+            for (int i = 0; i < n.Length; i++)
+            {
+                left[i].Print("Positions of Ants moving left");
+                right[i].Print("Positions of Ants moving right");
+                Console.WriteLine($" Given Plank of length \'{n[i]}\', it would take \'{DailyProblem.GetLastMoment(n[i], left[i], right[i])}\' seconds for all ants to fall-off the plank\n");
             }
         }
 
