@@ -341,6 +341,7 @@ namespace InterviewProblemNSolutions
             FlipBinaryTreeToMatchPreorderTraversal();
             RussianDollEnvelopes();
             LastMomentBeforeAllAntsFallOutOfAPlank();
+            CorporateFlightBookings();
 
 
             // String Matching Algorithm
@@ -5668,6 +5669,23 @@ namespace InterviewProblemNSolutions
                 left[i].Print("Positions of Ants moving left");
                 right[i].Print("Positions of Ants moving right");
                 Console.WriteLine($" Given Plank of length \'{n[i]}\', it would take \'{DailyProblem.GetLastMoment(n[i], left[i], right[i])}\' seconds for all ants to fall-off the plank\n");
+            }
+        }
+
+
+        public static void CorporateFlightBookings()
+        {
+            // https://leetcode.com/problems/corporate-flight-bookings/
+            Utility.Print("1109. Corporate Flight Bookings");
+            int[][][] bookings = {  new int[][] { new int[] { 1, 2, 10 }, new int[] { 2, 3, 20 }, new int[] { 2, 5, 25 } },
+                                    new int[][] { new int[] { 1, 2, 10 }, new int[] { 2, 2, 15 } } };
+            int[] n = { 5, 2 };
+            for (int i = 0; i < bookings.Length; i++)
+            {
+                bookings[i].Print("Bookings");
+                Console.WriteLine($" Based upon above bookings of Flight between '1'st & '{n[i]}'th Flight");
+                DailyProblem.CorpFlightBookings(bookings[i], n[i]).Print("Total no of seats reserved for flight i(indexed 1).");
+                Console.WriteLine("\n");
             }
         }
 

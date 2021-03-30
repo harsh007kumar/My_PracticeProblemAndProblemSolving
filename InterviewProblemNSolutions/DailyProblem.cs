@@ -12420,5 +12420,33 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static int[] CorpFlightBookingsBruteForce(int[][] bookings, int n)
+        {
+            int[] reservedSeats = new int[n];
+            for (int i = 0; i < bookings.Length; i++)
+                for (int j = bookings[i][0]; j <= bookings[i][1]; j++)
+                    reservedSeats[j - 1] += bookings[i][2];
+            return reservedSeats;
+        }
+        // Time O(Max(n,m)) || Space O(n), m = length of 'bookings'
+        public static int[] CorpFlightBookings(int[][] bookings, int n)
+        {
+            // using the idea of presum
+            int[] res = new int[n];
+            int start, last;
+            for (int i = 0; i < bookings.Length; i++)
+            {
+                start = bookings[i][0] - 1;     // all index after 'start' will have extra passengers
+                last = bookings[i][1] - 1;      // all index after 'last + 1' will not have extra passengers added above
+                res[start] += bookings[i][2];
+                if (last + 1 < n) res[last + 1] -= bookings[i][2];
+            }
+
+            for (int i = 1; i < n; i++)         // Compute PreFix Sum
+                res[i] += res[i - 1];
+            return res;
+        }
+        
+
     }
 }
