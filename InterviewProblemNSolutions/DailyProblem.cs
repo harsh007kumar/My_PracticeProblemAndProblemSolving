@@ -8247,7 +8247,7 @@ namespace InterviewProblemNSolutions
             int[] result = new int[ans.Count];
             i = 0;
             while (ans.Count > 0) result[i++] = ans.Pop();      // starting indicies are saved into result in reverse order i.e from first stamp to last stamp made
-
+            
             return result;
         }
         public class StampWindow
@@ -12446,7 +12446,72 @@ namespace InterviewProblemNSolutions
                 res[i] += res[i - 1];
             return res;
         }
-        
+
+
+        // Time O(n^3) || Space O(1)
+        public static int NumTeamsBruteForce(int[] rating)
+        {
+            int len = rating.Length;
+            return GetTeams();
+            // Local Func
+            int GetTeams(int i = 0, int firstNum = 0, int secondNum = 0)
+            {
+                if (i == len) return 0;
+
+                int count = 0;
+                if (secondNum != 0)
+                {
+                    if (firstNum < secondNum)
+                    {
+                        for (int k = i; k < len; k++)
+                            if (secondNum < rating[k])
+                                count++;
+                        return count;
+                    }
+                    else // if(firstNum > secondNum)
+                    {
+                        for (int k = i; k < len; k++)
+                            if (secondNum > rating[k])
+                                count++;
+                        return count;
+                    }
+                }
+                else
+                {
+                    if (firstNum == 0)
+                        for (int k = i; k < len - 2; k++)
+                            count += GetTeams(k + 1, rating[k]);
+                    else // (secondNum==0)
+                        for (int k = i; k < len - 1; k++)
+                            count += GetTeams(k + 1, firstNum, rating[k]);
+                    return count;
+                }
+            }
+        }
+        // Time = O(N^2) || Space O(1), n = len of 'rating' array
+        public static int NumTeams(int[] rating)
+        {
+            int len = rating.Length, count = 0, currNum, leftSmaller, leftBigger, rtSmaller, rtBigger;
+            for (int i = 1; i < len - 1; i++)
+            {
+                currNum = rating[i];
+                leftSmaller = leftBigger = rtSmaller = rtBigger = 0;
+                for (int j = 0; j < i; j++)
+                    if (rating[j] < currNum)
+                        leftSmaller++;
+                    else
+                        leftBigger++;
+
+                for (int j = i + 1; j < len; j++)
+                    if (rating[j] < currNum)
+                        rtSmaller++;
+                    else
+                        rtBigger++;
+
+                count += (leftSmaller * rtBigger) + (leftBigger * rtSmaller);
+            }
+            return count;
+        }
 
     }
 }

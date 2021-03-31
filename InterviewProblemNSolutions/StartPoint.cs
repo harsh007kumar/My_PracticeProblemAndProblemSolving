@@ -342,6 +342,7 @@ namespace InterviewProblemNSolutions
             RussianDollEnvelopes();
             LastMomentBeforeAllAntsFallOutOfAPlank();
             CorporateFlightBookings();
+            CountNumberOfTeams();
 
 
             // String Matching Algorithm
@@ -5688,6 +5689,23 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine("\n");
             }
         }
+
+
+        public static void CountNumberOfTeams()
+        {
+            // https://leetcode.com/problems/count-number-of-teams/
+            Utility.Print("1395. Count Number of Teams");
+            int[][] ratings = { new int[] { 2, 5, 3, 4, 1 }, new int[] { 2, 1, 3 }, new int[] { 1, 2, 3, 4 }, new int[] { 3, 6, 7, 5, 1 } };
+            foreach (var rating in ratings)
+            {
+                rating.Print("Ratings");
+                Console.WriteLine($" Maximum no of grps of '3' soldiers that can be build such that rating[i] < rating[j] < rating[k]) or" +
+                    $" (rating[i] > rating[j] > rating[k]) where (0 <= i < j < k < n)");
+                Console.Write($" Brute Force O(n^3) : '{DailyProblem.NumTeamsBruteForce(rating)}' ||");
+                Console.WriteLine($" Efficient O(n^2) : '{DailyProblem.NumTeams(rating)}'\n");
+            }
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
