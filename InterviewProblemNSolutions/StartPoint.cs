@@ -343,6 +343,7 @@ namespace InterviewProblemNSolutions
             LastMomentBeforeAllAntsFallOutOfAPlank();
             CorporateFlightBookings();
             CountNumberOfTeams();
+            CountLargestGroup();
 
 
             // String Matching Algorithm
@@ -5706,6 +5707,15 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void CountLargestGroup()
+        {
+            // https://leetcode.com/problems/count-largest-group/
+            Utility.Print("1399. Count Largest Group");
+            int[] nums = { 13, 2, 15, 24 };
+            foreach (var n in nums)
+                Console.WriteLine($" B/w 1...{n}, no of groups(number r grouped based upon sum of their digits) having the largest size are: '{DailyProblem.CountLargestGroup(n)}'\n");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

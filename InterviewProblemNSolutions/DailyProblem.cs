@@ -12513,5 +12513,43 @@ namespace InterviewProblemNSolutions
             return count;
         }
 
+
+        // Time = Space = O(n)
+        public static int CountLargestGroup(int n)
+        {
+            Dictionary<int, List<int>> ht = new Dictionary<int, List<int>>();
+            int maxGrpSize = 0, maxGrpCount = 0, digitSum;
+            for (int i = 1; i <= n; i++)
+            {
+                digitSum = GetDigitSum(i);
+                if (!ht.ContainsKey(digitSum))
+                    ht.Add(digitSum, new List<int>() { i });
+                else
+                    ht[digitSum].Add(i);
+
+                if (ht[digitSum].Count > maxGrpCount)
+                {
+                    maxGrpCount = ht[digitSum].Count;
+                    maxGrpSize = 1;
+                }
+                else if (ht[digitSum].Count == maxGrpCount)
+                    maxGrpSize++;
+            }
+            return maxGrpSize;
+
+            // local func
+            int GetDigitSum(int num)
+            {
+                int sum = 0;
+                while (num > 0)
+                {
+                    sum += num % 10;
+                    num /= 10;
+                }
+                return sum;
+            }
+        }
+
+
     }
 }
