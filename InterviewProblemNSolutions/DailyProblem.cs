@@ -12551,5 +12551,90 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n) Soln
+        public static bool IsPalindrome_UsingStringBuilder(ListNode h)
+        {
+            StringBuilder sb = new StringBuilder();
+            while (h != null)
+            {
+                sb.Append(h.val);
+                h = h.next;
+            }
+            string str = sb.ToString();
+            int start = 0, last = str.Length - 1;
+            while (start < last)
+                if (str[start++] != str[last--])
+                    return false;
+            return true;
+
+        }
+        // Time = Space = O(n) Soln
+        public static bool IsPalindrome_UsingList(ListNode curr)
+        {
+            List<int> ls = new List<int>();
+            while (curr != null)
+            {
+                ls.Add(curr.val);
+                curr = curr.next;
+            }
+            int start = 0, last = ls.Count - 1;
+            while (start < last)
+                if (ls[start++] != ls[last--])
+                    return false;
+            return true;
+        }
+        // Time O(n) || Space O(1)
+        public static bool IsPalindrome(ListNode h)
+        {
+            //  Count no of nodes in LinkedList
+            //  Idea is to reach half point in List while reversing the 1st half as we traverse to reach middle
+            //  if list was of odd length skip middle node
+            //  now start comparing values of 2nd half & 1st half which was reversed,
+            //  if at any point these 2 points values dont match return false
+            // 
+            //  return true at end
+            ListNode prv = null, curr = null, nxt = h;
+            int l = GetLen(h);
+            bool moveOne = l % 2 != 0;
+            l /= 2;
+            // reach mid-point in LinkedList
+            while (l-- > 0)
+            {
+                curr = nxt;
+                nxt = nxt.next;
+                curr.next = prv;
+                prv = curr;
+            }
+
+            // if odd count of nodes move one more step frwd as middle node need not be checked
+            if (moveOne)
+                nxt = nxt.next;
+
+            // Validate if Palindrome or not
+            while (nxt != null)
+            {
+                if (nxt.val != curr.val)
+                    return false;
+                nxt = nxt.next;
+                curr = curr.next;
+            }
+
+            return true;
+
+            // local func
+            int GetLen(ListNode t)
+            {
+                int size = 0;
+                while (t != null)
+                {
+                    size++;
+                    t = t.next;
+                }
+                return size;
+            }
+        }
+
+
+
     }
 }

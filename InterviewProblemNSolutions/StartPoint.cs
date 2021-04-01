@@ -344,6 +344,7 @@ namespace InterviewProblemNSolutions
             CorporateFlightBookings();
             CountNumberOfTeams();
             CountLargestGroup();
+            PalindromeLinkedList();
 
 
             // String Matching Algorithm
@@ -5715,6 +5716,26 @@ namespace InterviewProblemNSolutions
             int[] nums = { 13, 2, 15, 24 };
             foreach (var n in nums)
                 Console.WriteLine($" B/w 1...{n}, no of groups(number r grouped based upon sum of their digits) having the largest size are: '{DailyProblem.CountLargestGroup(n)}'\n");
+        }
+
+
+        public static void PalindromeLinkedList()
+        {
+            // https://leetcode.com/problems/palindrome-linked-list/
+            Utility.Print("234. Palindrome Linked List");
+            ListNode evenLenPalindrome = new ListNode(1) { next = new ListNode(2) { next = new ListNode(2) { next = new ListNode(1) } } };
+            ListNode evenLenNotPalindrome = new ListNode(1) { next = new ListNode(2) { next = new ListNode(2) { next = new ListNode(3) } } };
+            ListNode oddLenPalindrome = new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) { next = new ListNode(2) { next = new ListNode(1) } } } };
+            ListNode oddLenNotPalindrome = new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) { next = new ListNode(2) { next = new ListNode(9) } } } };
+
+            evenLenPalindrome.Print("even Len Palindrome");
+            Console.WriteLine($" Is List Palindrome: '{DailyProblem.IsPalindrome(evenLenPalindrome)}'\n");
+            evenLenNotPalindrome.Print("even Len Not-Palindrome");
+            Console.WriteLine($" Is List Palindrome: '{DailyProblem.IsPalindrome(evenLenNotPalindrome)}'\n");
+            oddLenPalindrome.Print("odd Len Palindrome");
+            Console.WriteLine($" Is List Palindrome: '{DailyProblem.IsPalindrome(oddLenPalindrome)}'\n");
+            oddLenNotPalindrome.Print("odd Len Not-Palindrome");
+            Console.WriteLine($" Is List Palindrome: '{DailyProblem.IsPalindrome(oddLenNotPalindrome)}'\n");
         }
 
 
