@@ -12675,5 +12675,22 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1), n = len of 'values' array
+        public static int MaxScoreSightseeingPair(int[] values)
+        {
+            // We start with the first sight val as max value, as we move to next index we need to deduct distance to calculate maxPairScore
+            // to achieve same effect we can just keep on decreasing max score found by 1 as we move to next index
+            // now only thing to make sure is we keep are prv max sight score updated in case we found new sight with higher score
+            int maxScore = 0, max = values[0];
+            for (int i = 1; i < values.Length; i++)    // O(n)
+            {
+                maxScore = Math.Max(maxScore, --max + values[i]);
+                max = Math.Max(max, values[i]);
+            }
+            return maxScore;
+        }
+
+
+
     }
 }

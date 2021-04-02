@@ -347,6 +347,7 @@ namespace InterviewProblemNSolutions
             PalindromeLinkedList();
             OnesAndZeroes();
             MostVisitedSectorInACircularTrack();
+            BestSightseeingPair();
 
 
             // String Matching Algorithm
@@ -5767,6 +5768,19 @@ namespace InterviewProblemNSolutions
                 rounds[i].Print("Rounds");
                 DailyProblem.MostVisited(n[i], rounds[i]).Print($"'Most visited sectors' b/w 1...{n[i]} sorted in ascending order are");
                 Console.WriteLine("\n");
+            }
+        }
+
+
+        public static void BestSightseeingPair()
+        {
+            // https://leetcode.com/problems/best-sightseeing-pair/
+            Utility.Print("1014. Best Sightseeing Pair");
+            int[][] sightValuesArr = { new int[] { 8, 1, 5, 2, 6 }, new int[] { 1, 2 } };
+            foreach (var sights in sightValuesArr)
+            {
+                sights.Print("Sight scores");
+                Console.WriteLine($" maximum score of a pair of sightseeing spots using formula [values[i] + values[j] + i - j] is: '{DailyProblem.MaxScoreSightseeingPair(sights)}'\n");
             }
         }
 
