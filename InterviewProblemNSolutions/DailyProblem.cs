@@ -12635,6 +12635,27 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(m*n*k + k*l) || Space O(m*n), m = maxZeros, n = maxOnes & k = length of 'strs' array & l = avg length of string in 'strs'
+        public static int FindMaxForm(string[] strs, int maxZeros, int maxOnes)
+        {
+            int[,] dp = new int[maxZeros + 1, maxOnes + 1];
+            int zeros, ones;
+            for (int i = 0; i < strs.Length; i++)   // O(k)
+            {
+                zeros = 0;
+                for (int j = 0; j < strs[i].Length; j++)    // O(l)
+                    if (strs[i][j] == '0')
+                        zeros++;
+                ones = strs[i].Length - zeros;
+
+                for (int j = maxZeros; j >= zeros; j--)     // O(m)
+                    for (int k = maxOnes; k >= ones; k--)   // O(n)
+                        dp[j, k] = Math.Max(dp[j, k], 1 + dp[j - zeros, k - ones]);
+            }
+            return dp[maxZeros, maxOnes];
+        }
+
+
 
     }
 }

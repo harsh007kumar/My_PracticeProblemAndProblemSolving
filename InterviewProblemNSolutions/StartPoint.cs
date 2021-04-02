@@ -345,6 +345,7 @@ namespace InterviewProblemNSolutions
             CountNumberOfTeams();
             CountLargestGroup();
             PalindromeLinkedList();
+            OnesAndZeroes();
 
 
             // String Matching Algorithm
@@ -5736,6 +5737,21 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" Is List Palindrome: '{DailyProblem.IsPalindrome(oddLenPalindrome)}'\n");
             oddLenNotPalindrome.Print("odd Len Not-Palindrome");
             Console.WriteLine($" Is List Palindrome: '{DailyProblem.IsPalindrome(oddLenNotPalindrome)}'\n");
+        }
+
+
+        public static void OnesAndZeroes()
+        {
+            // https://leetcode.com/problems/ones-and-zeroes/
+            Utility.Print("474. Ones and Zeroes");
+            string[][] strs = { new string[] { "10", "0001", "111001", "1", "0" }, new string[] { "10", "0", "1" } };
+            int[] m = { 5, 1 }, n = { 3, 1 };
+
+            for (int i = 0; i < strs.Length; i++)
+            {
+                strs[i].Print("Input");
+                Console.WriteLine($" Size of the largest subset of strs such that there are at most {m[i]} Zero's and {n[i]} One's in the subset is: '{DailyProblem.FindMaxForm(strs[i], m[i], n[i])}'\n");
+            }
         }
 
 
