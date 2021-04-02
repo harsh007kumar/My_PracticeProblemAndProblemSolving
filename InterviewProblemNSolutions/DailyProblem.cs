@@ -12656,6 +12656,24 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(nlogn) || Space O(n), n = no of sectors
+        public static IList<int> MostVisited(int n, int[] rounds)
+        {
+            List<int> mostVisitedSectors = new List<int>();
+            // most repeated sectors would always be b/w 1st sector and last sector of 'rounds' array
+            int first = rounds[0], last = rounds[rounds.Length - 1];
+            while (true)  // O(n)
+            {
+                mostVisitedSectors.Add(first);
+                if (first == last) break;
+                first %= n;
+                first++;
+            }
+
+            mostVisitedSectors.Sort();  // O(nlogn)
+            return mostVisitedSectors;
+        }
+
 
     }
 }

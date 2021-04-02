@@ -346,6 +346,7 @@ namespace InterviewProblemNSolutions
             CountLargestGroup();
             PalindromeLinkedList();
             OnesAndZeroes();
+            MostVisitedSectorInACircularTrack();
 
 
             // String Matching Algorithm
@@ -5751,6 +5752,21 @@ namespace InterviewProblemNSolutions
             {
                 strs[i].Print("Input");
                 Console.WriteLine($" Size of the largest subset of strs such that there are at most {m[i]} Zero's and {n[i]} One's in the subset is: '{DailyProblem.FindMaxForm(strs[i], m[i], n[i])}'\n");
+            }
+        }
+
+
+        public static void MostVisitedSectorInACircularTrack()
+        {
+            // https://leetcode.com/problems/most-visited-sector-in-a-circular-track/
+            Utility.Print("1560. Most Visited Sector in a Circular Track");
+            int[] n = { 4, 2, 7, 3 };
+            int[][] rounds = { new int[] { 1, 3, 1, 2 }, new int[] { 2, 1, 2, 1, 2, 1, 2, 1, 2 }, new int[] { 1, 3, 5, 7 }, new int[] { 33, 2, 1, 2, 1, 3, 2, 1, 2, 1, 3, 2, 3, 1 } };
+            for (int i = 0; i < n.Length; i++)
+            {
+                rounds[i].Print("Rounds");
+                DailyProblem.MostVisited(n[i], rounds[i]).Print($"'Most visited sectors' b/w 1...{n[i]} sorted in ascending order are");
+                Console.WriteLine("\n");
             }
         }
 
