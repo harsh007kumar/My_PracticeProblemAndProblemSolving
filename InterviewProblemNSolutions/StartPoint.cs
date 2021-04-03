@@ -349,6 +349,7 @@ namespace InterviewProblemNSolutions
             MostVisitedSectorInACircularTrack();
             BestSightseeingPair();
             LongestValidParentheses();
+            MinimumTimeVisitingAllPoints();
 
 
             // String Matching Algorithm
@@ -5793,6 +5794,20 @@ namespace InterviewProblemNSolutions
             string[] sArray = { ")))))()()()()()()())()()))))))))", ")))))()()()()()()())()())(((((((", ")()())", "", "(()", "()(()" , "(()()" };
             foreach (var str in sArray)
                 Console.WriteLine($" longest valid (well-formed) parentheses substring in '{str}' is of len: '{DailyProblem.LongestValidParentheses(str)}'\n");
+        }
+
+
+        public static void MinimumTimeVisitingAllPoints()
+        {
+            // https://leetcode.com/problems/minimum-time-visiting-all-points/
+            Utility.Print("1266. Minimum Time Visiting All Points");
+            int[][][] pointsArr = { new int[][] { new int[] { 1, 1 }, new int[] { 3, 4 }, new int[] { -1, 0 } },
+                                    new int[][] { new int[] { 3, 2 }, new int[] { -2, 2 } } };
+            foreach (var points in pointsArr)
+            {
+                points.Print("Points");
+                Console.WriteLine($" Time to travel all above points: '{DailyProblem.MinTimeToVisitAllPoints(points)}'\n");
+            }
         }
 
 

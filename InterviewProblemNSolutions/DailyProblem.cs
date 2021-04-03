@@ -12718,6 +12718,15 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1), n = len of 'points'
+        public static int MinTimeToVisitAllPoints(int[][] points)
+        {
+            int time = 0;
+            for (int i = 1; i < points.Length; i++)
+                time += Math.Max(Math.Abs(points[i - 1][0] - points[i][0]), Math.Abs(points[i - 1][1] - points[i][1]));
+            return time;
+        }
+
 
     }
 }
