@@ -12691,6 +12691,33 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n), n = len of 's'
+        public static int LongestValidParentheses(string s)
+        {
+            int longestParentheses = 0, lt = 0, rt = 0, lastValidStart;
+            Stack<int> openingBrackets = new Stack<int>();
+            while (rt < s.Length)
+                if (s[rt++] == '(')     // opening
+                    openingBrackets.Push(rt - 1);
+                else                    // closing
+                {
+                    if (openingBrackets.Count > 0)  // stack not empty, update ans with last opening idx & current idx
+                        longestParentheses = Math.Max(longestParentheses, rt - openingBrackets.Pop());
+                    else                // if stack was empty means we have reached scenario when we found more closing brackets than opening
+                    {
+                        // reset Stack & update left
+                        lt = rt;
+                        openingBrackets.Clear();
+                    }
+
+                    // also keep updating global max reached, to cover cases of consecutive "()()()()"
+                    lastValidStart = openingBrackets.Count == 0 ? lt : openingBrackets.Peek() + 1;
+                    longestParentheses = Math.Max(longestParentheses, rt - lastValidStart);
+                }
+            return longestParentheses;
+        }
+
+
 
     }
 }

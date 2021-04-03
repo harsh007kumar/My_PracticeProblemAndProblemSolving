@@ -348,6 +348,7 @@ namespace InterviewProblemNSolutions
             OnesAndZeroes();
             MostVisitedSectorInACircularTrack();
             BestSightseeingPair();
+            LongestValidParentheses();
 
 
             // String Matching Algorithm
@@ -5782,6 +5783,16 @@ namespace InterviewProblemNSolutions
                 sights.Print("Sight scores");
                 Console.WriteLine($" maximum score of a pair of sightseeing spots using formula [values[i] + values[j] + i - j] is: '{DailyProblem.MaxScoreSightseeingPair(sights)}'\n");
             }
+        }
+
+
+        public static void LongestValidParentheses()
+        {
+            // https://leetcode.com/problems/longest-valid-parentheses/
+            Utility.Print("32. Longest Valid Parentheses");
+            string[] sArray = { ")))))()()()()()()())()()))))))))", ")))))()()()()()()())()())(((((((", ")()())", "", "(()", "()(()" , "(()()" };
+            foreach (var str in sArray)
+                Console.WriteLine($" longest valid (well-formed) parentheses substring in '{str}' is of len: '{DailyProblem.LongestValidParentheses(str)}'\n");
         }
 
 
