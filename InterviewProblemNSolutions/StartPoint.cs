@@ -350,6 +350,7 @@ namespace InterviewProblemNSolutions
             BestSightseeingPair();
             LongestValidParentheses();
             MinimumTimeVisitingAllPoints();
+            DesignCircularQueue();
 
 
             // String Matching Algorithm
@@ -5808,6 +5809,21 @@ namespace InterviewProblemNSolutions
                 points.Print("Points");
                 Console.WriteLine($" Time to travel all above points: '{DailyProblem.MinTimeToVisitAllPoints(points)}'\n");
             }
+        }
+
+
+        public static void DesignCircularQueue()
+        {
+            // https://leetcode.com/problems/design-circular-queue/
+            Utility.Print("622. Design Circular Queue");
+            int k = 3, val = 5;
+            CircularQueue obj = new CircularQueue(k);
+            bool param_1 = obj.EnQueue(val);
+            bool param_2 = obj.DeQueue();
+            int param_3 = obj.Front();
+            int param_4 = obj.Rear();
+            bool param_5 = obj.IsEmpty();
+            bool param_6 = obj.IsFull();
         }
 
 
