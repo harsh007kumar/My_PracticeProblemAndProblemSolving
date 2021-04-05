@@ -62,7 +62,7 @@ namespace InterviewProblemNSolutions
         public static void Print(this int[] arr, string msg = "")
         {
             if (msg != "") Console.Write($" Printing '{msg}': \t");
-            else Console.WriteLine($" ==== Printing given int array with '{arr.Length}' elements ====");
+            else Console.WriteLine($" Printing given int array with '{arr.Length}' elements");
 
             for (int i = 0; i < arr.Length; i++)
                 Console.Write($" {arr[i]} ||");
@@ -71,7 +71,7 @@ namespace InterviewProblemNSolutions
         public static void Print(this char[] arr, string msg = "")
         {
             if (msg != "") Console.Write($" Printing '{msg}': \t");
-            else Console.WriteLine($" ==== Printing given int array with '{arr.Length}' elements ====");
+            else Console.WriteLine($" Printing given int array with '{arr.Length}' elements");
 
             for (int i = 0; i < arr.Length; i++)
                 Console.Write($" {arr[i]} ||");
@@ -82,7 +82,7 @@ namespace InterviewProblemNSolutions
         {
             var row = arr.GetLength(0);
             var col = arr.GetLength(1);
-            Console.WriteLine($" ==== Printing given 2-D char array with {row}:Row & {col}:Col ====");
+            Console.WriteLine($" Printing given 2-D char array with {row}:Row & {col}:Col");
             for (int i = 0; i < row; i++)
             {
                 for (int j = 0; j < col; j++)
@@ -96,7 +96,7 @@ namespace InterviewProblemNSolutions
         {
             var row = arr.Length;
             var col = arr[0].Length;
-            if (msg != "") Console.WriteLine($" ==== Printing \'{msg}\' 2-D char array with {row}:Row & {col}:Col ====");
+            if (msg != "") Console.WriteLine($" Printing \'{msg}\' 2-D char array with {row}:Row & {col}:Col");
             for (int i = 0; i < row; i++)
             {
                 for (int j = 0; j < col; j++)
@@ -109,7 +109,7 @@ namespace InterviewProblemNSolutions
         {
             var row = arr.Length;
             var col = arr[0].Length;
-            if (msg != "") Console.WriteLine($" ==== Printing \'{msg}\' 2-D string array with {row}:Row & {col}:Col ====");
+            if (msg != "") Console.WriteLine($" Printing \'{msg}\' 2-D string array with {row}:Row & {col}:Col");
             for (int i = 0; i < row; i++)
             {
                 for (int j = 0; j < col; j++)
@@ -123,7 +123,7 @@ namespace InterviewProblemNSolutions
         {
             var row = arr.GetLength(0);
             var col = arr.GetLength(1);
-            if (!silent) Console.WriteLine($" ==== Printing given 2-D int array with {row}:Row & {col}:Col ====");
+            if (!silent) Console.WriteLine($" Printing given 2-D int array with {row}:Row & {col}:Col");
             for (int i = 0; i < row; i++)
             {
                 for (int j = 0; j < col; j++)
@@ -138,7 +138,7 @@ namespace InterviewProblemNSolutions
             var row = arr.Length;
             if (row == 0) return;
             var col = arr[0].Length;
-            if (msg != "") Console.WriteLine($" ==== Printing \'{msg}\' 2-D int array with {row}:Row & {col}:Col ====");
+            if (msg != "") Console.WriteLine($" Printing \'{msg}\' 2-D int array with {row}:Row & {col}:Col");
             for (int i = 0; i < row; i++)
             {
                 for (int j = 0; j < arr[i].Length; j++)
