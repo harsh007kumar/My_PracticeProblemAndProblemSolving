@@ -12747,5 +12747,20 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(r^2) || Space O(r), r = rowIndex
+        public static IList<int> PascalsTriangleII(int rowIndex)
+        {
+            int[] row = new int[] { 1 }, nextRow;
+            while (row.Length - 1 < rowIndex)
+            {
+                nextRow = new int[row.Length + 1]; // next row always has 1 more len than last
+                nextRow[0] = nextRow[row.Length] = 1; // 1st & last index value is always 1
+                for (int i = 1; i < nextRow.Length - 1; i++) // compute intermediate value from row above
+                    nextRow[i] = row[i - 1] + row[i];
+                row = nextRow;
+            }
+            return row;
+        }
+
     }
 }

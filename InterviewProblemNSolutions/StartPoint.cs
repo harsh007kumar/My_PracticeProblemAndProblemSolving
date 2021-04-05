@@ -352,6 +352,7 @@ namespace InterviewProblemNSolutions
             MinimumTimeVisitingAllPoints();
             DesignCircularQueue();
             GlobalAndLocalInversions();
+            PascalsTriangleII();
 
 
             // String Matching Algorithm
@@ -5838,6 +5839,16 @@ namespace InterviewProblemNSolutions
                 A.Print("Input Array");
                 Console.WriteLine($" No of global inversions is equal to the number of local inversions: {DailyProblem.IsIdealPermutation(A)}\n");
             }
+        }
+
+
+        public static void PascalsTriangleII()
+        {
+            // https://leetcode.com/problems/pascals-triangle-ii/
+            Utility.Print("119. Pascal's Triangle II");
+            int[] rowIndexes = { 3, 0, 1 };
+            foreach (var rowIdx in rowIndexes)
+                DailyProblem.PascalsTriangleII(rowIdx).Print($"Pascals Triangle '{rowIdx}'th row");
         }
 
 
