@@ -351,6 +351,7 @@ namespace InterviewProblemNSolutions
             LongestValidParentheses();
             MinimumTimeVisitingAllPoints();
             DesignCircularQueue();
+            GlobalAndLocalInversions();
 
 
             // String Matching Algorithm
@@ -5824,6 +5825,19 @@ namespace InterviewProblemNSolutions
             int param_4 = obj.Rear();
             bool param_5 = obj.IsEmpty();
             bool param_6 = obj.IsFull();
+        }
+
+
+        public static void GlobalAndLocalInversions()
+        {
+            // https://leetcode.com/problems/global-and-local-inversions/
+            Utility.Print("775. Global and Local Inversions");
+            int[][] arrays = { new int[] { 1, 0, 2 }, new int[] { 1, 2, 0 }, new int[] { 2, 0, 1 }, new int[] { 2, 1, 0 }, new int[] { 0 } };
+            foreach (var A in arrays)
+            {
+                A.Print("Input Array");
+                Console.WriteLine($" No of global inversions is equal to the number of local inversions: {DailyProblem.IsIdealPermutation(A)}\n");
+            }
         }
 
 

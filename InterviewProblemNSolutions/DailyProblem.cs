@@ -12728,5 +12728,24 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1)
+        public static bool IsIdealPermutation(int[] A)
+        {
+            /* Because the count of local should <= count of global, all we care is when local < global happens.
+             * The difference between local and global is global also include nonadjacent i and j,
+             * so simplify the question to for every i, find in range 0 to i-2, see if there is a element larger than A[i],
+             * if it exist, we can return false directly.
+             */
+            int max = -1;
+            for (int i = 0; i < A.Length - 2; i++)
+            {
+                max = Math.Max(max, A[i]);
+                if (max > A[i + 2])
+                    return false;
+            }
+            return true;
+        }
+
+
     }
 }
