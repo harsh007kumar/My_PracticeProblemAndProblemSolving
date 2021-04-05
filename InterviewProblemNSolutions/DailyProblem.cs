@@ -12762,5 +12762,52 @@ namespace InterviewProblemNSolutions
             return row;
         }
 
+
+        // Time = Space = O(r*c), r = no of rows in nums, c = max no of columns in any nums[i]
+        public static int[] DiagonalTraverseII(IList<IList<int>> nums)
+        {
+            List<int> ans = new List<int>();
+            int r = 0, currRow, currCol, maxCol = 0;
+            while (r < nums.Count)             // traverse thru all the rows
+            {
+                maxCol = Math.Max(maxCol, nums[r].Count);// update max columns we need to cover
+                currRow = r++;
+                currCol = 0;
+                while (currRow >= 0 && currCol < maxCol)     // traverse & add current diagonal elements
+                    if (currCol++ < nums[currRow--].Count)
+                        ans.Add(nums[currRow + 1][currCol - 1]);
+            }
+            // now we only need to add elements of last row from 2nd column onwards
+            for (int i = 1; i < maxCol; i++)
+            {
+                currRow = r - 1;
+                currCol = i;
+                while (currRow >= 0 && currCol < maxCol)
+                    if (currCol++ < nums[currRow--].Count)
+                        ans.Add(nums[currRow + 1][currCol - 1]);
+            }
+            return ans.ToArray(); ;
+        }
+        // Time = Space = O(n), n = total no of elements in 2D zigzag array 'nums'
+        public static int[] DiagonalTraverseIIFaster(IList<IList<int>> nums)
+        {
+            List<Stack<int>> LST = new List<Stack<int>>();
+            for (int i = 0; i < nums.Count; i++)        // traverse thru all the rows
+            {
+                while (LST.Count <= i + nums[i].Count)  // add extra Stack to List if required
+                    LST.Add(new Stack<int>());
+
+                for (int j = 0; j < nums[i].Count; j++) // add current col elements to appropriate diagonal/stack
+                    LST[i + j].Push(nums[i][j]);
+            }
+            // collect and flatten our List of Stacks to form final ans
+            List<int> ans = new List<int>();
+            for (int i = 0; i < LST.Count; i++)
+                ans.AddRange(LST[i]);
+
+            return ans.ToArray();
+        }
+
+
     }
 }

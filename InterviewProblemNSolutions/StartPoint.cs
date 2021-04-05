@@ -353,6 +353,7 @@ namespace InterviewProblemNSolutions
             DesignCircularQueue();
             GlobalAndLocalInversions();
             PascalsTriangleII();
+            DiagonalTraverseII();
 
 
             // String Matching Algorithm
@@ -5849,6 +5850,24 @@ namespace InterviewProblemNSolutions
             int[] rowIndexes = { 3, 0, 1 };
             foreach (var rowIdx in rowIndexes)
                 DailyProblem.PascalsTriangleII(rowIdx).Print($"Pascals Triangle '{rowIdx}'th row");
+        }
+
+
+        public static void DiagonalTraverseII()
+        {
+            // https://leetcode.com/problems/diagonal-traverse-ii/
+            Utility.Print("1424. Diagonal Traverse II");
+            int[][][] numsArr = {   new int[][] { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 } },
+                                    new int[][] { new int[] { 1, 2, 3, 4, 5 }, new int[] { 6, 7 }, new int[] { 8 }, new int[] { 9, 10, 11 }, new int[] { 12, 13, 14, 15, 16 } },
+                                    new int[][] { new int[] { 1, 2, 3 }, new int[] { 4 }, new int[] { 5, 6, 7 }, new int[] { 8 }, new int[] { 9, 10, 11 } },
+                                    new int[][] { new int[] { 1, 2, 3, 4, 5, 6 } } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                //DailyProblem.DiagonalTraverseII(nums).Print($"Printing above Zig-Zag array in diagonal order");
+                DailyProblem.DiagonalTraverseIIFaster(nums).Print($"Printing above Zig-Zag array in diagonal order");
+                Console.WriteLine("\n");
+            }
         }
 
 
