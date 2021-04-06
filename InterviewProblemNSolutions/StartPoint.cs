@@ -355,6 +355,7 @@ namespace InterviewProblemNSolutions
             PascalsTriangleII();
             DiagonalTraverseII();
             MinimumOperationsToMakeArrayEqual();
+            LeastNumberOfUniqueIntegersAfterKRemovals();
 
 
             // String Matching Algorithm
@@ -5879,6 +5880,20 @@ namespace InterviewProblemNSolutions
             int[] arr = { 3, 6, 5, 1 };
             foreach (var num in arr)
                 Console.WriteLine($" Min no of operations needed to make all the elements of arr with size '{num}' equal: '{DailyProblem.MinimumOperationsToMakeArrayEqual(num)}'\n");
+        }
+
+
+        public static void LeastNumberOfUniqueIntegersAfterKRemovals()
+        {
+            // https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/
+            Utility.Print("1481. Least Number of Unique Integers after K Removals");
+            int[][] arr = { new int[] { 5, 5, 4 }, new int[] { 4, 3, 1, 1, 3, 3, 2 }, new int[] { 2, 4, 1, 8, 3, 5, 1, 3 } };
+            int[] k = { 1, 3, 3 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                arr[i].Print("Input");
+                Console.WriteLine($" least number of unique integers after removing exactly '{k[i]}' elements: '{DailyProblem.FindLeastNumOfUniqueInts(arr[i], k[i])}'\n");
+            }
         }
 
 

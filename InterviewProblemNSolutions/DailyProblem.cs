@@ -12834,6 +12834,35 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = O(Max(n,ulogu)) || Space = O(n), u = total no of unique numbers in 'arr', n = len of 'arr'
+        public static int FindLeastNumOfUniqueInts(int[] arr, int k)
+        {
+            Dictionary<int, int> numFreq = new Dictionary<int, int>();
+            for (int i = 0; i < arr.Length; i++)                // O(n)
+                if (!numFreq.ContainsKey(arr[i]))
+                    numFreq.Add(arr[i], 1);
+                else
+                    numFreq[arr[i]]++;
+            
+            SortedDictionary<int, List<int>> sameFreqNums = new SortedDictionary<int, List<int>>();
+            foreach (var kvp in numFreq)
+                if (!sameFreqNums.ContainsKey(kvp.Value))       // O(ulogu)
+                    sameFreqNums.Add(kvp.Value, new List<int>() { kvp.Key });
+                else
+                    sameFreqNums[kvp.Value].Add(kvp.Key);
+
+            int uniqueNumsRemoved = 0;
+            foreach (var listOfNums in sameFreqNums)            // O(n)
+                foreach (var num in listOfNums.Value)
+                {
+                    if (listOfNums.Key <= k) uniqueNumsRemoved++;
+                    k -= listOfNums.Key;
+                    if (k < 1) return numFreq.Count - uniqueNumsRemoved;
+                }
+            return numFreq.Count - uniqueNumsRemoved;
+        }
+
+
 
     }
 }
