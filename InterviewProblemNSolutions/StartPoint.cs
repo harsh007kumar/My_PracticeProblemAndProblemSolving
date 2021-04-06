@@ -354,6 +354,7 @@ namespace InterviewProblemNSolutions
             GlobalAndLocalInversions();
             PascalsTriangleII();
             DiagonalTraverseII();
+            MinimumOperationsToMakeArrayEqual();
 
 
             // String Matching Algorithm
@@ -5868,6 +5869,16 @@ namespace InterviewProblemNSolutions
                 DailyProblem.DiagonalTraverseIIFaster(nums).Print($"Printing above Zig-Zag array in diagonal order");
                 Console.WriteLine("\n");
             }
+        }
+
+
+        public static void MinimumOperationsToMakeArrayEqual()
+        {
+            // https://leetcode.com/problems/minimum-operations-to-make-array-equal/
+            Utility.Print("1551. Minimum Operations to Make Array Equal");
+            int[] arr = { 3, 6, 5, 1 };
+            foreach (var num in arr)
+                Console.WriteLine($" Min no of operations needed to make all the elements of arr with size '{num}' equal: '{DailyProblem.MinimumOperationsToMakeArrayEqual(num)}'\n");
         }
 
 

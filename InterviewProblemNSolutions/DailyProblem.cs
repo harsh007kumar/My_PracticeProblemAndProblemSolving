@@ -8247,7 +8247,7 @@ namespace InterviewProblemNSolutions
             int[] result = new int[ans.Count];
             i = 0;
             while (ans.Count > 0) result[i++] = ans.Pop();      // starting indicies are saved into result in reverse order i.e from first stamp to last stamp made
-            
+
             return result;
         }
         public class StampWindow
@@ -10800,7 +10800,7 @@ namespace InterviewProblemNSolutions
              * else return diff%2 == 0 && (oneSwapMade || sameCharSwapPossible)
              */
             if (A.Length != B.Length) return false;     // different length match not possible
-            
+
             int[] charCount = new int[26];              // to count frequencies of each letter in A
 
             int diff = 0, misMatchAt = -1;
@@ -10813,7 +10813,7 @@ namespace InterviewProblemNSolutions
                 {
                     if (++diff > 2)                     // no of different characters more than 2
                         return false;
-                    
+
                     if (misMatchAt == -1)               // 1st misMatch
                         misMatchAt = i;
                     else                                // 2nd misMatch
@@ -10932,7 +10932,7 @@ namespace InterviewProblemNSolutions
             {
                 while (i < l && nums[i] == 1)
                 { i++; currOnes++; }
-                
+
                 // update ans
                 ans = Math.Max(ans, currOnes + prvOnes);
 
@@ -11469,7 +11469,7 @@ namespace InterviewProblemNSolutions
                         {
                             N = N * 10 + k;     // add new digit to number
                             digits[k]--;        // reduce count of digit just used
-                            
+
                             if (FindAllNumsRecursively(i + 1))
                                 return true;
 
@@ -11527,7 +11527,7 @@ namespace InterviewProblemNSolutions
                     }
                 }
             }
-            
+
         }
         // Time O(k^2*(n+m)) || Space O(Max(n,m,k))
         public static int[] CreateMaximumNumberTrimAndMerge(int[] nums1, int[] nums2, int k)
@@ -11757,7 +11757,7 @@ namespace InterviewProblemNSolutions
                     {
                         if (numFreq.ContainsKey(currTarget - arr[j]))
                             ans = (ans + (numFreq[currTarget - arr[j]]) % mod) % mod;
-                        
+
                         if (!numFreq.ContainsKey(arr[j]))
                             numFreq.Add(arr[j], 1);
                         else
@@ -11843,12 +11843,12 @@ namespace InterviewProblemNSolutions
             // save nums and their original index from array 'B'
             for (i = 0; i < l; i++)
                 bIndex[i] = new int[] { B[i], i };
-            
+
             // Sort in Ascending order based upon value
             int[][] sortedB = (from pair in bIndex
                                orderby pair[0]              // O(nlogn)
                                select pair).ToArray();
-            
+
             // Step2: Sort 'A'
             Array.Sort(A);                                  // O(nlogn)
 
@@ -11862,7 +11862,7 @@ namespace InterviewProblemNSolutions
             {
                 while (i + j < l && A[i + j] <= sortedB[i][0])
                     j++;
-                
+
                 if (i + j < l)
                     ans.Add(A[i + j]);
             }
@@ -11874,7 +11874,7 @@ namespace InterviewProblemNSolutions
                 for (i = 0; i < ans.Count; i++)         // O(n)
                     while (i + j < l && ans[i] != A[i + j])
                         ans.Add(A[i + j++]);
-                
+
                 while (i + j < l)
                     ans.Add(A[i + j++]);
             }
@@ -11884,12 +11884,12 @@ namespace InterviewProblemNSolutions
             // all nums which didn't beat any card would be placed at the end
             for (i = 0; i < l; i++)                     // O(n)
                 sortedB[i][0] = ans[i];
-            
+
             // Now Sort 'nums' based upon original index of nums they beat/didn't beat in 'B'
             int[] result = (from pair in sortedB
                             orderby pair[1]                 // O(nlogn)
                             select pair[0]).ToArray();
-            
+
             return result.ToArray();
         }
 
@@ -11955,7 +11955,7 @@ namespace InterviewProblemNSolutions
                 isVisited[r, c] = true;
 
                 int[] curr = null;
-                
+
                 while (q.Count > 0)
                 {
                     curr = q.Dequeue();
@@ -12807,6 +12807,32 @@ namespace InterviewProblemNSolutions
 
             return ans.ToArray();
         }
+
+
+        // Time O(n) || Space O(1)
+        public static int MinimumOperationsToMakeArrayEqual(int n)
+        {
+            /* 1	3	5	7	9	11
+             * n = even median = 6
+             * 5	3	1
+             * we now see 'min no of operations' to convert all numbers to median for even 'n' values
+             * is just sum of nums[i] in the range 0<= i< (n+1)/2
+             * 
+             * 1	3	5	7	9
+             * n = odd median = 5
+             * 4	2	0
+             * we now see 'min no of operations' to convert all numbers to median for odd 'n' values
+             * is just sum of nums[i] in the range 0<= i< (n+1)/2   -  (n+1)/2;
+             */
+            int operation = 0, i = 0, currNum = 1;
+            while (i++ < (n + 1) / 2)        // O(n/2)
+            {
+                operation += currNum;
+                currNum += 2;
+            }
+            return operation - (n % 2 == 0 ? 0 : --i);
+        }
+
 
 
     }
