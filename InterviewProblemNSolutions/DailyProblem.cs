@@ -12863,6 +12863,33 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O((n-m)^2) || Space O(1)
+        public static bool DetectKPatternOfLenM(int[] arr, int m, int k)
+        {
+            int start, repeatStart, count;
+            for (start = 0; start <= arr.Length - m; start++)       // O(n-m)
+            {
+                count = 1;
+                // check for Consecutive repeatation in remaining arr
+                repeatStart = start + m;
+                while (repeatStart <= arr.Length - m && Match())    // O(n-2m)
+                {
+                    if (++count == k) return true;
+                    repeatStart += m;
+                }
+            }
+            return false;
+            // local func
+            bool Match()
+            {
+                int i = start, j = repeatStart;
+                while (i < start + m)
+                    if (arr[i++] != arr[j++])
+                        return false;
+                return true;
+            }
+        }
+
 
     }
 }

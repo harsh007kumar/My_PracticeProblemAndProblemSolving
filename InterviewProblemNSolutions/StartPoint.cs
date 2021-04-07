@@ -356,6 +356,7 @@ namespace InterviewProblemNSolutions
             DiagonalTraverseII();
             MinimumOperationsToMakeArrayEqual();
             LeastNumberOfUniqueIntegersAfterKRemovals();
+            DetectPatternOfLengthMRepeatedKOrMoreTimes();
 
 
             // String Matching Algorithm
@@ -5893,6 +5894,21 @@ namespace InterviewProblemNSolutions
             {
                 arr[i].Print("Input");
                 Console.WriteLine($" least number of unique integers after removing exactly '{k[i]}' elements: '{DailyProblem.FindLeastNumOfUniqueInts(arr[i], k[i])}'\n");
+            }
+        }
+
+
+        public static void DetectPatternOfLengthMRepeatedKOrMoreTimes()
+        {
+            // https://leetcode.com/problems/detect-pattern-of-length-m-repeated-k-or-more-times/
+            Utility.Print("1566. Detect Pattern of Length M Repeated K or More Times");
+            int[][] arrays = { new int[] { 1, 2, 4, 4, 4, 4 }, new int[] { 1, 2, 1, 2, 1, 1, 1, 3 }, new int[] { 1, 2, 1, 2, 1, 3 }, new int[] { 1, 2, 3, 1, 2 }, new int[] { 2, 2, 2, 2 } };
+            int[] m = { 1, 2, 2, 2, 2 };
+            int[] k = { 3, 2, 3, 2, 3 };
+            for (int i = 0; i < arrays.Length; i++)
+            {
+                arrays[i].Print("Input");
+                Console.WriteLine($" There exists a pattern of length '{m[i]}' that is consecutively repeated '{k[i]}' or more times'{DailyProblem.DetectKPatternOfLenM(arrays[i], m[i], k[i])}'\n");
             }
         }
 
