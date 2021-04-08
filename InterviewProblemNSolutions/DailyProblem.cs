@@ -12923,5 +12923,25 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1)
+        public static int MaxVowelsInSubstringOfLengthK(string s, int k)
+        {
+            int maxVowels = 0, currVowels = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (IsVowel(s[i]))       // Increament the count if new 'char in the sliding window is vowel'
+                    currVowels++;
+                if (i < k - 1) continue;
+
+                maxVowels = Math.Max(maxVowels, currVowels);
+                if (maxVowels == k)
+                    return k;
+
+                if (IsVowel(s[1 + i - k]))   // Decreament the count if 'char leaving the sliding window was vowel'
+                    currVowels--;
+            }
+            return maxVowels;
+            bool IsVowel(char ch) => ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
+        }
     }
 }

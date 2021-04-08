@@ -359,6 +359,7 @@ namespace InterviewProblemNSolutions
             DetectPatternOfLengthMRepeatedKOrMoreTimes();
             MinimumNumberOfStepsToMakeTwoStringsAnagram();
             BulbSwitcherIV();
+            MaximumNumberOfVowelsInASubstringOfGivenLength();
 
 
             // String Matching Algorithm
@@ -5933,6 +5934,17 @@ namespace InterviewProblemNSolutions
             string[] targetArr = { "10111", "101", "00000", "001011101" };
             foreach (var target in targetArr)
                 Console.WriteLine($" Min no of flips required to form '{target}' :'{DailyProblem.BulbSwitcherIV(target)}'\n");
+        }
+
+
+        public static void MaximumNumberOfVowelsInASubstringOfGivenLength()
+        {
+            // https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/
+            Utility.Print("1456. Maximum Number of Vowels in a Substring of Given Length");
+            string[] s = { "abciiidef", "aeiou", "leetcode", "rhythms", "tryhard" };
+            int[] k = { 3, 2, 3, 4, 4 };
+            for (int i = 0; i < s.Length; i++)
+                Console.WriteLine($" Max no of vowels in any substring of len '{k[i]}' in string '{s[i]}' are: '{DailyProblem.MaxVowelsInSubstringOfLengthK(s[i], k[i])}'\n");
         }
 
 
