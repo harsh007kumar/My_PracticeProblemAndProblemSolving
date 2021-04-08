@@ -12895,16 +12895,33 @@ namespace InterviewProblemNSolutions
         public static int MinSteps(string s, string t)
         {
             int[] charSet = new int[26];
-            for (int i = 0; i < s.Length; i++)
+            for (int i = 0; i < s.Length; i++)          // O(n)
             {
-                charSet[s[i] - 'a']++;    // increament for 's'
-                --charSet[t[i] - 'a'];     // decreament for 't'
+                charSet[s[i] - 'a']++;      // increament for 's'
+                --charSet[t[i] - 'a'];      // decreament for 't'
             }
             int count = 0;
-            for (int i = 0; i < charSet.Length; i++)
-                if (charSet[i] > 0)
+            for (int i = 0; i < charSet.Length; i++)    // O(26)
+                if (charSet[i] > 0)         // count remaing characters from 's' we missed in 't'
                     count += charSet[i];
             return count;
         }
+
+
+        // Time O(n) || Space O(1)
+        public static int BulbSwitcherIV(string target)
+        {
+            char curStateOfRemaingBulbs = '0';
+            int flips = 0;
+            for (int i = 0; i < target.Length; i++)
+                if (target[i] != curStateOfRemaingBulbs)   // 'i'th Bulb state doesnt matches, we need to flip the switch fr all bulbs after 'i'th index
+                {
+                    flips++;
+                    curStateOfRemaingBulbs = curStateOfRemaingBulbs == '0' ? '1' : '0';
+                }
+            return flips;
+        }
+
+
     }
 }

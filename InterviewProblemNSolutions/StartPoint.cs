@@ -358,6 +358,7 @@ namespace InterviewProblemNSolutions
             LeastNumberOfUniqueIntegersAfterKRemovals();
             DetectPatternOfLengthMRepeatedKOrMoreTimes();
             MinimumNumberOfStepsToMakeTwoStringsAnagram();
+            BulbSwitcherIV();
 
 
             // String Matching Algorithm
@@ -5922,6 +5923,16 @@ namespace InterviewProblemNSolutions
             string[] t = { "aba", "practice", "mangaar", "xxyyzz", "family" };
             for (int i = 0; i < t.Length; i++)
                 Console.WriteLine($" Min no of steps to make '{t[i]}' an anagram of '{s[i]}' is: '{DailyProblem.MinSteps(s[i], t[i])}'\n");
+        }
+
+
+        public static void BulbSwitcherIV()
+        {
+            // https://leetcode.com/problems/bulb-switcher-iv/
+            Utility.Print("1529. Bulb Switcher IV");
+            string[] targetArr = { "10111", "101", "00000", "001011101" };
+            foreach (var target in targetArr)
+                Console.WriteLine($" Min no of flips required to form '{target}' :'{DailyProblem.BulbSwitcherIV(target)}'\n");
         }
 
 
