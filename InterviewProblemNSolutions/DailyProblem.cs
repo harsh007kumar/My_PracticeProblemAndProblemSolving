@@ -12891,5 +12891,20 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1)
+        public static int MinSteps(string s, string t)
+        {
+            int[] charSet = new int[26];
+            for (int i = 0; i < s.Length; i++)
+            {
+                charSet[s[i] - 'a']++;    // increament for 's'
+                --charSet[t[i] - 'a'];     // decreament for 't'
+            }
+            int count = 0;
+            for (int i = 0; i < charSet.Length; i++)
+                if (charSet[i] > 0)
+                    count += charSet[i];
+            return count;
+        }
     }
 }

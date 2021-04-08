@@ -357,6 +357,7 @@ namespace InterviewProblemNSolutions
             MinimumOperationsToMakeArrayEqual();
             LeastNumberOfUniqueIntegersAfterKRemovals();
             DetectPatternOfLengthMRepeatedKOrMoreTimes();
+            MinimumNumberOfStepsToMakeTwoStringsAnagram();
 
 
             // String Matching Algorithm
@@ -5910,6 +5911,17 @@ namespace InterviewProblemNSolutions
                 arrays[i].Print("Input");
                 Console.WriteLine($" There exists a pattern of length '{m[i]}' that is consecutively repeated '{k[i]}' or more times'{DailyProblem.DetectKPatternOfLenM(arrays[i], m[i], k[i])}'\n");
             }
+        }
+
+
+        public static void MinimumNumberOfStepsToMakeTwoStringsAnagram()
+        {
+            //
+            Utility.Print("1347. Minimum Number of Steps to Make Two Strings Anagram");
+            string[] s = { "bab", "leetcode", "anagram", "xxyyzz", "friend" };
+            string[] t = { "aba", "practice", "mangaar", "xxyyzz", "family" };
+            for (int i = 0; i < t.Length; i++)
+                Console.WriteLine($" Min no of steps to make '{t[i]}' an anagram of '{s[i]}' is: '{DailyProblem.MinSteps(s[i], t[i])}'\n");
         }
 
 
