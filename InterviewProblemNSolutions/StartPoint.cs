@@ -362,6 +362,7 @@ namespace InterviewProblemNSolutions
             MaximumNumberOfVowelsInASubstringOfGivenLength();
             VerifyingAnAlienDictionary();
             MinimumSwapsToMakeStringsEqual();
+            MinimumDifferenceBetweenLargestAndSmallestValueInThreeMoves();
 
 
             // String Matching Algorithm
@@ -5972,6 +5973,19 @@ namespace InterviewProblemNSolutions
             string[] s2 = { "yy", "yx", "xy", "xyyxyxxxyx" };
             for (int i = 0; i < s1.Length; i++)
                 Console.WriteLine($" Min swaps required to make '{s1[i]}' and '{s2[i]}' equal: '{DailyProblem.MinSwapToMakeStringsEqual(s1[i], s2[i])}'\n");
+        }
+
+
+        public static void MinimumDifferenceBetweenLargestAndSmallestValueInThreeMoves()
+        {
+            // https://leetcode.com/problems/minimum-difference-between-largest-and-smallest-value-in-three-moves/
+            Utility.Print("1509. Minimum Difference Between Largest and Smallest Value in Three Moves");
+            int[][] numsArr = { new int[] { 5, 3, 2, 4 }, new int[] { 1, 5, 0, 10, 14 }, new int[] { 6, 6, 0, 1, 1, 4, 6 }, new int[] { 1, 5, 6, 14, 15 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" Min difference between the largest and smallest value of nums after perfoming at most 3 moves. '{DailyProblem.MinDifference(nums)}'\n");
+            }
         }
 
 

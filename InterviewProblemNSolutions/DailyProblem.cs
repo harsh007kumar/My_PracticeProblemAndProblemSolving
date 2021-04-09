@@ -12998,6 +12998,19 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(nlogn) || Space O(1)
+        public static int MinDifference(int[] nums)
+        {
+            if (nums.Length < 5) return 0;
+            Array.Sort(nums);
 
+            int l = nums.Length;
+            int diff = nums[l - 1] - nums[0];
+            // try all combinations from removing 3 nums from left and 0 from rt
+            // upto 0 nums from left and all 3 removed from right
+            for (int i = 0; i <= 3; i++)
+                diff = Math.Min(diff, nums[-1 + l - i] - nums[3 - i]);
+            return diff;
+        }
     }
 }
