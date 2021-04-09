@@ -12981,6 +12981,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1)
+        public static int MinSwapToMakeStringsEqual(string s1, string s2)
+        {
+            int notMatchingX = 0, notMatchingY = 0;
+            for (int i = 0; i < s1.Length; i++)
+                if (s1[i] != s2[i])
+                    if (s1[i] == 'x')
+                        notMatchingX++;
+                    else
+                        notMatchingY++;
+            // If total pairs are not even, then we cannot make strings same
+            if ((notMatchingX % 2 + notMatchingY % 2) % 2 != 0)
+                return -1;
+            return notMatchingX / 2 + notMatchingY / 2 + notMatchingX % 2 + notMatchingY % 2;
+        }
+
+
 
     }
 }

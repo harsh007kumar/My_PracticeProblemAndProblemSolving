@@ -361,6 +361,7 @@ namespace InterviewProblemNSolutions
             BulbSwitcherIV();
             MaximumNumberOfVowelsInASubstringOfGivenLength();
             VerifyingAnAlienDictionary();
+            MinimumSwapsToMakeStringsEqual();
 
 
             // String Matching Algorithm
@@ -5960,6 +5961,17 @@ namespace InterviewProblemNSolutions
                 words[i].Print("Order of words");
                 Console.WriteLine($" Given sequence of above words in alien lang. & order of alphabets '{order[i]}' we can say words are sorted lexographically: '{DailyProblem.IsAlienSorted(words[i], order[i])}'\n");
             }
+        }
+
+
+        public static void MinimumSwapsToMakeStringsEqual()
+        {
+            // https://leetcode.com/problems/minimum-swaps-to-make-strings-equal/
+            Utility.Print("1247. Minimum Swaps to Make Strings Equal");
+            string[] s1 = { "xx", "xy", "xx", "xxyyxyxyxx" };
+            string[] s2 = { "yy", "yx", "xy", "xyyxyxxxyx" };
+            for (int i = 0; i < s1.Length; i++)
+                Console.WriteLine($" Min swaps required to make '{s1[i]}' and '{s2[i]}' equal: '{DailyProblem.MinSwapToMakeStringsEqual(s1[i], s2[i])}'\n");
         }
 
 
