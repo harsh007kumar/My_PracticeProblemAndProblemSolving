@@ -360,6 +360,7 @@ namespace InterviewProblemNSolutions
             MinimumNumberOfStepsToMakeTwoStringsAnagram();
             BulbSwitcherIV();
             MaximumNumberOfVowelsInASubstringOfGivenLength();
+            VerifyingAnAlienDictionary();
 
 
             // String Matching Algorithm
@@ -5945,6 +5946,20 @@ namespace InterviewProblemNSolutions
             int[] k = { 3, 2, 3, 4, 4 };
             for (int i = 0; i < s.Length; i++)
                 Console.WriteLine($" Max no of vowels in any substring of len '{k[i]}' in string '{s[i]}' are: '{DailyProblem.MaxVowelsInSubstringOfLengthK(s[i], k[i])}'\n");
+        }
+
+
+        public static void VerifyingAnAlienDictionary()
+        {
+            // https://leetcode.com/problems/verifying-an-alien-dictionary/
+            Utility.Print("953. Verifying an Alien Dictionary");
+            string[][] words = { new string[] { "hello", "leetcode" }, new string[] { "word", "world", "row" }, new string[] { "apple", "app" } };
+            string[] order = { "hlabcdefgijkmnopqrstuvwxyz", "worldabcefghijkmnpqstuvxyz", "abcdefghijklmnopqrstuvwxyz" };
+            for (int i = 0; i < words.Length; i++)
+            {
+                words[i].Print("Order of words");
+                Console.WriteLine($" Given sequence of above words in alien lang. & order of alphabets '{order[i]}' we can say words are sorted lexographically: '{DailyProblem.IsAlienSorted(words[i], order[i])}'\n");
+            }
         }
 
 

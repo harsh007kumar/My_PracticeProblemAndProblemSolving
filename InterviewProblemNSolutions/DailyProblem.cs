@@ -12943,5 +12943,44 @@ namespace InterviewProblemNSolutions
             return maxVowels;
             bool IsVowel(char ch) => ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
         }
+
+
+        // Time O(n*l) || Space O(1), n = len of array 'words' & l = avg len of 'word'
+        public static bool IsAlienSorted(string[] words, string order)
+        {
+            int[] alienOrder = new int[26];
+            for (int i = 0; i < order.Length; i++)
+                alienOrder[order[i] - 'a'] = i;
+
+            for (int i = 1; i < words.Length; i++) // O(n)
+                if (!ValidOrder(words[i - 1], words[i]))
+                    return false;
+            return true;
+            // local func
+            bool ValidOrder(string last, string curr)   // O(l), l = avg length of 'word'
+            {
+                if (last.Length <= curr.Length)
+                {
+                    for (int i = 0; i < last.Length; i++)
+                        if (alienOrder[last[i] - 'a'] < alienOrder[curr[i] - 'a'])
+                            return true;
+                        else if (alienOrder[last[i] - 'a'] > alienOrder[curr[i] - 'a'])
+                            return false;
+                    return true;
+                }
+                else
+                {
+                    for (int i = 0; i < curr.Length; i++)
+                        if (alienOrder[last[i] - 'a'] < alienOrder[curr[i] - 'a'])
+                            return true;
+                        else if (alienOrder[last[i] - 'a'] > alienOrder[curr[i] - 'a'])
+                            return false;
+                    return false;
+                }
+            }
+        }
+
+
+
     }
 }
