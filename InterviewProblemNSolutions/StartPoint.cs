@@ -363,6 +363,7 @@ namespace InterviewProblemNSolutions
             VerifyingAnAlienDictionary();
             MinimumSwapsToMakeStringsEqual();
             MinimumDifferenceBetweenLargestAndSmallestValueInThreeMoves();
+            LongestIncreasingPathInAMatrix();
 
 
             // String Matching Algorithm
@@ -5985,6 +5986,21 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 Console.WriteLine($" Min difference between the largest and smallest value of nums after perfoming at most 3 moves. '{DailyProblem.MinDifference(nums)}'\n");
+            }
+        }
+
+
+        public static void LongestIncreasingPathInAMatrix()
+        {
+            // https://leetcode.com/problems/longest-increasing-path-in-a-matrix/
+            Utility.Print("329. Longest Increasing Path in a Matrix");
+            int[][][] matrices = {  new int[][] { new int[] { 9, 9, 4 }, new int[] { 6, 6, 8 }, new int[] { 2, 1, 1 } },
+                                    new int[][] { new int[] { 3, 4, 5 }, new int[] { 3, 2, 6 }, new int[] { 2, 2, 1 } },
+                                    new int[][] { new int[] { 1 } } };
+            foreach (var mat in matrices)
+            {
+                mat.Print("Matrix");
+                Console.WriteLine($" longest increasing path in above matrix is of length: '{DailyProblem.LongestIncreasingPath(mat)}'\n");
             }
         }
 

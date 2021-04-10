@@ -13012,5 +13012,40 @@ namespace InterviewProblemNSolutions
                 diff = Math.Min(diff, nums[-1 + l - i] - nums[3 - i]);
             return diff;
         }
+
+
+        // Time = Space = O(r*c)
+        public static int LongestIncreasingPath(int[][] matrix)
+        {
+            int row = matrix.Length, col = matrix[0].Length, longest = 0;
+            int[,] dp = new int[row, col];
+            for (int i = 0; i < row; i++)
+                for (int j = 0; j < col; j++)
+                    longest = Math.Max(longest, DFS(i, j));
+            return longest;
+            int DFS(int r, int c)
+            {
+                if (dp[r, c] != 0) return dp[r, c];
+
+                int max = 0;
+                // up
+                if (r - 1 >= 0 && matrix[r - 1][c] > matrix[r][c])
+                    max = Math.Max(max, DFS(r - 1, c));
+                // down
+                if (r + 1 < row && matrix[r + 1][c] > matrix[r][c])
+                    max = Math.Max(max, DFS(r + 1, c));
+                // lt
+                if (c - 1 >= 0 && matrix[r][c - 1] > matrix[r][c])
+                    max = Math.Max(max, DFS(r, c - 1));
+                // rt
+                if (c + 1 < col && matrix[r][c + 1] > matrix[r][c])
+                    max = Math.Max(max, DFS(r, c + 1));
+
+                return dp[r, c] = max + 1;
+            }
+        }
+
+
+
     }
 }
