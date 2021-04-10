@@ -13046,6 +13046,38 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n)
+        public static string BreakPalindrome(string palindrome)
+        {
+            int len = palindrome.Length, i = -1;
+            if (len < 2) return "";
+
+            bool replaced = false;
+            StringBuilder sb = new StringBuilder();
+            // try replacing a word
+            while (++i < len - 1)
+                if (!replaced && palindrome[i] != 'a')
+                {
+                    if (i != len / 2 || len % 2 == 0)
+                    {
+                        sb.Append('a');
+                        replaced = true;
+                    }
+                    else
+                        sb.Append(palindrome[i]);
+                }
+                else
+                    sb.Append(palindrome[i]);
+
+            // Append Last Character
+            if (!replaced) sb.Append(palindrome[i] != 'a' ? 'a' : 'b');
+            else sb.Append(palindrome[i]);
+
+            return sb.ToString();
+        }
+
+
+
 
     }
 }

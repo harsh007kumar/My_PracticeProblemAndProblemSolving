@@ -364,6 +364,7 @@ namespace InterviewProblemNSolutions
             MinimumSwapsToMakeStringsEqual();
             MinimumDifferenceBetweenLargestAndSmallestValueInThreeMoves();
             LongestIncreasingPathInAMatrix();
+            BreakAPalindrome();
 
 
             // String Matching Algorithm
@@ -6002,6 +6003,16 @@ namespace InterviewProblemNSolutions
                 mat.Print("Matrix");
                 Console.WriteLine($" longest increasing path in above matrix is of length: '{DailyProblem.LongestIncreasingPath(mat)}'\n");
             }
+        }
+
+
+        public static void BreakAPalindrome()
+        {
+            // https://leetcode.com/problems/break-a-palindrome/
+            Utility.Print("1328. Break a Palindrome");
+            string[] palindromes = { "abccba", "aba", "a", "aa", "zz" };
+            foreach (var paldindrome in palindromes)
+                Console.WriteLine($" After breaking plaindrome '{paldindrome}' in lexographically smallest possible way resultant string is: '{DailyProblem.BreakPalindrome(paldindrome)}'\n");
         }
 
 
