@@ -13136,5 +13136,61 @@ namespace InterviewProblemNSolutions
             return true;
         }
 
+
+        // Time O(n) || Space O(1)
+        public static int MaxDiffFromChangingAnInteger(int num)
+        {
+            string n = num.ToString();
+            int l = n.Length;
+            int min = Make(true);
+            int max = Make(false);
+            return max - min;
+            // local func
+            int Make(bool makeMin)
+            {
+                int val = 0, swapWith = 9;
+                char toSwap = ' ';
+                for (int i = 0; i < l; i++)
+                    if (toSwap == ' ') // still looking for the digit to swap
+                    {
+                        if (makeMin)
+                        {
+                            // try converting 1st digit to '1' if its already '1'
+                            if (i == 0 && n[i] != '1')
+                            {
+                                toSwap = n[i];
+                                swapWith = 1;
+                                val = swapWith;
+                            }
+                            // try converting any next digit to 0 which is not already 0 or 1
+                            else if (i > 0 && n[i] != '0' && n[i] != '1')
+                            {
+                                toSwap = n[i];
+                                swapWith = 0;
+                                val = val * 10 + swapWith;
+                            }
+                            else
+                                val = val * 10 + (n[i] - '0');
+                        }
+                        else // making Max
+                        {
+                            // try converting any digit to 9 which is not already 9
+                            if (n[i] != '9')
+                            {
+                                toSwap = n[i];
+                                val = val * 10 + swapWith;
+                            }
+                            else
+                                val = val * 10 + (n[i] - '0');
+                        }
+                    }
+                    else if (n[i] == toSwap)
+                        val = val * 10 + swapWith;
+                    else
+                        val = val * 10 + (n[i] - '0');
+
+                return val;
+            }
+        }
     }
 }

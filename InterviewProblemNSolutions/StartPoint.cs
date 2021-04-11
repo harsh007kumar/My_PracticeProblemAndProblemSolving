@@ -367,6 +367,7 @@ namespace InterviewProblemNSolutions
             BreakAPalindrome();
             HTMLEntityParser();
             SentenceSimilarityIII();
+            MaxDifferenceYouCanGetFromChangingAnInteger();
 
 
             // String Matching Algorithm
@@ -6036,6 +6037,16 @@ namespace InterviewProblemNSolutions
             string[] s2 = { "My Haley", "A lot of words", "Eating", "Lucccky", "CwFfRo H regR", "FmtdCzv Gp YZf UYJ xD iP tqchblXgqvNVdi" };
             for (int i = 0; i < s1.Length; i++)
                 Console.WriteLine($" '{s1[i]}' & '{s2[i]}' are similar: '{DailyProblem.AreSentencesSimilar(s1[i], s2[i])}' \n");
+        }
+
+
+        public static void MaxDifferenceYouCanGetFromChangingAnInteger()
+        {
+            // https://leetcode.com/problems/max-difference-you-can-get-from-changing-an-integer/
+            Utility.Print("1432. Max Difference You Can Get From Changing an Integer");
+            int[] nums = { 555, 9, 123456, 10000, 9288, 1, 111 };
+            foreach (var num in nums)
+                Console.WriteLine($" Max diff after changing one digit in '{num}' to create 2 nums a-b results in: '{DailyProblem.MaxDiffFromChangingAnInteger(num)}'\n");
         }
 
 
