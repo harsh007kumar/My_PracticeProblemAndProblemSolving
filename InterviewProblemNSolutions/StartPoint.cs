@@ -366,6 +366,7 @@ namespace InterviewProblemNSolutions
             LongestIncreasingPathInAMatrix();
             BreakAPalindrome();
             HTMLEntityParser();
+            SentenceSimilarityIII();
 
 
             // String Matching Algorithm
@@ -6024,6 +6025,17 @@ namespace InterviewProblemNSolutions
             string[] texts = { "&amp; is an HTML entity but &ambassador; is not.", "and I quote: &quot;...&quot;", "Stay home! Practice on Leetcode :)", "x &gt; y &amp;&amp; x &lt; y is always false", "leetcode.com&frasl;problemset&frasl;all", "&&gt;" };
             foreach (var text in texts)
                 Console.WriteLine($" '{text}'\n ======= after HTML parsing becomes =======\n '{DailyProblem.HTMLEntityParser(text)}'\n");
+        }
+
+
+        public static void SentenceSimilarityIII()
+        {
+            // https://leetcode.com/problems/sentence-similarity-iii/
+            Utility.Print("1813. Sentence Similarity III");
+            string[] s1 = { "My name is Haley", "of", "Eating right now", "Luky", "CwFfRo regR", "xD iP tqchblXgqvNVdi" };
+            string[] s2 = { "My Haley", "A lot of words", "Eating", "Lucccky", "CwFfRo H regR", "FmtdCzv Gp YZf UYJ xD iP tqchblXgqvNVdi" };
+            for (int i = 0; i < s1.Length; i++)
+                Console.WriteLine($" '{s1[i]}' & '{s2[i]}' are similar: '{DailyProblem.AreSentencesSimilar(s1[i], s2[i])}' \n");
         }
 
 

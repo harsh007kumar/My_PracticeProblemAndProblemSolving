@@ -13112,5 +13112,29 @@ namespace InterviewProblemNSolutions
             return sb.ToString();
         }
 
+
+        // Time = Space = O(n+m), n = len of sentence1, m = len of sentence2
+        public static bool AreSentencesSimilar(string sentence1, string sentence2)
+        {
+            var s1 = sentence1.Split(' ');
+            var s2 = sentence2.Split(' ');
+
+            if (s1.Length < s2.Length)   // we want to keep l1 longer/equal to l2
+            {
+                var temp = s1;
+                s1 = s2;
+                s2 = temp;
+            }
+            int i = 0, j = 0, l1 = s1.Length, l2 = s2.Length;
+            while (i < l2 && s1[i] == s2[i])
+                i++;
+            while (l2 - 1 - j >= 0 && s1[l1 - 1 - j] == s2[l2 - 1 - j])
+                j++;
+
+            if (i == 0 && j == 0) return false;  // no match found from either end
+            if (i + j < l2) return false;   // not all characters matched from smaller sentence
+            return true;
+        }
+
     }
 }
