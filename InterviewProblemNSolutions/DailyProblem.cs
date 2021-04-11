@@ -13077,7 +13077,40 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1), n = length of 'text'
+        public static string HTMLEntityParser(string text)
+        {
+            Dictionary<string, char> d = new Dictionary<string, char>();
+            d["&quot;"] = '"';
+            d["&apos;"] = '\'';
+            d["&amp;"] = '&';
+            d["&gt;"] = '>';
+            d["&lt;"] = '<';
+            d["&frasl;"] = '/';
 
+            int l = text.Length;
+            StringBuilder sb = new StringBuilder(), curr = new StringBuilder();
+            for (int i = 0; i < l; i++)
+                if (text[i] != '&' || (i + 1 < l && text[i + 1] == '&'))
+                    sb.Append(text[i]);
+                else // check if its a special character by taking into all characters till ';' character
+                {
+                    while (i < l && text[i] != ';')
+                        curr.Append(text[i++]);
+
+                    // we havent read the entire input 'text' 
+                    if (i < l) curr.Append(';');
+
+                    if (d.ContainsKey(curr.ToString()))
+                        sb.Append(d[curr.ToString()]);  // this was special character
+                    else
+                        sb.Append(curr.ToString());     // not special add to final ans as it is
+
+                    curr.Clear();                       // clear for next iteration
+                }
+
+            return sb.ToString();
+        }
 
     }
 }

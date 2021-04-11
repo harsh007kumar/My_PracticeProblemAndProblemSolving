@@ -365,6 +365,7 @@ namespace InterviewProblemNSolutions
             MinimumDifferenceBetweenLargestAndSmallestValueInThreeMoves();
             LongestIncreasingPathInAMatrix();
             BreakAPalindrome();
+            HTMLEntityParser();
 
 
             // String Matching Algorithm
@@ -6013,6 +6014,16 @@ namespace InterviewProblemNSolutions
             string[] palindromes = { "abccba", "aba", "a", "aa", "zz" };
             foreach (var paldindrome in palindromes)
                 Console.WriteLine($" After breaking plaindrome '{paldindrome}' in lexographically smallest possible way resultant string is: '{DailyProblem.BreakPalindrome(paldindrome)}'\n");
+        }
+
+
+        public static void HTMLEntityParser()
+        {
+            // https://leetcode.com/problems/html-entity-parser/
+            Utility.Print("1410. HTML Entity Parser");
+            string[] texts = { "&amp; is an HTML entity but &ambassador; is not.", "and I quote: &quot;...&quot;", "Stay home! Practice on Leetcode :)", "x &gt; y &amp;&amp; x &lt; y is always false", "leetcode.com&frasl;problemset&frasl;all", "&&gt;" };
+            foreach (var text in texts)
+                Console.WriteLine($" '{text}'\n ======= after HTML parsing becomes =======\n '{DailyProblem.HTMLEntityParser(text)}'\n");
         }
 
 
