@@ -13192,5 +13192,21 @@ namespace InterviewProblemNSolutions
                 return val;
             }
         }
+
+
+        // Time O(n) || Space O(1)
+        public static int[] BeautifulArrangementII(int n, int k)
+        {
+            // Intution based upon a decent guys observation https://youtu.be/atTsZ0PhuqE
+            int smallest = 1, largest = k + 1, i = 0;
+            int[] ans = new int[n];
+            while (i <= k)      // fill 1st 'K+1' indicies
+                ans[i] = (i++ % 2) == 0 ? smallest++ : largest--;
+            while (i < n)       // remaining values
+                ans[i] = ++i;
+            return ans;
+        }
+
+
     }
 }

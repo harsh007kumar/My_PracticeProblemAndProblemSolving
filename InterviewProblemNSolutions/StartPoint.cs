@@ -368,6 +368,7 @@ namespace InterviewProblemNSolutions
             HTMLEntityParser();
             SentenceSimilarityIII();
             MaxDifferenceYouCanGetFromChangingAnInteger();
+            BeautifulArrangementII();
 
 
             // String Matching Algorithm
@@ -6047,6 +6048,16 @@ namespace InterviewProblemNSolutions
             int[] nums = { 555, 9, 123456, 10000, 9288, 1, 111 };
             foreach (var num in nums)
                 Console.WriteLine($" Max diff after changing one digit in '{num}' to create 2 nums a-b results in: '{DailyProblem.MaxDiffFromChangingAnInteger(num)}'\n");
+        }
+
+
+        public static void BeautifulArrangementII()
+        {
+            // https://leetcode.com/problems/beautiful-arrangement-ii/
+            Utility.Print("667. Beautiful Arrangement II");
+            int[] n = { 3, 3, 5, 5, 5, 5 }, k = { 1, 2, 1, 2, 3, 4 };
+            for (int i = 0; i < n.Length; i++)
+                DailyProblem.BeautifulArrangementII(n[i], k[i]).Print($"Beautiful arrangement with array having distinct nums from [1...{n[i]}] with '{k[i]}' distinct difference among consecutive nums");
         }
 
 
