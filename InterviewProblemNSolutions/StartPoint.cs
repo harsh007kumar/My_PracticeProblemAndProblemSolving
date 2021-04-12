@@ -369,6 +369,7 @@ namespace InterviewProblemNSolutions
             SentenceSimilarityIII();
             MaxDifferenceYouCanGetFromChangingAnInteger();
             BeautifulArrangementII();
+            ScrambleString();
 
 
             // String Matching Algorithm
@@ -6058,6 +6059,17 @@ namespace InterviewProblemNSolutions
             int[] n = { 3, 3, 5, 5, 5, 5 }, k = { 1, 2, 1, 2, 3, 4 };
             for (int i = 0; i < n.Length; i++)
                 DailyProblem.BeautifulArrangementII(n[i], k[i]).Print($"Beautiful arrangement with array having distinct nums from [1...{n[i]}] with '{k[i]}' distinct difference among consecutive nums");
+        }
+
+
+        public static void ScrambleString()
+        {
+            // TechDose https://youtu.be/MDmZm_aVDF8
+            // https://leetcode.com/problems/scramble-string/
+            Utility.Print("87. Scramble String");
+            string[] s1 = { "great", "abcde", "a","abc" }, s2 = { "rgeat", "caebd", "a", "bca" };
+            for (int i = 0; i < s1.Length; i++)
+                Console.WriteLine($" '{s1[i]}' & '{s2[i]}'\n are scrambled string: '{DynamicProgramming.IsScramble(s1[i], s2[i])}'\n");
         }
 
 

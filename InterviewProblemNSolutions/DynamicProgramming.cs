@@ -1782,5 +1782,45 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n^2), n = length of str1
+        public static bool IsScramble(string str1, string str2)
+        {
+            return TryScramble(str1, str2, new Dictionary<string, bool>());
+            bool TryScramble(string s1, string s2, Dictionary<string, bool> cache)
+            {
+                if (s1 == s2) return true;
+                string key = s1 + "+" + s2;
+                if (cache.ContainsKey(key)) 
+                    return cache[key];
+
+                int n = s1.Length;
+                int[] map = new int[26];
+                // additional step to check the distinct characters & their frequency match, before making recursive calls
+                for (int i = 0; i < n; i++)
+                {
+                    map[s1[i] - 'a']++;
+                    map[s2[i] - 'a']--;
+                }
+                // check if frequency is not zero return false
+                for(int i=0;i<map.Length;i++)
+                    if(map[i]!=0)
+                        return cache[key] = false;
+
+                // Main Step, try breaking equal length s1 & s2 at each possible idx to check if any combination yields true
+                for (int i = 1; i < n; i++)
+                    // if A+X forms 's1'
+                    // &  B+Y forms 's2'
+                    // than we return true if either
+                    // A,B & X,Y are scramble || A,Y & X,B are scramble
+                    if ((TryScramble(s1.Substring(0, i), s2.Substring(0, i), cache) && TryScramble(s1.Substring(i), s2.Substring(i), cache))
+                    || (TryScramble(s1.Substring(0, i), s2.Substring(n - i), cache) && TryScramble(s1.Substring(i), s2.Substring(0, n - i), cache)))
+                        return cache[key] = true;
+
+                return cache[key] = false;
+            }
+        }
+
+
+
     }
 }
