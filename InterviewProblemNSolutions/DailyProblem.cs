@@ -13208,5 +13208,22 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1)
+        public static int CountHomogenous(string s)
+        {
+            int i = 0, l = s.Length, mod = 1000000007;
+            double ans = 0, count = 1;
+            while (++i < l)
+                if (s[i - 1] == s[i])
+                    count++;
+                else
+                {
+                    ans = (ans + ((((count + 1) * count) / 2) % mod)) % mod;
+                    count = 1;
+                }
+            ans = (ans + ((((count + 1) * count) / 2) % mod)) % mod;
+            return (int)ans;
+        }
+
     }
 }

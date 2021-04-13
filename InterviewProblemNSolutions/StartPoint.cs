@@ -370,6 +370,7 @@ namespace InterviewProblemNSolutions
             MaxDifferenceYouCanGetFromChangingAnInteger();
             BeautifulArrangementII();
             ScrambleString();
+            CountNumberOfHomogenousSubstrings();
 
 
             // String Matching Algorithm
@@ -6070,6 +6071,16 @@ namespace InterviewProblemNSolutions
             string[] s1 = { "great", "abcde", "a","abc" }, s2 = { "rgeat", "caebd", "a", "bca" };
             for (int i = 0; i < s1.Length; i++)
                 Console.WriteLine($" '{s1[i]}' & '{s2[i]}'\n are scrambled string: '{DynamicProgramming.IsScramble(s1[i], s2[i])}'\n");
+        }
+
+
+        public static void CountNumberOfHomogenousSubstrings()
+        {
+            //
+            Utility.Print("1759. Count Number of Homogenous Substrings");
+            string[] sArr = { "abbcccaa", "xy", "zzzzz" };
+            foreach (var s in sArr)
+                Console.WriteLine($" No of homogenous substrings of '{s}' are: '{DailyProblem.CountHomogenous(s)}'\n");
         }
 
 
