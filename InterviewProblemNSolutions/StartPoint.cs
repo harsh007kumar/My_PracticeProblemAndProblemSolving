@@ -171,7 +171,7 @@ namespace InterviewProblemNSolutions
             //LinkedListiNBinaryTree();
             //MergeInBetweenLinkedLists();
             //FindACorrespondingNodeOfABinaryTreeInACloneOfThatTree();
-            //PartitionList();
+            PartitionList();
             //BeautifulArrangement();
             //MakeTheStringGreat();
             //RemoveOutermostParentheses();
@@ -3065,8 +3065,10 @@ namespace InterviewProblemNSolutions
             Utility.Print("86. Partition List");
             ListNode head = new ListNode(1) { next = new ListNode(4) { next = new ListNode(3) { next = new ListNode(2) { next = new ListNode(5) { next = new ListNode(2) } } } } };
             head.Print("LinkedList");
-            DailyProblem.PartitionList(head, 3);
-            head.Print($"LinkedList After Paritiion as per val {3}");
+            int partitionVal = 3;
+            //DailyProblem.PartitionList(head, partitionVal).Print($"LinkedList After Paritiion as per val '{partitionVal}'");
+            DailyProblem.PartitionList_UsingStacks(head, partitionVal).Print($"LinkedList After Paritiion Using Stacks, Time = Space = O(n), with val '{partitionVal}'");
+            DailyProblem.PartitionList_Faster(head, partitionVal).Print($"LinkedList After Paritiion Efficient, Time O(n) Space O(1), with val '{partitionVal}'");
         }
 
 

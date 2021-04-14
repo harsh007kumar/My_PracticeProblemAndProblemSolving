@@ -6120,6 +6120,33 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n)
+        public static ListNode PartitionList_UsingStacks(ListNode head, int x)
+        {
+            Stack<ListNode> smaller = new Stack<ListNode>(), equalGreater = new Stack<ListNode>();
+            while (head != null)
+            {
+                if (head.val < x)
+                    smaller.Push(head);
+                else
+                    equalGreater.Push(head);
+                head = head.next;
+            }
+            ListNode curr;
+            while (equalGreater.Count > 0)
+            {
+                curr = equalGreater.Pop();
+                curr.next = head;
+                head = curr;
+            }
+            while (smaller.Count > 0)
+            {
+                curr = smaller.Pop();
+                curr.next = head;
+                head = curr;
+            }
+            return head;
+        }
         // Time O(n) || Space O(1), n = no of nodes in List
         public static ListNode PartitionList(ListNode head, int x)
         {
@@ -6142,6 +6169,29 @@ namespace InterviewProblemNSolutions
             head.next = paritionHead;
             if (paritionCurr != null) paritionCurr.next = null;
             return dummyNode.next;
+        }
+        // Time O(n) || Space O(1), n = no of nodes in List
+        public static ListNode PartitionList_Faster(ListNode head, int x)
+        {
+            ListNode smallerHead = new ListNode(0), largerHead = new ListNode(0);
+            ListNode before = smallerHead, after = largerHead;
+            while (head != null)
+            {
+                if (head.val < x)           // add all smaller nodes to smaller list
+                {
+                    before.next = head;
+                    before = before.next;
+                }
+                else                        // & all larger nodes to larger list
+                {
+                    after.next = head;
+                    after = after.next;
+                }
+                head = head.next;
+            }
+            before.next = largerHead.next;  // join smaller & larger list
+            after.next = null;              // mark last node as null
+            return smallerHead.next;
         }
 
 
