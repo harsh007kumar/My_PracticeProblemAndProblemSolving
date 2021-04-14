@@ -371,6 +371,7 @@ namespace InterviewProblemNSolutions
             BeautifulArrangementII();
             ScrambleString();
             CountNumberOfHomogenousSubstrings();
+            DesignLinkedList();
 
 
             // String Matching Algorithm
@@ -6083,6 +6084,20 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "abbcccaa", "xy", "zzzzz" };
             foreach (var s in sArr)
                 Console.WriteLine($" No of homogenous substrings of '{s}' are: '{DailyProblem.CountHomogenous(s)}'\n");
+        }
+
+
+        public static void DesignLinkedList()
+        {
+            // https://leetcode.com/problems/design-linked-list/
+            Utility.Print("707. Design Linked List");
+            MyLinkedList myLinkedList = new MyLinkedList();
+            myLinkedList.AddAtHead(1);
+            myLinkedList.AddAtTail(3);
+            myLinkedList.AddAtIndex(1, 2);    // linked list becomes 1->2->3
+            myLinkedList.Get(1);              // return 2
+            myLinkedList.DeleteAtIndex(1);    // now the linked list is 1->3
+            myLinkedList.Get(1);              // return 3
         }
 
 
