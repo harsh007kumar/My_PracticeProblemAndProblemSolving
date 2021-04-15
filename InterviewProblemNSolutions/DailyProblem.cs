@@ -13304,5 +13304,27 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1)
+        public static int MaximizeDistToClosestPerson(int[] seats)
+        {
+            int i = -1, j = 0, maxD = 1, l = seats.Length;
+            while (++i < l)
+                if (seats[i] == 0) // empty seat found
+                {
+                    // count no of continous empty seats;
+                    j = i;
+                    while (j < l && seats[j] == 0)
+                        j++;
+                    // update min Distance possible
+                    if (j == l || i == 0)    // special case of left or right end, so Alex can be seated at opp end
+                        maxD = Math.Max(maxD, j - i);
+                    else        // found a seat which is not empty, hence min distance is rt in between jth & ith index
+                        maxD = Math.Max(maxD, (1 + j - i) / 2);
+                    i = j;
+                }
+            return maxD;
+        }
+
+
     }
 }

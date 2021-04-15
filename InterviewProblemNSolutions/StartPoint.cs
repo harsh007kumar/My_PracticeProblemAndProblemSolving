@@ -373,6 +373,7 @@ namespace InterviewProblemNSolutions
             CountNumberOfHomogenousSubstrings();
             DesignLinkedList();
             FruitIntoBaskets();
+            MaximizeDistanceToClosestPerson();
 
 
             // String Matching Algorithm
@@ -6111,6 +6112,19 @@ namespace InterviewProblemNSolutions
             {
                 trees.Print("Trees");
                 Console.WriteLine($" Total amount of fruit we can collect in '2' baskets are: '{DailyProblem.TotalFruitIntoBaskets(trees)}'\n");
+            }
+        }
+
+
+        public static void MaximizeDistanceToClosestPerson()
+        {
+            // https://leetcode.com/problems/maximize-distance-to-closest-person/
+            Utility.Print("849. Maximize Distance to Closest Person");
+            int[][] seatsArray = { new int[] { 1, 0, 0, 0, 1, 0, 1 }, new int[] { 1, 0, 0, 0 }, new int[] { 0, 1 }, new int[] { 0, 0, 0, 0, 1 } };
+            foreach (var seats in seatsArray)
+            {
+                seats.Print("Seats");
+                Console.WriteLine($" Max distance between Alex and the closest person to him is maximized: '{DailyProblem.MaximizeDistToClosestPerson(seats)}'\n");
             }
         }
 
