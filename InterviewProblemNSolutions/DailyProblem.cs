@@ -13326,5 +13326,25 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(k)
+        public static bool ContainsNearbyDuplicate(int[] nums, int k)
+        {
+            if (k == 0) return false;
+            HashSet<int> numFreq = new HashSet<int>();
+            int i = -1;
+            while (++i < nums.Length)
+            {
+                if (!numFreq.Contains(nums[i]))
+                    numFreq.Add(nums[i]);
+                else // found a duplicate num at a distance which is <= 'k'
+                    return true;
+
+                if (i >= k)    // remove the num which is not part of sliding window of len 'k' now
+                    numFreq.Remove(nums[i - k]);
+            }
+            return false;
+        }
+
+
     }
 }
