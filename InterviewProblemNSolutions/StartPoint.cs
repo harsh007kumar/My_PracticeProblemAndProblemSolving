@@ -372,6 +372,7 @@ namespace InterviewProblemNSolutions
             ScrambleString();
             CountNumberOfHomogenousSubstrings();
             DesignLinkedList();
+            FruitIntoBaskets();
 
 
             // String Matching Algorithm
@@ -6098,6 +6099,19 @@ namespace InterviewProblemNSolutions
             myLinkedList.Get(1);              // return 2
             myLinkedList.DeleteAtIndex(1);    // now the linked list is 1->3
             myLinkedList.Get(1);              // return 3
+        }
+
+
+        public static void FruitIntoBaskets()
+        {
+            // https://leetcode.com/problems/fruit-into-baskets/
+            Utility.Print("904. Fruit Into Baskets");
+            int[][] treesArray = { new int[] { 1, 2, 1 }, new int[] { 0, 1, 2, 2 }, new int[] { 1, 2, 3, 2, 2 }, new int[] { 3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4 } };
+            foreach (var trees in treesArray)
+            {
+                trees.Print("Trees");
+                Console.WriteLine($" Total amount of fruit we can collect in '2' baskets are: '{DailyProblem.TotalFruitIntoBaskets(trees)}'\n");
+            }
         }
 
 

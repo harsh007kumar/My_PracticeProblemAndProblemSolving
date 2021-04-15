@@ -13275,5 +13275,34 @@ namespace InterviewProblemNSolutions
             return (int)ans;
         }
 
+
+        // Time = Space = O(n)
+        public static int TotalFruitIntoBaskets(int[] tree)
+        {
+            Dictionary<int, int> typeCount = new Dictionary<int, int>();
+            int i = -1, j = 0, l = tree.Length, max = 0;
+            while (++i < l)
+            {
+                if (typeCount.ContainsKey(tree[i]))
+                    typeCount[tree[i]]++;
+                else
+                    typeCount[tree[i]] = 1;
+
+                // more than 2 variant found 
+                if (typeCount.Count > 2)
+                {
+                    max = Math.Max(max, i - j);
+                    while (typeCount.Count > 2)
+                        if (--typeCount[tree[j++]] == 0)
+                        {
+                            typeCount.Remove(tree[j - 1]);
+                            break;
+                        }
+                }
+            }
+            return Math.Max(max, i - j);
+        }
+
+
     }
 }
