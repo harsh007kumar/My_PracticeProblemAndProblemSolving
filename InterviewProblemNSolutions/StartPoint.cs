@@ -375,6 +375,7 @@ namespace InterviewProblemNSolutions
             FruitIntoBaskets();
             MaximizeDistanceToClosestPerson();
             ContainsDuplicateII();
+            RemoveAllAdjacentDuplicatesInStringII();
 
 
             // String Matching Algorithm
@@ -6141,6 +6142,17 @@ namespace InterviewProblemNSolutions
                 nums[i].Print("Nums");
                 Console.WriteLine($" There are 2 distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= '{k[i]}' : '{DailyProblem.ContainsNearbyDuplicate(nums[i], k[i])}'\n");
             }
+        }
+
+
+        public static void RemoveAllAdjacentDuplicatesInStringII()
+        {
+            // https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/
+            Utility.Print("1209. Remove All Adjacent Duplicates in String II");
+            string[] s = { "abcd", "deeedbbcccbdaa", "pbbcggttciiippooaais" };
+            int[] k = { 2, 3, 2 };
+            for (int i = 0; i < s.Length; i++)
+                Console.WriteLine($" '{s[i]}' after repeatedly make '{k[i]}' duplicate removals on becomes: '{StringAlgorithms.RemoveAdjacentDuplicatesII(s[i], k[i])}'\n");
         }
 
 

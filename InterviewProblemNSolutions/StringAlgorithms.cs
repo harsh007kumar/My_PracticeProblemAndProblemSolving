@@ -794,5 +794,28 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time = Space = O(n)
+        public static string RemoveAdjacentDuplicatesII(string s, int k)
+        {
+            Stack<Pair<char, int>> st = new Stack<Pair<char, int>>();
+            for (int i = 0; i < s.Length; i++)
+                if (st.Count > 0 && st.Peek().key == s[i])  // new 'char' same as last one
+                {
+                    if (++st.Peek().val == k)               // count of consecutive chars equals 'k'
+                        st.Pop();
+                }
+                else                                        // different 'char' found
+                    st.Push(new Pair<char, int>(s[i], 1));
+
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var chars in st.Reverse())
+                for (int i = 0; i < chars.val; i++)
+                    sb.Append(chars.key);
+            return sb.ToString();
+        }
+
+
     }
 }
