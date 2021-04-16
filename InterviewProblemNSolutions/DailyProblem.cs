@@ -13346,5 +13346,101 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n^3) || Space O(1)
+        public static int WaysToSplit_IterativeBruteForce(int[] nums)
+        {
+            int left = 0, mid, rt, l = nums.Length, count = 0;
+            for (int i = 0; i < l - 2; i++)
+            {
+                left += nums[i];
+                mid = 0;
+                for (int j = i + 1; j < l - 1; j++)
+                {
+                    mid += nums[j];
+                    rt = 0;
+                    if (left > mid) continue;
+                    else
+                        for (int k = j + 1; k < l; k++)
+                        {
+                            rt += nums[k];
+                            if (mid > rt) continue;
+                            else { count++; break; }
+                        }
+                }
+            }
+            return count;
+        }
+        // Time O(nlogn) || Space O(n), n = length of 'nums'
+        public static int WaysToSplit(int[] nums)
+        {
+            /* Since we need to divide the arr into 3 parts so that 
+             * sum of left <= sum of middle <= sum of right
+             * 
+             * first optimization to save a lot of time is calculating the prefix sum in O(n) time
+             * which gives us sum of values b/w any 2 index in just O(1) time.
+             * 
+             * now our problem can be re-written as below
+             * find i & j index such that
+             * prefixSum[i] <= prefixSum[j]-prefixSum[i] <= prefixSum[n-1]-prefixSum[j]
+             * 
+             * so bascially we need to iterate i thru [1..n-2] we need atleast 1 values for mid & rt sub-array
+             * & for each index i, we need to find l & r such that
+             *      min index l such that sum of mid-array is greater or equal to left-sub-array)
+             *      max index r such that sum of mid-array is smaller than or equal to sum of rt-sub-array)
+             * 
+             * since prefix sum is sorted we can use binary search to find our 'l' & 'r' index
+             * at the end we return count % mod.
+             */
+            int n = nums.Length, count = 0, l, r;
+            long leftSum, remainingSum;
+
+            long[] prefixSum = new long[n + 1];
+            prefixSum[0] = nums[0];
+            for (int i = 1; i < n; i++)
+                prefixSum[i] = prefixSum[i-1] + nums[i];
+
+            for (int i = 0; i < n - 1; i++)
+            {
+                leftSum = prefixSum[i];
+                remainingSum = prefixSum[n-1] - leftSum;
+                if (prefixSum[n-1] < leftSum * 3) break;    // to divide array into 3 equal parts total sum should be >= thrice the sum of left-sub-array
+
+                l = SearchLeft(i + 1, leftSum);             // min index l such that sum of mid-array is greater or equal to left-sub-array)
+                r = SearchRight(i + 1, remainingSum / 2);   // max index r such that sum of mid-array is smaller than or equal to sum of rt-sub-array)
+
+                count += 1 + r - l;
+                count %= 1000000007;
+            }
+            return (int)count;
+
+
+            // local func
+            int SearchLeft(int idx, long target)
+            {
+                int mid, left = idx, rt = n - 2;
+                while (left < rt)
+                {
+                    mid = left + ((rt - left) / 2);
+                    if (prefixSum[mid] - leftSum >= target)//prefixSum is '1' index
+                        rt = mid;
+                    else
+                        left = mid + 1;
+                }
+                return left;
+            }
+            int SearchRight(int idx, long target)
+            {
+                int mid, left = idx, rt = n - 2;
+                while (left < rt)
+                {
+                    mid = left + (1 + rt - left) / 2;
+                    if (prefixSum[mid] - leftSum <= target) //prefixSum is '1' index
+                        left = mid;
+                    else
+                        rt = mid - 1;
+                }
+                return rt;
+            }
+        }
     }
 }

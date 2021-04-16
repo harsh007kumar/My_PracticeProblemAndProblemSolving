@@ -376,6 +376,7 @@ namespace InterviewProblemNSolutions
             MaximizeDistanceToClosestPerson();
             ContainsDuplicateII();
             RemoveAllAdjacentDuplicatesInStringII();
+            WaysToSplitArrayIntoThreeSubarrays();
 
 
             // String Matching Algorithm
@@ -6153,6 +6154,20 @@ namespace InterviewProblemNSolutions
             int[] k = { 2, 3, 2 };
             for (int i = 0; i < s.Length; i++)
                 Console.WriteLine($" '{s[i]}' after repeatedly make '{k[i]}' duplicate removals on becomes: '{StringAlgorithms.RemoveAdjacentDuplicatesII(s[i], k[i])}'\n");
+        }
+
+
+        public static void WaysToSplitArrayIntoThreeSubarrays()
+        {
+            // HappyCoding https://youtu.be/u5GIK6GaNWk
+            // https://leetcode.com/problems/ways-to-split-array-into-three-subarrays/
+            Utility.Print("1712. Ways to Split Array Into Three Subarrays");
+            int[][] numsArr = { new int[] { 1, 1, 1 }, new int[] { 1, 2, 2, 2, 5, 0 }, new int[] { 3, 2, 1 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" No of ways to split above array such that Sum of leftHalf<=Mid<=rtHalf are: '{DailyProblem.WaysToSplit(nums)}'\n");
+            }
         }
 
 
