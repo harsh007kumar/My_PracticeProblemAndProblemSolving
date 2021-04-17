@@ -13527,5 +13527,49 @@ namespace InterviewProblemNSolutions
             }
             return result;
         }
+
+
+        // Time O(log(MaxDate) * n) || Space O(1), MaxDate = 10^9 & n = length of 'bloomDay'
+        public static int MinDaysToMakeFlowerBouquets(int[] bloomDay, int m, int k)
+        {
+            /* 1st thing to check if there are enouf flowers to make 'm' bouquets of 'k' flower each, if not return -1
+             * 
+             * Now we know the ans for no of days to create 'm' bouquets can be anywhere in b/w 1 day to largest day present in 'bloomDay' array
+             * our objective is to find the min date at which we can create 'm' bouquets.
+             * 
+             * for this we can do a binary search which will find the middle date and we check for below:
+             *      if we can make all required bouquets than our rt boundry can be decreased till 'mid'
+             *      else we need to update our left boundry to mid+1
+             * we keep repeating above step till we left < rt
+             * and return rt at end as answer.
+             */
+            if (m * k > bloomDay.Length) return -1;
+            int left = 1, mid, rt = 1000000000; // rt can be either max possible value of bloomDay[i] or max value in present in array
+            while (left < rt)                   // O(log(10^9))
+            {
+                mid = left + (rt - left) / 2;
+                if (AllBouquetsCanBeMade())     // O(n)
+                    rt = mid;
+                else
+                    left = mid + 1;
+            }
+            return rt;
+            // local func
+            bool AllBouquetsCanBeMade()
+            {
+                int bouquetsMadeSoFar = 0, continousFlowersFound = 0;
+                for (int i = 0; i < bloomDay.Length; i++)
+                    if (bloomDay[i] > mid)
+                        continousFlowersFound = 0;
+                    else if (++continousFlowersFound == k)
+                    {
+                        if (++bouquetsMadeSoFar == m) return true;
+                        continousFlowersFound = 0;
+                    }
+                return false;
+            }
+        }
+
+
     }
 }

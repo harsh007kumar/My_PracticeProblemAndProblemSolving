@@ -379,6 +379,7 @@ namespace InterviewProblemNSolutions
             WaysToSplitArrayIntoThreeSubarrays();
             RiddleGame_MS_1();
             NumSubmatrixSumTarget();
+            MinimumNumberOfDaysToMakeMBouquets();
 
 
             // String Matching Algorithm
@@ -6198,6 +6199,21 @@ namespace InterviewProblemNSolutions
                 matrix[i].Print("Matrix");
                 Console.WriteLine($" No of non-empty submatrices that sum to '{target[i]}' are: '{DailyProblem.NumSubmatrixSumTarget(matrix[i], target[i])}'\n");
                 Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void MinimumNumberOfDaysToMakeMBouquets()
+        {
+            // https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/
+            Utility.Print("1482. Minimum Number of Days to Make m Bouquets");
+            int[][] bloomDayArray = { new int[] { 1, 10, 3, 10, 2 }, new int[] { 1, 10, 3, 10, 2 }, new int[] { 7, 7, 7, 7, 12, 7, 7 }, new int[] { 1000000000, 1000000000 }, new int[] { 1, 10, 2, 9, 3, 8, 4, 7, 5, 6 } };
+            int[] bouquetsReq = { 3, 3, 2, 1, 4 }, flowersPerBouquet = { 1, 2, 3, 1, 2 };
+            for (int i = 0; i < bloomDayArray.Length; i++)
+            {
+                bloomDayArray[i].Print("BloomDay");
+                Console.WriteLine($" Min no of days you need to wait to be able to make '{bouquetsReq[i]}' bouquets with '{flowersPerBouquet[i]}' " +
+                    $"flowers each from the garden: '{DailyProblem.MinDaysToMakeFlowerBouquets(bloomDayArray[i], bouquetsReq[i], flowersPerBouquet[i])}'\n");
             }
         }
 
