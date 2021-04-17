@@ -378,6 +378,7 @@ namespace InterviewProblemNSolutions
             RemoveAllAdjacentDuplicatesInStringII();
             WaysToSplitArrayIntoThreeSubarrays();
             RiddleGame_MS_1();
+            NumSubmatrixSumTarget();
 
 
             // String Matching Algorithm
@@ -6179,6 +6180,25 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "ab?ac?", "rd?e?wg??", "????????", "?asd", "??asdasd?", "a", "?" };
             foreach (var s in sArr)
                 Console.WriteLine($" '{s}' gets converts to '{DailyProblem.ReplaceMissingCharacters(s)}'\n");
+        }
+
+
+        public static void NumSubmatrixSumTarget()
+        {
+            // Happy Coding https://youtu.be/fTMjxzaVRPM
+            // https://leetcode.com/problems/number-of-submatrices-that-sum-to-target/
+            Utility.Print("1074. Number of Submatrices That Sum to Target");
+            //NumSubmatrixSumTarget
+            int[][][] matrix = { new int[][] { new int[] { 0, 1, 0 }, new int[] { 1, 1, 1 }, new int[] { 0, 1, 0 } },
+                                new int[][] { new int[] { 1, -1 }, new int[] { -1, 1 } }, 
+                                new int[][] { new int[] { 964 } } };
+            int[] target = { 0, 0, 964 };
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                matrix[i].Print("Matrix");
+                Console.WriteLine($" No of non-empty submatrices that sum to '{target[i]}' are: '{DailyProblem.NumSubmatrixSumTarget(matrix[i], target[i])}'\n");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
         }
 
 
