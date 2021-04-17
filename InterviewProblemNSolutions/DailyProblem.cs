@@ -13442,5 +13442,39 @@ namespace InterviewProblemNSolutions
                 return rt;
             }
         }
+
+
+        // Time O(l) || Space O(l) required for resultant string, l = length of input string 'riddle'
+        public static string ReplaceMissingCharacters(string riddle)
+        {
+            HashSet<char> avoid = new HashSet<char>();
+            int i = -1, l = riddle.Length;
+            char[] ans = new char[l];
+            while (++i < l)                                     // O(l)
+                if (riddle[i] == '?')  // needs replacemenet
+                {
+                    avoid.Clear();
+                    //don't use char used for last index
+                    if (i - 1 >= 0)
+                        avoid.Add(ans[i - 1]);
+                    //don't use char present at next index
+                    if (i + 1 < l && riddle[i + 1] != '?')
+                        avoid.Add(riddle[i + 1]);
+
+                    // a Random index b/w 0 & 25 can also be generated untill we find a 'char' which can be used
+                    for (int j = 0; j < 26; j++)                // O(26) ~O(1)
+                        if (!avoid.Contains((char)(j + 'a')))
+                        {
+                            ans[i] = (char)(j + 'a');
+                            break;
+                        }
+                }
+                else
+                    ans[i] = riddle[i];
+
+            return new string(ans);
+        }
+
+
     }
 }

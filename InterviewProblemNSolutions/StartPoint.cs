@@ -377,6 +377,7 @@ namespace InterviewProblemNSolutions
             ContainsDuplicateII();
             RemoveAllAdjacentDuplicatesInStringII();
             WaysToSplitArrayIntoThreeSubarrays();
+            RiddleGame_MS_1();
 
 
             // String Matching Algorithm
@@ -6168,6 +6169,16 @@ namespace InterviewProblemNSolutions
                 nums.Print("Nums");
                 Console.WriteLine($" No of ways to split above array such that Sum of leftHalf<=Mid<=rtHalf are: '{DailyProblem.WaysToSplit(nums)}'\n");
             }
+        }
+
+
+        public static void RiddleGame_MS_1()
+        {
+            // MS Codility Test Q1
+            Utility.Print("Riddle Game: replace missing alphabets such that its doesnt matches left or rt adjacnet characters");
+            string[] sArr = { "ab?ac?", "rd?e?wg??", "????????", "?asd", "??asdasd?", "a", "?" };
+            foreach (var s in sArr)
+                Console.WriteLine($" '{s}' gets converts to '{DailyProblem.ReplaceMissingCharacters(s)}'\n");
         }
 
 
