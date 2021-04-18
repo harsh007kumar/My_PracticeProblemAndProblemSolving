@@ -380,6 +380,7 @@ namespace InterviewProblemNSolutions
             RiddleGame_MS_1();
             NumSubmatrixSumTarget();
             MinimumNumberOfDaysToMakeMBouquets();
+            MinimumValueToGetPositiveStepByStepSum();
 
 
             // String Matching Algorithm
@@ -6214,6 +6215,20 @@ namespace InterviewProblemNSolutions
                 bloomDayArray[i].Print("BloomDay");
                 Console.WriteLine($" Min no of days you need to wait to be able to make '{bouquetsReq[i]}' bouquets with '{flowersPerBouquet[i]}' " +
                     $"flowers each from the garden: '{DailyProblem.MinDaysToMakeFlowerBouquets(bloomDayArray[i], bouquetsReq[i], flowersPerBouquet[i])}'\n");
+            }
+        }
+
+
+        public static void MinimumValueToGetPositiveStepByStepSum()
+        {
+            // https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/
+            Utility.Print("1413. Minimum Value to Get Positive Step by Step Sum");
+            int[][] numsArr = { new int[] { -3, 2, -3, 4, 2 }, new int[] { 1, 2 }, new int[] { 1, -2, -3 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                //Console.WriteLine($" Min +ve val of startValue such that the step by step sum is never less than 1: '{DailyProblem.MinStartValue(nums)}'\n");
+                Console.WriteLine($" Min +ve val of startValue such that the step by step sum is never less than 1: '{DailyProblem.MinStartValueFaster(nums)}'\n");
             }
         }
 

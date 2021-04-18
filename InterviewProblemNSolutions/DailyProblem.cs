@@ -13571,5 +13571,51 @@ namespace InterviewProblemNSolutions
         }
 
 
+
+        // Time O(log10001 * n) || Space O(1), n = length of 'nums'
+        public static int MinStartValue(int[] nums)
+        {
+            // since the we know at max array will have 100 elements each with worst val being -100,
+            // we know if we start with 100 * 101 will definatly pass the check,
+            // now we can use binary search to reduce our search space in 1 / 2 with each step.
+            // if mid val passes Check set maxV to mid
+            // else update minV to mid +1
+
+            int minV = 1, maxV = 10001, mid;
+            while (minV < maxV)         // O(log(10001))
+            {
+                mid = (minV + maxV) / 2;
+                if (StepSumCheck())     // O(n)
+                    maxV = mid;
+                else
+                    minV = mid + 1;
+            }
+            return maxV;
+
+            // local func
+            bool StepSumCheck()
+            {
+                int stepSum = mid;
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    stepSum += nums[i];
+                    if (stepSum < 1) return false;
+                }
+                return true;
+            }
+        }
+        // Time O(n) || Space O(1), n = length of 'nums'
+        public static int MinStartValueFaster(int[] nums)
+        {
+            int currSum = 0, minStepSum = 0;
+            foreach (var n in nums)
+            {
+                currSum += n;
+                minStepSum = Math.Min(minStepSum, currSum);
+            }
+            return 1 - minStepSum;
+        }
+
+
     }
 }
