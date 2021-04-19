@@ -381,6 +381,7 @@ namespace InterviewProblemNSolutions
             NumSubmatrixSumTarget();
             MinimumNumberOfDaysToMakeMBouquets();
             MinimumValueToGetPositiveStepByStepSum();
+            DeleteColumnsToMakeSortedIII();
 
 
             // String Matching Algorithm
@@ -6229,6 +6230,20 @@ namespace InterviewProblemNSolutions
                 nums.Print("Nums");
                 //Console.WriteLine($" Min +ve val of startValue such that the step by step sum is never less than 1: '{DailyProblem.MinStartValue(nums)}'\n");
                 Console.WriteLine($" Min +ve val of startValue such that the step by step sum is never less than 1: '{DailyProblem.MinStartValueFaster(nums)}'\n");
+            }
+        }
+
+
+        public static void DeleteColumnsToMakeSortedIII()
+        {
+            // https://leetcode.com/problems/delete-columns-to-make-sorted-iii/
+            Utility.Print("960. Delete Columns to Make Sorted III");
+            string[][] strsArray = { new string[] { "babca", "bbazb" }, new string[] { "edcba" }, new string[] { "ghi", "def", "abc" } };
+            foreach (var strs in strsArray)
+            {
+                strs.Print("Strs");
+                Console.WriteLine($" Min possible no of indicies which have to be deleted in order to make characters" +
+                    $" inside each string lexograpically sorteda are: '{DynamicProgramming.MinDeletionSize(strs)}'\n");
             }
         }
 

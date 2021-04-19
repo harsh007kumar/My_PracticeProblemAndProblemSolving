@@ -1821,6 +1821,46 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n*l*l) || Space O(l), n = len of 'strs' & l = length of a word
+        public static int MinDeletionSize(string[] strs)
+        {
+            /* Intution for algo is instead of keeping count of deleted columns we keep count of max columns we can keep
+             * we use int array dp which has default value '1' for each columns as surely we can atleast keep 1 column for all rows
+             * 
+             * Now we check for a given columns C considering we keep it, can we keep the next column 'D',
+             *      and to make sure we check all the rows of 'strs' should satisfy condition
+             *              strs[rowId][C] <= strs[rowId][D]
+             *      if not than we cannot keep column 'D'
+             *      if all rows pass the check we can update max columns kept at given column C as Math.Max(dp[C],1+dp[D])
+             *      
+             * we start with 2nd last columns as C & continue in above fashion till C is >= 0
+             * at end we pull the max column kept from dp array
+             * and return total columns - max columns kept to get 'min columns deleted'
+             */
+            int len = strs[0].Length, i;
+            int[] dp = new int[len];         // stores no of columns kept i.e. Not Deleted from current index
+            for (i = 0; i < len; i++) dp[i] = 1; // as min 1 columns can be kept while still keep each word lexo-sorted in 'strs'
+
+            // start checking for max possible columns count we can keep from each index start from 2nd last column onwards
+            for (int startingCol = len - 2; startingCol >= 0; startingCol--)
+                for (int currCol = startingCol + 1; currCol < len; currCol++)
+                {
+                    for (i = 0; i < strs.Length; i++)
+                        if (strs[i][startingCol] > strs[i][currCol])    // not lexo-sorted
+                            break;
+
+                    if (i == strs.Length)       // all rows checks passed for curr column
+                        dp[startingCol] = Math.Max(dp[startingCol], 1 + dp[currCol]);
+                }
+            int ans = 0;
+            for (i = 0; i < len; i++)
+                ans = Math.Max(ans, dp[i]);     // get maximum columns kept
+            
+            return len - ans;                   // returming min columns deleted
+        }
+
+
+
 
     }
 }
