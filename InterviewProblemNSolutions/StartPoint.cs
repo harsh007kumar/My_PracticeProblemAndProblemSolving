@@ -29,6 +29,7 @@ namespace InterviewProblemNSolutions
             //ThreeSum();
             //FourSum();
             FourSumII();
+            CombinationSumIV();
             //MostCommonWord();
             //ValidSudoku();
             SudokuSolver();
@@ -6244,6 +6245,19 @@ namespace InterviewProblemNSolutions
                 strs.Print("Strs");
                 Console.WriteLine($" Min possible no of indicies which have to be deleted in order to make characters" +
                     $" inside each string lexograpically sorteda are: '{DynamicProgramming.MinDeletionSize(strs)}'\n");
+            }
+        }
+
+        public static void CombinationSumIV()
+        {
+            // https://leetcode.com/problems/combination-sum-iv/
+            Utility.Print("377. Combination Sum IV");
+            int[][] nums = { new int[] { 1, 2, 3 }, new int[] { 9 } };
+            int[] target = { 4, 3 };
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Nums");
+                Console.WriteLine($" No of possible combinations/sequences that add up to target: '{DailyProblem.CombinationSum4(nums[i], target[i])}'\n");
             }
         }
 

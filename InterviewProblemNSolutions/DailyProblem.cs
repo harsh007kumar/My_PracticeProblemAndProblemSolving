@@ -13617,5 +13617,29 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(target) || Space O(n)
+        public static int CombinationSum4(int[] nums, int target)
+        {
+            Dictionary<int, int> ways = new Dictionary<int, int>();
+            SortedSet<int> set = new SortedSet<int>(nums);
+            ways[0] = 1;    // base value
+            return GetWays(target);
+            
+            // local func
+            int GetWays(int t)
+            {
+                if (ways.ContainsKey(t)) return ways[t];
+
+                int result = 0;
+                foreach(var n in set)
+                {
+                    if (n > t) break;
+                    result += GetWays(t - n);
+                }
+                return ways[t] = result;
+            }
+        }
+
+
     }
 }
