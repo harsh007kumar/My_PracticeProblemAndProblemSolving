@@ -13641,5 +13641,27 @@ namespace InterviewProblemNSolutions
         }
 
 
+
+        public static IList<IList<int>> CombinationSum(int[] candidates, int target)
+        {
+            List<IList<int>> res = new List<IList<int>>();
+            GetCombo(new List<int>(), target);
+            return res;
+            // local func
+            void GetCombo(List<int> curr, int t, int i = 0)
+            {
+                if (t < 0) return;
+                else if (t == 0) res.Add(new List<int>(curr));
+                else
+                    for (int idx = i; idx < candidates.Length; idx++)
+                    {
+                        curr.Add(candidates[idx]);
+                        GetCombo(curr, t - candidates[idx], idx);
+                        curr.RemoveAt(curr.Count - 1);
+                    }
+            }
+        }
+
+
     }
 }

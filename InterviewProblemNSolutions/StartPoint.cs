@@ -30,6 +30,7 @@ namespace InterviewProblemNSolutions
             //FourSum();
             FourSumII();
             CombinationSumIV();
+            CombinationSum();
             //MostCommonWord();
             //ValidSudoku();
             SudokuSolver();
@@ -6248,6 +6249,7 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
         public static void CombinationSumIV()
         {
             // https://leetcode.com/problems/combination-sum-iv/
@@ -6258,6 +6260,27 @@ namespace InterviewProblemNSolutions
             {
                 nums[i].Print("Nums");
                 Console.WriteLine($" No of possible combinations/sequences that add up to target: '{DailyProblem.CombinationSum4(nums[i], target[i])}'\n");
+            }
+        }
+
+
+        public static void CombinationSum()
+        {
+            // https://leetcode.com/problems/combination-sum/
+            Utility.Print("39. Combination Sum");
+            int[][] candidates = { new int[] { 2, 3, 6, 7 }, new int[] { 2, 3, 5 }, new int[] { 2 }, new int[] { 1 }, new int[] { 1 } };
+            int[] target = { 7, 8, 1, 1, 2 };
+            for (int i = 0; i < candidates.Length; i++)
+            {
+                candidates[i].Print("Candidates");
+                Console.WriteLine($" list of all unique combinations of candidates where the chosen numbers sum to '{target[i]}' are:");
+                foreach (var list in DailyProblem.CombinationSum(candidates[i], target[i]))
+                {
+                    foreach (var num in list)
+                        Console.Write($" {num},");
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
             }
         }
 
