@@ -13682,5 +13682,33 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1)
+        public static int FindLengthOfShortestSubarray(int[] arr)
+        {
+            int l = arr.Length, peak = 0, valley = l - 1;
+            // find 1st peak from start
+            while (peak < l - 2 && arr[peak] <= arr[peak + 1])
+                peak++;
+
+            // find 1st valley from end
+            while (valley > Math.Max(0, peak) && arr[valley - 1] <= arr[valley])
+                valley--;
+
+            if (peak >= valley) return 0;    // all nums are in non-decreasing order
+
+            // set starting value of ans as min of removing either all nums after peek or all nums before valley
+            int i = 0, j = valley, ans = Math.Min(l - peak - 1, j);
+            while (i <= peak && j < l)
+                if (arr[i] <= arr[j])
+                {
+                    ans = Math.Min(ans, j - i - 1);
+                    i++;
+                }
+                else
+                    j++;
+            return ans;
+        }
+
+
     }
 }

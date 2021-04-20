@@ -385,6 +385,8 @@ namespace InterviewProblemNSolutions
             MinimumValueToGetPositiveStepByStepSum();
             DeleteColumnsToMakeSortedIII();
             KthSmallestElementBST();
+            ShortestSubarrayToBeRemovedToMakeArraySorted();
+
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6299,6 +6301,19 @@ namespace InterviewProblemNSolutions
             int[] kth = { 1, 3, 4 };
             foreach (var k in kth)
                 Console.WriteLine($" '{k}'th elements(1-indexed) in above BST is: '{DailyProblem.KthSmallestInBST(r, k)}'\n");
+        }
+
+
+        public static void ShortestSubarrayToBeRemovedToMakeArraySorted()
+        {
+            // https://leetcode.com/problems/shortest-subarray-to-be-removed-to-make-array-sorted/
+            Utility.Print("1574. Shortest Subarray to be Removed to Make Array Sorted");
+            int[][] numsArr = { new int[] { 1, 2, 3, 10, 4, 2, 3, 5 }, new int[] { 5, 4, 3, 2, 1 }, new int[] { 1, 2, 3 }, new int[] { 1 }, new int[] { 10, 13, 17, 21, 15, 15, 9, 17, 22, 22, 13 }, new int[] { 2, 2, 2, 1, 1, 1 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" Removing a subarray (can be empty) of len: '{DailyProblem.FindLengthOfShortestSubarray(nums)}' from arr such that the remaining elements in arr are non-decreasing.\n");
+            }
         }
 
 
