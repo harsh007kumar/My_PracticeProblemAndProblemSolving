@@ -386,6 +386,7 @@ namespace InterviewProblemNSolutions
             DeleteColumnsToMakeSortedIII();
             KthSmallestElementBST();
             ShortestSubarrayToBeRemovedToMakeArraySorted();
+            MaximumProductOfThreeNumbers();
 
 
             // String Matching Algorithm
@@ -6313,6 +6314,19 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 Console.WriteLine($" Removing a subarray (can be empty) of len: '{DailyProblem.FindLengthOfShortestSubarray(nums)}' from arr such that the remaining elements in arr are non-decreasing.\n");
+            }
+        }
+
+
+        public static void MaximumProductOfThreeNumbers()
+        {
+            // https://leetcode.com/problems/maximum-product-of-three-numbers/
+            Utility.Print("628. Maximum Product of Three Numbers");
+            int[][] numsArr = { new int[] { 1, 2, 3 }, new int[] { 1, 2, 3, 4 }, new int[] { -1, -2, -3 }, new int[] { -9, -8, 1, 2, 3, 4 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" Max product achievable from 3 nums: '{DailyProblem.MaximumProductOfThreeNums(nums)}'\n");
             }
         }
 
