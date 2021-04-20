@@ -384,7 +384,7 @@ namespace InterviewProblemNSolutions
             MinimumNumberOfDaysToMakeMBouquets();
             MinimumValueToGetPositiveStepByStepSum();
             DeleteColumnsToMakeSortedIII();
-
+            KthSmallestElementBST();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6282,6 +6282,23 @@ namespace InterviewProblemNSolutions
                 }
                 Console.WriteLine();
             }
+        }
+
+
+        public static void KthSmallestElementBST()
+        {
+            // https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+            Utility.Print("230. Kth Smallest Element in a BST");
+            TreeNode r = new TreeNode(3)
+            {
+                left = new TreeNode(1)
+                { right = new TreeNode(2) },
+                right = new TreeNode(4)
+            };
+            r.InOrder("BST");
+            int[] kth = { 1, 3, 4 };
+            foreach (var k in kth)
+                Console.WriteLine($" '{k}'th elements(1-indexed) in above BST is: '{DailyProblem.KthSmallestInBST(r, k)}'\n");
         }
 
 

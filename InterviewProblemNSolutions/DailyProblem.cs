@@ -13663,5 +13663,24 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(h) || Iterative
+        public static int KthSmallestInBST(TreeNode r, int k)
+        {
+            Stack<TreeNode> st = new Stack<TreeNode>();
+            while (true)
+            {
+                while (r != null)
+                {
+                    st.Push(r);
+                    r = r.left;
+                }
+                r = st.Pop();
+                if (--k == 0) return r.val;
+                r = r.right;
+            }
+            return -1;
+        }
+
+
     }
 }
