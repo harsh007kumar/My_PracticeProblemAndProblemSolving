@@ -13747,6 +13747,29 @@ namespace InterviewProblemNSolutions
         // Time O(n), n = no of elements in 'triangle'
         public static int TriangleMinPathSum(IList<IList<int>> triangle)
         {
+            int smallestSum = Int32.MaxValue;
+            var len = triangle.Count;
+            for (int i = 1; i < len; i++)    // iterate thru all the Lists in Triangle and calculate min value possible at eaech index in that List
+            {
+                var listLen = triangle[i].Count;
+                for (int j = 0; j < listLen; j++)   // update value for each index of current row based upon min value we can find in row above
+                {
+                    if (j == 0)
+                        triangle[i][j] += triangle[i - 1][0];
+                    else if (j == listLen - 1)
+                        triangle[i][j] += triangle[i - 1][j - 1];
+                    else
+                        triangle[i][j] += Math.Min(triangle[i - 1][j - 1], triangle[i - 1][j]);
+                }
+            }
+            for (int i = 0; i < triangle[len - 1].Count; i++)
+                smallestSum = Math.Min(smallestSum, triangle[len - 1][i]);
+            return smallestSum;
+
+        }
+        // Time O(n), n = no of elements in 'triangle'
+        public static int TriangleMinPathSum_DP(IList<IList<int>> triangle)
+        {
             int n = triangle.Count;
             Dictionary<string, int> dp = new Dictionary<string, int>();
             return GetMin(0, 0);
@@ -13762,7 +13785,7 @@ namespace InterviewProblemNSolutions
                 return dp[key] = triangle[r][i] + Math.Min(GetMin(r + 1, i), GetMin(r + 1, i + 1));
             }
         }
-
+        
 
     }
 }
