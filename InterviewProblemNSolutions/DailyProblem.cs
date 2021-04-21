@@ -13743,5 +13743,26 @@ namespace InterviewProblemNSolutions
             return Math.Max(min1 * min2 * max1, max1 * max2 * max3);
         }
 
+
+        // Time O(n), n = no of elements in 'triangle'
+        public static int TriangleMinPathSum(IList<IList<int>> triangle)
+        {
+            int n = triangle.Count;
+            Dictionary<string, int> dp = new Dictionary<string, int>();
+            return GetMin(0, 0);
+            // local func
+            int GetMin(int r, int i)
+            {
+                if (r == n) return 0;
+                if (i > r) return int.MaxValue;
+
+                string key = r + "," + i;
+                if (dp.ContainsKey(key)) return dp[key];
+
+                return dp[key] = triangle[r][i] + Math.Min(GetMin(r + 1, i), GetMin(r + 1, i + 1));
+            }
+        }
+
+
     }
 }

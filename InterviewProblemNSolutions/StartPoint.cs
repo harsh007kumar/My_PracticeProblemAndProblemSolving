@@ -387,6 +387,7 @@ namespace InterviewProblemNSolutions
             KthSmallestElementBST();
             ShortestSubarrayToBeRemovedToMakeArraySorted();
             MaximumProductOfThreeNumbers();
+            Triangle();
 
 
             // String Matching Algorithm
@@ -6328,6 +6329,16 @@ namespace InterviewProblemNSolutions
                 nums.Print("Nums");
                 Console.WriteLine($" Max product achievable from 3 nums: '{DailyProblem.MaximumProductOfThreeNums(nums)}'\n");
             }
+        }
+
+
+        public static void Triangle()
+        {
+            // https://leetcode.com/problems/triangle/
+            Utility.Print("120. Triangle");
+            int[][] triangle = { new int[] { 2 }, new int[] { 3, 4 }, new int[] { 6, 5, 7 }, new int[] { 4, 1, 8, 3 } };
+            triangle.Print("Triangle");
+            Console.WriteLine($" Min path sum from top to bottom: '{DailyProblem.TriangleMinPathSum(triangle)}'");
         }
 
 
