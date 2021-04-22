@@ -817,5 +817,29 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n) Soln
+        public static bool CheckValidParenthesisString(string s)
+        {
+            Stack<int> open = new Stack<int>(), star = new Stack<int>();
+            for (int i = 0; i < s.Length; i++)
+                if (s[i] == '(')
+                    open.Push(i);
+                else if (s[i] == '*')
+                    star.Push(i);
+                else //if(s[i]==')')
+                    if (open.Count > 0)
+                    open.Pop();
+                else if (star.Count > 0)
+                    star.Pop();
+                else
+                    return false;
+            // Now process leftover opening brackets
+            while (open.Count > 0)
+                if (star.Count == 0 || star.Pop() < open.Pop())
+                    return false;
+            return true;
+        }
+
+
     }
 }

@@ -391,6 +391,7 @@ namespace InterviewProblemNSolutions
             BrickWall();
             TupleWithSameProduct();
             MaxLenConcatenatedStringWithUniqueCharacters();
+            ValidParenthesisString();
 
 
             // String Matching Algorithm
@@ -6388,6 +6389,17 @@ namespace InterviewProblemNSolutions
                 arr[i].Print("String Array");
                 Console.WriteLine($" String s is a concatenation of a sub-sequence of arr which have unique characters has max len: '{DailyProblem.MaxLenConcatenatedStringWithUniqueCharacters(arr[i])}'\n");
             }
+        }
+
+
+        public static void ValidParenthesisString()
+        {
+            // TECHDOSE https://youtu.be/KuE_Cn3xhxI
+            // https://leetcode.com/problems/valid-parenthesis-string/
+            Utility.Print("678. Valid Parenthesis String");
+            string[] sArr = { "()", "(*)", "(*))", "**)()", "*(" };
+            foreach (var s in sArr)
+                Console.WriteLine($" '{s}' is valid parenthesis string: '{StringAlgorithms.CheckValidParenthesisString(s)}'\n");
         }
 
 
