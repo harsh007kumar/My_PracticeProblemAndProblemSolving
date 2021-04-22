@@ -390,6 +390,7 @@ namespace InterviewProblemNSolutions
             Triangle();
             BrickWall();
             TupleWithSameProduct();
+            MaxLenConcatenatedStringWithUniqueCharacters();
 
 
             // String Matching Algorithm
@@ -6371,6 +6372,21 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 Console.WriteLine($" No of tuples (a, b, c, d) such that a * b = c * d where a, b, c, and d are elements of nums, and a != b != c != d are: '{DailyProblem.TupleSameProduct(nums)}'\n");
+            }
+        }
+
+
+        public static void MaxLenConcatenatedStringWithUniqueCharacters()
+        {
+            // https://leetcode.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/
+            Utility.Print("1239. Maximum Length of a Concatenated String with Unique Characters");
+            string[][] arr = {  new string[] { "un", "iq", "ue" },
+                                new string[] { "cha", "r", "act", "ers" },
+                                new string[] { "abcdefghijklmnopqrstuvwxyz" } };
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i].Print("String Array");
+                Console.WriteLine($" String s is a concatenation of a sub-sequence of arr which have unique characters has max len: '{DailyProblem.MaxLenConcatenatedStringWithUniqueCharacters(arr[i])}'\n");
             }
         }
 

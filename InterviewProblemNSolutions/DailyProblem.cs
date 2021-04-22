@@ -13836,5 +13836,35 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n^2) || Recursive Space O(n)
+        public static int MaxLenConcatenatedStringWithUniqueCharacters(IList<string> arr)
+        {
+            int ans = 0;
+            GetMax("", 0);
+            return ans;
+
+            // local func
+            void GetMax(string currS, int idx)  // O(n^2)
+            {
+                ans = Math.Max(ans, currS.Length);
+                for (int i = idx; i < arr.Count; i++)
+                {
+                    if (ans == 26) return;
+                    var newS = arr[i] + currS;
+                    if (!DuplicateChars(newS))
+                        GetMax(newS, i + 1);
+                }
+            }
+            bool DuplicateChars(string s)       // O(1)
+            {
+                int[] charSet = new int[26];
+                for (int i = 0; i < s.Length; i++)
+                    if (++charSet[s[i] - 'a'] == 2)
+                        return true;
+                return false;
+            }
+        }
+
+
     }
 }
