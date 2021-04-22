@@ -388,6 +388,7 @@ namespace InterviewProblemNSolutions
             ShortestSubarrayToBeRemovedToMakeArraySorted();
             MaximumProductOfThreeNumbers();
             Triangle();
+            BrickWall();
 
 
             // String Matching Algorithm
@@ -6340,6 +6341,23 @@ namespace InterviewProblemNSolutions
             triangle.Print("Triangle");
             Console.WriteLine($" Min path sum from top to bottom [using DP]: '{DailyProblem.TriangleMinPathSum_DP(triangle)}'");
             Console.WriteLine($" Min path sum from top to bottom: '{DailyProblem.TriangleMinPathSum(triangle)}'");
+        }
+
+
+        public static void BrickWall()
+        {
+            // https://leetcode.com/problems/brick-wall/
+            Utility.Print("554. Brick Wall");
+            int[][][] walls = { new int[][] { new int[] { 1, 2, 2, 1 }, new int[] { 3, 1, 2 }, new int[] { 1, 3, 2 }, new int[] { 2, 4 }, new int[] { 3, 1, 2 }, new int[] { 1, 3, 1, 1 } },
+                                new int[][] { new int[] { 1 }, new int[] { 1 }, new int[] { 1 } },
+                                new int[][] { new int[] { 1, 1 }, new int[] { 2 }, new int[] { 1, 1 } },
+                                new int[][] { new int[] { 100000000 } },
+                                new int[][] { new int[] { 7, 1, 2 }, new int[] { 3, 5, 1, 1 }, new int[] { 10 } } };
+            foreach (var wall in walls)
+            {
+                wall.Print("Wall");
+                Console.WriteLine($" Drawing a vertical line from the top to the bottom which crosses the least bricks are: '{DailyProblem.LeastCrossedBricks(wall)}'\n");
+            }
         }
 
 

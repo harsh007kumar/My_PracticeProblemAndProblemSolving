@@ -13785,7 +13785,29 @@ namespace InterviewProblemNSolutions
                 return dp[key] = triangle[r][i] + Math.Min(GetMin(r + 1, i), GetMin(r + 1, i + 1));
             }
         }
-        
+
+
+        // Time O(n) || Space O(m), n = no of total bricks in the wall & m = no of unique brick-checkpoints
+        public static int LeastCrossedBricks(IList<IList<int>> wall)
+        {
+            int l = wall.Count, minCrossedBricks = l;
+            Dictionary<int, int> preFixSumFreq = new Dictionary<int, int>();
+
+            // compute prefix sum for each row & add final in SortedDictionary
+            for (int i = 0; i < l; i++)
+                // Skip right most point as it should not be included as stated in probl.
+                for (int j = 0; j < wall[i].Count - 1; j++)
+                {
+                    wall[i][j] += j > 0 ? wall[i][j - 1] : 0;
+                    if (!preFixSumFreq.ContainsKey(wall[i][j])) preFixSumFreq.Add(wall[i][j], 1);
+                    else preFixSumFreq[wall[i][j]]++;
+
+                    minCrossedBricks = Math.Min(minCrossedBricks, l - preFixSumFreq[wall[i][j]]);
+                    if (minCrossedBricks == 0) return 0;
+                }
+
+            return minCrossedBricks;
+        }
 
     }
 }

@@ -145,7 +145,6 @@ namespace InterviewProblemNSolutions
                     Console.Write($" {arr[i][j]} ||");
                 Console.WriteLine();
             }
-            Console.WriteLine();
         }
 
         public static void Print(this bool[,] arr)
