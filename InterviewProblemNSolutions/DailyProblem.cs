@@ -13809,5 +13809,32 @@ namespace InterviewProblemNSolutions
             return minCrossedBricks;
         }
 
+
+        // Time O(n^2) || Space O(n), n = length of 'nums'
+        public static int TupleSameProduct(int[] nums)
+        {
+            Dictionary<int, int> productFreq = new Dictionary<int, int>();
+            for (int i = 0; i < nums.Length; i++)
+                for (int j = i + 1; j < nums.Length; j++)
+                {
+                    int product = nums[i] * nums[j];
+                    if (!productFreq.ContainsKey(product))
+                        productFreq[product] = 1;
+                    else
+                        productFreq[product]++;
+                }
+            long ans = 0;
+            foreach (var freq in productFreq.Values)
+                if (freq > 1)       // 2 or more unique nums-pair have same product
+                    ans += ((freq * (freq - 1)) / 2) * 8;       // (n * n-1) / 2 * 8
+            /* A unique Set has 8 ways
+             * Ex: There are 8 valid tuples for pari of {2,6} & {3,4} which are:
+             * (2,6,3,4) , (2,6,4,3) , (6,2,3,4) , (6,2,4,3)
+             * (3,4,2,6) , (4,3,2,6) , (3,4,6,2) , (4,3,6,2)
+             */
+            return (int)(ans % 1000000007);
+        }
+
+
     }
 }

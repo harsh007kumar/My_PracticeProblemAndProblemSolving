@@ -389,6 +389,7 @@ namespace InterviewProblemNSolutions
             MaximumProductOfThreeNumbers();
             Triangle();
             BrickWall();
+            TupleWithSameProduct();
 
 
             // String Matching Algorithm
@@ -6357,6 +6358,19 @@ namespace InterviewProblemNSolutions
             {
                 wall.Print("Wall");
                 Console.WriteLine($" Drawing a vertical line from the top to the bottom which crosses the least bricks are: '{DailyProblem.LeastCrossedBricks(wall)}'\n");
+            }
+        }
+
+
+        public static void TupleWithSameProduct()
+        {
+            // https://leetcode.com/problems/tuple-with-same-product/
+            Utility.Print("1726. Tuple with Same Product");
+            int[][] numsArr = { new int[] { 2, 3, 4, 6 }, new int[] { 1, 2, 4, 5, 10 }, new int[] { 2, 3, 4, 6, 8, 12 }, new int[] { 2, 3, 5, 7 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" No of tuples (a, b, c, d) such that a * b = c * d where a, b, c, and d are elements of nums, and a != b != c != d are: '{DailyProblem.TupleSameProduct(nums)}'\n");
             }
         }
 
