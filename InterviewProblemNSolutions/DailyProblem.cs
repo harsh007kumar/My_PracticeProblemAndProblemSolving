@@ -13884,5 +13884,25 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) Space O(1)
+        public static int MaxConsecutiveOnesIII(int[] nums, int k)
+        {
+            int ans = 0, i = -1, j = 0, l = nums.Length, ones = 0, zeros = 0;
+            while (++i < l)
+                if (nums[i] == 1)
+                    ans = Math.Max(ans, (++ones) + zeros);
+                else //if(nums[i]==0)
+                    if (++zeros <= k)
+                    ans = Math.Max(ans, ones + zeros);
+                else
+                    while (zeros > k)
+                        if (nums[j++] == 0)
+                            zeros--;
+                        else
+                            ones--;
+            return ans;
+        }
+
+
     }
 }

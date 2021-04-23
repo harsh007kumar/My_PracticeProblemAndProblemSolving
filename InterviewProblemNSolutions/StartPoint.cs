@@ -392,6 +392,7 @@ namespace InterviewProblemNSolutions
             TupleWithSameProduct();
             MaxLenConcatenatedStringWithUniqueCharacters();
             ValidParenthesisString();
+            MaxConsecutiveOnesIII();
 
 
             // String Matching Algorithm
@@ -6403,6 +6404,20 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "()", "(*)", "(*))", "**)()", "*(" };
             foreach (var s in sArr)
                 Console.WriteLine($" '{s}' is valid parenthesis string: '{StringAlgorithms.CheckValidParenthesisString(s)}'\n");
+        }
+
+
+        public static void MaxConsecutiveOnesIII()
+        {
+            // https://leetcode.com/problems/max-consecutive-ones-iii/
+            Utility.Print("1004. Max Consecutive Ones III");
+            int[][] nums = { new int[] { 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0 }, new int[] { 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1 } };
+            int[] k = { 2, 3 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                nums[i].Print("Nums");
+                Console.WriteLine($" Max no of consecutive 1's in the array if you can flip at most '{k[i]}' 0's are: '{DailyProblem.MaxConsecutiveOnesIII(nums[i], k[i])}'\n");
+            }
         }
 
 
