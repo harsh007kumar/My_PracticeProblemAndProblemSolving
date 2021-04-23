@@ -10918,6 +10918,24 @@ namespace InterviewProblemNSolutions
             //ans += Math.Min(zero, one);
             return ans;
         }
+        // Time O(n) || Space O(1)
+        public static int CountBinarySubstringsFaster(string s)
+        {
+            int zero = 0, one = 0, ans = 0, l = s.Length, i = 0;
+            while (i < l)
+            {
+                while (i < l && s[i] == '1')   // count contiguous one's
+                { one++; i++; }
+                ans += Math.Min(one, zero);
+                zero = 0;
+
+                while (i < l && s[i] == '0')   // count contiguous zero's
+                { zero++; i++; }
+                ans += Math.Min(one, zero);
+                one = 0;
+            }
+            return ans;
+        }
 
 
         /// <summary>

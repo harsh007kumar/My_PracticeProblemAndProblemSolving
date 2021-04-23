@@ -5090,7 +5090,10 @@ namespace InterviewProblemNSolutions
             Utility.Print("696. Count Binary Substrings");
             string[] sArr = { "00110011", "10101", "1110000100" };
             foreach (var str in sArr)
-                Console.WriteLine($" No of non-empty (contiguous) substrings in \'{str}\' that have the same number of 0's and 1's: \'{DailyProblem.CountBinarySubstrings(str)}\'\n");
+            {
+                //Console.WriteLine($" No of non-empty (contiguous) substrings in \'{str}\' that have the same number of 0's and 1's: \'{DailyProblem.CountBinarySubstrings(str)}\'\n");
+                Console.WriteLine($" No of non-empty (contiguous) substrings in \'{str}\' that have the same number of 0's and 1's: \'{DailyProblem.CountBinarySubstringsFaster(str)}\'\n");
+            }
         }
 
 
