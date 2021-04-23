@@ -13904,5 +13904,14 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Auxillary Space O(1) || Recursive Space O(h)
+        public static int CountGoodNodes(TreeNode root, int max = int.MinValue)
+        {
+            if (root == null) return 0;
+            return (root.val >= max ? 1 : 0)
+                + CountGoodNodes(root.left, Math.Max(max, root.val))
+                + CountGoodNodes(root.right, Math.Max(max, root.val));
+        }
+
     }
 }

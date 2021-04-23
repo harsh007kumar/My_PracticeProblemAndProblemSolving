@@ -393,6 +393,7 @@ namespace InterviewProblemNSolutions
             MaxLenConcatenatedStringWithUniqueCharacters();
             ValidParenthesisString();
             MaxConsecutiveOnesIII();
+            CountGoodNodesInBinaryTree();
 
 
             // String Matching Algorithm
@@ -6418,6 +6419,25 @@ namespace InterviewProblemNSolutions
                 nums[i].Print("Nums");
                 Console.WriteLine($" Max no of consecutive 1's in the array if you can flip at most '{k[i]}' 0's are: '{DailyProblem.MaxConsecutiveOnesIII(nums[i], k[i])}'\n");
             }
+        }
+
+
+        public static void CountGoodNodesInBinaryTree()
+        {
+            // https://leetcode.com/problems/count-good-nodes-in-binary-tree/
+            Utility.Print("1448. Count Good Nodes in Binary Tree");
+            TreeNode r = new TreeNode(3)
+            {
+                left = new TreeNode(1)
+                { left = new TreeNode(3) },
+                right = new TreeNode(4)
+                {
+                    left = new TreeNode(1),
+                    right = new TreeNode(5)
+                }
+            };
+            r.InOrder("Binary-Tree");
+            Console.WriteLine($" No of good nodes in the above binary tree are: '{DailyProblem.CountGoodNodes(r)}'\n");
         }
 
 
