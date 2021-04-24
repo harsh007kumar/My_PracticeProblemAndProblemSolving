@@ -394,6 +394,7 @@ namespace InterviewProblemNSolutions
             ValidParenthesisString();
             MaxConsecutiveOnesIII();
             CountGoodNodesInBinaryTree();
+            CriticalConnectionsInANetwork();
 
 
             // String Matching Algorithm
@@ -6438,6 +6439,18 @@ namespace InterviewProblemNSolutions
             };
             r.InOrder("Binary-Tree");
             Console.WriteLine($" No of good nodes in the above binary tree are: '{DailyProblem.CountGoodNodes(r)}'\n");
+        }
+
+
+        public static void CriticalConnectionsInANetwork()
+        {
+            // https://leetcode.com/problems/critical-connections-in-a-network/
+            Utility.Print("1192. Critical Connections in a Network");
+            int n = 4;
+            int[][] connections = { new int[] { 0, 1 }, new int[] { 1, 2 }, new int[] { 2, 0 }, new int[] { 1, 3 } };
+            connections.Print("Connections");
+            Console.WriteLine("Finding Bridges in UnDirected-Graph removing which can divide the Graph in 2 or more connected components");
+            DailyProblem.CriticalConnections(n, connections);
         }
 
 

@@ -13913,5 +13913,77 @@ namespace InterviewProblemNSolutions
                 + CountGoodNodes(root.right, Math.Max(max, root.val));
         }
 
+
+        // Finds Bridges in UnDirected-Graph removing which can divide the Graph in 2 or more connected components
+        // Time O(Max(n,V+E)) || Space O(V)
+        public static IList<IList<int>> CriticalConnections(int n, IList<IList<int>> connections)
+        {
+            // Create unDirected graph
+            Dictionary<int, List<int>> g = new Dictionary<int, List<int>>();
+
+            for (int i = 0; i < n; i++)        // intialize all nodes of graph with empty List
+                g[i] = new List<int>();
+
+            foreach (var edge in connections)                // O(n)
+            {
+                var u = edge[0];
+                var v = edge[1];
+                // U --> V
+                g[u].Add(v);
+                // V --> U
+                g[v].Add(u);
+            }
+
+            List<IList<int>> bridges = new List<IList<int>>();
+
+            int time = 1, source = 0;                       // we can choose any Vertex as source for Tarjan's Algo
+            bool[] isVisited = new bool[n];                 // to mark is Vertex is already visited or not
+            int[] startingTime = new int[n];                // to store the time at which Vertex was 1st visited
+            int[] parent = new int[n];                      // to store the time at which Vertex was 1st visited
+            int[] nodeWithEarlistTimeReachable = new int[n];// to store the the min-time node avalible via all any of the connected edges (except Parent)
+
+            for (int i = 0; i < n; i++)
+                startingTime[i] = parent[i] = nodeWithEarlistTimeReachable[i] = -1; // set default values
+
+            FindAllBridges(source);                         // we can start from any vertex, taking 0th node as source
+            
+            foreach (var bridge in bridges)                 // Printing potentially Risky-Connection
+                Console.WriteLine($" Edge/Cable: '{bridge[0]}---{bridge[1]}' is Only connection & its failure/damage to this can divide network into 2 or more parts");
+            
+            return bridges;
+
+            // local func
+            // DFS - Tarjan's Algo
+            void FindAllBridges(int u)          // O(V+E)
+            {
+                isVisited[u] = true;            // Mark visited
+
+                // update the starting time of newly visited node, also update the min-time-node reachable as self only for now
+                startingTime[u] = nodeWithEarlistTimeReachable[u] = time++;
+
+                foreach (var v in g[u])
+                    if (!isVisited[v])              // not visited yet
+                    {
+                        parent[v] = u;          // mark parent
+                        FindAllBridges(v);      // recursively check for adjacent Vertex
+
+                        // Update 'starting time' of parent node is found one via Adjacent Vertex
+                        nodeWithEarlistTimeReachable[u] = Math.Min(nodeWithEarlistTimeReachable[u], nodeWithEarlistTimeReachable[v]);
+
+                        //-- now coming back i.e. back-tracking after above recursive call --//
+
+                        // if Vertex 'V' can say to Vertex 'U' that i have found a Vertex better than you or i have found another way to reach to you
+                        if (nodeWithEarlistTimeReachable[v] <= startingTime[u])
+                            continue;
+                        else // if (nodeWithEarlistTimeReachable[v] > startingTime[u]), meaning Vertex V only connection with Vertex 'U' is edge U---V
+                            bridges.Add(new int[] { u, v });
+                    }
+                    else if (v != parent[u])        // vertex 'v' we are looking at is not parent of 'u'
+                                                    // update if a node with even smaller start-time is reachable for Vertex 'u'
+                        nodeWithEarlistTimeReachable[u] = Math.Min(nodeWithEarlistTimeReachable[u], startingTime[v]);
+            }
+        }
+
+
     }
 }
