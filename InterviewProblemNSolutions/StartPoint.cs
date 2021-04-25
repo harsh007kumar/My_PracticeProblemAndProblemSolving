@@ -395,7 +395,7 @@ namespace InterviewProblemNSolutions
             MaxConsecutiveOnesIII();
             CountGoodNodesInBinaryTree();
             CriticalConnectionsInANetwork();
-
+            FrequencyOfTheMostFrequentElement();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6454,6 +6454,21 @@ namespace InterviewProblemNSolutions
             connections.Print("Connections");
             Console.WriteLine("Finding Bridges in UnDirected-Graph removing which can divide the Graph in 2 or more connected components");
             DailyProblem.CriticalConnections(n, connections);
+        }
+
+
+        public static void FrequencyOfTheMostFrequentElement()
+        {
+            // Happy Coding https://youtu.be/e_oUSOkDahk
+            // https://leetcode.com/problems/frequency-of-the-most-frequent-element/
+            Utility.Print("1838. Frequency of the Most Frequent Element");
+            int[][] nums = { new int[] { 1, 2, 4 }, new int[] { 1, 4, 8, 13 }, new int[] { 3, 9, 6 } };
+            int[] k = { 5, 5, 2 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                nums[i].Print("Nums");
+                Console.WriteLine($" Max possible frequency of an element after performing at most '{k[i]}' operations(adding 1): '{DailyProblem.FrequencyOfTheMostFrequentElement(nums[i], k[i])}'\n");
+            }
         }
 
 

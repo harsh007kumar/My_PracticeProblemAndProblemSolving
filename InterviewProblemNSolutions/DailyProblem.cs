@@ -14017,5 +14017,21 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(nlogn) || Space O(1)
+        public static int FrequencyOfTheMostFrequentElement(int[] nums, int k)
+        {
+            Array.Sort(nums);
+            int l = 0, r = -1, ans = 1, slidingWindowTotal = 0;
+            while (++r < nums.Length)
+            {
+                while ((nums[r] * (r - l)) - slidingWindowTotal > k)
+                    slidingWindowTotal -= nums[l++];
+                slidingWindowTotal += nums[r];
+                ans = Math.Max(ans, 1 + r - l);
+            }
+            return ans;
+        }
+
+
     }
 }
