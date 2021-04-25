@@ -1346,6 +1346,7 @@ namespace InterviewProblemNSolutions
              */
         }
 
+
         // Returns 'Total no of unique paths' in a Grid [ROW x COL] with Obsctacle, starting from Top-Lt ending at Bottom-Rt
         // Time O(row*col) || Space O(col)
         public static int UniquePathsWithObstacles(int[][] obstacleGrid)
@@ -1440,7 +1441,6 @@ namespace InterviewProblemNSolutions
                 times++;
             }
         }
-
         // Best Solution => Transpose the Matrix and Reverse each row
         // Time O(Row^2) || Space O(1)
         public static void RotateImageTransposeAndReverse(int[][] matrix)
@@ -1456,7 +1456,38 @@ namespace InterviewProblemNSolutions
                 for (int c = 0; c < rows / 2; c++)
                     Utility.Swap(ref matrix[r][c], ref matrix[r][rows - 1 - c]);
         }
+        // Efficient Solution => Transpose the Matrix and Reverse each row
+        // Time O(Row^2) || Space O(1)
+        public static void RotateImageMovingDiagonallyFromLeftTopToMiddle(int[][] matrix)
+        {
+            if (matrix == null || matrix.Length < 1) return;
+            int n = matrix.Length;
+            for (int i = 0; i < (n + 1) / 2; i++)
+                Move(i, i);                     // Start Diagonally from Top-Left towards bottom-right but stop at Center
+            // local func
+            void Move(int startR, int startC)
+            {
+                for (int c = startC; c < n - (1 + startC); c++)
+                    MoveNumsCycle(startR, c);   // Swap all nums in current row one by one
+            }
+            void MoveNumsCycle(int r, int c)
+            {
+                // a * b
+                // * * *
+                // c * d
 
+                // Temp = A
+                int temp = matrix[r][c];
+                // A = C
+                matrix[r][c] = matrix[-1 + n - c][r];
+                // C = D
+                matrix[-1 + n - c][r] = matrix[-1 + n - r][-1 + n - c];
+                // D = B
+                matrix[-1 + n - r][-1 + n - c] = matrix[c][-1 + n - r];
+                // B = Temp
+                matrix[c][-1 + n - r] = temp;
+            }
+        }
         // Don't use below in interview difficult to explain the intution behind the approach
         // Time O(row) || Space O(1)
         public static void RotateFourRectangleApproach(int[][] matrix)
@@ -1486,6 +1517,7 @@ namespace InterviewProblemNSolutions
                     }
                 }
         }
+
 
         // Returns 1st missing +ve number (i.e. num which is not part of the input array)
         // Time O(n) || Space O(n)

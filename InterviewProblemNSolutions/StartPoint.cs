@@ -1122,8 +1122,11 @@ namespace InterviewProblemNSolutions
                 matrix.Print("Input Image");
                 //DailyProblem.RotateFourRectangleApproach(matrix);
                 DailyProblem.RotateImageTransposeAndReverse(matrix);
+                matrix.Print("90 degree Rotated Image");
+                DailyProblem.RotateImageMovingDiagonallyFromLeftTopToMiddle(matrix);
+                matrix.Print("90 degree Rotated Image");
                 //DailyProblem.RotateImage(matrix);
-                matrix.Print("90 degree rotated image");
+                //matrix.Print("90 degree rotated image");
             }
         }
 
