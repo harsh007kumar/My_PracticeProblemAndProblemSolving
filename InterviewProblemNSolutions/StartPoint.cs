@@ -396,6 +396,7 @@ namespace InterviewProblemNSolutions
             CountGoodNodesInBinaryTree();
             CriticalConnectionsInANetwork();
             FrequencyOfTheMostFrequentElement();
+            FurthestBuildingYouCanReach();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6468,6 +6469,23 @@ namespace InterviewProblemNSolutions
             {
                 nums[i].Print("Nums");
                 Console.WriteLine($" Max possible frequency of an element after performing at most '{k[i]}' operations(adding 1): '{DailyProblem.FrequencyOfTheMostFrequentElement(nums[i], k[i])}'\n");
+            }
+        }
+
+
+        public static void FurthestBuildingYouCanReach()
+        {
+            // https://youtu.be/o84_EH4UJXc
+            // https://leetcode.com/problems/furthest-building-you-can-reach/
+            Utility.Print("1642. Furthest Building You Can Reach");
+            int[][] heights = { new int[] { 4, 2, 7, 6, 9, 14, 12 }, new int[] { 4, 12, 2, 7, 3, 18, 20, 3, 19 }, new int[] { 14, 3, 19, 3 }, new int[] { 1, 2, 4, 7 }, new int[] { 1, 2, 4, 7 } };
+            int[] bricks = { 5, 10, 17, 0, 3 };
+            int[] ladders = { 1, 2, 0, 3, 1 };
+            for (int i = 0; i < heights.Length; i++)
+            {
+                heights[i].Print("Heights");
+                Console.WriteLine($" Farthest idx we can reach in above array starting with '{bricks[i]}' bricks & '{ladders[i]}' ladders is:" +
+                    $" '{DailyProblem.FurthestBuilding(heights[i], bricks[i], ladders[i])}'\n");
             }
         }
 

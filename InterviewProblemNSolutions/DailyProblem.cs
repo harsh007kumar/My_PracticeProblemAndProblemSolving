@@ -14033,5 +14033,38 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n *log(ladders)) || Space O(ladders), n = len of arr 'heights'
+        public static int FurthestBuilding(int[] heights, int bricks, int ladders, int i = 0)
+        {
+            MinHeap ob = new MinHeap(ladders);
+            int k = 0, bricksSum = 0, diff;
+            while (++k < heights.Length)
+            {
+                diff = heights[k] - heights[k - 1];
+
+                if (heights[k - 1] >= heights[k])
+                    continue;
+                else if (ladders-- > 0)
+                    ob.Insert(diff);                  // O(log ladders)
+                else
+                {
+
+                    if (ob.Count > 0 && diff > ob.arr[0])   // replace Heap Min with curr & Heapify
+                    {
+                        // remove an existing Jump being counted as used by ladder & instead mark as used bricks to jump
+                        bricksSum += ob.arr[0];
+                        ob.arr[0] = diff;
+                        ob.Heapify();                       // O(log ladders)
+                    }
+                    else bricksSum += diff;                 // add to TotalBricksSum
+
+                    if (bricksSum > bricks) break;
+                }
+            }
+            return k - 1;
+        }
+
+
+
     }
 }
