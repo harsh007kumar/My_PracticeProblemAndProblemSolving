@@ -398,6 +398,7 @@ namespace InterviewProblemNSolutions
             FrequencyOfTheMostFrequentElement();
             FurthestBuildingYouCanReach();
             CountNicePairsInAnArray();
+            RankTransformOfAnArray();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6500,6 +6501,19 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 Console.WriteLine($" No of nice pairs of indices such that nums[i] + rev(nums[j]) == nums[j] + rev(nums[i]) :'{DailyProblem.CountNicePairs(nums)}'\n");
+            }
+        }
+
+
+        public static void RankTransformOfAnArray()
+        {
+            // https://leetcode.com/problems/rank-transform-of-an-array/
+            Utility.Print("1331. Rank Transform of an Array");
+            int[][] numsArr = { new int[] { 40, 10, 20, 30 }, new int[] { 10, 10, 10 }, new int[] { 37, 12, 28, 9, 100, 56, 80, 5, 12 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                DailyProblem.ArrayRankTransform(nums).Print("Rank of elements in above Array");
             }
         }
 

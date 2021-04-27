@@ -14098,6 +14098,26 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(nlogn) || Space O(n)
+        public static int[] ArrayRankTransform(int[] arr)
+        {
+            SortedDictionary<int, List<int>> numIdx = new SortedDictionary<int, List<int>>();
+            for (int i = 0; i < arr.Length; i++)
+                if (!numIdx.ContainsKey(arr[i]))
+                    numIdx[arr[i]] = new List<int>() { i };
+                else
+                    numIdx[arr[i]].Add(i);
+
+            int curRank = 1;
+            foreach (var idxList in numIdx.Values)
+            {
+                foreach (var idx in idxList)
+                    arr[idx] = curRank;
+                curRank++;
+            }
+            return arr;
+        }
+
 
     }
 }
