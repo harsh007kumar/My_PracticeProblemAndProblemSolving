@@ -397,6 +397,7 @@ namespace InterviewProblemNSolutions
             CriticalConnectionsInANetwork();
             FrequencyOfTheMostFrequentElement();
             FurthestBuildingYouCanReach();
+            CountNicePairsInAnArray();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6486,6 +6487,19 @@ namespace InterviewProblemNSolutions
                 heights[i].Print("Heights");
                 Console.WriteLine($" Farthest idx we can reach in above array starting with '{bricks[i]}' bricks & '{ladders[i]}' ladders is:" +
                     $" '{DailyProblem.FurthestBuilding(heights[i], bricks[i], ladders[i])}'\n");
+            }
+        }
+
+
+        public static void CountNicePairsInAnArray()
+        {
+            // https://leetcode.com/problems/count-nice-pairs-in-an-array/
+            Utility.Print("1814. Count Nice Pairs in an Array");
+            int[][] numsArr = { new int[] { 42, 11, 1, 97 }, new int[] { 13, 10, 35, 24, 76 }, new int[] { 1, 1, 1, 11, 111 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" No of nice pairs of indices such that nums[i] + rev(nums[j]) == nums[j] + rev(nums[i]) :'{DailyProblem.CountNicePairs(nums)}'\n");
             }
         }
 

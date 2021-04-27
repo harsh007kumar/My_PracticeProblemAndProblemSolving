@@ -14065,6 +14065,39 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n), n = length of 'nums'
+        public static int CountNicePairs(int[] nums)
+        {
+            Dictionary<int, int> diffFreq = new Dictionary<int, int>();
+            long pair = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                var key = nums[i] - Rev(nums[i]);
+                if (diffFreq.ContainsKey(key))
+                    diffFreq[key]++;
+                else
+                    diffFreq[key] = 1;
+
+                // minus one as we don't want to count the cases which we have previously counted & key with appears just once
+                pair += diffFreq[key] - 1;
+                pair %= 1000000007;
+            }
+            return (int)pair;
+
+            // Local func to get reverse of the integer
+            int Rev(int n)
+            {
+                int rev = 0;
+                while (n > 0)
+                {
+                    rev = rev * 10 + n % 10;
+                    n /= 10;
+                }
+                return rev;
+            }
+        }
+
+
 
     }
 }
