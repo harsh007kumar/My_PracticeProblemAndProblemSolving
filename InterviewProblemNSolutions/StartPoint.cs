@@ -399,6 +399,7 @@ namespace InterviewProblemNSolutions
             FurthestBuildingYouCanReach();
             CountNicePairsInAnArray();
             RankTransformOfAnArray();
+            TopKFrequentWords();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6514,6 +6515,23 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 DailyProblem.ArrayRankTransform(nums).Print("Rank of elements in above Array");
+            }
+        }
+
+
+        public static void TopKFrequentWords()
+        {
+            // https://leetcode.com/problems/top-k-frequent-words/
+            Utility.Print("692. Top K Frequent Words");
+            string[][] input = { new string[] { "i", "love", "leetcode", "i", "love", "coding" }, new string[] { "the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is" } };
+            int[] k = { 2, 4 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                input[i].Print("Input Strings");
+                Console.WriteLine($" Printing below '{k[i]}' most frequent elements (same freq-words are picked as per their lexographical order");
+                foreach (var mostfrequentWord in DailyProblem.TopKFrequent(input[i], k[i]))
+                    Console.Write($" {mostfrequentWord} ||");
+                Console.WriteLine("\n");
             }
         }
 

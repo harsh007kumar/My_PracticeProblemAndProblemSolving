@@ -14119,5 +14119,43 @@ namespace InterviewProblemNSolutions
         }
 
 
+
+        // Time O(Max(n,k*(mlogm))) || Space O(n), n = length of 'words', m = avg no of unique words per frequency
+        public static IList<string> TopKFrequent(string[] words, int k)
+        {
+            Dictionary<string, int> freq = new Dictionary<string, int>();
+            foreach (var word in words)      // O(n)
+                if (!freq.ContainsKey(word)) freq[word] = 1;
+                else freq[word]++;
+
+            int maxFreq = 0;
+            Dictionary<int, List<string>> grpFreq = new Dictionary<int, List<string>>();
+            foreach (var kvp in freq)        // O(n)
+            {
+                maxFreq = Math.Max(maxFreq, kvp.Value);
+                if (!grpFreq.ContainsKey(kvp.Value))
+                    grpFreq[kvp.Value] = new List<string>() { kvp.Key };
+                else
+                    grpFreq[kvp.Value].Add(kvp.Key);
+            }
+
+            List<string> ans = new List<string>();
+            while (k > 0)                      // O(k)
+            {
+                while (!grpFreq.ContainsKey(maxFreq)) maxFreq--;
+
+                grpFreq[maxFreq].Sort();    // O(mlogm) m = no of unique words for curr frequency
+                foreach (var str in grpFreq[maxFreq])
+                {
+                    ans.Add(str);
+                    if (--k == 0) break;
+                }
+                grpFreq.Remove(maxFreq);
+            }
+            return ans;
+        }
+
+
+
     }
 }
