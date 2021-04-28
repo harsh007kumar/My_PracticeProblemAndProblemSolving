@@ -400,6 +400,7 @@ namespace InterviewProblemNSolutions
             CountNicePairsInAnArray();
             RankTransformOfAnArray();
             TopKFrequentWords();
+            ToeplitzMatrix();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6532,6 +6533,19 @@ namespace InterviewProblemNSolutions
                 foreach (var mostfrequentWord in DailyProblem.TopKFrequent(input[i], k[i]))
                     Console.Write($" {mostfrequentWord} ||");
                 Console.WriteLine("\n");
+            }
+        }
+
+
+        public static void ToeplitzMatrix()
+        {
+            // https://leetcode.com/problems/toeplitz-matrix/
+            Utility.Print("766. Toeplitz Matrix");
+            int[][][] matrices = { new int[][] { new int[] { 1, 2, 3, 4 }, new int[] { 5, 1, 2, 3 }, new int[] { 9, 5, 1, 2 }, }, new int[][] { new int[] { 1, 2 }, new int[] { 2, 2 } } };
+            foreach (var matrix in matrices)
+            {
+                matrix.Print("Matrix");
+                Console.WriteLine($" above matrix is Toeplitz if every diagonal from top-left to bottom-right has the same elements: '{DailyProblem.IsToeplitzMatrix(matrix)}'\n");
             }
         }
 

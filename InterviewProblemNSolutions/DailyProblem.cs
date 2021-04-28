@@ -14156,6 +14156,16 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(r*c) || Space O(1)
+        public static bool IsToeplitzMatrix(int[][] matrix)
+        {
+            for (int i = 1; i < matrix.Length; i++)        // skip 1st row
+                for (int j = 1; j < matrix[0].Length; j++) // skip 1st element of all rows
+                    if (matrix[i - 1][j - 1] != matrix[i][j])
+                        return false;
+            return true;
+        }
+
 
     }
 }
