@@ -14196,5 +14196,47 @@ namespace InterviewProblemNSolutions
                 return 0;
             }
         }
+
+
+        // Time O(r*c) || Space O(r+c)
+        public static int CountCommunicatingServers(int[][] g)
+        {
+            int row = g.Length, col = g[0].Length;
+            bool[] isRowCommunicating = new bool[row];
+            bool[] isColCommunicating = new bool[col];
+            List<int>[] rCount = new List<int>[row];    // to count no of columns at which servers are present
+            int[] cCount = new int[col];                // count no of servers per col
+
+            for (int r = 0; r < row; r++)
+            {
+                rCount[r] = new List<int>();
+                for (int c = 0; c < col; c++)
+                    if (g[r][c] == 1)
+                    {
+                        rCount[r].Add(c);
+                        if (rCount[r].Count > 1)
+                            isRowCommunicating[r] = true;
+                        if (++cCount[c] > 1)
+                            isColCommunicating[c] = true;
+                    }
+            }
+
+            int communicatingServers = 0;
+            for (int r = 0; r < row; r++)
+                if (isRowCommunicating[r])
+                {
+                    communicatingServers += rCount[r].Count;
+                    foreach (var column in rCount[r])
+                        cCount[column]--;       // subtract servers which are just counted from their respective columns
+                }
+            for (int c = 0; c < col; c++)
+                if (isColCommunicating[c])
+                    communicatingServers += cCount[c];
+
+            return communicatingServers;
+        }
+
+
+
     }
 }

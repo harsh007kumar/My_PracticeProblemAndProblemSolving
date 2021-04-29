@@ -402,6 +402,7 @@ namespace InterviewProblemNSolutions
             TopKFrequentWords();
             ToeplitzMatrix();
             AvailableCapturesForRook();
+            CountServersThatCommunicate();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6583,6 +6584,26 @@ namespace InterviewProblemNSolutions
             {
                 chessBoard.Print("Chess Board");
                 Console.WriteLine($" No of black pawn White Rook can capture : '{DailyProblem.NumRookCaptures(chessBoard)}'\n");
+            }
+        }
+
+
+        public static void CountServersThatCommunicate()
+        {
+            // https://leetcode.com/problems/count-servers-that-communicate/
+            Utility.Print("1267. Count Servers that Communicate");
+            int[][][] gridArr = {   new int[][] {   new int[] { 1, 0 },
+                                                    new int[] { 0, 1 } },
+                                    new int[][] {   new int[] { 1, 0 },
+                                                    new int[] { 1, 1 } },
+                                    new int[][] {   new int[] { 1, 1, 0, 0 },
+                                                    new int[] { 0, 0, 1, 0 },
+                                                    new int[] { 0, 0, 1, 0 },
+                                                    new int[] { 0, 0, 0, 1 } } };
+            foreach (var grid in gridArr)
+            {
+                grid.Print("GRID");
+                Console.WriteLine($" Total no of communicating servers in above grid are : '{DailyProblem.CountCommunicatingServers(grid)}'\n");
             }
         }
 
