@@ -14167,5 +14167,34 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(1)
+        public static int NumRookCaptures(char[][] b)
+        {
+            int row = b.Length, col = b[0].Length, r = 0, c = 0;
+            // find Position of 'Rook'
+            for (r = 0; r < row; r++)
+                for (c = 0; c < col; c++)
+                    if (b[r][c] == 'R')
+                        return CapturePawn(0) + CapturePawn(1) + CapturePawn(2) + CapturePawn(3);
+            return 0;
+            // local func
+            int CapturePawn(int direction)
+            {
+                int i = r, j = c;
+                int op = direction < 2 ? -1 : 1;
+
+                while (i >= 0 && i < 8 && j >= 0 && j < 8)
+                {
+                    if (b[i][j] == 'B') break;            // found Bishop 
+                    else if (b[i][j] == 'p') return 1;    // found Pawn
+
+                    // left or right direction update column
+                    if (direction % 2 == 0) j += op;
+                    // top or down direction update row
+                    else i += op;
+                }
+                return 0;
+            }
+        }
     }
 }

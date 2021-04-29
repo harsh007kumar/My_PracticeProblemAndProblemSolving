@@ -401,6 +401,7 @@ namespace InterviewProblemNSolutions
             RankTransformOfAnArray();
             TopKFrequentWords();
             ToeplitzMatrix();
+            AvailableCapturesForRook();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6546,6 +6547,42 @@ namespace InterviewProblemNSolutions
             {
                 matrix.Print("Matrix");
                 Console.WriteLine($" above matrix is Toeplitz if every diagonal from top-left to bottom-right has the same elements: '{DailyProblem.IsToeplitzMatrix(matrix)}'\n");
+            }
+        }
+
+
+        public static void AvailableCapturesForRook()
+        {
+            // https://leetcode.com/problems/available-captures-for-rook/
+            Utility.Print("999. Available Captures for Rook");
+            char[][][] boardArr = { new char[][] { new char[] { '.', '.', '.', '.', '.', '.', '.', '.' },
+                                                    new char[] { '.', '.', '.', 'p', '.', '.', '.', '.' },
+                                                    new char[] { '.', '.', '.', 'R', '.', '.', '.', 'p' },
+                                                    new char[] { '.', '.', '.', '.', '.', '.', '.', '.' },
+                                                    new char[] { '.', '.', '.', '.', '.', '.', '.', '.' },
+                                                    new char[] { '.', '.', '.', 'p', '.', '.', '.', '.' },
+                                                    new char[] { '.', '.', '.', '.', '.', '.', '.', '.' },
+                                                    new char[] { '.', '.', '.', '.', '.', '.', '.', '.' } },
+                                    new char[][] { new char[] { '.', '.', '.', '.', '.', '.', '.', '.' },
+                                                    new char[] { '.', 'p', 'p', 'p', 'p', 'p', '.', '.' },
+                                                    new char[] { '.', 'p', 'p', 'B', 'p', 'p', '.', '.' },
+                                                    new char[] { '.', 'p', 'B', 'R', 'B', 'p', '.', '.' },
+                                                    new char[] { '.', 'p', 'p', 'B', 'p', 'p', '.', '.' },
+                                                    new char[] { '.', 'p', 'p', 'p', 'p', 'p', '.', '.' },
+                                                    new char[] { '.', '.', '.', '.', '.', '.', '.', '.' },
+                                                    new char[] { '.', '.', '.', '.', '.', '.', '.', '.' } },
+                                    new char[][] { new char[] { '.', '.', '.', '.', '.', '.', '.', '.' },
+                                                    new char[] { '.', '.', '.', 'p', '.', '.', '.', '.' },
+                                                    new char[] { '.', '.', '.', 'p', '.', '.', '.', '.' },
+                                                    new char[] { 'p', 'p', '.', 'R', '.', 'p', 'B', '.' },
+                                                    new char[] { '.', '.', '.', '.', '.', '.', '.', '.' },
+                                                    new char[] { '.', '.', '.', 'B', '.', '.', '.', '.' },
+                                                    new char[] { '.', '.', '.', 'p', '.', '.', '.', '.' },
+                                                    new char[] { '.', '.', '.', '.', '.', '.', '.', '.' } } };
+            foreach (var chessBoard in boardArr)
+            {
+                chessBoard.Print("Chess Board");
+                Console.WriteLine($" No of black pawn White Rook can capture : '{DailyProblem.NumRookCaptures(chessBoard)}'\n");
             }
         }
 
