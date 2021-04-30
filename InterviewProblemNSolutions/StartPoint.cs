@@ -404,6 +404,7 @@ namespace InterviewProblemNSolutions
             AvailableCapturesForRook();
             CountServersThatCommunicate();
             PowerfulIntegers();
+            CanMakePalindromeFromSubstring();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6621,6 +6622,19 @@ namespace InterviewProblemNSolutions
                     Console.Write($" {sumOfPowerOfXAndY} ,");
                 Console.WriteLine("\n");
             }
+        }
+
+
+        public static void CanMakePalindromeFromSubstring()
+        {
+            // https://leetcode.com/problems/can-make-palindrome-from-substring/
+            Utility.Print("1177. Can Make Palindrome from Substring");
+            string s = "abcda";
+            int[][] queries = { new int[] { 3, 3, 0 }, new int[] { 1, 2, 0 }, new int[] { 0, 3, 1 }, new int[] { 0, 3, 2 }, new int[] { 0, 4, 1 } };
+            Console.WriteLine($" Given string '{s}'");
+            queries.Print("Printing Queries where 1st num is starting idx, 2nd num is last idx & 3rd num is no of chars we can replace");
+            foreach (var ans in DailyProblem.CanMakePaliQueries(s, queries))
+                Console.Write($" {ans} ||");
         }
 
 

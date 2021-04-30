@@ -14283,5 +14283,40 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time O(Max(l,m)) || Space O(l), l = length of string 's' & m = length of 'queries'
+        public static IList<bool> CanMakePaliQueries(string s, int[][] queries)
+        {
+            int l = s.Length;
+            int[] charFreq = new int[26];
+            int[][] freqPreFix = new int[l + 1][];      // S O(l)
+            freqPreFix[0] = charFreq.ToArray();
+            for (int i = 0; i < l; i++)                 // T O(l)
+            {
+                charFreq[s[i] - 'a']++;
+                freqPreFix[i + 1] = charFreq.ToArray();
+            }
+
+            bool[] ans = new bool[queries.Length];
+            for (int i = 0; i < queries.Length; i++)    // T O(m)
+                if (IsPalindrome(queries[i]))           // T O(26) ~O(1)
+                    ans[i] = true;
+            return ans;
+
+            // Local func
+            bool IsPalindrome(int[] q)
+            {
+                int left = q[0], right = q[1], k = q[2], oddFreq = 0;
+                for (int i = 0; i < 26; i++)
+                    // count alphabets with odd frequency
+                    if ((freqPreFix[right + 1][i] - freqPreFix[left][i]) % 2 != 0)
+                        oddFreq++;
+                oddFreq -= 2 * k;
+                return oddFreq < 2;
+            }
+        }
+
+
+
     }
 }
