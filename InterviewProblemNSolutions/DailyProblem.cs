@@ -14204,7 +14204,7 @@ namespace InterviewProblemNSolutions
             int row = g.Length, col = g[0].Length;
             bool[] isRowCommunicating = new bool[row];
             bool[] isColCommunicating = new bool[col];
-            List<int>[] rCount = new List<int>[row];    // to count no of columns at which servers are present
+            List<int>[] rCount = new List<int>[row];    // to store no of columns at which servers are present for each row
             int[] cCount = new int[col];                // count no of servers per col
 
             for (int r = 0; r < row; r++)
@@ -14214,9 +14214,9 @@ namespace InterviewProblemNSolutions
                     if (g[r][c] == 1)
                     {
                         rCount[r].Add(c);
-                        if (rCount[r].Count > 1)
+                        if (rCount[r].Count > 1)        // more than 2 servers found at curr row
                             isRowCommunicating[r] = true;
-                        if (++cCount[c] > 1)
+                        if (++cCount[c] > 1)            // more than 2 servers found at curr col
                             isColCommunicating[c] = true;
                     }
             }
@@ -14237,6 +14237,51 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(m*n) || Space O(1), m,n = max power 'x' & 'y' respectively so that 'number' is <= bound
+        public static IList<int> PowerfulIntegers(int x, int y, int bound)
+        {
+            if (bound <= 1) return new List<int>();
+
+            HashSet<int> ans = new HashSet<int>();
+
+            int maxPowerX = MaxPower(x), maxPowerY = MaxPower(y), powerOfX = 1, powerOfY = 1, lastPowerY, lastPowerX = -1;
+            //// Trick to found power in O(1)
+            //maxPowerX = x == 1 ? bound : (int)(Math.Log(bound) / Math.Log(x));
+            //maxPowerY = y == 1 ? bound : (int)(Math.Log(bound) / Math.Log(y));
+            for (int i = 0; i <= maxPowerX; i++)
+            {
+                powerOfY = 1;
+                lastPowerY = -1;
+                for (int j = 0; j <= maxPowerY; j++)
+                {
+                    if (powerOfX + powerOfY <= bound)
+                        ans.Add(powerOfX + powerOfY);
+                    else
+                        break;
+                    powerOfY *= y;
+                    if (powerOfY == lastPowerY) break;
+                    else lastPowerY = powerOfY;
+                }
+                powerOfX *= x;
+                if (powerOfX == lastPowerX) break;
+                else lastPowerX = powerOfX;
+            }
+            return ans.ToList();
+
+            // Local func
+            int MaxPower(int powerOf)
+            {
+                int p = -1, num = 1, last = -1;
+                while (num <= bound)
+                {
+                    p++;
+                    num *= powerOf;
+                    if (num == last) break;
+                    else last = num;
+                }
+                return p;
+            }
+        }
 
     }
 }

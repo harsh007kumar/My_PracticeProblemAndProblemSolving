@@ -403,6 +403,7 @@ namespace InterviewProblemNSolutions
             ToeplitzMatrix();
             AvailableCapturesForRook();
             CountServersThatCommunicate();
+            PowerfulIntegers();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6604,6 +6605,21 @@ namespace InterviewProblemNSolutions
             {
                 grid.Print("GRID");
                 Console.WriteLine($" Total no of communicating servers in above grid are : '{DailyProblem.CountCommunicatingServers(grid)}'\n");
+            }
+        }
+
+
+        public static void PowerfulIntegers()
+        {
+            // https://leetcode.com/problems/powerful-integers/
+            Utility.Print("970. Powerful Integers");
+            int[] x = { 2, 3, 2, 555, 1 }, y = { 3, 5, 1, 321, 1 }, bound = { 10, 15, 10, 2, 1 };
+            for (int i = 0; i < x.Length; i++)
+            {
+                Console.WriteLine($" Printing Unique nums which satify condition:\tPower of '{x[i]}' + Power of '{y[i]}' <= '{bound[i]}'");
+                foreach (var sumOfPowerOfXAndY in DailyProblem.PowerfulIntegers(x[i], y[i], bound[i]))
+                    Console.Write($" {sumOfPowerOfXAndY} ,");
+                Console.WriteLine("\n");
             }
         }
 
