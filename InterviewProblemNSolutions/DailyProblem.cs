@@ -14317,6 +14317,28 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n), n = length of 'dominoes' array
+        public static int NumEquivDominoPairs(int[][] dominoes)
+        {
+            Dictionary<string, int> hs = new Dictionary<string, int>();
+            int ans = 0;
+            foreach (var pair in dominoes)
+            {
+                if (pair[0] != pair[1])
+                {
+                    var rev = pair[1] + "|" + pair[0];
+                    if (hs.ContainsKey(rev))
+                        ans += hs[rev];
+                }
+                var key = pair[0] + "|" + pair[1];
+                if (hs.ContainsKey(key))
+                    ans += hs[key]++;     // add no of pair found in Dict & than also update the count by 1
+                else
+                    hs[key] = 1;
+            }
+            return ans;
+        }
+
 
     }
 }

@@ -406,6 +406,7 @@ namespace InterviewProblemNSolutions
             PowerfulIntegers();
             CanMakePalindromeFromSubstring();
             PrefixAndSuffixSearch();
+            NumberOfEquivalentDominoPairs();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6656,6 +6657,21 @@ namespace InterviewProblemNSolutions
                 foreach (var searchCreteria in toSearchArr[i])
                     Console.WriteLine($" Largest Index in input 'array of words' whose prefix '{searchCreteria[0]}' & suffic '{searchCreteria[1]}' match search createria : '{wordFilter.Find(searchCreteria[0], searchCreteria[1])}'");
                 Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void NumberOfEquivalentDominoPairs()
+        {
+            // https://leetcode.com/problems/number-of-equivalent-domino-pairs/
+            Utility.Print("1128. Number of Equivalent Domino Pairs");
+            int[][][] dominoesArr = { new int[][] { new int[] { 1, 2 }, new int[] { 2, 1 }, new int[] { 3, 4 }, new int[] { 5, 6 }, new int[] { 7, 6 }, new int[] { 6, 7 }, new int[] { 5, 6 }, new int[] { 6, 5 }, new int[] { 6, 5 }, new int[] { 6, 5 }, new int[] { 4, 1 }, new int[] { 1, 5 }, new int[] { 5, 1 }, new int[] { 1, 4 } },
+                                    new int[][] { new int[] { 1, 2 }, new int[] { 1, 2 }, new int[] { 1, 1 }, new int[] { 1, 2 }, new int[] { 2, 2 } },
+                                    new int[][] { new int[] { 1, 1 }, new int[] { 2, 2 }, new int[] { 1, 1 }, new int[] { 1, 2 }, new int[] { 1, 2 }, new int[] { 1, 1 } } };
+            foreach (var dominoes in dominoesArr)
+            {
+                dominoes.Print("DominoesArray");
+                Console.WriteLine($" number of pairs (i, j) for which 0 <= i < j < dominoes.length, and dominoes[i] is equivalent to dominoes[j] are: '{DailyProblem.NumEquivDominoPairs(dominoes)}'\n");
             }
         }
 
