@@ -11,6 +11,7 @@ namespace InterviewProblemNSolutions
         public Dictionary<char, TrieNode> children = null;
         public bool isWord;
         public int times = 0;
+        public int index = -1;
         public TrieNode() => children = new Dictionary<char, TrieNode>();
     }
     public class Trie
@@ -134,4 +135,59 @@ namespace InterviewProblemNSolutions
             return temp.isWord;
         }
     }
+
+
+
+    public class TrieForPreFixSuffixSearch
+    {
+        public TrieNode root, temp;
+        public TrieForPreFixSuffixSearch() => root = new TrieNode();
+
+        // Insert
+        public void Add(string word, int idx)
+        {
+            TrieNode temp = root;
+            foreach (var ch in word)
+            {
+                if (!temp.children.ContainsKey(ch)) temp.children.Add(ch, new TrieNode());
+                temp = temp.children[ch];
+            }
+            temp.isWord = true;
+            temp.index = idx;
+        }
+
+        public List<int> SearchPrefix(string prefix)
+        {
+            List<int> indiciesOfMatches = new List<int>();
+            temp = root;
+            foreach (var ch in prefix)              // Try reaching to the last node in prefix
+                if (temp.children.ContainsKey(ch))
+                    temp = temp.children[ch];
+                else
+                    return indiciesOfMatches;
+            
+            Populate(temp);                         // Now add indicies of all words that match above prefix
+            return indiciesOfMatches;
+            
+            // Local func
+            void Populate(TrieNode temp)
+            {
+                if (temp.isWord)                    // if current node is a word add it to 'ans'
+                    indiciesOfMatches.Add(temp.index);
+
+                foreach (var possibleMatch in temp.children.Values) // recursively search in sub-trees of curr Node
+                    Populate(possibleMatch);
+            }
+
+        }
+    }
+
+
+
+
+
+
+
+
+
 }

@@ -405,6 +405,7 @@ namespace InterviewProblemNSolutions
             CountServersThatCommunicate();
             PowerfulIntegers();
             CanMakePalindromeFromSubstring();
+            PrefixAndSuffixSearch();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6635,6 +6636,27 @@ namespace InterviewProblemNSolutions
             queries.Print("Printing Queries where 1st num is starting idx, 2nd num is last idx & 3rd num is no of chars we can replace");
             foreach (var ans in DailyProblem.CanMakePaliQueries(s, queries))
                 Console.Write($" {ans} ||");
+        }
+
+
+        public static void PrefixAndSuffixSearch()
+        {
+            // https://leetcode.com/problems/prefix-and-suffix-search/
+            Utility.Print("745. Prefix and Suffix Search");
+            string[][] inputArr = { new string[] { "apple" },
+                                    new string[] { "cabaabaaaa", "ccbcababac", "bacaabccba", "bcbbcbacaa", "abcaccbcaa", "accabaccaa", "cabcbbbcca", "ababccabcb", "caccbbcbab", "bccbacbcba" } };
+            string[][][] toSearchArr = { new string[][] { new string[] { "a", "e" } },
+                                        new string[][] { new string[] { "bccbacbcba", "a" }, new string[] { "ab", "abcaccbcaa" }, new string[] { "a", "aa" }, new string[] { "cabaaba", "abaaaa" }, new string[] { "cacc", "accbbcbab" }, new string[] { "ccbcab", "bac" }, new string[] { "bac", "cba" }, new string[] { "ac", "accabaccaa" }, new string[] { "bcbb", "aa" }, new string[] { "ccbca", "cbcababac" } } };
+            for (int i = 0; i < inputArr.Length; i++)
+            {
+                inputArr[i].Print("Array of words");
+                Console.WriteLine();
+                toSearchArr[i].Print("To Search - Prefix || Suffix");
+                WordFilter wordFilter = new WordFilter(inputArr[i]);
+                foreach (var searchCreteria in toSearchArr[i])
+                    Console.WriteLine($" Largest Index in input 'array of words' whose prefix '{searchCreteria[0]}' & suffic '{searchCreteria[1]}' match search createria : '{wordFilter.Find(searchCreteria[0], searchCreteria[1])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
         }
 
 

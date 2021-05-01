@@ -80,6 +80,7 @@
     <Compile Include="Trie.cs" />
     <Compile Include="TwoSum.cs" />
     <Compile Include="UndergroundSystem.cs" />
+    <Compile Include="WordFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
