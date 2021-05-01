@@ -14340,5 +14340,42 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) Space O(1)
+        public static int MovesToMakeZigzag(int[] nums)
+        {
+            int[] originalNums = nums.ToArray();
+            int evenMoves = 0, oddMoves = 0, l = nums.Length;
+            // even index is greater
+            for (int i = 0; i < l; i += 2)
+            {
+                if (i > 0 && nums[i - 1] >= nums[i])
+                {
+                    evenMoves += 1 + nums[i - 1] - nums[i];
+                    nums[i - 1] = nums[i] - 1;
+                }
+                if (i + 1 < l && nums[i] <= nums[i + 1])
+                {
+                    evenMoves += 1 + nums[i + 1] - nums[i];
+                    nums[i + 1] = nums[i] - 1;
+                }
+            }
+            // odd index is greater
+            for (int i = 1; i < l; i += 2)
+            {
+                if (originalNums[i - 1] >= originalNums[i])
+                {
+                    oddMoves += 1 + originalNums[i - 1] - originalNums[i];
+                    originalNums[i - 1] = originalNums[i] - 1;
+                }
+                if (i + 1 < l && originalNums[i] <= originalNums[i + 1])
+                {
+                    oddMoves += 1 + originalNums[i + 1] - originalNums[i];
+                    originalNums[i + 1] = originalNums[i] - 1;
+                }
+            }
+            return Math.Min(evenMoves, oddMoves);
+        }
+
+
     }
 }

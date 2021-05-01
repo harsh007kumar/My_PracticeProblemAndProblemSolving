@@ -407,6 +407,7 @@ namespace InterviewProblemNSolutions
             CanMakePalindromeFromSubstring();
             PrefixAndSuffixSearch();
             NumberOfEquivalentDominoPairs();
+            DecreaseElementsToMakeArrayZigzag();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6672,6 +6673,19 @@ namespace InterviewProblemNSolutions
             {
                 dominoes.Print("DominoesArray");
                 Console.WriteLine($" number of pairs (i, j) for which 0 <= i < j < dominoes.length, and dominoes[i] is equivalent to dominoes[j] are: '{DailyProblem.NumEquivDominoPairs(dominoes)}'\n");
+            }
+        }
+
+
+        public static void DecreaseElementsToMakeArrayZigzag()
+        {
+            // https://leetcode.com/problems/decrease-elements-to-make-array-zigzag/
+            Utility.Print("1144. Decrease Elements To Make Array Zigzag");
+            int[][] numsArr = { new int[] { 1, 2, 3 }, new int[] { 9, 6, 1, 6, 2 }, new int[] { 2, 7, 10, 9, 8, 9 }, new int[] { 10, 4, 4, 10, 10, 6, 2, 3 }, new int[] { 2 }, new int[] { 2, 2 }, new int[] { 3, 2 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" min no of operation to keep above arr Zig-Zagged: '{DailyProblem.MovesToMakeZigzag(nums)}'\n");
             }
         }
 
