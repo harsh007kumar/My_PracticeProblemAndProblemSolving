@@ -408,6 +408,7 @@ namespace InterviewProblemNSolutions
             PrefixAndSuffixSearch();
             NumberOfEquivalentDominoPairs();
             DecreaseElementsToMakeArrayZigzag();
+            Combinations();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6687,6 +6688,17 @@ namespace InterviewProblemNSolutions
                 nums.Print("Nums");
                 Console.WriteLine($" min no of operation to keep above arr Zig-Zagged: '{DailyProblem.MovesToMakeZigzag(nums)}'\n");
             }
+        }
+
+
+        public static void Combinations()
+        {
+            // https://leetcode.com/problems/combinations/
+            Utility.Print("77. Combinations");
+            int[] n = { 4, 1, 4, 15 };
+            int[] k = { 2, 1, 1, 15 };
+            for (int i = 0; i < k.Length; i++)
+                DailyProblem.Combinations(n[i], k[i]).Print($" For Range 1...{n[i]} below are all possible combinations of length '{k[i]}'");
         }
 
 

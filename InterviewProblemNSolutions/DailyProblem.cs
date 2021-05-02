@@ -14377,5 +14377,29 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time (n*k)) || Recursive Space O(k) || Auxillary Space O(k)
+        public static IList<IList<int>> Combinations(int n, int k)
+        {
+            List<IList<int>> ans = new List<IList<int>>();
+            Stack<int> combi = new Stack<int>();
+            Populate(1);
+            return ans;
+            // local func
+            void Populate(int i)
+            {
+                if (combi.Count == k)
+                    ans.Add(combi.Reverse().ToList());
+                else
+                    // Optimized to check if we have enouf nums to fill 'k' combination
+                    for (int num = i; num <= n && 1 + n - num >= k - combi.Count; num++)
+                    {
+                        combi.Push(num);
+                        Populate(num + 1);
+                        combi.Pop();
+                    }
+            }
+        }
+
+
     }
 }
