@@ -409,6 +409,7 @@ namespace InterviewProblemNSolutions
             NumberOfEquivalentDominoPairs();
             DecreaseElementsToMakeArrayZigzag();
             Combinations();
+            CourseScheduleIII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6699,6 +6700,19 @@ namespace InterviewProblemNSolutions
             int[] k = { 2, 1, 1, 15 };
             for (int i = 0; i < k.Length; i++)
                 DailyProblem.Combinations(n[i], k[i]).Print($" For Range 1...{n[i]} below are all possible combinations of length '{k[i]}'");
+        }
+
+
+        public static void CourseScheduleIII()
+        {
+            // https://leetcode.com/problems/course-schedule-iii/
+            Utility.Print("630. Course Schedule III");
+            int[][][] coursesArr = { new int[][] { new int[] { 100, 200 }, new int[] { 200, 1300 }, new int[] { 1000, 1250 }, new int[] { 2000, 3200 } }, new int[][] { new int[] { 1, 2 } }, new int[][] { new int[] { 3, 2 }, new int[] { 4, 3 } } };
+            foreach (var courses in coursesArr)
+            {
+                courses.Print("Courses (duration,lastDayToComplete)");
+                Console.WriteLine($" Max no of course we can complete: '{DailyProblem.ScheduleCourse(courses)}'\n");
+            }
         }
 
 

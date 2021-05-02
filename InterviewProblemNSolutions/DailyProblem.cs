@@ -14401,5 +14401,38 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(nlogn) || Space O(n)
+        public static int ScheduleCourse(int[][] courses)
+        {
+            //courses = courses.OrderBy(x => x[1]).ToArray();
+            courses = (from course in courses                           // O(nlogn)
+                       orderby course[1]        // sort by lastDay
+                       select course).ToArray();
+            MaxHeap maxH = new MaxHeap(courses.Length);
+            int time = 0, duration, lastDay;
+            for (int i = 0; i < courses.Length; i++)                    // O(n)
+            {
+                duration = courses[i][0];
+                lastDay = courses[i][1];
+                // if course duration + curr time <= course lastDay to complete course, we can take the curr course
+                if (duration + time <= lastDay)
+                {
+                    // take the course & add it to Priority Queue
+                    time += duration;
+                    maxH.Insert(duration);                              // O(logn)
+                }
+                // duration of curr course is smaller than the largest course we have taken till now
+                else if (maxH.Count > 0 && maxH.arr[0] > duration)
+                {
+                    // remove the course with biggest duration from MaxHeap & add the curr coarse duration
+                    time -= maxH.arr[0] - duration;     // update time to reflect taking shorter duration course
+                    maxH.arr[0] = duration;             // replace the HeapTop with new duration
+                    maxH.MaxHeapify();                  // re-balance the MaxHeap || O(logn)
+                }
+            }
+            return maxH.Count;
+        }
+
+
     }
 }
