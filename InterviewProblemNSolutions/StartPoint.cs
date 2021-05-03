@@ -412,6 +412,7 @@ namespace InterviewProblemNSolutions
             CourseScheduleIII();
             StoneGameIII();
             CombinationSumII();
+            FindNUniqueIntegersSumUptoZero();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6743,6 +6744,16 @@ namespace InterviewProblemNSolutions
                 DailyProblem.CombinationSumII(candidates[i], target[i]).Print($" Unique combinations in candidates where the candidate numbers sum to '{target[i]}'");
                 Console.WriteLine("\n");
             }
+        }
+
+
+        public static void FindNUniqueIntegersSumUptoZero()
+        {
+            // https://leetcode.com/problems/find-n-unique-integers-sum-up-to-zero/
+            Utility.Print("1304. Find N Unique Integers Sum up to Zero");
+            int[] arr = { 5, 3, 1, 4 };
+            foreach (var n in arr)
+                DailyProblem.SumZero(n).Print($"Array containing '{n}' unique integers such that they add up to => 0");
         }
 
 

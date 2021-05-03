@@ -14467,5 +14467,19 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n)
+        public static int[] SumZero(int n)
+        {
+            int currNum = 1, idx = 0;
+            int[] ans = new int[n];
+
+            while (idx < n / 2) ans[idx++] = -currNum++;     // add -ve nums
+            if (n % 2 == 1) ans[idx++] = 0;            // if 'n' is odd
+            while (idx < n) ans[idx++] = --currNum;        // add opp +ve nums
+
+            return ans;
+        }
+
+
     }
 }
