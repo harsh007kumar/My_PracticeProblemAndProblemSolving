@@ -411,6 +411,7 @@ namespace InterviewProblemNSolutions
             Combinations();
             CourseScheduleIII();
             StoneGameIII();
+            CombinationSumII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6726,6 +6727,21 @@ namespace InterviewProblemNSolutions
             {
                 stonesValues.Print("Stones-Values");
                 Console.WriteLine($" In above arr of stones if 'Alice' starts 1st, than result is: '{DynamicProgramming.StoneGameIII(stonesValues)}'\n");
+            }
+        }
+
+
+        public static void CombinationSumII()
+        {
+            // https://leetcode.com/problems/combination-sum-ii/
+            Utility.Print("40. Combination Sum II");
+            int[][] candidates = { new int[] { 10, 1, 2, 7, 6, 1, 5 }, new int[] { 2, 5, 2, 1, 2 }, new int[] { 14, 6, 25, 9, 30, 20, 33, 34, 28, 30, 16, 12, 31, 9, 9, 12, 34, 16, 25, 32, 8, 7, 30, 12, 33, 20, 21, 29, 24, 17, 27, 34, 11, 17, 30, 6, 32, 21, 27, 17, 16, 8, 24, 12, 12, 28, 11, 33, 10, 32, 22, 13, 34, 18, 12 } };
+            int[] target = { 8, 5, 27 };
+            for (int i = 0; i < candidates.Length; i++)
+            {
+                candidates[i].Print("Candidates");
+                DailyProblem.CombinationSumII(candidates[i], target[i]).Print($" Unique combinations in candidates where the candidate numbers sum to '{target[i]}'");
+                Console.WriteLine("\n");
             }
         }
 

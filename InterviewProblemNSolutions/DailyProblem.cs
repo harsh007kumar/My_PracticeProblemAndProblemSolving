@@ -14434,5 +14434,38 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(2^n) || Space O(n), since at each index we have 2 choice to include this num or not include & move frwd
+        public static IList<IList<int>> CombinationSumII(int[] candidates, int target)
+        {
+            Array.Sort(candidates);                 // O(nlogn)
+            List<IList<int>> ans = new List<IList<int>>();
+            Stack<int> curr = new Stack<int>();
+            int l = candidates.Length, currSum = 0;
+            FindCombi(0);
+            return ans;
+
+            // local func
+            void FindCombi(int idx)
+            {
+                if (target == currSum) ans.Add(curr.Reverse().ToList());
+                if (currSum >= target) return;
+
+                for (int i = idx; i < l; i++)
+                {
+                    currSum += candidates[i];
+                    curr.Push(candidates[i]);
+
+                    FindCombi(i + 1);
+
+                    currSum -= candidates[i];
+                    curr.Pop();
+
+                    // Skip all next nums which are same as curr num to avoid duplicate efforts
+                    while (i + 1 < l && candidates[i] == candidates[i + 1]) i++;
+                }
+            }
+        }
+
+
     }
 }
