@@ -410,6 +410,7 @@ namespace InterviewProblemNSolutions
             DecreaseElementsToMakeArrayZigzag();
             Combinations();
             CourseScheduleIII();
+            StoneGameIII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6712,6 +6713,19 @@ namespace InterviewProblemNSolutions
             {
                 courses.Print("Courses (duration,lastDayToComplete)");
                 Console.WriteLine($" Max no of course we can complete: '{DailyProblem.ScheduleCourse(courses)}'\n");
+            }
+        }
+
+
+        public static void StoneGameIII()
+        {
+            // https://leetcode.com/problems/stone-game-iii/
+            Utility.Print("1406. Stone Game III");
+            int[][] stonesArr = { new int[] { 1, 2, 3, 7 }, new int[] { 1, 2, 3, -9 }, new int[] { 1, 2, 3, 6 }, new int[] { 1, 2, 3, -1, -2, -3, 7 }, new int[] { -1, -2, -3 }, new int[] { 1 }, new int[] { 0 }, new int[] { -1 } };
+            foreach (var stonesValues in stonesArr)
+            {
+                stonesValues.Print("Stones-Values");
+                Console.WriteLine($" In above arr of stones if 'Alice' starts 1st, than result is: '{DynamicProgramming.StoneGameIII(stonesValues)}'\n");
             }
         }
 

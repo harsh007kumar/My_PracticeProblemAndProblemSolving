@@ -1860,7 +1860,34 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n)
+        public static string StoneGameIII(int[] stoneValue)
+        {
+            int alice = 0, total = 0, l = stoneValue.Length;
+            for (int i = 0; i < l; i++) total += stoneValue[i];
+            alice = Max(0, new Dictionary<int, int>());
 
+            if (alice > total - alice) return "Alice";
+            else if (alice < total - alice) return "Bob";
+            else return "Tie";
+
+            // local func
+            int Max(int i, Dictionary<int, int> cache)
+            {
+                if (i >= l) return 0;
+                if (cache.ContainsKey(i)) return cache[i];
+
+                // Alice takes just 1st stone & Minimum of what is left (after Bob take either the next one, two or three stones)
+                int score = stoneValue[i] + Math.Min(Max(i + 2, cache), Math.Min(Max(i + 3, cache), Max(i + 4, cache)));
+                // Alice takes 1st & 2nd stone
+                if (i + 1 < l) score = Math.Max(score, stoneValue[i] + stoneValue[i + 1] + Math.Min(Max(i + 3, cache), Math.Min(Max(i + 4, cache), Max(i + 5, cache))));
+                // Alice takes 1st & 2nd & 3rd stone
+                if (i + 2 < l) score = Math.Max(score, stoneValue[i] + stoneValue[i + 1] + stoneValue[i + 2] + Math.Min(Max(i + 4, cache), Math.Min(Max(i + 5, cache), Max(i + 6, cache))));
+                
+                // update the max score one can get from this index & return the value
+                return cache[i] = score;
+            }
+        }
 
     }
 }
