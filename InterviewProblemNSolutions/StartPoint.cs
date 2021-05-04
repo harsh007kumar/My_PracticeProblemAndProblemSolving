@@ -414,6 +414,7 @@ namespace InterviewProblemNSolutions
             CombinationSumII();
             FindNUniqueIntegersSumUptoZero();
             NondecreasingArray();
+            MaximumSumCircularSubarray();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6767,6 +6768,20 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 Console.WriteLine($" checking if above arr could become non-decreasing by modifying at most one element: '{DailyProblem.NondecreasingArray(nums)}'\n");
+            }
+        }
+
+
+        public static void MaximumSumCircularSubarray()
+        {
+            // TECH DOSE https://youtu.be/Q1TYVUEr-wY
+            // https://leetcode.com/problems/maximum-sum-circular-subarray/
+            Utility.Print("918. Maximum Sum Circular Subarray");
+            int[][] array = { new int[] { 1, -2, 3, -2 }, new int[] { 5, -3, 5 }, new int[] { 3, -1, 2, -1 }, new int[] { 3, -2, 2, -3 }, new int[] { -2, -3, -1 }, new int[] { -10, -7, 9, -7, 6, 9, -9, -4, -8, -5 } };
+            foreach (var A in array)
+            {
+                A.Print("Input-Array");
+                Console.WriteLine($" maximum possible sum of subarray in above circular array is: '{DailyProblem.MaxSubarraySumCircular(A)}'\n");
             }
         }
 

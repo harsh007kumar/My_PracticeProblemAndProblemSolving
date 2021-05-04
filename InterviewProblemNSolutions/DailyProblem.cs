@@ -14509,6 +14509,51 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Inspired from Kadane's Algo || Time O(n^2) Space O(1)
+        public static int MaxSubarraySumCircular_BruteForce(int[] A)
+        {
+            int back = 0, front = 1, currSum = A[0], maxSum = A[0], l = A.Length;
+            while (back < l)
+            {
+                while (currSum >= 0)
+                {
+                    currSum += A[front];
+                    maxSum = Math.Max(maxSum, currSum);
+                    front = (front + 1) % l;
+                    if (front == back)
+                    {
+                        front = back + 1;
+                        currSum = -1;
+                    }
+                }
+                currSum = 0;                            // Reset current sub-array Sum to 0
+                back = Math.Max(back, front);           // update the back pointer to current idx i.e. Front
+            }
+            return maxSum;
+        }
+        // Time O(n) Space O(1)
+        public static int MaxSubarraySumCircular(int[] A)
+        {
+            int currSum = int.MinValue, maxSum = int.MinValue, currMinSum = int.MaxValue, minSum = int.MaxValue, totalSum = 0, maxNum = int.MinValue;
+            bool foundPositive = false;
+            for (int i = 0; i < A.Length; i++)
+            {
+                currSum = A[i] + Math.Max(currSum, 0);
+                maxSum = Math.Max(maxSum, currSum);
+
+                totalSum += A[i];
+                maxNum = Math.Max(maxNum, A[i]);
+
+                currMinSum = A[i] + Math.Min(currMinSum, 0);
+                minSum = Math.Min(minSum, currMinSum);
+
+                if (A[i] >= 0) foundPositive = true;
+            }
+            // if all nums in array are -ve, return maxNum from array
+            // else in normal case return the maximum of maxSum or totalSum - minSum i.e. maxSum in case of wrap around sub-array
+            return foundPositive ? Math.Max(maxSum, totalSum - minSum) : maxNum;
+        }
+
 
     }
 }
