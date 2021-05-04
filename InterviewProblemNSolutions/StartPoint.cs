@@ -413,6 +413,7 @@ namespace InterviewProblemNSolutions
             StoneGameIII();
             CombinationSumII();
             FindNUniqueIntegersSumUptoZero();
+            NondecreasingArray();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6754,6 +6755,19 @@ namespace InterviewProblemNSolutions
             int[] arr = { 5, 3, 1, 4 };
             foreach (var n in arr)
                 DailyProblem.SumZero(n).Print($"Array containing '{n}' unique integers such that they add up to => 0");
+        }
+
+
+        public static void NondecreasingArray()
+        {
+            // https://leetcode.com/problems/non-decreasing-array/
+            Utility.Print("665. Non-decreasing Array");
+            int[][] numsArr = { new int[] { 4, 2, 3 }, new int[] { 4, 2, 1 }, new int[] { 1, 2, 4, 5, 3 }, new int[] { 5, 0, 1, 2, 3 }, new int[] { 1, 2, 5, 2, 3 }, new int[] { 1, 2, 3, 1, 3, 5 }, new int[] { 1, 1, 1, 1, 0, 1, 1, 0 }, new int[] { 5, 5, 10, 5, 5 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" checking if above arr could become non-decreasing by modifying at most one element: '{DailyProblem.NondecreasingArray(nums)}'\n");
+            }
         }
 
 

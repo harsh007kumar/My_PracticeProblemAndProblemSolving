@@ -14481,5 +14481,34 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) || Space O(1)
+        public static bool NondecreasingArray(int[] nums)
+        {
+            int modifyLimit = 1, l = nums.Length;
+            for (int i = 1; i < l; i++)
+                if (nums[i - 1] > nums[i])
+                {
+                    if (i == 1)                     // 0th element is larger than 1st idx, decrease 0th to 1st value
+                        nums[i - 1] = nums[i];
+                    else if (i == l - 1)            // last element is smaller, increase it to same as last-1
+                        nums[i] = nums[i - 1];
+                    else
+                    {
+                        if (i + 1 < l && nums[i - 1] <= nums[i + 1])
+                            nums[i] = nums[i - 1];  // increase the value of nums[i] to i-1
+                        else if (i - 1 > 0 && nums[i - 2] <= nums[i])
+                            nums[i - 1] = nums[i - 2];// decrease the value of nums[i-1] to i-2
+                        else
+                            return false;           // single modification to make non-decreasing not possible
+                    }
+
+                    if (--modifyLimit < 0)          // more than '1' modification not allowed
+                        return false;
+                }
+            return true;
+        }
+
+
+
     }
 }
