@@ -415,6 +415,7 @@ namespace InterviewProblemNSolutions
             FindNUniqueIntegersSumUptoZero();
             NondecreasingArray();
             MaximumSumCircularSubarray();
+            ContainsDuplicateIII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6782,6 +6783,20 @@ namespace InterviewProblemNSolutions
             {
                 A.Print("Input-Array");
                 Console.WriteLine($" maximum possible sum of subarray in above circular array is: '{DailyProblem.MaxSubarraySumCircular(A)}'\n");
+            }
+        }
+
+
+        public static void ContainsDuplicateIII()
+        {
+            // https://leetcode.com/problems/contains-duplicate-iii/
+            Utility.Print("220. Contains Duplicate III");
+            int[][] nums = { new int[] { 1, 2, 3, 1 }, new int[] { 1, 0, 1, 1 }, new int[] { 1, 5, 9, 1, 5, 9 }, new int[] { -3, 3, -6 }, new int[] { 2147483640, 2147483641 } };
+            int[] k = { 3, 1, 2, 2, 1 }, t = { 0, 2, 3, 3, 100 };
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Nums");
+                Console.WriteLine($" Checking if there are 2 distinct indices i & j in the array such that abs(nums[i] - nums[j]) <= '{t[i]}' and abs(i - j) <= '{k[i]}': '{DailyProblem.ContainsNearbyAlmostDuplicate(nums[i], k[i], t[i])}'\n");
             }
         }
 

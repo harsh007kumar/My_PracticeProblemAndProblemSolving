@@ -14555,5 +14555,45 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n*log(Min(n,k))) || Space O(Min(n,k))
+        public static bool ContainsNearbyAlmostDuplicate(int[] nums, int k, int t)
+        {
+            SortedSet<long> set = new SortedSet<long>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                // if atleast 1 nums exists, which is at max 'k' value apart current number
+                if (set.GetViewBetween((long)nums[i] - t, (long)nums[i] + t).Count > 0)
+                    return true;
+                // add current num to set
+                set.Add(nums[i]);
+                // if set size is greater than 'k' remove 'i-k'th num
+                if (i >= k) set.Remove(nums[i - k]);
+            }
+            return false;
+
+            /* JAVA TreeSet (balanced BST) based solution using floor & ceiling APIs
+            public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+                TreeSet<Long> balancedBST = new TreeSet();
+                for(int i=0;i<nums.length;i++)
+                {
+                    Long ceil = balancedBST.ceiling((long)nums[i]);
+                    if(ceil!=null && Math.abs(ceil-nums[i])<=t)
+                        return true;
+            
+                    Long floor = balancedBST.floor((long)nums[i]);
+                    if(floor!=null && Math.abs(floor-nums[i])<=t)
+                        return true;
+            
+                    // add curr num to tree-set
+                    balancedBST.add((long)nums[i]);
+                    // remove the 'i-k'th num if set size exceeds k
+                    if(balancedBST.size()>k)
+                        balancedBST.remove((long)nums[i-k]);
+                }
+                return false;
+            }
+             */
+        }
+
     }
 }
