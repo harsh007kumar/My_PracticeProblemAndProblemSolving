@@ -416,6 +416,7 @@ namespace InterviewProblemNSolutions
             NondecreasingArray();
             MaximumSumCircularSubarray();
             ContainsDuplicateIII();
+            ConvertSortedListToBinarySearchTree();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6797,6 +6798,23 @@ namespace InterviewProblemNSolutions
             {
                 nums[i].Print("Nums");
                 Console.WriteLine($" Checking if there are 2 distinct indices i & j in the array such that abs(nums[i] - nums[j]) <= '{t[i]}' and abs(i - j) <= '{k[i]}': '{DailyProblem.ContainsNearbyAlmostDuplicate(nums[i], k[i], t[i])}'\n");
+            }
+        }
+
+
+        public static void ConvertSortedListToBinarySearchTree()
+        {
+            // https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/
+            Utility.Print("109. Convert Sorted List to Binary Search Tre");
+            ListNode[] listArr = { new ListNode(-10) { next = new ListNode(-3) { next = new ListNode(0) { next = new ListNode(5) { next = new ListNode(9) } } } },
+                                   null,
+                                   new ListNode(0),
+                                   new ListNode(1) { next = new ListNode(3) } };
+            foreach (var list in listArr)
+            {
+                list.Print("Sorted-Linked-List");
+                DailyProblem.SortedListToBST(list).InOrder("Converted BST");
+                Console.WriteLine("\n");
             }
         }
 

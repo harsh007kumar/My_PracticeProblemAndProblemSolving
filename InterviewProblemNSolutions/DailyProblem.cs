@@ -14595,5 +14595,34 @@ namespace InterviewProblemNSolutions
              */
         }
 
+
+        // Time O(n) Space O(h), h = log(n), n = no of nodes in List
+        public static TreeNode SortedListToBST(ListNode head)
+        {
+            if (head == null) return null;
+            var mid = GetMid(head);
+            var root = new TreeNode(mid.val);
+            if (mid == head) return root;
+
+            root.left = SortedListToBST(head);
+            root.right = SortedListToBST(mid.next);
+            return root;
+            
+            // Local func
+            ListNode GetMid(ListNode h)
+            {
+                ListNode slow = h, fast = h, prv = null;
+                while (fast?.next != null)
+                {
+                    prv = slow;
+                    slow = slow.next;
+                    fast = fast.next.next;
+                }
+                if (prv != null) prv.next = null;
+                return slow;
+            }
+        }
+
+
     }
 }
