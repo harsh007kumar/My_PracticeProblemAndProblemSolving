@@ -14634,11 +14634,23 @@ namespace InterviewProblemNSolutions
         /// <returns></returns>
         public static int SuperpalindromesInRange(string left, string right)
         {
-            /* 
+            /* Problem is to find number which are palindrome & also square of number which is also palindrome
+             * This problem has BruteForce solution but in order to avoid TLE as range 10^18 is really huge
+             * 
+             * we know we are only intrested in numbers which are square of paldinrome,
+             * so we in fact need to find all lower level palindrome nums in the range 1...10^9 which are paldinrome
+             * & than we can take square of these num and increament counter when square lies b/w Left...Right
+             * 
+             * In order to further save time we know any 10^9 digit number which is a paldinrome can be constructed in either of below 2 ways
+             *      Odd len     12345 + 4321
+             *      Even len    1234 + 4321
+             * this further reduces our range to 10^5 from 10^9
+             * now we can iterate from 1...10^5 and for each num we reverse the num & concatenate to to original num to get final num,
+             * whose squrare we can check if lies between Left...Right than increament counter
              */
             ulong l = Convert.ToUInt64(left), r = Convert.ToUInt64(right), range = 100000, n = 0, superPalindrome = 0;
             string lHalf, rHalf;
-            // odd case
+            // odd len case
             while (++n <= range)                // O(10^5)
             {
                 lHalf = n.ToString();
@@ -14655,7 +14667,7 @@ namespace InterviewProblemNSolutions
                     superPalindrome++;
             }
             n = 0;
-            // even case
+            // even len case
             while (++n <= range)                // O(10^5)
             {
                 lHalf = n.ToString();
