@@ -14624,5 +14624,74 @@ namespace InterviewProblemNSolutions
         }
 
 
+        /// <summary>
+        /// Time O(10^5) || Space O(1)
+        /// Time O(W^(1/4)∗logW), where W = 10 ^18 is our upper limit for R.
+        /// The logW term comes from checking whether each candidate is the root of a palindrome.
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static int SuperpalindromesInRange(string left, string right)
+        {
+            /* 
+             */
+            ulong l = Convert.ToUInt64(left), r = Convert.ToUInt64(right), range = 100000, n = 0, superPalindrome = 0;
+            string lHalf, rHalf;
+            // odd case
+            while (++n <= range)                // O(10^5)
+            {
+                lHalf = n.ToString();
+                rHalf = Reverse(lHalf, 1);
+
+                //ulong num = (ulong)Math.Pow(Convert.ToUInt64(lHalf + rHalf), 2); THIS FUCKING DOESNT WORKS
+                ulong num = Convert.ToUInt64(lHalf + rHalf);
+                num *= num;
+
+                if (num > r)
+                    break;
+
+                if (num >= l && num == ReverseNum(num))
+                    superPalindrome++;
+            }
+            n = 0;
+            // even case
+            while (++n <= range)                // O(10^5)
+            {
+                lHalf = n.ToString();
+                rHalf = Reverse(lHalf);
+
+                ulong num = Convert.ToUInt64(lHalf + rHalf);
+                num *= num;
+
+                if (num > r)
+                    break;
+
+                if (num >= l && num == ReverseNum(num))
+                    superPalindrome++;
+            }
+            return (int)superPalindrome;
+            
+            // local Helper Func
+            string Reverse(string s, int skipLastDigit = 0)
+            {
+                Stack<char> st = new Stack<char>();
+                for (int i = 0; i < s.Length - skipLastDigit; i++)
+                    st.Push(s[i]);
+                return new string(st.ToArray());
+            }
+            ulong ReverseNum(ulong number)
+            {
+                ulong rev = 0;
+                while(number>0)
+                {
+                    rev = rev * 10 + number % 10;
+                    number /= 10;
+                }
+                return rev;
+            }
+        }
+
+
     }
 }

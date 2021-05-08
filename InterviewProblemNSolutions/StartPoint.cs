@@ -417,6 +417,7 @@ namespace InterviewProblemNSolutions
             MaximumSumCircularSubarray();
             ContainsDuplicateIII();
             ConvertSortedListToBinarySearchTree();
+            SuperPalindromes();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6816,6 +6817,17 @@ namespace InterviewProblemNSolutions
                 DailyProblem.SortedListToBST(list).InOrder("Converted BST");
                 Console.WriteLine("\n");
             }
+        }
+
+
+        public static void SuperPalindromes()
+        {
+            // Happing Coding https://youtu.be/sgRzd0DtZmM
+            // https://leetcode.com/problems/super-palindromes/
+            Utility.Print("906. Super Palindromes");
+            string[] left = { "4", "1", "1654867168715", "40000000000000000" }, right = { "1000", "2", "9654867168715", "50000000000000000" };
+            for (int i = 0; i < left.Length; i++)
+                Console.WriteLine($" No of Super Palindromes b/w '{left[i]}'...'{right[i]}' are: '{DailyProblem.SuperpalindromesInRange(left[i], right[i])}'\n");
         }
 
 
