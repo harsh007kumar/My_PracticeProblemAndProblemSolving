@@ -418,6 +418,7 @@ namespace InterviewProblemNSolutions
             ContainsDuplicateIII();
             ConvertSortedListToBinarySearchTree();
             SuperPalindromes();
+            InvalidTransactions();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6828,6 +6829,24 @@ namespace InterviewProblemNSolutions
             string[] left = { "4", "1", "1654867168715", "40000000000000000" }, right = { "1000", "2", "9654867168715", "50000000000000000" };
             for (int i = 0; i < left.Length; i++)
                 Console.WriteLine($" No of Super Palindromes b/w '{left[i]}'...'{right[i]}' are: '{DailyProblem.SuperpalindromesInRange(left[i], right[i])}'\n");
+        }
+
+
+        public static void InvalidTransactions()
+        {
+            // https://leetcode.com/problems/invalid-transactions/
+            Utility.Print("1169. Invalid Transactions");
+            string[][] transactionArr = {   new string[] { "alice,20,800,mtv", "alice,50,100,beijing" },
+                                            new string[] { "alice,20,800,mtv", "alice,50,1200,mtv" },
+                                            new string[] { "alice,20,800,mtv", "bob,50,1200,mtv" },
+                                            new string[] { "alice,20,800,mtv", "alice,50,100,mtv", "alice,51,100,frankfurt" },
+                                            new string[] { "alice,20,800,mtv", "bob,50,1200,mtv" } };
+            foreach (var transaction in transactionArr)
+            {
+                transaction.Print("Transactions");
+                DailyProblem.InvalidTransactions(transaction).Print("List of Invalid transactions");
+                Console.WriteLine();
+            }
         }
 
 

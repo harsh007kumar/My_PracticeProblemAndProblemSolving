@@ -12943,7 +12943,7 @@ namespace InterviewProblemNSolutions
                     numFreq.Add(arr[i], 1);
                 else
                     numFreq[arr[i]]++;
-            
+
             SortedDictionary<int, List<int>> sameFreqNums = new SortedDictionary<int, List<int>>();
             foreach (var kvp in numFreq)
                 if (!sameFreqNums.ContainsKey(kvp.Value))       // O(ulogu)
@@ -13447,13 +13447,13 @@ namespace InterviewProblemNSolutions
             long[] prefixSum = new long[n + 1];
             prefixSum[0] = nums[0];
             for (int i = 1; i < n; i++)
-                prefixSum[i] = prefixSum[i-1] + nums[i];
+                prefixSum[i] = prefixSum[i - 1] + nums[i];
 
             for (int i = 0; i < n - 1; i++)
             {
                 leftSum = prefixSum[i];
-                remainingSum = prefixSum[n-1] - leftSum;
-                if (prefixSum[n-1] < leftSum * 3) break;    // to divide array into 3 equal parts total sum should be >= thrice the sum of left-sub-array
+                remainingSum = prefixSum[n - 1] - leftSum;
+                if (prefixSum[n - 1] < leftSum * 3) break;    // to divide array into 3 equal parts total sum should be >= thrice the sum of left-sub-array
 
                 l = SearchLeft(i + 1, leftSum);             // min index l such that sum of mid-array is greater or equal to left-sub-array)
                 r = SearchRight(i + 1, remainingSum / 2);   // max index r such that sum of mid-array is smaller than or equal to sum of rt-sub-array)
@@ -13559,7 +13559,7 @@ namespace InterviewProblemNSolutions
                     sumFrequency.Clear();
                     sumFrequency.Add(0, 1);     // base case
                     int runningSum = 0, targetSum;
-                    
+
                     for (int r = 0; r < rows; r++)
                     {
                         runningSum += combinedRowSum[r];
@@ -13567,7 +13567,7 @@ namespace InterviewProblemNSolutions
 
                         if (sumFrequency.ContainsKey(targetSum))
                             result += sumFrequency[targetSum];
-                        
+
                         if (!sumFrequency.ContainsKey(runningSum))
                             sumFrequency[runningSum] = 1;
                         else
@@ -13674,14 +13674,14 @@ namespace InterviewProblemNSolutions
             SortedSet<int> set = new SortedSet<int>(nums);
             ways[0] = 1;    // base value
             return GetWays(target);
-            
+
             // local func
             int GetWays(int t)
             {
                 if (ways.ContainsKey(t)) return ways[t];
 
                 int result = 0;
-                foreach(var n in set)
+                foreach (var n in set)
                 {
                     if (n > t) break;
                     result += GetWays(t - n);
@@ -13978,10 +13978,10 @@ namespace InterviewProblemNSolutions
                 startingTime[i] = parent[i] = nodeWithEarlistTimeReachable[i] = -1; // set default values
 
             FindAllBridges(source);                         // we can start from any vertex, taking 0th node as source
-            
+
             foreach (var bridge in bridges)                 // Printing potentially Risky-Connection
                 Console.WriteLine($" Edge/Cable: '{bridge[0]}---{bridge[1]}' is Only connection & its failure/damage to this can divide network into 2 or more parts");
-            
+
             return bridges;
 
             // local func
@@ -14607,7 +14607,7 @@ namespace InterviewProblemNSolutions
             root.left = SortedListToBST(head);
             root.right = SortedListToBST(mid.next);
             return root;
-            
+
             // Local func
             ListNode GetMid(ListNode h)
             {
@@ -14683,7 +14683,7 @@ namespace InterviewProblemNSolutions
                     superPalindrome++;
             }
             return (int)superPalindrome;
-            
+
             // local Helper Func
             string Reverse(string s, int skipLastDigit = 0)
             {
@@ -14695,7 +14695,7 @@ namespace InterviewProblemNSolutions
             ulong ReverseNum(ulong number)
             {
                 ulong rev = 0;
-                while(number>0)
+                while (number > 0)
                 {
                     rev = rev * 10 + number % 10;
                     number /= 10;
@@ -14703,6 +14703,40 @@ namespace InterviewProblemNSolutions
                 return rev;
             }
         }
+
+
+        // Time O(n^2) Space O(n), n = length of array 'Transactions'
+        public static IList<string> InvalidTransactions(string[] transactions)
+        {
+            Dictionary<string, List<string[]>> d = new Dictionary<string, List<string[]>>();
+            // Grp transaction with same name together in Hashtable
+            for (int i = 0; i < transactions.Length; i++)           // O(n)
+            {
+                var curr = transactions[i].Split(',');
+                if (!d.ContainsKey(curr[0]))
+                    d[curr[0]] = new List<string[]>() { curr };
+                else
+                    d[curr[0]].Add(curr);
+            }
+            IList<string> invalid = new List<string>();
+            foreach (var tnx in d.Values)                           // O(n)
+                if (tnx.Count == 1) // grp has single entry, just check its 'amt' is not more than threshold
+                {
+                    if (Convert.ToInt32(tnx[0][2]) > 1000)
+                        invalid.Add(tnx[0][0] + "," + tnx[0][1] + "," + tnx[0][2] + "," + tnx[0][3]);
+                }
+                else
+                    for (int i = 0; i < tnx.Count; i++)
+                        for (int j = 0; j < tnx.Count; j++)
+                            // check if any tnx from same grp i.e. same name doesnt exceed threshold amt & also doesn't occur with 60min of any other tnx in different city
+                            if (i != j && (Convert.ToInt32(tnx[i][2]) > 1000 || (Math.Abs(Convert.ToInt32(tnx[j][1]) - Convert.ToInt32(tnx[i][1])) <= 60 && tnx[j][3] != tnx[i][3])))
+                            {
+                                invalid.Add(tnx[i][0] + "," + tnx[i][1] + "," + tnx[i][2] + "," + tnx[i][3]);
+                                break;  // once transaction is added to inValid stop further validation for ith transaction
+                            }
+            return invalid;
+        }
+
 
 
     }
