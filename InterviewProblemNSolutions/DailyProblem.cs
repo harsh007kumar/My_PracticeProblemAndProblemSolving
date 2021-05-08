@@ -14738,6 +14738,30 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) Space O(1)
+        public static bool CheckStraightLine(int[][] coordinates)
+        {
+            /* The idea of this solution is we use 3 points to find whether two slopes are equal. We can use the equation:
+             * 
+             * (x1 - x0) * (y2 - y1) != (y1 - y0) * (x2 - x1)
+             * where x0, x1, x2, y0, y1, y2 are all coordinates
+             * 
+             * we may equation simpler, by dividing both sides by (x1 - x0) and (x2 - x1) and we can get:
+             * (y2-y1) / (x2-x1) = (y1-y0) / (x1-x0) == Slope
+             * 
+             * but we will use original equation as we don't have to worry about dividing by 0
+             */
+            int x1 = coordinates[1][0], y1 = coordinates[1][1], x0 = coordinates[0][0], y0 = coordinates[0][1], y2, x2;
+            for (int i = 2; i < coordinates.Length; i++)
+            {
+                x2 = coordinates[i][0];
+                y2 = coordinates[i][1];
+                if ((x1 - x0) * (y2 - y1) != (y1 - y0) * (x2 - x1))
+                    return false;
+            }
+            return true;
+        }
+
 
     }
 }

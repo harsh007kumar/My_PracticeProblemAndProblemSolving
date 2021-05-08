@@ -419,6 +419,7 @@ namespace InterviewProblemNSolutions
             ConvertSortedListToBinarySearchTree();
             SuperPalindromes();
             InvalidTransactions();
+            CheckIfItIsAStraightLine();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6235,7 +6236,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("1074. Number of Submatrices That Sum to Target");
             //NumSubmatrixSumTarget
             int[][][] matrix = { new int[][] { new int[] { 0, 1, 0 }, new int[] { 1, 1, 1 }, new int[] { 0, 1, 0 } },
-                                new int[][] { new int[] { 1, -1 }, new int[] { -1, 1 } }, 
+                                new int[][] { new int[] { 1, -1 }, new int[] { -1, 1 } },
                                 new int[][] { new int[] { 964 } } };
             int[] target = { 0, 0, 964 };
             for (int i = 0; i < matrix.Length; i++)
@@ -6846,6 +6847,21 @@ namespace InterviewProblemNSolutions
                 transaction.Print("Transactions");
                 DailyProblem.InvalidTransactions(transaction).Print("List of Invalid transactions");
                 Console.WriteLine();
+            }
+        }
+
+
+        public static void CheckIfItIsAStraightLine()
+        {
+            // https://leetcode.com/problems/check-if-it-is-a-straight-line/
+            Utility.Print("1232. Check If It Is a Straight Line");
+            int[][][] coordinatesArr = { new int[][] { new int[] { 1, 2 }, new int[] { 2, 3 }, new int[] { 3, 4 }, new int[] { 4, 5 }, new int[] { 5, 6 }, new int[] { 6, 7 } },
+                                        new int[][] { new int[] { 1, 1 }, new int[] { 2, 2 }, new int[] { 3, 4 }, new int[] { 4, 5 }, new int[] { 5, 6 }, new int[] { 7, 7 } },
+                                        new int[][] { new int[] { 0, 0 }, new int[] { 0, 1 }, new int[] { 0, -1 } } };
+            foreach (var coordinate in coordinatesArr)
+            {
+                coordinate.Print("Coordinates");
+                Console.WriteLine($" Above Coordinates represent a straight line: '{DailyProblem.CheckStraightLine(coordinate)}'\n");
             }
         }
 
