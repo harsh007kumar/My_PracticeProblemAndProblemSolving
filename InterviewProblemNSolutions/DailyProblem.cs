@@ -14763,5 +14763,52 @@ namespace InterviewProblemNSolutions
         }
 
 
+
+        // Time O(n^2) Space O(1)
+        public static IList<int> PancakeSort(int[] A)
+        {
+            // Most imp thing to notice is for any given number, in order to move it to any desired position, it takes at most two pancake flips to do so.
+            IList<int> ans = new List<int>();
+            int l = A.Length;
+            if (l < 2) return ans;
+
+            for (int n = l; n >= 1; n--)
+                // nth num not present at its correct location
+                if (A[n - 1] != n)
+                {
+                    // find location of nth num in array
+                    for (int i = 0; i < n; i++)
+                        if (A[i] == n)
+                        {
+                            if (i == 0)    // nth element is at 0th idx
+                            {
+                                Flip(n - 1);
+                                ans.Add(n);
+                            }
+                            else
+                            {
+                                Flip(i);// take the nth element to 0th idx
+                                ans.Add(i + 1);
+                                Flip(n - 1);// now take nth element to its correct idx
+                                ans.Add(n);
+                            }
+                            break;
+                        }
+                }
+            return ans;
+
+            // local helper func
+            void Flip(int k)
+            {
+                int start = 0, last = k;
+                while (start < last)
+                {
+                    var temp = A[start];
+                    A[start++] = A[last];
+                    A[last--] = temp;
+                }
+            }
+        }
+
     }
 }

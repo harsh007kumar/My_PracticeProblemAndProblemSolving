@@ -420,6 +420,7 @@ namespace InterviewProblemNSolutions
             SuperPalindromes();
             InvalidTransactions();
             CheckIfItIsAStraightLine();
+            PancakeSorting();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6862,6 +6863,19 @@ namespace InterviewProblemNSolutions
             {
                 coordinate.Print("Coordinates");
                 Console.WriteLine($" Above Coordinates represent a straight line: '{DailyProblem.CheckStraightLine(coordinate)}'\n");
+            }
+        }
+
+
+        public static void PancakeSorting()
+        {
+            // https://leetcode.com/problems/pancake-sorting/
+            Utility.Print("969. Pancake Sorting");
+            int[][] arrays = { new int[] { 3, 2, 4, 1 }, new int[] { 1, 2, 3 }, new int[] { 4, 3, 2, 1 } };
+            foreach (var arr in arrays)
+            {
+                arr.Print("Input");
+                DailyProblem.PancakeSort(arr).Print("Pancake Sorting done at foll indices");
             }
         }
 
