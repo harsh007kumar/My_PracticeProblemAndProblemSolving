@@ -421,6 +421,7 @@ namespace InterviewProblemNSolutions
             InvalidTransactions();
             CheckIfItIsAStraightLine();
             PancakeSorting();
+            ConstructTargetArrayWithMultipleSums();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6876,6 +6877,19 @@ namespace InterviewProblemNSolutions
             {
                 arr.Print("Input");
                 DailyProblem.PancakeSort(arr).Print("Pancake Sorting done at foll indices");
+            }
+        }
+
+
+        public static void ConstructTargetArrayWithMultipleSums()
+        {
+            // https://leetcode.com/problems/construct-target-array-with-multiple-sums/
+            Utility.Print("1354. Construct Target Array With Multiple Sums");
+            int[][] targetArr = { new int[] { 9, 3, 5 }, new int[] { 1, 1, 1, 2 }, new int[] { 8, 5 }, new int[] { 1, 1000000000 }, new int[] { 1 }, new int[] { 5 }, new int[] { 1, 2, 3, 7 } };
+            foreach (var target in targetArr)
+            {
+                target.Print("Target");
+                Console.WriteLine($" Checking if above array can be create from same length array of 1's: '{DailyProblem.ConstructTargetArrayWithMultipleSums(target)}'\n");
             }
         }
 

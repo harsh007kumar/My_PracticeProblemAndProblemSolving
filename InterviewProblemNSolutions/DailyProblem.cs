@@ -14775,7 +14775,6 @@ namespace InterviewProblemNSolutions
             for (int n = l; n >= 1; n--)
                 // nth num not present at its correct location
                 if (A[n - 1] != n)
-                {
                     // find location of nth num in array
                     for (int i = 0; i < n; i++)
                         if (A[i] == n)
@@ -14794,7 +14793,6 @@ namespace InterviewProblemNSolutions
                             }
                             break;
                         }
-                }
             return ans;
 
             // local helper func
@@ -14808,6 +14806,44 @@ namespace InterviewProblemNSolutions
                     A[last--] = temp;
                 }
             }
+        }
+
+
+        // Time O(nlogn) || Space O(n)
+        public static bool ConstructTargetArrayWithMultipleSums(int[] target)
+        {
+            /* Given that the sum is strictly increasing,
+             * the largest element in the target must be formed in the last step by adding the total sum in the previous step.
+             * Thus, we can simulate the process in a reversed way.
+             * 
+             * Subtract the largest with the rest of the array,
+             * and put the new element into the array. Repeat until all elements become one
+             */
+            if (target.Length == 1) return target[0] == 1;
+            long total = 0, x, top, remaining;
+            MaxHeap heap = new MaxHeap(target.Length);
+            for (int i = 0; i < target.Length; i++) // O(n)
+            {
+                total += target[i];
+                heap.Insert(target[i]);             // O(logn)
+            }
+            while (heap.GetMin() > 1)
+            {
+                top = heap.GetMin();
+                //x = top - (total - top);          // Results in TLE in edge cases when max no is very large as compared to sum of reamaining numbers
+                remaining = total - top;
+                if (remaining > top) return false;
+                x = top % remaining;                // using mod instead of subtraction
+
+                if (remaining == 1) return true;    // happens when we just have 2 nums ex: 1,5678 & we can construct 1's array in that case,
+                                                    // in situation like 1,2,3,7 we catch false in above if check
+
+                if (x < 1) return false;            // no nums could be < 1 as starting array we are trying to re-create has all 1's
+
+                total -= (top - x);                 // update total
+                heap.UpdateTop((int)x);             // replace the HeapTop with new reduced values & Heapify
+            }
+            return true;
         }
 
     }
