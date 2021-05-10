@@ -14846,5 +14846,46 @@ namespace InterviewProblemNSolutions
             return true;
         }
 
+
+        // Brute Force Time O(n*n/2) Space O(1)
+        public static int CountPrimesBruteForce(int n)
+        {
+            int prime = 0;
+            for (int i = 2; i < n; i++)    // O(n)
+                if (isPrime(i))             // O(n/2)
+                    prime++;
+            return prime;
+            bool isPrime(int num)
+            {
+                for (int i = num / 2; i > 1; i--)
+                    if (num % i == 0)
+                        return false;
+                return true;
+            }
+        }
+        // Sieve of Eratosthenes Algo || Time O(n*loglogn) || Space O(n)
+        public static int CountPrimes_SieveAlgo(int range)
+        {
+            bool[] isPrime = new bool[range+1];   // O(n)
+            for (int i = 2; i < range; i++)
+                isPrime[i] = true;
+
+            // check only till SqRoot(range)
+            for (int n = 2; n * n < range; n++) // O(loglogn)
+                if (isPrime[n])
+                    // now mark all multiples of current no's as not prime,
+                    // start from n^2 as all num b/w n...-1+n^2 are already marked by integers smaller than n
+                    // Ex: for 5, 15 is marked by 3 & 10,20 marked by 2 hence start from 5^2=25
+                    for (int num = n * n; num < range; num += n)   // O(n)
+                        isPrime[num] = false;
+
+            int count = 0;
+            for (int n = 2; n < range; n++)    // O(n)
+                if (isPrime[n])
+                    count++;
+            return count;
+        }
+
+
     }
 }

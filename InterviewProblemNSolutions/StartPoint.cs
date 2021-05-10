@@ -422,6 +422,7 @@ namespace InterviewProblemNSolutions
             CheckIfItIsAStraightLine();
             PancakeSorting();
             ConstructTargetArrayWithMultipleSums();
+            CountPrimes();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6890,6 +6891,19 @@ namespace InterviewProblemNSolutions
             {
                 target.Print("Target");
                 Console.WriteLine($" Checking if above array can be create from same length array of 1's: '{DailyProblem.ConstructTargetArrayWithMultipleSums(target)}'\n");
+            }
+        }
+
+
+        public static void CountPrimes()
+        {
+            // https://leetcode.com/problems/count-primes/
+            Utility.Print("204. Count Primes");
+            int[] rangeArr = { 10, 0, 1, 4000, 9000000,3 };
+            foreach (var range in rangeArr)
+            {
+                //Console.WriteLine($" No of primes <= '{range}' are: '{DailyProblem.CountPrimesBruteForce(range)}'");
+                Console.WriteLine($" No of primes < '{range}' are: '{DailyProblem.CountPrimes_SieveAlgo(range)}'");
             }
         }
 
