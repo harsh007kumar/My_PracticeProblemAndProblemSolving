@@ -424,6 +424,7 @@ namespace InterviewProblemNSolutions
             ConstructTargetArrayWithMultipleSums();
             CountPrimes();
             MaximumPointsYouCanObtainFromCards();
+            FancySequence();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6925,6 +6926,30 @@ namespace InterviewProblemNSolutions
                 //Console.WriteLine($" Max no of points we can get by chosing '{k[i]}' from in any way from left & right of array is: '{DynamicProgramming.MaxScore_DP(cards[i], k[i])}'\n");
                 Console.WriteLine($" Max no of points we can get by chosing '{k[i]}' from in any way from left & right of array is: '{DailyProblem.MaxScore(cards[i], k[i])}'\n");
             }
+        }
+
+
+        public static void FancySequence()
+        {
+            // https://leetcode.com/problems/fancy-sequence/
+            Utility.Print("1622. Fancy Sequence");
+            // Original Self Implemention
+            //Fancy fancy = new Fancy();
+
+            // Happy Coding https://www.youtube.com/watch?v=vYF1ubJ4-ow
+            Fancy_Faster fancy = new Fancy_Faster();    // Maths based approach
+
+            fancy.Append(2);   // fancy sequence: [2]
+            fancy.AddAll(3);   // fancy sequence: [2+3] -> [5]
+            fancy.Append(7);   // fancy sequence: [5, 7]
+            fancy.MultAll(2);  // fancy sequence: [5*2, 7*2] -> [10, 14]
+            fancy.GetIndex(0); // return 10
+            fancy.AddAll(3);   // fancy sequence: [10+3, 14+3] -> [13, 17]
+            fancy.Append(10);  // fancy sequence: [13, 17, 10]
+            fancy.MultAll(2);  // fancy sequence: [13*2, 17*2, 10*2] -> [26, 34, 20]
+            fancy.GetIndex(0); // return 26
+            fancy.GetIndex(1); // return 34
+            fancy.GetIndex(2); // return 20        
         }
 
 
