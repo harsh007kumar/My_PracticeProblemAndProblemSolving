@@ -14887,5 +14887,24 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(k) || Space (1) || Sliding Window based Algo
+        public static int MaxScore(int[] cardPoints, int k)
+        {
+            int left = 0, right = cardPoints.Length - 1, maxPoints = 0, currMax = 0;
+            // start initially with all K card picked from left
+            while (left < k)                    // O(k)
+                currMax += cardPoints[left++];
+            maxPoints = currMax;
+            // now remove one card from left & pick its replacement from right
+            while (--left >= 0)                 // O(k)
+            {
+                currMax += -cardPoints[left];
+                currMax += cardPoints[right--];
+                maxPoints = Math.Max(maxPoints, currMax);
+            }
+            return maxPoints;
+        }
+
+
     }
 }

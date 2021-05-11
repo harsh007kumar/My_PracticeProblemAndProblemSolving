@@ -1889,5 +1889,26 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time O(k^2) || Space (k^2) || Dp-Top-Down
+        public static int MaxScore_DP(int[] cardPoints, int k)
+        {
+            Dictionary<string, int> cache = new Dictionary<string, int>();
+            return Max(0, cardPoints.Length - 1, k);
+            // local func
+            int Max(int start, int last, int toPick)
+            {
+                if (toPick < 1 || start > last) return 0;
+
+                string key = start + "|" + last + "|" + toPick;
+                if (cache.ContainsKey(key))
+                    return cache[key];
+
+                return cache[key] = Math.Max(cardPoints[start] + Max(start + 1, last, toPick - 1),
+                                             cardPoints[last] + Max(start, last - 1, toPick - 1));
+            }
+        }
+
+
     }
 }

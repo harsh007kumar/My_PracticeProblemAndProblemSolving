@@ -423,6 +423,7 @@ namespace InterviewProblemNSolutions
             PancakeSorting();
             ConstructTargetArrayWithMultipleSums();
             CountPrimes();
+            MaximumPointsYouCanObtainFromCards();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6904,6 +6905,25 @@ namespace InterviewProblemNSolutions
             {
                 //Console.WriteLine($" No of primes <= '{range}' are: '{DailyProblem.CountPrimesBruteForce(range)}'");
                 Console.WriteLine($" No of primes < '{range}' are: '{DailyProblem.CountPrimes_SieveAlgo(range)}'");
+            }
+        }
+
+
+        public static void MaximumPointsYouCanObtainFromCards()
+        {
+            // https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/
+            Utility.Print("1423. Maximum Points You Can Obtain from Cards");
+            int[][] cards = {   new int[] { 1, 2, 3, 4, 5, 6, 1 },
+                                new int[] { 2, 2, 2 },
+                                new int[] { 9, 7, 7, 9, 7, 7, 9 },
+                                new int[] { 1, 1000, 1 },
+                                new int[] { 1, 79, 80, 1, 1, 1, 200, 1 } };
+            int[] k = { 3, 2, 7, 1, 3 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                cards[i].Print("Cards");
+                //Console.WriteLine($" Max no of points we can get by chosing '{k[i]}' from in any way from left & right of array is: '{DynamicProgramming.MaxScore_DP(cards[i], k[i])}'\n");
+                Console.WriteLine($" Max no of points we can get by chosing '{k[i]}' from in any way from left & right of array is: '{DailyProblem.MaxScore(cards[i], k[i])}'\n");
             }
         }
 
