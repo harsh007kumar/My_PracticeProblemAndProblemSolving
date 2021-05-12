@@ -425,6 +425,7 @@ namespace InterviewProblemNSolutions
             CountPrimes();
             MaximumPointsYouCanObtainFromCards();
             FancySequence();
+            FindPeakElement();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6950,6 +6951,20 @@ namespace InterviewProblemNSolutions
             fancy.GetIndex(0); // return 26
             fancy.GetIndex(1); // return 34
             fancy.GetIndex(2); // return 20        
+        }
+
+
+        public static void FindPeakElement()
+        {
+            // https://leetcode.com/problems/find-peak-element/
+            Utility.Print("162. Find Peak Element");
+            int[][] numsArr = { new int[] { 1, 2, 3, 1 }, new int[] { 1, 2, 1, 3, 5, 6, 4 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" Index of element strictly greater than its neighbours is: '{DailyProblem.FindPeakElement_Linear(nums)}'\n");
+                Console.WriteLine($" Index of element strictly greater than its neighbours is: '{DailyProblem.FindPeakElement_BinarySearch(nums)}'\n");
+            }
         }
 
 

@@ -14906,5 +14906,29 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) Space O(1)
+        public static int FindPeakElement_Linear(int[] nums)
+        {
+            for (int i = 0; i < nums.Length - 1; i++)
+                if (nums[i] > nums[i + 1])
+                    return i;
+            return nums.Length - 1;
+        }
+        // Time O(logN) Space O(1)
+        public static int FindPeakElement_BinarySearch(int[] nums)
+        {
+            int left = 0, right = nums.Length - 1, mid;
+            while (left < right)
+            {
+                mid = left + (right - left) / 2;
+                if (nums[mid] > nums[mid + 1])
+                    right = mid;
+                else
+                    left = mid + 1;
+            }
+            return left;
+        }
+
+
     }
 }
