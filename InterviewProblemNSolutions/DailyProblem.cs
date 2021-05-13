@@ -14930,5 +14930,35 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n^3)
+        public static IList<string> AmbiguousCoordinates(string s)
+        {
+            List<string> validPair = new List<string>();
+            for (int i = 2; i < s.Length - 1; i++)
+                foreach (var firstC in Make(1, i))
+                    foreach (var secondC in Make(i, s.Length - 1))
+                        validPair.Add("(" + firstC + ", " + secondC + ")");
+            return validPair;
+            // local helper func
+            IList<string> Make(int l, int r)
+            {
+                List<string> coordinates = new List<string>();
+                string left, right;
+                // Make valid coordinate from s.Substring(l, r)
+                for (int d = 1; d <= r - l; d++)
+                {
+                    left = s.Substring(l, d);
+                    right = s.Substring(l + d, r - (l + d));
+                    // left part doesnt start with '0' or if it than that the only digit && right doesnt ends with '0'
+                    if ((left[0] != '0' || left.Length == 1) && !right.EndsWith("0"))
+                        // add dot operator if distance is less than total no of chars we have to play with
+                        coordinates.Add(left + (d < r - l ? "." : "") + right);
+                }
+                return coordinates;
+            }
+        }
+
+
+
     }
 }

@@ -426,6 +426,7 @@ namespace InterviewProblemNSolutions
             MaximumPointsYouCanObtainFromCards();
             FancySequence();
             FindPeakElement();
+            AmbiguousCoordinates();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6958,6 +6959,7 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/find-peak-element/
             Utility.Print("162. Find Peak Element");
+            Utility.Print("852. Peak Index in a Mountain Array");
             int[][] numsArr = { new int[] { 1, 2, 3, 1 }, new int[] { 1, 2, 1, 3, 5, 6, 4 } };
             foreach (var nums in numsArr)
             {
@@ -6965,6 +6967,16 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Index of element strictly greater than its neighbours is: '{DailyProblem.FindPeakElement_Linear(nums)}'\n");
                 Console.WriteLine($" Index of element strictly greater than its neighbours is: '{DailyProblem.FindPeakElement_BinarySearch(nums)}'\n");
             }
+        }
+
+
+        public static void AmbiguousCoordinates()
+        {
+            // https://leetcode.com/problems/ambiguous-coordinates/
+            Utility.Print("816. Ambiguous Coordinates");
+            string[] sArr = { "(123)", "(00011)", "(0123)", "(100)", "(000)" };
+            foreach (var s in sArr)
+                DailyProblem.AmbiguousCoordinates(s).Print($"Below are possible Coordinates created from string '{s}'");
         }
 
 

@@ -205,7 +205,7 @@ namespace InterviewProblemNSolutions
         {
             if (msg != "") Console.Write($" Printing \'{msg}\':");
             foreach (var element in iterator)
-                Console.Write($" \'{element}\'");
+                Console.Write($" \'{element}\' ||");
             Console.WriteLine();
         }
 
