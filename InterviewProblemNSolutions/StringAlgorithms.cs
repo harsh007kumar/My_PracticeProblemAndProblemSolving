@@ -841,5 +841,28 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n)
+        public static string ReverseOnlyLetters(string s)
+        {
+            int left = 0, right = s.Length - 1;
+            char[] rev = s.ToCharArray();
+            while (left < right)
+            {
+                while (left < right && !Char.IsLetter(rev[left]))
+                    left++;
+                while (left < right && !Char.IsLetter(rev[right]))
+                    right--;
+
+                if (left >= right) break;
+                // swap
+                var temp = rev[left];
+                rev[left++] = rev[right];
+                rev[right--] = temp;
+            }
+            return new string(rev);
+        }
+
+
+
     }
 }
