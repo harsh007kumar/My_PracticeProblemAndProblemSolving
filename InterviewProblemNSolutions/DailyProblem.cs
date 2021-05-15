@@ -14958,6 +14958,30 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        // Time O(n*k) || Space O(n), n = length of 'A"
+        public static long GetMaxBySkipFrwdByMaxK(int[] A, int k)
+        {
+            int l = A.Length;
+            Dictionary<int, long> cache = new Dictionary<int, long>();
+            return GetMax(0);
+            // local func
+            long GetMax(int idx)
+            {
+                if (idx >= l - 1) return A[l - 1];
+                if (cache.ContainsKey(idx))
+                    return cache[idx];
+
+                long max = long.MinValue;
+                // 2 choice include this idx or skip 'k' index ahead
+                for (int jump = 1; jump < idx + k; jump++)
+                {
+                    if (jump >= l) break;
+                    max = Math.Max(max, GetMax(idx + jump));
+                }
+                return cache[idx] = max + A[idx];
+            }
+        }
+
 
 
     }

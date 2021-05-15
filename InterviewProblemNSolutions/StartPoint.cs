@@ -428,6 +428,8 @@ namespace InterviewProblemNSolutions
             FindPeakElement();
             AmbiguousCoordinates();
             ReverseOnlyLetters();
+            GetMaxBySkipFrwdByMaxK();
+            CountCluster();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6988,6 +6990,19 @@ namespace InterviewProblemNSolutions
             string[] str = { "ab-cd", "a-bC-dEf-ghIj", "Test1ng-Leet=code-Q!", "7_28]" };
             foreach (var s in str)
                 Console.WriteLine($" Reverse of '{s}' after keeping non-letters at original index is '{StringAlgorithms.ReverseOnlyLetters(s)}'\n");
+        }
+
+
+        public static void GetMaxBySkipFrwdByMaxK()
+        {
+            Utility.Print(" Get Max possible score by skipping at most 'k' indicies from a index (must including 1st & last integer)");
+            int[][] arr = { new int[] { 3, 4, -2, 1, 2 }, new int[] { 0, -3, -2, -5, -7, 1 } };
+            int[] k = { 2, 3 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                arr[i].Print("Input");
+                Console.WriteLine($" Mac score when k='{k[i]}' for above array is: '{DailyProblem.GetMaxBySkipFrwdByMaxK(arr[i], k[i])}'\n ");
+            }
         }
 
 
