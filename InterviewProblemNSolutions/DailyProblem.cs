@@ -14983,6 +14983,43 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(Max(n^2,V+E)) Space O(n), n = no of verticies(Rows) in zombies
+        public static int zombiClusters(int[][] zombies)
+        {
+            int n = zombies.Length;
+            List<int>[] graph = new List<int>[n];
+
+            // create Graph
+            for (int i = 0; i < n; i++)
+            {
+                graph[i] = new List<int>();
+                for (int j = 0; j < n; j++)
+                    if (zombies[i][j] == 1 && i != j)
+                        // u-> v
+                        graph[i].Add(j);
+            }
+            int cluster = 0;
+            bool[] visited = new bool[n];
+            // DFS traversal
+            for (int i = 0; i < n; i++)
+                if (!visited[i])    // not already visited
+                {
+                    DFS(i);
+                    cluster++;
+                }
+
+            return cluster;
+
+            // local func
+            void DFS(int idx)
+            {
+                if (visited[idx]) return;
+                visited[idx] = true;
+                foreach (var adjacentVertex in graph[idx])
+                    DFS(adjacentVertex);
+            }
+        }
+
 
     }
 }

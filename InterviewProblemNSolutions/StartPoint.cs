@@ -6995,7 +6995,7 @@ namespace InterviewProblemNSolutions
 
         public static void GetMaxBySkipFrwdByMaxK()
         {
-            Utility.Print(" Get Max possible score by skipping at most 'k' indicies from a index (must including 1st & last integer)");
+            Utility.Print("Get Max possible score by skipping at most 'k' indicies from a index (must including 1st & last integer)");
             int[][] arr = { new int[] { 3, 4, -2, 1, 2 }, new int[] { 0, -3, -2, -5, -7, 1 } };
             int[] k = { 2, 3 };
             for (int i = 0; i < k.Length; i++)
@@ -7003,6 +7003,14 @@ namespace InterviewProblemNSolutions
                 arr[i].Print("Input");
                 Console.WriteLine($" Mac score when k='{k[i]}' for above array is: '{DailyProblem.GetMaxBySkipFrwdByMaxK(arr[i], k[i])}'\n ");
             }
+        }
+
+        public static void CountCluster()
+        {
+            Utility.Print("Count no of connected componenets in given undirected graph");
+            int[][] mat = new int[][] { new int[] { 1, 1, 0, 0 }, new int[] { 1, 1, 1, 0 }, new int[] { 0, 1, 1, 0 }, new int[] { 0, 0, 0, 1 } };
+            mat.Print("Graph");
+            Console.WriteLine($" No of clusters in above graph: {DailyProblem.zombiClusters(mat)}");
         }
 
 
