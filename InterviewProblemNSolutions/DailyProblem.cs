@@ -15021,5 +15021,49 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) Space O(1)
+        public static bool IsNumber(string s)
+        {
+            bool dotSeen = false, digitSeen= false;
+            int l = s.Length, i = -1;
+
+            // if Optional sign found at begining than increment idx by 1
+            if (s[0] == '+' || s[0] == '-') i++;
+
+            while (++i < l)
+                if (s[i] == '.')
+                {
+                    // if one dot has already been seen return false on getting 2nd
+                    if (dotSeen) return false;
+                    dotSeen = true;
+                }
+                // Digit found
+                else if (s[i] - '0' >= 0 && s[i] - '0' <= 9)
+                    digitSeen = true;
+                // 'e' or 'E' found && atleast 1 digit seen
+                else if ((s[i] == 'e' || s[i] == 'E') && digitSeen)
+                    return FoundInteger(i + 1);
+                // found alphabets b/w A...Z or a...z || '+'  '-' signs
+                else
+                    return false;
+            return digitSeen;
+
+            // local func
+            bool FoundInteger(int idx)
+            {
+                if (idx >= l) return false;
+
+                // if Optional sign found at begining than increment idx by 1
+                if (s[idx] == '+' || s[idx] == '-') idx++;
+
+                for (int k = idx; k < l; k++)
+                    // Anything else other than a Digit (sign operator || dot operator || 'e' or 'E' || some other alphabets b/w A...Z or a...z) found
+                    if (!Char.IsDigit(s[k]))
+                        return false;
+                return idx < l; // ensuring atleast 1 digit was seen
+            }
+        }
+
+
     }
 }
