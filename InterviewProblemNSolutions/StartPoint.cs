@@ -431,6 +431,9 @@ namespace InterviewProblemNSolutions
             GetMaxBySkipFrwdByMaxK();
             CountCluster();
             ValidNumber();
+            MeanderingArray();
+            CarParkingRoof();
+            AwardTopKHotels();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7022,6 +7025,46 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "0", "e", ".", ".1", "2", "0089", "-0.1", "+3.14", "4.", "-.9", "2e10", "-90E3", "3e+7", "+6e-1", "53.5e93", "-123.456e789", "abc", "1a", "1e", "e3", "99e2.5", "--6", "-+3", "95a54e53" };
             foreach (var s in sArr)
                 Console.WriteLine($" '{s}' is valid number: {DailyProblem.IsNumber(s)}\n");
+        }
+
+
+        public static void MeanderingArray()
+        {
+            Utility.Print("Booking.Com Q1 => MeanderingArray");
+            int[] unSorted = { -1, 1, 2, 3, -5 };
+            unSorted.Print("Unosrted Array");
+            DailyProblem.MeanderingArray(unSorted.ToList()).Print("Meandering-Array");
+        }
+
+
+        public static void CarParkingRoof()
+        {
+            Utility.Print("Booking.Com Q2 => CarParkingRoof");
+            long[] cars = { 6, 2, 12, 7 };
+            int k = 3;
+            cars.Print("Cars");
+            Console.WriteLine($" To cover '{k}' cars at index listed above we neeed Roof of len: '{DailyProblem.CarParkingRoof(cars.ToList(), k)}'");
+        }
+
+
+        public static void AwardTopKHotels()
+        {
+            Utility.Print("Booking.Com Q3 => AwardTopKHotels");
+            string positiveKeywords = "breakfast beach citycenter location metro view staff price";
+            string negativeKeywords = "not";
+            int[] hotelIds = { 1, 2, 1, 1, 2 };
+            string[] reviews = { "This hotel has a nice view of the citycenter. The location is perfect.",
+                                "The breakfast is ok. Regarding location, it is quite far from citycenter but price is cheap so it is worth.", 
+                                "Location is excellent. 5 minutes from citycenter. There is also a metero station very close to the hotel.",
+                                "They said I couldn't take my dog and there were other guests with dogs! That is not fair.",
+                                "Very friendly staff and good cost-benefit ratio. Its location is a bit far from citycenter." };
+            int k = 2;
+            Console.WriteLine($" Positive KeySet => '{positiveKeywords}'");
+            Console.WriteLine($" Negative KeySet => '{negativeKeywords}'");
+            hotelIds.Print("HotelsIDs");
+            reviews.Print("Reviews");
+            Console.WriteLine(Utility.lineDelimeter);
+            DailyProblem.AwardTopKHotels(positiveKeywords, negativeKeywords, hotelIds.ToList(), reviews.ToList(), k).Print($" Top '{k}' Hotel-ID's basis above reviews are: ");
         }
 
 

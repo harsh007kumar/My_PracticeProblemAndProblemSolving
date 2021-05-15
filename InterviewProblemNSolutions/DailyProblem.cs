@@ -15065,5 +15065,110 @@ namespace InterviewProblemNSolutions
         }
 
 
+        /*
+         * Complete the 'meanderingArray' function below.
+         *
+         * The function is expected to return an INTEGER_ARRAY.
+         * The function accepts INTEGER_ARRAY unsorted as parameter.
+         */
+        // Time = O(nlogn) || Space = O(n)
+        public static List<int> MeanderingArray(List<int> unsorted)
+        {
+            unsorted.Sort();    // O(nlogn)
+            int left = 0, right = unsorted.Count - 1;
+            List<int> ans = new List<int>(right + 1);
+            while (left <= right)  // O(n)
+            {
+                ans.Add(unsorted[right--]);
+                if (left < right)
+                    ans.Add(unsorted[left++]);
+            }
+            return ans;
+        }
+
+        /*
+         * Complete the 'carParkingRoof' function below.
+         *
+         * The function is expected to return a LONG_INTEGER.
+         * The function accepts following parameters:
+         *  1. LONG_INTEGER_ARRAY cars
+         *  2. INTEGER k
+         */
+        // Time O(nlogn) || Space O(k)
+        public static long CarParkingRoof(List<long> cars, int k)
+        {
+            if (k == 1) return 1;
+            // sort parked cars by their spots
+            cars.Sort();        // O(nlogn)
+
+            Queue<long> q = new Queue<long>(k); // Space O(k), to hold last 'k' spots
+            long roof = long.MaxValue;
+            for (int i = 0; i < cars.Count; i++)   // O(n)
+            {
+                q.Enqueue(cars[i]);
+                if (q.Count < k) continue; // less than 'k' spots are covered currently, add more spots
+
+                // try finding the min length of roof that covers 'k' spots
+                roof = Math.Min(roof, 1 + cars[i] - q.Dequeue());
+            }
+            return roof;
+        }
+
+        /*
+         * Complete the 'awardTopKHotels' function below.
+         *
+         * The function is expected to return an INTEGER_ARRAY.
+         * The function accepts following parameters:
+         *  1. STRING positiveKeywords
+         *  2. STRING negativeKeywords
+         *  3. INTEGER_ARRAY hotelIds
+         *  4. STRING_ARRAY reviews
+         *  5. INTEGER k
+         */
+        public static List<int> AwardTopKHotels(string positiveKeywords, string negativeKeywords, List<int> hotelIds, List<string> reviews, int k)
+        {
+            HashSet<string> positive = new HashSet<string>(positiveKeywords.ToLower().Split(' ').ToArray());
+            HashSet<string> negative = new HashSet<string>(negativeKeywords.ToLower().Split(' ').ToArray());
+
+            // using HashTable to store the review Score of each unique Hotel
+            Dictionary<int, long> hotelScore = new Dictionary<int, long>();
+            for (int i = 0; i < hotelIds.Count; i++)
+                if (!hotelScore.ContainsKey(hotelIds[i]))
+                    hotelScore[hotelIds[i]] = GetScore(reviews[i].ToLower(), positive, negative);
+                else    // update the score
+                    hotelScore[hotelIds[i]] += GetScore(reviews[i].ToLower(), positive, negative);
+
+            
+            //var sortedHotel = hotelScore.ToList();
+            //sortedHotel.Sort((x, y) => x.Value != y.Value ? y.Value.CompareTo(x.Value) : x.Key.CompareTo(y.Key));
+            
+            List<KeyValuePair<int, long>> sortedHotel = hotelScore.ToList();
+            sortedHotel.Sort(delegate (KeyValuePair<int, long> h1, KeyValuePair<int, long> h2)
+            // we need to sort in descending order of Score Higher Score Hotel comes 1st, hence if score of 2 hotels is different sort by score else pick one with smaller ID
+            { return h1.Value != h2.Value ? h2.Value.CompareTo(h1.Value) : h1.Key.CompareTo(h2.Key); });
+
+
+            List<int> topK = new List<int>();
+            foreach (var topRatedHotel in sortedHotel)
+            {
+                topK.Add(topRatedHotel.Key);
+                if (topK.Count == k)   // got our top 'K' hotels
+                    break;
+            }
+            return topK;
+        }
+        static long GetScore(string review, HashSet<string> positive, HashSet<string> negative)
+        {
+            long finalScore = 0;
+            foreach (var key in review.Split(' '))
+                if (positive.Contains(key))
+                    finalScore += 3;
+                else if (negative.Contains(key))
+                    finalScore -= 1;
+            return finalScore;
+        }
+
+
+
     }
 }
