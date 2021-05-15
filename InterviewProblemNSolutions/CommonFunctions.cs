@@ -68,6 +68,15 @@ namespace InterviewProblemNSolutions
                 Console.Write($" {arr[i]} ||");
             Console.WriteLine();
         }
+        public static void Print(this long[] arr, string msg = "")
+        {
+            if (msg != "") Console.Write($" Printing '{msg}': \t");
+            else Console.WriteLine($" Printing given int array with '{arr.Length}' elements");
+
+            for (int i = 0; i < arr.Length; i++)
+                Console.Write($" {arr[i]} ||");
+            Console.WriteLine();
+        }
         public static void Print(this char[] arr, string msg = "")
         {
             if (msg != "") Console.Write($" Printing '{msg}': \t");
@@ -174,11 +183,11 @@ namespace InterviewProblemNSolutions
             Console.WriteLine();
         }
         
-        public static void Print(this string[] arr, string msg="")
+        public static void Print(this IList<string>[] arr, string msg="")
         {
             if (msg != "") Console.Write($" Printing \'{msg}\':");
-            foreach(var word in arr)
-                Console.Write($" \'{word}\'");
+            foreach (var word in arr)
+                Console.Write($" \'{word}\' ||");
             Console.WriteLine();
         }
 
