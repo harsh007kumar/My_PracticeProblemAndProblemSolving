@@ -434,6 +434,7 @@ namespace InterviewProblemNSolutions
             MeanderingArray();
             CarParkingRoof();
             AwardTopKHotels();
+            BinaryTreeCameras();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7065,6 +7066,51 @@ namespace InterviewProblemNSolutions
             reviews.Print("Reviews");
             Console.WriteLine(Utility.lineDelimeter);
             DailyProblem.AwardTopKHotels(positiveKeywords, negativeKeywords, hotelIds.ToList(), reviews.ToList(), k).Print($" Top '{k}' Hotel-ID's basis above reviews are: ");
+        }
+
+
+        public static void BinaryTreeCameras()
+        {
+            // https://leetcode.com/problems/binary-tree-cameras/
+            Utility.Print("968. Binary Tree Cameras");
+            List<TreeNode> listOfTrees = new List<TreeNode>();
+            listOfTrees.Add(new TreeNode(1)
+            {
+                left = new TreeNode(2)
+                {
+                    right = new TreeNode(3)
+                    {
+                        left = new TreeNode(4)
+                        {
+                            right = new TreeNode(5)
+                            {
+                                left = new TreeNode(6)
+                            }
+                        }
+                    }
+                }
+            });
+            listOfTrees.Add(new TreeNode(1)
+            {
+                left = new TreeNode(2),
+                right = new TreeNode(3)
+            });
+            listOfTrees.Add(new TreeNode(1)
+            {
+                right = new TreeNode(2)
+                {
+                    right = new TreeNode(3)
+                    {
+                        left = new TreeNode(4),
+                        right = new TreeNode(5)
+                    }
+                }
+            });
+            foreach (var binaryTree in listOfTrees)
+            {
+                binaryTree.InOrder("Binary-Tree");
+                Console.WriteLine($" Min no of Camera's we need to monitor all nodes in above Tree are: '{DailyProblem.MinCameraCover(binaryTree)}'\n");
+            }
         }
 
 

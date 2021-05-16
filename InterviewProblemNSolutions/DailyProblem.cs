@@ -15169,6 +15169,38 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) Recursive Space O(h)
+        public static int MinCameraCover(TreeNode root, int counter = 0)
+        {
+            int totalCam = 0;
+            if (Cover(root) == 0)
+                totalCam++;     // using  Max func to cover edge case of when we just have one node in tree
+            return totalCam;
+
+            // local helper func
+            // 0: not monitored
+            // 1: camera is used
+            // 2: no camera, but monitored (use for null nodes)
+            // Post Order Traversal
+            int Cover(TreeNode r)
+            {
+                if (r == null) return 2;
+
+                var left = Cover(r.left);
+                var right = Cover(r.right);
+
+                if (left == 0 || right == 0)
+                {
+                    totalCam++;
+                    return 1;
+                }
+                if (left == 2 && right == 2)
+                    return 0;
+                else
+                    return 2;
+            }
+        }
+        
 
     }
 }
