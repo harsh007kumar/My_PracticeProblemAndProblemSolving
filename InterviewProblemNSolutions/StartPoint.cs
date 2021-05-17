@@ -435,6 +435,7 @@ namespace InterviewProblemNSolutions
             CarParkingRoof();
             AwardTopKHotels();
             BinaryTreeCameras();
+            LongestStringChain();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7110,6 +7111,19 @@ namespace InterviewProblemNSolutions
             {
                 binaryTree.InOrder("Binary-Tree");
                 Console.WriteLine($" Min no of Camera's we need to monitor all nodes in above Tree are: '{DailyProblem.MinCameraCover(binaryTree)}'\n");
+            }
+        }
+
+
+        public static void LongestStringChain()
+        {
+            // https://leetcode.com/problems/longest-string-chain/
+            Utility.Print("1048. Longest String Chain");
+            string[][] wordsArr = { new string[] { "a", "b", "ba", "bca", "bda", "bdca" }, new string[] { "xbc", "pcxbcf", "xb", "cxbc", "pcxbc" } };
+            foreach (var words in wordsArr)
+            {
+                words.Print("WOrds");
+                Console.WriteLine($" Length of longest chain in above words-array is of len: '{DailyProblem.LongestStrChain(words)}'\n");
             }
         }
 

@@ -15200,7 +15200,103 @@ namespace InterviewProblemNSolutions
                     return 2;
             }
         }
-        
 
+
+
+        public static int LongestStrChain(string[] words)
+        {
+            /* We iterate over words array and
+             * store all the words in dictionary where key is the length of words & value HashSet of words with length = key
+             * 
+             * next we start from largest length key to smallest key
+             * and for each word of current key size we try checking 
+             * if there is is any word in key-1 Hashet which matches current word if we delete one of the character from curr word
+             * 
+             * once we find max chain length equal to size of current key we stop iterating further as this is the max we can get
+             * 
+             * Added Cache later to fetch precomputed sub-problems in O(1)
+             */
+            Dictionary<int, HashSet<string>> dict = new Dictionary<int, HashSet<string>>();
+            int maxWordLen = 0, longestChain = 0;
+            // add words in Dictionary as per their length
+            foreach (var word in words)         // O(n)
+            {
+                if (!dict.ContainsKey(word.Length))
+                    dict[word.Length] = new HashSet<string>() { word };
+                else
+                    dict[word.Length].Add(word);
+
+                maxWordLen = Math.Max(maxWordLen, word.Length);
+            }
+
+
+            Dictionary<string, int> cache = new Dictionary<string, int>();
+            while (maxWordLen > 0)              // O(n^2)
+            {
+                // max possible length already found
+                if (longestChain >= maxWordLen) break;
+
+                if (dict.ContainsKey(maxWordLen))
+                    longestChain = Math.Max(longestChain, FindChain(maxWordLen));
+
+                maxWordLen--;
+            }
+            return longestChain;
+
+            // local helper func
+            int FindChain(int len)
+            {
+                int currChain = 0;
+                foreach (var word in dict[len])
+                {
+                    currChain = Math.Max(currChain, 1 + GetPredecessor(word));
+                    if (currChain == len)
+                        break;
+                }
+
+                return currChain;
+            }
+            int GetPredecessor(string original)
+            {
+                int len = 0;
+                if (cache.ContainsKey(original))
+                    return cache[original];
+
+                if (dict.ContainsKey(original.Length - 1))
+                    foreach (var predecessor in dict[original.Length - 1])
+                        if (IsPredecessor(predecessor, original))
+                        {
+                            len = Math.Max(len, 1 + (GetPredecessor(predecessor)));
+                            if (len == original.Length) break;
+                        }
+                
+                return cache[original] = len;
+            }
+            bool IsPredecessorSlower(string pre, string org)
+            {
+                for (int i = 0; i < org.Length; i++)
+                    if (pre == org.Substring(0, i) + (i + 1 < org.Length ? org.Substring(i + 1) : ""))
+                        return true;
+                return false;
+            }
+            bool IsPredecessor(string pre, string org)
+            {
+                int i = 0, j = 0;
+                bool misMatch = false;
+                while (i < pre.Length && j < org.Length)
+                    if (pre[i] == org[j])
+                    {
+                        i++; j++;   // increament both index
+                    }
+                    else if (misMatch)
+                        return false;// return false on 2nd mis-Match
+                    else
+                    {
+                        misMatch = true;
+                        j++;        // increae len of longer string on misMatch
+                    }
+                return true;
+            }
+        }
     }
 }
