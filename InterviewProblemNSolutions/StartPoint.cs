@@ -437,6 +437,7 @@ namespace InterviewProblemNSolutions
             BinaryTreeCameras();
             LongestStringChain();
             FindDuplicateFileInSystem();
+            LongestHappyString();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -6913,7 +6914,7 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/count-primes/
             Utility.Print("204. Count Primes");
-            int[] rangeArr = { 10, 0, 1, 4000, 9000000,3 };
+            int[] rangeArr = { 10, 0, 1, 4000, 9000000, 3 };
             foreach (var range in rangeArr)
             {
                 //Console.WriteLine($" No of primes <= '{range}' are: '{DailyProblem.CountPrimesBruteForce(range)}'");
@@ -7057,7 +7058,7 @@ namespace InterviewProblemNSolutions
             string negativeKeywords = "not";
             int[] hotelIds = { 1, 2, 1, 1, 2 };
             string[] reviews = { "This hotel has a nice view of the citycenter. The location is perfect.",
-                                "The breakfast is ok. Regarding location, it is quite far from citycenter but price is cheap so it is worth.", 
+                                "The breakfast is ok. Regarding location, it is quite far from citycenter but price is cheap so it is worth.",
                                 "Location is excellent. 5 minutes from citycenter. There is also a metero station very close to the hotel.",
                                 "They said I couldn't take my dog and there were other guests with dogs! That is not fair.",
                                 "Very friendly staff and good cost-benefit ratio. Its location is a bit far from citycenter." };
@@ -7141,6 +7142,16 @@ namespace InterviewProblemNSolutions
                 DailyProblem.FindDuplicateFileInSystem(paths).Print("Duplicate files in the file system in terms of their paths");
                 Console.WriteLine("\n");
             }
+        }
+
+
+        public static void LongestHappyString()
+        {
+            // https://leetcode.com/problems/longest-happy-string/
+            Utility.Print("1405. Longest Happy String");
+            int[][] abc_Array = { new int[] { 1, 1, 7 }, new int[] { 2, 2, 1 }, new int[] { 7, 1, 0 }, new int[] { 0, 7, 0 }, new int[] { 0, 0, 0 } };
+            foreach (var abc in abc_Array)
+                Console.WriteLine($" Longest Happy String when we have {abc[0]} a's , {abc[1]} b's & {abc[2]} c's is: '{DailyProblem.LongestDiverseString(abc[0], abc[1], abc[2])}'\n");
         }
 
 

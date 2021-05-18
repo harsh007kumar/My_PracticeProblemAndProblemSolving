@@ -15329,5 +15329,43 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time (a+b+c) || Space O(1)
+        public static string LongestDiverseString(int a, int b, int c)
+        {
+            List<Pair<int, char>> ls = new List<Pair<int, char>>();
+            ls.Add(new Pair<int, char>(a, 'a'));
+            ls.Add(new Pair<int, char>(b, 'b'));
+            ls.Add(new Pair<int, char>(c, 'c'));
+            ls.Sort((x, y) => x.key.CompareTo(y.key));
+            char lastCh = 'x';
+            StringBuilder sb = new StringBuilder();
+            while (ls[2].key > 0)  // we have keys left to insert
+            {
+                if (lastCh != ls[2].val)
+                {
+                    lastCh = ls[2].val;
+                    sb.Append(lastCh);
+                    if (--ls[2].key > 0)    // can be inserted 1 more time
+                    {
+                        sb.Append(lastCh);
+                        --ls[2].key;        // decreament largest key
+                    }
+                }
+                else if (ls[1].key > 0)
+                {
+                    --ls[1].key;            // decreament 2nd largest key
+                    lastCh = ls[1].val;
+                    sb.Append(lastCh);
+                }
+                else
+                    break;
+                ls.Sort((x, y) => x.key.CompareTo(y.key));   // O(1)
+            }
+            return sb.ToString();
+        }
+
+
+
+
     }
 }
