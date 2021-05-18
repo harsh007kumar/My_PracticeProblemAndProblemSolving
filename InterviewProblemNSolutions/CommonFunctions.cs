@@ -168,6 +168,18 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine();
             }
         }
+        public static void Print(this IList<IList<string>> arr, string msg = "")
+        {
+            var row = arr.Count;
+            if (row == 0) return;
+            if (msg != "") Console.WriteLine($" Printing \'{msg}\' 2-D int array with {row}:Row & {arr[0].Count}:Col");
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < arr[i].Count; j++)
+                    Console.Write($" {arr[i][j]} ||");
+                Console.WriteLine();
+            }
+        }
 
         public static void Print(this bool[,] arr)
         {
