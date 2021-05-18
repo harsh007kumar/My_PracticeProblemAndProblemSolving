@@ -436,6 +436,7 @@ namespace InterviewProblemNSolutions
             AwardTopKHotels();
             BinaryTreeCameras();
             LongestStringChain();
+            FindDuplicateFileInSystem();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7124,6 +7125,21 @@ namespace InterviewProblemNSolutions
             {
                 words.Print("WOrds");
                 Console.WriteLine($" Length of longest chain in above words-array is of len: '{DailyProblem.LongestStrChain(words)}'\n");
+            }
+        }
+
+
+        public static void FindDuplicateFileInSystem()
+        {
+            // https://leetcode.com/problems/find-duplicate-file-in-system/
+            Utility.Print("609. Find Duplicate File in System");
+            string[][] pathsArr = { new string[] { "root/a 1.txt(abcd) 2.txt(efgh)", "root/c 3.txt(abcd)", "root/c/d 4.txt(efgh)", "root 4.txt(efgh)" },
+                                    new string[] { "root/a 1.txt(abcd) 2.txt(efgh)", "root/c 3.txt(abcd)", "root/c/d 4.txt(efgh)" } };
+            foreach (var paths in pathsArr)
+            {
+                paths.Print("Paths");
+                DailyProblem.FindDuplicateFileInSystem(paths).Print("Duplicate files in the file system in terms of their paths");
+                Console.WriteLine("\n");
             }
         }
 

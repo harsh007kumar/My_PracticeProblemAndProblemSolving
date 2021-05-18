@@ -15298,5 +15298,36 @@ namespace InterviewProblemNSolutions
                 return true;
             }
         }
+
+
+        // Time = Space = O(n*m), n = length of 'paths' array & m is avg no of file in each path
+        public static IList<IList<string>> FindDuplicateFileInSystem(string[] paths)
+        {
+            Dictionary<string, List<string>> contentDict = new Dictionary<string, List<string>>();
+            foreach (var path in paths)                     // O(n)
+            {
+                var files = path.Split(' ');
+                // skip 0th idx as that contains 'directory'
+                for (int i = 1; i < files.Length; i++)      // O(m)
+                {
+                    // Ex: "1.txt(abcd)" gets splits into => new string[] { "1.txt" ,"abcd)" }
+                    var nameContent = files[i].Split('(');
+
+                    // new content than insert new key in HashTable
+                    if (!contentDict.ContainsKey(nameContent[1]))
+                        contentDict[nameContent[1]] = new List<string>() { files[0] + "/" + nameContent[0] };
+                    else // add one more file path to key whose content matches current file content
+                        contentDict[nameContent[1]].Add(files[0] + "/" + nameContent[0]);
+                }
+            }
+
+            List<IList<string>> duplicateFilesGrp = new List<IList<string>>();
+            foreach (var kvp in contentDict)
+                if (kvp.Value.Count > 1)        // duplicate files
+                    duplicateFilesGrp.Add(kvp.Value);
+            return duplicateFilesGrp;
+        }
+
+
     }
 }
