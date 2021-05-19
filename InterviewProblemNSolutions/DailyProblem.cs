@@ -15365,7 +15365,55 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(nlogn) || Space O(n)
+        public static int MinimumMovesToEqualArrayElements(int[] nums)
+        {
+            // Sort array
+            Array.Sort(nums);       // O(nlogn)
 
+            int l = nums.Length;
+            // Take adjacent difference
+            int[] absDiff = new int[l - 1];
+            for (int i = 1; i < l; i++)
+                absDiff[i - 1] = nums[i] - nums[i - 1];
+
+            // Compute presum
+            int[] preSum = new int[l - 1];
+            for (int i = 0; i < l - 1; i++)
+                preSum[i] = absDiff[i] + (i > 0 ? preSum[i - 1] : 0);
+
+            // Take sum of the resultant array
+            int moves = 0;
+            for (int i = 0; i < l - 1; i++)
+                moves += preSum[i];
+            return moves;
+        }
+        // Time O(n) || Space O(1)
+        public static int MinimumMovesToEqualArrayElementsFaster(int[] nums)
+        {
+            /* "Building upon above O(nlogn) solution"
+             * 
+             * Say you have an array as:
+             * [a, b, c, d, e, f]  // assume sorted
+             * [b-a, c-b, d-c, e-d, f-e] // adjacent difference
+             * [b-a, c-a, d-a, e-a, f-a] // presum
+             * It should have become clear by now but let me spell it out.
+             * 
+             * we are just subtracting the minimum element from all the elements in nums.
+             * (b+c+d+e+f) - 5*a
+             * (a+b+c+d+e+f) - 6a // +-a
+             * 
+             * -> sum(nums) - n*min(nums)
+             * So we were able to reduce the time complexity from O(n*lon(n)) to O(n).
+             */
+            long sum = 0, min = long.MaxValue;
+            foreach(var n in nums)
+            {
+                sum += n;
+                min = Math.Min(min, n);
+            }
+            return (int)(sum - (min * nums.Length));
+        }
 
     }
 }

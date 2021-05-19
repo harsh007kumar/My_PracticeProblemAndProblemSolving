@@ -438,6 +438,7 @@ namespace InterviewProblemNSolutions
             LongestStringChain();
             FindDuplicateFileInSystem();
             LongestHappyString();
+            MinimumMovesToEqualArrayElements();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7152,6 +7153,21 @@ namespace InterviewProblemNSolutions
             int[][] abc_Array = { new int[] { 1, 1, 7 }, new int[] { 2, 2, 1 }, new int[] { 7, 1, 0 }, new int[] { 0, 7, 0 }, new int[] { 0, 0, 0 } };
             foreach (var abc in abc_Array)
                 Console.WriteLine($" Longest Happy String when we have {abc[0]} a's , {abc[1]} b's & {abc[2]} c's is: '{DailyProblem.LongestDiverseString(abc[0], abc[1], abc[2])}'\n");
+        }
+
+
+        public static void MinimumMovesToEqualArrayElements()
+        {
+            // https://leetcode.com/problems/minimum-moves-to-equal-array-elements/
+            // https://leetcode.com/problems/minimum-moves-to-equal-array-elements/discuss/1217713/C++-python-Just-Some-Clever-Math-O(n)-or-O(1)
+            Utility.Print("453. Minimum Moves to Equal Array Elements");
+            int[][] numsArr = { new int[] { 1, 2, 3 }, new int[] { 1, 1, 1 }, new int[] { 1, 3, 5, 8 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" O(nlogn)  Min number of moves required to make all array elements equal: '{DailyProblem.MinimumMovesToEqualArrayElements(nums)}'\n");
+                Console.WriteLine($" O(n) Algo Min number of moves required to make all array elements equal: '{DailyProblem.MinimumMovesToEqualArrayElementsFaster(nums)}'\n");
+            }
         }
 
 
