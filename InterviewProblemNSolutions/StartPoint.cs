@@ -439,6 +439,7 @@ namespace InterviewProblemNSolutions
             FindDuplicateFileInSystem();
             LongestHappyString();
             MinimumMovesToEqualArrayElements();
+            MinimumAreaRectangle();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7167,6 +7168,20 @@ namespace InterviewProblemNSolutions
                 nums.Print("Nums");
                 Console.WriteLine($" O(nlogn)  Min number of moves required to make all array elements equal: '{DailyProblem.MinimumMovesToEqualArrayElements(nums)}'\n");
                 Console.WriteLine($" O(n) Algo Min number of moves required to make all array elements equal: '{DailyProblem.MinimumMovesToEqualArrayElementsFaster(nums)}'\n");
+            }
+        }
+
+
+        public static void MinimumAreaRectangle()
+        {
+            // https://leetcode.com/problems/minimum-area-rectangle/
+            Utility.Print("939. Minimum Area Rectangle");
+            int[][][] pointsArr = { new int[][] { new int[] { 1, 1 }, new int[] { 1, 3 }, new int[] { 3, 1 }, new int[] { 3, 3 }, new int[] { 2, 2 } },
+                                    new int[][] { new int[] { 1, 1 }, new int[] { 1, 3 }, new int[] { 3, 1 }, new int[] { 3, 3 }, new int[] { 4, 1 }, new int[] { 4, 3 } } };
+            foreach (var points in pointsArr)
+            {
+                points.Print("Points");
+                Console.WriteLine($" Min area of a rectangle formed from above points, with sides parallel to the x and y axes has area: '{DailyProblem.MinAreaRect(points)}'\n");
             }
         }
 

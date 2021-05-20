@@ -15415,5 +15415,30 @@ namespace InterviewProblemNSolutions
             return (int)(sum - (min * nums.Length));
         }
 
+
+        // Time O(n^2) Space = O(n)
+        public static int MinAreaRect(int[][] points)
+        {
+            Dictionary<int, HashSet<int>> xSet = new Dictionary<int, HashSet<int>>();
+            for (int i = 0; i < points.Length; i++)        // O(n)
+                if (!xSet.ContainsKey(points[i][0]))
+                    xSet[points[i][0]] = new HashSet<int>() { points[i][1] };
+                else
+                    xSet[points[i][0]].Add(points[i][1]);
+
+            int minArea = int.MaxValue, x1, y1, x2, y2;
+            for (int i = 0; i < points.Length; i++)        // O(n^2)
+                for (int j = i + 1; j < points.Length; j++)
+                {
+                    x1 = points[i][0];
+                    y1 = points[i][1];
+                    x2 = points[j][0];
+                    y2 = points[j][1];
+                    if (x1 != x2 && y1 != y2 && xSet[x1].Contains(y2) && xSet[x2].Contains(y1))
+                        minArea = Math.Min(minArea, Math.Abs(x1 - x2) * Math.Abs(y1 - y2));
+                }
+            return minArea == int.MaxValue ? 0 : minArea;
+        }
+
     }
 }
