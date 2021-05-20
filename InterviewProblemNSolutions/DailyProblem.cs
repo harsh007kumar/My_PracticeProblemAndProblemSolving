@@ -15440,5 +15440,39 @@ namespace InterviewProblemNSolutions
             return minArea == int.MaxValue ? 0 : minArea;
         }
 
+
+        // Time O(n*m) Space O(n), n = length of words array & m = avg len of each word
+        public static string LongestPrefixWord(string[] words)
+        {
+            HashSet<string> set = new HashSet<string>();
+            foreach (var word in words)   // O(n)
+                set.Add(word);
+
+            string ans = "";
+            StringBuilder prefix = new StringBuilder();
+
+            foreach (var word in words)  // O(n)
+                if (word.Length >= ans.Length)
+                {
+                    prefix.Clear();
+                    bool valid = true;
+                    foreach (var ch in word) // O(m)
+                    {
+                        prefix.Append(ch);
+                        // if any one of the prefix of current word is not present than mark curr word as NotValid
+                        if (!set.Contains(prefix.ToString()))
+                        {
+                            valid = false;
+                            break;
+                        }
+                    }
+                    // either longer valid word found or lexographically smaller same length word
+                    if (valid && (word.Length > ans.Length || word.CompareTo(ans) < 0))
+                        ans = word;
+                }
+            return ans;
+        }
+
+
     }
 }

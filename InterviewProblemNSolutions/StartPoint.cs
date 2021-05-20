@@ -440,6 +440,7 @@ namespace InterviewProblemNSolutions
             LongestHappyString();
             MinimumMovesToEqualArrayElements();
             MinimumAreaRectangle();
+            LongestWordInDictionary();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7182,6 +7183,20 @@ namespace InterviewProblemNSolutions
             {
                 points.Print("Points");
                 Console.WriteLine($" Min area of a rectangle formed from above points, with sides parallel to the x and y axes has area: '{DailyProblem.MinAreaRect(points)}'\n");
+            }
+        }
+
+
+        public static void LongestWordInDictionary()
+        {
+            // https://leetcode.com/problems/longest-word-in-dictionary/
+            Utility.Print("720. Longest Word in Dictionary");
+            string[][] wordsArr = new string[][] { new string[] { "w", "wo", "wor", "worl", "world" },
+                                new string[] { "a", "banana", "app", "appl", "ap", "apply", "apple" } };
+            foreach (var words in wordsArr)
+            {
+                words.Print("Words");
+                Console.WriteLine($" Longest & lexographically smallest word whose all prefixes are present in above dictionary and is '{DailyProblem.LongestPrefixWord(words)}'\n");
             }
         }
 
