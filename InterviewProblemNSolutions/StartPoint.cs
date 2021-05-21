@@ -441,6 +441,7 @@ namespace InterviewProblemNSolutions
             MinimumMovesToEqualArrayElements();
             MinimumAreaRectangle();
             LongestWordInDictionary();
+            FindAndReplacePattern();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7197,6 +7198,21 @@ namespace InterviewProblemNSolutions
             {
                 words.Print("Words");
                 Console.WriteLine($" Longest & lexographically smallest word whose all prefixes are present in above dictionary and is '{DailyProblem.LongestPrefixWord(words)}'\n");
+            }
+        }
+
+
+        public static void FindAndReplacePattern()
+        {
+            // https://leetcode.com/problems/find-and-replace-pattern/
+            Utility.Print("890. Find and Replace Pattern");
+            string[][] wordsArr = { new string[] { "abc", "deq", "mee", "aqq", "dkd", "ccc" }, new string[] { "a", "b", "c" } };
+            string[] pattern = { "abb", "a" };
+            for (int i = 0; i < wordsArr.Length; i++)
+            {
+                wordsArr[i].Print("Words");
+                StringAlgorithms.FindAndReplacePattern(wordsArr[i], pattern[i]).Print($"List of words from above array which match pattern '{pattern[i]}' =>");
+                Console.WriteLine("\n");
             }
         }
 

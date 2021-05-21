@@ -863,6 +863,41 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n*m) Space O(m), n = length of 'words', m = length of 'pattern'
+        public static IList<string> FindAndReplacePattern(string[] words, string pattern)
+        {
+            Dictionary<char, char> wordPatternMap = new Dictionary<char, char>();
+            HashSet<char> seen = new HashSet<char>();
+            IList<string> ans = new List<string>();
+            foreach (var word in words)  // O(n)
+                if (IsMatch(word))       // O(m) , m = 20
+                    ans.Add(word);
+            return ans;
+
+            // local helper func
+            bool IsMatch(string word)
+            {
+                wordPatternMap.Clear();
+                seen.Clear();
+                for (int i = 0; i < word.Length; i++)
+                    if (wordPatternMap.ContainsKey(word[i]))
+                    {
+                        // ecountered this character from 'word' before, return if its corrosponding char doesn't matches pattern curr idx
+                        if (wordPatternMap[word[i]] != pattern[i]) return false;
+                    }
+                    else
+                    {
+                        // char from pattern was seen before, meaing it has been associated with a char from word before
+                        // not also linked with new character from word making duplicate mapping, hence return false
+                        if (seen.Contains(pattern[i])) return false;
+                        wordPatternMap[word[i]] = pattern[i]; // add word[i]->pattern[i] mapping
+                        seen.Add(pattern[i]);               // mark seen
+                    }
+                return true;
+            }
+        }
+
+
 
     }
 }
