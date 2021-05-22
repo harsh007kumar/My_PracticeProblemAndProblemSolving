@@ -7231,6 +7231,14 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+        public static void N_QueensII()
+        {
+            // https://leetcode.com/problems/n-queens/
+            Utility.Print("52. N-Queens II");
+            int[] queensCount = { 4, 1, 2, 9 };
+            foreach (var qCount in queensCount)
+                Console.WriteLine($" Total possible configuration of placing '{qCount}' Queens in {qCount}x{qCount} chessboard are: '{DailyProblem.TotalNQueens(qCount)}'\n");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

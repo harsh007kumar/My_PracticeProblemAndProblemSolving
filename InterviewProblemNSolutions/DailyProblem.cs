@@ -15664,6 +15664,69 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+        // Time O(n!) Space O(n), n = 9 i.e. no of rows
+        public static int TotalNQueens(int n)
+        {
+            // Algo same as 'SolveNQueensFaster' we just dont store dots & Queens position anywhere
+            int ans = 0;
+            bool[] isRowAttacked = new bool[n];
+            bool[] isColAttacked = new bool[n];
+            HashSet<int>[] isLtDiagAttacked = new HashSet<int>[n];
+            HashSet<int>[] isRtDiagAttacked = new HashSet<int>[n];
+
+            for (int r = 0; r < n; r++)                     // O(n)
+            {
+                isLtDiagAttacked[r] = new HashSet<int>();
+                isRtDiagAttacked[r] = new HashSet<int>();
+            }
+            Try(0, 0);
+            return ans;
+
+            // Local helper func
+            void Try(int r, int queensPlaced)
+            {
+                if (queensPlaced == n)
+                    ans++;
+                else if (r < n)
+                    for (int c = 0; c < n; c++)             // O(n)
+                        if (!UnderAttack(r, c))
+                        {
+                            // Mark Straight lines that are underAttack
+                            Mark(r, c, true);
+
+                            // Make Recursive Call
+                            Try(r + 1, queensPlaced + 1);
+
+                            // Un-Mark Straight lines now not underAttack
+                            Mark(r, c, false);
+                        }
+            }
+            bool UnderAttack(int r, int c)                  // O(1)
+            {
+                int lMin = Math.Min(r, c);
+                int rMin = Math.Min(r, -1 + n - c);
+                if (isRowAttacked[r] || isColAttacked[c] || isLtDiagAttacked[r - lMin].Contains(c - lMin) || isRtDiagAttacked[c + rMin].Contains(r - rMin))
+                    return true;
+                return false;
+            }
+            void Mark(int r, int c, bool val)               // O(1)
+            {
+                isRowAttacked[r] = isColAttacked[c] = val;
+                int lMin = Math.Min(r, c);
+                int rMin = Math.Min(r, -1 + n - c);
+
+                if (val)    // mark position
+                {
+                    isLtDiagAttacked[r - lMin].Add(c - lMin);
+                    isRtDiagAttacked[c + rMin].Add(r - rMin);
+                }
+                else        // Un-mark position
+                {
+                    isLtDiagAttacked[r - lMin].Remove(c - lMin);
+                    isRtDiagAttacked[c + rMin].Remove(r - rMin);
+                }
+            }
+        }
 
 
 
