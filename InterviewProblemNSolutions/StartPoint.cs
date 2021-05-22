@@ -442,6 +442,7 @@ namespace InterviewProblemNSolutions
             MinimumAreaRectangle();
             LongestWordInDictionary();
             FindAndReplacePattern();
+            N_Queens();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7213,6 +7214,19 @@ namespace InterviewProblemNSolutions
                 wordsArr[i].Print("Words");
                 StringAlgorithms.FindAndReplacePattern(wordsArr[i], pattern[i]).Print($"List of words from above array which match pattern '{pattern[i]}' =>");
                 Console.WriteLine("\n");
+            }
+        }
+
+
+        public static void N_Queens()
+        {
+            // https://leetcode.com/problems/n-queens/
+            Utility.Print("51. N-Queens");
+            int[] queensCount = { 4, 1, 2, 9 };
+            foreach (var qCount in queensCount)
+            {
+                DailyProblem.SolveNQueens(qCount).Print($"Below are all possible configuration of placing '{qCount}' Queens in {qCount}x{qCount} chessboard");
+                Console.WriteLine(Utility.lineDelimeter);
             }
         }
 

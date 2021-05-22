@@ -15474,5 +15474,103 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n^2), n = 9 i.e. no of rows
+        public static IList<IList<string>> SolveNQueens(int n)
+        {
+            /* We need to place 'n' quees in a chessboard of 'n' rows & 'n' cols
+             * We try placing queens one by one at each pos[r,c] which is not under attack by any queen
+             * and than we mark below 4 straight lines as under attack:
+             *      curr row
+             *      curr column
+             *      one  diagonal: row,col transformed into if col greater than zero => row-col, 0
+             *      next diagonal: row,col transformed into if row greater than zero => 0, col+row
+             * places where we place Queen is updated with 'Q' & where we can't place marked with dot '.'
+             * once count of placed quees equals 'n' we check if unique configuration than save to ans
+             */
+            List<IList<string>> ans = new List<IList<string>>();
+            bool[] isRowAttacked = new bool[n];
+            bool[] isColAttacked = new bool[n];
+            HashSet<int>[] isLtDiagAttacked = new HashSet<int>[n];
+            HashSet<int>[] isRtDiagAttacked = new HashSet<int>[n];
+            Stack<char> currPlacement = new Stack<char>();          // to keep track of where queens have been placed currently
+            HashSet<string> uniqPlacements = new HashSet<string>(); // to store all unique positions where queens have been placed
+
+            // create empty board with just dots
+            char[][] board = new char[n][];
+            for (int r = 0; r < n; r++)                     // O(n)
+            {
+                isLtDiagAttacked[r] = new HashSet<int>();
+                isRtDiagAttacked[r] = new HashSet<int>();
+                board[r] = new char[n];
+                for (int c = 0; c < n; c++)
+                    board[r][c] = '.';
+            }
+            Try(0, 0, 0);
+            return ans;
+
+            // Local helper func
+            void Try(int r, int j, int queensPlaced)
+            {
+                if (queensPlaced == n)
+                {
+                    string pattern = new string(currPlacement.ToArray());
+                    if (!uniqPlacements.Contains(pattern))
+                    {
+                        uniqPlacements.Add(pattern);
+                        string[] sequence = new string[n];
+                        for (int i = 0; i < n; i++)
+                            sequence[i] = new string(board[i]);
+                        ans.Add(sequence);
+                    }
+                }
+                else if (r < n)
+                    for (int c = j; c < n; c++)             // O(n)
+                        if (!UnderAttack(r, c))
+                        {
+                            // Add Queen + Mark Straight lines that are underAttack + Add position where queen is added
+                            Mark(r, c, true);
+
+                            // Make Recursive Call
+                            Try(r + 1, 0, queensPlaced + 1);
+
+                            //  Remove Queen + Un-Mark Straight lines now not underAttack + Clear position where queen is removed from
+                            Mark(r, c, false);
+                        }
+            }
+            bool UnderAttack(int r, int c)                  // O(1)
+            {
+                int lMin = Math.Min(r, c);
+                int rMin = Math.Min(r, -1 + n - c);
+                if (isRowAttacked[r] || isColAttacked[c] || isLtDiagAttacked[r - lMin].Contains(c - lMin) || isRtDiagAttacked[c + rMin].Contains(r - rMin))
+                    return true;
+                return false;
+            }
+            void Mark(int r, int c, bool val)               // O(1)
+            {
+                isRowAttacked[r] = isColAttacked[c] = val;
+                int lMin = Math.Min(r, c);
+                int rMin = Math.Min(r, -1 + n - c);
+                if (val)    // mark position
+                {
+                    board[r][c] = 'Q';  // Add Queen
+                    isLtDiagAttacked[r- lMin].Add(c- lMin);
+                    isRtDiagAttacked[c + rMin].Add(r - rMin);
+                    // Add position where queen is added
+                    currPlacement.Push((char)('0' + r));
+                    currPlacement.Push((char)('0' + c));
+                }
+                else        // Un-mark position
+                {
+                    board[r][c] = '.';  // Remove Queen
+                    isLtDiagAttacked[r - lMin].Remove(c - lMin);
+                    isRtDiagAttacked[c + rMin].Remove(r - rMin);
+                    // Clear position where queen is removed from
+                    currPlacement.Pop();
+                    currPlacement.Pop();
+                }
+            }
+        }
+
+
     }
 }
