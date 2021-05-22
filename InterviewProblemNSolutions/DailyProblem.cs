@@ -15575,6 +15575,97 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+        // Time O(n!) Space O(n^2), n = 9 i.e. no of rows
+        public static IList<IList<string>> SolveNQueensFaster(int n)
+        {
+            /* We need to place 'n' quees in a chessboard of 'n' rows & 'n' cols
+             * We try placing queens one by one at each pos[r,c] which is not under attack by any queen
+             * and than we mark below 4 straight lines as under attack:
+             *      curr row
+             *      curr column
+             *      left diagonal: row,col transformed into:
+             *          int lMin = Math.Min(r, c);
+             *          => [r- lMin, c- lMin] left-most starting point of lt diagonal
+             *      right diagonal: row,col transformed into:
+             *          int rMin = Math.Min(r, -1 + n - c);
+             *          => [r - rMin,c + rMin] right-most starting point of rt diagonal
+             * places where we place Queen is updated with 'Q' & where we can't place marked with dot '.'
+             * once count of placed quees equals 'n' we check if unique configuration than save to ans
+             */
+            List<IList<string>> ans = new List<IList<string>>();
+            bool[] isRowAttacked = new bool[n];
+            bool[] isColAttacked = new bool[n];
+            HashSet<int>[] isLtDiagAttacked = new HashSet<int>[n];
+            HashSet<int>[] isRtDiagAttacked = new HashSet<int>[n];
+
+            // create empty board with just dots
+            char[][] board = new char[n][];
+            for (int r = 0; r < n; r++)                     // O(n)
+            {
+                isLtDiagAttacked[r] = new HashSet<int>();
+                isRtDiagAttacked[r] = new HashSet<int>();
+                board[r] = new char[n];
+                for (int c = 0; c < n; c++)
+                    board[r][c] = '.';
+            }
+            Try(0, 0);
+            return ans;
+
+            // Local helper func
+            void Try(int r, int queensPlaced)
+            {
+                if (queensPlaced == n)
+                {
+                    // create the chessBoard we got after placing 'n' queens
+                    string[] sequence = new string[n];
+                    for (int i = 0; i < n; i++)
+                        sequence[i] = new string(board[i]);
+                    ans.Add(sequence);
+                }
+                else if (r < n)
+                    for (int c = 0; c < n; c++)             // O(n)
+                        if (!UnderAttack(r, c))
+                        {
+                            // Add Queen + Mark Straight lines that are underAttack
+                            Mark(r, c, true);
+
+                            // Make Recursive Call
+                            Try(r + 1, queensPlaced + 1);
+
+                            //  Remove Queen + Un-Mark Straight lines now not underAttack
+                            Mark(r, c, false);
+                        }
+            }
+            bool UnderAttack(int r, int c)                  // O(1)
+            {
+                int lMin = Math.Min(r, c);
+                int rMin = Math.Min(r, -1 + n - c);
+                if (isRowAttacked[r] || isColAttacked[c] || isLtDiagAttacked[r - lMin].Contains(c - lMin) || isRtDiagAttacked[c + rMin].Contains(r - rMin))
+                    return true;
+                return false;
+            }
+            void Mark(int r, int c, bool val)               // O(1)
+            {
+                isRowAttacked[r] = isColAttacked[c] = val;
+                int lMin = Math.Min(r, c);
+                int rMin = Math.Min(r, -1 + n - c);
+
+                if (val)    // mark position
+                {
+                    board[r][c] = 'Q';  // Add Queen
+                    isLtDiagAttacked[r - lMin].Add(c - lMin);
+                    isRtDiagAttacked[c + rMin].Add(r - rMin);
+                }
+                else        // Un-mark position
+                {
+                    board[r][c] = '.';  // Remove Queen
+                    isLtDiagAttacked[r - lMin].Remove(c - lMin);
+                    isRtDiagAttacked[c + rMin].Remove(r - rMin);
+                }
+            }
+        }
+
+
 
 
     }

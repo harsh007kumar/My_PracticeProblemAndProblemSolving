@@ -443,6 +443,7 @@ namespace InterviewProblemNSolutions
             LongestWordInDictionary();
             FindAndReplacePattern();
             N_Queens();
+            N_QueensII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7225,7 +7226,8 @@ namespace InterviewProblemNSolutions
             int[] queensCount = { 4, 1, 2, 9 };
             foreach (var qCount in queensCount)
             {
-                DailyProblem.SolveNQueens(qCount).Print($"Below are all possible configuration of placing '{qCount}' Queens in {qCount}x{qCount} chessboard");
+                //DailyProblem.SolveNQueens(qCount).Print($"Below are all possible configuration of placing '{qCount}' Queens in {qCount}x{qCount} chessboard");
+                DailyProblem.SolveNQueensFaster(qCount).Print($"Below are all possible configuration of placing '{qCount}' Queens in {qCount}x{qCount} chessboard");
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
