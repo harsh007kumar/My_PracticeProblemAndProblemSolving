@@ -15474,16 +15474,21 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time = Space = O(n^2), n = 9 i.e. no of rows
+        // Time O(n!) Space O(n^2), n = 9 i.e. no of rows
         public static IList<IList<string>> SolveNQueens(int n)
         {
             /* We need to place 'n' quees in a chessboard of 'n' rows & 'n' cols
              * We try placing queens one by one at each pos[r,c] which is not under attack by any queen
+             * & record this position to ensure later on we are not duplicating any sequence of positions
              * and than we mark below 4 straight lines as under attack:
              *      curr row
              *      curr column
-             *      one  diagonal: row,col transformed into if col greater than zero => row-col, 0
-             *      next diagonal: row,col transformed into if row greater than zero => 0, col+row
+             *      left diagonal: row,col transformed into:
+             *          int lMin = Math.Min(r, c);
+             *          => [r- lMin, c- lMin] left-most starting point of lt diagonal
+             *      right diagonal: row,col transformed into:
+             *          int rMin = Math.Min(r, -1 + n - c);
+             *          => [r - rMin,c + rMin] right-most starting point of rt diagonal
              * places where we place Queen is updated with 'Q' & where we can't place marked with dot '.'
              * once count of placed quees equals 'n' we check if unique configuration than save to ans
              */
@@ -15505,11 +15510,11 @@ namespace InterviewProblemNSolutions
                 for (int c = 0; c < n; c++)
                     board[r][c] = '.';
             }
-            Try(0, 0, 0);
+            Try(0, 0);
             return ans;
 
             // Local helper func
-            void Try(int r, int j, int queensPlaced)
+            void Try(int r, int queensPlaced)
             {
                 if (queensPlaced == n)
                 {
@@ -15524,14 +15529,14 @@ namespace InterviewProblemNSolutions
                     }
                 }
                 else if (r < n)
-                    for (int c = j; c < n; c++)             // O(n)
+                    for (int c = 0; c < n; c++)             // O(n)
                         if (!UnderAttack(r, c))
                         {
                             // Add Queen + Mark Straight lines that are underAttack + Add position where queen is added
                             Mark(r, c, true);
 
                             // Make Recursive Call
-                            Try(r + 1, 0, queensPlaced + 1);
+                            Try(r + 1, queensPlaced + 1);
 
                             //  Remove Queen + Un-Mark Straight lines now not underAttack + Clear position where queen is removed from
                             Mark(r, c, false);
