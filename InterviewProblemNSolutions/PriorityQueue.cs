@@ -6,9 +6,9 @@ namespace InterviewProblemNSolutions
     // MinHeap => PriorityQueue
     public class PriorityQueue<T1,T2>
     {
-        public List<Pair<T1,T2>> arr;
+        public Pair<T1,T2>[] arr;
         public int Count = 0;
-        public PriorityQueue() => arr = new List<Pair<T1, T2>>();   // Constructor
+        public PriorityQueue(int n = 0) => arr = new Pair<T1, T2>[n];   // Constructor
         public int LeftChild(int x) => 2 * x + 1;
         public int RtChild(int x) => LeftChild(x) + 1;
         public int Parent(int x) => (x - 1) / 2;
