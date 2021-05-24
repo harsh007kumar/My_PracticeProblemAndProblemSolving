@@ -444,6 +444,7 @@ namespace InterviewProblemNSolutions
             FindAndReplacePattern();
             N_Queens();
             N_QueensII();
+            MaximumNumberOfEatenApples();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7238,6 +7239,21 @@ namespace InterviewProblemNSolutions
             int[] queensCount = { 4, 1, 2, 9 };
             foreach (var qCount in queensCount)
                 Console.WriteLine($" Total possible configuration of placing '{qCount}' Queens in {qCount}x{qCount} chessboard are: '{DailyProblem.TotalNQueens(qCount)}'\n");
+        }
+
+
+        public static void MaximumNumberOfEatenApples()
+        {
+            // https://leetcode.com/problems/maximum-number-of-eaten-apples/
+            Utility.Print("1705. Maximum Number of Eaten Apples");
+            int[][] apples = { new int[] { 1, 2, 3, 5, 2 }, new int[] { 3, 0, 0, 0, 0, 2 }, new int[] { 2, 1, 10 } };
+            int[][] days = { new int[] { 3, 2, 1, 4, 2 }, new int[] { 3, 0, 0, 0, 0, 2 }, new int[] { 2, 10, 1 } };
+            for (int i = 0; i < apples.Length; i++)
+            {
+                apples[i].Print("Apples");
+                days[i].Print("Days");
+                Console.WriteLine($" Max no of apples we can eat: '{DailyProblem.EatenApples(apples[i], days[i])}'\n");
+            }
         }
 
 

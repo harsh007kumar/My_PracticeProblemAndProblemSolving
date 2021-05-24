@@ -15729,6 +15729,45 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = O(nlogn) || Space O(n)
+        public static int EatenApples(int[] apples, int[] days)
+        {
+            int count = 0, day;
+            PriorityQueue<int, int> pq = new PriorityQueue<int, int>(days.Length);
+            for (day = 0; day < apples.Length; day++)               // O(n)
+            {
+                // Added to Priority Queue, if atleast one apple is added && it can be eaten till atleast a day or more
+                if (apples[day] > 0 && days[day] > 0)
+                    pq.Insert(days[day] + day, apples[day]);        // O(logn)
+                // Remove all such entries which have either expired before or expiery today or have no apples left
+                while (pq.Count > 0 && (pq.arr[0].key <= day || pq.arr[0].val <= 0))
+                    pq.ExtractMin();                                // O(logn)
+
+                if (pq.Count > 0)
+                {
+                    count++;            // have one apple
+                    pq.arr[0].val--;    // decreament count
+                }
+            }
+
+            int leftDays, min;
+            // after 'n' days check if there are apples which you can still eat
+            while (pq.Count > 0)
+            {
+                while (pq.Count > 0 && (pq.arr[0].key <= day || pq.arr[0].val <= 0))
+                    pq.ExtractMin();                                // O(logn)
+
+                if (pq.Count > 0)
+                {
+                    leftDays = pq.arr[0].key - day;
+                    min = Math.Min(pq.arr[0].val, leftDays);
+                    count += min;
+                    pq.arr[0].val -= min;
+                    day += Math.Min(min, leftDays);
+                }
+            }
+            return count;
+        }
 
 
     }
