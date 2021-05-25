@@ -15733,6 +15733,7 @@ namespace InterviewProblemNSolutions
         public static int EatenApples(int[] apples, int[] days)
         {
             int count = 0, day;
+            // To keep count of apple as value & their expiery date as key in ascending order to expiry we use Min-PriorityQueue
             PriorityQueue<int, int> pq = new PriorityQueue<int, int>(days.Length);
             for (day = 0; day < apples.Length; day++)               // O(n)
             {
@@ -15770,5 +15771,37 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n) 
+        public static int EvalRPN(string[] tokens)
+        {
+            int secondNo;
+            Stack<int> st = new Stack<int>();
+            for (int i = 0; i < tokens.Length; i++)
+                switch (tokens[i])
+                {
+                    case "+":
+                        st.Push(st.Pop() + st.Pop());
+                        break;
+
+                    case "-":
+                        secondNo = st.Pop();
+                        st.Push(st.Pop() - secondNo);
+                        break;
+
+                    case "/":
+                        secondNo = st.Pop();
+                        st.Push(st.Pop() / secondNo);
+                        break;
+
+                    case "*":
+                        st.Push(st.Pop() * st.Pop());
+                        break;
+
+                    default:
+                        st.Push(Convert.ToInt32(tokens[i]));
+                        break;
+                }
+            return st.Pop();
+        }
     }
 }

@@ -445,6 +445,7 @@ namespace InterviewProblemNSolutions
             N_Queens();
             N_QueensII();
             MaximumNumberOfEatenApples();
+            EvaluateReversePolishNotation();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7253,6 +7254,22 @@ namespace InterviewProblemNSolutions
                 apples[i].Print("Apples");
                 days[i].Print("Days");
                 Console.WriteLine($" Max no of apples we can eat: '{DailyProblem.EatenApples(apples[i], days[i])}'\n");
+            }
+        }
+
+
+        public static void EvaluateReversePolishNotation()
+        {
+            // https://leetcode.com/problems/evaluate-reverse-polish-notation/
+            Utility.Print("150. Evaluate Reverse Polish Notation");
+            string[][] tokensArr = { new string[] { "2", "1", "+", "3", "*" },
+                                    new string[] { "4", "13", "5", "/", "+" },
+                                    new string[] { "10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+" },
+                                    new string[] { "4","3","-" } };
+            foreach (var tokens in tokensArr)
+            {
+                tokens.Print("Tokens");
+                Console.WriteLine($" Above Reverse Polish Notation evalute to : '{DailyProblem.EvalRPN(tokens)}'\n");
             }
         }
 
