@@ -446,6 +446,7 @@ namespace InterviewProblemNSolutions
             N_QueensII();
             MaximumNumberOfEatenApples();
             EvaluateReversePolishNotation();
+            FindValidMatrixGivenRowAndColumnSums();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7270,6 +7271,22 @@ namespace InterviewProblemNSolutions
             {
                 tokens.Print("Tokens");
                 Console.WriteLine($" Above Reverse Polish Notation evalute to : '{DailyProblem.EvalRPN(tokens)}'\n");
+            }
+        }
+
+
+        public static void FindValidMatrixGivenRowAndColumnSums()
+        {
+            // https://leetcode.com/problems/find-valid-matrix-given-row-and-column-sums/
+            Utility.Print("1605. Find Valid Matrix Given Row and Column Sums");
+            int[][] rowsSum = new int[][] { new int[] { 3, 8 }, new int[] { 5, 7, 10 }, new int[] { 14, 9 }, new int[] { 1, 0 }, new int[] { 0 } };
+            int[][] colsSum = new int[][] { new int[] { 4, 7 }, new int[] { 8, 6, 8 }, new int[] { 6, 9, 8 }, new int[] { 1 }, new int[] { 0 } };
+            for (int i = 0; i < rowsSum.Length; i++)
+            {
+                rowsSum[i].Print("Rows Sum");
+                colsSum[i].Print("Cols Sum");
+                DailyProblem.RestoreMatrix(rowsSum[i], colsSum[i]).Print("Restored-Matrix");
+                Console.WriteLine(Utility.lineDelimeter);
             }
         }
 

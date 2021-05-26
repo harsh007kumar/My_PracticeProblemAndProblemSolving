@@ -15803,5 +15803,27 @@ namespace InterviewProblemNSolutions
                 }
             return st.Pop();
         }
+
+
+        // Time = Space = O(r*c), r = length of 'rowSum' & c = length of 'colSum'
+        public static int[][] RestoreMatrix(int[] rowSum, int[] colSum)
+        {
+            int rows = rowSum.Length, cols = colSum.Length;
+            int[][] ans = new int[rows][];
+            for (int r = 0; r < rows; r++)     // O(r)
+            {
+                ans[r] = new int[cols];
+                for (int c = 0; c < cols; c++) // O(c)
+                {
+                    ans[r][c] = Math.Min(rowSum[r], colSum[c]);
+                    rowSum[r] -= ans[r][c];
+                    colSum[c] -= ans[r][c];
+                }
+            }
+            return ans;
+        }
+
+
+
     }
 }
