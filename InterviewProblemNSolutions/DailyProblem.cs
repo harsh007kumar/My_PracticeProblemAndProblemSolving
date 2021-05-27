@@ -15825,6 +15825,35 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n^2) || Space O(n)
+        public static int MaxProductOfWordsLength(string[] words)
+        {
+            int ans = 0, l = words.Length;
+            Pair<int, int>[] maskLen = new Pair<int, int>[l];
+            for (int i = 0; i < l; i++)                                    // O(n)
+                maskLen[i] = new Pair<int, int>(GetMask(words[i]), words[i].Length);
+
+            for (int i = 0; i < l; i++)                                    // O(n^2)
+                for (int j = i + 1; j < l; j++)
+                    if ((maskLen[i].key & maskLen[j].key) == 0)
+                        ans = Math.Max(ans, maskLen[i].val * maskLen[j].val);
+            return ans;
+
+
+            // local helper func
+            int GetMask(string word)    // O(26) ~O(1)
+            {
+                bool[] charSet = new bool[26];
+                foreach (var ch in word)
+                    charSet[ch - 'a'] = true;
+                int mask = 0;
+                for (int i = 0; i < charSet.Length; i++)
+                    mask += (charSet[i] ? 1 : 0) << i;
+                return mask;
+            }
+        }
+
+        
 
     }
 }

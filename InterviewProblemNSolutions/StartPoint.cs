@@ -447,6 +447,7 @@ namespace InterviewProblemNSolutions
             MaximumNumberOfEatenApples();
             EvaluateReversePolishNotation();
             FindValidMatrixGivenRowAndColumnSums();
+            MaximumProductOfWordLengths();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7287,6 +7288,21 @@ namespace InterviewProblemNSolutions
                 colsSum[i].Print("Cols Sum");
                 DailyProblem.RestoreMatrix(rowsSum[i], colsSum[i]).Print("Restored-Matrix");
                 Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void MaximumProductOfWordLengths()
+        {
+            // https://leetcode.com/problems/maximum-product-of-word-lengths/
+            Utility.Print("318. Maximum Product of Word Lengths");
+            string[][] wordsArr = { new string[] { "abcw", "baz", "foo", "bar", "xtfn", "abcdef" },
+                                    new string[] { "a", "ab", "abc", "d", "cd", "bcd", "abcd" },
+                                    new string[] { "a", "aa", "aaa", "aaaa" } };
+            foreach (var words in wordsArr)
+            {
+                words.Print("Words");
+                Console.WriteLine($" Max value of length(word[i]) * length(word[j]) where the two words do not share common letters is: '{DailyProblem.MaxProductOfWordsLength(words)}'\n");
             }
         }
 
