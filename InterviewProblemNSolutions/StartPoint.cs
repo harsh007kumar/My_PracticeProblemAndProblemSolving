@@ -448,6 +448,7 @@ namespace InterviewProblemNSolutions
             EvaluateReversePolishNotation();
             FindValidMatrixGivenRowAndColumnSums();
             MaximumProductOfWordLengths();
+            MaximumErasureValue();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7303,6 +7304,19 @@ namespace InterviewProblemNSolutions
             {
                 words.Print("Words");
                 Console.WriteLine($" Max value of length(word[i]) * length(word[j]) where the two words do not share common letters is: '{DailyProblem.MaxProductOfWordsLength(words)}'\n");
+            }
+        }
+
+
+        public static void MaximumErasureValue()
+        {
+            // https://leetcode.com/problems/maximum-erasure-value/
+            Utility.Print("1695. Maximum Erasure Value");
+            int[][] numsArr = { new int[] { 4, 2, 4, 5, 6 }, new int[] { 5, 2, 1, 2, 5, 2, 1, 2, 5 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" Max score we can get by erasing excatly one unique sub-array is: '{DailyProblem.MaximumUniqueSubarray(nums)}'\n");
             }
         }
 

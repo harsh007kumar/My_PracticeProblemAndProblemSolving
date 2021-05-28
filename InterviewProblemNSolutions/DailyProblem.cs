@@ -15853,7 +15853,33 @@ namespace InterviewProblemNSolutions
             }
         }
 
-        
+
+        // Time = Space = O(n)
+        public static int MaximumUniqueSubarray(int[] nums)
+        {
+            int max = 0, currSum = 0, i = -1, j = 0, l = nums.Length;
+            HashSet<int> uniq = new HashSet<int>();
+            while (++i < l)
+            {
+                if (!uniq.Contains(nums[i]))
+                {
+                    uniq.Add(nums[i]);
+                    currSum += nums[i];
+                }
+                else
+                {
+                    while (nums[j] != nums[i])
+                    {
+                        uniq.Remove(nums[j]);
+                        currSum -= nums[j++];
+                    }
+                    j++;
+                }
+                max = Math.Max(max, currSum);
+            }
+            return max;
+        }
+
 
     }
 }
