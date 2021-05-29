@@ -15881,5 +15881,28 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = O(r*(c + clogc)) ~O(r*clogc) || Space O(1), r = no of rows & c = no of columns
+        public static int LargestSubmatrix(int[][] matrix)
+        {
+            int rows = matrix.Length, cols = matrix[0].Length, maxArea = 0;
+            // pre-process the input, store the count no of consecutive 1's below each cell in matrix
+            for (int r = rows - 2; r >= 0; r--)          // O(r*c)
+                for (int c = 0; c < cols; c++)
+                    if (matrix[r][c] > 0)
+                        matrix[r][c] += matrix[r + 1][c];
+            // calculate largest area submatrix by sorting each row (Desc order) by value of consecutive 1's starting from each index
+            // and now for each index/col we know all cols left to it have more or equal no of consecutive 1's
+            // area = count of consecutive 1's starting from curr index idx * (1+idx)
+            for (int r = 0; r < rows; r++)             // O(r*(c + clogc))
+            {
+                Array.Sort(matrix[r], (x, y) => y.CompareTo(x));  // O(clogc)
+                for (int c = 0; c < cols; c++)                         // O(c)
+                    maxArea = Math.Max(maxArea, matrix[r][c] * (c + 1));
+            }
+            return maxArea;
+        }
+
+
+
     }
 }

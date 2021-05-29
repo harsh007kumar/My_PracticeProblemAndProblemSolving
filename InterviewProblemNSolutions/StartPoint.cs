@@ -449,6 +449,7 @@ namespace InterviewProblemNSolutions
             FindValidMatrixGivenRowAndColumnSums();
             MaximumProductOfWordLengths();
             MaximumErasureValue();
+            LargestSubmatrixWithRearrangements();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7317,6 +7318,22 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 Console.WriteLine($" Max score we can get by erasing excatly one unique sub-array is: '{DailyProblem.MaximumUniqueSubarray(nums)}'\n");
+            }
+        }
+
+
+        public static void LargestSubmatrixWithRearrangements()
+        {
+            // https://leetcode.com/problems/largest-submatrix-with-rearrangements/
+            Utility.Print("1727. Largest Submatrix With Rearrangements");
+            int[][][] matrixArr = { new int[][] { new int[] { 0, 0, 1 }, new int[] { 1, 1, 1 }, new int[] { 1, 0, 1 } },
+                                    new int[][] { new int[] { 1, 0, 1, 0, 1 } },
+                                    new int[][] { new int[] { 1, 1, 0 }, new int[] { 1, 0, 1 } },
+                                    new int[][] { new int[] { 0, 0 }, new int[] { 0, 0 } } };
+            foreach (var matrix in matrixArr)
+            {
+                matrix.Print("Matrix");
+                Console.WriteLine($" Area of the largest submatrix within matrix where every element of the submatrix is 1 after reordering the columns optimally is: '{DailyProblem.LargestSubmatrix(matrix)}'\n");
             }
         }
 
