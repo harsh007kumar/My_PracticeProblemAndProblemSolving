@@ -15903,6 +15903,58 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n)
+        public static int MaximumGap(int[] nums)
+        {
+            int n = nums.Length, min = int.MaxValue, max = int.MinValue, maxGap = 0;
+            if (n < 2) return 0;    // edge case les than 2 elements, Gap cannot be calculated
+
+            // 1# Find Min & Max in input array
+            for (int i = 0; i < n; i++)            // O(n)
+            {
+                min = Math.Min(min, nums[i]);
+                max = Math.Max(max, nums[i]);
+            }
+
+            // 2# Calculate the gap-size, length of each bucket
+            int interval = (int)(Math.Ceiling((double)(max - min) / (n - 1)));
+
+            // 3# create 2 buckets to store the Min & Max value lying in a given bucket
+            int[] minBucket = new int[n - 1];
+            int[] maxBucket = new int[n - 1];
+
+            // 3a# Set default values buckets, useful to identify cases when no values goes in a bucket
+            for (int i = 0; i < minBucket.Length; i++)
+            {
+                minBucket[i] = int.MaxValue;
+                maxBucket[i] = int.MinValue;
+            }
+
+            // 4# iterate thru the input array and update max & min values for each num in buckets it belongs
+            for (int i = 0; i < n; i++)
+            {
+                if (nums[i] == max || nums[i] == min) continue; // Skip adding Min & Max values to Buckets
+                // Formula => (number-min) / interval
+                var bucketIdx = (nums[i] - min) / interval;
+                minBucket[bucketIdx] = Math.Min(minBucket[bucketIdx], nums[i]);
+                maxBucket[bucketIdx] = Math.Max(maxBucket[bucketIdx], nums[i]);
+            }
+
+            // 5# Calculate max gap possible b/w buckets
+            int lastMax = min;
+            for (int i = 0; i < minBucket.Length; i++)
+                if (minBucket[i] != int.MaxValue)
+                {
+                    // compare last buckets Max values with current buckets Min value, to get max gap
+                    maxGap = Math.Max(maxGap, minBucket[i] - lastMax);
+                    lastMax = maxBucket[i]; // now update lastMax for next iteration
+                }
+            // 5a# check if gap b/w lastMax & global max updates 'ans'
+            maxGap = Math.Max(maxGap, max - lastMax);
+
+            return maxGap;
+        }
+
 
     }
 }

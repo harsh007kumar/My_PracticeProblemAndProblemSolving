@@ -450,6 +450,7 @@ namespace InterviewProblemNSolutions
             MaximumProductOfWordLengths();
             MaximumErasureValue();
             LargestSubmatrixWithRearrangements();
+            MaximumGap();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7334,6 +7335,20 @@ namespace InterviewProblemNSolutions
             {
                 matrix.Print("Matrix");
                 Console.WriteLine($" Area of the largest submatrix within matrix where every element of the submatrix is 1 after reordering the columns optimally is: '{DailyProblem.LargestSubmatrix(matrix)}'\n");
+            }
+        }
+
+
+        public static void MaximumGap()
+        {
+            // https://youtu.be/VT-6zwGKYwA
+            // https://leetcode.com/problems/maximum-gap/
+            Utility.Print("164. Maximum Gap");
+            int[][] numsArr = { new int[] { 3, 6, 9, 1 }, new int[] { 10 }, new int[] { 3, 6, 9, 1, 18 }, new int[] { 345634, 123123, 678, 123, 890, 234123, 234, 7, 8, 9678 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" Maximum Gap b/w any two consecutive no if above array was sorted is: '{DailyProblem.MaximumGap(nums)}'\n");
             }
         }
 
