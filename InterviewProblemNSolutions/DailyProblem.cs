@@ -15956,5 +15956,32 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n*m*k) || Space O(n*m), n = length of products array & m = avg length of words in products & k = length of 'searchWord'
+        public static IList<IList<string>> SuggestedProducts(string[] products, string searchWord)
+        {
+            TrieForSearchSuggestionSystem t = new TrieForSearchSuggestionSystem();
+            foreach (var product in products)   // O(n)
+                t.Add(product.ToCharArray());   // O(m)
+
+            List<IList<string>> ans = new List<IList<string>>();
+            List<string> matches;
+            Stack<char> prefix = new Stack<char>();
+            InterviewProblemNSolutions.TrieNode curr = t.root;
+
+            foreach (var ch in searchWord)      // O(k)
+            {
+                if (curr.children.ContainsKey(ch))  // to the trieNode from where we would begin our search
+                    curr = curr.children[ch];       // if child node with given char doesn't exists than break-out
+                else break;
+                
+                prefix.Push(ch);
+                matches = new List<string>();
+                t.SearchSuggestion(curr, prefix, matches); // O(n*m)
+                ans.Add(matches);
+            }
+            return ans;
+        }
+
+
     }
 }

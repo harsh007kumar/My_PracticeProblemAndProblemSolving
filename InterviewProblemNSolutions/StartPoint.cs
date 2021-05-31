@@ -451,6 +451,7 @@ namespace InterviewProblemNSolutions
             MaximumErasureValue();
             LargestSubmatrixWithRearrangements();
             MaximumGap();
+            SearchSuggestionsSystem();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7349,6 +7350,24 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 Console.WriteLine($" Maximum Gap b/w any two consecutive no if above array was sorted is: '{DailyProblem.MaximumGap(nums)}'\n");
+            }
+        }
+
+
+        public static void SearchSuggestionsSystem()
+        {
+            // https://leetcode.com/problems/search-suggestions-system/
+            Utility.Print("1268. Search Suggestions System");
+            string[][] products = { new string[] { "mobile", "mouse", "moneypot", "monitor", "mousepad" },
+                                    new string[] { "havana" },
+                                    new string[] { "bags", "baggage", "banner", "box", "cloths" },
+                                    new string[] { "havana" } };
+            string[] searchWord = { "mouse", "havana", "bags", "tatiana" };
+            for (int i = 0; i < products.Length; i++)
+            {
+                products[i].Print("Products");
+                DailyProblem.SuggestedProducts(products[i], searchWord[i]).Print($"from above set of products, matching results for {searchWord[i]} are:");
+                Console.WriteLine(Utility.lineDelimeter);
             }
         }
 

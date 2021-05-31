@@ -136,8 +136,6 @@ namespace InterviewProblemNSolutions
         }
     }
 
-
-
     public class TrieForPreFixSuffixSearch
     {
         public TrieNode root, temp;
@@ -182,8 +180,26 @@ namespace InterviewProblemNSolutions
         }
     }
 
+    public class TrieForSearchSuggestionSystem : Trie
+    {
 
+        public TrieForSearchSuggestionSystem() : base() { }
 
+        // Updates 'matchesFound' List with all Sentences/Words reachable from current 'TrieNode' till count is less <= 3
+        public void SearchSuggestion(TrieNode currNode, Stack<char> prefixSoFar, List<string> matchesFound)
+        {
+            if (currNode.isWord)
+                matchesFound.Add(new string(prefixSoFar.Reverse().ToArray()));
+            // traverse in lexographically sorted order
+            foreach (var possibleWord in currNode.children.OrderBy(x => x.Key))
+            {
+                if (matchesFound.Count >= 3) return;
+                prefixSoFar.Push(possibleWord.Key);
+                SearchSuggestion(possibleWord.Value, prefixSoFar, matchesFound);
+                prefixSoFar.Pop();
+            }
+        }
+    }
 
 
 
