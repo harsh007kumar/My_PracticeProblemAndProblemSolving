@@ -16015,6 +16015,56 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+        public static IList<string> AddOperators_UsingStacksAndStringBuilder(string num, int target)
+        {
+            IList<string> ans = new List<string>();
+            Stack<string> st = new Stack<string>();
+            StringBuilder sb = new StringBuilder();
+            BackTrack(0, 0, 0, 0);
+            return ans;
+
+            // local helper func
+            void BackTrack(int idx, long prv, long curr, long val)
+            {
+                if (idx >= num.Length)
+                {
+                    if (val == target && curr == 0)
+                    {
+                        sb.Clear();
+                        foreach (var s in st.Reverse())
+                            sb.Append(s);
+                        ans.Add(sb.ToString());
+                    }
+                    return;
+                }
+
+                curr = curr * 10 + num[idx] - '0';
+                if (curr > 0)
+                    BackTrack(idx + 1, prv, curr, val);
+
+                string currStr = curr.ToString();
+                if (st.Count == 0)
+                {
+                    st.Push(currStr);
+                    BackTrack(idx + 1, curr, 0, val + curr);
+                    st.Pop();
+                }
+                else
+                {
+                    st.Push("+" + currStr);
+                    BackTrack(idx + 1, curr, 0, val + curr);
+                    st.Pop();
+
+                    st.Push("-" + currStr);
+                    BackTrack(idx + 1, -curr, 0, val - curr);
+                    st.Pop();
+
+                    st.Push("*" + currStr);
+                    BackTrack(idx + 1, prv * curr, 0, val - prv + prv * curr);
+                    st.Pop();
+                }
+            }
+        }
 
 
 
