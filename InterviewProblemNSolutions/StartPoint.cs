@@ -452,6 +452,7 @@ namespace InterviewProblemNSolutions
             LargestSubmatrixWithRearrangements();
             MaximumGap();
             SearchSuggestionsSystem();
+            ExpressionAddOperators();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7367,6 +7368,20 @@ namespace InterviewProblemNSolutions
             {
                 products[i].Print("Products");
                 DailyProblem.SuggestedProducts(products[i], searchWord[i]).Print($"from above set of products, matching results for {searchWord[i]} are:");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void ExpressionAddOperators()
+        {
+            // https://leetcode.com/problems/expression-add-operators/
+            Utility.Print("282. Expression Add Operators");
+            string[] nums = { "123", "232", "105", "00", "3456237490", "2147483648" };
+            int[] target = { 6, 8, 5, 0, 9191, -2147483648 };
+            for (int i = 0; i < target.Length; i++)
+            {
+                DailyProblem.AddOperators(nums[i], target[i]).Print($"From string of digits '{nums[i]}', below are resultant expression that evalute to '{target[i]}'");
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }

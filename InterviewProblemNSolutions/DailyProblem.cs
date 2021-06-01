@@ -15983,5 +15983,40 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(3^n) Space O(n), n = length of string 'num'
+        public static IList<string> AddOperators(string num, int target)
+        {
+            IList<string> ans = new List<string>();
+            BackTrack(0, 0, 0, 0, "");
+            return ans;
+
+            // local helper func
+            void BackTrack(int idx, long prv, long curr, long val, string s)
+            {
+                if (idx >= num.Length)
+                {
+                    if (val == target && curr == 0)
+                        ans.Add(s);
+                    return;
+                }
+
+                curr = curr * 10 + num[idx] - '0';
+                if (curr > 0)
+                    BackTrack(idx + 1, prv, curr, val, s);
+
+                string currStr = curr.ToString();
+                if (s == "")
+                    BackTrack(idx + 1, curr, 0, val + curr, currStr);
+                else
+                {
+                    BackTrack(idx + 1, curr, 0, val + curr, s + "+" + currStr);
+                    BackTrack(idx + 1, -curr, 0, val - curr, s + "-" + currStr);
+                    BackTrack(idx + 1, prv * curr, 0, val - prv + prv * curr, s + "*" + currStr);
+                }
+            }
+        }
+
+
+
     }
 }
