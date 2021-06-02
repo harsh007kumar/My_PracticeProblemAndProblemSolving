@@ -457,6 +457,7 @@ namespace InterviewProblemNSolutions
             SumOfBeautyOfAllSubstrings();
             CheckIfSentenceIsPangram();
             ValidPalindromeII();
+            LongestSubstringOfAllVowelsInOrder();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7432,6 +7433,16 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "aba", "abca", "abc", "aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuculmgmqfvnbgtapekouga" };
             foreach (var s in sArr)
                 Console.WriteLine($" '{s}' can be palindrome after deleting at most one character from it: '{StringAlgorithms.ValidPalindromeII(s)}'\n");
+        }
+
+
+        public static void LongestSubstringOfAllVowelsInOrder()
+        {
+            // https://leetcode.com/problems/longest-substring-of-all-vowels-in-order/
+            Utility.Print("1839. Longest Substring Of All Vowels in Order");
+            string[] sArr = { "aeiaaioaaaaeiiiiouuuooaauuaeiu", "aeeeiiiioooauuuaeiou", "a" };
+            foreach (var s in sArr)
+                Console.WriteLine($" In '{s}' Longest substring of all vowels in order is: '{StringAlgorithms.LongestBeautifulSubstringOfAllVowels(s)}'\n");
         }
 
 

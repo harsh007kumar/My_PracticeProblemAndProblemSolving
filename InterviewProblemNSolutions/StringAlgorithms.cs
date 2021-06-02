@@ -924,5 +924,42 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) Space O(1)
+        public static int LongestBeautifulSubstringOfAllVowels(string w)
+        {
+            // to check the order
+            char[] prvVowel = new char[26];
+            prvVowel['e' - 'a'] = 'a';
+            prvVowel['i' - 'a'] = 'e';
+            prvVowel['o' - 'a'] = 'i';
+            prvVowel['u' - 'a'] = 'o';
+
+            int start, max = 0, l = w.Length, i = 0;
+            while (i < l)           // O(n)
+                if (w[i++] == 'a')
+                    max = Math.Max(max, GetMax());
+            return max;
+
+            // helper func
+            int GetMax()
+            {
+                start = --i;
+                char curr = 'a';
+                while (i < l)
+                {
+                    if (w[i] != curr)   // next char found
+                        // if next Vowel's prv->char is not from the Vowel order
+                        if (prvVowel[w[i] - 'a'] != curr) break;
+                        // if order is maintained, than update 'curr' to next vowel in the order
+                        else curr = w[i];
+                    i++;
+                }
+                // if all Vowel's found, than curr must be pointing to last Vowel
+                // else return 0 if not all vowels found
+                return (curr == 'u') ? i - start : 0;
+            }
+        }
+
+
     }
 }
