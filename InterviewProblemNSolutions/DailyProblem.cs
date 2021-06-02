@@ -16067,6 +16067,41 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n^2) || Space O(1)
+        public static int BeautySum(string s)
+        {
+            int[] charSet;
+            int beauty = 0, diffChar;
+            for (int startFrom = 0; startFrom < s.Length; startFrom++)  // O(n)
+            {
+                charSet = new int[26];
+                diffChar = 0;
+                for (int j = startFrom; j < s.Length; j++)  // O(n)
+                {
+                    if (++charSet[s[j] - 'a'] == 1)
+                        diffChar++;
+
+                    if (diffChar > 1)                       // O(1)
+                        beauty += GetBeauty();              // O(26)
+                }
+            }
+            return beauty;
+
+            // local helper func
+            int GetBeauty()                                 // O(26) ~O(1)
+            {
+                int min = int.MaxValue, max = int.MinValue;
+                for (int i = 0; i < 26; i++)
+                    if (charSet[i] != 0)
+                    {
+                        min = Math.Min(min, charSet[i]);
+                        max = Math.Max(max, charSet[i]);
+                    }
+                return max - min;
+            }
+        }
+
+
 
     }
 }

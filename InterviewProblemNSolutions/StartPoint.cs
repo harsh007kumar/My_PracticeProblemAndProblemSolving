@@ -454,6 +454,7 @@ namespace InterviewProblemNSolutions
             SearchSuggestionsSystem();
             ExpressionAddOperators();
             InterleavingString();
+            SumOfBeautyOfAllSubstrings();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7399,6 +7400,16 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < s1.Length; i++)
                 //Console.WriteLine($" '{s3[i]}' can be created from interleaving of '{s1[i]}' & '{s2[i]}': '{DynamicProgramming.IsInterleave_Recursive(s1[i], s2[i], s3[i])}'\n");
                 Console.WriteLine($" '{s3[i]}' can be created from interleaving of '{s1[i]}' & '{s2[i]}': '{DynamicProgramming.IsInterleave_DP(s1[i], s2[i], s3[i])}'\n");
+        }
+
+
+        public static void SumOfBeautyOfAllSubstrings()
+        {
+            // https://leetcode.com/problems/sum-of-beauty-of-all-substrings/
+            Utility.Print("1781. Sum of Beauty of All Substrings");
+            string[] sArr = { "aabcb", "aabcbaa" };
+            foreach (var s in sArr)
+                Console.WriteLine($" Sum of Beauty of all substrings of '{s}' is: '{DailyProblem.BeautySum(s)}'\n");
         }
 
 
