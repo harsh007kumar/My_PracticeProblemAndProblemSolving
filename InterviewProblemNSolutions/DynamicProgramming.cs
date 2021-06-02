@@ -1910,5 +1910,63 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static bool IsInterleave_Recursive(string s1, string s2, string s3)
+        {
+            int l1 = s1.Length, l2 = s2.Length;
+            Stack<char> st = new Stack<char>();
+            return Check(0, 0);
+            // local helper func
+            bool Check(int i, int j)
+            {
+                if (i == l1 && j == l2)
+                    return (s3 == new string(st.Reverse().ToArray())) ? true : false;
+
+                // add from s1
+                if (i < l1)
+                {
+                    st.Push(s1[i]);
+                    if (Check(i + 1, j)) return true;
+                    st.Pop();
+                }
+                // add from s2
+                if (j < l2)
+                {
+                    st.Push(s2[j]);
+                    if (Check(i, j + 1)) return true;
+                    st.Pop();
+                }
+                return false;
+            }
+        }
+        // Dp-bottom-up approach, Time = Space = O(n*m), n = length of s1 & m = len of s2
+        public static bool IsInterleave_DP(string s1, string s2, string s3)
+        {
+            int l1 = s1.Length, l2 = s2.Length;
+            if (l1 + l2 != s3.Length) return false;
+
+            bool[,] dp = new bool[l1 + 1, l2 + 1];
+
+            dp[0, 0] = true;    // empty base case
+
+            // fill 1st row by matching characters from s2
+            for (int i = 0; i < l2; i++)
+                // s3 & s2 char matches for each idx & left idx in dp is also true
+                dp[0, i + 1] = (s2[i] == s3[i]) && dp[0, i];
+
+            // fill 1st column by matching characters from s1
+            for (int i = 0; i < l1; i++)
+                // s3 & s1 char matches for each idx & top idx in dp is also true
+                dp[i + 1, 0] = (s1[i] == s3[i]) && dp[i, 0];
+
+            for (int r = 1; r <= l1; r++)
+                for (int c = 1; c <= l2; c++)
+                    // either the char from s1 or s2 matches & all characters before that have matched
+                    if ((s3[-1 + r + c] == s1[r - 1] && dp[r - 1, c]) || (s3[-1 + r + c] == s2[c - 1] && dp[r, c - 1]))
+                        dp[r, c] = true;
+            
+            return dp[l1, l2];
+        }
+
+
     }
 }
