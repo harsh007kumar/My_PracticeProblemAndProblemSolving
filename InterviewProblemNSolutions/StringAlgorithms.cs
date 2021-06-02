@@ -898,6 +898,31 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) Space O(1)
+        public static bool ValidPalindromeII(string s)
+        {
+            int start = 0, last = s.Length - 1;
+            while (start < last)
+                if (s[start] == s[last])
+                {
+                    start++;
+                    last--;
+                }
+                else
+                    return IsPalindrome(start + 1, last) || IsPalindrome(start, last - 1);
+            
+            return true;
+
+            // helper func
+            bool IsPalindrome(int lt, int rt)
+            {
+                while (lt < rt)
+                    if (s[lt++] != s[rt--])
+                        return false;
+                return true;
+            }
+        }
+
 
     }
 }

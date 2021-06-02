@@ -456,6 +456,7 @@ namespace InterviewProblemNSolutions
             InterleavingString();
             SumOfBeautyOfAllSubstrings();
             CheckIfSentenceIsPangram();
+            ValidPalindromeII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7421,6 +7422,16 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "thequickbrownfoxjumpsoverthelazydog", "leetcode" };
             foreach (var s in sArr)
                 Console.WriteLine($" String '{s}' is Pangram(have atleast one of all 26 characters): '{DailyProblem.CheckIfPangram(s)}'\n");
+        }
+
+
+        public static void ValidPalindromeII()
+        {
+            // https://leetcode.com/problems/valid-palindrome-ii/
+            Utility.Print("680. Valid Palindrome II");
+            string[] sArr = { "aba", "abca", "abc", "aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuculmgmqfvnbgtapekouga" };
+            foreach (var s in sArr)
+                Console.WriteLine($" '{s}' can be palindrome after deleting at most one character from it: '{StringAlgorithms.ValidPalindromeII(s)}'\n");
         }
 
 
