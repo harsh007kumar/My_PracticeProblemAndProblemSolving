@@ -16102,6 +16102,18 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) Space O(1)
+        public static bool CheckIfPangram(string s)
+        {
+            int[] set = new int[26];
+            int diffChars = 0;
+            for (int i = 0; i < s.Length; i++)
+                if (++set[s[i] - 'a'] == 1 && ++diffChars >= 26)
+                    return true;
+            return false;
+        }
+
+
 
     }
 }

@@ -455,6 +455,7 @@ namespace InterviewProblemNSolutions
             ExpressionAddOperators();
             InterleavingString();
             SumOfBeautyOfAllSubstrings();
+            CheckIfSentenceIsPangram();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7410,6 +7411,16 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "aabcb", "aabcbaa" };
             foreach (var s in sArr)
                 Console.WriteLine($" Sum of Beauty of all substrings of '{s}' is: '{DailyProblem.BeautySum(s)}'\n");
+        }
+
+
+        public static void CheckIfSentenceIsPangram()
+        {
+            // https://leetcode.com/problems/check-if-the-sentence-is-pangram/
+            Utility.Print("1832. Check if the Sentence Is Pangram");
+            string[] sArr = { "thequickbrownfoxjumpsoverthelazydog", "leetcode" };
+            foreach (var s in sArr)
+                Console.WriteLine($" String '{s}' is Pangram(have atleast one of all 26 characters): '{DailyProblem.CheckIfPangram(s)}'\n");
         }
 
 
