@@ -16114,6 +16114,40 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(nlog26) ~O(n) || Space O(26) ~O(1), n = len of input 's'
+        public static string ReorganizeString(string s)
+        {
+            int[] charSet = new int[26];
+            for (int i = 0; i < s.Length; i++)  // O(n)
+                charSet[s[i] - 'a']++;
+
+            MaxHeapReorganize ob = new MaxHeapReorganize();
+            for (int i = 0; i < 26; i++)        // O(26)
+                // add all characters with count > 0 to MaxHeap
+                if (charSet[i] != 0)
+                    ob.Add(charSet[i], i);
+
+            StringBuilder sb = new StringBuilder();
+            int last = 1111;
+            while (ob.Count > 0)                // O(nlog26)
+                if (ob.arr[0][1] != last)
+                {
+                    last = ob.arr[0][1];
+                    sb.Append((char)('a' + last));    // fetch the char with highest freq & add to ans
+                    ob.arr[0][0]--;      // decreament count
+                    ob.Heapify();
+                }
+                else if (ob.Count > 1)     // have atleast 1 more char
+                {
+                    last = ob.arr[1][1];
+                    sb.Append((char)('a' + last));    // fetch the char with highest freq & add to ans
+                    ob.arr[1][0]--;      // decreament count
+                    ob.Heapify(1);
+                }
+                else break;             // 'Reorganize' Not Possible
+            return ob.Count == 0 ? sb.ToString() : "";
+        }
+
 
     }
 }

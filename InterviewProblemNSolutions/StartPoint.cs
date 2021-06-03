@@ -458,6 +458,7 @@ namespace InterviewProblemNSolutions
             CheckIfSentenceIsPangram();
             ValidPalindromeII();
             LongestSubstringOfAllVowelsInOrder();
+            ReorganizeString();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7443,6 +7444,16 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "aeiaaioaaaaeiiiiouuuooaauuaeiu", "aeeeiiiioooauuuaeiou", "a" };
             foreach (var s in sArr)
                 Console.WriteLine($" In '{s}' Longest substring of all vowels in order is: '{StringAlgorithms.LongestBeautifulSubstringOfAllVowels(s)}'\n");
+        }
+
+
+        public static void ReorganizeString()
+        {
+            // https://leetcode.com/problems/reorganize-string/
+            Utility.Print("767. Reorganize String");
+            string[] sArr = { "aab", "aaab", "a", "vvvlo", "vdjvevvvs" };
+            foreach (var s in sArr)
+                Console.WriteLine($" Input '{s}' can be reorganized into: '{DailyProblem.ReorganizeString(s)}'\n ");
         }
 
 
