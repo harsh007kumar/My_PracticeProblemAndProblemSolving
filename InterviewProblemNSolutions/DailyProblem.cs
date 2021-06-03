@@ -16149,5 +16149,30 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(Max(nlogn,mlogm)) || Space O(1), n,m = length of 'horizontalCuts' & 'verticalCuts' respectively
+        public static int MaxAreaOfPieceOfCake(int h, int w, int[] horizontalCuts, int[] verticalCuts)
+        {
+            Array.Sort(horizontalCuts);             // O(nlogn)
+            Array.Sort(verticalCuts);               // O(mlogm)
+            long maxL = 0, maxW = 0, lastCutIdx = 0;
+            foreach (var idx in horizontalCuts)      // O(n)
+            {
+                maxL = Math.Max(maxL, idx - lastCutIdx);
+                lastCutIdx = idx;
+            }
+            maxL = Math.Max(maxL, h - lastCutIdx);
+
+            lastCutIdx = 0;
+            foreach (var idx in verticalCuts)        // O(m)
+            {
+                maxW = Math.Max(maxW, idx - lastCutIdx);
+                lastCutIdx = idx;
+            }
+            maxW = Math.Max(maxW, w - lastCutIdx);
+            return (int)((maxW * maxL) % 1000000007);
+        }
+
+
+
     }
 }

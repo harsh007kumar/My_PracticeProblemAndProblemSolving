@@ -459,6 +459,7 @@ namespace InterviewProblemNSolutions
             ValidPalindromeII();
             LongestSubstringOfAllVowelsInOrder();
             ReorganizeString();
+            MaximumAreaOfPieceOfCakeAfterHorizontalAndVerticalCuts();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7454,6 +7455,23 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "aab", "aaab", "a", "vvvlo", "vdjvevvvs" };
             foreach (var s in sArr)
                 Console.WriteLine($" Input '{s}' can be reorganized into: '{DailyProblem.ReorganizeString(s)}'\n ");
+        }
+
+
+        public static void MaximumAreaOfPieceOfCakeAfterHorizontalAndVerticalCuts()
+        {
+            // https://leetcode.com/problems/maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/
+            Utility.Print("1465. Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts");
+            int[] h = { 5, 5, 5 }, w = { 4, 4, 4 };
+            int[][] horizontalCutsArr = { new int[] { 1, 2, 4 }, new int[] { 3, 1 }, new int[] { 3 } };
+            int[][] verticalCutsArr = { new int[] { 1, 3 }, new int[] { 1 }, new int[] { 3 } };
+            for (int i = 0; i < h.Length; i++)
+            {
+                Console.WriteLine($" In a cafe of dimension => '{h[i]}' x '{w[i]}'");
+                horizontalCutsArr[i].Print("horizontal-Cuts");
+                verticalCutsArr[i].Print("vertical-Cuts");
+                Console.WriteLine($" Max Area of single piece of Cake is: '{DailyProblem.MaxAreaOfPieceOfCake(h[i], w[i], horizontalCutsArr[i], verticalCutsArr[i])}'\n");
+            }
         }
 
 
