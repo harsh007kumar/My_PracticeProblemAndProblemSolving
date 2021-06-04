@@ -460,6 +460,7 @@ namespace InterviewProblemNSolutions
             LongestSubstringOfAllVowelsInOrder();
             ReorganizeString();
             MaximumAreaOfPieceOfCakeAfterHorizontalAndVerticalCuts();
+            OpenTheLock();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7471,6 +7472,23 @@ namespace InterviewProblemNSolutions
                 horizontalCutsArr[i].Print("horizontal-Cuts");
                 verticalCutsArr[i].Print("vertical-Cuts");
                 Console.WriteLine($" Max Area of single piece of Cake is: '{DailyProblem.MaxAreaOfPieceOfCake(h[i], w[i], horizontalCutsArr[i], verticalCutsArr[i])}'\n");
+            }
+        }
+
+
+        public static void OpenTheLock()
+        {
+            // https://leetcode.com/problems/open-the-lock/
+            Utility.Print("752. Open the Lock");
+            string[][] deadends = { new string[] { "0201", "0101", "0102", "1212", "2002" },
+                                    new string[] { "8888" },
+                                    new string[] { "8887", "8889", "8878", "8898", "8788", "8988", "7888", "9888" },
+                                    new string[] { "0000" } };
+            string[] target = { "0202", "0009", "8888", "8888" };
+            for (int i = 0; i < target.Length; i++)
+            {
+                deadends[i].Print("Deadends");
+                Console.WriteLine($" Min no of moves to get from '0000' => '{target[i]}' position is: '{DailyProblem.OpenLock(deadends[i], target[i])}'\n");
             }
         }
 

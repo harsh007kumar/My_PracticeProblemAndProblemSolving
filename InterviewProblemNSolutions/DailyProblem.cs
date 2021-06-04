@@ -16173,6 +16173,57 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(numDig^lockLen + deadends.Length) || Space O(numDig^lockLen)
+        // numDig = 10 (0-9) , lockLen = 4
+        public static int OpenLock(string[] deadends, string target)
+        {
+            HashSet<string> blocker = new HashSet<string>();
+            foreach (var deadEnd in deadends)
+                blocker.Add(deadEnd);
+
+            // starting pattern of 0000 is present in deadend
+            if (blocker.Contains("0000")) return -1;
+
+            return BFS();
+
+            int BFS()
+            {
+                Queue<Pair<string, int>> q = new Queue<Pair<string, int>>();
+                q.Enqueue(new Pair<string, int>(target, 0));
+
+                while (q.Count > 0)
+                {
+                    var curr = q.Dequeue();
+                    if (curr.key == "0000") return curr.val;
+
+                    var currState = curr.key.ToArray();
+                    for (int i = 0; i < currState.Length; i++)
+                    {
+                        var wheelDigit = currState[i] - '0';
+
+                        // next (digit+1)%10
+                        currState[i] = (char)(((wheelDigit + 1) % 10) + '0');
+                        var nextState = new string(currState);
+                        if (!blocker.Contains(nextState))
+                            // added next state along with no moves to Q
+                            q.Enqueue(new Pair<string, int>(nextState, 1 + curr.val));
+                        blocker.Add(nextState); // mark visited as we dont want to evalute this again
+
+                        // prv (digit+9)%10
+                        currState[i] = (char)(((wheelDigit + 9) % 10) + '0');
+                        nextState = new string(currState);
+                        if (!blocker.Contains(nextState))
+                            // added next state along with no moves to Q
+                            q.Enqueue(new Pair<string, int>(nextState, 1 + curr.val));
+                        blocker.Add(nextState); // mark visited as we dont want to evalute this again
+
+                        currState[i] = (char)(wheelDigit + '0');    // reset back curr digit before moving onto next digit
+                    }
+                }
+                return -1;
+            }
+        }
+
 
     }
 }
