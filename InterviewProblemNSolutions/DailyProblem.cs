@@ -16225,5 +16225,34 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(Max(nlogn,nlogk)) || Space O(n+k)
+        public static int MaxPerformanceTeam(int n, int[] speed, int[] efficiency, int k)
+        {
+            int[][] players = new int[n][];
+            for (int i = 0; i < n; i++)         // O(n)
+                players[i] = new int[] { speed[i], efficiency[i] };
+
+            // sort in decreasing order of efficiency, if two players have same efficiency than choose one with higher speed first
+            Array.Sort(players, (x, y) => y[1].CompareTo(x[1]));
+
+            long maxPerf = 0, totalSpeed = 0, mod = 1000000007;
+            MinHeap mheap = new MinHeap(k + 1);
+
+            for (int i = 0; i < n; i++)         // O(n)
+            {
+                mheap.Insert(players[i][0]);    // insert ith player speed to MinHeap
+                totalSpeed += players[i][0];    // add ith speed to total speed sum
+
+                if (mheap.Count > k)            // if Heap has more than 'k' than pop the player with min Speed
+                    totalSpeed -= mheap.ExtractMin();       // O(logk)
+
+                // update max team performance (curr player has the min efficieny)
+                maxPerf = Math.Max(maxPerf, totalSpeed * players[i][1]);
+            }
+            return (int)(maxPerf % mod);
+        }
+
+
+
     }
 }

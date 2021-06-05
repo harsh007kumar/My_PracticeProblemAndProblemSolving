@@ -461,6 +461,7 @@ namespace InterviewProblemNSolutions
             ReorganizeString();
             MaximumAreaOfPieceOfCakeAfterHorizontalAndVerticalCuts();
             OpenTheLock();
+            MaximumPerformanceOfATeam();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7489,6 +7490,27 @@ namespace InterviewProblemNSolutions
             {
                 deadends[i].Print("Deadends");
                 Console.WriteLine($" Min no of moves to get from '0000' => '{target[i]}' position is: '{DailyProblem.OpenLock(deadends[i], target[i])}'\n");
+            }
+        }
+
+
+        public static void MaximumPerformanceOfATeam()
+        {
+            // https://leetcode.com/problems/maximum-performance-of-a-team/
+            Utility.Print("1383. Maximum Performance of a Team");
+            int[] n = { 6, 6, 6 }, k = { 2, 3, 4 };
+            int[][] speed = {       new int[] { 2, 10, 3, 1, 5, 8 },
+                                    new int[] { 2, 10, 3, 1, 5, 8 },
+                                    new int[] { 2, 10, 3, 1, 5, 8 } };
+            int[][] efficiency = {  new int[] { 5, 4, 3, 9, 7, 2 },
+                                    new int[] { 5, 4, 3, 9, 7, 2 },
+                                    new int[] { 5, 4, 3, 9, 7, 2 } };
+            for (int i = 0; i < n.Length; i++)
+            {
+                speed[i].Print("Speed");
+                efficiency[i].Print("Efficiency");
+                Console.WriteLine($" From above list of '{n[i]}' players, team with max performance consisting of maximum '{k[i]}' players has score =>" +
+                    $" '{DailyProblem.MaxPerformanceTeam(n[i], speed[i], efficiency[i], k[i])}'\n");
             }
         }
 
