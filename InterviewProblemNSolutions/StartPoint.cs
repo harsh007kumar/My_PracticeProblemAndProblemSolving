@@ -462,6 +462,7 @@ namespace InterviewProblemNSolutions
             MaximumAreaOfPieceOfCakeAfterHorizontalAndVerticalCuts();
             OpenTheLock();
             MaximumPerformanceOfATeam();
+            IntegerToEnglishWords();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7512,6 +7513,16 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" From above list of '{n[i]}' players, team with max performance consisting of maximum '{k[i]}' players has score =>" +
                     $" '{DailyProblem.MaxPerformanceTeam(n[i], speed[i], efficiency[i], k[i])}'\n");
             }
+        }
+
+
+        public static void IntegerToEnglishWords()
+        {
+            // https://leetcode.com/problems/integer-to-english-words/
+            Utility.Print("273. Integer to English Words");
+            int[] nums = { 123, 12345, 1234567, 1234567891, 0, 123000000, 1230000000, 100 };
+            foreach (var num in nums)
+                Console.WriteLine($" '{num}' get converted into '{DailyProblem.NumberToWords(num)}'\n");
         }
 
 

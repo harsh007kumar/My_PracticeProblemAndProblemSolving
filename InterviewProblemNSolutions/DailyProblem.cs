@@ -16253,6 +16253,108 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n), n = no of digits in 'num'
+        public static string NumberToWords(int num)
+        {
+            /* while num > 0, we get the mod of num with 1000
+             *      & convert this val (having max 3 digits) into words
+             * 
+             *      increament the level starting from => "" << Thousand << Million << Billion << Trillion
+             *      and append this keyword from current level to end of string if value was > 0
+             *      
+             *      divide the num by 1000
+             */
+
+            if (num < 1) return "Zero";
+
+            string[] digitName = new string[100];
+            #region Base Conversion
+            digitName[0] = "";
+            digitName[1] = "One";
+            digitName[2] = "Two";
+            digitName[3] = "Three";
+            digitName[4] = "Four";
+            digitName[5] = "Five";
+            digitName[6] = "Six";
+            digitName[7] = "Seven";
+            digitName[8] = "Eight";
+            digitName[9] = "Nine";
+            digitName[10] = "Ten";
+            digitName[11] = "Eleven";
+            digitName[12] = "Twelve";
+            digitName[13] = "Thirteen";
+            digitName[14] = "Fourteen";
+            digitName[15] = "Fifteen";
+            digitName[16] = "Sixteen";
+            digitName[17] = "Seventeen";
+            digitName[18] = "Eighteen";
+            digitName[19] = "Nineteen";
+            digitName[20] = "Twenty";
+            digitName[30] = "Thirty";
+            digitName[40] = "Forty";
+            digitName[50] = "Fifty";
+            digitName[60] = "Sixty";
+            digitName[70] = "Seventy";
+            digitName[80] = "Eighty";
+            digitName[90] = "Ninety";
+            #endregion
+            string[] levels = new string[] { "", "Thousand", "Million", "Billion", "Trillion" };
+            
+            int level = 0;
+            Stack<string> st = new Stack<string>();
+            while (num > 0)
+            {
+                Convert3Digits(num % 1000, level);
+                num /= 1000;
+                level++;    // increament level from Thousand => Million, Million to Billion, etc
+            }
+
+            StringBuilder sb = new StringBuilder();
+            // append all values from Stack to Stringbuilder and than append one space also
+            while (st.Count > 1)
+                sb.Append(st.Pop()).Append(' ');
+
+            // append last values without Space
+            sb.Append(st.Pop());
+
+            return sb.ToString();
+
+            // local helper func
+            void Convert3Digits(int val, int curLevel)
+            {
+                if (val < 1) return;
+
+                // var levelName = levels[curLevel];
+                if (curLevel > 0)
+                    st.Push(levels[curLevel]);
+                
+                int lastTwo = val % 100;
+                if (lastTwo < 20)
+                {
+                    if (lastTwo > 0)
+                        st.Push(digitName[lastTwo]);
+                }
+                else
+                {
+                    // int lastD = lastTwo % 10;
+                    if (lastTwo % 10 > 0)
+                        st.Push(digitName[lastTwo % 10]);
+
+                    // int secondLast = (lastTwo / 10) * 10;
+                    lastTwo /= 10;
+                    if (lastTwo > 0)
+                        st.Push(digitName[lastTwo * 10]);
+                }
+                
+                val /= 100;
+                if (val > 0)
+                {
+                    st.Push("Hundred");
+                    st.Push(digitName[val]);
+                }
+            }
+        }
+
 
     }
 }
