@@ -16356,5 +16356,28 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n), n = length of 'nums'
+        public static int LongestConsecutive(int[] nums)
+        {
+            int ans = 0, currLongestSeq, currNum;
+            HashSet<int> set = new HashSet<int>(nums.Length);
+            for (int i = 0; i < nums.Length; i++)
+                set.Add(nums[i]);
+
+            for (int i = 0; i < nums.Length; i++)
+                // if set doesnt contains num-1 than check to see longest sequence we can get starting from curr num
+                if (!set.Contains(nums[i] - 1))
+                {
+                    currNum = nums[i];
+                    currLongestSeq = 1;
+                    // find longest seq starting from nums[i]
+                    while (set.Contains(++currNum))
+                        currLongestSeq++;
+                    ans = Math.Max(ans, currLongestSeq);
+                }
+            return ans;
+        }
+
+
     }
 }

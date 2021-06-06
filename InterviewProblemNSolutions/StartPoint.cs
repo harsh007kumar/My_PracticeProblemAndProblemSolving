@@ -463,6 +463,7 @@ namespace InterviewProblemNSolutions
             OpenTheLock();
             MaximumPerformanceOfATeam();
             IntegerToEnglishWords();
+            LongestConsecutiveSequence();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7523,6 +7524,22 @@ namespace InterviewProblemNSolutions
             int[] nums = { 123, 12345, 1234567, 1234567891, 0, 123000000, 1230000000, 100 };
             foreach (var num in nums)
                 Console.WriteLine($" '{num}' get converted into '{DailyProblem.NumberToWords(num)}'\n");
+        }
+
+
+        public static void LongestConsecutiveSequence()
+        {
+            // GFG https://youtu.be/rmscV-OsLNQ
+            // https://leetcode.com/problems/longest-consecutive-sequence/
+            Utility.Print("128. Longest Consecutive Sequence");
+            int[][] numsArr = { new int[] { 100, 4, 200, 1, 3, 2 },
+                                new int[] { 0, 3, 7, 2, 5, 8, 4, 6, 0, 1 },
+                                new int[] { 9, 8, 7, 6, 5, 1, 2, 3, 4 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" length of the longest consecutive elements sequence in O(n) time is: '{DailyProblem.LongestConsecutive(nums)}'\n");
+            }
         }
 
 
