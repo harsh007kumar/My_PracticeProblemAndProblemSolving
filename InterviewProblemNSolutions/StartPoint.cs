@@ -464,6 +464,7 @@ namespace InterviewProblemNSolutions
             MaximumPerformanceOfATeam();
             IntegerToEnglishWords();
             LongestConsecutiveSequence();
+            MinCostClimbingStairs();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7539,6 +7540,21 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 Console.WriteLine($" length of the longest consecutive elements sequence in O(n) time is: '{DailyProblem.LongestConsecutive(nums)}'\n");
+            }
+        }
+
+
+        public static void MinCostClimbingStairs()
+        {
+            // https://leetcode.com/problems/min-cost-climbing-stairs/
+            Utility.Print("746. Min Cost Climbing Stairs");
+            int[][] costArr = { new int[] { 10, 15, 20 },
+                                new int[] { 1, 100, 1, 1, 1, 100, 1, 1, 100, 1 } };
+            foreach (var cost in costArr)
+            {
+                cost.Print("Stair-Cost");
+                Console.WriteLine($" [Recursive] Min cost to climb to top starting from 0th or 1st idx is: '{DynamicProgramming.MinCostClimbingStairs(cost)}'\n");
+                Console.WriteLine($" [Iterative] Min cost to climb to top starting from 0th or 1st idx is: '{DynamicProgramming.MinCostClimbingStairsIterative(cost)}'\n");
             }
         }
 

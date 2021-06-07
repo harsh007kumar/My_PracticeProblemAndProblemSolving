@@ -1969,5 +1969,54 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n), n = length of 'cost' || Recursive Soln
+        public static int MinCostClimbingStairs(int[] cost)
+        {
+            int[] cache = new int[cost.Length];
+            // set default values
+            for (int i = 0; i < cost.Length; i++) cache[i] = -1;
+
+            return Math.Min(GetMin(0), GetMin(1));
+            // local helper func
+            int GetMin(int idx)
+            {
+                if (idx >= cost.Length) return 0;
+                
+                // idx for which cost has not been calculated previously
+                if (cache[idx] != -1) return cache[idx];
+
+                // if not than find min cost to reach end from curr idx
+                return cache[idx] = cost[idx] + Math.Min(GetMin(idx + 1), GetMin(idx + 2));
+            }
+        }
+        // Time = O(n) Space O(1), n = length of 'cost' || Iterative Soln
+        public static int MinCostClimbingStairsIterative(int[] cost)
+        {
+            /* Initialize two variables, downOne and downTwo,
+             * that represent the minimum cost to reach one step and two steps below the current step, respectively.
+             * We will start iteration from step 2, 
+             * which means these variables will initially represent the minimum cost to reach steps 0 and 1,
+             * so we will initialize each of them to 0.
+             * 
+             * Iterate over the array, again with 1 extra iteration at the end to treat the top floor as the final "step".
+             * At each iteration, simulate moving 1 step up.
+             * This means downOne will now refer to the current step,
+             * so apply our recurrence relation to update downOne.
+             * downTwo will be whatever downOne was prior to the update,
+             * so let's use a temporary variable to help with the update.
+             * 
+             * In the end, since we treated the top floor as a step,
+             * downOne will refer to the minimum cost to reach the top floor. Return downOne.
+             */
+            int downOne = 0, downTwo = 0, temp;
+            for (int i = 2; i < cost.Length + 1; i++)
+            {
+                temp = downOne;
+                downOne = Math.Min(downOne + cost[i - 1], downTwo + cost[i - 2]);
+                downTwo = temp;
+            }
+            return downOne;
+        }
+
     }
 }
