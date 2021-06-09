@@ -125,6 +125,7 @@ namespace InterviewProblemNSolutions
             //JumpGameII();
             //JumpGameIII();
             //JumpGameIV();
+            JumpGameVI();
             //LinkedListRandomNode();
             //IncreasingOrderSearchTree();
             //KthFactorOfN();
@@ -7555,6 +7556,24 @@ namespace InterviewProblemNSolutions
                 cost.Print("Stair-Cost");
                 Console.WriteLine($" [Recursive] Min cost to climb to top starting from 0th or 1st idx is: '{DynamicProgramming.MinCostClimbingStairs(cost)}'\n");
                 Console.WriteLine($" [Iterative] Min cost to climb to top starting from 0th or 1st idx is: '{DynamicProgramming.MinCostClimbingStairsIterative(cost)}'\n");
+            }
+        }
+
+
+        public static void JumpGameVI()
+        {
+            // Happy Coding https://youtu.be/dHAsYTvbbj4
+            // https://leetcode.com/problems/jump-game-vi/
+            Utility.Print("1696. Jump Game VI");
+            int[][] nums = {    new int[] { 1, -1, -2, 4, -7, 3 },
+                                new int[] { 10, -5, -2, 4, 0, 3 },
+                                new int[] { 1, -5, -20, 4, -1, 3, -6, -3 } };
+            int[] k = { 2, 3, 2 };
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Nums");
+                Console.WriteLine($" Starting from 0th idx max score we can get my jumping max '{k[i]}' positions everytime till we reach last" +
+                    $" idx in above array we score: '{DynamicProgramming.JumpGameVI_DP(nums[i], k[i])}'\n");
             }
         }
 

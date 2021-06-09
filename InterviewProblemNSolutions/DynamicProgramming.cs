@@ -2018,5 +2018,40 @@ namespace InterviewProblemNSolutions
             return downOne;
         }
 
+
+        // Time = Space = O(n)
+        public static int JumpGameVI(int[] nums, int k)
+        {
+            int l = nums.Length;
+            long[] dp = new long[l];
+            // set default min values
+            for (int i = 0; i < l; i++) 
+                dp[i] = long.MinValue;
+
+            dp[0] = nums[0];    // max value we can get at 0th idx is value at 0th idx itself
+            k++;    // size of sliding window
+            List<int> slideWin = new List<int>();
+            slideWin.Add(0);
+
+            for (int i = 1; i < l; i++)
+            {
+                // remove if any num is going out of window
+                if (i >= k && slideWin[0] == i - k)
+                    slideWin.RemoveAt(0);
+
+                // max value from front of SlidingWindow + current num value is maxValue we can get at current idx
+                dp[i] = nums[i] + dp[slideWin[0]];
+
+                // remvoe all indices from the end of SlidingWindow who's dp value is small or equal to current idx maxValue possible
+                while (slideWin.Count > 0 && dp[slideWin[slideWin.Count - 1]] <= dp[i])
+                    slideWin.RemoveAt(slideWin.Count - 1);
+
+                // add curr idx to sliding window
+                slideWin.Add(i);
+            }
+            return (int)dp[l - 1];
+        }
+
+
     }
 }
