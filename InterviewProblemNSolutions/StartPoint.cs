@@ -466,6 +466,7 @@ namespace InterviewProblemNSolutions
             IntegerToEnglishWords();
             LongestConsecutiveSequence();
             MinCostClimbingStairs();
+            MyCalendarI();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7573,8 +7574,23 @@ namespace InterviewProblemNSolutions
             {
                 nums[i].Print("Nums");
                 Console.WriteLine($" Starting from 0th idx max score we can get my jumping max '{k[i]}' positions everytime till we reach last" +
-                    $" idx in above array we score: '{DynamicProgramming.JumpGameVI_DP(nums[i], k[i])}'\n");
+                    $" idx in above array we score: '{DynamicProgramming.JumpGameVI(nums[i], k[i])}'\n");
             }
+        }
+
+
+        public static void MyCalendarI()
+        {
+            // https://leetcode.com/problems/my-calendar-i/
+            Utility.Print("729. My Calendar I");
+            MyCalendar obj = new MyCalendar();
+            obj.Book(10, 20); // returns true
+            obj.Book(15, 25); // returns false
+            obj.Book(20, 30); // returns true
+            /* Explanation:
+             * The first event can be booked.The second can't because time 15 is already booked by another event.
+             * The third event can be booked, as the first event takes every time less than 20, but not including 20.
+             */
         }
 
 

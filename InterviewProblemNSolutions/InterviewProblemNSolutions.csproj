@@ -65,6 +65,7 @@
     <Compile Include="MaxHeapReorganizeString.cs" />
     <Compile Include="MinHeap.cs" />
     <Compile Include="MinStack.cs" />
+    <Compile Include="MyCalendar.cs" />
     <Compile Include="MyHashSet.cs" />
     <Compile Include="MyLinkedList.cs" />
     <Compile Include="NestedIterator.cs" />
