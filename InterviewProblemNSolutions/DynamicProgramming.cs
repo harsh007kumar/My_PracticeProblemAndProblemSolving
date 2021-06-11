@@ -2057,28 +2057,41 @@ namespace InterviewProblemNSolutions
         public static int StoneGameVII(int[] stones)
         {
             int l = stones.Length;
+
             int[] prefixSum = new int[l + 1];
-            for (int i = 0; i < l; i++)         // O(n)
+            for (int i = 0; i < l; i++)                             // O(n)
                 prefixSum[i + 1] = prefixSum[i] + stones[i];
 
-            // for caching states while doing top-down traversal
+            // for Caching states while doing top-down traversal
             long[,] cache = new long[l, l];
             for (int r = 0; r < l; r++)
                 for (int c = 0; c < l; c++)
-                    cache[r, c] = long.MinValue;
+                    cache[r, c] = long.MinValue;        // state to indicate value doesnt exists
 
-            return (int)MaxDiff(0, stones.Length - 1);
+            return (int)MaxDiff(0, l - 1);
 
             // local helper func
-            int Score(int left, int right) => prefixSum[right + 1] - prefixSum[left];       // O(1)
+            int Score(int left, int right) => prefixSum[right + 1] - prefixSum[left];   // O(1)
 
-            long MaxDiff(int left, int right)                                                // O(n^2)
+            long MaxDiff(int left, int right)                                           // O(n^2)
             {
-                if (left >= right) return 0;    // since only single stone remaining, after removal player gets 0
+                if (left >= right) return 0;                // since only single stone remaining, after removal player gets 0
 
-                if (cache[left, right] != long.MinValue)
+                if (cache[left, right] != long.MinValue)    // if curr state is previously solved use value from cache
                     return cache[left, right];
 
+                /* if curr player chooses to remove left most stone,
+                 * than max diff we get is:
+                 *  LeftScore i.e
+                 *      (1st player score => Sum of stones from left+1..right)
+                 *      -
+                 *      (2nd player advantage after this move => additional score 2nd player gets after curr move)
+                 *      
+                 *  RtScore i.e
+                 *      (1st player score => Sum of stones from left..right-1)
+                 *      -
+                 *      (2nd player advantage after this move => additional score 2nd player gets after curr move)
+                 */
                 var leftScore = Score(left + 1, right) - MaxDiff(left + 1, right);
                 var rtScore = Score(left, right - 1) - MaxDiff(left, right - 1);
 
