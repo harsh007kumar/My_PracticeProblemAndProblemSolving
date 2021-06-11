@@ -2053,5 +2053,40 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n^2), n = length of 'stones'
+        public static int StoneGameVII(int[] stones)
+        {
+            int l = stones.Length;
+            int[] prefixSum = new int[l + 1];
+            for (int i = 0; i < l; i++)         // O(n)
+                prefixSum[i + 1] = prefixSum[i] + stones[i];
+
+            // for caching states while doing top-down traversal
+            long[,] cache = new long[l, l];
+            for (int r = 0; r < l; r++)
+                for (int c = 0; c < l; c++)
+                    cache[r, c] = long.MinValue;
+
+            return (int)MaxDiff(0, stones.Length - 1);
+
+            // local helper func
+            int Score(int left, int right) => prefixSum[right + 1] - prefixSum[left];       // O(1)
+
+            long MaxDiff(int left, int right)                                                // O(n^2)
+            {
+                if (left >= right) return 0;    // since only single stone remaining, after removal player gets 0
+
+                if (cache[left, right] != long.MinValue)
+                    return cache[left, right];
+
+                var leftScore = Score(left + 1, right) - MaxDiff(left + 1, right);
+                var rtScore = Score(left, right - 1) - MaxDiff(left, right - 1);
+
+                return cache[left, right] = Math.Max(leftScore, rtScore);
+            }
+        }
+
+
+
     }
 }

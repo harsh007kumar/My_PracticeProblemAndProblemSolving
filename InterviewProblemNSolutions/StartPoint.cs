@@ -467,6 +467,7 @@ namespace InterviewProblemNSolutions
             LongestConsecutiveSequence();
             MinCostClimbingStairs();
             MyCalendarI();
+            StoneGameVII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7591,6 +7592,19 @@ namespace InterviewProblemNSolutions
              * The first event can be booked.The second can't because time 15 is already booked by another event.
              * The third event can be booked, as the first event takes every time less than 20, but not including 20.
              */
+        }
+
+
+        public static void StoneGameVII()
+        {
+            // https://leetcode.com/problems/stone-game-vii/
+            Utility.Print("1690. Stone Game VII");
+            int[][] stonesArr = { new int[] { 5, 3, 1, 4, 2 }, new int[] { 7, 90, 5, 1, 100, 10, 10, 2 } };
+            foreach (var stones in stonesArr)
+            {
+                stonesArr.Print("Stones");
+                Console.WriteLine($" Min difference in Alice and Bob's score if they both play optimally is: '{DynamicProgramming.StoneGameVII(stones)}'\n");
+            }
         }
 
 
