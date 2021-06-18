@@ -16399,5 +16399,36 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(nlogm) Space O(1), n = len of arr1, m = len of arr2
+        public static int FindTheDistanceValueBetweenTwoArrays(int[] arr1, int[] arr2, int d)
+        {
+            Array.Sort(arr2);
+            int ans = 0;
+            foreach (var n in arr1)      // O(n)
+                if (Math.Abs(n - GetCloset(n)) > d)    // O(logm)
+                    ans++;
+            return ans;
+
+            // local helper func
+            int GetCloset(int num)
+            {
+                int left = 0, right = arr2.Length - 1, mid;
+                while (left <= right)
+                {
+                    mid = left + (right - left) / 2;
+                    if (arr2[mid] < num)
+                        left = mid + 1;
+                    else if (arr2[mid] > num)
+                        right = mid - 1;
+                    else
+                        return num;
+                }
+                if (right < 0) return arr2[left];
+                if (left == arr2.Length) return arr2[right];
+                return Math.Abs(arr2[left] - num) < Math.Abs(arr2[right] - num) ? arr2[left] : arr2[right];
+            }
+        }
+
+
     }
 }

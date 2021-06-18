@@ -469,6 +469,7 @@ namespace InterviewProblemNSolutions
             MyCalendarI();
             StoneGameVII();
             NumberOfSubarraysWithBoundedMaximum();
+            FindTheDistanceValueBetweenTwoArrays();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7623,6 +7624,23 @@ namespace InterviewProblemNSolutions
                 nums[i].Print("Nums");
                 Console.WriteLine($" No of contiguous non-empty subarrays such that the value of the maximum array element in that subarray is in the range [{left[i]}, {right[i]}]" +
                     $" are: {DailyProblem.NumberOfSubarraysWithBoundedMaximum(nums[i], left[i], right[i])}\n");
+            }
+        }
+
+
+        public static void FindTheDistanceValueBetweenTwoArrays()
+        {
+            // https://leetcode.com/problems/find-the-distance-value-between-two-arrays/
+            Utility.Print("1385. Find the Distance Value Between Two Arrays");
+            int[][] arr1 = { new int[] { 4, 5, 8 }, new int[] { 1, 4, 2, 3 }, new int[] { 2, 1, 100, 3 }, new int[] { -3, -3, 4, -1, -10 } };
+            int[][] arr2 = { new int[] { 10, 9, 1, 8 }, new int[] { -4, -3, 6, 10, 20, 30 }, new int[] { -5, -2, 10, -3, 7 }, new int[] { 7, 10 } };
+            int[] d = { 2, 3, 6, 12 };
+            for (int i = 0; i < d.Length; i++)
+            {
+                arr1[i].Print("Arr1");
+                arr2[i].Print("Arr1");
+                Console.WriteLine($" Distance value is defined as the number of elements arr1[i] such that there is not any element arr2[j]" +
+                    $" where |arr1[i]-arr2[j]| <= d are: '{DailyProblem.FindTheDistanceValueBetweenTwoArrays(arr1[i], arr2[i], d[i])}'\n");
             }
         }
 
