@@ -468,6 +468,7 @@ namespace InterviewProblemNSolutions
             MinCostClimbingStairs();
             MyCalendarI();
             StoneGameVII();
+            NumberOfSubarraysWithBoundedMaximum();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7604,6 +7605,24 @@ namespace InterviewProblemNSolutions
             {
                 stonesArr.Print("Stones");
                 Console.WriteLine($" Min difference in Alice and Bob's score if they both play optimally is: '{DynamicProgramming.StoneGameVII(stones)}'\n");
+            }
+        }
+
+
+        public static void NumberOfSubarraysWithBoundedMaximum()
+        {
+            // https://leetcode.com/problems/number-of-subarrays-with-bounded-maximum/
+            Utility.Print("795. Number of Subarrays with Bounded Maximum");
+            int[][] nums = {    new int[] { 2, 1, 4, 3 },
+                                new int[] { 2, 9, 2, 5, 6 },
+                                new int[] { 73, 55, 36, 5, 55, 14, 9, 7, 72, 52 },
+                                new int[] { 16, 69, 88, 85, 79, 87, 37, 33, 39, 34 } };
+            int[] left = { 2, 2, 32, 55 }, right = { 3, 8, 69, 57 };
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Nums");
+                Console.WriteLine($" No of contiguous non-empty subarrays such that the value of the maximum array element in that subarray is in the range [{left[i]}, {right[i]}]" +
+                    $" are: {DailyProblem.NumberOfSubarraysWithBoundedMaximum(nums[i], left[i], right[i])}\n");
             }
         }
 

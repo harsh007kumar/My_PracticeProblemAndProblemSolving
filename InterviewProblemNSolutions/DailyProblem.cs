@@ -16379,5 +16379,25 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) Space O(1), n = len of 'nums'
+        public static int NumberOfSubarraysWithBoundedMaximum(int[] nums, int left, int right)
+        {
+            int startIdx = 0, count = 0, ans = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] > right)
+                {
+                    startIdx = i + 1;
+                    count = 0;
+                }
+                else if (left <= nums[i])
+                    count = 1 + i - startIdx;
+                
+                ans += count;
+            }
+            return ans;
+        }
+
+
     }
 }
