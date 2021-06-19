@@ -73,8 +73,10 @@
     <Compile Include="PriorityQueue.cs" />
     <Compile Include="ProductOfNumbers.cs" />
     <Compile Include="RandomPickWithBlacklisted.cs" />
+    <Compile Include="RangeSumNumArray.cs" />
     <Compile Include="RangeSumQuery2DImmutable.cs" />
     <Compile Include="SearchAlgorithms.cs" />
+    <Compile Include="SegmentTree.cs" />
     <Compile Include="SelectionAlgorithms.cs" />
     <Compile Include="Spellchecker.cs" />
     <Compile Include="StartPoint.cs" />

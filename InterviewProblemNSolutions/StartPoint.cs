@@ -470,6 +470,7 @@ namespace InterviewProblemNSolutions
             StoneGameVII();
             NumberOfSubarraysWithBoundedMaximum();
             FindTheDistanceValueBetweenTwoArrays();
+            RangeSumQueryMutable();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7642,6 +7643,18 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Distance value is defined as the number of elements arr1[i] such that there is not any element arr2[j]" +
                     $" where |arr1[i]-arr2[j]| <= d are: '{DailyProblem.FindTheDistanceValueBetweenTwoArrays(arr1[i], arr2[i], d[i])}'\n");
             }
+        }
+
+
+        public static void RangeSumQueryMutable()
+        {
+            // Coding Decoded https://youtu.be/dUkRI0R3sg8
+            // https://leetcode.com/problems/range-sum-query-mutable/
+            Utility.Print("307. Range Sum Query - Mutable");
+            RangeSumNumArray numArray = new RangeSumNumArray(new int[] { 1, 3, 5 });
+            numArray.SumRange(0, 2); // return 1 + 3 + 5 = 9
+            numArray.Update(1, 2);   // nums = [1, 2, 5]
+            numArray.SumRange(0, 2); // return 1 + 2 + 5 = 8
         }
 
 
