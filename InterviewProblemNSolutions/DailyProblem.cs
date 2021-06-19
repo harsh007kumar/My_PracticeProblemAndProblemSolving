@@ -16430,5 +16430,22 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n*k)
+        public static int KInversePairs(int n, int k)
+        {
+            int[,] dp = new int[n + 1, k + 1];
+            // build all ansers for values of 'n' starting from 1
+            for (int nth = 1; nth <= n; nth++)
+                for (int kth = 0; kth <= k; kth++)
+                    if (kth == 0)
+                        // for k=0 inversion there is only 1 possibility where all elements r in asc order
+                        dp[nth, kth] = 1;
+                    else
+                        for (int i = 0; i <= Math.Min(kth, nth - 1); i++)
+                            dp[nth, kth] = (dp[nth, kth] + dp[nth - 1, kth - i]) % 1000000007;
+            return dp[n, k];
+        }
+
+
     }
 }

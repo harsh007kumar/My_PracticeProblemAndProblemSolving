@@ -471,6 +471,7 @@ namespace InterviewProblemNSolutions
             NumberOfSubarraysWithBoundedMaximum();
             FindTheDistanceValueBetweenTwoArrays();
             RangeSumQueryMutable();
+            KInversePairsArray();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7655,6 +7656,18 @@ namespace InterviewProblemNSolutions
             numArray.SumRange(0, 2); // return 1 + 3 + 5 = 9
             numArray.Update(1, 2);   // nums = [1, 2, 5]
             numArray.SumRange(0, 2); // return 1 + 2 + 5 = 8
+        }
+
+
+        public static void KInversePairsArray()
+        {
+            // Coding Decoded https://youtu.be/U4SLvGBEqpE
+            // https://leetcode.com/problems/k-inverse-pairs-array/
+            Utility.Print("629. K Inverse Pairs Array");
+            int[] n = { 3, 3 }, k = { 0, 1 };
+            for (int i = 0; i < n.Length; i++)
+                Console.WriteLine($" Given 2 integers {n[i]} and {k[i]}, the no of different arrays consist of numbers from 1 to n such that" +
+                    $" there are exactly k inverse pairs are: '{DailyProblem.KInversePairs(n[i], k[i])}'\n");
         }
 
 
