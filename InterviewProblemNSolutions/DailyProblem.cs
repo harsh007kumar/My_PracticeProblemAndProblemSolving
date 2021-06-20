@@ -16447,5 +16447,52 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(r*c*logn) || Space O(r*c) , r,c = rows & cols in 'grid' & n = max cell elevation found in grid
+        public static int SwimInRisingWater(int[][] grid)
+        {
+            int row = grid.Length, col = grid[0].Length;
+            // lowest time we need to wait is the level of 'destination' cell elevation
+            int low = grid[row - 1][col - 1], high = GetMax(), time, ans = grid[row - 1][col - 1];
+            bool[,] visited;
+            while (low <= high)             // O(logn)
+            {
+                time = low + (high - low) / 2;
+                visited = new bool[row, col];
+                if (CanReach(0, 0))         // O(rows*cols)
+                {
+                    ans = time;
+                    high = time - 1;
+                }
+                else
+                    low = time + 1;
+            }
+            return ans;
+
+            // local helper func
+            // DFS traversal
+            bool CanReach(int i, int j)
+            {
+                // if outside grid boundry or curr cell elevation more than 'time' value or current cell has been traversed before
+                if (i < 0 || i >= row || j < 0 || j >= col || grid[i][j] > time || visited[i, j]) return false;
+
+                // reached destination cell
+                if (i == row - 1 && j == col - 1) return true;
+
+                visited[i, j] = true;       // mark visited
+
+                // try traversal in all 4 possible directions
+                return (CanReach(i, j - 1) || CanReach(i - 1, j) || CanReach(i, j + 1) || CanReach(i + 1, j)) ? true : false;
+            }
+
+            int GetMax()
+            {
+                int val = int.MinValue;
+                for (int r = 0; r < row; r++)
+                    for (int c = 0; c < col; c++)
+                        val = Math.Max(grid[r][c], val);
+                return val;
+            }
+        }
+
     }
 }

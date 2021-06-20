@@ -472,6 +472,7 @@ namespace InterviewProblemNSolutions
             FindTheDistanceValueBetweenTwoArrays();
             RangeSumQueryMutable();
             KInversePairsArray();
+            SwimInRisingWater();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7668,6 +7669,46 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < n.Length; i++)
                 Console.WriteLine($" Given 2 integers {n[i]} and {k[i]}, the no of different arrays consist of numbers from 1 to n such that" +
                     $" there are exactly k inverse pairs are: '{DailyProblem.KInversePairs(n[i], k[i])}'\n");
+        }
+
+
+        public static void SwimInRisingWater()
+        {
+            // https://leetcode.com/problems/swim-in-rising-water/
+            Utility.Print("778. Swim in Rising Water");
+            int[][][] gridArr = { new int[][] {   new int[] { 0, 2 },
+                                                new int[] { 1, 3 } },
+                                new int[][] {   new int[] { 0, 1, 2, 3, 4 },
+                                                new int[] { 24, 23, 22, 21, 5 },
+                                                new int[] { 12, 13, 14, 15, 16 },
+                                                new int[] { 11, 17, 18, 19, 20 },
+                                                new int[] { 10, 9, 8, 7, 6 } },
+                                new int[][] {   new int[] {26,99,80,1,89,86,54,90,47,87},
+                                                new int[] {9,59,61,49,14,55,77,3,83,79}, 
+                                                new int[] {42,22,15,5,95,38,74,12,92,71}, 
+                                                new int[] {58,40,64,62,24,85,30,6,96,52}, 
+                                                new int[] {10,70,57,19,44,27,98,16,25,65},
+                                                new int[] {13,0,76,32,29,45,28,69,53,41},
+                                                new int[] {18,8,21,67,46,36,56,50,51,72},
+                                                new int[] {39,78,48,63,68,91,34,4,11,31},
+                                                new int[] {97,23,60,17,66,37,43,33,84,35},
+                                                new int[] {75,88,82,20,7,73,2,94,93,81}},
+                                new int[][] {   new int[] {10,27,37,77,87,49,70,85,90,40},
+                                                new int[] {73,63,50,8,5,98,20,19,52,32},
+                                                new int[] {99,46,45,86,96,91,42,38,97,0},
+                                                new int[] {21,78,79,62,35,2,48,81,89,80},
+                                                new int[] {13,22,53,12,34,75,36,18,88,23},
+                                                new int[] {95,9,59,84,72,25,74,65,83,4}, 
+                                                new int[] {43,47,58,30,3,31,57,69,28,92},
+                                                new int[] {6,7,94,82,54,67,61,39,33,55},
+                                                new int[] {60,15,41,68,24,56,1,76,14,64},
+                                                new int[] {29,16,71,44,17,93,51,11,26,66}}
+                              };
+            foreach (var grid in gridArr)
+            {
+                grid.Print("GRID");
+                Console.WriteLine($" Starting at the top left square (0, 0). The least time until we can reach the bottom right square (N-1, N-1) is: '{DailyProblem.SwimInRisingWater(grid)}'\n");
+            }
         }
 
 
