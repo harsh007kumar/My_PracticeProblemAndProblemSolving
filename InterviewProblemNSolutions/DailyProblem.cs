@@ -16494,5 +16494,52 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time O(nlogn) Space O(n), n = length of 'stations'
+        public static int MinRefuelStops(int target, int startFuel, int[][] stations)
+        {
+            /*
+            as we traverse the sorted list of stations (asc order of distance from start)
+            we add the stations in MaxHeap sorted by fuel at given station
+
+            at any point if we reach >=taget than return curr PitStops 
+            if we run out of fuel before reaching target & we have no station in ouyr heap return -1
+            but if we have some station in MaxHeap pick the top one & increament the 'PitStops' by 1
+            */
+            int fuelInTank = startFuel, pitStops = 0, lastPos = 0, j = -1;
+            MaxHeapMinRefuelStops mHeap = new MaxHeapMinRefuelStops(stations.Length);
+            while (++j < stations.Length) // O(n)
+            {
+                fuelInTank -= stations[j][0] - lastPos;
+                lastPos = stations[j][0];
+
+                if (fuelInTank < 0)
+                {
+                    while (fuelInTank < 0 && mHeap.Count > 0)
+                    {
+                        pitStops++;
+                        var st = mHeap.ExtractMax();
+                        fuelInTank += st[1];
+                    }
+                    // if still not enouf fuel to make it to next station
+                    if (fuelInTank < 0) return -1;
+                }
+
+                // add curr fuel station to MaxHeap
+                mHeap.Add(stations[j]); // O(logn)
+            }
+
+            fuelInTank -= target - lastPos;
+            while (fuelInTank < 0 && mHeap.Count > 0)
+            {
+                pitStops++;
+                var st = mHeap.ExtractMax();
+                fuelInTank += st[1];
+            }
+            return fuelInTank >= 0 ? pitStops : -1;
+        }
+
+
+
     }
 }

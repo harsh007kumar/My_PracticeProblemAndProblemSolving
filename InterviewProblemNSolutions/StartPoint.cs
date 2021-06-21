@@ -473,6 +473,7 @@ namespace InterviewProblemNSolutions
             RangeSumQueryMutable();
             KInversePairsArray();
             SwimInRisingWater();
+            MinimumNumberOfRefuelingStops();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7708,6 +7709,21 @@ namespace InterviewProblemNSolutions
             {
                 grid.Print("GRID");
                 Console.WriteLine($" Starting at the top left square (0, 0). The least time until we can reach the bottom right square (N-1, N-1) is: '{DailyProblem.SwimInRisingWater(grid)}'\n");
+            }
+        }
+
+
+        public static void MinimumNumberOfRefuelingStops()
+        {
+            // https://leetcode.com/problems/minimum-number-of-refueling-stops/
+            Utility.Print("871. Minimum Number of Refueling Stops");
+            int[] target = { 1, 100, 100 }, startFuel = { 1, 1, 10 };
+            int[][][] stations = { new int[][] { }, new int[][] { new int[] { 10, 100 } }, new int[][] { new int[] { 10, 60 }, new int[] { 20, 30 }, new int[] { 30, 30 }, new int[] { 60, 40 } } };
+            for(int i=0;i<target.Length;i++)
+            {
+                stations[i].Print("Stations");
+                Console.WriteLine($" Min no of refueling stops the car must make in order to reach its destination '{target[i]}'" +
+                    $"\n while passing thru above Fuel pumps with starting fuel '{startFuel[i]}' are : '{DailyProblem.MinRefuelStops(target[i], startFuel[i], stations[i])}'\n");
             }
         }
 
