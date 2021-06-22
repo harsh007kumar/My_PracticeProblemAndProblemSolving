@@ -16654,6 +16654,62 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(Max(n,m)*k) || Space O(1), n = length of 's', m = avg length of word in 'words' & k = length of array 'words'
+        public static int NumMatchingSubseq_BruteForce(string s, string[] words)
+        {
+            int ans = 0;
+            foreach (var word in words)     // O(k)
+                if (Subsequence(word))      // O(Max(n,m))
+                    ans++;
+            return ans;
+            // local helper func
+            bool Subsequence(string w)
+            {
+                int i = 0;
+                foreach (var ch in s)
+                    if (ch == w[i])    // characters match
+                        if (++i == w.Length)   // move to next character of word till we have matched all
+                            break;
+                return i == w.Length;
+            }
+        }
+        // Time O(Max(n,m*k)) || Space O(n), n = length of 's', m = avg length of word in 'words' & k = length of array 'words'
+        public static int NumMatchingSubseq(string s, string[] words)
+        {
+            // dictionary to store all characters present in string 's' as key with their list of indices as value
+            Dictionary<char, List<int>> charIdx = new Dictionary<char, List<int>>();
+            for (int i = 0; i < s.Length; i++)      // O(n)
+                if (!charIdx.ContainsKey(s[i]))
+                    charIdx[s[i]] = new List<int>() { i };
+                else
+                    charIdx[s[i]].Add(i);
+
+            int ans = 0;
+            bool foundNextChar;
+            foreach (var word in words)             // O(k)
+            {
+                int i = 0, lastIdx = -1;
+                while (i < word.Length)             // O(m)
+                {
+                    if (!charIdx.ContainsKey(word[i])) break;
+                    foundNextChar = false;
+                    foreach (var idx in charIdx[word[i]])
+                        if (idx > lastIdx)
+                        {
+                            lastIdx = idx;
+                            foundNextChar = true;
+                            i++;
+                            break;
+                        }
+                    if (!foundNextChar) break;  // next char was not found in 's'
+                }
+
+                if (i == word.Length)
+                    ans++;
+            }
+            return ans;
+        }
+
 
 
     }

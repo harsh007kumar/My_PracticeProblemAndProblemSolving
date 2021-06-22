@@ -475,6 +475,7 @@ namespace InterviewProblemNSolutions
             SwimInRisingWater();
             MinimumNumberOfRefuelingStops();
             PalindromePairs();
+            NumberOfMatchingSubsequences();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7743,6 +7744,21 @@ namespace InterviewProblemNSolutions
                     $"\n so that the concatenation of the two words words[i] + words[j] is a palindrome are");
                 DailyProblem.PalindromePairs(words).Print("PalindromePairs");
                 Console.WriteLine();
+            }
+        }
+
+
+        public static void NumberOfMatchingSubsequences()
+        {
+            // https://leetcode.com/problems/number-of-matching-subsequences/
+            Utility.Print("792. Number of Matching Subsequences");
+            string[] s = { "abcde", "dsahjpjauf" };
+            string[][] words = { new string[] { "a", "bb", "acd", "ace" }, new string[] { "ahjpjau", "ja", "ahbwzgqnuk", "tnmlanowax" } };
+            for (int i = 0; i < s.Length; i++)
+            {
+                words[i].Print("Words");
+                //Console.WriteLine($" No of words from above array that is a subsequence of '{s[i]}' are: '{DailyProblem.NumMatchingSubseq_BruteForce(s[i], words[i])}'\n");
+                Console.WriteLine($" No of words from above array that is a subsequence of '{s[i]}' are: '{DailyProblem.NumMatchingSubseq(s[i], words[i])}'\n");
             }
         }
 
