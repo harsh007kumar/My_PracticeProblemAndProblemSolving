@@ -16540,6 +16540,121 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n * m^2) Space O(n), n = length of 'words', m = avg length of each word
+        public static IList<IList<int>> PalindromePairs(string[] words)
+        {
+            IList<IList<int>> ans = new List<IList<int>>();
+            int l = words.Length;
+
+            // add all words in array to Dictionary with their index as value
+            Dictionary<string, int> wordIdx = new Dictionary<string, int>(l);
+            for (int i = 0; i < l; i++)        // O(n)
+                wordIdx[words[i]] = i;
+
+            // iterate thru each word present in input
+            for (int i = 0; i < l; i++)        // O(n)
+            {
+                // Case 1 : Reverse of current word in present
+                var rev = words[i].Reverse();  // O(m)
+                if (wordIdx.ContainsKey(rev))
+                {
+                    int j = wordIdx[rev];
+                    if (i != j)
+                        ans.Add(new int[] { i, j });
+                }
+                // Case 2 : found reverse of prefix of curr word whose last half is palindromic
+                foreach (var prefix in GetPreFix(words[i])) // O(m^2)
+                {
+                    var revPrefix = prefix.Reverse();
+                    if (wordIdx.ContainsKey(revPrefix))
+                        ans.Add(new int[] { i, wordIdx[revPrefix] });
+                }
+                // Case 3 : found reverse of suffix of curr word whose first half is palindromic
+                foreach (var suffix in GetSufFix(words[i]))  // O(m^2)
+                {
+                    var revSuffix = suffix.Reverse();
+                    if (wordIdx.ContainsKey(revSuffix))
+                        ans.Add(new int[] { wordIdx[revSuffix], i });
+                }
+            }
+            // special case of having one empty string in input array
+            if (wordIdx.ContainsKey(""))
+            {
+                int blankIdx = wordIdx[""];
+                for (int i = 0; i < l; i++)     // O(n)
+                    if (blankIdx != i && IsPalindrome(words[i]))
+                    {
+                        ans.Add(new int[] { i, blankIdx });
+                        ans.Add(new int[] { blankIdx, i });
+                    }
+            }
+            return ans;
+
+
+            // local helper func
+            List<string> GetPreFix(string a)
+            {
+                List<string> pList = new List<string>();
+                for (int i = 0; i < a.Length - 1; i++)
+                {
+                    string left = a.Substring(0, i + 1);
+                    string right = a.Substring(i + 1);
+                    if (IsPalindrome(right))
+                        pList.Add(left);
+                }
+                return pList;
+            }
+            List<string> GetSufFix(string a)
+            {
+                List<string> sList = new List<string>();
+                for (int i = 0; i < a.Length - 1; i++)
+                {
+                    string left = a.Substring(0, i + 1);
+                    string right = a.Substring(i + 1);
+                    if (IsPalindrome(left))
+                        sList.Add(right);
+                }
+                return sList;
+            }
+            bool IsPalindrome(string a)
+            {
+                int left = 0, right = a.Length - 1;
+                while (left < right)
+                    if (a[left++] != a[right--])
+                        return false;
+                return true;
+            }
+            /*
+            // Time O(n^2 * m) Space O(1), n = length of 'words', m = avg length of each word
+            public IList<IList<int>> PalindromePairs(string[] words)
+            {
+                IList<IList<int>> ans = new List<IList<int>>();
+                for(int i=0;i<words.Length;i++)
+                    for(int j=i+1;j<words.Length;j++)
+                    {
+                        if(IsPalindrome(words[i],words[j]))
+                            ans.Add(new int[] {i,j});
+                        if(IsPalindrome(words[j],words[i]))
+                            ans.Add(new int[] {j,i});
+                    }
+                return ans;
+
+                // local helper func
+                bool IsPalindrome(string a, string b)
+                {
+                    string merge = a+b;
+                    int left = 0, right = merge.Length-1;
+                    while(left<right)
+                        if(merge[left++]!=merge[right--])
+                            return false;
+                    return true;
+                }
+            }
+            */
+        }
+
+
+
 
     }
 }

@@ -29,6 +29,14 @@ namespace InterviewProblemNSolutions
         public const string lineDelimeter = "\n--------------------------------------------------------------------------------------";
         public static void Print(string str = "") => Console.WriteLine($"\n===================== {str} =====================");
 
+        public static string Reverse(this string str)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = str.Length - 1; i >= 0; i--)
+                sb.Append(str[i]);
+            return sb.ToString();
+        }
+
         public static void Swap(ref int a,ref int b)
         {
             var temp = a;

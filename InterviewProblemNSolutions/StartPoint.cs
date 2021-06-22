@@ -474,6 +474,7 @@ namespace InterviewProblemNSolutions
             KInversePairsArray();
             SwimInRisingWater();
             MinimumNumberOfRefuelingStops();
+            PalindromePairs();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7724,6 +7725,24 @@ namespace InterviewProblemNSolutions
                 stations[i].Print("Stations");
                 Console.WriteLine($" Min no of refueling stops the car must make in order to reach its destination '{target[i]}'" +
                     $"\n while passing thru above Fuel pumps with starting fuel '{startFuel[i]}' are : '{DailyProblem.MinRefuelStops(target[i], startFuel[i], stations[i])}'\n");
+            }
+        }
+
+
+        public static void PalindromePairs()
+        {
+            // https://leetcode.com/problems/palindrome-pairs/
+            Utility.Print("336. Palindrome Pairs");
+            string[][] wordsArr = { new string[] { "abcd", "dcba", "lls", "s", "sssll" },
+                                    new string[] { "bat", "tab", "cat" }, 
+                                    new string[] { "a", "" } };
+            foreach (var words in wordsArr)
+            {
+                words.Print("Words");
+                Console.WriteLine($" From above string array all the pairs of the distinct indices (i, j) in the given list," +
+                    $"\n so that the concatenation of the two words words[i] + words[j] is a palindrome are");
+                DailyProblem.PalindromePairs(words).Print("PalindromePairs");
+                Console.WriteLine();
             }
         }
 
