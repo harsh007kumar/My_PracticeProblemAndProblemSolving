@@ -476,6 +476,7 @@ namespace InterviewProblemNSolutions
             MinimumNumberOfRefuelingStops();
             PalindromePairs();
             NumberOfMatchingSubsequences();
+            OutOfBoundaryPaths();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7760,6 +7761,18 @@ namespace InterviewProblemNSolutions
                 //Console.WriteLine($" No of words from above array that is a subsequence of '{s[i]}' are: '{DailyProblem.NumMatchingSubseq_BruteForce(s[i], words[i])}'\n");
                 Console.WriteLine($" No of words from above array that is a subsequence of '{s[i]}' are: '{DailyProblem.NumMatchingSubseq(s[i], words[i])}'\n");
             }
+        }
+
+
+        public static void OutOfBoundaryPaths()
+        {
+            // https://leetcode.com/problems/out-of-boundary-paths/
+            Utility.Print("576. Out of Boundary Paths");
+            int[] m = { 2, 1 }, n = { 2, 3 }, maxMove = { 2, 3 }, startRow = { 0, 0 }, startColumn = { 0, 1 };
+            for (int i = 0; i < m.Length; i++)
+                Console.WriteLine($" In a '{m[i]}x{n[i]}' GRID with maxMoves '{maxMove[i]}' & starting from Pos '{startRow[i]},{startColumn[i]}'" +
+                    $"\n diff paths to move ball out of boundry are: '{DailyProblem.OutOfBoundaryPaths(m[i], n[i], maxMove[i], startRow[i], startColumn[i])}'\n");
+            //OutOfBoundaryPathsBruteForce(m[i], n[i], maxMove[i], startRow[i], startColumn[i])
         }
 
 

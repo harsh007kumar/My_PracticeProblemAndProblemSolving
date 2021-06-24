@@ -16711,6 +16711,88 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(4^n) || Recursive Space O(n), n = maxMoves
+        public static int OutOfBoundaryPathsBruteForce(int m, int n, int maxMove, int startRow, int startColumn)
+        {
+            return DFS(0, startRow, startColumn);
+            // local helper func
+            int DFS(int totalMoves, int curR, int curC)
+            {
+                // total moves count should be <= max allowed moves
+                if (totalMoves > maxMove) return 0;
+                // reached out of GRID
+                if (curR < 0 || curR >= m || curC < 0 || curC >= n) return 1;
+
+                totalMoves++;
+
+                return (DFS(totalMoves, curR - 1, curC) +
+                        DFS(totalMoves, curR + 1, curC) +
+                        DFS(totalMoves, curR, curC - 1) +
+                        DFS(totalMoves, curR, curC + 1)
+                       ) % 1000000007;
+            }
+        }
+        // Time = Space = O(m*n*maxMove), Dp-Top-Down approach
+        public static int OutOfBoundaryPaths(int m, int n, int maxMove, int startRow, int startColumn)
+        {
+            long mod = 1000000007;
+            // dp to store for each cell in GRID no of way to reach boundry
+            Dictionary<int, long>[,] dp = new Dictionary<int, long>[m, n];
+            for (int r = 0; r < m; r++)
+                for (int c = 0; c < n; c++)
+                    dp[r, c] = new Dictionary<int, long>();
+
+            return (int)(Paths(startRow, startColumn, maxMove) % mod);
+
+            // local helper recursive Dp-Top-Down Soln
+            long Paths(int r, int c, int movesLeft)
+            {
+                if (r < 0 || r >= m || c < 0 || c >= n) return 1;
+                // no more moves left to proceed further
+                if (movesLeft == 0) return 0;
+
+                if (dp[r, c].ContainsKey(movesLeft))
+                    return dp[r, c][movesLeft];
+                
+                // decrease moves left by 1
+                movesLeft--;
+
+                return dp[r, c][movesLeft] = (  Paths(r - 1, c, movesLeft) +
+                                                Paths(r + 1, c, movesLeft) +
+                                                Paths(r, c - 1, movesLeft) +
+                                                Paths(r, c + 1, movesLeft)
+                                             ) % mod;
+            }
+            /* Alternate Implementation
+             * 
+            // dp to store for each cell in GRID no of way to reach boundry
+            int[,,] dp = new int[m, n, maxMove + 1];
+            for (int r = 0; r < m; r++)
+                for (int c = 0; c < n; c++)
+                    for (int moves = 1; moves <= maxMove; moves++)
+                        dp[r, c, moves] = -1;
+
+            return (int)(Paths(startRow, startColumn, maxMove));
+
+            // local helper recursive Dp-Top-Down Soln
+            int Paths(int r, int c, int movesLeft)
+            {
+                if (r < 0 || r >= m || c < 0 || c >= n) return 1;
+                // no more moves left to proceed further
+                if (movesLeft == 0) return 0;
+
+                if (dp[r, c, movesLeft] != -1)
+                    return dp[r, c, movesLeft];
+
+                // decrease moves left by 1
+                movesLeft--;
+
+                return dp[r, c, movesLeft] = (Paths(r - 1, c, movesLeft) + Paths(r + 1, c, movesLeft) + Paths(r, c - 1, movesLeft) + Paths(r, c + 1, movesLeft)) % 1000000007;
+            }
+            */
+        }
+
+
 
     }
 }
