@@ -16793,6 +16793,15 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(nlogn) Space O(n), BST based approach
+        public static IList<int> CountSmaller(int[] nums)
+        {
+            CountSmallerBST bst = new CountSmallerBST();
+            for (int i = nums.Length - 1; i >= 0; i--)
+                nums[i] = bst.Add(ref bst.root, nums[i], 0);
+            return nums;
+        }
+
 
     }
 }

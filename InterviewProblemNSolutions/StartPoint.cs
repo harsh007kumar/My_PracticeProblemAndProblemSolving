@@ -477,6 +477,7 @@ namespace InterviewProblemNSolutions
             PalindromePairs();
             NumberOfMatchingSubsequences();
             OutOfBoundaryPaths();
+            CountOfSmallerNumbersAfterSelf();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7775,6 +7776,19 @@ namespace InterviewProblemNSolutions
             //OutOfBoundaryPathsBruteForce(m[i], n[i], maxMove[i], startRow[i], startColumn[i])
         }
 
+
+        public static void CountOfSmallerNumbersAfterSelf()
+        {
+            // https://youtu.be/JIBfKrGVF6I
+            // https://leetcode.com/problems/count-of-smaller-numbers-after-self/
+            Utility.Print("315. Count of Smaller Numbers After Self");
+            int[][] numsArr = { new int[] { 5, 2, 6, 1 }, new int[] { -1 }, new int[] { -1, -1 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                DailyProblem.CountSmaller(nums).Print(" Count of no of smaller elements to the right of nums[i]");
+            }
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

@@ -48,6 +48,7 @@
     <Compile Include="CircularQueue.cs" />
     <Compile Include="Codec.cs" />
     <Compile Include="CommonFunctions.cs" />
+    <Compile Include="CountSmallerBST.cs" />
     <Compile Include="DailyProblem.cs" />
     <Compile Include="DivideAndConquerAlgorithms.cs" />
     <Compile Include="DynamicProgramming.cs" />
