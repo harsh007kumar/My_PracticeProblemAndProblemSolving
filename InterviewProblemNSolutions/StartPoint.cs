@@ -7786,9 +7786,15 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                DailyProblem.CountSmaller(nums).Print(" Count of no of smaller elements to the right of nums[i]");
+                
+                //// BST based approach, TLE on LeetCode for C# soln
+                //DailyProblem.CountSmaller(nums).Print(" Count of no of smaller elements to the right of nums[i]");
+
+                // Segment-Tree based approach
+                DailyProblem.CountSmaller_SegmentTree(nums).Print(" Count of no of smaller elements to the right of nums[i]");
             }
         }
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

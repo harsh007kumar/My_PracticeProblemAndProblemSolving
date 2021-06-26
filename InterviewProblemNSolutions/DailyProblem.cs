@@ -16801,6 +16801,17 @@ namespace InterviewProblemNSolutions
                 nums[i] = bst.Add(ref bst.root, nums[i], 0);
             return nums;
         }
+        // Time O(nlogn) Space O(n), Segment-Tree based approach
+        public static IList<int> CountSmaller_SegmentTree(int[] nums)
+        {
+            SegmentTree_SmallerCount bst = new SegmentTree_SmallerCount(nums);
+            for (int i = nums.Length - 1; i >= 0; i--)
+            {
+                bst.UpdateTree(bst.root, nums[i], 1);           // update count for 'nums[i]' idx
+                nums[i] = bst.SumRange(bst.root, bst.Start, nums[i] - 1);   // calculate no of no in range Start..nums[i]-1
+            }
+            return nums;
+        }
 
 
     }
