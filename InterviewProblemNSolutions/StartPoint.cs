@@ -478,6 +478,7 @@ namespace InterviewProblemNSolutions
             NumberOfMatchingSubsequences();
             OutOfBoundaryPaths();
             CountOfSmallerNumbersAfterSelf();
+            ReverseLinkedListII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7792,6 +7793,21 @@ namespace InterviewProblemNSolutions
 
                 // Segment-Tree based approach
                 DailyProblem.CountSmaller_SegmentTree(nums).Print(" Count of no of smaller elements to the right of nums[i]");
+            }
+        }
+
+
+        public static void ReverseLinkedListII()
+        {
+            // https://leetcode.com/problems/reverse-linked-list-ii/
+            Utility.Print("92. Reverse Linked List II");
+            ListNode[] linkedList = { new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) { next = new ListNode(4) { next = new ListNode(5) } } } }, new ListNode(1) };
+            int[] left = { 2, 1 }, right = { 4, 1 };
+            for (int i = 0; i < linkedList.Length; i++)
+            {
+                linkedList[i].Print("Original LinkedList");
+                DailyProblem.ReverseBetween(linkedList[i], left[i], right[i]).Print($"After Reversing Nodes b/w Pos {left[i]}...{right[i]} ");
+                Console.WriteLine();
             }
         }
 

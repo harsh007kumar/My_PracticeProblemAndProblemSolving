@@ -16814,5 +16814,38 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) Space O(1), n = Min(length of linkedlist,right)
+        public static ListNode ReverseBetween(ListNode head, int left, int right)
+        {
+            ListNode dummyN = new ListNode(0);
+            dummyN.next = head;
+
+            ListNode prv = dummyN, curr = null, nextNode = dummyN, reverseAfter = null;
+            int pos = 0;
+
+            while (++pos <= right + 1)
+                if (pos <= left)
+                {
+                    prv = nextNode;
+                    nextNode = nextNode.next;
+                }
+                else // if (pos > left)
+                {
+                    if (reverseAfter == null)
+                        reverseAfter = prv;
+
+                    curr = nextNode;
+                    nextNode = nextNode.next;
+                    curr.next = prv;
+                    prv = curr;
+                }
+
+            reverseAfter.next.next = nextNode;  // stich the reversed end->next to next in original
+            reverseAfter.next = curr;           // stich the node before the reversal started->next to reverseHead
+            return dummyN.next;
+        }
+
+
+
     }
 }
