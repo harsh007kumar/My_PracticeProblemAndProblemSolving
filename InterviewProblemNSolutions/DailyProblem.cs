@@ -16846,6 +16846,34 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space= O(n), n = length of 'rating', 3-Pass
+        public static int Candy(int[] ratings)
+        {
+            /* Each child must have 1 candy base case
+            * first we scan from left to right
+            *       if ith rating > i-1th rating
+            *       update ith = (i-1th candies) + 1
+            * now second pass we move from right
+            *       if i-1th rating > ith rating & candyCount[i-1] <= candyCount[i]
+            *       candyCount[i-1] = candyCount[i] + 1
+            */
+            int l = ratings.Length, totalCandy = 0;
+            int[] candyCount = new int[l];
+
+            for (int i = 1; i < l; i++)    // O(n)
+                if (ratings[i] > ratings[i - 1])
+                    candyCount[i] = candyCount[i - 1] + 1;
+
+            for (int i = l - 2; i >= 0; i--) // O(n)
+                if (ratings[i] > ratings[i + 1] && candyCount[i] <= candyCount[i + 1])
+                    candyCount[i] = Math.Max(candyCount[i], candyCount[i + 1] + 1);
+
+            for (int i = 0; i < l; i++)    // O(n)
+                totalCandy += candyCount[i];
+
+            return totalCandy + l;
+        }
+
 
     }
 }

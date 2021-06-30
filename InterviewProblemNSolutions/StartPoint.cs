@@ -479,6 +479,7 @@ namespace InterviewProblemNSolutions
             OutOfBoundaryPaths();
             CountOfSmallerNumbersAfterSelf();
             ReverseLinkedListII();
+            Candy();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7808,6 +7809,21 @@ namespace InterviewProblemNSolutions
                 linkedList[i].Print("Original LinkedList");
                 DailyProblem.ReverseBetween(linkedList[i], left[i], right[i]).Print($"After Reversing Nodes b/w Pos {left[i]}...{right[i]} ");
                 Console.WriteLine();
+            }
+        }
+
+
+        public static void Candy()
+        {
+            // https://leetcode.com/problems/candy/
+            Utility.Print("135. Candy");
+            int[][] ratingsArr = {  new int[] { 1, 0, 2 },
+                                    new int[] { 1, 2, 2 },
+                                    new int[] { 1, 2, 7, 6, 7, 7, 7, 2, 1 } };
+            foreach (var ratings in ratingsArr)
+            {
+                ratings.Print("Ratings");
+                Console.WriteLine($" Min no of candies you need to have to distribute the candies to the children => '{DailyProblem.Candy(ratings)}'\n");
             }
         }
 
