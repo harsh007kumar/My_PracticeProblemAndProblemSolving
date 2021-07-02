@@ -480,6 +480,7 @@ namespace InterviewProblemNSolutions
             CountOfSmallerNumbersAfterSelf();
             ReverseLinkedListII();
             Candy();
+            FindKClosestElements();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7824,6 +7825,21 @@ namespace InterviewProblemNSolutions
             {
                 ratings.Print("Ratings");
                 Console.WriteLine($" Min no of candies you need to have to distribute the candies to the children => '{DailyProblem.Candy(ratings)}'\n");
+            }
+        }
+
+
+        public static void FindKClosestElements()
+        {
+            // https://leetcode.com/problems/find-k-closest-elements/
+            Utility.Print("658. Find K Closest Elements");
+            int[][] array = { new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 2, 3, 4, 5 } };
+            int[] k = { 4, 4 }, x = { 3, -1 };
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i].Print("Sorted Input");
+                DailyProblem.FindClosestElements(array[i], k[i], x[i]).Print($"Given above sorted integer array arr, the '{k[i]}' closest integers to '{x[i]}' in the array in sorted order are");
+                Console.WriteLine();
             }
         }
 

@@ -16875,5 +16875,84 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(logN + k), Space O(k) || Binary Search + Sliding Window approach, n = length of 'arr'
+        public static IList<int> FindClosestElements(int[] arr, int k, int x)
+        {
+            // ALGO
+            // Find closed num to 'x'
+            // than start traversing in both left & right direction
+            // and choose the num which is closed to 'x'
+            // if its left than update left-- after adding the num
+            // else if its right than update right++ after adding the num
+            // if both are equal distance apart than choose left
+            // if you reach end of either left or right boundry set that side num as int.MaxValue
+            // at end sort the 'ans' List
+            // - even faster approach would be to just keep updating left & right till 'k' nums are found & than create a new 'ans' with all values starting from left+1 to right-1
+
+            int closetIdx = GetCloset();                // O(logn)
+            int lt = closetIdx - 1, rt = closetIdx + 1;
+            long left, right;
+
+            int[] ans = new int[k];
+            //List<int> ans = new List<int>() { arr[closetIdx] };
+            // find 'k-1' closet from array
+            while (--k > 0)                             // O(Min(n,k))
+            {
+                left = lt >= 0 ? arr[lt] : int.MaxValue;
+                right = rt < arr.Length ? arr[rt] : int.MaxValue;
+                if (Math.Abs(left - x) > Math.Abs(right - x))
+                {
+                    //ans.Add((int)right);
+                    rt++;
+                }
+                else //if(Math.Abs(left-x)<=Math.Abs(right-x))
+                {
+                    //ans.Add((int)left);
+                    lt--;
+                }
+            }
+            //ans.Sort();                               // O(klogk)
+            
+            int i = 0;
+            lt++;
+            while (lt < rt)                             // O(k)
+                ans[i++] = arr[lt++];
+            
+            return ans;
+
+            // local helper func
+            int GetCloset()
+            {
+                int start = 0, last = arr.Length - 1, mid, idx = 0;
+                long closetVal = int.MaxValue;
+                while (start <= last)
+                {
+                    mid = start + (last - start) / 2;
+                    if (arr[mid] == x) return mid;
+                    else if (arr[mid] > x)
+                    {
+                        if (Math.Abs(arr[mid] - x) < Math.Abs(closetVal - x))
+                        {
+                            closetVal = arr[mid];
+                            idx = mid;
+                        }
+                        last = mid - 1;
+                    }
+                    else //if(arr[mid]<x)
+                    {
+                        if (Math.Abs(arr[mid] - x) < Math.Abs(closetVal - x))
+                        {
+                            closetVal = arr[mid];
+                            idx = mid;
+                        }
+                        start = mid + 1;
+                    }
+                }
+                return idx;
+            }
+        }
+
+
+
     }
 }
