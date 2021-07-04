@@ -2100,6 +2100,67 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(5^n) Recursive Space O(n)
+        public static int CountVowelPermutation_BruteForce(int n)
+        {
+            Dictionary<char, char[]> map = new Dictionary<char, char[]>();
+            map[' '] = new char[] { 'a', 'e', 'i', 'o', 'u' };
+            map['a'] = new char[] { 'e' };
+            map['e'] = new char[] { 'a', 'i' };
+            map['i'] = new char[] { 'a', 'e', 'o', 'u' };
+            map['o'] = new char[] { 'i', 'u' };
+            map['u'] = new char[] { 'a' };
+
+            long count = 0, mod = 1000000007;
+            GetCombo(' ', n);
+            return (int)count;
+            // local helper func
+            void GetCombo(char lastCh, int len)
+            {
+                if (len <= 0)
+                    count = (count + 1) % mod;
+                else
+                    foreach (var ch in map[lastCh])
+                        GetCombo(ch, len - 1);
+            }
+        }
+        // DP-Bottom-Up Time O(n) Space O(1)
+        public static int CountVowelPermutation(int n)
+        {
+            /* ALGO
+             * if we are given the number of strings of length i that end in each vowel, like aCount, eCount, iCount, oCount, and uCount,
+             * we can compute the number of strings of length i + 1 that end in each vowel by simple addition:
+             * 
+             * aCountNew = eCount + iCount + uCount
+             * eCountNew = aCount + iCount
+             * iCountNew = eCount + oCount
+             * oCountNew = iCount
+             * uCountNew = iCount + oCount
+             * Starting from here, we have two approaches:
+             * 
+             * Bottom-up: We will initialize the number of strings of size 1 to be 1 for each vowel. As the size grows from 1 to n,
+             *      we will iteratively increase the count of strings that end in each vowel according to the rules above.
+             * 
+             * Top-down: We can also perform the above idea recursively.
+             */
+            long aCount = 1, eCount = 1, iCount = 1, oCount = 1, uCount = 1, mod = 1000000007;
+            long aNew, eNew, iNew, oNew, uNew;
+            for (int i = 1; i < n; i++)
+            {
+                aNew = (eCount + iCount + uCount) % mod;
+                eNew = (aCount + iCount) % mod;
+                iNew = (eCount + oCount) % mod;
+                oNew = iCount;
+                uNew = (oCount + iCount) % mod;
+                aCount = aNew;
+                eCount = eNew;
+                iCount = iNew;
+                oCount = oNew;
+                uCount = uNew;
+            }
+            return (int)((aCount + eCount + iCount + oCount + uCount) % mod);
+        }
+
 
     }
 }

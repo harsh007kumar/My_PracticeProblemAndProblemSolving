@@ -481,6 +481,7 @@ namespace InterviewProblemNSolutions
             ReverseLinkedListII();
             Candy();
             FindKClosestElements();
+            CountVowelsPermutation();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7841,6 +7842,17 @@ namespace InterviewProblemNSolutions
                 DailyProblem.FindClosestElements(array[i], k[i], x[i]).Print($"Given above sorted integer array arr, the '{k[i]}' closest integers to '{x[i]}' in the array in sorted order are");
                 Console.WriteLine();
             }
+        }
+
+
+        public static void CountVowelsPermutation()
+        {
+            // https://leetcode.com/problems/count-vowels-permutation/
+            Utility.Print("1220. Count Vowels Permutation");
+            int[] numbers = { 1, 2, 5, 10, 15, 1000 };
+            foreach (var n in numbers)
+                //Console.WriteLine($" Count of strings of length {n} can be formed under the given rules are: {DailyProblem.CountVowelPermutation_BruteForce(n)}\n");
+                Console.WriteLine($" Count of strings of length {n} can be formed under the given rules are: '{DynamicProgramming.CountVowelPermutation(n)}'\n");
         }
 
 
