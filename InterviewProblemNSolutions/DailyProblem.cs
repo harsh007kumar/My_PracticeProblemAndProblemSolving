@@ -16983,5 +16983,41 @@ namespace InterviewProblemNSolutions
              */
         }
 
+
+        // Time = Space = O(r*c), r = rows in 'mat' & c = cols in 'mat'
+        public static int[][] MatrixReshape(int[][] mat, int rNew, int cNew)
+        {
+            int row = mat.Length, col = mat[0].Length;
+            if (row * col != rNew * cNew) return mat;
+
+            int[][] ans = new int[rNew][];
+
+            //for (int r = 0; r < rNew; r++)
+            //    ans[r] = new int[cNew];
+
+            int[] newLine = new int[cNew];
+
+            int ir = 0, ic = 0;
+            // read all the values from the original matrix
+            for (int r = 0; r < row; r++)
+                for (int c = 0; c < col; c++)
+                {
+                    //// update values in 'reshaped' matrix
+                    //ans[ir][ic++] = mat[r][c];
+
+                    newLine[ic++] = mat[r][c];
+
+                    // if reached end of the column of reshaped matrix
+                    if (ic == cNew)
+                    {
+                        // add current filled row to reshaped matrix & update row idx
+                        ans[ir++] = newLine;
+                        newLine = new int[cNew];
+                        ic = 0; // reset col idx to 0
+                    }
+                }
+            return ans;
+        }
+
     }
 }

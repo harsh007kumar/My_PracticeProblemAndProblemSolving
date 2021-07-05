@@ -483,6 +483,7 @@ namespace InterviewProblemNSolutions
             FindKClosestElements();
             CountVowelsPermutation();
             MaximumUnitsOnATruck();
+            ReshapeTheMatrix();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7868,6 +7869,21 @@ namespace InterviewProblemNSolutions
             {
                 boxTypes[i].Print("BoxTypes");
                 Console.WriteLine($" with truckSize '{truckSize[i]}', the max no of boxes that can be put on the truck are: '{DailyProblem.MaximumUnits(boxTypes[i], truckSize[i])}'\n");
+            }
+        }
+
+
+        public static void ReshapeTheMatrix()
+        {
+            // https://leetcode.com/problems/reshape-the-matrix/
+            Utility.Print("566. Reshape the Matrix");
+            int[][][] mat = { new int[][] { new int[] { 1, 2 }, new int[] { 3, 4 } }, new int[][] { new int[] { 1, 2 }, new int[] { 3, 4 } }, new int[][] { new int[] { 1, 2, 3, 4 } } };
+            int[] r = { 1, 2, 2 }, c = { 4, 4, 2 };
+            for (int i = 0; i < mat.Length; i++)
+            {
+                mat[i].Print("Matrix");
+                DailyProblem.MatrixReshape(mat[i], r[i], c[i]).Print($"Creating wanted reshaped matrix of '{r[i]}x{c[i]}' from above matrix");
+                Console.WriteLine();
             }
         }
 
