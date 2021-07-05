@@ -482,6 +482,7 @@ namespace InterviewProblemNSolutions
             Candy();
             FindKClosestElements();
             CountVowelsPermutation();
+            MaximumUnitsOnATruck();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7853,6 +7854,21 @@ namespace InterviewProblemNSolutions
             foreach (var n in numbers)
                 //Console.WriteLine($" Count of strings of length {n} can be formed under the given rules are: {DailyProblem.CountVowelPermutation_BruteForce(n)}\n");
                 Console.WriteLine($" Count of strings of length {n} can be formed under the given rules are: '{DynamicProgramming.CountVowelPermutation(n)}'\n");
+        }
+
+
+        public static void MaximumUnitsOnATruck()
+        {
+            // https://leetcode.com/problems/maximum-units-on-a-truck/
+            Utility.Print("1710. Maximum Units on a Truck");
+            int[][][] boxTypes = {  new int[][] { new int[] { 1, 3 }, new int[] { 2, 2 }, new int[] { 3, 1 } },
+                                    new int[][] { new int[] { 5, 10 }, new int[] { 2, 5 }, new int[] { 4, 7 }, new int[] { 3, 9 } } };
+            int[] truckSize = { 4, 10 };
+            for (int i = 0; i < truckSize.Length; i++)
+            {
+                boxTypes[i].Print("BoxTypes");
+                Console.WriteLine($" with truckSize '{truckSize[i]}', the max no of boxes that can be put on the truck are: '{DailyProblem.MaximumUnits(boxTypes[i], truckSize[i])}'\n");
+            }
         }
 
 

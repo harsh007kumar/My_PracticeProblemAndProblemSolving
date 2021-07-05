@@ -16953,6 +16953,35 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(Min(m,nlogn)) || Space O(1), n = length of 'boxTypes' & m = 'truckSize'
+        public static int MaximumUnits(int[][] boxTypes, int truckSize)
+        {
+            Array.Sort(boxTypes, (x, y) => y[1].CompareTo(x[1])); // O(nlogn), sorting based on no of units in each type of box
+            int maxUnits = 0, i = 0, minUnitThatCanBeExtracted;
+            while (truckSize > 0 && i < boxTypes.Length)         // O(Min(n,m)
+            {
+                minUnitThatCanBeExtracted = Math.Min(boxTypes[i][0], truckSize);
+
+                maxUnits += minUnitThatCanBeExtracted * boxTypes[i][1];
+                truckSize -= minUnitThatCanBeExtracted;
+                i++;
+            }
+            return maxUnits;
+            /*
+            Array.Sort(boxTypes, (x,y) => y[1].CompareTo(x[1])); // O(nlogn)
+            int maxUnits = 0, i=0;
+            while(truckSize > 0 && i < boxTypes.Length)         // O(Min(n,m)
+            {
+                maxUnits+=boxTypes[i][1];
+                // decreament truck capacity by 1
+                truckSize--;
+                // decreament the no of boxes of ith type
+                if(--boxTypes[i][0] == 0)
+                    i++;
+            }   
+            return maxUnits;
+             */
+        }
 
     }
 }
