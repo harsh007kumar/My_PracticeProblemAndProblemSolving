@@ -17019,5 +17019,30 @@ namespace InterviewProblemNSolutions
             return ans;
         }
 
+
+        // Time = O(nlogn) Space = O(n)
+        public static int ReduceArraySizeToTheHalf(int[] arr)
+        {
+            Dictionary<int, int> numFreq = new Dictionary<int, int>();
+            // fetch all numbers and update their frequency in Dictionary
+            for (int i = 0; i < arr.Length; i++)                                // O(n)
+                if (!numFreq.ContainsKey(arr[i]))
+                    numFreq[arr[i]] = 1;
+                else
+                    numFreq[arr[i]]++;
+
+            int ans = 0, setSize = 0;
+            foreach (var kvp in numFreq.OrderByDescending(x => x.Value))        // O(nlogn) because we are sorting the Dictionary in decreasing order of frequency of numbers
+                if (ans < arr.Length / 2)
+                {
+                    setSize++;
+                    ans += kvp.Value;
+                }
+                else break;
+            
+            return setSize;
+        }
+
+
     }
 }

@@ -484,6 +484,7 @@ namespace InterviewProblemNSolutions
             CountVowelsPermutation();
             MaximumUnitsOnATruck();
             ReshapeTheMatrix();
+            ReduceArraySizeToTheHalf();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7884,6 +7885,23 @@ namespace InterviewProblemNSolutions
                 mat[i].Print("Matrix");
                 DailyProblem.MatrixReshape(mat[i], r[i], c[i]).Print($"Creating wanted reshaped matrix of '{r[i]}x{c[i]}' from above matrix");
                 Console.WriteLine();
+            }
+        }
+
+
+        public static void ReduceArraySizeToTheHalf()
+        {
+            // https://leetcode.com/problems/reduce-array-size-to-the-half/
+            Utility.Print("1338. Reduce Array Size to The Half");
+            int[][] arrays = {  new int[] { 3, 3, 3, 3, 5, 5, 5, 2, 2, 7 },
+                                new int[] { 7, 7, 7, 7, 7, 7 }, 
+                                new int[] { 1, 9 },
+                                new int[] { 1000, 1000, 3, 7 },
+                                new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } };
+            foreach (var arr in arrays)
+            {
+                arr.Print("Input Array");
+                Console.WriteLine($" Min size of the set so that at least half of the integers of above array are removed is: '{DailyProblem.ReduceArraySizeToTheHalf(arr)}'\n");
             }
         }
 
