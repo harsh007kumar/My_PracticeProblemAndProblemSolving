@@ -17045,7 +17045,6 @@ namespace InterviewProblemNSolutions
 
 
 
-
         // Time O(nlogn), n = length of 'str'
         public static string CustomSortString_Sorting(string order, string str)
         {
@@ -17081,6 +17080,28 @@ namespace InterviewProblemNSolutions
             return new string(sorted);
         }
 
+
+        // Time = Space = O(n), n = length of 'number'
+        public static string ReformatNumber(string number)
+        {
+            Queue<char> q = new Queue<char>();
+            foreach (var ch in number)
+                if (ch - '0' >= 0 && ch - '0' <= 9)
+                    q.Enqueue(ch);
+
+            StringBuilder sb = new StringBuilder();
+            while (q.Count > 4)
+                sb.Append(q.Dequeue()).Append(q.Dequeue()).Append(q.Dequeue()).Append('-');
+            
+            if (q.Count == 3)
+                sb.Append(q.Dequeue()).Append(q.Dequeue()).Append(q.Dequeue());
+            else if (q.Count == 4)
+                sb.Append(q.Dequeue()).Append(q.Dequeue()).Append('-').Append(q.Dequeue()).Append(q.Dequeue());
+            else //if(q.Count==2)
+                sb.Append(q.Dequeue()).Append(q.Dequeue());
+            
+            return sb.ToString();
+        }
 
     }
 }

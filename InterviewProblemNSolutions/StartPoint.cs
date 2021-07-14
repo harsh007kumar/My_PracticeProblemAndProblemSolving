@@ -485,8 +485,8 @@ namespace InterviewProblemNSolutions
             MaximumUnitsOnATruck();
             ReshapeTheMatrix();
             ReduceArraySizeToTheHalf();
-            
             CustomSortString();
+            ReformatPhoneNumber();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7915,7 +7915,18 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/custom-sort-string/
             Utility.Print("791. Custom Sort String");
             string order = "cba", str = "abcd";
+            //Console.WriteLine($" After permuting the characters of '{str}' so that they match the '{order}' sorted order : '{DailyProblem.CustomSortString_Sorting(order, str)}'");
             Console.WriteLine($" After permuting the characters of '{str}' so that they match the '{order}' sorted order : '{DailyProblem.CustomSortString(order, str)}'");
+        }
+
+
+        public static void ReformatPhoneNumber()
+        {
+            // https://leetcode.com/problems/reformat-phone-number/
+            Utility.Print("1694. Reformat Phone Number");
+            string[] numbers = { "1-23-45 6", "123 4-567", "123 4-5678", "12", "--17-5 229 35-39475 " };
+            foreach (var number in numbers)
+                Console.WriteLine($" Formatting '{number}' as per given instruction gives: '{DailyProblem.ReformatNumber(number)}'\n");
         }
 
 
