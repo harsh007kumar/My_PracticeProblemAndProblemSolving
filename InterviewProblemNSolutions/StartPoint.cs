@@ -485,6 +485,7 @@ namespace InterviewProblemNSolutions
             MaximumUnitsOnATruck();
             ReshapeTheMatrix();
             ReduceArraySizeToTheHalf();
+            KthSmallestElementInASortedMatrix();
             CustomSortString();
             ReformatPhoneNumber();
 
@@ -7908,6 +7909,22 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void KthSmallestElementInASortedMatrix()
+        {
+            // https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
+            Utility.Print("378. Kth Smallest Element in a Sorted Matrix");
+            int[][][] matrix = {    new int[][] { new int[] { 1, 5, 9 }, new int[] { 10, 11, 13 }, new int[] { 12, 13, 15 } },
+                                    new int[][] { new int[] { -5 } },
+                                    new int[][] { new int[] { 1, 2 }, new int[] { 1, 3 } },
+                                    new int[][] { new int[] { 1, 2, 3, 4, 5 } },
+                                    new int[][] { new int[] { 1, 4, 7, 11, 15 }, new int[] { 2, 5, 8, 12, 19 }, new int[] { 3, 6, 9, 16, 22 }, new int[] { 10, 13, 14, 17, 24 }, new int[] { 18, 21, 23, 26, 30 } } };
+            int[] k = { 8, 1, 3, 4, 5 };
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                matrix[i].Print("Sorted MATRIX");
+                Console.WriteLine($" '{k[i]}'th smallest element in the sorted order (not the kth distinct element) is: '{DailyProblem.KthSmallestInSortedMatrix(matrix[i], k[i])}'\n");
+            }
+        }
 
 
         public static void CustomSortString()

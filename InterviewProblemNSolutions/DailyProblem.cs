@@ -17044,6 +17044,56 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(k) Space O(1)
+        public static int KthSmallestInSortedMatrix(int[][] mat, int k)
+        {
+            /*
+            if k==1 return mat[0][0]
+            else we will be comparing two nums at any given moment
+            one while moving in ith Row from 0th to last column
+            & another one while moving in jth column from 0th to last row\
+            at each moment we compare the nums which ever is smaller we moving to next element in that direction
+            i.e. if 0th row 1st Col num is smaller than 0th Col 1st row num than we move first num to oth row 2nd idx
+            & similar operation if num from 0th col 1st row was selected we would have moved to 0th Col 2nd row
+
+            whwnever we reach the end of the line we start from next line
+            and choose the starting index as 1 + currnet row/col second num is pointing at
+            */
+            if (k == 1) return mat[0][0];
+
+            int r1 = 0, r2 = 0, c1 = 0, c2 = 0, row = mat.Length, col = mat[0].Length;
+            if (row > col)  // more rows than columns
+                r1++;
+            else
+                c2++;
+            int num1, num2;
+            while (--k > 0)
+            {
+                num1 = r1 < row ? mat[r1][c1] : int.MaxValue;
+                num2 = c2 < col ? mat[r2][c2] : int.MaxValue;
+
+                if (num1 <= num2)
+                {
+                    if (++r1 == row)
+                    {
+                        r1 = r2 + 1;
+                        c1++;
+                    }
+                }
+                else
+                {
+                    if (++c2 == col)
+                    {
+                        c2 = c1 + 1;
+                        r2++;
+                    }
+                }
+            }
+            num1 = r1 < row ? mat[r1][c1] : int.MaxValue;
+            num2 = c2 < col ? mat[r2][c2] : int.MaxValue;
+            return Math.Min(num1, num2);
+        }
+
 
         // Time O(nlogn), n = length of 'str'
         public static string CustomSortString_Sorting(string order, string str)
