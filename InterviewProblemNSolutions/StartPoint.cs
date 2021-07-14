@@ -485,6 +485,8 @@ namespace InterviewProblemNSolutions
             MaximumUnitsOnATruck();
             ReshapeTheMatrix();
             ReduceArraySizeToTheHalf();
+            
+            CustomSortString();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7903,6 +7905,17 @@ namespace InterviewProblemNSolutions
                 arr.Print("Input Array");
                 Console.WriteLine($" Min size of the set so that at least half of the integers of above array are removed is: '{DailyProblem.ReduceArraySizeToTheHalf(arr)}'\n");
             }
+        }
+
+
+
+
+        public static void CustomSortString()
+        {
+            // https://leetcode.com/problems/custom-sort-string/
+            Utility.Print("791. Custom Sort String");
+            string order = "cba", str = "abcd";
+            Console.WriteLine($" After permuting the characters of '{str}' so that they match the '{order}' sorted order : '{DailyProblem.CustomSortString(order, str)}'");
         }
 
 

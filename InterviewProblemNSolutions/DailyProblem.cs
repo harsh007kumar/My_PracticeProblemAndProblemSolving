@@ -17044,5 +17044,43 @@ namespace InterviewProblemNSolutions
         }
 
 
+
+
+        // Time O(nlogn), n = length of 'str'
+        public static string CustomSortString_Sorting(string order, string str)
+        {
+            int[] priority = new int[26];
+            // set the priority from 0..25 for each letter in 'order'
+            for (int i = 0; i < order.Length; i++)      // O(m)
+                priority[order[i] - 'a'] = i + 1;
+            // now using above priority sort the str
+            char[] sArr = str.ToCharArray();            // O(n)
+            Array.Sort(sArr, (x, y) => priority[x - 'a'].CompareTo(priority[y - 'a'])); // O(nlogn)
+            return new string(sArr);
+        }
+        // Time O(Max(n,m), n,m = length of 'str' & 'order' respectively
+        public static string CustomSortString(string order, string str)
+        {
+            // get the count of different chars in 'str'
+            int[] count = new int[26];                  // O(n)
+            for (int i = 0; i < str.Length; i++)
+                count[str[i] - 'a']++;
+
+            int idx = 0;
+            char[] sorted = new char[str.Length];
+            // read the chars in 'order' and append current char to 'sorted' 'count' times
+            foreach (char ch in order)                  // O(m)
+                while (count[ch - 'a']-- > 0)
+                    sorted[idx++] = ch;
+
+            // add all remaining characters to 'sorted' who's order was not provided in 'order' string
+            for (int i = 0; i < count.Length; i++)
+                while (count[i]-- > 0)                  // O(n)
+                    sorted[idx++] = (char)(i + 'a');
+            
+            return new string(sorted);
+        }
+
+
     }
 }
