@@ -17153,5 +17153,27 @@ namespace InterviewProblemNSolutions
             return sb.ToString();
         }
 
+
+        // Time O(n^2) Space O(1), n = length of 'nums' array
+        public static int TriangleNumber(int[] nums)
+        {
+            Array.Sort(nums);       // O(nlogn)
+            int triplets = 0, left, right;
+            for (int i = 2; i < nums.Length; i++)
+            {
+                left = 0; right = i - 1;
+                while (left < right)
+                    if (nums[left] + nums[right] > nums[i])     // triangle can be formed
+                        triplets += right-- - left;             // update count and reduce right by 1 to see again if more triplets can be formed,
+                                                                // once we found a pair left,right,i we increament count by diff of right-left
+                                                                // Bcoz all remaining nums between left to right can also form triplet
+                    else
+                        left++;                                 // keep moving left towards right to increase value of left side
+            }
+            return triplets;
+        }
+
+
+
     }
 }

@@ -488,6 +488,7 @@ namespace InterviewProblemNSolutions
             KthSmallestElementInASortedMatrix();
             CustomSortString();
             ReformatPhoneNumber();
+            ValidTriangleNumber();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7944,6 +7945,20 @@ namespace InterviewProblemNSolutions
             string[] numbers = { "1-23-45 6", "123 4-567", "123 4-5678", "12", "--17-5 229 35-39475 " };
             foreach (var number in numbers)
                 Console.WriteLine($" Formatting '{number}' as per given instruction gives: '{DailyProblem.ReformatNumber(number)}'\n");
+        }
+
+
+        public static void ValidTriangleNumber()
+        {
+            // Coding Decoded https://youtu.be/pmsex9gj1PI
+            // https://leetcode.com/problems/valid-triangle-number/
+            Utility.Print("611. Valid Triangle Number");
+            int[][] numsArr = { new int[] { 2, 2, 3, 4 }, new int[] { 4, 2, 3, 4 }, new int[] { 1, 2 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" The no of triplets chosen from the above array that can make triangles if we take them as side lengths of a triangle are: '{DailyProblem.TriangleNumber(nums)}'\n");
+            }
         }
 
 
