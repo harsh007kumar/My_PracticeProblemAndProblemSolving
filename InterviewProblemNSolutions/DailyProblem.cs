@@ -17174,6 +17174,50 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) Space O(1)
+        public static int[] ThreeEqualParts(int[] A)
+        {
+            int ones = 0, len = A.Length;
+            // counts 1's
+            for (int i = 0; i < len; i++)                               // O(n)
+                if (A[i] == 1)
+                    ones++;
+
+            // if total 1's not in multiple of three return
+            if (ones % 3 != 0)
+                return new int[] { -1, -1 };
+
+            // corner case only zero's r present in input
+            if (ones == 0)
+                return new int[] { 0, 2 }; // we can divide array from anywhere as each part wud be == 0
+
+            int p1 = 0, p2 = 0, p3 = 0, count = 0, target = ones / 3;
+            for (int i = 0; i < len; i++)                               // O(n)
+                if (A[i] == 1)
+                {
+                    if (count == 0)
+                        p1 = i;
+                    else if (count == target)
+                        p2 = i;
+                    else if (count == 2 * target)
+                        p3 = i;
+
+                    if (count++ == 2 * target) break;
+                }
+
+            int orignalP2 = p2, originalP3 = p3;
+            while (p3 < len && p1 < orignalP2 && p2 < originalP3)       // O(n)
+                // if at any point all 3 values dont match means split is not possible
+                if (A[p1] != A[p2] || A[p2] != A[p3])
+                    return new int[] { -1, -1 };
+                else
+                { p1++; p2++; p3++; }
+
+            // we check if p3 reached len of array to confirm all values match
+            return p3 == len ? new int[] { p1 - 1, p2 } : new int[] { -1, -1 };
+        }
+
+
 
     }
 }

@@ -489,6 +489,7 @@ namespace InterviewProblemNSolutions
             CustomSortString();
             ReformatPhoneNumber();
             ValidTriangleNumber();
+            ThreeEqualParts();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7958,6 +7959,23 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 Console.WriteLine($" The no of triplets chosen from the above array that can make triangles if we take them as side lengths of a triangle are: '{DailyProblem.TriangleNumber(nums)}'\n");
+            }
+        }
+
+
+        public static void ThreeEqualParts()
+        {
+            // https://leetcode.com/problems/three-equal-parts/
+            Utility.Print("927. Three Equal Parts");
+            int[][] arrays = {  new int[] { 1, 0, 1, 0, 1 },
+                                new int[] { 1, 1, 0, 1, 1 },
+                                new int[] { 1, 1, 0, 0, 1 },
+                                new int[] { 0, 0, 0, 0, 0, 0, } };
+            foreach (var arr in arrays)
+            {
+                arr.Print("Input Array");
+                int[] ans = DailyProblem.ThreeEqualParts(arr);
+                Console.WriteLine($" Dividing above array into 3 non-empty parts such that all of these parts represent the same binary value: '{ans[0]}...{ans[1]}'\n");
             }
         }
 
