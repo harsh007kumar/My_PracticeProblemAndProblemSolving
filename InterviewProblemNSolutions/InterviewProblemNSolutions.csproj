@@ -79,6 +79,7 @@
     <Compile Include="SearchAlgorithms.cs" />
     <Compile Include="SegmentTree.cs" />
     <Compile Include="SelectionAlgorithms.cs" />
+    <Compile Include="ShuffleArray.cs" />
     <Compile Include="Spellchecker.cs" />
     <Compile Include="StartPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

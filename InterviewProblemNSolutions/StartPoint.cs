@@ -490,6 +490,7 @@ namespace InterviewProblemNSolutions
             ReformatPhoneNumber();
             ValidTriangleNumber();
             ThreeEqualParts();
+            ShuffleArray();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7965,6 +7966,7 @@ namespace InterviewProblemNSolutions
 
         public static void ThreeEqualParts()
         {
+            // Happy Coding https://youtu.be/ngh9It1S5pc
             // https://leetcode.com/problems/three-equal-parts/
             Utility.Print("927. Three Equal Parts");
             int[][] arrays = {  new int[] { 1, 0, 1, 0, 1 },
@@ -7977,6 +7979,19 @@ namespace InterviewProblemNSolutions
                 int[] ans = DailyProblem.ThreeEqualParts(arr);
                 Console.WriteLine($" Dividing above array into 3 non-empty parts such that all of these parts represent the same binary value: '{ans[0]}...{ans[1]}'\n");
             }
+        }
+
+
+        public static void ShuffleArray()
+        {
+            // https://leetcode.com/problems/shuffle-an-array/
+            Utility.Print("384. Shuffle an Array");
+            int[] nums = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            nums.Print("Original");
+            ShuffleArray obj = new ShuffleArray(nums);
+            int[] param_1 = obj.Reset();
+            int[] param_2 = obj.Shuffle();
+            param_2.Print("Shuffled-Array-Using: Fisher-Yates Algorithm");
         }
 
 
