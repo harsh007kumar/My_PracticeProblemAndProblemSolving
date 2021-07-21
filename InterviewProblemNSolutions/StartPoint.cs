@@ -491,6 +491,7 @@ namespace InterviewProblemNSolutions
             ValidTriangleNumber();
             ThreeEqualParts();
             ShuffleArray();
+            PushDominoes();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7992,6 +7993,16 @@ namespace InterviewProblemNSolutions
             int[] param_1 = obj.Reset();
             int[] param_2 = obj.Shuffle();
             param_2.Print("Shuffled-Array-Using: Fisher-Yates Algorithm");
+        }
+
+
+        public static void PushDominoes()
+        {
+            // https://leetcode.com/problems/push-dominoes/
+            Utility.Print("838. Push Dominoes");
+            string[] dominoesArr = { "RR.L", ".L.R...LR..L.." };
+            foreach (var dominoes in dominoesArr)
+                Console.WriteLine($" For initial state '{dominoes}' final state would be => '{DailyProblem.PushDominoes(dominoes)}'\n");
         }
 
 

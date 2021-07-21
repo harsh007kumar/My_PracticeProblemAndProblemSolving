@@ -17218,6 +17218,84 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) Space O(1)
+        public static string PushDominoes(string dominoes)
+        {
+            /*
+            we initially set the last state as 'L'
+            we inspect each char from 0th index to len-1
+            if current state is empty i.e. '.' we increament the counter count which initially is set 0
+            if the current state is :
+
+                Case 1  => '.'
+                    increament count by 1
+                Case 2  => 'R'
+                    if last state was also 'R'
+                        than we append 'R' to final result count times & reset the count to 0
+                    else //if last was 'L'
+                        than we append '.' to final result count times
+                Case 3 => 'L'
+                    if last state was also 'L'
+                        than we append 'L' to final result count times & reset the count to 0
+                    else //if last was 'R'
+                        if check if count is odd or even
+                            than we append 'R' to final result count/2 times
+                            if count was odd we append one '.'
+                            lastly we append 'L' to final result count/2 times
+                if current state is not '.' we also append curr state once to result
+            */
+            StringBuilder sb = new StringBuilder();
+            char lastState = 'L', toAdd;
+            int count = 0, times;
+            foreach (var ch in dominoes)
+            {
+                if (ch == '.')
+                {
+                    count++;
+                    continue;
+                }
+                if (ch == 'R')
+                {
+                    toAdd = lastState == 'R' ? 'R' : '.';
+                    while (count-- > 0)
+                        sb.Append(toAdd);
+                    count = 0;  // reset count for next iteration
+                }
+                else // if (ch=='L')
+                {
+                    if (lastState == 'L')
+                        while (count-- > 0)
+                            sb.Append('L');
+                    else // if(lastState=='R')
+                    {
+                        times = count / 2;
+                        // startomg half wud fall to Right
+                        while (times-- > 0)
+                            sb.Append('R');
+
+                        // in case of odd length gap with R...L, we add 1 '.' at center
+                        if (count % 2 != 0)
+                            sb.Append('.');
+
+                        times = count / 2;
+                        // ending half wud fall to Left
+                        while (times-- > 0)
+                            sb.Append('L');
+                    }
+
+                    count = 0;  // reset count for next iteration
+                }
+                lastState = ch;
+                sb.Append(ch);
+            }
+
+            // take care of empty states which are still to be filled at end
+            while (count-- > 0)
+                sb.Append(lastState == 'L' ? '.' : 'R');
+
+            return sb.ToString();
+        }
+
 
     }
 }
