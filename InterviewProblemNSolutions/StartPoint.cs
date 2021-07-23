@@ -492,6 +492,7 @@ namespace InterviewProblemNSolutions
             ThreeEqualParts();
             ShuffleArray();
             PushDominoes();
+            BinaryTreePruning();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8003,6 +8004,56 @@ namespace InterviewProblemNSolutions
             string[] dominoesArr = { "RR.L", ".L.R...LR..L.." };
             foreach (var dominoes in dominoesArr)
                 Console.WriteLine($" For initial state '{dominoes}' final state would be => '{DailyProblem.PushDominoes(dominoes)}'\n");
+        }
+
+
+        public static void BinaryTreePruning()
+        {
+            // https://leetcode.com/problems/binary-tree-pruning/
+            Utility.Print("814. Binary Tree Pruning");
+            TreeNode[] treeArray = { new TreeNode(1) 
+                                        {
+                                            left = new TreeNode(0)
+                                                {   left = new TreeNode(0),
+                                                    right = new TreeNode(1)
+                                                }
+                                        },
+                                    new TreeNode(1)
+                                        {
+                                            left = new TreeNode(1)
+                                                { 
+                                                    left = new TreeNode(1)
+                                                        {
+                                                            left = new TreeNode(0)
+                                                        },
+                                                    right = new TreeNode(1)
+                                                },
+                                            right = new TreeNode(0)
+                                                {
+                                                    left = new TreeNode(0),
+                                                    right = new TreeNode(1)
+                                                }
+                                        },
+                                    new TreeNode(1)
+                                        {
+                                            left = new TreeNode(0)
+                                                {
+                                                    left = new TreeNode(0),
+                                                    right = new TreeNode(0)
+                                                },
+                                            right = new TreeNode(1)
+                                                {
+                                                    left = new TreeNode(0),
+                                                    right = new TreeNode(1)
+                                                }
+                                        }
+                                   };
+            foreach (var root in treeArray)
+            {
+                root.InOrder("Binary Tree");
+                DailyProblem.PruneTree(root).InOrder("After Prunining all nodes which dont have '1' value");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
         }
 
 

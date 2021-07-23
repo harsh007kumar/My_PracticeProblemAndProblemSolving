@@ -17297,5 +17297,31 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) Space O(h), Recursive Soln
+        public static TreeNode PruneTree(TreeNode root)
+        {
+            HasOne(ref root);
+            return root;
+
+            // local helper func || POST ORDER TRAVERSAL (LEFT >> RIGHT >> ROOT)
+            bool HasOne(ref TreeNode r)
+            {
+                if (r == null)
+                    return false;
+
+                bool oneOnlt = HasOne(ref r.left);
+                bool oneOnRt = HasOne(ref r.right);
+                if (oneOnlt || oneOnRt || r.val == 1)
+                    return true;
+                else // since we didnt find one on either left or right subtree neither is root value one hence delete this node
+                {
+                    r = null;
+                    return false;
+                }
+            }
+        }
+
+
+
     }
 }
