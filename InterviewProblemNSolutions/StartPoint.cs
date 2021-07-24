@@ -116,6 +116,7 @@ namespace InterviewProblemNSolutions
             InsertDeleteGetRandomO1();  // RandomizedSet
             //UniqueMorseCodeWords();
             //WordLadder();
+            WordLadderII();
             //HouseRobber();
             //HouseRobberII();
             //HouseRobberIII();
@@ -8052,6 +8053,23 @@ namespace InterviewProblemNSolutions
             {
                 root.InOrder("Binary Tree");
                 DailyProblem.PruneTree(root).InOrder("After Prunining all nodes which dont have '1' value");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void WordLadderII()
+        {
+            // https://leetcode.com/problems/word-ladder-ii/
+            Utility.Print("126. Word Ladder II");
+            string[] beginWord = { "hit", "hit", "a" }, endWord = { "cog", "cog", "c" };
+            string[][] wordList = { new string[] { "hot", "dot", "dog", "lot", "log", "cog" },
+                                    new string[] { "hot", "dot", "dog", "lot", "log" },
+                                    new string[] { "a", "b", "c" } };
+            for (int i = 0; i < beginWord.Length; i++)
+            { 
+                wordList[i].Print("List of words");
+                DailyProblem.FindLadders(beginWord[i], endWord[i], wordList[i]).Print($"Given above list of words, below are the shortest paths from '{beginWord[i]}'...'{endWord[i]}'");
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }

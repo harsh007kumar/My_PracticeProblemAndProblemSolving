@@ -17322,6 +17322,119 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = O(Max(N^2*l,n*l*26)), Space = O(n), n = no of words in 'wordList' & l = length of each word
+        public static IList<IList<string>> FindLadders(string beginWord, string endWord, IList<string> wordList)
+        {
+            Dictionary<string, List<string>> graph = new Dictionary<string, List<string>>();
+            Dictionary<string, List<string>> unqAdjacencyList = new Dictionary<string, List<string>>();
+
+            // insert all unique words in Dictionary to later form an UnDirected Graph
+            for (int i = 0; i < wordList.Count; i++)            // O(n)
+                graph[wordList[i]] = new List<string>();        // add other nodes
+            unqAdjacencyList[beginWord] = new List<string>();
+
+            if (!graph.ContainsKey(beginWord))
+            {
+                graph[beginWord] = new List<string>();          // add source
+
+                for (int i = 0; i < wordList.Count; i++)        // O(n)
+                    // Connect all nodes which are 1 edit distance away from beginword
+                    if (IsCharOneDiff(wordList[i], beginWord))  // O(l)
+                        graph[beginWord].Add(wordList[i]);
+            }
+            // Connect all nodes which are 1 edit distance away from 'wordList'
+            for (int i = 0; i < wordList.Count; i++)            // O(n)
+            {
+                /* Alternate way to find adjacent nodes can b instead of traversing all the nodes to see which are 1 edit distance apart
+                 * we store all the words in HashSet 
+                 * and than to create Graph we just check for each word
+                 *      and for each char in curr word if we try replace origin character with another character (26 possible char)
+                 *          if new choosen char is not same as original we replace the original character in word
+                 *          and check if this new word in present in HashSet
+                 *          if Yes than we make the connection
+                 */
+                for (int j = i + 1; j < wordList.Count; j++)    // O(n)
+                    if (IsCharOneDiff(wordList[i], wordList[j]))// O(l)
+                    {
+                        graph[wordList[i]].Add(wordList[j]);
+                        graph[wordList[j]].Add(wordList[i]);
+                    }
+
+                unqAdjacencyList[wordList[i]] = new List<string>();
+            }
+
+            List<IList<string>> result = new List<IList<string>>();
+            int shortestPathLen = int.MaxValue;
+
+            // we can stop check for shortest paths if destination is not present in graph
+            if (!graph.ContainsKey(endWord)) return result;
+
+            // create unique Adjacency List which will be used in DFS
+            CreateLevelWiseAdjacencyList_BFS(beginWord, endWord);// O(n)
+
+            // now using Unique Adjacency list created above do DFS traversal from source (level 0) till u find 'destination'
+            Stack<string> path = new Stack<string>();
+            GetShortestPaths_DFS(beginWord, endWord);           // O(n*l*26)
+            return result;
+
+            // local helper func
+            void CreateLevelWiseAdjacencyList_BFS(string source, string destination)
+            {
+                Dictionary<string, int> level = new Dictionary<string, int>();          // to store hopCount
+                Queue<string> q = new Queue<string>();
+
+                level[source] = 0;
+                q.Enqueue(source);
+
+                while (q.Count > 0)
+                {
+                    var parent = q.Dequeue();
+                    foreach (var adjacentNode in graph[parent])
+                        if (!level.ContainsKey(adjacentNode))
+                        {
+                            level[adjacentNode] = level[parent] + 1;
+                            unqAdjacencyList[parent].Add(adjacentNode);
+
+                            if (adjacentNode == destination)
+                                shortestPathLen = level[adjacentNode];
+                            else // keeping adding intermediate nodes till we reach destination node
+                                q.Enqueue(adjacentNode);
+                        }
+                        else if (level[adjacentNode] > level[parent])
+                            unqAdjacencyList[parent].Add(adjacentNode);
+                }
+            }
+            // Time O(V+E)
+            void GetShortestPaths_DFS(string source, string destination, int hopsCount = 0)
+            {
+                if (hopsCount > shortestPathLen) return;
+                
+                path.Push(source);
+
+                if (source == destination)
+                    result.Add(path.Reverse().ToList());
+
+                foreach (var nodeInLowerLevel in unqAdjacencyList[source])
+                    GetShortestPaths_DFS(nodeInLowerLevel, destination);
+
+                path.Pop();
+            }
+
+            // returns 'True' if both input diff by max 1 character
+            bool IsCharOneDiff(string a, string b)
+            {
+                bool oneDiffFound = false;
+                for (int i = 0; i < a.Length; i++)
+                    if (a[i] != b[i])
+                        if (oneDiffFound)
+                            return false;
+                        else
+                            oneDiffFound = true;
+                return true;
+            }
+        }
+
+
 
     }
 }
