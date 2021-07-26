@@ -494,6 +494,7 @@ namespace InterviewProblemNSolutions
             ShuffleArray();
             PushDominoes();
             BinaryTreePruning();
+            NonNegativeIntegersWithoutConsecutiveOnes();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8060,6 +8061,7 @@ namespace InterviewProblemNSolutions
 
         public static void WordLadderII()
         {
+            // TECH DOSE https://youtu.be/mIZJIuMpI2M
             // https://leetcode.com/problems/word-ladder-ii/
             Utility.Print("126. Word Ladder II");
             string[] beginWord = { "hit", "hit", "a" }, endWord = { "cog", "cog", "c" };
@@ -8072,6 +8074,15 @@ namespace InterviewProblemNSolutions
                 DailyProblem.FindLadders(beginWord[i], endWord[i], wordList[i]).Print($"Given above list of words, below are the shortest paths from '{beginWord[i]}'...'{endWord[i]}'");
                 Console.WriteLine(Utility.lineDelimeter);
             }
+        }
+
+        public static void NonNegativeIntegersWithoutConsecutiveOnes()
+        {
+            // https://leetcode.com/problems/non-negative-integers-without-consecutive-ones/
+            Utility.Print("600. Non-negative Integers without Consecutive Ones");
+            int[] arr = { 5, 1, 2, 4568, 7897265, 1000000000 };
+            foreach(var n in arr)
+                Console.WriteLine($" No of the integers in the range [0, {n}] whose binary representations do not contain consecutive ones: '{DailyProblem.FindIntegersWithoutConsecutiveOnes(n)}'");
         }
 
 

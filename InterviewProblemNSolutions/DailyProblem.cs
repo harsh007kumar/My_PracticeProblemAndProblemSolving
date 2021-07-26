@@ -17435,6 +17435,49 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(2^k), Auxillary Space O(1), Recursive Space O(k), k = distance of farthest ON bit in 'n' from right
+        public static int FindIntegersWithoutConsecutiveOnes(int n)
+        {
+            int bLen = 0;
+            // find the distance of farthest 1 i.e. On bit from right
+            for (int i = 0; i < 32; i++)
+                if ((1 << i & n) > 0)
+                    bLen = i + 1;
+            
+            // we set initial count as '2' because smallest input i.e. n==1 has 0 & 1 as valid ans i.e. 2 nums
+            int count = 2;
+            // now we start with initial number 1
+            // and add Zero & One after left shifting the num by 1 place <<1
+            // we keeping repeating above process till we have reached the distance of fartest 1 bit in number 'n'
+            // also when no of binary number length matches that of input 'n'
+            // we only increament counter if current number is <= input 'n'
+            CountNumsSmallerThanN();
+            return count;
+
+
+            // local helper func
+            void CountNumsSmallerThanN(int currNum = 1, int len = 1, bool lastBitOn = true)
+            {
+                if (len >= bLen) return;
+                currNum <<= 1;    // left shift 1 place
+
+                // after adding OFF bit on right see if num is still smaller than 'n'
+                if (currNum <= n)
+                {
+                    count++;
+                    CountNumsSmallerThanN(currNum, len + 1, false);
+                }
+                // before adding ON bit on right we check if last added bit was not ON
+                // & check currNum doesnt exceed 'n'
+                if (!lastBitOn && ++currNum <= n)
+                {
+                    count++;
+                    CountNumsSmallerThanN(currNum, len + 1, true);
+                }
+            }
+        }
+
+
 
     }
 }
