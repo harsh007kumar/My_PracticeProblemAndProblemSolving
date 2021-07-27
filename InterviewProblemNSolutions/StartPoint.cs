@@ -496,6 +496,7 @@ namespace InterviewProblemNSolutions
             BinaryTreePruning();
             NonNegativeIntegersWithoutConsecutiveOnes();
             ConvertSortedArrayToBST();
+            ThreeSumCloset();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8094,6 +8095,17 @@ namespace InterviewProblemNSolutions
             int[] nums = { 1, 2, 3, 4, 5, 6 };
             nums.Print("Sorted Nums");
             DailyProblem.SortedArrayToBST(nums).InOrder("Balanced BST");
+        }
+
+
+        public static void ThreeSumCloset()
+        {
+            // https://leetcode.com/problems/3sum-closest/
+            Utility.Print("16. 3Sum Closest");
+            int[] nums = { -1, 2, 1, -4 };
+            int target = 1;
+            nums.Print("Nums");
+            Console.WriteLine($" Closet 3-Sum to '{target}' in above is: '{DailyProblem.ThreeSumClosest(nums, target)}'");
         }
 
 

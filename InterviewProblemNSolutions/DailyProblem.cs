@@ -17496,5 +17496,38 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time O(n^2) Space O(1), n = length of 'target'
+        public static int ThreeSumClosest(int[] A, int target)
+        {
+            Array.Sort(A);
+            int l = A.Length, closet = A[0] + A[1] + A[l - 1], lt, rt, sum;
+            for (int i = 0; i < l - 2; i++)
+            {
+                if (i > 0 && A[i] == A[i - 1]) continue;    // optimization
+                lt = i + 1;
+                rt = l - 1;
+                while (lt < rt)
+                {
+                    if (lt > i + 1 && A[lt] == A[lt - 1])   // optimization
+                    {
+                        lt++;
+                        continue;
+                    }
+                    sum = A[i] + A[lt] + A[rt];
+                    if (Math.Abs(sum - target) < Math.Abs(closet - target))
+                        closet = sum;
+                    if (sum > target)
+                        rt--;
+                    else if (sum < target)
+                        lt++;
+                    else
+                        break;
+                }
+            }
+            return (int)closet;
+        }
+
+
     }
 }
