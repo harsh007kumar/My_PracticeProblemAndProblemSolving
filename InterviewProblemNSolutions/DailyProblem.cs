@@ -17478,6 +17478,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n), n = length of 'nums'
+        public static TreeNode SortedArrayToBST(int[] nums)
+        {
+            return GetBST(0, nums.Length - 1);
+
+            // local helper func
+            TreeNode GetBST(int lt, int rt)
+            {
+                if (lt > rt) return null;
+                int mid = lt + (rt - lt) / 2;
+                return new TreeNode(nums[mid])
+                {
+                    left = GetBST(lt, mid - 1),
+                    right = GetBST(mid + 1, rt)
+                };
+            }
+        }
 
     }
 }

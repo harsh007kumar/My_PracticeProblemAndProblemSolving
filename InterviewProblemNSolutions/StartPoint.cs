@@ -495,6 +495,7 @@ namespace InterviewProblemNSolutions
             PushDominoes();
             BinaryTreePruning();
             NonNegativeIntegersWithoutConsecutiveOnes();
+            ConvertSortedArrayToBST();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8083,6 +8084,16 @@ namespace InterviewProblemNSolutions
             int[] arr = { 5, 1, 2, 4568, 7897265, 1000000000 };
             foreach(var n in arr)
                 Console.WriteLine($" No of the integers in the range [0, {n}] whose binary representations do not contain consecutive ones: '{DailyProblem.FindIntegersWithoutConsecutiveOnes(n)}'");
+        }
+
+
+        public static void ConvertSortedArrayToBST()
+        {
+            // https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+            Utility.Print("108. Convert Sorted Array to Binary Search Tree");
+            int[] nums = { 1, 2, 3, 4, 5, 6 };
+            nums.Print("Sorted Nums");
+            DailyProblem.SortedArrayToBST(nums).InOrder("Balanced BST");
         }
 
 
