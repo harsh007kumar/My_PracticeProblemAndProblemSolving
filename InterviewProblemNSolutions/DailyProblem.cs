@@ -17557,7 +17557,40 @@ namespace InterviewProblemNSolutions
             }
             return beautifulArr;
         }
+        // Time = Space = O(nlogn)
+        public static int[] BeautifulArray_Cache(int n, Dictionary<int, int[]> cache, ref int biggestBeautifulSeen)
+        {
+            if (cache.ContainsKey(n)) 
+                return cache[n];
 
+            int size = biggestBeautifulSeen, idx, i, val;
+            int[] temp, beautifulArr = cache[size];     // default state, n=1
+            while (size++ < n)
+            {
+                temp = new int[size];
+                idx = 0;
+                // add odd values as per formula of 2*num-1
+                for (i = 0; i < beautifulArr.Length; i++)
+                {
+                    val = 2 * beautifulArr[i] - 1;
+                    if (val <= size)
+                        temp[idx++] = val;
+                }
+                // now add even values as per formula of 2*num
+                for (i = 0; i < beautifulArr.Length; i++)
+                {
+                    val = 2 * beautifulArr[i];
+                    if (val <= size)
+                        temp[idx++] = val;
+                }
+                // update beautiful array
+                beautifulArr = temp;
+                // add to cache
+                cache[size] = beautifulArr;
+            }
+            biggestBeautifulSeen = Math.Max(biggestBeautifulSeen, n);
+            return beautifulArr;
+        }
 
 
     }

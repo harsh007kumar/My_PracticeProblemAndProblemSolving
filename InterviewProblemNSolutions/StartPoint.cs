@@ -8116,8 +8116,14 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/beautiful-array/
             Utility.Print("932. Beautiful Array");
             int[] nArr = { 1, 7, 2, 3, 4 };    // For every i < j, there is no k with i < k < j such that nums[k] * 2 = nums[i] + nums[j].
+            
+            var cache = new Dictionary<int, int[]>();
+            cache[1] = new int[1] { 1 };
+            int biggestBeautifulSeen = 1;
+
             foreach (var n in nArr)
-                DailyProblem.BeautifulArray(n).Print($"for n={n}, below is generated beautiful array");
+                //DailyProblem.BeautifulArray(n).Print($"for n={n}, below is generated beautiful array");
+                DailyProblem.BeautifulArray_Cache(n, cache, ref biggestBeautifulSeen).Print($"for n={n}, below is generated beautiful array");
         }
 
 
