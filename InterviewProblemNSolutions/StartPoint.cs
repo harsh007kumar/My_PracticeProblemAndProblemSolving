@@ -497,6 +497,7 @@ namespace InterviewProblemNSolutions
             NonNegativeIntegersWithoutConsecutiveOnes();
             ConvertSortedArrayToBST();
             ThreeSumCloset();
+            BeautifulArray();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8106,6 +8107,17 @@ namespace InterviewProblemNSolutions
             int target = 1;
             nums.Print("Nums");
             Console.WriteLine($" Closet 3-Sum to '{target}' in above is: '{DailyProblem.ThreeSumClosest(nums, target)}'");
+        }
+
+
+        public static void BeautifulArray()
+        {
+            // Coding Decoded https://youtu.be/7-RZ0Lw6VRg
+            // https://leetcode.com/problems/beautiful-array/
+            Utility.Print("932. Beautiful Array");
+            int[] nArr = { 1, 7, 2, 3, 4 };    // For every i < j, there is no k with i < k < j such that nums[k] * 2 = nums[i] + nums[j].
+            foreach (var n in nArr)
+                DailyProblem.BeautifulArray(n).Print($"for n={n}, below is generated beautiful array");
         }
 
 

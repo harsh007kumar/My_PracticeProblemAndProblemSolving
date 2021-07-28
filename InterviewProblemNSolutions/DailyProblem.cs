@@ -17529,5 +17529,36 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(nlogn)
+        public static int[] BeautifulArray(int n)
+        {
+            int[] temp, beautifulArr = { 1 };     // default state, n=1
+            int size = 1, idx, i, val;
+            while (size++ < n)
+            {
+                temp = new int[size];
+                idx = 0;
+                // add odd values as per formula of 2*num-1
+                for (i = 0; i < beautifulArr.Length; i++)
+                {
+                    val = 2 * beautifulArr[i] - 1;
+                    if (val <= size)
+                        temp[idx++] = val;
+                }
+                // now add even values as per formula of 2*num
+                for (i = 0; i < beautifulArr.Length; i++)
+                {
+                    val = 2 * beautifulArr[i];
+                    if (val <= size)
+                        temp[idx++] = val;
+                }
+                // update beautiful array
+                beautifulArr = temp;
+            }
+            return beautifulArr;
+        }
+
+
+
     }
 }
