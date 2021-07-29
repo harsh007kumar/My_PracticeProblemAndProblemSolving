@@ -498,6 +498,7 @@ namespace InterviewProblemNSolutions
             ConvertSortedArrayToBST();
             ThreeSumCloset();
             BeautifulArray();
+            ZeroOneMatrix();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8124,6 +8125,50 @@ namespace InterviewProblemNSolutions
             foreach (var n in nArr)
                 //DailyProblem.BeautifulArray(n).Print($"for n={n}, below is generated beautiful array");
                 DailyProblem.BeautifulArray_Cache(n, cache, ref biggestBeautifulSeen).Print($"for n={n}, below is generated beautiful array");
+        }
+
+
+        public static void ZeroOneMatrix()
+        {
+            // https://leetcode.com/problems/01-matrix/
+            Utility.Print("542. 01 Matrix");
+            int[][][] matArray = {
+                                    new int[][] {
+                                        new int[] { 0, 0, 0 },
+                                        new int[] { 0, 1, 0 },
+                                        new int[] { 0, 0, 0 }
+                                                },
+                                    new int[][] {
+                                        new int[] { 0, 0, 1, 0, 1, 1, 1, 0, 1, 1 },
+                                        new int[] { 1, 1, 1, 1, 0, 1, 1, 1, 1, 1 },
+                                        new int[] { 1, 1, 1, 1, 1, 0, 0, 0, 1, 1 },
+                                        new int[] { 1, 0, 1, 0, 1, 1, 1, 0, 1, 1 },
+                                        new int[] { 0, 0, 1, 1, 1, 0, 1, 1, 1, 1 },
+                                        new int[] { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 },
+                                        new int[] { 1, 1, 1, 1, 0, 1, 0, 1, 0, 1 },
+                                        new int[] { 0, 1, 0, 0, 0, 1, 0, 0, 1, 1 },
+                                        new int[] { 1, 1, 1, 0, 1, 1, 0, 1, 0, 1 },
+                                        new int[] { 1, 0, 1, 1, 1, 0, 1, 1, 1, 0 }
+                                                },
+                                    new int[][] {
+                                        new int[] { 1, 1, 0, 0, 1, 0, 0, 1, 1, 0 },
+                                        new int[] { 1, 0, 0, 1, 0, 1, 1, 1, 1, 1 },
+                                        new int[] { 1, 1, 1, 0, 0, 1, 1, 1, 1, 0 },
+                                        new int[] { 0, 1, 1, 1, 0, 1, 1, 1, 1, 1 },
+                                        new int[] { 0, 0, 1, 1, 1, 1, 1, 1, 1, 0 },
+                                        new int[] { 1, 1, 1, 1, 1, 1, 0, 1, 1, 1 },
+                                        new int[] { 0, 1, 1, 1, 1, 1, 1, 0, 0, 1 },
+                                        new int[] { 1, 1, 1, 1, 1, 0, 0, 1, 1, 1 },
+                                        new int[] { 0, 1, 0, 1, 1, 0, 1, 1, 1, 1 },
+                                        new int[] { 1, 1, 1, 0, 1, 0, 1, 1, 1, 1 }
+                                                }
+                                 };
+            foreach (var mat in matArray)
+            {
+                mat.Print("Matrix");
+                DailyProblem.ZeroOneMatrix(mat).Print($"Distance of the nearest 0 for each cell is");
+                Console.WriteLine();
+            }
         }
 
 

@@ -17593,5 +17593,62 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(row*col)
+        public static int[][] ZeroOneMatrix(int[][] mat)
+        {
+            /* Find all the position of ones in matrix and add these pos to Queue with Value 0
+             * all non zero are marked as Not visited/Calculatedd
+             * now start dequeing queue
+             *      pick the current node & add its adjacent 4 nodes (lt,rt,top,bottom) which are not already visited to queue 
+             *      and also update value for current cell as parentNode + 1
+             *      at end this way we will have nearest Zero value for all nodes
+             */
+            int row = mat.Length, col = mat[0].Length;
+            Queue<int[]> q = new Queue<int[]>();
+
+            for (int r = 0; r < row; r++)
+                for (int c = 0; c < col; c++)
+                    if (mat[r][c] == 0)
+                        // add current row,col,nearestZeroDist
+                        q.Enqueue(new int[] { r, c });
+                    else
+                        mat[r][c] = -1;     // Closet Zero not calculated
+
+            int closetZero = 0, size;
+            while (q.Count > 0)             // BFS
+            {
+                size = q.Count;
+                closetZero++;   // we increament distance by 1
+                while (size-- > 0)
+                {
+                    var temp = q.Dequeue();
+                    int r = temp[0], c = temp[1];
+                    if (r > 0 && mat[r - 1][c] == -1)                // top
+                    {
+                        mat[r - 1][c] = closetZero;
+                        q.Enqueue(new int[] { r - 1, c });
+                    }
+                    if (r + 1 < row && mat[r + 1][c] == -1)          // bottom
+                    {
+                        mat[r + 1][c] = closetZero;
+                        q.Enqueue(new int[] { r + 1, c });
+                    }
+                    if (c > 0 && mat[r][c - 1] == -1)                // left
+                    {
+                        mat[r][c - 1] = closetZero;
+                        q.Enqueue(new int[] { r, c - 1 });
+                    }
+                    if (c + 1 < col && mat[r][c + 1] == -1)          // right
+                    {
+                        mat[r][c + 1] = closetZero;
+                        q.Enqueue(new int[] { r, c + 1 });
+                    }
+                }
+            }
+            return mat;
+        }
+
+
+
     }
 }
