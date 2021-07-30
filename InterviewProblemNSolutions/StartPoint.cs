@@ -499,6 +499,7 @@ namespace InterviewProblemNSolutions
             ThreeSumCloset();
             BeautifulArray();
             ZeroOneMatrix();
+            MapSumPairs();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8172,6 +8173,18 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MapSumPairs()
+        {
+            // https://leetcode.com/problems/map-sum-pairs/
+            Utility.Print("677. Map Sum Pairs");
+            MapSum mapSum = new MapSum();
+            mapSum.Insert("apple", 3);
+            var sum1 = mapSum.Sum("ap");           // return 3 (apple = 3)
+            mapSum.Insert("app", 2);
+            var sum2 = mapSum.Sum("ap");           // return 5 (apple + app = 3 + 2 = 5)
+        }
+
+        
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
         /// <summary>

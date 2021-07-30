@@ -12,6 +12,7 @@ namespace InterviewProblemNSolutions
         public bool isWord;
         public int times = 0;
         public int index = -1;
+        public string word;
         public TrieNode() => children = new Dictionary<char, TrieNode>();
     }
     public class Trie
@@ -201,7 +202,45 @@ namespace InterviewProblemNSolutions
         }
     }
 
+    public class TrieForMapSum
+    {
+        public TrieNode root;
+        public TrieForMapSum() => root = new TrieNode();
 
+        // Insert
+        public void Add(string word)
+        {
+            TrieNode temp = root;
+            foreach (var ch in word)
+            {
+                if (!temp.children.ContainsKey(ch)) temp.children.Add(ch, new TrieNode());
+                temp = temp.children[ch];
+            }
+            temp.isWord = true;
+            temp.word = word;
+        }
+        // Get matching Prefix Sum
+        public int GetMatchingPrefixSum(string prefix, Dictionary<string, int> keyValueMap)
+        {
+            int totalSum = 0;
+            TrieNode temp = root;
+            foreach (var ch in prefix)
+            {
+                if (!temp.children.ContainsKey(ch)) return totalSum;
+                temp = temp.children[ch];
+            }
+            GetAllSubNodeSum(temp);
+            return totalSum;
+
+            // local helper func
+            void GetAllSubNodeSum(TrieNode currNode)
+            {
+                if (currNode.isWord) totalSum += keyValueMap[currNode.word];
+                foreach (var node in currNode.children)
+                    GetAllSubNodeSum(currNode.children[node.Key]);
+            }
+        }
+    }
 
 
 
