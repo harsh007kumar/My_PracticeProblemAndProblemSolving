@@ -500,6 +500,7 @@ namespace InterviewProblemNSolutions
             BeautifulArray();
             ZeroOneMatrix();
             MapSumPairs();
+            DecodeWaysII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8184,7 +8185,17 @@ namespace InterviewProblemNSolutions
             var sum2 = mapSum.Sum("ap");           // return 5 (apple + app = 3 + 2 = 5)
         }
 
-        
+
+        public static void DecodeWaysII()
+        {
+            // https://leetcode.com/problems/decode-ways-ii/
+            Utility.Print("639. Decode Ways II");
+            string[] sArr = { "1212", "*", "1*", "2*", "**", "***", "****", "*1*1*0" };
+            foreach (var s in sArr)
+                Console.WriteLine($" Given '{s}' consisting of digits(0...9) & *, the no of ways to decode it are: '{DynamicProgramming.DecodeWaysII(s)}'\n");
+        }
+
+
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
         /// <summary>

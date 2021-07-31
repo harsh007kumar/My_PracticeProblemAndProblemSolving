@@ -2162,5 +2162,65 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n), n = length of 's'
+        public static int DecodeWaysII(string s)
+        {
+            int mod = 1000000007, l = s.Length;
+            Dictionary<int, long> waysFromIdx = new Dictionary<int, long>(s.Length);
+            return (int)CountDecodeWays();
+            
+            // local helper func
+            long CountDecodeWays(int i=0)
+            {
+                if (i == l) return 1;
+                if (s[i] == '0') return 0;                      // if current digit is 0 its not a valid Decoding
+                // if we have precalculated ways after this index onwards, return its value from Dictionary
+                if (waysFromIdx.ContainsKey(i))
+                    return waysFromIdx[i];
+
+                long count = 0;
+                bool firstCharIsSpecialChar = s[i] == '*';
+
+                // using single digit, if curr char is special char '*' we add 8 to result as current digit cud have been any of 1...9
+                count = ((firstCharIsSpecialChar ? 9 : 1) * CountDecodeWays(i + 1)) % mod;
+
+                // using two digit (if value <= 26)
+                if (i + 1 < l)
+                {
+                    var waysAfterCurrDoubleDigit = CountDecodeWays(i + 2) % mod;
+                    bool secondCharisSpecialChar = s[i + 1] == '*';
+                    int firstDigit = s[i] - '0', secondDigit = s[i + 1] - '0';
+
+                    if (!firstCharIsSpecialChar)                // regular 1st digit
+                    {
+                        if (firstDigit == 1 || firstDigit == 2)                     // 1st digit must be either A or B in order to consider it to be b/w J...Z
+                            if (!secondCharisSpecialChar)       // regular 2nd digit
+                            {
+                                if (firstDigit == 1 || secondDigit <= 6)            // 2nd digit must be less than <=6(1 indexed) so total value is 1...26 i.e. (A...Z)
+                                                                                    // in order to consider it to be b/w J...Z
+                                    count += waysAfterCurrDoubleDigit;
+                            }
+                            else                                // 2nd digit could make anything from 11...19 (if 1st digit was 1) or 21...26 (if 1st digit was 2)
+                                count += (firstDigit == 1 ? 9 : 6) * waysAfterCurrDoubleDigit;
+                    }
+                    else // special 1st digit i.e. it can be any from 1...9
+                    {
+                        if (!secondCharisSpecialChar)           // special 1st + regular 2nd digit
+                        {
+                            if (secondDigit <= 6)               // final value can be either (10,11,12,13,14,15,16 or 20,21,22,23,24,25,26), hence multiple by 2
+                                count += 2 * waysAfterCurrDoubleDigit;              // multiplying by 9 as 1st digit could be anything b/w 1...9
+                            else
+                                count += waysAfterCurrDoubleDigit;                  // since second is either 7,8,9 we have only one option of first digit being 1
+                        }
+                        else                                    // special 1st + special 2nd digit
+                            count += 15 * waysAfterCurrDoubleDigit;                 // double value digit can be anything from 11...19 & 21...26 i.e. total 15 diff variations
+                    }
+                }
+                return waysFromIdx[i] = count % mod;
+            }
+
+        }
+
+
     }
 }
