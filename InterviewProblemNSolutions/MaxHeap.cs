@@ -17,7 +17,7 @@ namespace InterviewProblemNSolutions
         public int LeftChild(int x) => 2 * x + 1;
         public int RtChild(int x) => LeftChild(x) + 1;
         public int Parent(int x) => (x - 1) / 2;
-        public int GetMin() => arr[0];
+        public int GetMax() => arr[0];
         public void UpdateTop(int val)
         {
             arr[0] = val;
