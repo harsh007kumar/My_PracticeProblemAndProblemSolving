@@ -17615,6 +17615,54 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n^2), n = length of square grid
+        public static int MakingALargeIsland(int[][] grid)
+        {
+            /* Get the size of all island (using DFS) and assign them a unique ID
+             *      store each individual island size in Dictionary with key islandID & value as its size
+             * 
+             * now traverse all zero's in grid put all unique (max four) island directly connected to it
+             *      and add their sum up + 1 to get the max island possible size
+             */
+            int n = grid.Length, maxIsland = 0, islandID = 100;
+            Dictionary<int, int> unqIslandSize = new Dictionary<int, int>();
+
+            for (int r = 0; r < n; r++)
+                for (int c = 0; c < n; c++)
+                    if (grid[r][c] == 1)    // new island found
+                        maxIsland = Math.Max(maxIsland, unqIslandSize[++islandID] = DFS(r, c, islandID));
+
+            unqIslandSize[0] = 0;   // default value of island with ID 0 is 0
+            HashSet<int> uniqueConnectedIslands = new HashSet<int>();
+            for (int r = 0; r < n; r++)
+                for (int c = 0; c < n; c++)
+                    if (grid[r][c] == 0)    // possible connection cell connecting 2 or more(max 4) island found
+                    {
+                        if (r > 0) uniqueConnectedIslands.Add(grid[r - 1][c]);
+                        if (r + 1 < n) uniqueConnectedIslands.Add(grid[r + 1][c]);
+                        if (c > 0) uniqueConnectedIslands.Add(grid[r][c - 1]);
+                        if (c + 1 < n) uniqueConnectedIslands.Add(grid[r][c + 1]);
+
+                        int connectedSize = 1;  // value is 1 as we are converting cell r,c zero to One
+                        foreach (var island in uniqueConnectedIslands)
+                            connectedSize += unqIslandSize[island];
+
+                        maxIsland = Math.Max(maxIsland, connectedSize);
+                        uniqueConnectedIslands.Clear();     // clean Hashset for next iteration
+                    }
+
+            return maxIsland;
+
+            // local helper DFS func to get the largest island size
+            int DFS(int i, int j, int ID)
+            {
+                if (i < 0 || i >= n || j < 0 || j >= n || grid[i][j] != 1) return 0;
+                grid[i][j] = ID;        // mark visited with unique island ID
+                // 1 + bottom + top + right + left
+                return 1 + DFS(i + 1, j, ID) + DFS(i - 1, j, ID) + DFS(i, j + 1, ID) + DFS(i, j - 1, ID);
+            }
+        }
+
 
     }
 }

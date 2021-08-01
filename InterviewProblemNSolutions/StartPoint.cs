@@ -501,6 +501,7 @@ namespace InterviewProblemNSolutions
             ZeroOneMatrix();
             MapSumPairs();
             DecodeWaysII();
+            MakingALargeIsland();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8193,6 +8194,22 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "1212", "*", "1*", "2*", "**", "***", "****", "*1*1*0" };
             foreach (var s in sArr)
                 Console.WriteLine($" Given '{s}' consisting of digits(0...9) & *, the no of ways to decode it are: '{DynamicProgramming.DecodeWaysII(s)}'\n");
+        }
+
+
+        public static void MakingALargeIsland()
+        {
+            // https://leetcode.com/problems/making-a-large-island/
+            Utility.Print("827. Making A Large Island");
+            int[][][] gridArr = {   new int[][] { new int[] { 1, 0 }, new int[] { 0, 1 } },
+                                    new int[][] { new int[] { 1, 1 }, new int[] { 1, 0 } },
+                                    new int[][] { new int[] { 1, 1 }, new int[] { 1, 1 } }
+                                };
+            foreach (var grid in gridArr)
+            {
+                grid.Print("GRID");
+                Console.WriteLine($" size of the largest island in above grid after changing at most one 0 to be 1: '{DailyProblem.MakingALargeIsland(grid)}'\n");
+            }
         }
 
 
