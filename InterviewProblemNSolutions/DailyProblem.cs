@@ -17664,5 +17664,27 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n!) Space O(n), n = length of 'nums'
+        public static IList<IList<int>> SubsetsWithDup(int[] nums)
+        {
+            Array.Sort(nums);       // O(nlogn)
+            List<IList<int>> ans = new List<IList<int>>();
+            BackTrack(0, new Stack<int>());
+            return ans;
+            // local helper func
+            void BackTrack(int idx, Stack<int> curSet)
+            {
+                ans.Add(curSet.Reverse().ToArray());
+                for (int i = idx; i < nums.Length; i++)
+                    if (i == idx || nums[i - 1] != nums[i])
+                    {
+                        curSet.Push(nums[i]);
+                        BackTrack(i + 1, curSet);
+                        curSet.Pop();
+                    }
+            }
+        }
+
+
     }
 }

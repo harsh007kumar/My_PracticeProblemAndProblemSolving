@@ -502,6 +502,7 @@ namespace InterviewProblemNSolutions
             MapSumPairs();
             DecodeWaysII();
             MakingALargeIsland();
+            SubsetsII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8209,6 +8210,20 @@ namespace InterviewProblemNSolutions
             {
                 grid.Print("GRID");
                 Console.WriteLine($" size of the largest island in above grid after changing at most one 0 to be 1: '{DailyProblem.MakingALargeIsland(grid)}'\n");
+            }
+        }
+
+
+        public static void SubsetsII()
+        {
+            // https://leetcode.com/problems/subsets-ii/
+            Utility.Print("90. Subsets II");
+            int[][] numsArr = { new int[] { 1, 2, 2 }, new int[] { 0 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("nums");
+                DailyProblem.SubsetsWithDup(nums).Print($"Below are all possible subsets (the power set) without duplicate subsets");
+                Console.WriteLine();
             }
         }
 
