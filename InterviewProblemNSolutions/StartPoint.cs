@@ -8232,6 +8232,8 @@ namespace InterviewProblemNSolutions
         public static void PalindromePartitioningII()
         {
             // https://leetcode.com/problems/palindrome-partitioning-ii/
+            // IDeserve https://youtu.be/WPr1jDh3bUQ
+            // Tushar Roy https://youtu.be/lDYIvtBVmgo (good fr understanding but slower algo)
             Utility.Print("132. Palindrome Partitioning II");
             string[] sArr = { "aab", "a", "ab", "aaaannnnnbcjsjscgsioudcsssss" };
             foreach (var s in sArr)
