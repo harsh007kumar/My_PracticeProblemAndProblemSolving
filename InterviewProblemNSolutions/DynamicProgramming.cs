@@ -2222,5 +2222,64 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n^2), n = length of 's'
+        public static int MinCut(string s)
+        {
+            /* First we use DP to store if each substring os 's' is paldinrome or not in 2-D bool array => 'isPali' [similar to LPS (LongestPalindromicSubString)]
+             * 
+             * Now we create an 1-D array 'cuts' which stores min no of cuts to make the string from idx 0 to curr idx a palindrome
+             * we use 'isPali' to find in O(1) time if current string is paldinrome or not
+             * if paldinrome we save 0 in 'cuts' fr string ending at current idx (set default value int.MaxValue)
+             * if not paldinrome
+             *      we try splitting from 1st idx to curr-1 idx
+             *          at each split we can get the min cuts to make first half palindrome from 'cuts'
+             *          and for second part we see if its palindrome from 'isPali' is True
+             *              we add 1 to 'cuts' value we got for first half and store for current substring 0...currIdx
+             *              cuts[currIdx]=Math.Min(cuts[currIdx],1+cuts[splitAtIdx])
+             *          if 2nd part not palindrome we move to next split idx
+             */
+            int n = s.Length;
+            bool[,] isPali = new bool[n, n];
+            // caculate n store value for each substring is palindrome or not
+            for (int len = 1; len <= n; len++)
+                for (int startIdx = 0; startIdx <= n - len; startIdx++)
+                {
+                    int lastIdx = startIdx + len - 1;
+                    if (len == 1)
+                        // single char are always palindrome
+                        isPali[startIdx, lastIdx] = true;
+                    else if (len == 2)
+                        // 2 char word is palindrome if both are chars are same
+                        isPali[startIdx, lastIdx] = s[startIdx] == s[lastIdx];
+                    else // len>=3
+                        // if first & last char are same and substring leaving those is also palindrome
+                        isPali[startIdx, lastIdx] = s[startIdx] == s[lastIdx] && isPali[startIdx + 1, lastIdx - 1];
+                }
+            
+            // OPTIMIZATION if entire string is palindrome no further checks required
+            if (isPali[0, n - 1])
+                return 0;
+
+            int[] cuts = new int[n];
+            for (int currIdx = 0; currIdx < n; currIdx++)
+                if (isPali[0, currIdx])
+                    // isPaldindrome no cuts req
+                    cuts[currIdx] = 0;
+                else
+                {
+                    cuts[currIdx] = n;  // setting default value can also set to int.MaxValue
+                    // we try splitting from 1st to currIdx-1 to get min possible cuts
+                    for (int splitAt = 1; splitAt <= currIdx; splitAt++)
+                        if (isPali[splitAt, currIdx])   // 2nd part is palindrome
+                            if (1 == (cuts[currIdx] = Math.Min(cuts[currIdx], 1 + cuts[splitAt - 1])))
+                                break;  // OPTIMIZATION => Minimum cut 1 achieved need not evalute further
+                }
+            
+            // return min cuts to make all partitiion of 's' palindrome
+            return cuts[n - 1];
+        }
+
+
+
     }
 }

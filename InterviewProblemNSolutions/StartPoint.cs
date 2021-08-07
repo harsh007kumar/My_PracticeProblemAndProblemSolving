@@ -503,6 +503,7 @@ namespace InterviewProblemNSolutions
             DecodeWaysII();
             MakingALargeIsland();
             SubsetsII();
+            PalindromePartitioningII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8225,6 +8226,16 @@ namespace InterviewProblemNSolutions
                 DailyProblem.SubsetsWithDup(nums).Print($"Below are all possible subsets (the power set) without duplicate subsets");
                 Console.WriteLine();
             }
+        }
+
+
+        public static void PalindromePartitioningII()
+        {
+            // https://leetcode.com/problems/palindrome-partitioning-ii/
+            Utility.Print("132. Palindrome Partitioning II");
+            string[] sArr = { "aab", "a", "ab", "aaaannnnnbcjsjscgsioudcsssss" };
+            foreach (var s in sArr)
+                Console.WriteLine($" Min no of cuts to make each partition of '{s}' a paldinrome is => '{DynamicProgramming.MinCut(s)}'\n");
         }
 
 
