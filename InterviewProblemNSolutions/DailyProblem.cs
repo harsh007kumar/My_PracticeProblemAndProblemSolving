@@ -17686,5 +17686,95 @@ namespace InterviewProblemNSolutions
         }
 
 
+
+        // Time = O(r*c*log(r*c)) || Space O(r*c), r = no of rows & c = no of cols in 'Matrix'
+        public static int[][] MatrixRankTransform(int[][] matrix)
+        {
+            /* Deriving from Rank Transformation for 1-D array,
+             * we will save all the nums in Dictionary 'numsPos' as key with value as list of positions of each such number in matrix
+             * 
+             * Set 'rank' variable as 1
+             * Also create a array to maxRank to store the max rank for each row & also for cols (default curr max rank is 0)
+             * Now we sort 'numsPos' with key & read numbers from the smallest to largest value
+             * 
+             * for each curr number we check the maxRank for current numbers row & col and +1 to the current max and set that as rank
+             * we have to also check maxRank if multiple numbers with same value exists in current numbers row or col
+             * 
+             * we also keep updating the maxRank in rows & cols after each rank update
+             */
+            Dictionary<int, List<int>> numsPos = new Dictionary<int, List<int>>();
+            int rows = matrix.Length, cols = matrix[0].Length, currMax, r, c;
+            for (r = 0; r < rows; r++)
+                for (c = 0; c < cols; c++)
+                    if (!numsPos.ContainsKey(matrix[r][c]))                 // new number
+                        numsPos[matrix[r][c]] = new List<int>() { r * 1000 + c };
+                    else                                                    // num already present, add new position
+                        numsPos[matrix[r][c]].Add(r * 1000 + c);
+
+            int[] maxRankRow = new int[rows], maxRankCol = new int[cols];   // default rank fr all rows & col is 0
+
+            foreach (var currNumPositions in numsPos.OrderBy(x => x.Key))   // O(rows*cols*log(rows*cols)) if we have all distinct nums in matrix
+                foreach (var currGrp in GetSameNumberGrps(currNumPositions.Value))
+                {
+                    currMax = 0;        // set default rank
+
+                    // find the minimum viable rank for curr group by looking at maxRank in all rows and cols where curr number is present
+                    foreach (var pos in currGrp)
+                        currMax = Math.Max(currMax, Math.Max(maxRankRow[pos / 1000], maxRankCol[pos % 1000]));
+
+                    currMax++;          // add +1 to get current rank
+
+                    foreach (var pos in currGrp)
+                    {
+                        r = pos / 1000;
+                        c = pos % 1000;
+                        // set rank & also update maximum Rank each row & col where curr Number was present
+                        maxRankRow[r] = maxRankCol[c] = matrix[r][c] = currMax;
+                    }
+                }
+
+            return matrix;
+
+            // local helper func
+            List<IList<int>> GetSameNumberGrps(List<int> positions)
+            {
+                List<IList<int>> grps = new List<IList<int>>();
+                HashSet<int> visited = new HashSet<int>();
+                Queue<int> q = new Queue<int>();
+                List<int> grp = new List<int>();
+                int curR, curC;
+                foreach(var pos in positions)
+                    if (!visited.Contains(pos))
+                    {
+                        q.Enqueue(pos);
+                        visited.Add(pos);
+
+                        while(q.Count>0)
+                        {
+                            var currPos = q.Dequeue();
+                            grp.Add(currPos);
+                            curR = currPos / 1000;
+                            curC = currPos % 1000;
+                            // all nums which are in same row or same col are added to curr group
+                            foreach(var uniqPos in positions)
+                                if(!visited.Contains(uniqPos))
+                                    if(curR == uniqPos/1000 || curC == uniqPos%1000)    // same row or col
+                                    {
+                                        q.Enqueue(uniqPos);             // add to Queue
+                                        visited.Add(uniqPos);           // mark visited
+                                    }
+                        }
+
+                        grps.Add(grp);
+
+                        // reset fr next grp
+                        grp = new List<int>();
+                        q.Clear();
+                    }
+                return grps;
+            }
+        }
+
+
     }
 }

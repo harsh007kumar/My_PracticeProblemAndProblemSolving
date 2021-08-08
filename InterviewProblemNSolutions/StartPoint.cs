@@ -504,6 +504,8 @@ namespace InterviewProblemNSolutions
             MakingALargeIsland();
             SubsetsII();
             PalindromePartitioningII();
+            //P1();
+            RankTransformOfAMatrix();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8239,6 +8241,28 @@ namespace InterviewProblemNSolutions
             foreach (var s in sArr)
                 Console.WriteLine($" Min no of cuts to make each partition of '{s}' a paldinrome is => '{DynamicProgramming.MinCut(s)}'\n");
         }
+
+
+
+
+        public static void RankTransformOfAMatrix()
+        {
+            // https://leetcode.com/problems/rank-transform-of-a-matrix/
+            Utility.Print("1632. Rank Transform of a Matrix");
+            int[][][] matricies = new int[][][] {   new int[][] { new int[] { 1, 2 }, new int[] { 3, 4 } },
+                                                    new int[][] { new int[] { 7, 7 }, new int[] { 7, 7 } },
+                                                    new int[][] { new int[] { 20, -21, 14 }, new int[] { -19, 4, 19 }, new int[] { 22, -47, 24 }, new int[] { -19, 4, 19 } },
+                                                    new int[][] { new int[] { 7, 3, 6 }, new int[] { 1, 4, 5 }, new int[] { 9, 8, 2 } },
+                                                    new int[][] { new int[] { -37,-26,-47,-40,-13 }, new int[] { 22,-11,-44,47,-6 }, new int[] { -35,8,-45,34,-31 }, new int[] { -16,23,-6,-43,-20 }, new int[] { 47,38,-27,-8,43 } }
+                                                };
+            foreach (var matrix in matricies)
+            {
+                matrix.Print("Matrix");
+                DailyProblem.MatrixRankTransform(matrix).Print($"Rank matrix of above input is:");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
