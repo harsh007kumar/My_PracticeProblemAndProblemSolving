@@ -17776,5 +17776,47 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(nlogn+m) Space O(n), n = no of unique elements in 'arr' & m = total nums in 'arr'
+        public static bool CanReorderDoubled(int[] arr)
+        {
+            Dictionary<int, int> numFreq = new Dictionary<int, int>();
+            for (int i = 0; i < arr.Length; i++)
+                if (!numFreq.ContainsKey(arr[i]))
+                    numFreq[arr[i]] = 1;    // add new num with freq = 1
+                else
+                    numFreq[arr[i]]++;      // increase the frequency
+            
+            var uniqSortNums = from kvp in numFreq
+                               orderby kvp.Key
+                               select kvp.Key;
+
+            // reading uniq numbers in sorted order (asc)
+            foreach (var num in uniqSortNums)
+                if (numFreq[num] > 0)       // freq is 1 or more, check if there exists a num which is * 2 in Dict
+                    if (num < 0)    // for -ve nums
+                    {
+                        // if -ve odd num found
+                        if (num % 2 != 0) return false;
+
+                        var half = num / 2;
+                        if (!numFreq.ContainsKey(half) || numFreq[half] < numFreq[num])
+                            return false;
+                        else
+                            numFreq[half] -= numFreq[num];  // decrease the frequency of * 2 number in Dictionary for current num
+                    }
+                    else //(num>0) for +ve nums
+                    {
+                        var twice = num * 2;
+                        if (!numFreq.ContainsKey(twice) || numFreq[twice] < numFreq[num])
+                            return false;
+                        else
+                            numFreq[twice] -= numFreq[num];  // decrease the frequency of * 2 number in Dictionary for current num
+                    }
+            
+            // if all pair found & present
+            return true;
+        }
+
+
     }
 }

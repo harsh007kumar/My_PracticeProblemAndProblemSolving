@@ -506,6 +506,7 @@ namespace InterviewProblemNSolutions
             PalindromePartitioningII();
             //P1();
             RankTransformOfAMatrix();
+            ArrayOfDoubledPairs();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8263,6 +8264,18 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void ArrayOfDoubledPairs()
+        {
+            // https://leetcode.com/problems/array-of-doubled-pairs/
+            Utility.Print("954. Array of Doubled Pairs");
+            int[][] arrays = { new int[] { 3, 1, 3, 6 }, new int[] { 2, 1, 2, 6 }, new int[] { 4, -2, 2, -4 }, new int[] { 1, 2, 4, 16, 8, 4 }, new int[] { -1, 2, 4, 16, 8, 4 }, new int[] { -6, -3 } };
+            foreach (var arr in arrays)
+            {
+                arr.Print("Array");
+                Console.WriteLine($" it is possible to reorder it such that arr[2 * i + 1] = 2 * arr[2 * i] for every 0 <= i < len(arr) / 2 : '{DailyProblem.CanReorderDoubled(arr)}'");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
