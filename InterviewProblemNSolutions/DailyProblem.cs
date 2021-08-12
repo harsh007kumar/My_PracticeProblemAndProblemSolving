@@ -3417,6 +3417,40 @@ namespace InterviewProblemNSolutions
 
             return grp;
         }
+        // Time O(n*l) Space O(n), n = no of words in 'strs' & l = avg length of each word
+        public static IList<IList<string>> GroupAnagramsFaster(string[] strs)
+        {
+            var anagramsDict = new Dictionary<string, List<string>>();
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var word in strs)           // O(n)
+            {
+                var CODE = GetKey(word);
+                if (!anagramsDict.ContainsKey(CODE))     // new grp
+                    anagramsDict[CODE] = new List<string>() { word };
+                else                                    // adding curr word to matching anagram grp
+                    anagramsDict[CODE].Add(word);
+            }
+            // add the grps to the final ans
+            var ans = new List<IList<string>>();
+            foreach (var grp in anagramsDict.Values)
+                ans.Add(grp);
+            return ans;
+            // Local helper func
+            string GetKey(string str)
+            {
+                var charCount = new int[26];
+                foreach (var ch in str)          // O(l)
+                    charCount[ch - 'a']++;
+
+                sb.Clear();
+                // Form CODE for char which have freq > 0, ex: B2F1Z3
+                for (int i = 0; i < 26; i++)           // O(26)
+                    if (charCount[i] > 0)
+                        sb.Append(charCount[i]).Append((char)(i + 'a'));
+                return sb.ToString();
+            }
+        }
 
 
         // Time O(N) || Space O(1)

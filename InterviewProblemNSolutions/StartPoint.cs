@@ -98,7 +98,7 @@ namespace InterviewProblemNSolutions
             //RegularExpressionMatching();
             //PoorPigs();
             //RemoveInterval();
-            //GroupAnagrams();
+            GroupAnagrams();
             //LongestMountain();
             //MergeIntervals();
             //InsertIntervals();
@@ -1975,7 +1975,8 @@ namespace InterviewProblemNSolutions
             foreach (var strs in strsArr)
             {
                 strs.Print("Input");
-                foreach (var grp in DailyProblem.GroupAnagrams(strs))
+                //foreach (var grp in DailyProblem.GroupAnagrams(strs))
+                foreach (var grp in DailyProblem.GroupAnagramsFaster(strs))
                 {
                     Console.Write("[");
                     foreach (var word in grp)
@@ -8242,7 +8243,6 @@ namespace InterviewProblemNSolutions
             foreach (var s in sArr)
                 Console.WriteLine($" Min no of cuts to make each partition of '{s}' a paldinrome is => '{DynamicProgramming.MinCut(s)}'\n");
         }
-
 
 
 
