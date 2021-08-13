@@ -2973,6 +2973,49 @@ namespace InterviewProblemNSolutions
                 for (int r = 0; r < matrix.Length; r++)
                     matrix[r][0] = 0;
         }
+        // Time O(n^2) || Space O(1)
+        public static void SetMatrixZeroesEasy(int[][] matrix)
+        {
+            bool setFirstRow = false;
+            int row = matrix.Length, col = matrix[0].Length;
+            // check if we need to mark 1st row as Zero
+            for (int c = 0; c < col; c++)
+                if (matrix[0][c] == 0)
+                {
+                    setFirstRow = true;
+                    break;
+                }
+
+            // Check the remaining matrix & mark 1st row & 1st Col as 0 if that row/col has zero
+            for (int r = 1; r < row; r++)
+                for (int c = 0; c < col; c++)
+                    if (matrix[r][c] == 0)
+                    {
+                        matrix[0][c] = 0; // mark row
+                        matrix[r][0] = 0; // mark col
+                    }
+
+            for (int r = 1; r < row; r++)
+                if (matrix[r][0] == 0)
+                    MarkZero(r, true);
+            for (int c = 0; c < col; c++)
+                if (matrix[0][c] == 0)
+                    MarkZero(c, false);
+            if (setFirstRow)
+                MarkZero(0, true);
+
+            // local helper func
+            void MarkZero(int idx, bool markRow)
+            {
+                if (markRow)
+                    for (int c = 0; c < col; c++)
+                        matrix[idx][c] = 0;
+                else
+                    for (int r = 0; r < row; r++)
+                        matrix[r][idx] = 0;
+            }
+        }
+
 
         // Time O(n) || Space O(1)
         public static void MergeSortedArray(int[] nums1, int m, int[] nums2, int n)
