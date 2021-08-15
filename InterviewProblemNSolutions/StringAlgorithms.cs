@@ -483,6 +483,41 @@ namespace InterviewProblemNSolutions
             else
                 Console.WriteLine($"No Window Containing All Characters \t'{charSet}' found in input \t'{input}'");
         }
+        // Time O(m+n) Space O(1), m,n = length of string 's' & 't' respectively
+        public static string MinWindowContainingAllCharFaster(string s, string t)
+        {
+            if (t.Length > s.Length) return "";  // base case
+            int[] charFreq = new int[128], currWindow = new int[128];   // Standard ASCII
+
+            // get all unique characters & their frequency in 't'
+            for (int i = 0; i < t.Length; i++)
+                charFreq[t[i]]++;
+
+            // using sliding window technique,
+            // we keep moving the rt pointer till we get all char with freq >= one present in 'charFreq'
+            // once we get it we keep moving lt pointer frwd and at every point we check this substring still contains all the req chars & freq we update the 'ans' substring with this new smaller substring till its no longer contains all req chars
+            // than we again start moving the rt pointer till its <s.Length
+
+            int lt = -1, rt = -1, ansLen = int.MaxValue, ansStartIdx = -1, validCharCount = 0;
+            while (++rt < s.Length)
+                // if curr char is part of target string and its count is <= req count
+                if (++currWindow[s[rt]] <= charFreq[s[rt]])
+                    // found all req characters of 'target'
+                    if (++validCharCount == t.Length)
+                        while (validCharCount == t.Length)
+                        {
+                            if (rt - lt < ansLen)
+                            {
+                                ansLen = rt - lt;
+                                ansStartIdx = lt + 1;
+                            }
+                            if (--currWindow[s[++lt]] < charFreq[s[lt]])
+                                validCharCount--;
+                        }
+            // we atleast one valid SubString found return the ans else return empty string
+            return ansStartIdx > -1 ? s.Substring(ansStartIdx, ansLen) : "";
+        }
+
 
         /// <summary>
         /// Returns True if given 'pattern' exists in 2-D 'input' char array, else returns false

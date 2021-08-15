@@ -8390,9 +8390,14 @@ namespace InterviewProblemNSolutions
         public static void MinWindowContainingAllCharacters()
         {
             Utility.Print("Problem - 13 Minimum window in input string which will contain all the characters given in char array(p. 693)");
-            var input = "ABB$ACBAA$";
-            var chArray = "A$AB";
-            StringAlgorithms.MinWindowContainingAllCharacters(input, chArray);
+            Utility.Print("76. Minimum Window Substring");
+            string[] sArr = { "ABB$ACBAA$", "ADOBECODEBANC", "a", "a" };
+            string[] tArr = { "A$AB", "ABC", "a", "aa" };
+            for (int i = 0; i < sArr.Length; i++)
+            {
+                //StringAlgorithms.MinWindowContainingAllCharacters(sArr[i], tArr[i]);
+                Console.WriteLine($" Smallest Substring of '{sArr[i]}' contains all chars(including duplicates) of '{tArr[i]}' is : {StringAlgorithms.MinWindowContainingAllCharFaster(sArr[i], tArr[i])}");
+            }
         }
 
         public static void FindPatternPresentIn2DCharArray()
