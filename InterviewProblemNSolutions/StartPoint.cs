@@ -507,6 +507,7 @@ namespace InterviewProblemNSolutions
             //P1();
             RankTransformOfAMatrix();
             ArrayOfDoubledPairs();
+            ComplexNumberMultiplication();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8247,6 +8248,7 @@ namespace InterviewProblemNSolutions
 
 
 
+
         public static void RankTransformOfAMatrix()
         {
             // https://leetcode.com/problems/rank-transform-of-a-matrix/
@@ -8276,6 +8278,16 @@ namespace InterviewProblemNSolutions
                 arr.Print("Array");
                 Console.WriteLine($" it is possible to reorder it such that arr[2 * i + 1] = 2 * arr[2 * i] for every 0 <= i < len(arr) / 2 : '{DailyProblem.CanReorderDoubled(arr)}'");
             }
+        }
+
+
+        public static void ComplexNumberMultiplication()
+        {
+            // https://leetcode.com/problems/complex-number-multiplication/
+            Utility.Print("537. Complex Number Multiplication");
+            string[] num1 = { "1+1i", "1+-1i" }, num2 = { "1+1i", "1+-1i" };
+            for (int i = 0; i < num1.Length; i++)
+                Console.WriteLine($" Multiplication of {num1[i]} x {num2[i]} results in: '{DailyProblem.ComplexNumberMultiply(num1[i], num2[i])}'");
         }
 
 

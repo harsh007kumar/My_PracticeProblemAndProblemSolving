@@ -17764,6 +17764,7 @@ namespace InterviewProblemNSolutions
 
 
 
+
         // Time = O(r*c*log(r*c)) || Space O(r*c), r = no of rows & c = no of cols in 'Matrix'
         public static int[][] MatrixRankTransform(int[][] matrix)
         {
@@ -17893,6 +17894,20 @@ namespace InterviewProblemNSolutions
             // if all pair found & present
             return true;
         }
+
+
+        // Time = Space = O(1)
+        public static string ComplexNumberMultiply(string num1, string num2)
+        {
+            var n1 = num1.Split('+');
+            var n2 = num2.Split('+');
+            int real1 = int.Parse(n1[0]), real2 = int.Parse(n2[0]), imag1 = int.Parse((n1[1].Split('i'))[0]), imag2 = int.Parse((n2[1].Split('i'))[0]);
+            Console.WriteLine($" {real1},{imag1},{real2},{imag2}");
+            int r1r2 = real1 * real2, r1i2 = real1 * imag2, i1r2 = imag1 * real2, i1i2 = imag1 * imag2;
+
+            return (r1r2 - i1i2) + "+" + (r1i2 + i1r2) + "i";
+        }
+
 
 
     }
