@@ -17764,7 +17764,6 @@ namespace InterviewProblemNSolutions
 
 
 
-
         // Time = O(r*c*log(r*c)) || Space O(r*c), r = no of rows & c = no of cols in 'Matrix'
         public static int[][] MatrixRankTransform(int[][] matrix)
         {
@@ -17906,6 +17905,26 @@ namespace InterviewProblemNSolutions
             int r1r2 = real1 * real2, r1i2 = real1 * imag2, i1r2 = imag1 * real2, i1i2 = imag1 * imag2;
 
             return (r1r2 - i1i2) + "+" + (r1i2 + i1r2) + "i";
+        }
+
+
+
+        // Time = Space = O(n), n = no of nodes in Tree || Recursive Soln
+        public static bool IsValidSerialization(string preorder)
+        {
+            var tree = preorder.Split(',');
+            int i = 0, nodesCount = tree.Length;
+            return Check() && i == nodesCount;
+
+            // local helper func
+            bool Check()
+            {
+                if (i >= nodesCount) return false;
+                // curr node is null, return true
+                if (tree[i++] == "#") return true;
+                // else check if it has both valid left & right subtree
+                return Check() && Check();
+            }
         }
 
 

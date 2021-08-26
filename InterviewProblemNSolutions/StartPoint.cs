@@ -508,6 +508,7 @@ namespace InterviewProblemNSolutions
             RankTransformOfAMatrix();
             ArrayOfDoubledPairs();
             ComplexNumberMultiplication();
+            VerifyPreorderSerializationOfABinaryTree();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8288,6 +8289,16 @@ namespace InterviewProblemNSolutions
             string[] num1 = { "1+1i", "1+-1i" }, num2 = { "1+1i", "1+-1i" };
             for (int i = 0; i < num1.Length; i++)
                 Console.WriteLine($" Multiplication of {num1[i]} x {num2[i]} results in: '{DailyProblem.ComplexNumberMultiply(num1[i], num2[i])}'");
+        }
+
+
+        public static void VerifyPreorderSerializationOfABinaryTree()
+        {
+            // https://leetcode.com/problems/verify-preorder-serialization-of-a-binary-tree/
+            Utility.Print("331. Verify Preorder Serialization of a Binary Tree");
+            string[] trees = { "9,3,4,#,#,1,#,#,2,#,6,#,#", "9,#,#,1", "1,#", "9,#,92,#,#" };
+            foreach (var binaryTree in trees)
+                Console.WriteLine($" Binary-Tree-Serialization '{binaryTree}' is Valid : '{DailyProblem.IsValidSerialization(binaryTree)}'\n");
         }
 
 
