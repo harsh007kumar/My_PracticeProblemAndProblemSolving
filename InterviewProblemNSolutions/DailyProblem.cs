@@ -17764,6 +17764,7 @@ namespace InterviewProblemNSolutions
 
 
 
+
         // Time = O(r*c*log(r*c)) || Space O(r*c), r = no of rows & c = no of cols in 'Matrix'
         public static int[][] MatrixRankTransform(int[][] matrix)
         {
@@ -17925,6 +17926,22 @@ namespace InterviewProblemNSolutions
                 // else check if it has both valid left & right subtree
                 return Check() && Check();
             }
+        }
+        // Time = O(n) ||  Space = O(1), n = length of 'preorder' || Iterative Soln
+        public static bool IsValidSerialization_Iterative(string preorder)
+        {
+            int count = 1;
+            for (int i = 0; i < preorder.Length; i++)
+                if (preorder[i] != ',')
+                    if (preorder[i] == '#')
+                    {
+                        // if count goes below 1 before we reach the end no need to check any further, return false
+                        if (--count <= 0 && i < preorder.Length - 1)
+                            return false;
+                    }
+                    else if (i == 0 || preorder[i - 1] == ',')
+                        count++;
+            return count == 0;
         }
 
 

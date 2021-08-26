@@ -8296,9 +8296,12 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/verify-preorder-serialization-of-a-binary-tree/
             Utility.Print("331. Verify Preorder Serialization of a Binary Tree");
-            string[] trees = { "9,3,4,#,#,1,#,#,2,#,6,#,#", "9,#,#,1", "1,#", "9,#,92,#,#" };
+            string[] trees = { "9,3,4,#,#,1,#,#,2,#,6,#,#", "9,#,#,1", "1,#", "9,#,92,#,#", "#,7,6,9,#,#,#" };
             foreach (var binaryTree in trees)
+            {
                 Console.WriteLine($" Binary-Tree-Serialization '{binaryTree}' is Valid : '{DailyProblem.IsValidSerialization(binaryTree)}'\n");
+                Console.WriteLine($" Binary-Tree-Serialization '{binaryTree}' is Valid : '{DailyProblem.IsValidSerialization_Iterative(binaryTree)}'\n");
+            }
         }
 
 
