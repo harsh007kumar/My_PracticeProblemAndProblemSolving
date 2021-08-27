@@ -509,6 +509,7 @@ namespace InterviewProblemNSolutions
             ArrayOfDoubledPairs();
             ComplexNumberMultiplication();
             VerifyPreorderSerializationOfABinaryTree();
+            LongestUncommonSubsequenceII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8301,6 +8302,19 @@ namespace InterviewProblemNSolutions
             {
                 Console.WriteLine($" Binary-Tree-Serialization '{binaryTree}' is Valid : '{DailyProblem.IsValidSerialization(binaryTree)}'\n");
                 Console.WriteLine($" Binary-Tree-Serialization '{binaryTree}' is Valid : '{DailyProblem.IsValidSerialization_Iterative(binaryTree)}'\n");
+            }
+        }
+
+
+        public static void LongestUncommonSubsequenceII()
+        {
+            // https://leetcode.com/problems/longest-uncommon-subsequence-ii/
+            Utility.Print("522. Longest Uncommon Subsequence II");
+            string[][] s_Arr = { new string[] { "aba", "cdc", "eae" }, new string[] { "aaa", "aaa", "aa" } };
+            foreach (var strs in s_Arr)
+            {
+                strs.Print("Input array");
+                Console.WriteLine($" Longest uncommon subsequence in above array is of length: '{StringAlgorithms.FindLUSlength(strs)}'\n");
             }
         }
 

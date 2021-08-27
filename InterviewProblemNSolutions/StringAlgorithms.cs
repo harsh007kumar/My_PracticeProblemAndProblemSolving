@@ -996,5 +996,37 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n^2) Space O(1), n = length of 'strs'
+        public static int FindLUSlength(string[] strs)
+        {
+            int LUCS = -1;
+            for (int i = 0; i < strs.Length; i++)
+            {
+                bool isSubsequence = false;
+                for (int j = 0; j < strs.Length; j++)
+                    if (i != j && Check(strs[i], strs[j]))
+                    {
+                        isSubsequence = true;
+                        break;
+                    }
+
+                if (!isSubsequence)
+                    LUCS = Math.Max(LUCS, strs[i].Length);
+            }
+            return LUCS;
+            // local helper func
+            bool Check(string a, string b)
+            {
+                int i = 0, j = 0;
+                if (a.Length > b.Length) return false;
+                while (i < a.Length && j < b.Length)
+                    if (a[i] == b[j++])
+                        i++;
+                return i == a.Length; // all characters of 'a' found in 'b'
+            }
+        }
+
+
+
     }
 }
