@@ -2323,7 +2323,59 @@ namespace InterviewProblemNSolutions
 
             return maxPossibleProfit;
         }
+        // Happy Coding https://www.youtube.com/watch?v=XJp-aOn35y4&ab_channel=HappyCoding
+        // Time O(nlogn) Space O(n), n = no of jobs
+        public static int JobScheduling_Faster(int[] startTime, int[] endTime, int[] profit)
+        {
+            var jobs = startTime
+                .Select((_, i) => new   // create custom obj
+                {
+                    s = startTime[i],
+                    e = endTime[i],
+                    p = profit[i],
+                }
+                )
+                .OrderBy(x => x.e)      // sort by end-time             // O(nlogn)
+                .ToArray();
 
+            // for debugging
+            foreach (var job in jobs)
+                Console.WriteLine($" {job.s}...{job.e} with profit {job.p}");
+
+            int[] maxProfit = new int[jobs.Length];
+            maxProfit[0] = jobs[0].p;
+
+            for (int curr = 1; curr < jobs.Length; curr++)              // O(n)
+            {
+                // when we not schedule curr job
+                maxProfit[curr] = maxProfit[curr - 1];
+
+                // when we schedule curr job,
+                // using binary search we find out the right most idx on the left of curr idx which has endTime<= curr job StartTime
+                var idx = BinarySearch(curr);                           // O(logn)
+
+                // update global max profit
+                maxProfit[curr] = Math.Max(maxProfit[curr], jobs[curr].p + (idx >= 0 ? maxProfit[idx] : 0));
+            }
+
+            return maxProfit[jobs.Length-1];
+            
+            // local helper func
+            int BinarySearch(int currJobIdx)
+            {
+                int sTime = jobs[currJobIdx].s, left = 0, right = currJobIdx - 1;
+                while (left <= right)
+                {
+                    var mid = left + (right - left) / 2;
+                    // if end time greater than start-time
+                    if (jobs[mid].e > sTime)
+                        right = mid - 1;
+                    else
+                        left = mid + 1;
+                }
+                return right;
+            }
+        }
 
 
     }

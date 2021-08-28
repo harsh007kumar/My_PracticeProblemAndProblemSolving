@@ -8350,6 +8350,7 @@ namespace InterviewProblemNSolutions
                 endTime[i].Print("End-Time");
                 profit[i].Print("Profit");
                 Console.WriteLine($" Max profit we can get from above jobs is: '{DynamicProgramming.JobScheduling(startTime[i], endTime[i], profit[i])}'\n");
+                Console.WriteLine($" Max profit we can get from above jobs is: '{DynamicProgramming.JobScheduling_Faster(startTime[i], endTime[i], profit[i])}'\n");
             }
         }
 
