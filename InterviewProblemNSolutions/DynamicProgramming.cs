@@ -2280,6 +2280,51 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Tushar Roy https://youtu.be/cr6Ip0J9izc
+        // Time O(n^2) Space O(n), n = no of jobs
+        public static int JobScheduling(int[] startTime, int[] endTime, int[] profit)
+        {
+            var jobs = startTime
+                .Select((_, i) => new   // create custom obj
+                {
+                    s = startTime[i],
+                    e = endTime[i],
+                    p = profit[i],
+                }
+                )
+                .OrderBy(x => x.e)      // sort by end-time
+                .ToArray();
+
+            // for debugging
+            foreach (var job in jobs)
+                Console.WriteLine($" {job.s}...{job.e} with profit {job.p}");
+
+            int[] maxProfit = new int[jobs.Length];
+            int maxPossibleProfit = int.MinValue;
+
+            for (int curr = 0; curr < jobs.Length; curr++)
+            {
+                // min profit if we just completed curr job
+                maxProfit[curr] = jobs[curr].p;
+
+                for (int left = 0; left < curr; left++)
+                {
+                    // if end time of the job on the left in greater than start time of curr job than jobs can't be overlapped
+                    // we break out since all jobs to right to left pointer wud have even higher end time
+                    if (jobs[left].e > jobs[curr].s) break;
+
+                    // max profit till curIdx is profit of => curr job + max profit we can earned for all jobs we selected which didnt overlap with left idx job
+                    maxProfit[curr] = Math.Max(maxProfit[curr], jobs[curr].p + maxProfit[left]);
+                }
+
+                // update global max profit
+                maxPossibleProfit = Math.Max(maxPossibleProfit, maxProfit[curr]);
+            }
+
+            return maxPossibleProfit;
+        }
+
+
 
     }
 }

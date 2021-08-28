@@ -17763,6 +17763,37 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static bool CheckMove(char[][] board, int rMove, int cMove, char color)
+        {
+            int[][] direction = new int[][] { new int[] { -1, 0 }, new int[] { 1, 0 }, new int[] { 0, -1 }, new int[] { 0, 1 } };
+            return DFS(rMove, cMove);
+
+            // local helper func
+            bool DFS(int r, int c)
+            {
+                return CheckInOneDirection(r - 1, c, 1, 0) || CheckInOneDirection(r + 1, c, 1, 1) || CheckInOneDirection(r, c - 1, 1, 2) || CheckInOneDirection(r, c + 1, 1, 3);
+            }
+
+            bool CheckInOneDirection(int r, int c, int len, int dir)
+            {
+                if (r < 0 || r == 8 || c < 0 || c == 8 || board[r][c] == '.') return false;
+                ++len;  // update length
+
+                if (board[r][c] == color)
+                {
+                    if (len >= 3)
+                        return true;
+                }
+                else // opp color
+                {
+                    r += direction[dir][0];
+                    c += direction[dir][1];
+                    return CheckInOneDirection(r, c, len, dir);
+                }
+
+                return false;
+            }
+        }
 
 
         // Time = O(r*c*log(r*c)) || Space O(r*c), r = no of rows & c = no of cols in 'Matrix'

@@ -510,6 +510,7 @@ namespace InterviewProblemNSolutions
             ComplexNumberMultiplication();
             VerifyPreorderSerializationOfABinaryTree();
             LongestUncommonSubsequenceII();
+            MaximumProfitInJobScheduling();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -7451,7 +7452,7 @@ namespace InterviewProblemNSolutions
             // Tushar Roy https://youtu.be/ih2OZ9-M3OM
             // https://leetcode.com/problems/interleaving-string/
             Utility.Print("97. Interleaving String");
-            string[]    s1 = { "aab", "aabcc", "aabcc", "", "" },
+            string[] s1 = { "aab", "aabcc", "aabcc", "", "" },
                         s2 = { "axy", "dbbca", "dbbca", "", "" },
                         s3 = { "aaxaby", "aadbbcbcac", "aadbbbaccc", "", "a" };
             for (int i = 0; i < s1.Length; i++)
@@ -7723,9 +7724,9 @@ namespace InterviewProblemNSolutions
                                                 new int[] { 11, 17, 18, 19, 20 },
                                                 new int[] { 10, 9, 8, 7, 6 } },
                                 new int[][] {   new int[] {26,99,80,1,89,86,54,90,47,87},
-                                                new int[] {9,59,61,49,14,55,77,3,83,79}, 
-                                                new int[] {42,22,15,5,95,38,74,12,92,71}, 
-                                                new int[] {58,40,64,62,24,85,30,6,96,52}, 
+                                                new int[] {9,59,61,49,14,55,77,3,83,79},
+                                                new int[] {42,22,15,5,95,38,74,12,92,71},
+                                                new int[] {58,40,64,62,24,85,30,6,96,52},
                                                 new int[] {10,70,57,19,44,27,98,16,25,65},
                                                 new int[] {13,0,76,32,29,45,28,69,53,41},
                                                 new int[] {18,8,21,67,46,36,56,50,51,72},
@@ -7737,7 +7738,7 @@ namespace InterviewProblemNSolutions
                                                 new int[] {99,46,45,86,96,91,42,38,97,0},
                                                 new int[] {21,78,79,62,35,2,48,81,89,80},
                                                 new int[] {13,22,53,12,34,75,36,18,88,23},
-                                                new int[] {95,9,59,84,72,25,74,65,83,4}, 
+                                                new int[] {95,9,59,84,72,25,74,65,83,4},
                                                 new int[] {43,47,58,30,3,31,57,69,28,92},
                                                 new int[] {6,7,94,82,54,67,61,39,33,55},
                                                 new int[] {60,15,41,68,24,56,1,76,14,64},
@@ -7757,7 +7758,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("871. Minimum Number of Refueling Stops");
             int[] target = { 1, 100, 100 }, startFuel = { 1, 1, 10 };
             int[][][] stations = { new int[][] { }, new int[][] { new int[] { 10, 100 } }, new int[][] { new int[] { 10, 60 }, new int[] { 20, 30 }, new int[] { 30, 30 }, new int[] { 60, 40 } } };
-            for(int i=0;i<target.Length;i++)
+            for (int i = 0; i < target.Length; i++)
             {
                 stations[i].Print("Stations");
                 Console.WriteLine($" Min no of refueling stops the car must make in order to reach its destination '{target[i]}'" +
@@ -7771,7 +7772,7 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/palindrome-pairs/
             Utility.Print("336. Palindrome Pairs");
             string[][] wordsArr = { new string[] { "abcd", "dcba", "lls", "s", "sssll" },
-                                    new string[] { "bat", "tab", "cat" }, 
+                                    new string[] { "bat", "tab", "cat" },
                                     new string[] { "a", "" } };
             foreach (var words in wordsArr)
             {
@@ -7820,7 +7821,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                
+
                 //// BST based approach, TLE on LeetCode for C# soln
                 //DailyProblem.CountSmaller(nums).Print(" Count of no of smaller elements to the right of nums[i]");
 
@@ -7921,7 +7922,7 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/reduce-array-size-to-the-half/
             Utility.Print("1338. Reduce Array Size to The Half");
             int[][] arrays = {  new int[] { 3, 3, 3, 3, 5, 5, 5, 2, 2, 7 },
-                                new int[] { 7, 7, 7, 7, 7, 7 }, 
+                                new int[] { 7, 7, 7, 7, 7, 7 },
                                 new int[] { 1, 9 },
                                 new int[] { 1000, 1000, 3, 7 },
                                 new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 } };
@@ -8030,7 +8031,7 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/binary-tree-pruning/
             Utility.Print("814. Binary Tree Pruning");
-            TreeNode[] treeArray = { new TreeNode(1) 
+            TreeNode[] treeArray = { new TreeNode(1)
                                         {
                                             left = new TreeNode(0)
                                                 {   left = new TreeNode(0),
@@ -8040,7 +8041,7 @@ namespace InterviewProblemNSolutions
                                     new TreeNode(1)
                                         {
                                             left = new TreeNode(1)
-                                                { 
+                                                {
                                                     left = new TreeNode(1)
                                                         {
                                                             left = new TreeNode(0)
@@ -8086,7 +8087,7 @@ namespace InterviewProblemNSolutions
                                     new string[] { "hot", "dot", "dog", "lot", "log" },
                                     new string[] { "a", "b", "c" } };
             for (int i = 0; i < beginWord.Length; i++)
-            { 
+            {
                 wordList[i].Print("List of words");
                 DailyProblem.FindLadders(beginWord[i], endWord[i], wordList[i]).Print($"Given above list of words, below are the shortest paths from '{beginWord[i]}'...'{endWord[i]}'");
                 Console.WriteLine(Utility.lineDelimeter);
@@ -8098,7 +8099,7 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/non-negative-integers-without-consecutive-ones/
             Utility.Print("600. Non-negative Integers without Consecutive Ones");
             int[] arr = { 5, 1, 2, 4568, 7897265, 1000000000 };
-            foreach(var n in arr)
+            foreach (var n in arr)
                 Console.WriteLine($" No of the integers in the range [0, {n}] whose binary representations do not contain consecutive ones: '{DailyProblem.FindIntegersWithoutConsecutiveOnes(n)}'");
         }
 
@@ -8130,7 +8131,7 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/beautiful-array/
             Utility.Print("932. Beautiful Array");
             int[] nArr = { 1, 7, 2, 3, 4 };    // For every i < j, there is no k with i < k < j such that nums[k] * 2 = nums[i] + nums[j].
-            
+
             var cache = new Dictionary<int, int[]>();
             cache[1] = new int[1] { 1 };
             int biggestBeautifulSeen = 1;
@@ -8249,6 +8250,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void P1()
+        {
+            // 5220. Maximum Product of the Length of Two Palindromic Substrings
+            char[][][] board = new char[][][]   {
+                                                new char[][] { new char[] { '.', '.', '.', 'B', '.', '.', '.', '.' }, new char[] { '.', '.', '.', 'W', '.', '.', '.', '.' }, new char[] { '.', '.', '.', 'W', '.', '.', '.', '.' }, new char[] { '.', '.', '.', 'W', '.', '.', '.', '.' }, new char[] { 'W', 'B', 'B', '.', 'W', 'W', 'W', 'B' }, new char[] { '.', '.', '.', 'B', '.', '.', '.', '.' }, new char[] { '.', '.', '.', 'B', '.', '.', '.', '.' }, new char[] { '.', '.', '.', 'W', '.', '.', '.', '.' } },
+                                                new char[][] { new char[] { '.', '.', '.', '.', '.', '.', '.', '.' }, new char[] { '.', 'B', '.', '.', 'W', '.', '.', '.' }, new char[] { '.', '.', 'W', '.', '.', '.', '.', '.' }, new char[] { '.', '.', '.', 'W', 'B', '.', '.', '.' }, new char[] { '.', '.', '.', '.', '.', '.', '.', '.' }, new char[] { '.', '.', '.', '.', 'B', 'W', '.', '.' }, new char[] { '.', '.', '.', '.', '.', '.', 'W', '.' }, new char[] { '.', '.', '.', '.', '.', '.', '.', 'B' } },
+                                                new char[][] { new char[] {'W','W','.','B','.','B','B','.'}, new char[] {'W','B','.','.','W','B','.','.'}, new char[] {'B','B','B','B','W','W','B','.'}, new char[] {'W','B','.','.','B','B','B','.'}, new char[] {'W','W','B','.','W','.','B','B'}, new char[] {'B','.','B','W','.','B','.','.'}, new char[] {'.','B','B','W','B','B','.','.'}, new char[] {'B','B','W','.','.','B','.','.'} }
+                                                };
+            int[] rMove = { 4, 4, 4 }, cMove = { 3, 4, 3 };
+            char[] color = { 'B', 'W', 'B' };
+            for (int i = 0; i < board.Length; i++)
+            {
+                board[i].Print("Board");
+                Console.WriteLine($" Move is Valid => '{DailyProblem.CheckMove(board[i], rMove[i], cMove[i], color[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
         public static void RankTransformOfAMatrix()
@@ -8318,6 +8336,22 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void MaximumProfitInJobScheduling()
+        {
+            // https://leetcode.com/problems/maximum-profit-in-job-scheduling/
+            Utility.Print("1235. Maximum Profit in Job Scheduling");
+            int[][] startTime = new int[][] { new int[] { 1, 2, 3, 3 }, new int[] { 1, 2, 3, 4, 6 }, new int[] { 1, 1, 1 } }, 
+                    endTime = new int[][] { new int[] { 3, 4, 5, 6 }, new int[] { 3, 5, 10, 6, 9 }, new int[] { 2, 3, 4 } },
+                    profit = new int[][] { new int[] { 50, 10, 40, 70 }, new int[] { 20, 20, 100, 70, 60 }, new int[] { 5, 6, 4 } };
+            for (int i = 0; i < startTime.Length; i++)
+            {
+                startTime[i].Print("Start-Time");
+                endTime[i].Print("End-Time");
+                profit[i].Print("Profit");
+                Console.WriteLine($" Max profit we can get from above jobs is: '{DynamicProgramming.JobScheduling(startTime[i], endTime[i], profit[i])}'\n");
+            }
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
