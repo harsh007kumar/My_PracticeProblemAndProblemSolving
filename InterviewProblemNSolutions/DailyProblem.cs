@@ -17976,6 +17976,21 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Larry https://youtu.be/HY1uys6hS_Y
+        // Time O(Sqrt(c)) Space O(1)
+        public static bool JudgeSquareSum(int c)
+        {
+            long a = 0;
+            while (2 * a * a <= c)
+            {
+                int b = (int)(Math.Sqrt(c - (a * a)));
+                if ((b * b) + (a * a) == c) return true;
+                a++;
+            }
+            return false;
+        }
+
+
 
     }
 }

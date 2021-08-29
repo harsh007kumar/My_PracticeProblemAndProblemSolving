@@ -512,6 +512,7 @@ namespace InterviewProblemNSolutions
             LongestUncommonSubsequenceII();
             MaximumProfitInJobScheduling();
             PatchingArray();
+            SumOfSquareNumbers();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8366,6 +8367,16 @@ namespace InterviewProblemNSolutions
                 nums[i].Print("Input");
                 Console.WriteLine($" minimum number of patches required to make up all numbers upto '{target[i]}' are: '{DynamicProgramming.MinPatches(nums[i], target[i])}'\n");
             }
+        }
+
+
+        public static void SumOfSquareNumbers()
+        {
+            // https://leetcode.com/problems/sum-of-square-numbers/
+            Utility.Print("633. Sum of Square Numbers");
+            int[] cArr = { 5, 3, 4, 2, 1, int.MaxValue, 20000000 };
+            foreach (var c in cArr)
+                Console.WriteLine($" Given non-negative integer {c}, there're two integers a & b such that a^2 + b^2 = c '{DailyProblem.JudgeSquareSum(c)}'");
         }
 
 
