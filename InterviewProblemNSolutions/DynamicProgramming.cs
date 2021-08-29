@@ -2378,5 +2378,31 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Larry https://youtu.be/SPBXNJKLWr4
+        // Time O(N+logT) Space O(1), n = length of 'nums' & T = target value
+        public static int MinPatches(int[] nums, int target)
+        {
+            long max = 0; int count = 0;
+            foreach (var n in nums)
+            {
+                while (n > max + 1)                 // O(LogT)
+                {
+                    max += max + 1;     // add no which is 1 greater than last max number we can create till now
+                    count++;            // increament count as we just added a new number
+                    if (target < max)
+                        return count;
+                }
+                max += n;               // add num present in array to max to get next point till where we can create numbers
+                if (target < max)
+                    return count;
+            }
+            while (target > max)                    // O(LogT)
+            {
+                max += max + 1;
+                count++;
+            }
+            return count;
+        }
+
     }
 }

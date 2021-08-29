@@ -511,6 +511,7 @@ namespace InterviewProblemNSolutions
             VerifyPreorderSerializationOfABinaryTree();
             LongestUncommonSubsequenceII();
             MaximumProfitInJobScheduling();
+            PatchingArray();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8353,6 +8354,20 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Max profit we can get from above jobs is: '{DynamicProgramming.JobScheduling_Faster(startTime[i], endTime[i], profit[i])}'\n");
             }
         }
+
+        public static void PatchingArray()
+        {
+            // https://leetcode.com/problems/patching-array/
+            Utility.Print("330. Patching Array");
+            int[][] nums = { new int[] { 1, 3 }, new int[] { 1, 5, 10 }, new int[] { 1, 2, 2 }, new int[] { 1, 2, 31, 33 } };
+            int[] target = { 6, 20, 5, 2147483647 };
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Input");
+                Console.WriteLine($" minimum number of patches required to make up all numbers upto '{target[i]}' are: '{DynamicProgramming.MinPatches(nums[i], target[i])}'\n");
+            }
+        }
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
