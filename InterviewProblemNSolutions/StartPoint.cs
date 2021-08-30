@@ -513,6 +513,7 @@ namespace InterviewProblemNSolutions
             MaximumProfitInJobScheduling();
             PatchingArray();
             SumOfSquareNumbers();
+            RangeAdditionII();
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8377,6 +8378,21 @@ namespace InterviewProblemNSolutions
             int[] cArr = { 5, 3, 4, 2, 1, int.MaxValue, 20000000 };
             foreach (var c in cArr)
                 Console.WriteLine($" Given non-negative integer {c}, there're two integers a & b such that a^2 + b^2 = c '{DailyProblem.JudgeSquareSum(c)}'");
+        }
+
+
+        public static void RangeAdditionII()
+        {
+            // https://leetcode.com/problems/range-addition-ii/
+            Utility.Print("598. Range Addition II");
+            int[][][] ops = {  new int[][] { new int[] { 2, 2 }, new int[] { 3, 3 } },
+                                    new int[][] { new int[] { 2, 2 }, new int[] { 3, 3 }, new int[] { 3, 3 }, new int[] { 3, 3 }, new int[] { 2, 2 }, new int[] { 3, 3 }, new int[] { 3, 3 }, new int[] { 3, 3 }, new int[] { 2, 2 }, new int[] { 3, 3 }, new int[] { 3, 3 }, new int[] { 3, 3 } } };
+            int[] m = { 3, 3, 3 }, n = { 3, 3, 3 };
+            for (int i = 0; i < ops.Length; i++)
+            {
+                ops[i].Print("Operations to be performed in {m[i]}x{n[i]} Mattrix");
+                Console.WriteLine($" number of maximum integers in the matrix after performing all the operations is: '{DailyProblem.RangeAdditionII(m[i], n[i], ops[i])}'\n");
+            }
         }
 
 

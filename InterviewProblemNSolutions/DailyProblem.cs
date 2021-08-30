@@ -17991,6 +17991,19 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n) Space O(1), n = length of 'ops'
+        public static int RangeAdditionII(int rBoundry, int cBoundry, int[][] ops)
+        {
+            foreach (var op in ops)  // O(n)
+            {
+                rBoundry = Math.Min(rBoundry, op[0]);
+                cBoundry = Math.Min(cBoundry, op[1]);
+            }
+            return rBoundry * cBoundry;
+        }
+
+
+
 
     }
 }
