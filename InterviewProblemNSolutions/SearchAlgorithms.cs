@@ -508,5 +508,42 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Frequency of {input[i] % len + 1} : {input[input[i] % len] / len} ");
 
         }
+
+
+        // Time O(logn) Space O(1), n = len of 'nums'
+        public static int MinInRotatedSortedArray(int[] nums)
+        {
+            int l = 0, r = nums.Length - 1, m;
+            while (l < r)
+            {
+                m = l + (r - l) / 2;
+                if (nums[l] < nums[r])
+                    break;
+                else if (nums[m] >= nums[l])
+                    l = m + 1;
+                else
+                    r = m;
+            }
+            return nums[l];
+        }
+        /* CLEAN ALTERNATE
+        public static int MinInRotatedSortedArray(int[] nums)
+        {
+            int l =0,r = nums.Length-1;
+
+            while(l<r)
+            {
+                if(nums[l]<nums[r])
+                    return nums[l];
+
+                int m =(l+r)/2;
+                if(nums[m]>nums[r])
+                    l = m+1;
+                else
+                    r = m;
+            }
+            return nums[l];
+        }
+        */
     }
 }

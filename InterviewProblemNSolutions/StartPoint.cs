@@ -514,6 +514,9 @@ namespace InterviewProblemNSolutions
             PatchingArray();
             SumOfSquareNumbers();
             RangeAdditionII();
+            FindMinimumInRotatedSortedArray();
+
+
 
             // String Matching Algorithm
             BruteForceWay();
@@ -8392,6 +8395,19 @@ namespace InterviewProblemNSolutions
             {
                 ops[i].Print("Operations to be performed in {m[i]}x{n[i]} Mattrix");
                 Console.WriteLine($" number of maximum integers in the matrix after performing all the operations is: '{DailyProblem.RangeAdditionII(m[i], n[i], ops[i])}'\n");
+            }
+        }
+
+
+        public static void FindMinimumInRotatedSortedArray()
+        {
+            // https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+            Utility.Print("153. Find Minimum in Rotated Sorted Array");
+            int[][] numsArr = { new int[] { 3, 4, 5, 1, 2 }, new int[] { 4, 5, 6, 7, 0, 1, 2 }, new int[] { 11, 13, 15, 17 }, new int[] { 2, 1 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Nums");
+                Console.WriteLine($" Smallest number in above rotated array is: '{SearchAlgorithms.MinInRotatedSortedArray(nums)}'\n");
             }
         }
 
