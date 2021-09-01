@@ -18003,6 +18003,38 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = O(n) Space O(1), n = len of 'nums'
+        public static int ArrayNesting(int[] nums)
+        {
+            int max = 1, curMax, val, nVal;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                //curMax = -1;
+                //val = i;
+                //while (val >= 0)
+                //{
+                //    nVal = nums[val];
+                //    nums[val] = -1;
+                //    if (val == nVal) break;
+                //    val = nVal;
+                //    curMax++;
+                //}
+                //max = Math.Max(max, curMax);
+                //if (max > nums.Length / 2) break;       // Optimization
+                curMax = 0;
+                val = i;
+                while (nums[val] >= 0)
+                {
+                    nVal = nums[val];
+                    nums[val] = -1;               // mark Visited
+                    val = nVal;
+                    curMax++;
+                }
+                if ((max = Math.Max(max, curMax)) > nums.Length / 2)  // Optimization
+                    break;
+            }
+            return max;
+        }
 
 
     }

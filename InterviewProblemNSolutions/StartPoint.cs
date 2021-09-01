@@ -515,6 +515,7 @@ namespace InterviewProblemNSolutions
             SumOfSquareNumbers();
             RangeAdditionII();
             FindMinimumInRotatedSortedArray();
+            ArrayNesting();
 
 
 
@@ -8408,6 +8409,19 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 Console.WriteLine($" Smallest number in above rotated array is: '{SearchAlgorithms.MinInRotatedSortedArray(nums)}'\n");
+            }
+        }
+
+
+        public static void ArrayNesting()
+        {
+            // https://leetcode.com/problems/array-nesting/
+            Utility.Print("565. Array Nesting");
+            int[][] arrays = { new int[] { 5, 4, 0, 3, 1, 6, 2 }, new int[] { 0, 1, 2 }, new int[] { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 } };
+            foreach (var arr in arrays)
+            {
+                arr.Print("Input");
+                Console.WriteLine($" longest length of a set s[k] is: '{DailyProblem.ArrayNesting(arr)}'\n");
             }
         }
 
