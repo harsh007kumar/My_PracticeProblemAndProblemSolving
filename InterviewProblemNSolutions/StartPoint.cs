@@ -516,6 +516,7 @@ namespace InterviewProblemNSolutions
             RangeAdditionII();
             FindMinimumInRotatedSortedArray();
             ArrayNesting();
+            UniqueBinarySearchTreesII();
 
 
 
@@ -8422,6 +8423,19 @@ namespace InterviewProblemNSolutions
             {
                 arr.Print("Input");
                 Console.WriteLine($" longest length of a set s[k] is: '{DailyProblem.ArrayNesting(arr)}'\n");
+            }
+        }
+
+
+        public static void UniqueBinarySearchTreesII()
+        {
+            // https://leetcode.com/problems/unique-binary-search-trees-ii/
+            Utility.Print("95. Unique Binary Search Trees II");
+            for (int n = 1; n <= 8; n++)
+            {
+                Console.WriteLine($"\n For Catalan no {n}, below are all the structurally unique BST's, which has exactly {n} nodes of unique values from 1 to {n}");
+                foreach (var validBST in DailyProblem.GenerateTrees(n))
+                    validBST.InOrder("BST");
             }
         }
 

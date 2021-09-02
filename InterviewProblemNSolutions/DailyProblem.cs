@@ -18037,5 +18037,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Coding Decoded https://youtu.be/mhCJgZWJlSI
+        public static IList<TreeNode> GenerateTrees(int n) => GetBST(1, n);
+        public static IList<TreeNode> GetBST(int start, int last)
+        {
+            var combinations = new List<TreeNode>();
+            if (start > last)
+                combinations.Add(null);
+            else if (start == last)
+                combinations.Add(new TreeNode(start));
+            else// if(start<last)
+                for (int r = start; r <= last; r++)
+                    foreach (var ltBST in GetBST(start, r - 1))
+                        foreach (var rtBST in GetBST(r + 1, last))
+                            combinations.Add(new TreeNode(r) { left = ltBST, right = rtBST });
+            return combinations;
+        }
+
+
     }
 }
