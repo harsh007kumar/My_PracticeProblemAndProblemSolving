@@ -517,6 +517,7 @@ namespace InterviewProblemNSolutions
             FindMinimumInRotatedSortedArray();
             ArrayNesting();
             UniqueBinarySearchTreesII();
+            LargestPlusSign();
 
 
 
@@ -8436,6 +8437,20 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"\n For Catalan no {n}, below are all the structurally unique BST's, which has exactly {n} nodes of unique values from 1 to {n}");
                 foreach (var validBST in DailyProblem.GenerateTrees(n))
                     validBST.InOrder("BST");
+            }
+        }
+
+
+        public static void LargestPlusSign()
+        {
+            // https://leetcode.com/problems/largest-plus-sign/
+            Utility.Print("764. Largest Plus Sign");
+            int[] n = { 5, 1, 3 };
+            int[][][] mines = { new int[][] { new int[] { 4, 2 } }, new int[][] { new int[] { 0, 0 } }, new int[][] { new int[] { 0, 1 } } };
+            for (int i = 0; i < n.Length; i++)
+            {
+                mines[i].Print("Mines");
+                Console.WriteLine($" In a Grid of {n[i]}x{n[i]} the order of the largest plus sign is: '{DynamicProgramming.OrderOfLargestPlusSign(n[i], mines[i])}'\n");
             }
         }
 

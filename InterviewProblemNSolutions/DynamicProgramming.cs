@@ -2404,5 +2404,41 @@ namespace InterviewProblemNSolutions
             return count;
         }
 
+
+        // Time = Space = O(n^2)
+        public static int OrderOfLargestPlusSign(int n, int[][] mines)
+        {
+            /* create a 2D array dp which will save the max no of 1's on left and from top
+                calculate this for each cell, the ans is (Min(left,rt)+1)/2
+            */
+            int[,] lt = new int[n, n], top = new int[n, n], rt = new int[n, n], bo = new int[n, n];
+            foreach (var mine in mines)
+                lt[mine[0], mine[1]] = rt[mine[0], mine[1]] = int.MaxValue;
+
+            int largestPlus = 0;
+            // top to bottom + left to right
+            for (int r = n - 1; r >= 0; r--)
+                for (int c = n - 1; c >= 0; c--)
+                    if (rt[r, c] == int.MaxValue)
+                        rt[r, c] = bo[r, c] = 0;
+                    else
+                    {
+                        rt[r, c] = 1 + (c < n - 1 ? rt[r, c + 1] : 0);
+                        bo[r, c] = 1 + (r < n - 1 ? bo[r + 1, c] : 0);
+                    }
+
+            // top to bottom + left to right
+            for (int r = 0; r < n; r++)
+                for (int c = 0; c < n; c++)
+                    if (lt[r, c] == int.MaxValue)
+                        lt[r, c] = top[r, c] = 0;
+                    else
+                    {
+                        lt[r, c] = 1 + (c - 1 >= 0 ? lt[r, c - 1] : 0);
+                        top[r, c] = 1 + (r - 1 >= 0 ? top[r - 1, c] : 0);
+                        largestPlus = Math.Max(largestPlus, Math.Min(lt[r, c], Math.Min(top[r, c], Math.Min(rt[r, c], bo[r, c]))));
+                    }
+            return largestPlus;
+        }
     }
 }
