@@ -2440,5 +2440,74 @@ namespace InterviewProblemNSolutions
                     }
             return largestPlus;
         }
+
+
+        // Time O(n^3) Space O(n)
+        public static int NumberOfArithmeticSlices_Recursive(int[] nums)
+        {
+            int count = 0, l = nums.Length;
+            Get(0, 0, 0, 0);
+            return count;
+            // local helper func
+            void Get(int idx, int numsFound, long num1, long num2)
+            {
+                if (idx >= l) return;
+                else
+                {
+                    for (int i = idx; i < l; i++)
+                    {
+                        if (numsFound == 0)
+                            Get(i + 1, numsFound + 1, nums[i], num2);
+                        else if (numsFound == 1)
+                            Get(i + 1, numsFound + 1, num1, nums[i]);
+                        else if (nums[i] - num2 == num2 - num1)   // same diff
+                        {
+                            count++;
+                            Get(i + 1, numsFound + 1, num2, nums[i]);
+                        }
+                    }
+                }
+            }
+        }
+        // Time O(n^2) Space O(n)
+        public static int NumberOfArithmeticSlices_DP(int[] nums)
+        {
+            int l = nums.Length;
+
+            Dictionary<long, int>[] cache = new Dictionary<long, int>[l];
+            for (int i = 0; i < l; i++) cache[i] = new Dictionary<long, int>();
+
+            return Get(0, 0, 0, 0);
+
+            // local helper func
+            int Get(int idx, int numsFound, long num1, long num2)
+            {
+                if (idx >= l)
+                    return 0;
+                else
+                {
+                    int count = 0;
+                    for (int i = idx; i < l; i++)
+                    {
+                        if (numsFound == 0)
+                            count+= Get(i + 1, numsFound + 1, nums[i], num2);
+                        else if (numsFound == 1)
+                            count+= Get(i + 1, numsFound + 1, num1, nums[i]);
+                        else if (nums[i] - num2 == num2 - num1)   // same diff
+                        {
+                            // if seen same diff at current idx return
+                            if (cache[i].ContainsKey(num2 - num1))
+                                count += cache[i][num2 - num1];
+                            else // else calculate count for current diff and save it in Dictionary at current index
+                                count += (cache[i][num2 - num1] = 1 + Get(i + 1, numsFound + 1, num2, nums[i]));
+                        }
+                    }
+                    return count;
+                }
+            }
+        }
+
+
+
     }
 }

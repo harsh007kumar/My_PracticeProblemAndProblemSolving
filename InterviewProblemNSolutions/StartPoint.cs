@@ -518,6 +518,7 @@ namespace InterviewProblemNSolutions
             ArrayNesting();
             UniqueBinarySearchTreesII();
             LargestPlusSign();
+            ArithmeticSlicesIISubsequence();
 
 
 
@@ -8451,6 +8452,25 @@ namespace InterviewProblemNSolutions
             {
                 mines[i].Print("Mines");
                 Console.WriteLine($" In a Grid of {n[i]}x{n[i]} the order of the largest plus sign is: '{DynamicProgramming.OrderOfLargestPlusSign(n[i], mines[i])}'\n");
+            }
+        }
+
+
+        public static void ArithmeticSlicesIISubsequence()
+        {
+            // https://leetcode.com/problems/arithmetic-slices-ii-subsequence/
+            Utility.Print("446. Arithmetic Slices II - Subsequence");
+            int[][] numsArr = { new int[] { 2, 4, 6, 8, 10 },
+                                new int[] { 7, 7, 7, 7, 7 },
+                                new int[] { 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7 },
+                                new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+                                new int[] { 79,20,64,28,67,81,60,58,97,85,92,96,82,89,46,50,15,2,36,44,54,2,90,37,7,79,26,40,34,67,64,28,60,89,46,31,9,95,43,19,47,64,48,95,80,31,47,19,72,99,28,46,13,9,64,4,68,74,50,28,69,94,93,3,80,78,23,80,43,49,77,18,68,28,13,61,34,44,80,70,55,85,0,37,93,40,47,47,45,23,26,74,45,67,34,20,33,71,48,96 },
+                                new int[] { 0,2000000000,-294967296} };
+            foreach (var nums in numsArr)
+            {
+                nums.Print(nameof(nums));
+                // Console.WriteLine($" No of all the arithmetic subsequences of nums(len>2) are: '{DynamicProgramming.NumberOfArithmeticSlices_Recursive(nums)}'\n");
+                Console.WriteLine($" No of all the arithmetic subsequences of nums(len>2) are: '{DynamicProgramming.NumberOfArithmeticSlices_DP(nums)}'\n");
             }
         }
 
