@@ -18055,5 +18055,19 @@ namespace InterviewProblemNSolutions
         }
 
 
+
+
+        // Time O(n) Space O(1), n = len of 'text'
+        public static int MaxNumberOfBalloons(string text)
+        {
+            int[] charSet = new int[26];
+            for (int i = 0; i < text.Length; i++)
+                charSet[text[i] - 'a']++;
+
+            // B A L-2 O-2 N, we take the min of all characters required to make 1 'ballon'
+            return Math.Min(charSet['b' - 'a'], Math.Min(charSet['a' - 'a'], Math.Min(charSet['l' - 'a'] / 2, Math.Min(charSet['o' - 'a'] / 2, charSet['n' - 'a']))));
+        }
+
+
     }
 }

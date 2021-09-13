@@ -519,6 +519,8 @@ namespace InterviewProblemNSolutions
             UniqueBinarySearchTreesII();
             LargestPlusSign();
             ArithmeticSlicesIISubsequence();
+            ReachableNodesInSubdividedGraph();
+            MaximumNumberOfBalloons();
 
 
 
@@ -8472,6 +8474,18 @@ namespace InterviewProblemNSolutions
                 // Console.WriteLine($" No of all the arithmetic subsequences of nums(len>2) are: '{DynamicProgramming.NumberOfArithmeticSlices_Recursive(nums)}'\n");
                 Console.WriteLine($" No of all the arithmetic subsequences of nums(len>2) are: '{DynamicProgramming.NumberOfArithmeticSlices_DP(nums)}'\n");
             }
+        }
+
+
+
+
+        public static void MaximumNumberOfBalloons()
+        {
+            // https://leetcode.com/problems/maximum-number-of-balloons/
+            Utility.Print("1189. Maximum Number of Balloons");
+            string[] texts = { "nlaebolko", "loonbalxballpoon", "leetcode", "balloonballo" };
+            foreach (var text in texts)
+                Console.WriteLine($" No of 'balloon' we can make from characters in '{text}' are: '{DailyProblem.MaxNumberOfBalloons(text)}'\n");
         }
 
 
