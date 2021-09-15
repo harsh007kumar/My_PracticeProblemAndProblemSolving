@@ -18055,6 +18055,54 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = O(m+n) Space = O(n), n = no of Verticies, m = length of 'edges'
+        public static int ReachableNodes(int[][] edges, int maxMoves, int n)
+        {
+            // create the graph
+            Dictionary<int, int>[] g = new Dictionary<int, int>[n];
+            for (int i = 0; i < n; i++) g[i] = new Dictionary<int, int>();
+
+            int u, v, cnt;
+            foreach (var edge in edges)      // O(m)
+            {
+                u = edge[0];
+                v = edge[1];
+                cnt = edge[2];
+                // u->v
+                g[u][v] = cnt;
+                // v->u
+                g[v][u] = cnt;
+            }
+
+            int reachableNodes = 0;
+            bool[] visited = new bool[n];
+            Get(0, maxMoves);                // O(Min(n,maxMoves))
+
+            return reachableNodes;
+            // local helper func, DFS tarversal
+            void Get(int currNode, int moveLeft)
+            {
+                if (moveLeft < 0 || visited[currNode]) return;  // no more moves left or already visited node
+                reachableNodes++;           // since current node is reachable
+                visited[currNode] = true;   // mark visited
+                
+                List<int> connectedNodes = g[currNode].Keys.ToList();   // creating another collection as editing Dictionary while iterating is not allowed
+                foreach (var adjNode in connectedNodes)
+                {
+                    // get count of no of nodes reachable b/w curr and adjacent nodes excluding both
+                    reachableNodes += Math.Min(moveLeft, g[currNode][adjNode]);
+                    
+                    // remove same amt of nodes from adjacent to avoid counting same in b/w nodes twice
+                    g[adjNode][currNode] -= Math.Min(moveLeft, g[currNode][adjNode]);
+
+                    // only continue DFS further if adjacent is not visited yet
+                    if (visited[adjNode]) continue;
+
+                    // further check nodes reachable from Adjacent Node
+                    Get(adjNode, -1 + moveLeft - g[currNode][adjNode]);
+                }
+            }
+        }
 
 
         // Time O(n) Space O(1), n = len of 'text'
@@ -18066,6 +18114,39 @@ namespace InterviewProblemNSolutions
 
             // B A L-2 O-2 N, we take the min of all characters required to make 1 'ballon'
             return Math.Min(charSet['b' - 'a'], Math.Min(charSet['a' - 'a'], Math.Min(charSet['l' - 'a'] / 2, Math.Min(charSet['o' - 'a'] / 2, charSet['n' - 'a']))));
+        }
+
+
+        // Time O(n) Space O(1), n = length of 'A'
+        public static int MaxTurbulenceSize(int[] A)
+        {
+            int maxTurbulent = 1, i = -1, currMax = 1;
+            bool lookingForGreater = true;
+            while (++i < A.Length - 1)
+            {
+                if (lookingForGreater)
+                {
+                    if (A[i] > A[i + 1])
+                    {
+                        currMax++;
+                        lookingForGreater = !lookingForGreater;
+                    }
+                    else
+                        currMax = A[i] != A[i + 1] ? 2 : 1;
+                }
+                else // !lookingForGreater
+                {
+                    if (A[i] < A[i + 1])
+                    {
+                        currMax++;
+                        lookingForGreater = !lookingForGreater;
+                    }
+                    else
+                        currMax = A[i] != A[i + 1] ? 2 : 1;
+                }
+                maxTurbulent = Math.Max(maxTurbulent, currMax);
+            }
+            return maxTurbulent;
         }
 
 

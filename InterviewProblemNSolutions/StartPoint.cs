@@ -521,6 +521,7 @@ namespace InterviewProblemNSolutions
             ArithmeticSlicesIISubsequence();
             ReachableNodesInSubdividedGraph();
             MaximumNumberOfBalloons();
+            LongestTurbulentSubarray();
 
 
 
@@ -8477,6 +8478,22 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void ReachableNodesInSubdividedGraph()
+        {
+            // https://leetcode.com/problems/reachable-nodes-in-subdivided-graph/
+            Utility.Print("882. Reachable Nodes In Subdivided Graph");
+            int[][][] edges = { new int[][] { new int[] { 0, 1, 10 }, new int[] { 0, 2, 1 }, new int[] { 1, 2, 2 } },
+                                new int[][] { new int[] { 0, 1, 4 }, new int[] { 1, 2, 6 }, new int[] { 0, 2, 8 }, new int[] { 1, 3, 1 } },
+                                new int[][] { new int[] { 1, 2, 4 }, new int[] { 1, 4, 5 }, new int[] { 1, 3, 1 }, new int[] { 2, 3, 4 }, new int[] { 3, 4, 5 } },
+                                new int[][] { new int[] { 2, 4, 2 }, new int[] { 3, 4, 5 }, new int[] { 2, 3, 1 }, new int[] { 0, 2, 1 }, new int[] { 0, 3, 5 } } ,
+                                new int[][] { new int[] { 0, 2, 3 }, new int[] { 0, 4, 4 }, new int[] { 2, 3, 8 }, new int[] { 1, 3, 5 }, new int[] { 0, 3, 9 }, new int[] { 3, 4, 6 }, new int[] { 0, 1, 5 }, new int[] { 2, 4, 6 }, new int[] { 1, 2, 3 }, new int[] { 1, 4, 1 } } };
+            int[] maxMoves = { 6, 10, 17, 14, 8 }, n = { 3, 4, 5, 5, 5 };
+            for (int i = 0; i < edges.Length; i++)
+            {
+                edges[i].Print("Edges");
+                Console.WriteLine($" No of nodes that are reachable from node '0' in the new graph with maxMoves '{maxMoves[i]}' are: '{DailyProblem.ReachableNodes(edges[i], maxMoves[i], n[i])}'\n");
+            }
+        }
 
 
         public static void MaximumNumberOfBalloons()
@@ -8486,6 +8503,19 @@ namespace InterviewProblemNSolutions
             string[] texts = { "nlaebolko", "loonbalxballpoon", "leetcode", "balloonballo" };
             foreach (var text in texts)
                 Console.WriteLine($" No of 'balloon' we can make from characters in '{text}' are: '{DailyProblem.MaxNumberOfBalloons(text)}'\n");
+        }
+
+
+        public static void LongestTurbulentSubarray()
+        {
+            // https://leetcode.com/problems/longest-turbulent-subarray/
+            Utility.Print("978. Longest Turbulent Subarray");
+            int[][] arrays = { new int[] { 9, 4, 2, 10, 7, 8, 8, 1, 9 }, new int[] { 4, 8, 12, 16 }, new int[] { 100 }, new int[] { 100, 1 }, new int[] { 100, 1, 2 }, new int[] { 9, 9 } };
+            foreach (var array in arrays)
+            {
+                array.Print("Input array");
+                Console.WriteLine($" Length of a maximum size turbulent subarray in above arr is: '{DailyProblem.MaxTurbulenceSize(array)}'\n");
+            }
         }
 
 
