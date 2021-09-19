@@ -1027,6 +1027,27 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(2^n) Space O(1), n = length of 's'
+        public static int NumDistinctSubsequences_Recursive(string s, string t)
+        {
+            int count = 0;
+            GetSequences(0, 0);
+            return count;
+            // local helper func
+            void GetSequences(int idxS, int idxT)
+            {
+                if (idxT == t.Length)
+                    count++;
+                else
+                    while (idxS < s.Length)
+                    {
+                        if (s[idxS] == t[idxT])    // req character from 't' match
+                            GetSequences(idxS + 1, idxT + 1);
+                        idxS++;
+                    }
+            }
+        }
+
 
     }
 }
