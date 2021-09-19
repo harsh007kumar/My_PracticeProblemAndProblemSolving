@@ -2508,6 +2508,38 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // https://youtu.be/9yV6Elqvblw
+        // Time = Space = O(n*m), n,m = length of 's' & 't' respectively
+        public static int NumDistinctSubsequences_DP(string s, string t)
+        {
+            int[,] dp = new int[t.Length + 1, s.Length + 1];
+            for (int idxT = 0; idxT <= t.Length; idxT++)
+                for (int idxS = 0; idxS <= s.Length; idxS++)
+                    if (idxT == 0)
+                        dp[idxT, idxS] = 1; // empty string 't' can atleast be found once in 's'
+                    else if (idxS == 0)
+                        dp[idxT, idxS] = 0; // empty string 's' of len=0 cannot have any subsequnce of 't' with tLen >= 1
+                    else// at each point we have one definate choice to not to take the current character from 's'
+                        // & we have extra option when both characters match from 's' & 't' match
+                        dp[idxT, idxS] = dp[idxT, idxS - 1] + (t[idxT - 1] == s[idxS - 1] ? dp[idxT - 1, idxS - 1] : 0);
+            return dp[t.Length, s.Length];
+
+            /* above can also be written in consive manner as below
+            int[,] dp = new int[t.Length + 1, s.Length + 1];
+            
+            // empty string 't' can atleast be found once in 's', by not selecting any character
+            for (int c = 0; c <= s.Length; c++)
+                dp[0, c] = 1;
+
+            for (int idxT = 1; idxT <= t.Length; idxT++)
+                for (int idxS = 1; idxS <= s.Length; idxS++)
+                    // at each point we have one definate choice to not to take the current character from 's'
+                    // & we have extra option when both characters match from 's' & 't' match
+                    dp[idxT, idxS] = dp[idxT, idxS - 1] + (t[idxT - 1] == s[idxS - 1] ? dp[idxT - 1, idxS - 1] : 0);
+            return dp[t.Length, s.Length];
+            */
+        }
+
 
     }
 }
