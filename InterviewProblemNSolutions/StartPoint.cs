@@ -37,7 +37,7 @@ namespace InterviewProblemNSolutions
             //ComplimentBase10();
             //SpiralMatrix();
             SpiralMatrixII();
-            //WinnerOfTicTacToe();
+            WinnerOfTicTacToe();
             //ReorderDataInLogFiles();
             //MajorityElement();
             //MajorityElementII();
@@ -1013,7 +1013,8 @@ namespace InterviewProblemNSolutions
             Utility.Print("1275. Find Winner on a Tic Tac Toe Game");
             int[][] moves = { new int[] { 0, 0 }, new int[] { 2, 0 }, new int[] { 1, 1 }, new int[] { 2, 1 }, new int[] { 2, 2 } };
             moves.Print("TicTac Moves");
-            Console.WriteLine($" Above moves result in : {DailyProblem.WinnerOfTicTacToe(moves)}");
+            //Console.WriteLine($" Above moves result in : {DailyProblem.WinnerOfTicTacToe(moves)}");
+            Console.WriteLine($" Above moves result in : {DailyProblem.WinnerOfTicTacToe_Clean(moves)}");
         }
 
         public static void ReorderDataInLogFiles()

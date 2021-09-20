@@ -892,6 +892,25 @@ namespace InterviewProblemNSolutions
 
             return moves.Length < 9 ? "Pending" : "Draw";
         }
+        // Time = Space = O(r^2) ~O(9) ~O(1), r = no of rows in tic-tak
+        public static string WinnerOfTicTacToe_Clean(int[][] moves)
+        {
+            Dictionary<char, int>[] dict = new Dictionary<char, int>[8];
+            for (int i = 0; i < dict.Length; i++)
+                dict[i] = new Dictionary<char, int>() { { 'A', 0 }, { 'B', 0 } };
+
+            for (int i = 0; i < moves.Length; i++)
+            {
+                var r = moves[i][0];
+                var c = moves[i][1];
+                var player = i % 2 == 0 ? 'A' : 'B';
+                // Mark Row                     || Mark Col                     || Mark Lt-Diag                       || Mark Rt-Diag
+                if (++dict[r][player] >= 3 || ++dict[c + 3][player] >= 3 || (r == c && ++dict[6][player] >= 3) || (r + c == 2 && ++dict[7][player] >= 3))
+                    return player + "";
+            }
+            return moves.Length == 9 ? "Draw" : "Pending";
+        }
+
 
         public static string[] ReorderDataInLogFiles(string[] logs)
         {
