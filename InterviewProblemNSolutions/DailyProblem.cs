@@ -13271,6 +13271,26 @@ namespace InterviewProblemNSolutions
 
             return sb.ToString();
         }
+        // Time = Space = O(n)
+        public static string BreakPalindrome_Clean(string palindrome)
+        {
+            // any string of length <=1 is always palindrome
+            if (palindrome.Length < 2) return "";
+
+            char[] nonPali = palindrome.ToCharArray();
+            int lt = -1, halfPoint = palindrome.Length / 2;
+            // replace the 1st non-'a' to 'a' to make the smallest string which is non-palindrome
+            while (++lt < halfPoint)
+                if (palindrome[lt] != 'a')
+                {
+                    nonPali[lt] = 'a';
+                    return new string(nonPali);
+                }
+
+            // if all the chars in the 1st half have only 'a' then replace the last char to 'b'
+            nonPali[palindrome.Length - 1] = 'b';
+            return new string(nonPali);
+        }
 
 
         // Time O(n) || Space O(1), n = length of 'text'

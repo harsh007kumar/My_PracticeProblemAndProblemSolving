@@ -6180,9 +6180,10 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/break-a-palindrome/
             Utility.Print("1328. Break a Palindrome");
-            string[] palindromes = { "abccba", "aba", "a", "aa", "zz" };
+            string[] palindromes = { "abccba", "aba", "a", "aa", "zz", "bbb", "aabaa" };
             foreach (var paldindrome in palindromes)
-                Console.WriteLine($" After breaking plaindrome '{paldindrome}' in lexographically smallest possible way resultant string is: '{DailyProblem.BreakPalindrome(paldindrome)}'\n");
+                //Console.WriteLine($" After breaking plaindrome '{paldindrome}' in lexographically smallest possible way resultant string is: '{DailyProblem.BreakPalindrome(paldindrome)}'\n");
+                Console.WriteLine($" After breaking plaindrome '{paldindrome}' in lexographically smallest possible way resultant string is: '{DailyProblem.BreakPalindrome_Clean(paldindrome)}'\n");
         }
 
 
