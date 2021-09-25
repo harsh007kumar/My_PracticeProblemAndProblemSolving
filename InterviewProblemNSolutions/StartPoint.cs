@@ -523,6 +523,7 @@ namespace InterviewProblemNSolutions
             MaximumNumberOfBalloons();
             LongestTurbulentSubarray();
             DistinctSubsequences();
+            ShortestPathInAGridwithObstaclesElimination();
 
 
 
@@ -8531,6 +8532,23 @@ namespace InterviewProblemNSolutions
             {
                 Console.WriteLine($" Given strings s:'{s[i]}' and t:'{t[i]}' the no of distinct subsequences of s which equals t are: '{StringAlgorithms.NumDistinctSubsequences_Recursive(s[i], t[i])}'\n");
                 Console.WriteLine($" Given strings s:'{s[i]}' and t:'{t[i]}' the no of distinct subsequences of s which equals t are: '{DynamicProgramming.NumDistinctSubsequences_DP(s[i], t[i])}'\n");
+            }
+        }
+
+
+        public static void ShortestPathInAGridwithObstaclesElimination()
+        {
+            // https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/
+            Utility.Print("1293. Shortest Path in a Grid with Obstacles Elimination");
+            int[][][] grid = new int[][][] {
+                                            new int[][] { new int[] { 0, 0, 0 }, new int[] { 1, 1, 0 }, new int[] { 0, 0, 0 }, new int[] { 0, 1, 1 }, new int[] { 0, 0, 0 } },
+                                            new int[][] { new int[] { 0, 1, 1 }, new int[] { 1, 1, 1 }, new int[] { 1, 0, 0 } }
+                                            };
+            int[] k = { 1, 1 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                grid[i].Print("GRID");
+                Console.WriteLine($" Shortest part from top-left to bottom right cell after removing max '{k[i]}' obstacles is: '{DailyProblem.ShortestPathWithObstaclesElimination(grid[i], k[i]) }'\n");
             }
         }
 

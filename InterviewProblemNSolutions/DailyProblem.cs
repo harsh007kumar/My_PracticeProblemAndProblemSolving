@@ -18189,5 +18189,53 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(m*n*k)
+        public static int ShortestPathWithObstaclesElimination(int[][] grid, int k)
+        {
+            Queue<int[]> q = new Queue<int[]>();
+            int m = grid.Length, n = grid[0].Length;
+            bool[,,] seen = new bool[m, n, k + 1];
+            int shortestRoute = 0, r, c, kLeft, obstacleCost, currR, currC;
+            seen[0, 0, k] = true;
+            q.Enqueue(new int[] { 0, 0, k });
+            int[][] direction = { new int[] { 0, -1 }, new int[] { -1, 0 }, new int[] { 0, 1 }, new int[] { 1, 0 } };
+            while (q.Count > 0)
+            {
+                int curQCount = q.Count;
+                while (--curQCount >= 0)
+                {
+                    var cur = q.Dequeue();
+                    r = cur[0]; c = cur[1]; kLeft = cur[2];
+                    
+                    // reached bottom-rt destination
+                    if (r == m - 1 && c == n - 1)
+                        return shortestRoute;
+
+                    foreach (var d in direction)
+                    {
+                        currR = r + d[0];
+                        currC = c + d[1];
+                        // if current cell is valid coordinate
+                        if (0 <= currR && currR < m && 0 <= currC && currC < n)
+                        {
+                            // curr cell is obstacle
+                            obstacleCost = grid[currR][currC] == 1 ? 1 : 0;
+                            
+                            // if curr cell is not seen with curr state
+                            if (kLeft - obstacleCost >= 0 && !seen[currR, currC, kLeft - obstacleCost])
+                            {
+                                q.Enqueue(new int[] { currR, currC, kLeft - obstacleCost });
+                                seen[currR, currC, kLeft - obstacleCost] = true;
+                            }
+                        }
+                    }
+                }
+                shortestRoute++;
+            }
+
+            return -1;  // no path found
+        }
+
+
     }
 }
