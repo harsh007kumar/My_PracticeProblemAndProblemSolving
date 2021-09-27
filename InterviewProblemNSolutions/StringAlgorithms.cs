@@ -1049,5 +1049,39 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n*l), n = len of emails & l = avg length of each email
+        public static int NumUniqueEmails(String[] emails)
+        {
+            Dictionary<string, HashSet<string>> uniqEmails = new Dictionary<string, HashSet<string>>();
+            for (int i = 0; i < emails.Length; i++)
+            {
+                var (localName, domainName) = ProcessEmail(emails[i]);
+                if (!uniqEmails.ContainsKey(localName))
+                    uniqEmails[localName] = new HashSet<string>() { domainName };
+                else
+                    uniqEmails[localName].Add(domainName);
+            }
+            int uniCount = 0;
+            foreach (var uniqDomain in uniqEmails.Values)
+                uniCount += uniqDomain.Count;
+            return uniCount;
+
+            // local helper func
+            (string, string) ProcessEmail(string email)
+            {
+                var eSplit = email.Split('@');  // split email into local & domain name
+
+                StringBuilder local = new StringBuilder();
+                foreach (var ch in eSplit[0])
+                    if (char.IsLetter(ch))
+                        local.Append(ch);
+                    else if (ch == '.') continue;
+                    else break;
+                
+                return (local.ToString(), eSplit[1]);
+            }
+        }
+
+
     }
 }

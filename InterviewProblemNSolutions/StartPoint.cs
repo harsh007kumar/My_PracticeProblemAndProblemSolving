@@ -524,7 +524,7 @@ namespace InterviewProblemNSolutions
             LongestTurbulentSubarray();
             DistinctSubsequences();
             ShortestPathInAGridwithObstaclesElimination();
-
+            UniqueEmailAddresses();
 
 
             // String Matching Algorithm
@@ -8549,6 +8549,21 @@ namespace InterviewProblemNSolutions
             {
                 grid[i].Print("GRID");
                 Console.WriteLine($" Shortest part from top-left to bottom right cell after removing max '{k[i]}' obstacles is: '{DailyProblem.ShortestPathWithObstaclesElimination(grid[i], k[i]) }'\n");
+            }
+        }
+
+
+        public static void UniqueEmailAddresses()
+        {
+            // https://leetcode.com/problems/unique-email-addresses/
+            Utility.Print("929. Unique Email Addresses");
+            string[][] emailsArr = {
+                                    new string[] { "test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com", "testemail+david@lee.tcode.com" },
+                                    new string[] { "a@leetcode.com", "b@leetcode.com", "c@leetcode.com" } };
+            foreach (var emails in emailsArr)
+            {
+                emails.Print("E-Mails array");
+                Console.WriteLine($" From above list number of different addresses that actually receive mails are: '{StringAlgorithms.NumUniqueEmails(emails)}'\n");
             }
         }
 
