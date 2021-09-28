@@ -769,10 +769,14 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/sort-array-by-parity-ii/
             Utility.Print("922. Sort Array By Parity II");
-            int[] input = { 4, 7, 5, 2 };
-            input.Print("Input");
-            DailyProblem.SortArrayByParityII(input);
-            input.Print("Output");
+            int[][] inputArr = { new int[] { 4, 7, 5, 2 }, new int[] { 2, 3 }, new int[] { 1, 2, 3, 4 }, new int[] { 4, 1, 1, 0, 1, 0 } };
+            foreach (var input in inputArr)
+            {
+                input.Print("Input");
+                //DailyProblem.SortArrayByParityII(input);
+                DailyProblem.SortArrayByParityII_OnePass(input);
+                input.Print("Output");
+            }
         }
 
         public static void ShortestDistanceFromAllBuildings()

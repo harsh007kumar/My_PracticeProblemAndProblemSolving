@@ -212,7 +212,7 @@ namespace InterviewProblemNSolutions
             return result;
         }
 
-        // Time O(n) || Space O(1)
+        // Time O(n) || Space O(1), 2-Pass Soln
         public static void SortArrayByParityII(int[] A)
         {
             int len = A.Length, even = 0, odd = 0;
@@ -232,6 +232,35 @@ namespace InterviewProblemNSolutions
                 even += 2;
                 odd -= 2;
             }
+        }
+        // Time O(n) Space O(1) 1-Pass Soln
+        public static void SortArrayByParityII_OnePass(int[] nums)
+        {
+            int i = 0, odd = nums.Length - 1, even = nums.Length - 2;
+            // swap no from the end if no is not present at its proper index i.e. Even not at even & odd not present at odd idx
+            while (!(i > odd || i > even))   // while(i<nums.Length)
+                if (i % 2 == 0)    // even index
+                {
+                    if (nums[i] % 2 == 1)    // odd no
+                    {
+                        var temp = nums[odd];
+                        nums[odd] = nums[i];
+                        nums[i] = temp;
+                        odd -= 2;
+                    }
+                    else i++;
+                }
+                else        // odd index
+                {
+                    if (nums[i] % 2 == 0)    // even no
+                    {
+                        var temp = nums[even];
+                        nums[even] = nums[i];
+                        nums[i] = temp;
+                        even -= 2;
+                    }
+                    else i++;
+                }
         }
 
 
