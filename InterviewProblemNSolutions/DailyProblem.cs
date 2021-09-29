@@ -18266,5 +18266,42 @@ namespace InterviewProblemNSolutions
         }
 
 
+
+        // Time O(n) Space O(k) Soln, n = length of LinkedList
+        public static ListNode[] SplitListToParts(ListNode head, int k)
+        {
+            ListNode[] ans = new ListNode[k];
+
+            // split into 'k' parts
+            // If there are N nodes in the list, and k parts,
+            // then every part has N/k elements, except the first N%k parts have an extra one.
+            int len = GetLength(head), eachPartLen = len / k, firstModK = len % k, elementsFilledSoFar = 0, idx = 0;
+            while (head != null)
+            {
+                if (elementsFilledSoFar == 0)   // start filling new part
+                    ans[idx++] = head;
+
+                var noOfElementsToBeFilled = eachPartLen + (idx <= firstModK ? 1 : 0);
+                if (++elementsFilledSoFar == noOfElementsToBeFilled)
+                {
+                    elementsFilledSoFar = 0;    // reset counter
+                    var next = head.next;
+                    head.next = null;           // mark the end of current list
+                    head = next;
+                }
+                else
+                    head = head.next;
+            }
+            return ans;
+
+            // local helper func
+            int GetLength(ListNode h)
+            {
+                int l = 0;
+                while (h != null) { l++; h = h.next; }
+                return l;
+            }
+        }
+        
     }
 }

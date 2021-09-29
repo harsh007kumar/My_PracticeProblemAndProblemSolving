@@ -525,6 +525,7 @@ namespace InterviewProblemNSolutions
             DistinctSubsequences();
             ShortestPathInAGridwithObstaclesElimination();
             UniqueEmailAddresses();
+            SplitLinkedListInParts();
 
 
             // String Matching Algorithm
@@ -8568,6 +8569,31 @@ namespace InterviewProblemNSolutions
             {
                 emails.Print("E-Mails array");
                 Console.WriteLine($" From above list number of different addresses that actually receive mails are: '{StringAlgorithms.NumUniqueEmails(emails)}'\n");
+            }
+        }
+
+
+        public static void SplitLinkedListInParts()
+        {
+            // https://leetcode.com/problems/split-linked-list-in-parts/
+            // Given the head of a singly linked list and an integer k, split the linked list into k consecutive linked list parts.
+            // The length of each part should be as equal as possible: no two parts should have a size differing by more than one.
+            // This may lead to some parts being null.
+            Utility.Print("725. Split Linked List in Parts");
+            ListNode[] linkedlist = { 
+                new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) } },
+                new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) { next = new ListNode(4) { next = new ListNode(5) { next = new ListNode(6) { next = new ListNode(7) { next = new ListNode(8) { next = new ListNode(9) { next = new ListNode(10) } } } } } } } } }
+                                    };
+            int[] k = { 5, 3 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                linkedlist[i].Print("Input LinkedList");
+                var idx = 0;
+                Console.WriteLine($"After splitting above list in '{k[i]}' parts");
+                foreach (var splitList in DailyProblem.SplitListToParts(linkedlist[i], k[i]))
+                    splitList.Print($" SplitList: {++idx}");
+                
+                Console.WriteLine(Utility.lineDelimeter);
             }
         }
 
