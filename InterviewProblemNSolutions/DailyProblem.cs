@@ -8955,13 +8955,12 @@ namespace InterviewProblemNSolutions
             int sum = 0; foreach (int n in nums) sum += n;
 
             if (sum % k > 0) return false;          // Can't divide total sum in equal 'k' parts return false
-            int target = sum / k;
-
+            
+            int idx = nums.Length - 1, target = sum / k;
             Array.Sort(nums);                       // O(nlogn)
-            int idx = nums.Length - 1;
             if (nums[idx] > target) return false;   // biggest val is larger than target sum of each grp
 
-            while (nums[idx] == target)
+            while (idx >= 0 && nums[idx] == target) // remove digits which == target & reduce no of 'k' grps by same amt
             {
                 idx--;
                 k--;
@@ -8981,6 +8980,8 @@ namespace InterviewProblemNSolutions
                         if (bruteForceSearch(grps, i)) return true;
                         grps[j] -= currNum;         // remove back
                     }
+                    // adding curr num to empty grp at index 'k' could not could return true ans
+                    // hence adding to another any other other grp at diff index would also not yield in true
                     if (grps[j] == 0) break;        // skipping Zero's in grp
                 }
                 return false;
