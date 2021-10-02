@@ -526,6 +526,7 @@ namespace InterviewProblemNSolutions
             ShortestPathInAGridwithObstaclesElimination();
             UniqueEmailAddresses();
             SplitLinkedListInParts();
+            WildcardMatching();
 
 
             // String Matching Algorithm
@@ -8594,6 +8595,20 @@ namespace InterviewProblemNSolutions
                     splitList.Print($" SplitList: {++idx}");
                 
                 Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void WildcardMatching()
+        {
+            // https://leetcode.com/problems/wildcard-matching/
+            Utility.Print("44. Wildcard Matching");
+            string[] s = { "aa", "aa", "cb", "adceb", "acdcb", "", "aaabbbaabaaaaababaabaaabbabbbbbbbbaabababbabbbaaaaba", "aaaabaaaabbbbaabbbaabbaababbabbaaaababaaabbbbbbaabbbabababbaaabaabaaaaaabbaabbbbaababbababaabbbaababbbba", "mississippi", "bbbaaabaababbabbbaabababbbabababaabbaababbbabbbabb", "abbabaaabbabbaababbabbbbbabbbabbbabaaaaababababbbabababaabbababaabbbbbbaaaabababbbaabbbbaabbbbababababbaabbaababaabbbababababbbbaaabbbbbabaaaabbababbbbaababaabbababbbbbababbbabaaaaaaaabbbbbaabaaababaaaabb" },
+                     p = { "a", "*", "?a", "*a*b", "a*c?b", "******", "a*******b", "*****b*aba***babaa*bbaba***a*aaba*b*aa**a*b**ba***a*a*", "m??*ss*?i*pi", "*b**b***baba***aaa*b***", "**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b**aaaaaaaaa*a********ba*bbb***a*ba*bb*bb**a*b*bb" };
+            for (int i = 0; i < s.Length; i++)
+            {
+                //Console.WriteLine($" For Input =>\t'{s[i]}'\n and Pattern =>\t'{p[i]}',\n wildcard pattern matching results in : '{StringAlgorithms.WildcardMatching(s[i], p[i])}'\n");
+                Console.WriteLine($" For Input =>\t'{s[i]}'\n and Pattern =>\t'{p[i]}',\n wildcard pattern matching results in : '{DynamicProgramming.WildcardMatching_DP(s[i], p[i])}'\n");
             }
         }
 

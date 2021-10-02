@@ -1083,5 +1083,80 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static bool WildcardMatching(string s, string p)
+        {
+            // Step1: remove multiple *** from pattern, ex: reduce a***b**c*? -> a*b*c*?
+            StringBuilder sb = new StringBuilder();
+            bool lastCharWasStar = false;
+            foreach (var ch in p)
+                if (ch != '*')
+                {
+                    sb.Append(ch);
+                    lastCharWasStar = false;
+                }
+                else if (!lastCharWasStar)
+                {
+                    lastCharWasStar = true;
+                    sb.Append(ch);
+                }
+            p = sb.ToString();
+
+
+            int sI = 0, pI = 0, sLength = s.Length, pLength = p.Length;
+
+            // Step2: check & remove characters from end if possible
+            while (pLength > pI && sLength > sI)
+            {
+                if (p[pLength - 1] == '*') break;
+                else
+                    // '?' matches to any character in 's'
+                    if (p[pLength - 1] == '?')
+                    { pLength--; sLength--; }
+                    // last characters match
+                    else if (p[pLength - 1] == s[sLength - 1])
+                    { pLength--; sLength--; }
+                    // last characters don't match return false
+                    else return false;
+            }
+
+            // Step3: check if matches
+            return IsMatch(sI, pI, sLength, pLength);
+
+            // local helper func
+            bool IsMatch(int sIdx, int pIdx, int sLen, int pLen)
+            {
+                while (pIdx < pLen)
+                {
+                    // reached end of string 's', but more wild-characters from patterms is left to be matched hence return false
+                    if (sIdx >= sLen && p[pIdx] != '*')
+                        return false;
+
+                    if (p[pIdx] == '?')
+                        sIdx++;
+                    else if (p[pIdx] == '*')
+                    {
+                        // '*' Matches any sequence of characters (including the empty sequence).
+                        for (int i = sIdx; i < s.Length + 1; i++)   //   try skipping 0 to all remaining characters in 's'
+                        //for (int i = sLen; i >= sIdx; i--)   //   try skipping 0 to all remaining characters in 's'
+                            if (IsMatch(i, pIdx + 1, sLen, pLen))
+                                return true;
+                        // if after skpping some 'x' characters we didn't got the result than return False
+                        break;
+                    }
+                    else // Alphabet to be matched
+                    {
+                        if (s[sIdx] == p[pIdx]) sIdx++;
+                        else return false;
+                    }
+
+                    pIdx++;
+                }
+
+                return pIdx == pLen && sIdx == sLen;
+            }
+        }
+
+
+
     }
 }
