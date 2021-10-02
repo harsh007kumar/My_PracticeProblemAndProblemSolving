@@ -2541,5 +2541,45 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Tushar Roy https://youtu.be/3ZDZ-N0EPV0
+        // DP Soln, Time = Space = O(m,n), m,n are length of string 's' & pattern 'p'
+        public static bool WildcardMatching_DP(string s, string p)
+        {
+            // Step1: remove multiple *** from pattern, ex: reduce a***b**c*? -> a*b*c*?
+            StringBuilder sb = new StringBuilder();
+            bool lastCharWasStar = false;
+            foreach (var ch in p)
+                if (ch != '*')
+                {
+                    sb.Append(ch);
+                    lastCharWasStar = false;
+                }
+                else if (!lastCharWasStar)
+                {
+                    lastCharWasStar = true;
+                    sb.Append(ch);
+                }
+            p = sb.ToString();
+
+
+            // Step2: Create a boolean DP array to hold value of string matching starting from 0... to current index
+            bool[,] dp = new bool[s.Length + 1, p.Length + 1];
+
+            // empty patterns matches with empty String
+            dp[0, 0] = true;
+
+            // since '*' in start of pattern can match to empty string 
+            if (p.Length > 0 && p[0] == '*') dp[0, 1] = true;
+
+            for (int r = 1; r <= s.Length; r++)
+                for (int c = 1; c <= p.Length; c++)
+                    if (p[c - 1] == '*')    // ex: when s=abc & p=abc*, we see if abc == abc (* was considered empty) or ab==abc (* matched with char 'c' from string 's')
+                        dp[r, c] = dp[r - 1, c] || dp[r, c - 1];
+                    else // if wild character or characters match in 's' & 'p', then assign value basis dp[r-1,c-1] i.e. string with one length shorter than current
+                        dp[r, c] = (p[c - 1] == '?' || p[c - 1] == s[r - 1]) && dp[r - 1, c - 1];
+
+
+            return dp[s.Length, p.Length];
+        }
     }
 }
