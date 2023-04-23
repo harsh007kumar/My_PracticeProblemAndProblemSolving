@@ -527,6 +527,7 @@ namespace InterviewProblemNSolutions
             UniqueEmailAddresses();
             SplitLinkedListInParts();
             WildcardMatching();
+            ShuffleTheArray();
 
 
             // String Matching Algorithm
@@ -8612,6 +8613,22 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void ShuffleTheArray()
+        {
+            // https://leetcode.com/problems/shuffle-the-array/description/
+            Utility.Print("1470. Shuffle the Array");
+            int[][] numsArr = new int[][]
+                                        {
+                                            new int[] { 2, 5, 1, 3, 4, 7 },
+                                            new int[] { 1, 2, 3, 4, 4, 3, 2, 1 },
+                                            new int[] { 1, 1, 2, 2 }
+                                        };
+            for (int i = 0; i < numsArr.Length; i++)
+            {
+                numsArr[i].Print("Input-Array");
+                BitManipulation.ShuffleTheArray(numsArr[i], numsArr[i].Length / 2).Print("Shuffled-Array");
+            }
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

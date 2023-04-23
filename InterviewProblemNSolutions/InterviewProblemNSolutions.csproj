@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoCompleteSystem.cs" />
+    <Compile Include="BitManipulation.cs" />
     <Compile Include="CircularQueue.cs" />
     <Compile Include="Codec.cs" />
     <Compile Include="CommonFunctions.cs" />
