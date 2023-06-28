@@ -1,10 +1,7 @@
 ﻿using Sorting;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Xml;
 
 namespace InterviewProblemNSolutions
 {
@@ -528,6 +525,7 @@ namespace InterviewProblemNSolutions
             SplitLinkedListInParts();
             WildcardMatching();
             ShuffleTheArray();
+            NextGreaterNodeInLinkedList();
 
 
             // String Matching Algorithm
@@ -8627,6 +8625,22 @@ namespace InterviewProblemNSolutions
             {
                 numsArr[i].Print("Input-Array");
                 BitManipulation.ShuffleTheArray(numsArr[i], numsArr[i].Length / 2).Print("Shuffled-Array");
+            }
+        }
+
+        public static void NextGreaterNodeInLinkedList()
+        {
+            // https://leetcode.com/problems/next-greater-node-in-linked-list/description/ Submited by Anup Kumar
+            Utility.Print("1019. Next Greater Node In Linked List");
+            List<ListNode> linkedLists = new List<ListNode>();
+            linkedLists.Add(new ListNode(2) { next = new ListNode(7) { next = new ListNode(4) { next = new ListNode(3) { next = new ListNode(5) } } } });
+            linkedLists.Add(new ListNode(5) { next = new ListNode(4) { next = new ListNode(3) { next = new ListNode(2) { next = new ListNode(1) { next = new ListNode(1) { next = new ListNode(2) { next = new ListNode(4) } } } } } } });
+            linkedLists.Add(new ListNode(1) { next = new ListNode(7) { next = new ListNode(5) { next = new ListNode(1) { next = new ListNode(9) { next = new ListNode(2) { next = new ListNode(5) { next = new ListNode(1) } } } } } } });
+            foreach (var linkedList in linkedLists)
+            {
+                linkedList.Print("Input linked-list");
+                //DailyProblem.NextLargerNodes(linkedList).Print("next-greater-node-in-linked-list");
+                DailyProblem.NextLargerNodes_Faster(linkedList).Print("next-greater-node-in-linked-list");
             }
         }
 

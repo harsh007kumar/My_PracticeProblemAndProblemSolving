@@ -18303,6 +18303,79 @@ namespace InterviewProblemNSolutions
                 return l;
             }
         }
-        
+
+        // Time O(n) Space O(n), n = no of nodes in the linked list
+        public static int[] NextLargerNodes(ListNode head)
+        {
+            int len = 0, idx = 0;
+            ListNode h = head;
+            while (h != null)
+            {
+                len++;
+                h = h.next;
+            }
+            // Console.WriteLine($"Length {len}");
+
+            int[] ans = new int[len];
+            Stack<MyNode> st = new Stack<MyNode>();
+            while (head != null)
+            {
+                // if no element in stack just push current element and along with its index
+                if (st.Count == 0)
+                    st.Push(new MyNode(head.val, idx));
+                else
+                {
+                    if (st.Peek().val > head.val)
+                        st.Push(new MyNode(head.val, idx));
+                    else
+                    {
+                        // while stack is not empty and stack top is smaller than current node values
+                        while (st.Count > 0 && st.Peek().val < head.val)
+                        {
+                            var n = st.Pop();
+                            while (n.idx < idx && ans[n.idx] == 0)
+                                ans[n.idx++] = head.val;
+                        }
+                        // once we have updated max fr all prv values smaller than current node values, push current node value & index
+                        st.Push(new MyNode(head.val, idx));
+                    }
+                }
+                // Console.WriteLine($"{idx} value {head.val}");
+                head = head.next;
+                idx++;
+            }
+            return ans;
+        }
+
+        // Time O(n) Space O(n), n = no of nodes in the linked list
+        public static int[] NextLargerNodes_Faster(ListNode head)
+        {
+            int len = 0, idx = 0;
+            ListNode h = head;
+            while (h != null)
+            {
+                len++;
+                h = h.next;
+            }
+
+            int[] ans = new int[len];
+            Stack<MyNode> st = new Stack<MyNode>();
+            while (head != null)
+            {
+                if (st.Count > 0 && st.Peek().val < head.val)
+                    // while stack is not empty and stack top is smaller than current node values
+                    while (st.Count > 0 && st.Peek().val < head.val)
+                    {
+                        var n = st.Pop();
+                        while (n.idx < idx && ans[n.idx] == 0)
+                            ans[n.idx++] = head.val;
+                    }
+
+                // push current node value &index
+                st.Push(new MyNode(head.val, idx++));
+                head = head.next;
+            }
+            return ans;
+        }
     }
 }
