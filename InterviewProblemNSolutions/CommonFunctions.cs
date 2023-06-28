@@ -24,6 +24,16 @@ namespace InterviewProblemNSolutions
         public ListNode() => prv = next = null;
     }
 
+    public class MyNode
+    {
+        public int val, idx = int.MinValue;
+        public MyNode(int v, int i)
+        {
+            val = v;
+            idx = i;
+        }
+    }
+
     public static class Utility
     {
         public const string lineDelimeter = "\n--------------------------------------------------------------------------------------";
