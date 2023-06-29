@@ -526,6 +526,7 @@ namespace InterviewProblemNSolutions
             WildcardMatching();
             ShuffleTheArray();
             NextGreaterNodeInLinkedList();
+            NeitherMinimumNorMaximum();
 
 
             // String Matching Algorithm
@@ -8643,6 +8644,26 @@ namespace InterviewProblemNSolutions
                 DailyProblem.NextLargerNodes_Faster(linkedList).Print("next-greater-node-in-linked-list");
             }
         }
+
+        public static void NeitherMinimumNorMaximum()
+        {
+            // https://leetcode.com/problems/neither-minimum-nor-maximum/submissions/
+            Utility.Print("2733. Neither Minimum nor Maximum");
+            int[][] numsArr = new int[][]
+                {
+                    new int[] { 3, 2, 1, 4},
+                    new int[] { 1, 2 },
+                    new int[] { 2, 1, 3}
+                };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Distinct Unique Array of Integers");
+                //Console.WriteLine($" Number which is netiher Min nor Max is : '{DailyProblem.FindNonMinOrMax(nums)}'");
+                Console.WriteLine($" Number which is netiher Min nor Max is : '{DailyProblem.FindNonMinOrMax_Faster(nums)}'");
+            }
+        }
+
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

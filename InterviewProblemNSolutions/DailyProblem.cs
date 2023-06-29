@@ -18377,5 +18377,38 @@ namespace InterviewProblemNSolutions
             }
             return ans;
         }
+
+
+        // Time = O(n) Space = O(1)
+        public static int FindNonMinOrMax(int[] nums)
+        {
+            if (nums.Length < 3) return -1;    // we need to have min 3 unique numbers fr valid ans
+            int min = nums[0], max = nums[0];
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (min != max && nums[i] != min && nums[i] != max)
+                {
+                    if (min < nums[i] && nums[i] < max) return nums[i];
+                    else if (nums[i] < min) return min;
+                    else return max;
+                    // var unique = new List<int>() {min,max,nums[i]};
+                    // unique.Sort(); // sort 3 unique numbers we have
+                    // return unique[1]; // return the middle one
+                }
+                if (nums[i] < min) min = nums[i];
+                if (nums[i] > max) max = nums[i];
+            }
+            return -1;
+        }
+
+        // Time = Space = O(1)
+        public static int FindNonMinOrMax_Faster(int[] nums)
+        {
+            if (nums.Length < 3) return -1;    // we need to have min 3 unique numbers fr valid ans
+            // since we have onyl distinct integers we can check 1st three numbers to get valid ans
+            int min = Math.Min(nums[0], Math.Min(nums[1], nums[2]));
+            int max = Math.Max(nums[0], Math.Max(nums[1], nums[2]));
+            return (min < nums[0] && nums[0] < max) ? nums[0] : (min < nums[1] && nums[1] < max) ? nums[1] : nums[2];
+        }
     }
 }
