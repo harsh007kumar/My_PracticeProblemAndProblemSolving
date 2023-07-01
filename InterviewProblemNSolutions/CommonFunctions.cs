@@ -33,6 +33,16 @@ namespace InterviewProblemNSolutions
             idx = i;
         }
     }
+    public class MyCharNode
+    {
+        public char ch;
+        public int idx = int.MinValue;
+        public MyCharNode(char c, int i)
+        {
+            ch = c;
+            idx = i;
+        }
+    }
 
     public static class Utility
     {
