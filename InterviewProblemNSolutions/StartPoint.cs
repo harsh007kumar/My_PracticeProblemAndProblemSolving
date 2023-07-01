@@ -527,6 +527,7 @@ namespace InterviewProblemNSolutions
             ShuffleTheArray();
             NextGreaterNodeInLinkedList();
             NeitherMinimumNorMaximum();
+            LongestSubstringWithoutRepeatingCharacters();
 
 
             // String Matching Algorithm
@@ -8663,6 +8664,17 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void LongestSubstringWithoutRepeatingCharacters()
+        {
+            // https://leetcode.com/problems/longest-substring-without-repeating-characters/
+            Utility.Print("3. Longest Substring Without Repeating Characters");
+            string[] inputStrs = { "abcabcbb", "bbbbb", "pwwkew", "aab", "abba", "brnk" };
+            foreach (var s in inputStrs)
+            {
+                Console.WriteLine($"Length of longest substring without repeating chars in string '{s}' is => {StringAlgorithms.LengthOfLongestSubstring_Faster(s)}");
+                //Console.WriteLine($"Length of longest substring without repeating chars in string '{s}' is => {StringAlgorithms.LengthOfLongestSubstring_SecondApproach(s)}");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

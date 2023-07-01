@@ -1156,7 +1156,58 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        // Time O(n), Space O(m), n = length of 's', m = total unquie chars in 's'
+        public static int LengthOfLongestSubstring_Faster(string s)
+        {
+            HashSet<char> uniqueChars = new HashSet<char>();
+            Queue<MyCharNode> charOrder = new Queue<MyCharNode>();
+            int maxLen = 0, currLen = 0;
+            for (int i = 0; i < s.Length; i++)
+                if (!uniqueChars.Contains(s[i]))                            // unique char found
+                {
+                    uniqueChars.Add(s[i]);                                  // add to the hashset   
+                    charOrder.Enqueue(new MyCharNode(s[i], i));             // add char to the queue along with its index
+                    maxLen = Math.Max(maxLen, ++currLen);
+                }
+                else
+                {
+                    while (charOrder.Count > 0)
+                    {
+                        var currNode = charOrder.Dequeue();
+                        if (currNode.ch != s[i])
+                            uniqueChars.Remove(currNode.ch);
+                        else
+                        {
+                            charOrder.Enqueue(new MyCharNode(s[i], i));     // add current char back to the queue end
+                            break;
+                        }
+                    }
+                    currLen = i - (charOrder.Peek().idx) + 1;               // update currLen
+                }
+            return maxLen;
+        }
 
+        // Time O(n), Space O(n), n = length of 's', m = total unquie chars in 's'
+        public static int LengthOfLongestSubstring_SecondApproach(string s)
+        {
+            Dictionary<char, int> charIdx = new Dictionary<char, int>();
+            int start = 0, i = -1, maxLen = 0;
+            while (++i < s.Length)
+            {
+                if (charIdx.ContainsKey(s[i]))
+                {
+                    var lastOccurenceIndex = charIdx[s[i]];
+                    // update start only if start index is smaller than last Occurence Index of current character
+                    start = lastOccurenceIndex >= start ? lastOccurenceIndex + 1 : start;
+                    // update dictionary with latest index of current char
+                    charIdx[s[i]] = i;
+                }
+                else
+                    charIdx[s[i]] = i;
+                maxLen = Math.Max(maxLen, 1 + i - start);
+            }
+            return maxLen;
+        }
 
     }
 }
