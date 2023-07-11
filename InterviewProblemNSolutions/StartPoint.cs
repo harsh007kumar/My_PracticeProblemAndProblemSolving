@@ -528,6 +528,7 @@ namespace InterviewProblemNSolutions
             NextGreaterNodeInLinkedList();
             NeitherMinimumNorMaximum();
             LongestSubstringWithoutRepeatingCharacters();
+            FindAllPossibleRecipesFromGivenSupplies();
 
 
             // String Matching Algorithm
@@ -8675,6 +8676,49 @@ namespace InterviewProblemNSolutions
                 //Console.WriteLine($"Length of longest substring without repeating chars in string '{s}' is => {StringAlgorithms.LengthOfLongestSubstring_SecondApproach(s)}");
             }
         }
+
+        public static void FindAllPossibleRecipesFromGivenSupplies()
+        {
+            // https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/
+            Utility.Print("2115. Find All Possible Recipes from Given Supplies");
+            string[][] recipesArr = new string[][] {
+                new string[] { "bread" },
+                new string[] { "bread", "sandwich" },
+                new string[] { "bread", "sandwich", "burger" },
+                new string[] { "ju", "fzjnm", "x", "e", "zpmcz", "h", "q" } };
+            List<List<List<string>>> ingredientsArr = new List<List<List<string>>>() {
+                new List<List<string>>() { 
+                    new List<string>() { "yeast", "flour" } },
+                new List<List<string>>() { 
+                    new List<string>() { "yeast", "flour" },
+                    new List<string>() { "bread", "meat" } },
+                new List<List<string>>() { 
+                    new List<string>() { "yeast", "flour" },
+                    new List<string>() { "bread", "meat" },
+                    new List<string>() { "sandwich", "meat", "bread" } },
+                new List<List<string>>() {
+                    new List<string>() { "d" },
+                    new List<string>() { "hveml", "f", "cpivl" },
+                    new List<string>() { "cpivl", "zpmcz", "h", "e", "fzjnm", "ju" },
+                    new List<string>() { "cpivl", "hveml", "zpmcz", "ju", "h" },
+                    new List<string>() { "h","fzjnm","e","q","x"},
+                    new List<string>() { "d","hveml","cpivl","q","zpmcz","ju","e","x"},
+                    new List<string>() { "f","hveml","cpivl"} } };
+            string[][] suppliesArr = new string[][] {
+                new string[] { "yeast", "flour", "corn" },
+                new string[] { "yeast", "flour", "meat" },
+                new string[] { "yeast", "flour", "meat" },
+                new string[] { "f", "hveml", "cpivl", "d" } };
+            for (int i = 0; i < recipesArr.Length; i++)
+            {
+                recipesArr[i].Print("Recipes");
+                ingredientsArr[i].Print("ingredients");
+                suppliesArr[i].Print("Supplies");
+                DailyProblem.FindAllRecipes(recipesArr[i], ingredientsArr[i], suppliesArr[i]).Print("list of all the recipes that you can create");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

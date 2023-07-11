@@ -18410,5 +18410,70 @@ namespace InterviewProblemNSolutions
             int max = Math.Max(nums[0], Math.Max(nums[1], nums[2]));
             return (min < nums[0] && nums[0] < max) ? nums[0] : (min < nums[1] && nums[1] < max) ? nums[1] : nums[2];
         }
+
+        // Time O(Max(s,r*n)) Space O(r*n)
+        public static IList<string> FindAllRecipes(string[] recipes, List<List<string>> ingredients, string[] supplies)
+        {
+            /* Algo/Approach
+            Create a graph with each element in supplies order as 0
+            Now traverse the reciepe add it to graph if not already present set the order as no of ingredients required to make it
+                now traverse thru each ingredients:
+                    if not already present in graph
+                        add new node for the ingridents & the current recipe in the list of linked Nodes to each ingredient
+                    if already present in graph
+                        just add the current recipe to the list of linked Nodes
+            Now create a queue prefilled with the supplies
+                and for each node decrease the order of all linked Nodes by -1
+                if any linked Node reaches order 0 than add it to the end of the queue
+            At the end iterate thru the recipes and check if node with the matching name has order 0 than add recipe to the ans
+            */
+            Dictionary<string, int> inDegree = new Dictionary<string, int>();
+            Dictionary<string, List<string>> graph = new Dictionary<string, List<string>>();
+            foreach (var sup in supplies)                           // O(s), s = length of supplies
+            {
+                inDegree[sup] = 0;
+                graph[sup] = new List<string>();
+            }
+            for (int i = 0; i < recipes.Length; i++)                // O(r), r = no of recipes
+            {
+                var recipe = recipes[i];
+                var recipe_ingredient = ingredients[i];
+
+                if (!graph.ContainsKey(recipe))
+                    graph[recipe] = new List<string>();
+                inDegree[recipe] = recipe_ingredient.Count;
+
+                foreach (var ingre in recipe_ingredient)            // O(n), avg no of ingredients/recipe
+                {
+                    if (!graph.ContainsKey(ingre))
+                    {
+                        graph[ingre] = new List<string>();
+                        graph[ingre].Add(recipe);
+                        inDegree[ingre] = int.MaxValue;
+                    }
+                    else
+                    {
+                        graph[ingre].Add(recipe);   // add new recipe which depends on current ingredient
+                    }
+                }
+            }
+
+            Queue<string> canBeMade = new Queue<string>(supplies);  // O(s), s = length of supplies
+            while (canBeMade.Count > 0)
+            {
+                var hasBeenMade = canBeMade.Dequeue();
+                foreach (var dependent in graph[hasBeenMade])
+                {
+                    if (--inDegree[dependent] == 0)
+                        canBeMade.Enqueue(dependent);
+                }
+            }
+
+            List<string> ans = new List<string>();
+            foreach (var recipe in recipes)                         // O(r), s = no of recipes
+                if (inDegree[recipe] == 0)
+                    ans.Add(recipe);
+            return ans;
+        }
     }
 }
