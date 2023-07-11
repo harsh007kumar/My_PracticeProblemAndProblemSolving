@@ -18480,6 +18480,22 @@ namespace InterviewProblemNSolutions
         // Time O(n^2) Space O(Max(m,n)), n = length of meetings
         public static IList<int> FindAllPeople(int n, int[][] meetings, int firstPerson)
         {
+            /*  Create a graph with Key a person and Value as list of meetings they had with others in the format {meetingWith, meetTime}
+
+                Initialize 1st time ppl knew secret for each person as int.MaxValue and update it to 0 for firstPerson which got to know the secret from person at index o (lets all this array 'SecretKnowTime')
+
+                Now Initialize the queue with the people who know the secret at time t0 i.e. 0th and firstPerson
+
+                Now while Dequeuing the person p1 from the Q
+                go thru all meetings done by p1 (if any)
+
+                while going thru meetings check if it was held at time i.e. after they knew secret than skip to next meeting
+                also skip if the p2 who is meeting p1 knew the secret from schedule meeting time.
+
+                we only add p2 to queue if current meeting is when they got to know the secret for the very first time.
+                also reduce/update the time in SecretKnowTime array for p2.
+             */
+
             int[] SecretKnowTime = Enumerable.Repeat(int.MaxValue, n).ToArray();
             SecretKnowTime[0] = SecretKnowTime[firstPerson] = 0;    // set time when first 2 person know the secret
             Dictionary<int, List<int[]>> meetSchedule = new Dictionary<int, List<int[]>>();
