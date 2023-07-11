@@ -529,6 +529,7 @@ namespace InterviewProblemNSolutions
             NeitherMinimumNorMaximum();
             LongestSubstringWithoutRepeatingCharacters();
             FindAllPossibleRecipesFromGivenSupplies();
+            FindAllPeopleWithSecret();
 
 
             // String Matching Algorithm
@@ -8715,6 +8716,26 @@ namespace InterviewProblemNSolutions
                 ingredientsArr[i].Print("ingredients");
                 suppliesArr[i].Print("Supplies");
                 DailyProblem.FindAllRecipes(recipesArr[i], ingredientsArr[i], suppliesArr[i]).Print("list of all the recipes that you can create");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+        public static void FindAllPeopleWithSecret()
+        {
+            // https://leetcode.com/problems/find-all-people-with-secret/description/
+            Utility.Print("2092. Find All People With Secret");
+            int[] peoplesArr = { 6, 4, 5 };
+            int[][][] meetingsArr = new int[][][]
+            {
+                new int[][] { new int[] { 1, 2, 5 }, new int[] { 2, 3, 8 }, new int[] { 1, 5, 10 } },
+                new int[][] { new int[] { 3, 1, 3 }, new int[] { 1, 2, 2 }, new int[] { 0, 3, 3 } },
+                new int[][] { new int[] { 3, 4, 2 }, new int[] { 1, 2, 1 }, new int[] { 2, 3, 1 } },
+            };
+            int[] firstPersonsArr = { 1, 3, 1 };
+            for (int i = 0; i < peoplesArr.Length; i++)
+            {
+                meetingsArr[i].Print($"For '{peoplesArr[i]}' peoples starting with firstPerson => '{firstPersonsArr[i]}' who knows the secret below are the details of the meetings where x0:P1, x1:P2 & x3: Time at which meeting occurred");
+                DailyProblem.FindAllPeople(peoplesArr[i], meetingsArr[i], firstPersonsArr[i]).Print("Below peoples know the Secret at the end of all the meetings");
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }

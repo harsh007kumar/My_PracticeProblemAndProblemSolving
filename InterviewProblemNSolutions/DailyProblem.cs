@@ -18475,5 +18475,57 @@ namespace InterviewProblemNSolutions
                     ans.Add(recipe);
             return ans;
         }
+
+        // Ref https://leetcode.com/problems/find-all-people-with-secret/solutions/1600202/java-hashmap-and-queue/
+        // Time O(n^2) Space O(Max(m,n)), n = length of meetings
+        public static IList<int> FindAllPeople(int n, int[][] meetings, int firstPerson)
+        {
+            int[] SecretKnowTime = Enumerable.Repeat(int.MaxValue, n).ToArray();
+            SecretKnowTime[0] = SecretKnowTime[firstPerson] = 0;    // set time when first 2 person know the secret
+            Dictionary<int, List<int[]>> meetSchedule = new Dictionary<int, List<int[]>>();
+            foreach (var meet in meetings)                           // O(m), m = no of meetings
+            {
+                var p1 = meet[0];
+                var p2 = meet[1];
+                var time = meet[2];
+                // update Graph for P1
+                if (!meetSchedule.ContainsKey(p1))
+                    meetSchedule[p1] = new List<int[]>() { new int[] { p2, time } };
+                else
+                    meetSchedule[p1].Add(new int[] { p2, time });
+                // update Graph for P2
+                if (!meetSchedule.ContainsKey(p2))
+                    meetSchedule[p2] = new List<int[]>() { new int[] { p1, time } };
+                else
+                    meetSchedule[p2].Add(new int[] { p1, time });
+            }
+
+            Queue<int> q = new Queue<int>();
+            q.Enqueue(0);
+            q.Enqueue(firstPerson);
+            while (q.Count > 0)                                     // O(n), all person know the secret
+            {
+                var currPerson = q.Dequeue();
+                if (!meetSchedule.ContainsKey(currPerson)) continue; // no meetings present for a given person
+                foreach (var meet in meetSchedule[currPerson])      // O(n)
+                {
+                    // P1 meeting with P2 happened before P1 knew Secret or P2 knew secret before his meeting with P1
+                    if (SecretKnowTime[currPerson] > meet[1] || SecretKnowTime[meet[0]] <= meet[1])
+                        continue;
+                    else
+                    {
+                        q.Enqueue(meet[0]);
+                        SecretKnowTime[meet[0]] = meet[1];  // update the secret known time for P2 to earlier duration
+                    }
+                }
+            }
+
+            List<int> knowSecret = new List<int>();
+            for (int i = 0; i < n; i++)                        // O(n)
+                if (SecretKnowTime[i] != int.MaxValue)
+                    knowSecret.Add(i);
+            return knowSecret.ToList();
+
+        }
     }
 }
