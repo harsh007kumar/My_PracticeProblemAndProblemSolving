@@ -209,6 +209,19 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void Print(this List<List<string>> arr, string msg = "")
+        {
+            var row = arr.Count;
+            if (row == 0) return;
+            if (msg != "") Console.WriteLine($" Printing \'{msg}\' 2-D string array with {row}:Row & {arr[0].Count}:Col");
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < arr[i].Count; j++)
+                    Console.Write($" {arr[i][j]} ||");
+                Console.WriteLine();
+            }
+        }
+
         public static void Print(this bool[,] arr)
         {
             var row = arr.GetLength(0);
