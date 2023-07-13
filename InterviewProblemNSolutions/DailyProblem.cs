@@ -18570,5 +18570,62 @@ namespace InterviewProblemNSolutions
                 InOrder(r.right);
             }
         }
+
+        // Time = Space O(n)
+        public static void RecoverTree_Faster_Recursive(TreeNode root)
+        {
+            TreeNode first = null, second = null, prv = null;
+            // find the 2 out of order Nodes which have been swapped while doing InOrder traversal
+            InOrder(root);      // O(n)
+            
+            // Swap the 2 out of order nodes with each other
+            int t = first.val;
+            first.val = second.val;
+            second.val = t;
+
+            // Inline helper func
+            void InOrder(TreeNode r)
+            {
+                if (r == null) return;
+                InOrder(r.left);
+                if (prv != null && prv.val > r.val)
+                {
+                    if (first == null) first = prv;     // 1st bad node i.e. prv is stored in 'first'
+                    second = r;                         // 2nd bad node i.e. root is stored in 'second'
+                }
+                prv = r;
+                InOrder(r.right);
+            }
+        }
+
+        // Time O(n) | Space O(1)
+        public static void RecoverTree_Faster_Iterative(TreeNode root)
+        {
+            TreeNode first = null, second = null, prv = null, curr;
+            // find the 2 out of order Nodes which have been swapped while doing InOrder traversal
+            curr = root;
+            Stack<TreeNode> st = new Stack<TreeNode>();
+            while(true)
+            {
+                while(curr!=null)
+                {
+                    st.Push(curr);
+                    curr = curr.left;
+                }
+                if (st.Count == 0) break;
+                curr = st.Pop();
+                if (prv != null && prv.val > curr.val)
+                {
+                    second = curr;                      // 2nd bad node i.e. root is stored in 'second'
+                    if (first == null) first = prv;     // 1st bad node i.e. prv is stored in 'first'
+                    else break;                         // 2nd instance nodes r not in order, we got both the nodes no need to iterate further
+                }
+                prv = curr;
+                curr = curr.right;
+            }
+
+            // Swap the 2 out of order nodes with each other
+            (second.val, first.val) = (first.val, second.val);
+        }
     }
 }

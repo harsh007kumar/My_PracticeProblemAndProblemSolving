@@ -8753,7 +8753,9 @@ namespace InterviewProblemNSolutions
             foreach (var BST in bstArr)
             {
                 BST.InOrder("Original BST where excatly 2 nodes are swapped");
-                DailyProblem.RecoverTree(BST);
+                // DailyProblem.RecoverTree(BST);
+                // DailyProblem.RecoverTree_Faster_Recursive(BST);
+                DailyProblem.RecoverTree_Faster_Iterative(BST);
                 BST.InOrder("Valid BST after update");
                 Console.WriteLine(Utility.lineDelimeter);
             }
