@@ -18543,5 +18543,32 @@ namespace InterviewProblemNSolutions
             return knowSecret.ToList();
 
         }
+
+        // Time O(nlogn) | Space O(n)
+        public static void RecoverTree(TreeNode root)
+        {
+            List<int> ls = new List<int>();
+            int idx = 0;
+
+            InOrder(root);      // first take the inorder of the BST
+            ls.Sort();          // sort the elements to make the BST valid, O(nlogn)
+            FixTree(root);      // now update the BST as per the sorted list without changing the structure
+            
+            // inline helper func
+            void FixTree(TreeNode r)
+            {
+                if (r == null) return;
+                FixTree(r.left);
+                r.val = ls[idx++];
+                FixTree(r.right);
+            }
+            void InOrder(TreeNode r)
+            {
+                if (r == null) return;
+                InOrder(r.left);
+                ls.Add(r.val);
+                InOrder(r.right);
+            }
+        }
     }
 }

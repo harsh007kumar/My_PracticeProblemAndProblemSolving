@@ -530,6 +530,7 @@ namespace InterviewProblemNSolutions
             LongestSubstringWithoutRepeatingCharacters();
             FindAllPossibleRecipesFromGivenSupplies();
             FindAllPeopleWithSecret();
+            RecoverBinarySearchTree();
 
 
             // String Matching Algorithm
@@ -8740,6 +8741,23 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void RecoverBinarySearchTree()
+        {
+            // https://leetcode.com/problems/recover-binary-search-tree/description/
+            Utility.Print("99. Recover Binary Search Tree");
+            TreeNode[] bstArr = new TreeNode[]
+            {
+                new TreeNode(1){ left = new TreeNode(3){ right = new TreeNode(2)} },
+                new TreeNode(3){ left = new TreeNode(1), right = new TreeNode(4){ left = new TreeNode(2)} },
+            };
+            foreach (var BST in bstArr)
+            {
+                BST.InOrder("Original BST where excatly 2 nodes are swapped");
+                DailyProblem.RecoverTree(BST);
+                BST.InOrder("Valid BST after update");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
