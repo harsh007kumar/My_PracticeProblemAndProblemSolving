@@ -18627,5 +18627,39 @@ namespace InterviewProblemNSolutions
             // Swap the 2 out of order nodes with each other
             (second.val, first.val) = (first.val, second.val);
         }
+
+        // Time = Space = O(n), n = no of nodes
+        public TreeNode MergeTrees(TreeNode root1, TreeNode root2)
+        {
+            TreeNode merged = null;
+            Merge(root1, root2, ref merged);
+            return merged;
+            // inline helper func
+            void Merge(TreeNode r1, TreeNode r2, ref TreeNode m) // Time O(n)
+            {
+                if (r1 == null) m = r2;
+                else if (r2 == null) m = r1;
+                else
+                {
+                    m = new TreeNode(r1.val + r2.val);
+                    Merge(r1.left, r2.left, ref m.left);
+                    Merge(r1.right, r2.right, ref m.right);
+                }
+            }
+        }
+
+        // Time = Space = O(n), n = no of nodes
+        public static TreeNode MergeTrees_Efficient(TreeNode r1, TreeNode r2)
+        {
+            if (r1 == null) return r2;
+            else if (r2 == null) return r1;
+            else
+            {
+                r1.val += r2.val;
+                r1.left = MergeTrees_Efficient(r1.left, r2.left);
+                r1.right = MergeTrees_Efficient(r1.right, r2.right);
+                return r1;
+            }
+        }
     }
 }

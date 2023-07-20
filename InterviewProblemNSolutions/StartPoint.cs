@@ -531,6 +531,7 @@ namespace InterviewProblemNSolutions
             FindAllPossibleRecipesFromGivenSupplies();
             FindAllPeopleWithSecret();
             RecoverBinarySearchTree();
+            MergeTwoBinaryTrees();
 
 
             // String Matching Algorithm
@@ -8761,6 +8762,25 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void MergeTwoBinaryTrees()
+        {
+            // https://leetcode.com/problems/merge-two-binary-trees/description/
+            Utility.Print("617. Merge Two Binary Trees");
+            TreeNode[] bstArr = new TreeNode[]
+            {
+                new TreeNode(1){
+                    left = new TreeNode(3){ left = new TreeNode(5)},
+                    right = new TreeNode(2),
+                },
+                new TreeNode(2){
+                    left = new TreeNode(1){ right = new TreeNode(4)},
+                    right = new TreeNode(3){ right = new TreeNode(7)}
+                },
+            };
+            //DailyProblem.MergeTrees(bstArr[0], bstArr[1]).InOrder("Merged-BST");
+            DailyProblem.MergeTrees_Efficient(bstArr[0], bstArr[1]).InOrder("Merged-BST");
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
