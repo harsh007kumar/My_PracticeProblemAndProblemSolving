@@ -532,6 +532,8 @@ namespace InterviewProblemNSolutions
             FindAllPeopleWithSecret();
             RecoverBinarySearchTree();
             MergeTwoBinaryTrees();
+            LongestCommonPrefix();
+
 
 
             // String Matching Algorithm
@@ -8781,6 +8783,24 @@ namespace InterviewProblemNSolutions
             //DailyProblem.MergeTrees(bstArr[0], bstArr[1]).InOrder("Merged-BST");
             DailyProblem.MergeTrees_Efficient(bstArr[0], bstArr[1]).InOrder("Merged-BST");
         }
+
+
+        public static void LongestCommonPrefix()
+        {
+            // https://leetcode.com/problems/longest-common-prefix/
+            Utility.Print("14. Longest Common Prefix");
+            string[][] inputs = new string[][]
+            { 
+                new string[] { "flower","flow","flight" },
+                new string[] { "dog","racecar","car" }
+            };
+            foreach(var inputStrArr in inputs)
+            {
+                inputStrArr.Print("Input array of strings");
+                Console.WriteLine($"Longest common prefix is => '{StringAlgorithms.LongestCommonPrefix(inputStrArr)}'");
+            }
+        }
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

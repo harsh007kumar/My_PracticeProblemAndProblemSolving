@@ -1209,5 +1209,19 @@ namespace InterviewProblemNSolutions
             return maxLen;
         }
 
+        // Time = O(n*m), Space = O(t), n length of strs array & m is avg length of each string in strs array, t is length of first string in array
+        public static string LongestCommonPrefix(string[] strs)
+        {
+            char[] commPrefix = strs[0].ToCharArray();
+            int matchedIdx = commPrefix.Length;
+            for (int i = 1; i < strs.Length; i++)
+            {
+                matchedIdx = Math.Min(matchedIdx, strs[i].Length);
+                for (int idx = 0; idx < matchedIdx; idx++)
+                    if (commPrefix[idx] != strs[i][idx])    // exit as soon as 1st non-matching chars appear & update idx till where characters matched
+                        matchedIdx = idx;
+            }
+            return new string(commPrefix,0,matchedIdx);
+        }
     }
 }
