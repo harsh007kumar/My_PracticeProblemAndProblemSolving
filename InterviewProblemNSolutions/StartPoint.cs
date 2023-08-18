@@ -533,6 +533,7 @@ namespace InterviewProblemNSolutions
             RecoverBinarySearchTree();
             MergeTwoBinaryTrees();
             LongestCommonPrefix();
+            CapitalizeTheTitle();
 
 
 
@@ -8801,6 +8802,15 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void CapitalizeTheTitle()
+        {
+            // https://leetcode.com/problems/capitalize-the-title/description/
+            Utility.Print("2129. Capitalize the Title");
+            string[] inputArr = new string[] { "capiTalIze tHe titLe", "First leTTeR of EACH Word", "i lOve leetcode" };
+            foreach (var input in inputArr)
+                Console.WriteLine($"For input string '{input}' the Captilaized string as per set rules is => '{StringAlgorithms.CapitalizeTitle(input)}'");
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

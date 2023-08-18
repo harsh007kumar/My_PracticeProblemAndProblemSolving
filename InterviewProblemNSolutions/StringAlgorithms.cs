@@ -1223,5 +1223,25 @@ namespace InterviewProblemNSolutions
             }
             return new string(commPrefix,0,matchedIdx);
         }
+
+        // Time = Space = O(n), n is length of 'title' string
+        public static string CapitalizeTitle(string title)
+        {
+            char[] ans = new char[title.Length];
+            int currWordLen = 0;
+            for (int i = 0; i < title.Length; i++)
+                if (title[i] == ' ')
+                {
+                    currWordLen = 0;
+                    ans[i] = ' ';
+                }
+                else
+                {
+                    ans[i] = Char.ToLower(title[i]);
+                    if (++currWordLen == 3)    // current word is longer than 2 chars which means First letter should be UpperCase
+                        ans[i - 2] = Char.ToUpper(ans[i - 2]);
+                }
+            return new string(ans);
+        }
     }
 }
