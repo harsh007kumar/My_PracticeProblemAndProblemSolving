@@ -1243,5 +1243,30 @@ namespace InterviewProblemNSolutions
                 }
             return new string(ans);
         }
+
+
+        // Time = Space = O(n), n = of of characters in input string 's'
+        public static string ZigzagConversion(string s, int numRows)
+        {
+            if (numRows == 1) return s;
+
+            StringBuilder[] sbArr = new StringBuilder[numRows];
+            for (int i = 0; i < numRows; i++) sbArr[i] = new StringBuilder();  // initialize the StringBuilder array
+
+            int r = 0;
+            bool goingDown = true;
+            foreach (var ch in s)    // iterate thru all the characters in the input string
+            {
+                sbArr[r].Append(ch);
+                // update the direction for next character
+                if (r == 0) goingDown = true;
+                else if (r + 1 == numRows) goingDown = false;
+                r = goingDown ? r + 1 : r - 1;
+            }
+
+            string zigZag = "";
+            foreach (var sb in sbArr) zigZag += sb.ToString();
+            return zigZag;
+        }
     }
 }

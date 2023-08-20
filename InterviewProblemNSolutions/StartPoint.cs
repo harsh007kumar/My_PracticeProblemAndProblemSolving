@@ -534,6 +534,7 @@ namespace InterviewProblemNSolutions
             MergeTwoBinaryTrees();
             LongestCommonPrefix();
             CapitalizeTheTitle();
+            ZigzagConversion();
 
 
 
@@ -8811,6 +8812,20 @@ namespace InterviewProblemNSolutions
             foreach (var input in inputArr)
                 Console.WriteLine($"For input string '{input}' the Captilaized string as per set rules is => '{StringAlgorithms.CapitalizeTitle(input)}'");
         }
+
+
+        public static void ZigzagConversion()
+        {
+            // https://leetcode.com/problems/zigzag-conversion/description/
+            Utility.Print("6. Zigzag Conversion");
+            string[] inputStrArr = new string[] { "PAYPALISHIRING", "PAYPALISHIRING", "A", "AB", "ABCDEFGHIJKLMNOPQRSTUVWXYZ" };
+            int[] numRowsArr = new int[] { 3, 4, 1, 1, 3 };
+            for (int i = 0; i < numRowsArr.Length; i++)
+            {
+                Console.WriteLine($"For input string '{inputStrArr[i]}' after zigzagging it in '{numRowsArr[i]}' no of rows the jumbled string is => '{StringAlgorithms.ZigzagConversion(inputStrArr[i], numRowsArr[i])}'");
+            }
+        }
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
