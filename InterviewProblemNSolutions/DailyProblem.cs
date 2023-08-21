@@ -2301,9 +2301,29 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time O(n) || Space O(1)
+        // Time O(1) || Space O(1), as integer can have max of 10 digits only
         public static int ReverseInt(int num)
         {
+
+            if (num == int.MinValue) return 0;
+            Console.WriteLine($"For num {num}");
+            bool isPositive = num >= 0;
+            num = Math.Abs(num);
+            int rev = 0;
+            while (num != 0)
+            {
+                // need to check if multiplying by 10 would lead to num greater than limit i.e. MaxValue
+                // & also if rev is enumcatly 1/10 of MaxValue so last possible value that coud b added without overflowing is 7
+                // MaxValue value 2147483647, MinValue -2147483648
+                if (rev > int.MaxValue / 10 || (rev == int.MaxValue / 10 && num % 10 > (isPositive ? 7 : 8)))
+                    return 0;
+                rev = rev * 10 + num % 10;
+                num /= 10;
+                Console.WriteLine($"{rev} {num}");
+            }
+            return isPositive ? rev : rev * -1;
+
+            /* Slightly confusing
             if (num == int.MinValue) return 0;
             bool isPositive = num >= 0;
             num = Math.Abs(num);
@@ -2311,13 +2331,16 @@ namespace InterviewProblemNSolutions
             while (num != 0)
             {
                 if (isPositive)
-                { if (reverse > int.MaxValue / 10 || (reverse == int.MinValue && num % 10 > 8)) return 0; }
+                { if (reverse > int.MaxValue / 10 || (reverse == int.MinValue && num % 10 > 8)) 
+                        return 0; }
                 else
-                { if (reverse > int.MaxValue / 10 || (reverse == int.MinValue && num % 10 > 7)) return 0; }
+                { if (reverse > int.MaxValue / 10 || (reverse == int.MinValue && num % 10 > 7))
+                        return 0; }
                 reverse = reverse * 10 + num % 10;
                 num /= 10;
             }
             return isPositive ? reverse : reverse * -1;
+            */
 
             /* FOR EVEN FASTER RUNTIME
             //if (x == int.MinValue) return 0;
@@ -8955,7 +8978,7 @@ namespace InterviewProblemNSolutions
             int sum = 0; foreach (int n in nums) sum += n;
 
             if (sum % k > 0) return false;          // Can't divide total sum in equal 'k' parts return false
-            
+
             int idx = nums.Length - 1, target = sum / k;
             Array.Sort(nums);                       // O(nlogn)
             if (nums[idx] > target) return false;   // biggest val is larger than target sum of each grp
@@ -15012,7 +15035,7 @@ namespace InterviewProblemNSolutions
         // Sieve of Eratosthenes Algo || Time O(n*loglogn) || Space O(n)
         public static int CountPrimes_SieveAlgo(int range)
         {
-            bool[] isPrime = new bool[range+1];   // O(n)
+            bool[] isPrime = new bool[range + 1];   // O(n)
             for (int i = 2; i < range; i++)
                 isPrime[i] = true;
 
@@ -15170,7 +15193,7 @@ namespace InterviewProblemNSolutions
         // Time O(n) Space O(1)
         public static bool IsNumber(string s)
         {
-            bool dotSeen = false, digitSeen= false;
+            bool dotSeen = false, digitSeen = false;
             int l = s.Length, i = -1;
 
             // if Optional sign found at begining than increment idx by 1
@@ -15284,10 +15307,10 @@ namespace InterviewProblemNSolutions
                 else    // update the score
                     hotelScore[hotelIds[i]] += GetScore(reviews[i].ToLower(), positive, negative);
 
-            
+
             //var sortedHotel = hotelScore.ToList();
             //sortedHotel.Sort((x, y) => x.Value != y.Value ? y.Value.CompareTo(x.Value) : x.Key.CompareTo(y.Key));
-            
+
             List<KeyValuePair<int, long>> sortedHotel = hotelScore.ToList();
             sortedHotel.Sort(delegate (KeyValuePair<int, long> h1, KeyValuePair<int, long> h2)
             // we need to sort in descending order of Score Higher Score Hotel comes 1st, hence if score of 2 hotels is different sort by score else pick one with smaller ID
@@ -15415,7 +15438,7 @@ namespace InterviewProblemNSolutions
                             len = Math.Max(len, 1 + (GetPredecessor(predecessor)));
                             if (len == original.Length) break;
                         }
-                
+
                 return cache[original] = len;
             }
             bool IsPredecessorSlower(string pre, string org)
@@ -15553,7 +15576,7 @@ namespace InterviewProblemNSolutions
              * So we were able to reduce the time complexity from O(n*lon(n)) to O(n).
              */
             long sum = 0, min = long.MaxValue;
-            foreach(var n in nums)
+            foreach (var n in nums)
             {
                 sum += n;
                 min = Math.Min(min, n);
@@ -15704,7 +15727,7 @@ namespace InterviewProblemNSolutions
                 if (val)    // mark position
                 {
                     board[r][c] = 'Q';  // Add Queen
-                    isLtDiagAttacked[r- lMin].Add(c- lMin);
+                    isLtDiagAttacked[r - lMin].Add(c - lMin);
                     isRtDiagAttacked[c + rMin].Add(r - rMin);
                     // Add position where queen is added
                     currPlacement.Push((char)('0' + r));
@@ -16119,7 +16142,7 @@ namespace InterviewProblemNSolutions
                 if (curr.children.ContainsKey(ch))  // to the trieNode from where we would begin our search
                     curr = curr.children[ch];       // if child node with given char doesn't exists than break-out
                 else break;
-                
+
                 prefix.Push(ch);
                 matches = new List<string>();
                 t.SearchSuggestion(curr, prefix, matches); // O(n*m)
@@ -16445,7 +16468,7 @@ namespace InterviewProblemNSolutions
             digitName[90] = "Ninety";
             #endregion
             string[] levels = new string[] { "", "Thousand", "Million", "Billion", "Trillion" };
-            
+
             int level = 0;
             Stack<string> st = new Stack<string>();
             while (num > 0)
@@ -16473,7 +16496,7 @@ namespace InterviewProblemNSolutions
                 // var levelName = levels[curLevel];
                 if (curLevel > 0)
                     st.Push(levels[curLevel]);
-                
+
                 int lastTwo = val % 100;
                 if (lastTwo < 20)
                 {
@@ -16491,7 +16514,7 @@ namespace InterviewProblemNSolutions
                     if (lastTwo > 0)
                         st.Push(digitName[lastTwo * 10]);
                 }
-                
+
                 val /= 100;
                 if (val > 0)
                 {
@@ -16538,7 +16561,7 @@ namespace InterviewProblemNSolutions
                 }
                 else if (left <= nums[i])
                     count = 1 + i - startIdx;
-                
+
                 ans += count;
             }
             return ans;
@@ -16899,11 +16922,11 @@ namespace InterviewProblemNSolutions
 
                 if (dp[r, c].ContainsKey(movesLeft))
                     return dp[r, c][movesLeft];
-                
+
                 // decrease moves left by 1
                 movesLeft--;
 
-                return dp[r, c][movesLeft] = (  Paths(r - 1, c, movesLeft) +
+                return dp[r, c][movesLeft] = (Paths(r - 1, c, movesLeft) +
                                                 Paths(r + 1, c, movesLeft) +
                                                 Paths(r, c - 1, movesLeft) +
                                                 Paths(r, c + 1, movesLeft)
@@ -17058,12 +17081,12 @@ namespace InterviewProblemNSolutions
                 }
             }
             //ans.Sort();                               // O(klogk)
-            
+
             int i = 0;
             lt++;
             while (lt < rt)                             // O(k)
                 ans[i++] = arr[lt++];
-            
+
             return ans;
 
             // local helper func
@@ -17185,7 +17208,7 @@ namespace InterviewProblemNSolutions
                     ans += kvp.Value;
                 }
                 else break;
-            
+
             return setSize;
         }
 
@@ -17238,7 +17261,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < count.Length; i++)
                 while (count[i]-- > 0)                  // O(n)
                     sorted[idx++] = (char)(i + 'a');
-            
+
             return new string(sorted);
         }
 
@@ -17254,14 +17277,14 @@ namespace InterviewProblemNSolutions
             StringBuilder sb = new StringBuilder();
             while (q.Count > 4)
                 sb.Append(q.Dequeue()).Append(q.Dequeue()).Append(q.Dequeue()).Append('-');
-            
+
             if (q.Count == 3)
                 sb.Append(q.Dequeue()).Append(q.Dequeue()).Append(q.Dequeue());
             else if (q.Count == 4)
                 sb.Append(q.Dequeue()).Append(q.Dequeue()).Append('-').Append(q.Dequeue()).Append(q.Dequeue());
             else //if(q.Count==2)
                 sb.Append(q.Dequeue()).Append(q.Dequeue());
-            
+
             return sb.ToString();
         }
 
@@ -17520,7 +17543,7 @@ namespace InterviewProblemNSolutions
             void GetShortestPaths_DFS(string source, string destination, int hopsCount = 0)
             {
                 if (hopsCount > shortestPathLen) return;
-                
+
                 path.Push(source);
 
                 if (source == destination)
@@ -17555,7 +17578,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < 32; i++)
                 if ((1 << i & n) > 0)
                     bLen = i + 1;
-            
+
             // we set initial count as '2' because smallest input i.e. n==1 has 0 & 1 as valid ans i.e. 2 nums
             int count = 2;
             // now we start with initial number 1
@@ -17672,7 +17695,7 @@ namespace InterviewProblemNSolutions
         // Time = Space = O(nlogn)
         public static int[] BeautifulArray_Cache(int n, Dictionary<int, int[]> cache, ref int biggestBeautifulSeen)
         {
-            if (cache.ContainsKey(n)) 
+            if (cache.ContainsKey(n))
                 return cache[n];
 
             int size = biggestBeautifulSeen, idx, i, val;
@@ -17921,22 +17944,22 @@ namespace InterviewProblemNSolutions
                 Queue<int> q = new Queue<int>();
                 List<int> grp = new List<int>();
                 int curR, curC;
-                foreach(var pos in positions)
+                foreach (var pos in positions)
                     if (!visited.Contains(pos))
                     {
                         q.Enqueue(pos);
                         visited.Add(pos);
 
-                        while(q.Count>0)
+                        while (q.Count > 0)
                         {
                             var currPos = q.Dequeue();
                             grp.Add(currPos);
                             curR = currPos / 1000;
                             curC = currPos % 1000;
                             // all nums which are in same row or same col are added to curr group
-                            foreach(var uniqPos in positions)
-                                if(!visited.Contains(uniqPos))
-                                    if(curR == uniqPos/1000 || curC == uniqPos%1000)    // same row or col
+                            foreach (var uniqPos in positions)
+                                if (!visited.Contains(uniqPos))
+                                    if (curR == uniqPos / 1000 || curC == uniqPos % 1000)    // same row or col
                                     {
                                         q.Enqueue(uniqPos);             // add to Queue
                                         visited.Add(uniqPos);           // mark visited
@@ -17963,7 +17986,7 @@ namespace InterviewProblemNSolutions
                     numFreq[arr[i]] = 1;    // add new num with freq = 1
                 else
                     numFreq[arr[i]]++;      // increase the frequency
-            
+
             var uniqSortNums = from kvp in numFreq
                                orderby kvp.Key
                                select kvp.Key;
@@ -17990,7 +18013,7 @@ namespace InterviewProblemNSolutions
                         else
                             numFreq[twice] -= numFreq[num];  // decrease the frequency of * 2 number in Dictionary for current num
                     }
-            
+
             // if all pair found & present
             return true;
         }
@@ -18154,13 +18177,13 @@ namespace InterviewProblemNSolutions
                 if (moveLeft < 0 || visited[currNode]) return;  // no more moves left or already visited node
                 reachableNodes++;           // since current node is reachable
                 visited[currNode] = true;   // mark visited
-                
+
                 List<int> connectedNodes = g[currNode].Keys.ToList();   // creating another collection as editing Dictionary while iterating is not allowed
                 foreach (var adjNode in connectedNodes)
                 {
                     // get count of no of nodes reachable b/w curr and adjacent nodes excluding both
                     reachableNodes += Math.Min(moveLeft, g[currNode][adjNode]);
-                    
+
                     // remove same amt of nodes from adjacent to avoid counting same in b/w nodes twice
                     g[adjNode][currNode] -= Math.Min(moveLeft, g[currNode][adjNode]);
 
@@ -18236,7 +18259,7 @@ namespace InterviewProblemNSolutions
                 {
                     var cur = q.Dequeue();
                     r = cur[0]; c = cur[1]; kLeft = cur[2];
-                    
+
                     // reached bottom-rt destination
                     if (r == m - 1 && c == n - 1)
                         return shortestRoute;
@@ -18250,7 +18273,7 @@ namespace InterviewProblemNSolutions
                         {
                             // curr cell is obstacle
                             obstacleCost = grid[currR][currC] == 1 ? 1 : 0;
-                            
+
                             // if curr cell is not seen with curr state
                             if (kLeft - obstacleCost >= 0 && !seen[currR, currC, kLeft - obstacleCost])
                             {
@@ -18553,7 +18576,7 @@ namespace InterviewProblemNSolutions
             InOrder(root);      // first take the inorder of the BST
             ls.Sort();          // sort the elements to make the BST valid, O(nlogn)
             FixTree(root);      // now update the BST as per the sorted list without changing the structure
-            
+
             // inline helper func
             void FixTree(TreeNode r)
             {
@@ -18577,7 +18600,7 @@ namespace InterviewProblemNSolutions
             TreeNode first = null, second = null, prv = null;
             // find the 2 out of order Nodes which have been swapped while doing InOrder traversal
             InOrder(root);      // O(n)
-            
+
             // Swap the 2 out of order nodes with each other
             int t = first.val;
             first.val = second.val;
@@ -18605,9 +18628,9 @@ namespace InterviewProblemNSolutions
             // find the 2 out of order Nodes which have been swapped while doing InOrder traversal
             curr = root;
             Stack<TreeNode> st = new Stack<TreeNode>();
-            while(true)
+            while (true)
             {
-                while(curr!=null)
+                while (curr != null)
                 {
                     st.Push(curr);
                     curr = curr.left;

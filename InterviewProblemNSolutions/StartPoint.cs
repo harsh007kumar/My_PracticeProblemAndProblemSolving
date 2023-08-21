@@ -66,7 +66,7 @@ namespace InterviewProblemNSolutions
             //MinimumCostToConnectSticks();
             //MinCostToMergeStones();
             //StringToInteger();
-            //ReverseNum();
+            ReverseNum();
             //SearchA2DMatrixII();
             //CloneGraph();
             //LetterCombinations();
@@ -8825,7 +8825,6 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"For input string '{inputStrArr[i]}' after zigzagging it in '{numRowsArr[i]}' no of rows the jumbled string is => '{StringAlgorithms.ZigzagConversion(inputStrArr[i], numRowsArr[i])}'");
             }
         }
-
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
