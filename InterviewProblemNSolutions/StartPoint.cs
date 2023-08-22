@@ -535,6 +535,7 @@ namespace InterviewProblemNSolutions
             LongestCommonPrefix();
             CapitalizeTheTitle();
             ZigzagConversion();
+            TopKFrequentElements();
 
 
 
@@ -8825,6 +8826,27 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"For input string '{inputStrArr[i]}' after zigzagging it in '{numRowsArr[i]}' no of rows the jumbled string is => '{StringAlgorithms.ZigzagConversion(inputStrArr[i], numRowsArr[i])}'");
             }
         }
+
+
+        public static void TopKFrequentElements()
+        {
+            // https://leetcode.com/problems/top-k-frequent-elements/
+            Utility.Print("347. Top K Frequent Elements");
+            int[][] numsArr = new int[][]
+            {
+                new int[] { 1, 1, 1, 2, 2, 3 },
+                new int[] { 1 },
+                new int[] { 5, -3, 9, 1, 7, 7, 9, 10, 2, 2, 10, 10, 3, -1, 3, 7, -9, -1, 3, 3 },
+            };
+            int[] kArr = new int[] { 2, 1, 3 };
+            for (int i = 0; i < kArr.Length; i++)
+            {
+                numsArr[i].Print("Input Array");
+                DailyProblem.TopKFrequent(numsArr[i], kArr[i]).Print($" '{kArr[i]}' most frequent elements from above list are");
+            }
+        }
+
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

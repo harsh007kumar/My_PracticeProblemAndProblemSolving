@@ -62,4 +62,59 @@ namespace InterviewProblemNSolutions
             return ans;
         }
     }
+
+    public class MinHeapPair
+    {
+        public int[][] arr;
+        public int Count = 0;
+        public MinHeapPair(int size) => arr = new int[size][];
+        public int Left(int x) => 2 * x + 1;
+        public int Right(int x) => 2 * x + 2;
+        public int Parent(int x) => (x - 1) / 2;
+        public void Add(int n, int freq)  // bottom-up
+        {
+            Console.WriteLine($" Key {n}- Freq {freq}, Heap Size {Count}");
+            int i = Count++;
+            arr[i] = new int[2] { n, freq };
+            while (i != 0 && arr[Parent(i)][1] > arr[i][1])
+            {
+                int p = Parent(i);
+                // swap
+                var temp = arr[p];
+                arr[p] = arr[i];
+                arr[i] = temp;
+                i = p;
+            }
+        }
+        public void Heapify(int i = 0)    // top-down
+        {
+            while (i < Count)
+            {
+                if (Count < 2) return;
+                int lt = Left(i), rt = Right(i);
+                int smaller = i;
+                if (lt < Count && arr[lt][1] < arr[i][1])
+                    smaller = lt;
+                if (rt < Count && arr[rt][1] < arr[smaller][1])
+                    smaller = rt;
+                if (smaller != i)
+                {
+                    var temp = arr[smaller];
+                    arr[smaller] = arr[i];
+                    arr[i] = temp;
+                    // Heapify child
+                    i = smaller;
+                }
+                else return;
+            }
+
+        }
+        public int[] ExtractMin()
+        {
+            var ans = arr[0];
+            arr[0] = arr[--Count];
+            Heapify();
+            return ans;
+        }
+    }
 }

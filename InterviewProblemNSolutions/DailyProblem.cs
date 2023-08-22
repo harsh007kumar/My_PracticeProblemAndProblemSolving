@@ -18684,5 +18684,38 @@ namespace InterviewProblemNSolutions
                 return r1;
             }
         }
+
+        // Time O(nlogk) Space O(Max(k,d)), n = length of nums, d = distinct nums
+        public static int[] TopKFrequent(int[] nums, int k)
+        {
+            Dictionary<int, int> numCount = new Dictionary<int, int>();
+            foreach (var no in nums)             // O(n)
+                if (!numCount.ContainsKey(no))
+                    numCount[no] = 1;
+                else
+                    numCount[no]++;
+            var topK = new MinHeapPair(k);
+            foreach (var kvp in numCount)        // O(nlogk)
+            {
+                if (topK.Count < k)
+                    topK.Add(kvp.Key, kvp.Value);
+                else if (topK.arr[0][1] < kvp.Value)
+                {
+                    topK.ExtractMin();
+                    topK.Add(kvp.Key, kvp.Value);
+                }
+            }
+            return topK.arr.Select(pair => pair[0]).ToArray(); // O(k)
+
+            /* Dictionary+LINQ, Time O(NLogN) Space O(N)
+            Dictionary<int, int> numCount = new Dictionary<int, int>();
+            foreach (var no in nums) // O(N)
+                if (!numCount.ContainsKey(no))
+                    numCount[no] = 1;
+                else
+                    numCount[no]++;
+            return numCount.OrderByDescending(kvp => kvp.Value).Select(kvp => kvp.Key).Take(k).ToArray(); // O(NLogN)
+            */
+        }
     }
 }
