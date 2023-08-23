@@ -434,6 +434,27 @@ namespace InterviewProblemNSolutions
         // Time O(n) || Space O(n)
         public static int[] ProductOfArrayExceptSelf(int[] nums, int len)
         {
+            /* 2 - Pass Approach
+            int l = nums.Length;
+            int[] ltProduct = new int[l];
+            int[] rtProduct = new int[l];
+            int[] ans = new int[l];
+            for (int i = l - 1; i >= 0; i--)         // O(n)
+            {
+                ltProduct[i] = rtProduct[i] = nums[i];
+                if (i < l - 1) rtProduct[i] *= rtProduct[i + 1];   // product from of all elements on right
+            }
+            for (int i = 0; i < l; i++)            // O(n)
+            {
+
+                if (i > 0) ltProduct[i] *= ltProduct[i - 1];     // product from of all elements on left
+                var ltP = i > 0 ? ltProduct[i - 1] : 1;
+                var rtP = i < l - 1 ? rtProduct[i + 1] : 1;
+                ans[i] = ltP * rtP;
+            }
+            return ans;
+            */
+
             int[] leftProduct = new int[len];
             int[] rtProduct = new int[len];
 
