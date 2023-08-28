@@ -1181,7 +1181,7 @@ namespace InterviewProblemNSolutions
         // Func() takes input of non-negative integers representing an elevation map where the width of each bar is 1,
         // and compute how much water it can trap after raining.
         // Time O(n) || Space O(n)
-        public static int TrapRainWater(int[] height)
+        public static int TrapRainWater_Stack(int[] height)
         {
             /* a) Insert elevation in stack before storing calculate,
              *      water than could be stored b/w current and stack top
@@ -1217,6 +1217,46 @@ namespace InterviewProblemNSolutions
             }
             return waterCollected;
         }
+
+        // Time O(n) Space O(1)
+        // https://youtu.be/ZI2z5pq0TqA
+        public static int TrapRainWater_2Pointer(int[] height)
+        {
+            int lt = 0, rt = height.Length - 1, trapped = 0, ltMax = 0, rtMax = 0;
+            while (lt < rt)
+                // we calculate the water stored right above the current index only
+                if (height[lt] < height[rt])
+                {
+                    ltMax = Math.Max(ltMax, height[lt]);
+                    trapped += ltMax - height[lt];
+                    lt++;
+                }
+                else
+                {
+                    rtMax = Math.Max(rtMax, height[rt]);
+                    trapped += rtMax - height[rt];
+                    rt--;
+                }
+            return trapped;
+
+
+            #region Time = Space = O(n)
+            //int l = height.Length, trapped = 0;
+            //int[] ltMax = new int[l];
+            //int[] rtMax = new int[l];
+            //ltMax[0] = rtMax[l - 1] = 0;
+            //for (int i = 1; i < l; i++)
+            //    ltMax[i] = Math.Max(height[i - 1], ltMax[i - 1]);
+            //for (int i = l - 2; i >= 0; i--)
+            //    rtMax[i] = Math.Max(height[i + 1], rtMax[i + 1]);
+
+            //for (int i = 0; i < l; i++)
+            //    // we only want to add +ve water units, and water at current idx which is bascially min of left max, rt max - curr ht
+            //    trapped += Math.Max(0, Math.Min(ltMax[i], rtMax[i]) - height[i]);
+            //return trapped;
+            #endregion
+        }
+
 
         // Returns True if string is Palindrome
         public static bool IsPalindrome(string str)

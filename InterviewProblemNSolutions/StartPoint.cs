@@ -42,7 +42,7 @@ namespace InterviewProblemNSolutions
             //CompressedStringIterator();
             //MeetingRoomsII();
             //NumberOfIslands();
-            //TrapRainWater();
+            TrapRainWater();
             //FindTheCelebrity();
             //IsPalindrome();
             //WordSearch();
@@ -1156,12 +1156,14 @@ namespace InterviewProblemNSolutions
         public static void TrapRainWater()
         {
             // https://leetcode.com/problems/trapping-rain-water/
+            // https://youtu.be/ZI2z5pq0TqA
             Utility.Print("42. Trapping Rain Water");
             int[][] heightArr = { new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 }, new int[] { 4, 2, 0, 3, 2, 5 } };
             foreach (var height in heightArr)
             {
                 height.Print("Elevation Map");
-                Console.WriteLine($" Maximum Vol of water that can be trapped in above Map is: {DailyProblem.TrapRainWater(height)}");
+                Console.WriteLine($" Maximum Vol of water that can be trapped in above Map is (stack based approach): {DailyProblem.TrapRainWater_Stack(height)}");
+                Console.WriteLine($" Maximum Vol of water that can be trapped in above Map is (2-Pointers based approach): {DailyProblem.TrapRainWater_2Pointer(height)}");
             }
         }
 
