@@ -9433,6 +9433,7 @@ namespace InterviewProblemNSolutions
             //return timer;
             #endregion
 
+            #region 2nd Attempt
             /* The maximum number of tasks is 26. Let's allocate an array frequencies of 26 elements to keep the frequency of each task.
              * 
              * Iterate over the input array and store the frequency of task A at index 0, the frequency of task B at index 1, etc.
@@ -9444,23 +9445,48 @@ namespace InterviewProblemNSolutions
              * 
              * Return busy slots + idle slots: len(tasks) + idle_time.
              */
+            //int l = tasks.Length;
+            //if (coolDownTime == 0) return l;
+
+            //// calculate frequencies of the tasks
+            //int[] frequency = new int[26];
+            //for (int i = 0; i < l; i++) frequency[tasks[i] - 'A']++;// O(n)
+
+            //Array.Sort(frequency);                                  // O(26log26)
+
+            //int maxFreqTask = frequency[25], maxIdleTime = (maxFreqTask - 1) * coolDownTime;
+
+            //// not we try reducing idleTime by iterating over remaining tasks and see how many can be completed within coolDown time for maxFreqTask
+            //for (int i = 24; i >= 0 && maxIdleTime > 0; i--)        // O(25)
+            //    maxIdleTime -= Math.Min(maxFreqTask - 1, frequency[i]);
+
+            //// idle time can be >= 0
+            //return l + Math.Max(0, maxIdleTime);
+            #endregion
+
+            // Final Attempt
             int l = tasks.Length;
             if (coolDownTime == 0) return l;
 
-            // calculate frequencies of the tasks
-            int[] frequency = new int[26];
-            for (int i = 0; i < l; i++) frequency[tasks[i] - 'A']++;// O(n)
+            int maxFreq = 0, maxFreqIdx = -1;
+            int[] taskFreq = new int[26];
+            // calculate freq of each task and find maxFreq
+            foreach (var t in tasks) // O(n)
+                if (++taskFreq[t - 'A'] > maxFreq)
+                {
+                    maxFreq = taskFreq[t - 'A'];
+                    maxFreqIdx = t - 'A';
+                }
 
-            Array.Sort(frequency);                                  // O(26log26)
+            // calculate total idle time
+            int idleTime = (maxFreq - 1) * coolDownTime;
 
-            int maxFreqTask = frequency[25], maxIdleTime = (maxFreqTask - 1) * coolDownTime;
+            // try reducing idle time
+            for (int i = 0; i < 26; i++)  // O(24)
+                if (i != maxFreqIdx)
+                    idleTime -= Math.Min(maxFreq - 1, taskFreq[i]);
 
-            // not we try reducing idleTime by iterating over remaining tasks and see how many can be completed within coolDown time for maxFreqTask
-            for (int i = 24; i >= 0 && maxIdleTime > 0; i--)        // O(25)
-                maxIdleTime -= Math.Min(maxFreqTask - 1, frequency[i]);
-
-            // idle time can be >= 0
-            return l + Math.Max(0, maxIdleTime);
+            return l + Math.Max(0, idleTime);
         }
 
 
