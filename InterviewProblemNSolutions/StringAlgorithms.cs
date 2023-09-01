@@ -1268,5 +1268,47 @@ namespace InterviewProblemNSolutions
             foreach (var sb in sbArr) zigZag += sb.ToString();
             return zigZag;
         }
+
+
+        // Time O(26*n) Space O(n), n = length of input string 's'
+        public static string LongestRepeatingCharacterReplacement(string s, int k)
+        {
+            /*
+            For each unique character present in 's'
+            we run a loop in which we try to find the max possible len of string with one character only after making atmost k replacements
+            we do this maximum of 26 times if all characters r present in the input string
+
+            for calculating max Length with each characters we count how many diff character other than one we r trying to maximize we have got till now
+            till its <=k we can keep maximizing string length
+
+            post hitting k+1 diff characters we update the starting point => 1st different character that was found on idx + 1
+            */
+
+            HashSet<char> unqChars = new HashSet<char>();
+            foreach (var ch in s) unqChars.Add(ch);
+
+            int maxRepeatingChar = 0;
+            foreach (var unqChar in unqChars)           // O(26)
+            {
+                int start = 0;
+                Queue<MyCharNode> q = new Queue<MyCharNode>();
+                for (int i = 0; i < s.Length; i++)      // O(n)
+                {
+                    if (s[i] != unqChar)   // diff character than one we are trying to maximize
+                    {
+                        q.Enqueue(new MyCharNode(s[i], i));
+                        if (q.Count > k)   // need to update starting point
+                        {
+                            start = q.Dequeue().idx + 1;
+                        }
+                    }
+                    maxRepeatingChar = Math.Max(maxRepeatingChar, 1 + i - start);
+
+                    // no point in continuing if we already have got the max possible length
+                    if (s.Length - start < maxRepeatingChar) break;
+                }
+            }
+            return maxRepeatingChar;
+        }
     }
 }

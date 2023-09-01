@@ -536,6 +536,7 @@ namespace InterviewProblemNSolutions
             CapitalizeTheTitle();
             ZigzagConversion();
             TopKFrequentElements();
+            LongestRepeatingCharacterReplacement();
 
 
 
@@ -8848,6 +8849,16 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void LongestRepeatingCharacterReplacement()
+        {
+            // https://leetcode.com/problems/longest-repeating-character-replacement/description/
+            Utility.Print("424. Longest Repeating Character Replacement");
+            string[] sArr = new string[] { "ABAB", "AABABBA" };
+            int[] kArr = { 2, 1 };
+            for (int i = 0; i < kArr.Length; i++)
+                Console.WriteLine($"For input string '{sArr[i]}' and k '{kArr[i]}' maximum length of string with repeating character is: '{StringAlgorithms.LongestRepeatingCharacterReplacement(sArr[i], kArr[i])}'");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
