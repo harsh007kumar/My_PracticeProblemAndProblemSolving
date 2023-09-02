@@ -705,6 +705,51 @@ namespace InterviewProblemNSolutions
         // Time O(n) || Space O(26) ~O(1)
         public static bool PermutationInString(string s1, string s2)
         {
+            #region ALGO
+            //Get the count of each character in s1
+            //Now traverse thru s2 and start updating the count of characters encountered
+            //    if we get character which is not present in s1 then reset the counter for all characters
+            //    bcoz we want continous chars ie. substring of s1 & even one unwated chars will unstify condition
+
+            //    another thing to keep in mind is if we get more than k (present in s1) req character for any letter in s2
+            //    then we must remove that character & any character which comes before  that character is removed
+            #endregion
+            int[] expected = new int[26], actual = new int[26];
+            foreach (var ch in s1)          // O(n)
+                expected[ch - 'a']++;
+
+            int totalCharInS1 = s1.Length, validCharFoundInS2 = 0, startIdx = 0, l = s2.Length;
+            for (int i = 0; i < l; i++)     // O(m)
+            {
+                var ch = s2[i];
+                if (expected[ch - 'a'] == 0)// character which is not present in s1 encoutered reset count and 'actual' set
+                {
+                    actual = new int[26];   // reset characters found till now
+                    validCharFoundInS2 = 0;
+                    startIdx = i + 1;
+                }
+                else                        // char present in s1 found
+                {
+                    if (++actual[ch - 'a'] > expected[ch - 'a'])  // if frequency of current character is more than expected
+                    {
+                        while (startIdx < i)
+                        {
+                            actual[s2[startIdx] - 'a']--;
+                            if (s2[startIdx++] == ch) break;   // extra count of current char is removed, hence break now
+                            validCharFoundInS2--;
+                        }
+                    }
+                    else
+                    {
+                        if (++validCharFoundInS2 == totalCharInS1)
+                            return true;    // all required characters found in continuation
+                    }
+                }
+            }
+            return false;
+
+            #region Prv Approach O(n) Approach
+            /*
             int[] actual = new int[26];
             int[] expected = new int[26];
             for (int i = 0; i < s1.Length; i++)
@@ -741,6 +786,8 @@ namespace InterviewProblemNSolutions
                 }
 
             return false;
+            */
+            #endregion
         }
 
 
