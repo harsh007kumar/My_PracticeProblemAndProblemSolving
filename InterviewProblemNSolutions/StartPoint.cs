@@ -537,6 +537,7 @@ namespace InterviewProblemNSolutions
             ZigzagConversion();
             TopKFrequentElements();
             LongestRepeatingCharacterReplacement();
+            NumberOfSubstringsContainingAllThreeCharacters();
 
 
 
@@ -8859,6 +8860,18 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < kArr.Length; i++)
                 Console.WriteLine($"For input string '{sArr[i]}' and k '{kArr[i]}' maximum length of string with repeating character is: '{StringAlgorithms.LongestRepeatingCharacterReplacement(sArr[i], kArr[i])}'");
         }
+
+
+        public static void NumberOfSubstringsContainingAllThreeCharacters()
+        {
+            // https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/description/
+            Utility.Print("1358. Number of Substrings Containing All Three Characters");
+            string[] sArr = { "abcabc", "aaacb", "abc" };
+            foreach (var str in sArr)
+                //Console.WriteLine($"For input string '{str}' no of substring with has atleast 1 of a,b,c are: {StringAlgorithms.NumberOfSubstringsContainingAllThreeCharacters(str)}");
+                Console.WriteLine($"For input string '{str}' no of substring with has atleast 1 of a,b,c are: {StringAlgorithms.NumberOfSubstringsContainingAllThreeCharacters_Faster(str)}");
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

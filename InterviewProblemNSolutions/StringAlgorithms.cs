@@ -1271,7 +1271,7 @@ namespace InterviewProblemNSolutions
 
 
         // Time O(26*n) Space O(n), n = length of input string 's'
-        public static string LongestRepeatingCharacterReplacement(string s, int k)
+        public static int LongestRepeatingCharacterReplacement(string s, int k)
         {
             /*
             For each unique character present in 's'
@@ -1309,6 +1309,64 @@ namespace InterviewProblemNSolutions
                 }
             }
             return maxRepeatingChar;
+        }
+
+        // Time = O(n^2) | Space O(1), n = length of input string 's'
+        public static int NumberOfSubstringsContainingAllThreeCharacters(string s)
+        {
+
+            #region ALGO
+            //Brute force way is to check for each substring possible and see if it has atleast 1 of each req character a,b,c
+            //we try having a counter for each char and once we found that we have atleast 1 of each
+
+            //this is valid substring, now for all the remaining characters post this point will also yield a valid string // optimization
+            //hence we can simple add length - currentIdx to final ans
+            #endregion
+            int l = s.Length, ans = 0;
+            int[] counter = new int[3];
+            for (int startIdx = 0; startIdx < l; startIdx++)
+            {
+                counter[0] = counter[1] = counter[2] = 0;
+                for (int j = startIdx; j < l; j++)
+                {
+                    counter[s[j] - 'a']++;
+                    if (counter[0] > 0 && counter[1] > 0 && counter[2] > 0)
+                    {
+                        ans += l - j;
+                        break;  // breakout of inner loop as we can know each subtring from this point onwards will have atleast 1 of each char
+                    }
+                }
+            }
+            return ans;
+        }
+
+        // Time = O(n) | Space O(1), n = length of input string 's'
+        public static int NumberOfSubstringsContainingAllThreeCharacters_Faster(string s)
+        {
+            #region ALGO
+            //Not optimizing on below approach we see that we are uncessary starting from the start once we have a valid substring
+            //better approach wud be once we get a valid substring we just see how many character from the start we can remove
+            //till curr substring is no longer valid
+
+            //now we add this count to the final ans
+            //& we start the process again
+
+            //again traversing thru characters till we found a valid string and than removing characters till string is no longer active
+            //and adding counter to ans
+
+            //& repeat
+            #endregion
+            int[] counter = new int[3];
+            int ans = 0, i = -1, validTill = 0, l = s.Length;
+            while (++i < l)
+            {
+                counter[s[i] - 'a']++;
+                // we got valid string, now we try to see how many characters from start we can remove before its no longer valid
+                while (counter[0] > 0 && counter[1] > 0 && counter[2] > 0)
+                    --counter[s[validTill++] - 'a']; // increasing validTill counter tells us how many characters from start have been removed
+                ans += validTill; // all characters till valid-1 wud yield in valid string when combined with characters till idx i
+            }
+            return ans;
         }
     }
 }
