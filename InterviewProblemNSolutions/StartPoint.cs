@@ -538,6 +538,8 @@ namespace InterviewProblemNSolutions
             TopKFrequentElements();
             LongestRepeatingCharacterReplacement();
             NumberOfSubstringsContainingAllThreeCharacters();
+            CarFleet();
+
 
 
 
@@ -8872,7 +8874,30 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"For input string '{str}' no of substring with has atleast 1 of a,b,c are: {StringAlgorithms.NumberOfSubstringsContainingAllThreeCharacters_Faster(str)}");
         }
 
-
+        public static void CarFleet()
+        {
+            // https://leetcode.com/problems/car-fleet/description/
+            Utility.Print("853. Car Fleet");
+            int[] targetArr = { 12, 10, 100, 10 };
+            int[][] positionArr = new int[][] {
+                new int[] { 10, 8, 0, 5, 3 },
+                new int[] { 3 },
+                new int[] { 0, 2, 4 },
+                new int[] { 6, 8 }
+            };
+            int[][] speedArr = new int[][] {
+                new int[] { 2, 4, 1, 1, 3 },
+                new int[] { 3 },
+                new int[] { 4, 2, 1 },
+                new int[] { 3, 2 } 
+            };
+            for (int i = 0; i < targetArr.Length; i++)
+            {
+                positionArr[i].Print("Positions of cars");
+                speedArr[i].Print("Speed of cars");
+                Console.WriteLine($"For reaching target '{targetArr[i]}' miles above cars would reach in '{DailyProblem.CarFleet(targetArr[i], positionArr[i], speedArr[i])}' grps/fleets of cars\n");
+            }
+        }
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

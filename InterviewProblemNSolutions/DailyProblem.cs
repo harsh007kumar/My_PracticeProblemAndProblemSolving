@@ -18818,5 +18818,39 @@ namespace InterviewProblemNSolutions
             return numCount.OrderByDescending(kvp => kvp.Value).Select(kvp => kvp.Key).Take(k).ToArray(); // O(NLogN)
             */
         }
+
+        // Time O(nlogn) | Space O(n), n = no of cars in positions/speed array
+        public static int CarFleet(int target, int[] position, int[] speed)
+        {
+            #region ALGO
+            /*
+             * Create a custom list which has both position and speed and sort it  by position of cars
+             * Now we create a stack and start from 0th index of sorted array of position of cars
+             * we add total time required to reach 'target' for current car with given 's' speed from 'p' position
+             * 
+             * we add it to the stack
+             * 
+             * before adding to stack just check if there is a faster car whose time to reach target is lessort than curr than pop it
+             * as that will merge to current grp/fleet of cars
+             * 
+             * at the end we know how many fleets r there by simply counting the no grp left in stack
+             */
+            #endregion
+            int l = position.Length;
+            List<MyNode> posSpeed = new List<MyNode>();
+            for (int i = 0; i < l; i++)
+                posSpeed.Add(new MyNode(position[i], speed[i]));
+
+            var sorted = (from posSp in posSpeed orderby posSp.val select posSp).ToList();      // O(nlogn)
+            Stack<decimal> st = new Stack<decimal>();
+            foreach (var car in sorted)             // O(n)
+            {
+                // if there are faster car than current car will block before reaching target than pop them as it wud merge with curr car fleet
+                while (st.Count > 0 && st.Peek() <= (decimal)(target - car.val) / car.idx)
+                    st.Pop();
+                st.Push((decimal)(target - car.val) / car.idx);  // add current car time to reach target
+            }
+            return st.Count;
+        }
     }
 }
