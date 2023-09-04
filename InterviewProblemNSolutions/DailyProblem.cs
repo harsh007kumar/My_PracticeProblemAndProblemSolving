@@ -6503,19 +6503,33 @@ namespace InterviewProblemNSolutions
         /// </summary>
         /// <param name="T"></param>
         /// <returns></returns>
-        public static int[] DailyTemperatures(int[] T)
+        public static int[] DailyTemperatures(int[] temperatures)
         {
-            int[] ans = new int[T.Length];
-            Stack<int> nextHigher = new Stack<int>(T.Length);
-            for (int i = T.Length - 1; i >= 0; i--)
+            int l = temperatures.Length;
+            int[] warmer = new int[l];
+            Stack<int> st = new Stack<int>();
+            for (int i = 0; i < l; i++)        // O(n)
             {
-                while (nextHigher.Count > 0 && T[nextHigher.Peek()] <= T[i])
-                    nextHigher.Pop();
-                // if stack is empty means no higher value exists else take the Stack Top
-                ans[i] = nextHigher.Count > 0 ? nextHigher.Peek() - i : 0;
-                nextHigher.Push(i);      // add current val to Stack
+                // if stack is empty means or no lower value exists than skip
+                while (st.Count > 0 && temperatures[st.Peek()] < temperatures[i])
+                    warmer[st.Peek()] = i - st.Pop();   // update index diff in ans array
+                st.Push(i); // push current idx
             }
-            return ans;
+            return warmer;
+
+            #region OLD implementation same approach
+            //int[] ans = new int[T.Length];
+            //Stack<int> nextHigher = new Stack<int>(T.Length);
+            //for (int i = T.Length - 1; i >= 0; i--)
+            //{
+            //    while (nextHigher.Count > 0 && T[nextHigher.Peek()] <= T[i])
+            //        nextHigher.Pop();
+            //    // if stack is empty means no higher value exists else take the Stack Top
+            //    ans[i] = nextHigher.Count > 0 ? nextHigher.Peek() - i : 0;
+            //    nextHigher.Push(i);      // add current val to Stack
+            //}
+            //return ans;
+            #endregion
         }
 
 
