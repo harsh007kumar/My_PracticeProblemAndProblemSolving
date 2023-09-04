@@ -3037,7 +3037,7 @@ namespace InterviewProblemNSolutions
             /*
             //int maxSortedLen = 1, currSortedLen = 1;
             if (root == null) return 0;
-            Stack<TreeNode> st = new Stack<TreeNode>(100);
+            Stack<TreeNode> finishTime = new Stack<TreeNode>(100);
             int maxSortedLen = 1, currSortedLen = 1;
             TreeNode last = null;
             bool isAscending = true;
@@ -3045,11 +3045,11 @@ namespace InterviewProblemNSolutions
             {
                 while (root != null)
                 {
-                    st.Push(root);
+                    finishTime.Push(root);
                     root = root.left;
                 }
-                if (st.Count == 0) break;
-                var temp = st.Pop();
+                if (finishTime.Count == 0) break;
+                var temp = finishTime.Pop();
                 if (last != null)
                 {
                     if (isAscending)
@@ -8434,7 +8434,7 @@ namespace InterviewProblemNSolutions
              * if stack is empty add current digit to stack if num is not '0'
              * else if check while Last Inserted digit is > current digit than remove stack top and decreament 'k'
              * 
-             * Now if k > 0 remove st.Top() & decreament 'k' untill k == 0
+             * Now if k > 0 remove finishTime.Top() & decreament 'k' untill k == 0
              * 
              * at end pull out all digits from stack and reverse & return
              */
@@ -18842,15 +18842,35 @@ namespace InterviewProblemNSolutions
                 posSpeed.Add(new MyNode(position[i], speed[i]));
 
             var sorted = (from posSp in posSpeed orderby posSp.val select posSp).ToList();      // O(nlogn)
-            Stack<decimal> st = new Stack<decimal>();
+            Stack<decimal> finishTime = new Stack<decimal>();
             foreach (var car in sorted)             // O(n)
             {
                 // if there are faster car than current car will block before reaching target than pop them as it wud merge with curr car fleet
-                while (st.Count > 0 && st.Peek() <= (decimal)(target - car.val) / car.idx)
-                    st.Pop();
-                st.Push((decimal)(target - car.val) / car.idx);  // add current car time to reach target
+                while (finishTime.Count > 0 && finishTime.Peek() <= (decimal)(target - car.val) / car.idx)
+                    finishTime.Pop();
+                finishTime.Push((decimal)(target - car.val) / car.idx);  // add current car time to reach target
             }
-            return st.Count;
+            return finishTime.Count;
+        }
+
+        // Time = O(target) | Space = O(n), n = no of cars in input array's
+        public static int CarFleet_Faster(int target, int[] position, int[] speed)
+        {
+            int[] track = new int[target];
+            for (int i = 0; i < speed.Length; i++)      // O(n)
+                track[position[i]] = speed[i];  // add speed of each car on the track where they start from
+            Stack<decimal> leaders = new Stack<decimal>();
+            for (int i = target - 1; i >= 0; i--)       // O(target)
+            {
+                if (track[i] > 0)
+                {
+                    var currCarFinishTime = (decimal)(target - i) / track[i];
+                    // if there are no leader cars or leader will reach before current car can than add curr car to the stack as it will reach in different grp
+                    if (leaders.Count == 0 || leaders.Peek() < currCarFinishTime)
+                        leaders.Push(currCarFinishTime);
+                }
+            }
+            return leaders.Count;
         }
     }
 }

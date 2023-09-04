@@ -8895,7 +8895,8 @@ namespace InterviewProblemNSolutions
             {
                 positionArr[i].Print("Positions of cars");
                 speedArr[i].Print("Speed of cars");
-                Console.WriteLine($"For reaching target '{targetArr[i]}' miles above cars would reach in '{DailyProblem.CarFleet(targetArr[i], positionArr[i], speedArr[i])}' grps/fleets of cars\n");
+                //Console.WriteLine($"For reaching target '{targetArr[i]}' miles above cars would reach in '{DailyProblem.CarFleet(targetArr[i], positionArr[i], speedArr[i])}' grps/fleets of cars\n");
+                Console.WriteLine($"For reaching target '{targetArr[i]}' miles above cars would reach in '{DailyProblem.CarFleet_Faster(targetArr[i], positionArr[i], speedArr[i])}' grps/fleets of cars\n");
             }
         }
 
