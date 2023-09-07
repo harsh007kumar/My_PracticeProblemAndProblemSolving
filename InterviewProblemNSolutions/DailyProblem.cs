@@ -18820,6 +18820,7 @@ namespace InterviewProblemNSolutions
         }
 
         // Time O(nlogn) | Space O(n), n = no of cars in positions/speed array
+        // requirs sorting better if target value is very high as compared to no of cars i.e. target >>> nlogn
         public static int CarFleet(int target, int[] position, int[] speed)
         {
             #region ALGO
@@ -18856,6 +18857,15 @@ namespace InterviewProblemNSolutions
         // Time = O(target) | Space = O(n), n = no of cars in input array's
         public static int CarFleet_Faster(int target, int[] position, int[] speed)
         {
+            #region ALGO
+            /*
+                We just need to calculate the finish time of each car and basis that
+                if we start from either start of the very end of track
+                we can see how many slowers car will join leader car and form 1 grp.
+
+                any car which is slower than leading car will reach in its own grp
+             */
+            #endregion
             int[] track = new int[target];
             for (int i = 0; i < speed.Length; i++)      // O(n)
                 track[position[i]] = speed[i];  // add speed of each car on the track where they start from
@@ -18871,6 +18881,61 @@ namespace InterviewProblemNSolutions
                 }
             }
             return leaders.Count;
+        }
+
+        // Time O(logP*n) Space O(1), P = max pile size in array of piles, n = length of piles array
+        public static int KokoEatingBananas(int[] piles, int h)
+        {
+            #region ALGO
+            /*
+            Since we know max speed required to finish all the pile is just the size of max pile (we can also skip finding it & just start with int.MaxValue)
+            minSpeed is 1 banana per hour
+
+            as we can only go to 1 pile per hr and eat at the max speed at which we can either finish all or have to wait if eating speed in more than no of banana in given pile
+
+            so we try all the combination in binary search way, thats we see if mid speed (avg of min+max) is good enouf to eat all the banans in <= 'h' hrs before gaurd arrive or not
+            if yes we move the max to mid-1
+            if no we move the min to mid+1
+            also keep track of last speed at which we were able to eat all piles
+
+            keep repeating above operation till min is <= max
+
+            to understand if current speed 's' is enouf to finish we just need to see how many hours it will take to finish current pile and add that to reqHours
+            if before finish all the piles reqHours cross threshold of 'h' we know this speed 's' is not enouf
+            */
+            #endregion
+            int minSpeedK = 1, maxSpeedK = 1, l = piles.Length;
+            // get max piles size from
+            foreach (var pile in piles)  // O(n)
+                if (maxSpeedK < pile)
+                    maxSpeedK = pile;
+
+            // now we try to reduce maxSpeed
+            int minSpeedToFinishAll = maxSpeedK;
+            while (minSpeedK <= maxSpeedK)  // O(logP)
+            {
+                var mid = minSpeedK + (maxSpeedK - minSpeedK) / 2;
+                if (CanEatAllInH(mid))   // O(n)
+                {
+                    minSpeedToFinishAll = mid;
+                    maxSpeedK = mid - 1;
+                }
+                else
+                    minSpeedK = mid + 1;
+            }
+            return minSpeedToFinishAll;
+
+            // helper func
+            bool CanEatAllInH(int speed)
+            {
+                int reqHours = 0;
+                foreach (var pile in piles)
+                {
+                    reqHours += pile / speed + (pile % speed == 0 ? 0 : 1);
+                    if (reqHours > h) return false;
+                }
+                return true;
+            }
         }
     }
 }
