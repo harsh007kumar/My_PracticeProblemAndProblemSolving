@@ -87,6 +87,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringAlgorithms.cs" />
     <Compile Include="StringIterator.cs" />
+    <Compile Include="TimeMap.cs" />
     <Compile Include="TinyURL.cs" />
     <Compile Include="Trie.cs" />
     <Compile Include="TwoSum.cs" />

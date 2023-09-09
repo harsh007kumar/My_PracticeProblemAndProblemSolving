@@ -540,6 +540,8 @@ namespace InterviewProblemNSolutions
             NumberOfSubstringsContainingAllThreeCharacters();
             CarFleet();
             KokoEatingBananas();
+            TimeBasedKeyValueStore();
+
 
 
 
@@ -8921,6 +8923,28 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Min speed per hour at with koko need to eat banana to finish all above piles before gaurd comes back in '{hArr[i]}' hours is: {DailyProblem.KokoEatingBananas(pilesArr[i], hArr[i])}");
                 Console.WriteLine(Utility.lineDelimeter);
             }
+        }
+
+        public static void TimeBasedKeyValueStore()
+        {
+            // https://leetcode.com/problems/time-based-key-value-store/description/
+            Utility.Print("981. Time Based Key-Value Store");
+            string[] timeMap = new string[] { "set", "get", "get", "set", "get", "get" };
+            string[][] inputs = new string[][] { new string[] { "foo", "bar", "1" }, new string[] { "foo", "1" }, new string[] { "foo", "3" }, new string[] { "foo", "bar2", "4" }, new string[] { "foo", "4" }, new string[] { "foo", "5" } };
+
+            timeMap.Print("TimeMap Operations");
+            TimeMap tmObj = new TimeMap();
+            foreach (var op in inputs)
+                if (op.Length > 2)
+                {
+                    Console.WriteLine($"Put Operation Key: {op[0]}\tValue:{op[1]}\tTimestamp:{op[2]}");
+                    tmObj.Set(op[0], op[1], Convert.ToInt32(op[2]));
+                }
+                else
+                {
+                    Console.Write($"Get Operation Key: {op[0]}\tTimestamp:{op[1]}");
+                    Console.WriteLine($"\t\tAns for Get => {tmObj.Get(op[0], Convert.ToInt32(op[1]))}");
+                }
         }
 
 
