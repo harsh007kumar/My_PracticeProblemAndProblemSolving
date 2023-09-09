@@ -9258,6 +9258,7 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/search-in-rotated-sorted-array/
             // https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
+            Utility.Print("33. Search in Rotated Sorted Array");
             Utility.Print("Problem-40  Given a sorted array of n integers that has been rotated an unknown number of times," +
                 " give a O(logn) algorithm that finds an element in the array.(pp. 579 - 580)");
             int[][] input = { new int[] { 15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14 }, new int[] { 4, 5, 6, 7, 0, 1, 2 }, new int[] { 4, 5, 6, 7, 0, 1, 2 }, new int[] { 1 } };
@@ -9270,6 +9271,8 @@ namespace InterviewProblemNSolutions
                 //var index = SearchAlgorithms.BinarySearchInRotatedArraySinglePass(input[i], 0, input[i].Length - 1, searchFor[i]);
                 // Iterative
                 var index = SearchAlgorithms.BinarySearchInRotatedArraySinglePassIterative(input[i], 0, input[i].Length - 1, searchFor[i]);
+                // Iterative
+                //var index = SearchAlgorithms.BinarySearchInRotatedArrayIterative(input[i], searchFor[i]);
                 if (index != -1)
                     Console.WriteLine($" Element \t\'{searchFor[i]}\' found at index : \t{index}");
                 else

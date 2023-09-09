@@ -317,6 +317,29 @@ namespace InterviewProblemNSolutions
             return -1;
         }
 
+
+        // Time O(Logn) || Space O(1) || 1 pass
+        public static int BinarySearchInRotatedArrayIterative(int[] nums, int target)
+        {
+            int lt = 0, rt = nums.Length - 1, mid;
+            while (lt <= rt)
+            {
+                mid = lt + (rt - lt) / 2;
+                if (nums[mid] == target) return mid;
+                // left array is sorted and target lies b/w it
+                else if (nums[lt] <= nums[mid] && nums[lt] <= target && target < nums[mid])
+                    rt = mid - 1;
+                // right array is sorted and target doesnt lies in it
+                else if (nums[mid] <= nums[rt] && !(nums[mid] < target && target <= nums[rt]))
+                    rt = mid - 1;
+                // if none of the above 2 condition if true means target definatly doesnot lies on left half of array
+                // so just search for in right half now
+                else 
+                    lt = mid + 1;
+            }
+            return -1;
+        }
+
         // Time (Logn) || Space O(1)
         public static int FirstOccurenceInSortedArray(int[] input, int data)
         {
