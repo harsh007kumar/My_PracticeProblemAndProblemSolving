@@ -13964,22 +13964,46 @@ namespace InterviewProblemNSolutions
 
         public static IList<IList<int>> CombinationSum(int[] candidates, int target)
         {
-            List<IList<int>> res = new List<IList<int>>();
-            GetCombo(new List<int>(), target);
-            return res;
-            // local func
-            void GetCombo(List<int> curr, int t, int i = 0)
+            IList<IList<int>> ans = new List<IList<int>>();
+            CombiSum(0, 0, new List<int>());
+            return ans;
+
+            void CombiSum(int idx, int currSum, List<int> st)
             {
-                if (t < 0) return;
-                else if (t == 0) res.Add(new List<int>(curr));
-                else
-                    for (int idx = i; idx < candidates.Length; idx++)
-                    {
-                        curr.Add(candidates[idx]);
-                        GetCombo(curr, t - candidates[idx], idx);
-                        curr.RemoveAt(curr.Count - 1);
-                    }
+                if (currSum == target)
+                {
+                    ans.Add(st.ToList()); // add current combination to the ans, use ToList() here as directly adding list will modify final ans when list is later modified
+                    return;
+                }
+                if (idx == candidates.Length || currSum > target) return;
+
+                var s = st.ToList();
+                while (currSum <= target)
+                {
+                    CombiSum(idx + 1, currSum, s);    // 1st move frwd without adding anything
+                    s.Add(candidates[idx]);
+                    currSum += candidates[idx];
+                }
             }
+
+            #region 1st Approach
+            //List<IList<int>> res = new List<IList<int>>();
+            //GetCombo(new List<int>(), target);
+            //return res;
+            //// local func
+            //void GetCombo(List<int> curr, int t, int i = 0)
+            //{
+            //    if (t < 0) return;
+            //    else if (t == 0) res.Add(new List<int>(curr));
+            //    else
+            //        for (int idx = i; idx < candidates.Length; idx++)
+            //        {
+            //            curr.Add(candidates[idx]);
+            //            GetCombo(curr, t - candidates[idx], idx);
+            //            curr.RemoveAt(curr.Count - 1);
+            //        }
+            //}
+            #endregion
         }
 
 
