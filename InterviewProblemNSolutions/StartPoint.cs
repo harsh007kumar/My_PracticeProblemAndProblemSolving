@@ -541,6 +541,7 @@ namespace InterviewProblemNSolutions
             CarFleet();
             KokoEatingBananas();
             TimeBasedKeyValueStore();
+            RemoveLetterToEqualizeFrequency();
 
 
 
@@ -8945,6 +8946,15 @@ namespace InterviewProblemNSolutions
                     Console.Write($"Get Operation Key: {op[0]}\tTimestamp:{op[1]}");
                     Console.WriteLine($"\t\tAns for Get => {tmObj.Get(op[0], Convert.ToInt32(op[1]))}");
                 }
+        }
+
+        public static void RemoveLetterToEqualizeFrequency()
+        {
+            // https://leetcode.com/problems/remove-letter-to-equalize-frequency/description/
+            Utility.Print("2423. Remove Letter To Equalize Frequency");
+            string[] strArr = new string[] { "abcc", "abcc", "aaaabbbbccc", "aazz", "abc", "bbba", "abbb", "aaaaa", "aabbc" };
+            foreach (var str in strArr)
+                Console.WriteLine($" For input string '{str}' after removing excatly 1 index all letters will have same frequency: '{DailyProblem.EqualFrequency(str)}'");
         }
 
 

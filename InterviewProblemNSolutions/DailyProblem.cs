@@ -18937,5 +18937,54 @@ namespace InterviewProblemNSolutions
                 return true;
             }
         }
+
+        // Time = O(n) Space = O(1), n = no of characters in word
+        public static bool EqualFrequency(string word)
+        {
+            Dictionary<char, int> freq = new Dictionary<char, int>();
+            foreach (var ch in word)                    // O(n)
+                if (!freq.ContainsKey(ch))
+                    freq[ch] = 1;
+                else
+                    freq[ch]++;
+
+            // only 1 unique char is present in input
+            if (freq.Count == 1)
+                return true;
+
+            var fList = freq.Keys.ToList();
+            // we try to see if by removing any 1 of the given characters its possible to achieve same freq for all letters
+            foreach (var ch in fList)                   // O(26)
+            {
+                bool charRemoved = false;
+                // remove freq of current character by 1
+                if (--freq[ch] == 0)
+                {
+                    freq.Remove(ch);
+                    charRemoved = true;
+                }
+                // check now if all elements have same frequency, by passing in a copy of current dictionary
+                if (Check(freq.ToDictionary(entry => entry.Key, entry => entry.Value))) // O(26) i.e. O(1)
+                    return true;
+
+                // Restore back original freq of current character
+                if (charRemoved) freq[ch] = 1;
+                else freq[ch]++;
+            }
+            return false;
+
+            // local helper func
+            bool Check(Dictionary<char, int> f)
+            {
+                int currFreq = -1;
+                // instead of using same dict copy the dictionary
+                foreach (var kvp in f)
+                    if (currFreq == -1)    // encountered 1st char
+                        currFreq = kvp.Value;
+                    else if (currFreq != kvp.Value)
+                        return false;
+                return true;
+            }
+        }
     }
 }
