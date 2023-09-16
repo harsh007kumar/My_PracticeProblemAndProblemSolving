@@ -2221,6 +2221,50 @@ namespace InterviewProblemNSolutions
 
         }
 
+        // Time O(n*(2^n)) || Space O(n^2), n = length of string 's'
+        public static IList<IList<string>> PalindromePartitioning(string s)
+        {
+            int l = s.Length;
+            Dictionary<string, bool> isPali = new Dictionary<string, bool>();
+            IList<IList<string>> ans = new List<IList<string>>();
+            Stack<string> st = new Stack<string>();
+            FindPaliPartition();
+            return ans;
+
+            // local helper func
+            void FindPaliPartition(int start = 0)
+            {
+                if (start == l) ans.Add(st.Reverse().ToList());  // if reached end of string means all the substring we made on our way were palindrome
+                else
+                    // take varing length of substring start from current idx starting with len=1 till longest possible string
+                    for (int len = 1; len <= l - start; len++)
+                        // if curr substring is Paldindrome than check if left over string can be divided into a valid palindrome
+                        if (Palindrome(start, len, out string substr))
+                        {
+                            st.Push(substr);
+                            FindPaliPartition(start + len);
+                            st.Pop();
+                        }
+            }
+            // top-down approach, Memoization
+            bool Palindrome(int idx, int length, out string currStr)
+            {
+                currStr = s.Substring(idx, length);
+                if (!isPali.ContainsKey(currStr))
+                {
+                    bool result = false;
+                    if (length == 1)
+                        result = true;
+                    else if (length <= 3)
+                        result = currStr[0] == currStr[length - 1];
+                    else
+                        result = currStr[0] == currStr[length - 1] && Palindrome(idx + 1, length - 2, out string sub);
+                    return isPali[currStr] = result;
+                }
+                else // return precomputed value
+                    return isPali[currStr];
+            }
+        }
 
         // Time = Space = O(n^2), n = length of 's'
         public static int MinCut(string s)

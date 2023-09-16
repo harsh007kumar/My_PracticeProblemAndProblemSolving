@@ -138,7 +138,7 @@ namespace InterviewProblemNSolutions
             //SubstringWithConcatenationOfAllWords();
             //LowestCommonAncestorDeepestLeaves();
             //BurstBalloons();
-            //PalindromePartitioning();
+            PalindromePartitioning();
             //SquaresSortedArray();
             //BinaryTreeRightSideView();
             //MinimumCostToHireKWorkers();
@@ -2645,30 +2645,6 @@ namespace InterviewProblemNSolutions
             int[] nums = { 3, 1, 5, 8 };
             Console.WriteLine($" Max coins collected by bursting the balloons wisely\t\'{DynamicProgramming.BurstBalloons(nums)}\'");
         }
-
-
-        public static void PalindromePartitioning()
-        {
-            // https://leetcode.com/problems/palindrome-partitioning/
-            Utility.Print("131. Palindrome Partitioning");
-            string[] sArr = { "aab", "a" };
-            foreach (var s in sArr)
-            {
-                Console.WriteLine($" For Input String: \'{s}\' below are all possible valid Palindrome Substrings");
-                List<IList<string>> finalResult = new List<IList<string>>();
-                List<string> localResult = new List<string>();
-                //DailyProblem.PalindromePartitioning_Recursive(s, 0, s.Length - 1, finalResult, localResult);
-                bool[,] dp = new bool[s.Length, s.Length];
-                DailyProblem.PalindromePartitioning_DP(s, 0, s.Length - 1, finalResult, localResult, dp);
-                foreach (var eachLen in finalResult)
-                {
-                    foreach (var palindrome in eachLen)
-                        Console.Write($" \'{palindrome}\' ||");
-                    Console.WriteLine();
-                }
-            }
-        }
-
 
         public static void SquaresSortedArray()
         {
@@ -8281,6 +8257,37 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void PalindromePartitioning()
+        {
+            // https://leetcode.com/problems/palindrome-partitioning/
+            Utility.Print("131. Palindrome Partitioning");
+            string[] sArr = { "aab", "a", "abbab" };
+            //foreach (var s in sArr)
+            //{
+            //    Console.WriteLine($" For Input String: \'{s}\' below are all possible valid Palindrome Substrings");
+            //    List<IList<string>> finalResult = new List<IList<string>>();
+            //    List<string> localResult = new List<string>();
+            //    //DailyProblem.PalindromePartitioning_Recursive(s, 0, s.Length - 1, finalResult, localResult);
+            //    bool[,] dp = new bool[s.Length, s.Length];
+            //    DailyProblem.PalindromePartitioning_DP(s, 0, s.Length - 1, finalResult, localResult, dp);
+            //    foreach (var eachLen in finalResult)
+            //    {
+            //        foreach (var palindrome in eachLen)
+            //            Console.Write($" \'{palindrome}\' ||");
+            //        Console.WriteLine(Utility.lineDelimeter);
+            //    }
+            //}
+            foreach (var s in sArr)
+            {
+                Console.WriteLine($" For Input String: \'{s}\' below are all possible valid Palindrome Substrings");
+                foreach (var eachLen in DynamicProgramming.PalindromePartitioning(s))
+                {
+                    foreach (var palindrome in eachLen)
+                        Console.Write($" \'{palindrome}\' ||");
+                    Console.WriteLine(Utility.lineDelimeter);
+                }
+            }
+        }
 
         public static void PalindromePartitioningII()
         {
