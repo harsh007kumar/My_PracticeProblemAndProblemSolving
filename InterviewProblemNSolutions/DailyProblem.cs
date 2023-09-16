@@ -2533,21 +2533,68 @@ namespace InterviewProblemNSolutions
         /// <returns></returns>
         public static IList<string> LetterCombinationsOfPhoneNo(string digits)
         {
-            IList<string> result = new List<string>();
-            if (digits.Length == 0) return result;
-
-            // Create dict from where letters corrosponding to each num would be stored
-            Dictionary<int, List<char>> dict = new Dictionary<int, List<char>>(8);
-            char startingLetter = 'a';
-            for (int inputDigit = 2; inputDigit < 10; inputDigit++)
+            Dictionary<char, List<char>> digitToChar = new Dictionary<char, List<char>>()
             {
-                dict.Add(inputDigit, new List<char>(3));
-                for (int i = 0; i < (((inputDigit == 7) || (inputDigit == 9)) ? 4 : 3); i++)
-                    dict[inputDigit].Add(startingLetter++);
+                {'2' , new List<char>(){'a','b','c'}},
+                {'3' , new List<char>(){'d','e','f'}},
+                {'4' , new List<char>(){'g','h','i'}},
+                {'5' , new List<char>(){'j','k','l'}},
+                {'6' , new List<char>(){'m','n','o'}},
+                {'7' , new List<char>(){'p','q','r','s'}},
+                {'8' , new List<char>(){'t','u','v'}},
+                {'9' , new List<char>(){'w','x','y','z'}},
+            };
+
+            IList<string> ans = new List<string>();
+            int l = digits.Length;
+            GetCombo(new List<char[]>());
+            return ans;
+
+            // local helper func
+            void GetCombo(List<char[]> ls, int idx = 0)
+            {
+                if (idx == l)
+                {
+                    foreach (var letterCombination in ls)
+                        ans.Add(new string(letterCombination));
+                }
+                else
+                {
+                    List<char[]> currLs = new List<char[]>();
+                    foreach (var letter in digitToChar[digits[idx]])
+                        if (ls.Count > 0)
+                            foreach (var combo in ls)
+                            {
+                                combo[idx] = letter;
+                                currLs.Add(combo.ToArray());
+                            }
+                        else
+                        {
+                            var newList = new char[l];
+                            newList[idx] = letter;
+                            currLs.Add(newList);
+                        }
+                    GetCombo(currLs, idx + 1);
+                }
             }
 
-            LetterCombinations(digits, 0, dict, "", ref result);
-            return result;
+            #region Old approach
+            //IList<string> result = new List<string>();
+            //if (digits.Length == 0) return result;
+
+            //// Create dict from where letters corrosponding to each num would be stored
+            //Dictionary<int, List<char>> dict = new Dictionary<int, List<char>>(8);
+            //char startingLetter = 'a';
+            //for (int inputDigit = 2; inputDigit < 10; inputDigit++)
+            //{
+            //    dict.Add(inputDigit, new List<char>(3));
+            //    for (int i = 0; i < (((inputDigit == 7) || (inputDigit == 9)) ? 4 : 3); i++)
+            //        dict[inputDigit].Add(startingLetter++);
+            //}
+
+            //LetterCombinations(digits, 0, dict, "", ref result);
+            //return result;
+            #endregion
         }
         // Helper Recursive Function which goes thru each possible combination and adds them to result list at end
         public static void LetterCombinations(string digits, int currNumIndex, Dictionary<int, List<char>> dict, string letterComboSoFar, ref IList<string> result)
