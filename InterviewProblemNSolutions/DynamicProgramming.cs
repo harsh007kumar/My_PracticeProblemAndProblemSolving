@@ -1710,6 +1710,87 @@ namespace InterviewProblemNSolutions
             return cash;
         }
 
+        // Time O(2^n) | Space = O(n)
+        public static int BestTimeToBuyAndSellStockWithCooldown_Recursive(int[] prices)
+        {
+            /*
+            At each day we can do either of the below
+                a. Buy (if not alreayd bought or last sold + cooldowm < current date)
+                b. cpp;-down (no buy, no sell)
+                c. Sell (if bought prv)
+            we try to maximize the profite arising out of each of the above operation
+            */
+            int l = prices.Length;
+            return MaxProfit(-1, 1, -1);
+            // local helper func
+            int MaxProfit(int idx, int canBuy, int BoughtAt = -1)
+            {
+                if (++idx >= l) return 0;
+
+                int max = 0;
+                if (canBuy == 0)   // need to collDown before buying again
+                    max = Math.Max(max, MaxProfit(idx, canBuy + 1, BoughtAt));
+                else if (canBuy == 1)  // buying
+                {
+                    // wait
+                    max = Math.Max(max, MaxProfit(idx, canBuy, BoughtAt));
+                    // buy
+                    max = Math.Max(max, MaxProfit(idx, canBuy + 1, prices[idx]));
+                }
+                else //if(buying==2)// can Sell
+                {
+                    // wait
+                    max = Math.Max(max, MaxProfit(idx, canBuy, BoughtAt));
+                    // sell
+                    max = Math.Max(max, (prices[idx] - BoughtAt) + MaxProfit(idx, 0, -1));
+                }
+                return max;
+            }
+        }
+
+        // Time = Space = O(n)
+        // NEETCODE https://youtu.be/I7j0F7AHpb8
+        public static int BestTimeToBuyAndSellStockWithCooldown_DP(int[] prices)
+        {
+            /*
+            At each day we can do either of the below
+                a. Buy (if not alreayd bought or last sold + cooldowm < current date)
+                b. cpp;-down (no buy, no sell)
+                c. Sell (if bought prv)
+            we try to maximize the profite arising out of each of the above operation
+            */
+            int l = prices.Length;
+            Dictionary<bool,int>[] dp = new Dictionary<bool, int>[l];
+            for (int i = 0; i < l; i++)
+                dp[i] = new Dictionary<bool, int>();
+            return MaxProfit(-1, true);
+            // local helper func
+            int MaxProfit(int idx, bool buying)
+            {
+                if (++idx >= l) return 0;
+                // return if this state was alredy precomputed
+                if (dp[idx].ContainsKey(buying))
+                    return dp[idx][buying];
+
+                int max = 0;
+                if (buying)  // can buy
+                {
+                    // wait
+                    max = Math.Max(max, MaxProfit(idx, buying));
+                    // buy
+                    max = Math.Max(max, MaxProfit(idx, !buying) - prices[idx]);
+                }
+                else // can Sell
+                {
+                    // wait
+                    max = Math.Max(max, MaxProfit(idx, buying));
+                    // sell + add coolDown day
+                    max = Math.Max(max, MaxProfit(idx + 1, !buying) + prices[idx]);
+                }
+                return dp[idx][buying] = max;
+            }
+        }
+
 
         // Recursive Soln
         public static int MaxUncrossedLines_Recursive(int[] A, int[] B, int i = 0, int j = 0)

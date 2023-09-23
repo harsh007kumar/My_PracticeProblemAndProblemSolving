@@ -1,5 +1,6 @@
 ﻿using Sorting;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -542,7 +543,7 @@ namespace InterviewProblemNSolutions
             KokoEatingBananas();
             TimeBasedKeyValueStore();
             RemoveLetterToEqualizeFrequency();
-
+            BestTimeToBuyAndSellStockWithCooldown();
 
 
 
@@ -2174,6 +2175,19 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void BestTimeToBuyAndSellStockWithCooldown()
+        {
+            // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/
+            // NEETCODE https://youtu.be/I7j0F7AHpb8
+            Utility.Print("309. Best Time to Buy and Sell Stock with Cooldown");
+            int[][] pricesArr = { new int[] { 1, 2, 3, 0, 2 }, new int[] { 1 }, new int[] { 1, 2, 4 } };
+            foreach(var prices in pricesArr)
+            {
+                prices.Print("PRICES");
+                Console.WriteLine($" After completing at Buy-Sell on above with 1 day coolDown, MaxProfit: {DynamicProgramming.BestTimeToBuyAndSellStockWithCooldown_Recursive(prices)}");
+                Console.WriteLine($" After completing at Buy-Sell on above with 1 day coolDown, MaxProfit: {DynamicProgramming.BestTimeToBuyAndSellStockWithCooldown_DP(prices)}");
+            }
+        }
 
         public static void DecodeString()
         {
