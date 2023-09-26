@@ -617,6 +617,7 @@ namespace InterviewProblemNSolutions
             OptimalStrategyForACoinGame();
             LongestPalindromicSubsequence();
             LongestPalindromicSubString();
+            PalindromicSubstrings();
             NoOfTimesStringOccursAsSubsequenceInAnotherString();
             MaxSizeSquareSUbMatrix();
             MaximumSumRectangle();
@@ -9846,6 +9847,15 @@ namespace InterviewProblemNSolutions
             string[] inputArr = { "babad", "AAAABBAA", "AGDDDA", "AGCTCBMAACTGGAM", "GEEKSFORGEEKS", "ABAXAABAXABYBAXABYB" };
             foreach (var input in inputArr)
                 DynamicProgramming.LongestPalindromicSubString(input);                    // DP Tabulation
+        }
+
+        public static void PalindromicSubstrings()
+        {
+            // https://leetcode.com/problems/palindromic-substrings/
+            Utility.Print("647. Palindromic Substrings");
+            string[] sArr = { "abc", "aaa", "abcccddcceec" };
+            foreach (var s in sArr)
+                Console.WriteLine($"For input string '{s}' no of palindromic substrings are => {DailyProblem.PalindromicSubstrings(s)}");
         }
 
         public static void NoOfTimesStringOccursAsSubsequenceInAnotherString()

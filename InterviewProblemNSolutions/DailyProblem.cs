@@ -19059,5 +19059,39 @@ namespace InterviewProblemNSolutions
                 return true;
             }
         }
+
+
+        // Time O(n^2) | Space O(1)
+        public static int PalindromicSubstrings(string s)
+        {
+            int l = s.Length;
+            if (l == 1) return 1;
+            int count = 1, lt, rt;
+            for (int i = 1; i < l; i++)
+            {
+                count++;    // each single char is palindrome
+
+                // odd length
+                lt = i - 1;
+                rt = i + 1;
+                while (lt >= 0 && rt < l && s[lt] == s[rt])
+                {
+                    count++;
+                    lt--;
+                    rt++;
+                }
+
+                // even length
+                lt = i - 1;
+                rt = i;
+                while (lt >= 0 && rt < l && s[lt] == s[rt])
+                {
+                    count++;
+                    lt--;
+                    rt++;
+                }
+            }
+            return count;
+        }
     }
 }
