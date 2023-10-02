@@ -1268,9 +1268,10 @@ namespace InterviewProblemNSolutions
             var len = input.Length;
             if (input == null || len < 1) return false;                 // null input or blank string
 
-            if (dictionary.Contains(input) ||                           // entire word is present in dictonary
-                (memo.ContainsKey(input) && memo[input]))               // or we have previously calculated this sub-problem/string and result was true
-                return true;
+            if (dictionary.Contains(input))
+                return true;                                            // entire word is present in dictonary
+            else if(memo.ContainsKey(input))                            // or we have previously calculated this sub-problem/string and result was true
+                return memo[input];
 
             bool result = false;
             // try spliting the string into two part starting with 1 characters only on left if that is present in dictionary
@@ -1282,8 +1283,7 @@ namespace InterviewProblemNSolutions
                     result = true;
                     break;
                 }
-            if (result) memo.Add(input, result);
-            return result;
+            return memo[input] = result;
         }
 
         // Bottom-Up Tabulation based solution // Time O(n^3) || Space O(n^2)
