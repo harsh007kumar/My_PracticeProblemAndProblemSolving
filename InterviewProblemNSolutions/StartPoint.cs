@@ -9951,8 +9951,9 @@ namespace InterviewProblemNSolutions
                     var memo = new Dictionary<string, bool>();
                     dictionary.Print();
                     //var result = DynamicProgramming.WordBreakProblemRecursive(input, dictionary);
-                    var result = DynamicProgramming.WordBreakProblemMemo(input, dictionary, memo);
+                    //var result = DynamicProgramming.WordBreakProblemMemo(input, dictionary, memo);
                     //var result = DynamicProgramming.WordBreakProblemTabulation(input, dictionary);
+                    var result = DynamicProgramming.WordBreakProblemTabulation_Efficient(input, dictionary);
                     Console.WriteLine($"\n For above Dictonary given sentence \'{input}\' can be split into words which exists: \t{result}");
                 }
         }

@@ -1343,6 +1343,24 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        // Bottom-Up Tabulation based solution // Time O(n^2) || Space O(n)
+        // Function which returns true if for given input there exists such a set where each substrings is present in dictionary
+        // Ex: for string "code" returns true if dictionary contains 'c','od','e' or excat word "code"
+        public static bool WordBreakProblemTabulation_Efficient(string s, HashSet<string> wordDict)
+        {
+            int l = s.Length;
+            int[] dp = new int[l + 1];
+            dp[l] = 1;  // base case
+
+            for (int startIdx = l - 1; startIdx >= 0; startIdx--)
+                foreach (var word in wordDict)
+                    // we are not exceeding the length of input string | and substring and word match
+                    if (startIdx + word.Length <= l && s.Substring(startIdx, word.Length) == word)
+                        // update the dp from current startIdx once we get good match and continue onto lower idx in input 's'
+                        if ((dp[startIdx] = dp[startIdx + word.Length]) > 0)
+                            break;
+            return dp[0] > 0;
+        }
 
         // DP-Tabulation (bottom-Up) approach
         // Time O(N^3) || Space O(N^2)
