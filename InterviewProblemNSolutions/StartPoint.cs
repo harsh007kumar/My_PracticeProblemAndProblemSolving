@@ -9749,13 +9749,12 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/partition-equal-subset-sum/
             Utility.Print("416. Partition Equal Subset Sum");
             Utility.Print("Problem-28  Partition problem is to determine whether a given set can be partitioned into two subsets such that the sum of elements in both subsets is the same(p. 800)");
-            int[][] inputArr = { new int[] { 1, 5, 11, 5 }, new int[] { 1, 2, 5 }, new int[] { 1, 1 } };
+            int[][] inputArr = { new int[] { 1, 5, 11, 5 }, new int[] { 1, 2, 5 }, new int[] { 1, 1 }, new int[] { 1, 2, 1, 2 } };
             foreach (var input in inputArr)
             {
                 input.Print("Input Array");
                 Console.WriteLine($" Above array can be paritioned into two subsets with equal total-sum : {DynamicProgramming.FindPartition(input, input.Length)}");
             }
-
         }
 
         public static void FindOptimalBinarySearchTree()

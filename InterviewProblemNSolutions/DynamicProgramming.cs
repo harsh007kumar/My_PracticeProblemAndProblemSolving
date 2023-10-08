@@ -667,6 +667,25 @@ namespace InterviewProblemNSolutions
             //return SubSetSumRecursive(input, len, totalSum / 2);                                    // Time Consuming O(2^n) recursive approach
             return SubsetSumMemo(input, len, totalSum / 2, 0, new int[len + 1, totalSum / 2]);      // DP Memo Top-Down, FASTEST
             //return SubSetSumMemo(input, len, totalSum / 2, new Dictionary<string, bool>());         // DP Memoization top down approach Old
+            //return SubsetSum_HashSet(input, totalSum / 2, len);                                     // Using HashSet to save all possible combination of subsets sums
+
+
+            // NEETCODE https://youtu.be/IsvocB5BJhw
+            // Time O(n*Sum(nums)) | Space O(Sum(nums))
+            bool SubsetSum_HashSet(int[] nums, int target, int l)
+            {
+                HashSet<int> set = new HashSet<int>();
+                set.Add(0);
+                for (int i = l - 1; i >= 0; i--)
+                {
+                    HashSet<int> currSet = new HashSet<int>(set);
+                    foreach (var num in set)
+                        if (num + nums[i] == target) return true;
+                        else currSet.Add(num + nums[i]);
+                    set = currSet;
+                }
+                return false;
+            }
         }
         // Memoization based || Top Down Approach
         // Time O(2^n) we have 2 decisions to make at every index from 0..N-1 || Recursive Space Required!
