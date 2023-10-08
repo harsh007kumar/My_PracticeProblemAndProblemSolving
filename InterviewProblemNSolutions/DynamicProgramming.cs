@@ -90,7 +90,7 @@ namespace InterviewProblemNSolutions
             int result = 1;
             while (num > 1)
             {
-                result = fib0 + fib1;       // saving results in table while moving bottoms-up will result in subsquently faster response time finding result for nums in array
+                result = fib0 + fib1;       // saving results in table while moving bottoms-up will result in subsquently faster response time finding result for input in array
                 fib0 = fib1;
                 fib1 = result;
                 num--;
@@ -498,6 +498,29 @@ namespace InterviewProblemNSolutions
                 if (tab[i] > maxLen)                // keep updating max length so far
                     maxLen = tab[i];
             }
+            #region Right to left traversal aproach
+            /*
+            //At each index we have 2 choice
+            //    a) skip adding curr num to sequence
+            //    b) IF Num is greater than prv num add it to sequence
+            //If we add a Cache which stores the max length sequence from current index
+            //than our problem time complexecity reduce from O(2^n) to O(n^2)
+
+            //this way we traverse from right to left and calculate the LIS from each index
+            //& we have our max once we reach index 0
+            int longestSubsequence = 0, l = input.Length;
+            int[] dp = new int[l];
+            for (int startIdx = l - 1; startIdx >= 0; startIdx--)
+            {
+                for (int i = startIdx + 1; i < l; i++)
+                    if (input[startIdx] < input[i])
+                        dp[startIdx] = Math.Max(dp[startIdx], dp[i]);
+                // increase the current idx max by 1 as even single num has LIS of 1
+                longestSubsequence = Math.Max(longestSubsequence, ++dp[startIdx]);
+            }
+            return longestSubsequence;
+            */
+            #endregion
             PrintIncreasingSequence(tab, maxLen, input, len);
             return maxLen;
         }
@@ -1506,13 +1529,13 @@ namespace InterviewProblemNSolutions
         public static int MinOperations_SlidingWindow(int[] nums, int x)
         {
             /* Algorithm
-             * Step 1: Calculate the total sum of nums. Mark as total.
+             * Step 1: Calculate the total sum of input. Mark as total.
              * 
              * Step 2: Initialize two pointers left and right to 0. 
-             * Initialize an integer current to represent the sum from nums[left] to nums[right], inclusively.
+             * Initialize an integer current to represent the sum from input[left] to input[right], inclusively.
              * Initialize an integer maxLen to record the maximum length that sums up to total - x.
              * 
-             * Step 3: Iterate right form 0 to the end of nums. In each iteration:
+             * Step 3: Iterate right form 0 to the end of input. In each iteration:
              * Update current.
              * If current is greater than total - x, move left to right.
              * If current is equal to total - x, update the maximum length.
@@ -2522,7 +2545,7 @@ namespace InterviewProblemNSolutions
 
 
         // Larry https://youtu.be/SPBXNJKLWr4
-        // Time O(N+logT) Space O(1), n = length of 'nums' & T = target value
+        // Time O(N+logT) Space O(1), n = length of 'input' & T = target value
         public static int MinPatches(int[] nums, int target)
         {
             long max = 0; int count = 0;

@@ -9702,6 +9702,8 @@ namespace InterviewProblemNSolutions
 
         public static void FindLongestIncreasingSubsequence()
         {
+            // NEETCODE https://youtu.be/cjWnW0hdF1Y
+            Utility.Print("300. Longest Increasing Subsequence");
             Utility.Print("Problem-20  Longest Increasing Subsequence (p. 790)");
             int[] input = { 5, 6, 2, 3, 4, 1, 9, 9, 8, 9, 5 };
             input.Print("Input");
