@@ -607,6 +607,7 @@ namespace InterviewProblemNSolutions
             FindOrderToPerformMatrixMultiplications();
             ZeroOneKnapSackProblem();
             CoinChangingMinimumNoOfCoins();
+            CoinCombinationProblem();
             FindLongestIncreasingSubsequence();
             BuildingBridgesOverRiver();
             SubsetSumProblem();
@@ -9697,6 +9698,20 @@ namespace InterviewProblemNSolutions
                 var minNoOfCoins = DynamicProgramming.CoinChangeMinimumNoOfCoins(coins, changeReq);
                 //var minNoOfCoins = DynamicProgramming.CoinChange_DP_BottomUp(coins, changeReq);
                 Console.WriteLine($" Min No of coins to get '{changeReq}' in change is : '{minNoOfCoins}'\n");
+            }
+        }
+
+        public static void CoinCombinationProblem()
+        {
+            // https://leetcode.com/problems/coin-change-ii/
+            Utility.Print("518. Coin Change II");
+            int[][] coins = { new int[] { 1, 2, 5 }, new int[] { 2 }, new int[] { 10 } };
+            int[] changeAmt = { 5, 3, 10 };
+
+            for (int i = 0; i < coins.Length; i++)
+            {
+                coins[i].Print("Coins Array");
+                Console.WriteLine($"Number of combinations that make up that amount '{changeAmt[i]}' from above list of coins is : '{DynamicProgramming.CoinChangeII(changeAmt[i], coins[i])}'\n");
             }
         }
 

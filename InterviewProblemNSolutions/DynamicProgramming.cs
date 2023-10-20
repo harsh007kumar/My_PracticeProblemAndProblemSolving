@@ -476,6 +476,24 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(m*n), m = amount & n = length of coins array
+        public static int CoinChangeII(int amount, int[] coins)
+        {
+            int rows = coins.Length;
+            int[,] dp = new int[rows + 1, amount + 1];
+
+            for (int coinIdx = 0; coinIdx < rows; coinIdx++)
+                for (int amt = 0; amt <= amount; amt++)
+                    if (amt == 0) dp[coinIdx + 1, amt] = 1;   // left most column that idicated amt 0 has excatly 1 way to doing so i.e. by not selecting any coin
+                    else
+                    {
+                        if (amt - coins[coinIdx] >= 0)        // we use current coin if its not greater than remaining amount
+                            dp[coinIdx + 1, amt] = dp[coinIdx + 1, amt - coins[coinIdx]];
+                        dp[coinIdx + 1, amt] += dp[coinIdx, amt];   // add to the result the no of ways to get current amt if we totally skip using current coin at 'coinIdx'
+                    }
+            return dp[rows, amount];
+        }
+
         // Time O(n^2) || Space O(n)
         public static int LongestIncreasingSubsequence(int[] input)
         {
@@ -492,7 +510,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < len; i++)           // index for which we are updating maxLen value
             {
                 for (int j = 0; j < i; j++)         // iterate thru each index from 0 to i-1 to find max len for i
-                    // if value at i is greater than value at j and maxLen value for i is less than maxLenValue at j + 1 (adding 1 as we r including ith value in array)
+                    // if value at i is greater than value at j and maxLen value for i is less than maxLenValue at j + 1 (adding 1 as we coinIdx including ith value in array)
                     if (input[i] > input[j] && tab[i] < tab[j] + 1)
                         tab[i] = tab[j] + 1;
                 if (tab[i] > maxLen)                // keep updating max length so far
@@ -2760,7 +2778,7 @@ namespace InterviewProblemNSolutions
                 for (int c = 1; c <= p.Length; c++)
                     if (p[c - 1] == '*')    // ex: when s=abc & p=abc*, we see if abc == abc (* was considered empty) or ab==abc (* matched with char 'c' from string 's')
                         dp[r, c] = dp[r - 1, c] || dp[r, c - 1];
-                    else // if wild character or characters match in 's' & 'p', then assign value basis dp[r-1,c-1] i.e. string with one length shorter than current
+                    else // if wild character or characters match in 's' & 'p', then assign value basis dp[coinIdx-1,c-1] i.e. string with one length shorter than current
                         dp[r, c] = (p[c - 1] == '?' || p[c - 1] == s[r - 1]) && dp[r - 1, c - 1];
 
 
