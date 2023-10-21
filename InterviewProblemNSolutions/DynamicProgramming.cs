@@ -2126,7 +2126,28 @@ namespace InterviewProblemNSolutions
             
             return dp[l1, l2];
         }
+        // Dp-top-down approach, Time = Space = O(n*m), n = length of s1 & m = len of s2
+        public static bool IsInterleave_DP_TopDown(string s1, string s2, string s3)
+        {
+            int m = s1.Length, n = s2.Length;
+            int[,] dp = new int[m + 1, n + 1];
+            return InterLeave(0, 0, 0) == 1;
 
+            // local helper func
+            int InterLeave(int i1, int i2, int k)
+            {
+                if (k == s3.Length) return (i1 == m && i2 == n) ? 1 : -1;
+                else if (dp[i1, i2] != 0) return dp[i1, i2];
+                else
+                {
+                    if (i1 < m && s1[i1] == s3[k] && InterLeave(i1 + 1, i2, k + 1) == 1)
+                        return dp[i1, i2] = 1;
+                    if (i2 < n && s2[i2] == s3[k] && InterLeave(i1, i2 + 1, k + 1) == 1)
+                        return dp[i1, i2] = 1;
+                    return dp[i1, i2] = -1;
+                }
+            }
+        }
 
         // Time = Space = O(n), n = length of 'cost' || Recursive Soln
         public static int MinCostClimbingStairs(int[] cost)

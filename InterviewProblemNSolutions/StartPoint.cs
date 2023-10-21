@@ -7503,12 +7503,14 @@ namespace InterviewProblemNSolutions
             // Tushar Roy https://youtu.be/ih2OZ9-M3OM
             // https://leetcode.com/problems/interleaving-string/
             Utility.Print("97. Interleaving String");
-            string[] s1 = { "aab", "aabcc", "aabcc", "", "" },
-                        s2 = { "axy", "dbbca", "dbbca", "", "" },
-                        s3 = { "aaxaby", "aadbbcbcac", "aadbbbaccc", "", "a" };
+            string[] s1 = { "aab", "aabcc", "aabcc", "", "", "a" },
+                        s2 = { "axy", "dbbca", "dbbca", "", "", "b" },
+                        s3 = { "aaxaby", "aadbbcbcac", "aadbbbaccc", "", "a", "a" };
             for (int i = 0; i < s1.Length; i++)
                 //Console.WriteLine($" '{s3[i]}' can be created from interleaving of '{s1[i]}' & '{s2[i]}': '{DynamicProgramming.IsInterleave_Recursive(s1[i], s2[i], s3[i])}'\n");
-                Console.WriteLine($" '{s3[i]}' can be created from interleaving of '{s1[i]}' & '{s2[i]}': '{DynamicProgramming.IsInterleave_DP(s1[i], s2[i], s3[i])}'\n");
+                //Console.WriteLine($" '{s3[i]}' can be created from interleaving of '{s1[i]}' & '{s2[i]}': '{DynamicProgramming.IsInterleave_DP(s1[i], s2[i], s3[i])}'\n");
+                Console.WriteLine($" '{s3[i]}' can be created from interleaving of '{s1[i]}' & '{s2[i]}': '{DynamicProgramming.IsInterleave_DP_TopDown(s1[i], s2[i], s3[i])}'\n");
+
         }
 
 
