@@ -2784,5 +2784,31 @@ namespace InterviewProblemNSolutions
 
             return dp[s.Length, p.Length];
         }
+
+        // NeetCode https://youtu.be/g0npyaQtAQM
+        // Time = Space = O(n^2)
+        public static int FindTargetSumWays(int[] nums, int target)
+        {
+            Dictionary<int, Dictionary<int, int>> waysToTarget = new Dictionary<int, Dictionary<int, int>>();
+            return WaysToGetTargetSum(0, 0);
+
+            // local helper func
+            int WaysToGetTargetSum(int idx, int currSum)
+            {
+                if (idx == nums.Length)
+                    return currSum == target ? 1 : 0;   // return 1 if target found
+                else if (waysToTarget.ContainsKey(idx) && waysToTarget[idx].ContainsKey(currSum))
+                    return waysToTarget[idx][currSum];  // return from cache
+                else
+                {
+                    if (!waysToTarget.ContainsKey(idx))
+                        waysToTarget[idx] = new Dictionary<int, int>();
+
+                    var adding = WaysToGetTargetSum(idx + 1, currSum + nums[idx]);
+                    var subtracting = WaysToGetTargetSum(idx + 1, currSum - nums[idx]);
+                    return waysToTarget[idx][currSum] = adding + subtracting;
+                }
+            }
+        }
     }
 }

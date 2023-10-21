@@ -544,6 +544,7 @@ namespace InterviewProblemNSolutions
             TimeBasedKeyValueStore();
             RemoveLetterToEqualizeFrequency();
             BestTimeToBuyAndSellStockWithCooldown();
+            FindTargetSumWays();
 
 
 
@@ -2190,6 +2191,20 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" After completing at Buy-Sell on above with 1 day coolDown, MaxProfit: {DynamicProgramming.BestTimeToBuyAndSellStockWithCooldown_DP(prices)}");
             }
         }
+
+        public static void FindTargetSumWays()
+        {
+            // https://leetcode.com/problems/target-sum/
+            Utility.Print("494. Target Sum");
+            int[][] nums = { new int[] { 1, 1, 1, 1, 1 }, new int[] { 1 } };
+            int[] target = { 3, 1 };
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Input array");
+                Console.WriteLine($" No of ways to achieve target {target[i]} by either adding or subtracting each number in above array is: {DynamicProgramming.FindTargetSumWays(nums[i], target[i])}");
+            }
+        }
+
 
         public static void DecodeString()
         {
