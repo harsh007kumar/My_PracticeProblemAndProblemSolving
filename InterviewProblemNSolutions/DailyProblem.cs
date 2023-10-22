@@ -13416,32 +13416,55 @@ namespace InterviewProblemNSolutions
         // Time = Space = O(r*c)
         public static int LongestIncreasingPath(int[][] matrix)
         {
-            int row = matrix.Length, col = matrix[0].Length, longest = 0;
-            int[,] dp = new int[row, col];
-            for (int i = 0; i < row; i++)
-                for (int j = 0; j < col; j++)
-                    longest = Math.Max(longest, DFS(i, j));
+            int[][] directionArr = { new int[] { 0, 1 }, new int[] { 0, -1 }, new int[] { 1, 0 }, new int[] { -1, 0 } };
+            int rows = matrix.Length, cols = matrix[0].Length, longest = -1;
+            int[,] dp = new int[rows, cols];
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < cols; j++)
+                    longest = Math.Max(DFS(i, j, -1), longest);
             return longest;
-            int DFS(int r, int c)
+
+            // local helper func
+            int DFS(int r, int c, int lastNum)
             {
+                if (r < 0 || r >= rows || c < 0 || c >= cols || matrix[r][c] <= lastNum) return 0;
+                // if sub-problem is already precomputed than return the longest possible path from curr cell
                 if (dp[r, c] != 0) return dp[r, c];
 
-                int max = 0;
-                // up
-                if (r - 1 >= 0 && matrix[r - 1][c] > matrix[r][c])
-                    max = Math.Max(max, DFS(r - 1, c));
-                // down
-                if (r + 1 < row && matrix[r + 1][c] > matrix[r][c])
-                    max = Math.Max(max, DFS(r + 1, c));
-                // lt
-                if (c - 1 >= 0 && matrix[r][c - 1] > matrix[r][c])
-                    max = Math.Max(max, DFS(r, c - 1));
-                // rt
-                if (c + 1 < col && matrix[r][c + 1] > matrix[r][c])
-                    max = Math.Max(max, DFS(r, c + 1));
+                int longestPathFromCurrentCell = 0;
+                // iterate in all 4 possible directions
+                foreach (var direction in directionArr)
+                    longestPathFromCurrentCell = Math.Max(longestPathFromCurrentCell, DFS(r + direction[0], c + direction[1], matrix[r][c]));
 
-                return dp[r, c] = max + 1;
+                return dp[r, c] = 1 + longestPathFromCurrentCell;
             }
+
+            //int row = matrix.Length, col = matrix[0].Length, longest = 0;
+            //int[,] dp = new int[row, col];
+            //for (int i = 0; i < row; i++)
+            //    for (int j = 0; j < col; j++)
+            //        longest = Math.Max(longest, DFS(i, j));
+            //return longest;
+            //int DFS(int r, int c)
+            //{
+            //    if (dp[r, c] != 0) return dp[r, c];
+
+            //    int max = 0;
+            //    // up
+            //    if (r - 1 >= 0 && matrix[r - 1][c] > matrix[r][c])
+            //        max = Math.Max(max, DFS(r - 1, c));
+            //    // down
+            //    if (r + 1 < row && matrix[r + 1][c] > matrix[r][c])
+            //        max = Math.Max(max, DFS(r + 1, c));
+            //    // lt
+            //    if (c - 1 >= 0 && matrix[r][c - 1] > matrix[r][c])
+            //        max = Math.Max(max, DFS(r, c - 1));
+            //    // rt
+            //    if (c + 1 < col && matrix[r][c + 1] > matrix[r][c])
+            //        max = Math.Max(max, DFS(r, c + 1));
+
+            //    return dp[r, c] = max + 1;
+            //}
         }
 
 
