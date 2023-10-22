@@ -8599,6 +8599,7 @@ namespace InterviewProblemNSolutions
             {
                 Console.WriteLine($" Given strings s:'{s[i]}' and t:'{t[i]}' the no of distinct subsequences of s which equals t are: '{StringAlgorithms.NumDistinctSubsequences_Recursive(s[i], t[i])}'\n");
                 Console.WriteLine($" Given strings s:'{s[i]}' and t:'{t[i]}' the no of distinct subsequences of s which equals t are: '{DynamicProgramming.NumDistinctSubsequences_DP(s[i], t[i])}'\n");
+                Console.WriteLine($" Given strings s:'{s[i]}' and t:'{t[i]}' the no of distinct subsequences of s which equals t are: '{DynamicProgramming.NumDistinctSubsequences_DP_TopDown(s[i], t[i])}'\n");
             }
         }
 

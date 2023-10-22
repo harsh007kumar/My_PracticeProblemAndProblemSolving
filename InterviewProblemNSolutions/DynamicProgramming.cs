@@ -2763,7 +2763,33 @@ namespace InterviewProblemNSolutions
             return dp[t.Length, s.Length];
             */
         }
+        // Memoization based soln
+        // Time = Space = O(n*m), n,m = length of 's' & 't' respectively
+        public static int NumDistinctSubsequences_DP_TopDown(string s, string t)
+        {
+            int sLen = s.Length, tLen = t.Length;
+            Dictionary<int, Dictionary<int, int>> dp = new Dictionary<int, Dictionary<int, int>>();
+            return GetDistinctSuubSequences(0, 0);
 
+            // local helper func
+            int GetDistinctSuubSequences(int sIdx, int tIdx)
+            {
+                if (tIdx == tLen) return 1;
+                if (sIdx == sLen) return 0;
+                if (dp.ContainsKey(sIdx) && dp[sIdx].ContainsKey(tIdx)) return dp[sIdx][tIdx];
+
+                if (!dp.ContainsKey(sIdx)) dp[sIdx] = new Dictionary<int, int>();
+                int distinctFromCurrentIdx = 0;
+
+                // skip current character from 's'
+                distinctFromCurrentIdx = GetDistinctSuubSequences(sIdx + 1, tIdx);
+                // current char in 's' & 't' match
+                if (s[sIdx] == t[tIdx])
+                    distinctFromCurrentIdx += GetDistinctSuubSequences(sIdx + 1, tIdx + 1);
+
+                return dp[sIdx][tIdx] = distinctFromCurrentIdx;
+            }
+        }
 
         // Tushar Roy https://youtu.be/3ZDZ-N0EPV0
         // DP Soln, Time = Space = O(m,n), m,n are length of string 's' & pattern 'p'
