@@ -1,6 +1,5 @@
 ﻿using Sorting;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -545,6 +544,7 @@ namespace InterviewProblemNSolutions
             RemoveLetterToEqualizeFrequency();
             BestTimeToBuyAndSellStockWithCooldown();
             FindTargetSumWays();
+            ReverseBits();
 
 
 
@@ -2203,6 +2203,17 @@ namespace InterviewProblemNSolutions
                 nums[i].Print("Input array");
                 Console.WriteLine($" No of ways to achieve target {target[i]} by either adding or subtracting each number in above array is: {DynamicProgramming.FindTargetSumWays(nums[i], target[i])}");
             }
+        }
+
+        public static void ReverseBits()
+        {
+            // https://leetcode.com/problems/reverse-bits/
+            Utility.Print("190. Reverse Bits");
+            uint[] nums = { 43261596,    // "00000010100101000001111010011100"),
+                            4294967293  // Convert.ToUInt32("11111111111111111111111111111101")
+                          };
+            foreach (var num in nums)
+                Console.WriteLine($" Reverse of {num} => {DailyProblem.ReverseBits(num)}");
         }
 
 

@@ -19116,5 +19116,19 @@ namespace InterviewProblemNSolutions
             }
             return count;
         }
+
+        // Time O(32) ~O(1) | Space O(1)
+        public static uint ReverseBits(uint n)
+        {
+            uint reverse = 0;
+            int loopTime = 32;
+            while (loopTime-- > 0)     // O(32)
+            {
+                reverse <<= 1;    // left shift the current ans by 1
+                reverse += n & 1;   // now add whatever bit (On/Off) from the no we are reversing
+                n >>= 1;
+            }
+            return reverse;
+        }
     }
 }
