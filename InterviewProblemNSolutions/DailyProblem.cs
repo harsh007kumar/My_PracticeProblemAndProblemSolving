@@ -19130,5 +19130,21 @@ namespace InterviewProblemNSolutions
             }
             return reverse;
         }
+
+        // Time = Space = O(1)
+        public static int SumOfTwoIntegersWithoutUsingPlusOperatorBitManipulation(int a, int b)
+        {
+            while (b != 0)
+            {
+                var temp = (a & b) << 1;
+                a = a ^ b;
+                b = temp;
+            }
+            return a;
+        }
+
+        // Time = Space = O(1)
+        public static int SumOfTwoIntegersWithoutUsingPlusOperatorAndUsingLogAndPowerFunc(int a, int b) => (int)Math.Log((Math.Pow(2, a) * Math.Pow(2, b)), 2);
+
     }
 }

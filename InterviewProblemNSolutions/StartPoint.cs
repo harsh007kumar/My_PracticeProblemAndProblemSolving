@@ -545,6 +545,7 @@ namespace InterviewProblemNSolutions
             BestTimeToBuyAndSellStockWithCooldown();
             FindTargetSumWays();
             ReverseBits();
+            SumOfTwoIntegersWithoutUsingPlusOperator();
 
 
 
@@ -2216,6 +2217,19 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Reverse of {num} => {DailyProblem.ReverseBits(num)}");
         }
 
+        public static void SumOfTwoIntegersWithoutUsingPlusOperator()
+        {
+            // NeetCode https://youtu.be/gVUrDV4tZfY
+            // https://leetcode.com/problems/sum-of-two-integers/
+            Utility.Print("371. Sum of Two Integers");
+            int[] a = { 1, 2, -900 };
+            int[] b = { 2, 3, 100 };
+            for (int i = 0; i < a.Length; i++)
+            {
+                Console.WriteLine($"The sum of {a[i]} & {b[i]} without using + operator is (using Bit manipulation): {DailyProblem.SumOfTwoIntegersWithoutUsingPlusOperatorBitManipulation(a[i], b[i])}");
+                Console.WriteLine($"The sum of {a[i]} & {b[i]} without using + operator is (using Power and log functions): {DailyProblem.SumOfTwoIntegersWithoutUsingPlusOperatorAndUsingLogAndPowerFunc(a[i], b[i])}");
+            }
+        }
 
         public static void DecodeString()
         {
