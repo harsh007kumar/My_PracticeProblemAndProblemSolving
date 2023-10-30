@@ -3983,6 +3983,34 @@ namespace InterviewProblemNSolutions
         // Divide and Conquer Approach || Time O(n) || Space O(n)
         public static int BestTimeToBuyAndSellStockIII_DivideAndConquer(int[] prices)
         {
+            int len = prices.Length;
+            int ltMin = prices[0], ltMaxProfit = 0, rtProfit = 0, maxProfit = 0, ltProfit = 0;
+
+            int[] rtMax = new int[len];
+            rtMax[len - 1] = prices[len - 1];
+            // Update MaxValue avaliable on right hand of each index
+            for (int i = len - 2; i >= 0; i--)
+                rtMax[i] = Math.Max(rtMax[i + 1], prices[i]);
+
+            for (int partitionAt = 0; partitionAt < len; partitionAt++)     // partitionAt is considered part of right array
+            {
+                // left side profit cal
+                if (partitionAt > 0)
+                    ltMin = Math.Min(ltMin, prices[partitionAt - 1]);
+                if (partitionAt > 0)
+                    ltProfit = Math.Max(ltProfit, prices[partitionAt - 1] - ltMin);
+                ltMaxProfit = Math.Max(ltMaxProfit, ltProfit);
+
+                // now right side profit cal
+                rtProfit = Math.Max(0, rtMax[partitionAt] - prices[partitionAt]);
+
+                // maximum total profit if we partition at current index
+                maxProfit = Math.Max(maxProfit, ltMaxProfit + rtProfit);
+
+                // Console.WriteLine($" {partitionAt}, {maxProfit}={ltMaxProfit}+{rtProfit} | {ltProfit}");
+            }
+            return maxProfit;
+
             /* Divide the problem into 2 parts
              * 1st tranx in left
              * 2nd tranx in right
@@ -3993,34 +4021,34 @@ namespace InterviewProblemNSolutions
              * we try to find maximize profit in left and right half
              */
 
-            var len = prices.Length;
-            if (len < 2) return 0;
-            int Lmin = prices[0], Rmax = prices[len - 1];
+            //var len = prices.Length;
+            //if (len < 2) return 0;
+            //int Lmin = prices[0], Rmax = prices[len - 1];
 
-            int[] left = new int[len];
-            // left to right pass [Sell after considering we have previously bought]
-            for (int i = 1; i < len; i++)
-            {
-                // max profit possilble at current index is max of either profit at i-1 or curr selling price my Lmin
-                left[i] = Math.Max(left[i - 1], prices[i] - Lmin);
-                Lmin = Math.Min(Lmin, prices[i]);
-            }
+            //int[] left = new int[len];
+            //// left to right pass [Sell after considering we have previously bought]
+            //for (int i = 1; i < len; i++)
+            //{
+            //    // max profit possilble at current index is max of either profit at i-1 or curr selling price my Lmin
+            //    left[i] = Math.Max(left[i - 1], prices[i] - Lmin);
+            //    Lmin = Math.Min(Lmin, prices[i]);
+            //}
 
-            int[] right = new int[len];
-            // right to left pass [Buy after considering we have previously sold]
-            for (int i = len - 2; i >= 0; i--)
-            {
-                // max profit possilble at current index is max of either profit at i+1 or curr buying price my Rmax
-                right[i] = Math.Max(right[i + 1], Rmax - prices[i]);
-                Rmax = Math.Max(Rmax, prices[i]);
-            }
+            //int[] right = new int[len];
+            //// right to left pass [Buy after considering we have previously sold]
+            //for (int i = len - 2; i >= 0; i--)
+            //{
+            //    // max profit possilble at current index is max of either profit at i+1 or curr buying price my Rmax
+            //    right[i] = Math.Max(right[i + 1], Rmax - prices[i]);
+            //    Rmax = Math.Max(Rmax, prices[i]);
+            //}
 
-            /* One optimization is calculating the total profit while calculating max profit for 'right array' above*/
-            int totalProfit = 0;
-            // taking each index as mid point for dividing the entire array to maximize totalProfit
-            for (int i = 0; i < len; i++)
-                totalProfit = Math.Max(totalProfit, left[i] + right[i]);
-            return totalProfit;
+            ///* One optimization is calculating the total profit while calculating max profit for 'right array' above*/
+            //int totalProfit = 0;
+            //// taking each index as mid point for dividing the entire array to maximize totalProfit
+            //for (int i = 0; i < len; i++)
+            //    totalProfit = Math.Max(totalProfit, left[i] + right[i]);
+            //return totalProfit;
         }
 
 
