@@ -104,6 +104,7 @@ namespace InterviewProblemNSolutions
             //GenerateParenthesis();
             //BestTimeToBuyAndSellStockII();
             //BestTimeToBuyAndSellStockIII();
+            BestTimeToBuyAndSellStockIV();
             //DecodeString();
             //KthLargestElementInArray();
             //AssignCookies();
@@ -2176,6 +2177,28 @@ namespace InterviewProblemNSolutions
             {
                 prices.Print("PRICES");
                 Console.WriteLine($" After completing at max 2 Buy-Sell on above, MaxProfit: {DailyProblem.BestTimeToBuyAndSellStockIII_DivideAndConquer(prices)}");
+            }
+        }
+
+        public static void BestTimeToBuyAndSellStockIV()
+        {
+            // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/
+            Utility.Print("188. Best Time to Buy and Sell Stock IV");
+            int[][] prices = {
+                            new int[] { 2, 4, 1 },
+                            new int[] { 3, 2, 6, 5, 0, 3 },
+                            new int[] { 3, 3, 5, 0, 0, 3, 1, 4 }, 
+                            new int[] { 1, 2, 3, 4, 5 },
+                            new int[] { 7, 6, 4, 3, 1 },
+                            new int[] { 1 },
+                            new int[] { 1, 2, 4, 2, 5, 7, 2, 4, 9, 0 } 
+                            };
+            int[] k = { 2, 2, 2, 2, 2, 2, 2 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                prices[i].Print("PRICES");
+                Console.WriteLine($" After completing at max '{k[i]}' Buy-Sell on above, MaxProfit => {DynamicProgramming.BestTimeToBuyAndSellStockIV_DP(prices[i], k[i])}");
+                Console.WriteLine(Utility.lineDelimeter);
             }
         }
 

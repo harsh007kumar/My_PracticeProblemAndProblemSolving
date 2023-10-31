@@ -471,7 +471,7 @@ namespace InterviewProblemNSolutions
                     if (c >= coins[i])      // if current amt is greater or equal to ith coinType
                         // Min of either current no of coins or taking ith coin and value at current amt - coinValue which is picked
                         dp[c] = Math.Min(dp[c], 1 + dp[c - coins[i]]);
-            
+
             return dp[amt] <= amt ? dp[amt] : -1;
         }
 
@@ -1330,7 +1330,7 @@ namespace InterviewProblemNSolutions
 
             if (dictionary.Contains(input))
                 return true;                                            // entire word is present in dictonary
-            else if(memo.ContainsKey(input))                            // or we have previously calculated this sub-problem/string and result was true
+            else if (memo.ContainsKey(input))                            // or we have previously calculated this sub-problem/string and result was true
                 return memo[input];
 
             bool result = false;
@@ -1740,7 +1740,7 @@ namespace InterviewProblemNSolutions
         }
 
 
-        [Obsolete("Doesnt works for all cases+ Algo is not efficient Time = O(n^2)",true)]
+        [Obsolete("Doesnt works for all cases+ Algo is not efficient Time = O(n^2)", true)]
         public static int BestTimeToBuyAndSellStockWithTransactionFee_Depricated(int[] prices, int fee)
         {
             int l = prices.Length;
@@ -1838,7 +1838,7 @@ namespace InterviewProblemNSolutions
             we try to maximize the profite arising out of each of the above operation
             */
             int l = prices.Length;
-            Dictionary<bool,int>[] dp = new Dictionary<bool, int>[l];
+            Dictionary<bool, int>[] dp = new Dictionary<bool, int>[l];
             for (int i = 0; i < l; i++)
                 dp[i] = new Dictionary<bool, int>();
             return MaxProfit(-1, true);
@@ -1882,15 +1882,15 @@ namespace InterviewProblemNSolutions
         {
             if (i >= A.Length || j >= B.Length)
                 return 0;
-            
+
             // if sub-problem is pre-computed return stored answer
             if (cache[i, j] != -1)
                 return cache[i, j];
 
             if (A[i] == B[j])
                 return cache[i, j] = 1 + MaxUncrossedLines_DP(A, B, i + 1, j + 1, cache);
-            else 
-                return cache[i, j] = Math.Max(  MaxUncrossedLines_DP(A, B, i, j + 1, cache),
+            else
+                return cache[i, j] = Math.Max(MaxUncrossedLines_DP(A, B, i, j + 1, cache),
                                                 MaxUncrossedLines_DP(A, B, i + 1, j, cache));
         }
         // DP Top-Down Approach || Time = Space = O(n*m), n = len of A & m = len of B
@@ -1949,7 +1949,7 @@ namespace InterviewProblemNSolutions
             {
                 if (s1 == s2) return true;
                 string key = s1 + "+" + s2;
-                if (cache.ContainsKey(key)) 
+                if (cache.ContainsKey(key))
                     return cache[key];
 
                 int n = s1.Length;
@@ -1961,8 +1961,8 @@ namespace InterviewProblemNSolutions
                     map[s2[i] - 'a']--;
                 }
                 // check if frequency is not zero return false
-                for(int i=0;i<map.Length;i++)
-                    if(map[i]!=0)
+                for (int i = 0; i < map.Length; i++)
+                    if (map[i] != 0)
                         return cache[key] = false;
 
                 // Main Step, try breaking equal length s1 & s2 at each possible idx to check if any combination yields true
@@ -2014,7 +2014,7 @@ namespace InterviewProblemNSolutions
             int ans = 0;
             for (i = 0; i < len; i++)
                 ans = Math.Max(ans, dp[i]);     // get maximum columns kept
-            
+
             return len - ans;                   // returming min columns deleted
         }
 
@@ -2042,7 +2042,7 @@ namespace InterviewProblemNSolutions
                 if (i + 1 < l) score = Math.Max(score, stoneValue[i] + stoneValue[i + 1] + Math.Min(Max(i + 3, cache), Math.Min(Max(i + 4, cache), Max(i + 5, cache))));
                 // Alice takes 1st & 2nd & 3rd stone
                 if (i + 2 < l) score = Math.Max(score, stoneValue[i] + stoneValue[i + 1] + stoneValue[i + 2] + Math.Min(Max(i + 4, cache), Math.Min(Max(i + 5, cache), Max(i + 6, cache))));
-                
+
                 // update the max score one can get from this index & return the value
                 return cache[i] = score;
             }
@@ -2123,7 +2123,7 @@ namespace InterviewProblemNSolutions
                     // either the char from s1 or s2 matches & all characters before that have matched
                     if ((s3[-1 + r + c] == s1[r - 1] && dp[r - 1, c]) || (s3[-1 + r + c] == s2[c - 1] && dp[r, c - 1]))
                         dp[r, c] = true;
-            
+
             return dp[l1, l2];
         }
         // Dp-top-down approach, Time = Space = O(n*m), n = length of s1 & m = len of s2
@@ -2161,7 +2161,7 @@ namespace InterviewProblemNSolutions
             int GetMin(int idx)
             {
                 if (idx >= cost.Length) return 0;
-                
+
                 // idx for which cost has not been calculated previously
                 if (cache[idx] != -1) return cache[idx];
 
@@ -2205,7 +2205,7 @@ namespace InterviewProblemNSolutions
             int l = nums.Length;
             long[] dp = new long[l];
             // set default min values
-            for (int i = 0; i < l; i++) 
+            for (int i = 0; i < l; i++)
                 dp[i] = long.MinValue;
 
             dp[0] = nums[0];    // max value we can get at 0th idx is value at 0th idx itself
@@ -2348,9 +2348,9 @@ namespace InterviewProblemNSolutions
             int mod = 1000000007, l = s.Length;
             Dictionary<int, long> waysFromIdx = new Dictionary<int, long>(s.Length);
             return (int)CountDecodeWays();
-            
+
             // local helper func
-            long CountDecodeWays(int i=0)
+            long CountDecodeWays(int i = 0)
             {
                 if (i == l) return 1;
                 if (s[i] == '0') return 0;                      // if current digit is 0 its not a valid Decoding
@@ -2479,7 +2479,7 @@ namespace InterviewProblemNSolutions
                         // if first & last char are same and substring leaving those is also palindrome
                         isPali[startIdx, lastIdx] = s[startIdx] == s[lastIdx] && isPali[startIdx + 1, lastIdx - 1];
                 }
-            
+
             // OPTIMIZATION if entire string is palindrome no further checks required
             if (isPali[0, n - 1])
                 return 0;
@@ -2498,7 +2498,7 @@ namespace InterviewProblemNSolutions
                             if (1 == (cuts[currIdx] = Math.Min(cuts[currIdx], 1 + cuts[splitAt - 1])))
                                 break;  // OPTIMIZATION => Minimum cut 1 achieved need not evalute further
                 }
-            
+
             // return min cuts to make all partitiion of 's' palindrome
             return cuts[n - 1];
         }
@@ -2582,8 +2582,8 @@ namespace InterviewProblemNSolutions
                 maxProfit[curr] = Math.Max(maxProfit[curr], jobs[curr].p + (idx >= 0 ? maxProfit[idx] : 0));
             }
 
-            return maxProfit[jobs.Length-1];
-            
+            return maxProfit[jobs.Length - 1];
+
             // local helper func
             int BinarySearch(int currJobIdx)
             {
@@ -2714,9 +2714,9 @@ namespace InterviewProblemNSolutions
                     for (int i = idx; i < l; i++)
                     {
                         if (numsFound == 0)
-                            count+= Get(i + 1, numsFound + 1, nums[i], num2);
+                            count += Get(i + 1, numsFound + 1, nums[i], num2);
                         else if (numsFound == 1)
-                            count+= Get(i + 1, numsFound + 1, num1, nums[i]);
+                            count += Get(i + 1, numsFound + 1, num1, nums[i]);
                         else if (nums[i] - num2 == num2 - num1)   // same diff
                         {
                             // if seen same diff at current idx return
@@ -2855,6 +2855,48 @@ namespace InterviewProblemNSolutions
                     var subtracting = WaysToGetTargetSum(idx + 1, currSum - nums[idx]);
                     return waysToTarget[idx][currSum] = adding + subtracting;
                 }
+            }
+        }
+
+        // Time = Space = o(n^2), n = length of array 'prices'
+        public static int BestTimeToBuyAndSellStockIV_DP(int[] prices, int k)
+        {
+            /*
+            I think best way to solve this is to find all possible solutions to find the best profit
+            that can be generated by buy-selling at most 'k' times.
+
+            so to divide the problem into smaller sub-problem
+            the decision tree wud look like:
+            Given we have not breached K counter
+            a. we can either buy or skip buying at any given day/index
+            b. if already bought we can sell or skip selling on a given day/index
+
+            to improce run-time we can cache the resut of max profit at given index for given 'k' value
+            */
+            int len = prices.Length;
+            Dictionary<int, int>[] dp = new Dictionary<int, int>[len];
+            for (int i = 0; i < len; i++)
+                dp[i] = new Dictionary<int, int>();
+            return Profit(0, k);
+
+            // local helper func
+            int Profit(int idx, int BuySellCounter)
+            {
+                if (BuySellCounter < 1 || idx == len) return 0;
+                // if sub-problem with give counter from a given day is already
+                // precomputed than return from cache
+                if (dp[idx].ContainsKey(BuySellCounter))
+                    return dp[idx][BuySellCounter];
+
+                int currIdxAndKMax = 0;
+                // process of buying
+                for (int i = idx + 1; i < len; i++)
+                    currIdxAndKMax = Math.Max(currIdxAndKMax, Profit(i + 1, BuySellCounter - 1) + prices[i] - prices[idx]);
+
+                // process of skipping
+                currIdxAndKMax = Math.Max(currIdxAndKMax, Profit(idx + 1, BuySellCounter));
+
+                return dp[idx][BuySellCounter] = currIdxAndKMax;
             }
         }
     }
