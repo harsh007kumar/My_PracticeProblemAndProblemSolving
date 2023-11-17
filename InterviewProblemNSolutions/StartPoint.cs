@@ -5881,8 +5881,22 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/reconstruct-itinerary/
             Utility.Print("332. Reconstruct Itinerary");
-            string[][][] ticketsArr = {    new string[][] { new string[] { "MUC", "LHR" }, new string[] { "JFK", "MUC" }, new string[] { "SFO", "SJC" }, new string[] { "LHR", "SFO" } },
-                                        new string[][] { new string[] { "JFK", "SFO" }, new string[] { "JFK", "ATL" }, new string[] { "SFO", "ATL" }, new string[] { "ATL", "JFK" }, new string[] { "ATL", "SFO" } } };
+            string[][][] ticketsArr = { new string[][] { new string[] { "MUC", "LHR" }, new string[] { "JFK", "MUC" }, new string[] { "SFO", "SJC" }, new string[] { "LHR", "SFO" } },
+                                        new string[][] { new string[] { "JFK", "SFO" }, new string[] { "JFK", "ATL" }, new string[] { "SFO", "ATL" }, new string[] { "ATL", "JFK" }, new string[] { "ATL", "SFO" } },
+                                        new string[][] { new string[] { "JFK", "KUL" },new string[] { "JFK", "NRT" },new string[] { "NRT", "JFK" } },
+
+                                        // One possible input is multiple same flight from loc A to B & back creating a loop
+                                        new string[][] { new string[] { "JFK", "SFO" },new string[] { "JFK", "ATL" },new string[] { "SFO", "JFK" },
+                                                         new string[] { "ATL", "AAA" },new string[] { "AAA", "BBB" },new string[] { "BBB", "ATL" },
+                                                         new string[] { "ATL", "AAA" },new string[] { "AAA", "BBB" },new string[] { "BBB", "ATL" },
+                                                         new string[] { "ATL", "AAA" },new string[] { "AAA", "BBB" },new string[] { "BBB", "ATL" },
+                                                         new string[] { "ATL", "AAA" },new string[] { "AAA", "BBB" },new string[] { "BBB", "ATL" },
+                                                         new string[] { "ATL", "AAA" },new string[] { "AAA", "BBB" },new string[] { "BBB", "ATL" },
+                                                         new string[] { "ATL", "AAA" },new string[] { "AAA", "BBB" },new string[] { "BBB", "ATL" },
+                                                         new string[] { "ATL", "AAA" },new string[] { "AAA", "BBB" },new string[] { "BBB", "ATL" },
+                                                         new string[] { "ATL", "AAA" },new string[] { "AAA", "BBB" },new string[] { "BBB", "ATL" },
+                                                        },
+                                        };
             foreach (var tickets in ticketsArr)
             {
                 tickets.Print("Tickets");
@@ -7849,6 +7863,7 @@ namespace InterviewProblemNSolutions
             {
                 grid.Print("GRID");
                 Console.WriteLine($" Starting at the top left square (0, 0). The least time until we can reach the bottom right square (N-1, N-1) is: '{DailyProblem.SwimInRisingWater(grid)}'\n");
+                Console.WriteLine($" Starting at the top left square (0, 0). The least time until we can reach the bottom right square (N-1, N-1) is: '{DailyProblem.SwimInRisingWater_PriorityQueue(grid)}'\n");
             }
         }
 

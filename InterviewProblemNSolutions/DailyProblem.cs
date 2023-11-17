@@ -16888,6 +16888,42 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        // Time O(nlogn) | Space O(n), where n = total no of cells in the grid
+        public static int SwimInRisingWater_PriorityQueue(int[][] grid)
+        {
+            /*
+            We start from the top and for each cell and all valid 4 direction we add max of (waterLevel required to reach current, curr cell val)
+            in a min heap priority queue 
+
+            after adding we pickup the smallest wt i.e. GetMin() from min-heap
+            and repeat this step and stop once we reach the destination
+            */
+            int n = grid.Length, w = 0, r, c;
+            bool[,] visited = new bool[n, n];
+            PriorityQueueForGrid pq = new PriorityQueueForGrid();
+            pq.Add(new PairForGrid(0, 0, 0));
+            while (pq.count > 0)
+            {
+                var cur = pq.GetMin();
+                r = cur.x;
+                c = cur.y;
+                w = Math.Max(cur.wt, grid[r][c]);
+                if (r == n - 1 && c == n - 1) break;
+
+                if (visited[r, c]) continue;
+                visited[r, c] = true;
+
+                if (c + 1 < n && !visited[r, c + 1])   // right
+                    pq.Add(new PairForGrid(Math.Max(w, grid[r][c + 1]), r, c + 1));
+                if (c - 1 >= 0 && !visited[r, c - 1])  // left
+                    pq.Add(new PairForGrid(Math.Max(w, grid[r][c - 1]), r, c - 1));
+                if (r + 1 < n && !visited[r + 1, c])   // down
+                    pq.Add(new PairForGrid(Math.Max(w, grid[r + 1][c]), r + 1, c));
+                if (r - 1 >= 0 && !visited[r - 1, c])  // up
+                    pq.Add(new PairForGrid(Math.Max(w, grid[r - 1][c]), r - 1, c));
+            }
+            return w;
+        }
 
         // Time O(nlogn) Space O(n), n = length of 'stations'
         public static int MinRefuelStops(int target, int startFuel, int[][] stations)

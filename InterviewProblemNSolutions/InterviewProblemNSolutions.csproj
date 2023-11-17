@@ -74,6 +74,7 @@
     <Compile Include="NestedIterator.cs" />
     <Compile Include="PeekingIterator.cs" />
     <Compile Include="PriorityQueue.cs" />
+    <Compile Include="PriorityQueueForGrid.cs" />
     <Compile Include="ProductOfNumbers.cs" />
     <Compile Include="RandomPickWithBlacklisted.cs" />
     <Compile Include="RangeSumNumArray.cs" />
