@@ -3200,7 +3200,8 @@ namespace InterviewProblemNSolutions
             Utility.Print("143. Reorder List");
             ListNode head = new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) { next = new ListNode(4) } } };
             head.Print("ORIGINAL LINKED LIST");
-            DailyProblem.ReOrderList(head);
+            // DailyProblem.ReOrderList_UsingStack(head);
+            DailyProblem.ReorderList_Iterative(head);
             head.Print("RE-ORDERED LINKED LIST");
         }
 

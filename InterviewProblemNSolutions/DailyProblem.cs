@@ -6298,7 +6298,7 @@ namespace InterviewProblemNSolutions
         /// Time O(n) || Space O(n)
         /// </summary>
         /// <param name="A"></param>
-        public static void ReOrderList(ListNode A)
+        public static void ReOrderList_UsingStack(ListNode A)
         {
             if (A == null || A.next == null) return;
 
@@ -6333,6 +6333,72 @@ namespace InterviewProblemNSolutions
                     fast = fast.next.next;
                 }
                 return slow;
+            }
+        }
+
+        /// <summary>
+        /// Given a singly linked list L: L0→L1→…→Ln-1→Ln,
+        /// re-order it to:               L0→Ln→L1→Ln-1→L2→Ln-2→…
+        /// Time O(n) || Space O(1)
+        /// </summary>
+        /// <param name="head"></param>
+        public static void ReorderList_Iterative(ListNode head)
+        {
+            var l = Len(head);
+            if (l < 2) return;
+            var beforemid = SecondHalf(head, l);
+            var mid = Reverse(beforemid.next);
+            beforemid.next = null;
+            ListNode cur, l1nxt, l2nxt, l1 = head, l2 = mid, last = null;
+            while (l1 != null && l2 != null)
+            {
+                l1nxt = l1.next;
+                l2nxt = l2.next;
+
+                cur = l1;
+                l1.next = l2;
+                l2.next = null;
+
+                if (last != null)
+                    last.next = cur;
+                last = l2;
+                l1 = l1nxt;
+                l2 = l2nxt;
+            }
+
+            // odd length input list, this is extra step
+            if (l1 != null) last.next = l1;
+
+            // local helper func
+            ListNode SecondHalf(ListNode v, int len)
+            {
+                var middle = (len + 1) >> 1;
+                while (--middle > 0)
+                    v = v.next;
+                return v;
+            }
+            int Len(ListNode v)
+            {
+                int size = 0;
+                while (v != null)
+                {
+                    size++;
+                    v = v.next;
+                }
+                return size;
+            }
+            ListNode Reverse(ListNode next)
+            {
+                ListNode prv = null, cur = next;
+                while (cur != null)
+                {
+                    next = cur.next;
+                    cur.next = prv;
+                    prv = cur;
+                    if (next == null) break;
+                    cur = next;
+                }
+                return cur;
             }
         }
 
