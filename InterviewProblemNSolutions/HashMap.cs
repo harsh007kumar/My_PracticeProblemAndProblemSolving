@@ -75,6 +75,7 @@ namespace InterviewProblemNSolutions
             this.key = key;
             this.val = val;
         }
+        public override string ToString() => $" {key},{val}";
     }
 
 

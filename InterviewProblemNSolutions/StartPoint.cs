@@ -5819,8 +5819,9 @@ namespace InterviewProblemNSolutions
             {
                 matrix.Print("Continent");
                 Console.Write($" List of grid coordinates where water can flow to both the Pacific and Atlantic ocean are: ");
-                foreach (var coordinate in DailyProblem.PacificAtlantic(matrix))
-                    Console.Write($" \'{coordinate[0]}, {coordinate[1]}\' ||");
+                // foreach (var coordinate in DailyProblem.PacificAtlantic_DFS(matrix))
+                foreach (var coordinate in DailyProblem.PacificAtlantic_BFS(matrix))
+                        Console.Write($" \'{coordinate[0]}, {coordinate[1]}\' ||");
                 Console.WriteLine("\n");
             }
         }

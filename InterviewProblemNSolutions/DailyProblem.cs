@@ -2499,7 +2499,7 @@ namespace InterviewProblemNSolutions
             {
                 var cur = q.Dequeue();
 
-                // create parent ListNode with same value as cur ListNode
+                // create parent ListNode with same value as current ListNode
                 if (!dict.ContainsKey(cur.val)) dict.Add(cur.val, new ListNode(cur.val));
 
                 foreach (var adjacentListNode in cur.neighbors)
@@ -6389,16 +6389,16 @@ namespace InterviewProblemNSolutions
             }
             ListNode Reverse(ListNode next)
             {
-                ListNode prv = null, cur = next;
-                while (cur != null)
+                ListNode prv = null, current = next;
+                while (current != null)
                 {
-                    next = cur.next;
-                    cur.next = prv;
-                    prv = cur;
+                    next = current.next;
+                    current.next = prv;
+                    prv = current;
                     if (next == null) break;
-                    cur = next;
+                    current = next;
                 }
-                return cur;
+                return current;
             }
         }
 
@@ -12388,7 +12388,7 @@ namespace InterviewProblemNSolutions
 
 
         // Time = Space = O(m*n), m = no of rows & n = no of columns in 'matrix' || DFS based approach
-        public static IList<IList<int>> PacificAtlantic(int[][] matrix)
+        public static IList<IList<int>> PacificAtlantic_DFS(int[][] matrix)
         {
             List<IList<int>> coordinateList = new List<IList<int>>();
             int row = matrix.Length;
@@ -12485,6 +12485,80 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time = Space = O(m*n), m = no of rows & n = no of columns in 'heights' || BFS based approach
+        public static IList<IList<int>> PacificAtlantic_BFS(int[][] heights)
+        {
+            int rows = heights.Length, cols = heights[0].Length, r, c;
+            int[,] canFlow = new int[rows, cols];
+            List<IList<int>> result = new List<IList<int>>();
+
+            Queue<Pair<int, int>> q = new Queue<Pair<int, int>>();
+            // BFS from pacific
+            c = 0;
+            for (r = 0; r < rows; r++)
+                q.Enqueue(new Pair<int, int>(r, c));
+            r = 0;
+            for (c = 0; c < cols; c++)
+                q.Enqueue(new Pair<int, int>(r, c));
+            while (q.Count > 0)
+            {
+                var cur = q.Dequeue();
+                // Console.WriteLine(current);
+                r = cur.key;
+                c = cur.val;
+
+                if (canFlow[r, c] == 0)
+                {
+                    // Console.WriteLine($"PAC going in loop for {r},{c} {heights[r][c]}");
+                    canFlow[r, c]++;
+                    if (r + 1 < rows && heights[r][c] <= heights[r + 1][c])
+                        q.Enqueue(new Pair<int, int>(r + 1, c));
+                    if (r - 1 >= 0 && heights[r][c] <= heights[r - 1][c])
+                        q.Enqueue(new Pair<int, int>(r - 1, c));
+                    if (c + 1 < cols && heights[r][c] <= heights[r][c + 1])
+                        q.Enqueue(new Pair<int, int>(r, c + 1));
+                    if (c - 1 >= 0 && heights[r][c] <= heights[r][c - 1])
+                        q.Enqueue(new Pair<int, int>(r, c - 1));
+                }
+            }
+
+            // BFS from atlantic
+            bool[,] visited = new bool[rows, cols];
+            c = cols - 1;
+            for (r = 0; r < rows; r++)
+                q.Enqueue(new Pair<int, int>(r, c));
+            r = rows - 1;
+            for (c = 0; c < cols; c++)
+                q.Enqueue(new Pair<int, int>(r, c));
+            while (q.Count > 0)
+            {
+                var cur = q.Dequeue();
+                // Console.WriteLine(current);
+                r = cur.key;
+                c = cur.val;
+                if (!visited[r, c])
+                {
+                    // Console.WriteLine($"ATL going in loop for {r},{c} {heights[r][c]}");
+                    visited[r, c] = true;
+                    canFlow[r, c]++;
+                    if (r + 1 < rows && heights[r][c] <= heights[r + 1][c])
+                        q.Enqueue(new Pair<int, int>(r + 1, c));
+                    if (r - 1 >= 0 && heights[r][c] <= heights[r - 1][c])
+                        q.Enqueue(new Pair<int, int>(r - 1, c));
+                    if (c + 1 < cols && heights[r][c] <= heights[r][c + 1])
+                        q.Enqueue(new Pair<int, int>(r, c + 1));
+                    if (c - 1 >= 0 && heights[r][c] <= heights[r][c - 1])
+                        q.Enqueue(new Pair<int, int>(r, c - 1));
+                }
+            }
+            for (r = 0; r < rows; r++)
+                for (c = 0; c < cols; c++)
+                    if (canFlow[r, c] > 1)
+                        result.Add(new List<int>() { r, c });
+            return result;
+        }
+    
 
         // Time O(m*n) || Auxiliary Space O(1) || Recursive Space O(m*n)
         public static int NumberOfEnclaves(int[][] grid)
