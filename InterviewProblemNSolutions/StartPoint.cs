@@ -547,6 +547,8 @@ namespace InterviewProblemNSolutions
             FindTargetSumWays();
             ReverseBits();
             SumOfTwoIntegersWithoutUsingPlusOperator();
+            RottingOranges();
+
 
 
 
@@ -9062,6 +9064,25 @@ namespace InterviewProblemNSolutions
             foreach (var str in strArr)
                 Console.WriteLine($" For input string '{str}' after removing excatly 1 index all letters will have same frequency: '{DailyProblem.EqualFrequency(str)}'");
         }
+
+        public static void RottingOranges()
+        {
+            Utility.Print($"994. Rotting Oranges");
+            int[][][] gridArr = new int[][][]
+            {
+                new int[][] { new int[] { 2, 1, 1 }, new int[] { 1, 1, 0}, new int[] { 0, 1, 1 } },
+                new int[][] { new int[] { 2, 1, 1 }, new int[] { 0, 1, 1}, new int[] { 1, 0, 1 } },
+                new int[][] { new int[] { 0, 2 } },
+                new int[][] { new int[] { 2, 1, 1 }, new int[] { 1, 1, 1}, new int[] { 0, 1, 2 } },
+            };
+            foreach (var grid in gridArr)
+            {
+                grid.Print("Input GRID, 0 = empty, 1 = fresh, 2 = rotten");
+                Console.WriteLine($"Minimum time elapsed before all oranges are rotten = {DailyProblem.OrangesRotting(grid)}");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

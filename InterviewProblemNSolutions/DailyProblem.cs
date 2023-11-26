@@ -19350,5 +19350,68 @@ namespace InterviewProblemNSolutions
         // Time = Space = O(1)
         public static int SumOfTwoIntegersWithoutUsingPlusOperatorAndUsingLogAndPowerFunc(int a, int b) => (int)Math.Log((Math.Pow(2, a) * Math.Pow(2, b)), 2);
 
+        // Time = Space = O(r*c), r = no of rows & c = no of cols in GRID
+        public static int OrangesRotting(int[][] grid)
+        {
+            /* ALGO
+            we iterate thru each cell in the grid
+            if its rotten we run BFS from current cell in all 4 possible directions and find out max time to rotten all adjacent cells
+            we store this elapsed time value
+            and we encounter another cell that is rotten but not already visited we run the BFS again from current cell
+            we update the max of current elapsed time vs last elapsed time
+
+            at the end we iterate thru grid once to check if we have all empty or rotten oranges if yes we return max elapsed time else -1
+            */
+            int rows = grid.Length, cols = grid[0].Length, maxElaspedTime = 0, r, c;
+            int[][] directions = new int[4][] { new int[] { 1, 0 }, new int[] { -1, 0 }, new int[] { 0, 1 }, new int[] { 0, -1 } };
+            bool[,] visited = new bool[rows, cols];
+            Queue<Pair<int, int>> q = new Queue<Pair<int, int>>();
+            for (r = 0; r < rows; r++)
+                for (c = 0; c < cols; c++)
+                    if (grid[r][c] == 2)   // rotten
+                        q.Enqueue(new Pair<int,int>(r, c));
+
+            if (q.Count > 0) q.Enqueue(null);
+            maxElaspedTime = Math.Max(maxElaspedTime, BFS());
+
+            // check if 1 or more fresh orange is still present
+            for (r = 0; r < rows; r++)
+                for (c = 0; c < cols; c++)
+                    if (grid[r][c] == 1)
+                        return -1;
+            return maxElaspedTime;
+
+            // local helper func
+            int BFS()
+            {
+                int totalTime = 0, curTime = 0, x, y;
+                while (q.Count > 0)
+                {
+                    var cur = q.Dequeue();
+                    if (cur == null)
+                    {
+                        totalTime = curTime++;
+                        if (q.Count > 0) q.Enqueue(null);
+                    }
+                    else
+                    {
+                        x = cur.key;
+                        y = cur.val;
+                        grid[x][y] = 2;
+                        foreach (var dir in directions)
+                            if (IsValid(x + dir[0], y + dir[1]))
+                                q.Enqueue(new Pair<int, int>(x + dir[0], y + dir[1]));
+                    }
+                }
+                return totalTime;
+            }
+            bool IsValid(int x, int y)
+            {
+                // not valid cell or not a fresh orange
+                if (x < 0 || x >= rows || y < 0 || y >= cols || grid[x][y] != 1 || visited[x, y]) return false;
+                visited[x, y] = true;
+                return true;
+            }
+        }
     }
 }
