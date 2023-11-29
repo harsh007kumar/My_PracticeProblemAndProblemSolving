@@ -2389,7 +2389,8 @@ namespace InterviewProblemNSolutions
                     $" is: \'{DailyProblem.WordLadder(beginWord[i], endWord[i], wordList[i])}\'");
                 Console.WriteLine($" Length of shortest transformation sequence from beginWord \'{beginWord[i]}\' to endWord \'{endWord[i]}\'" +
                     $" is: \'{DailyProblem.WordLadderFaster(beginWord[i], endWord[i], wordList[i])}\'");
-                
+                Console.WriteLine($" Length of shortest transformation sequence from beginWord \'{beginWord[i]}\' to endWord \'{endWord[i]}\'" +
+                    $" is: \'{DailyProblem.WordLadderFastest(beginWord[i], endWord[i], wordList[i])}\'");                
             }
         }
 

@@ -4506,6 +4506,111 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        /// <summary>
+        /// Given two words, beginWord and endWord, and a dictionary wordList,
+        /// return the number of words in the shortest transformation sequence from beginWord to endWord,
+        /// or 0 if no such sequence exists.
+        /// 
+        /// Time = Space = O(n*m), n = length of 'wordList' and m = avg length of each word
+        /// </summary>
+        /// <param name="beginWord"></param>
+        /// <param name="endWord"></param>
+        /// <param name="wordList"></param>
+        /// <returns></returns>
+        public static int WordLadderFastest(string beginWord, string endWord, IList<string> wordList)
+        {
+            /*  ALGO 
+                Create a 1 UnDirected graph for each word in list and beginWord
+                which has all possible cases it can be transformed into as values
+                ex: 'hot' will have => '*ot' , 'h*t' , 'ho*'
+
+                Now create second graph which holds values of all possible
+                transformation and from where they created
+                ex: '*ot' will have value => ''hot' , 'got' , 'rot' , etc
+                i.e. all possible matching values within 1 edit distance from wordList
+    
+                Now we just run BFS from source and return depth of transformation on reaching endWord
+                else return 0
+             */
+            Dictionary<string, List<string>> wordDict = new Dictionary<string, List<string>>();
+            Dictionary<string, List<string>> transformDict = new Dictionary<string, List<string>>();
+            List<string> transforms;
+            foreach (var word in wordList)                          // O(n)
+            {
+                // get all possbile transformation for current word
+                transforms = Transform(word.ToCharArray());         // O(m)
+                // add original word and all its posible transformations
+                wordDict[word] = transforms;
+                // now for all the transformation add the word as value in transformDict
+                foreach (var trans in transforms)                   // O(m)
+                    if (!transformDict.ContainsKey(trans))
+                        transformDict[trans] = new List<string>() { word };
+                    else
+                        transformDict[trans].Add(word);
+            }
+            // base case endWord not reachable
+            if (!wordDict.ContainsKey(endWord)) return 0;
+
+            // add begin word to graph
+            if (!wordDict.ContainsKey(beginWord))
+            {
+                wordDict[beginWord] = Transform(beginWord.ToCharArray());
+                // now for all the transformation add the word as value in transformDict
+                foreach (var trans in wordDict[beginWord])          // O(m)
+                {
+                    // Console.WriteLine($" trans for original {trans}");
+                    if (!transformDict.ContainsKey(trans))
+                        transformDict[trans] = new List<string>() { beginWord };
+                    else
+                        transformDict[trans].Add(beginWord);
+                }
+            }
+
+            // find shorted path from begin to end using BFS
+            return ShortestPath();                                  // O(n*m)
+
+            // local helper func
+            int ShortestPath()
+            {
+                Dictionary<string, int> dist = new Dictionary<string, int>();
+                Queue<string> q = new Queue<string>();
+                q.Enqueue(beginWord);
+                dist[beginWord] = 1;
+                while (q.Count > 0)
+                {
+                    var cur = q.Dequeue();
+                    var parentDist = dist[cur];
+                    if (cur == endWord) return dist[endWord];
+                    foreach (var possibleTransformations in wordDict[cur])
+                        if (!dist.ContainsKey(possibleTransformations))
+                        {
+                            dist[possibleTransformations] = parentDist + 1;
+                            foreach (var actualWordsInList in transformDict[possibleTransformations])
+                                if (!dist.ContainsKey(actualWordsInList))
+                                {
+                                    q.Enqueue(actualWordsInList);
+                                    dist[actualWordsInList] = parentDist + 1;
+                                }
+                        }
+                }
+                return 0;
+            }
+            List<string> Transform(char[] w)
+            {
+                List<string> ans = new List<string>();
+                char org;
+                for (int i = 0; i < w.Length; i++)
+                {
+                    org = w[i];
+                    w[i] = '*';
+                    ans.Add(new string(w));
+                    w[i] = org;
+                }
+                return ans;
+            }
+        }
+
+
         // Time = Space = O(N)
         public static int HouseRobberI(int[] nums)
         {
