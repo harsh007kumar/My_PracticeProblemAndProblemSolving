@@ -2389,6 +2389,7 @@ namespace InterviewProblemNSolutions
                     $" is: \'{DailyProblem.WordLadder(beginWord[i], endWord[i], wordList[i])}\'");
                 Console.WriteLine($" Length of shortest transformation sequence from beginWord \'{beginWord[i]}\' to endWord \'{endWord[i]}\'" +
                     $" is: \'{DailyProblem.WordLadderFaster(beginWord[i], endWord[i], wordList[i])}\'");
+                
             }
         }
 
@@ -3103,7 +3104,9 @@ namespace InterviewProblemNSolutions
             foreach (var edges in edgesArr)
             {
                 edges.Print("UnDirected Graph Edges");
-                int[] redundantEdge = DailyProblem.FindRedundantConnection(edges);
+                //int[] redundantEdge = DailyProblem.FindRedundantConnection(edges);
+                int[] redundantEdge = DailyProblem.FindRedundantConnection_Efficient(edges);
+                
                 Console.WriteLine($" Removing Edge: u({redundantEdge[0]})->v({redundantEdge[1]}) will make above Graph Cycle Free\n");
             }
         }

@@ -4506,7 +4506,6 @@ namespace InterviewProblemNSolutions
             }
         }
 
-
         // Time = Space = O(N)
         public static int HouseRobberI(int[] nums)
         {
@@ -6085,6 +6084,77 @@ namespace InterviewProblemNSolutions
                 return false;
             }
         }
+
+        // Time = Space = O(N), N = no of nodes in Graph
+        public static int[] FindRedundantConnection_Efficient(int[][] edges)
+        {
+            /* ALGO
+            a. Build the graph
+            b. find the cycle using DFS keep track of parent of each vertex
+            c. once we find the cycle add all the edge of each node in the cycle to a HasSet
+            d. now start from the end of the edges array and first edge what is present in HashSet would be our ans
+            */
+            int V = edges.Length;
+            List<int>[] g = new List<int>[V + 1];
+            foreach (var edge in edges)
+            {
+                int u = edge[0], v = edge[1];
+                if (g[u] == null) g[u] = new List<int>();
+                if (g[v] == null) g[v] = new List<int>();
+
+                // add edge u->v
+                g[u].Add(v);
+                // add edge v->u
+                g[v].Add(u);
+            }
+
+            int[] parent = new int[V + 1];
+            bool[] visited = new bool[V + 1];
+            HashSet<string> cyclicEdges = new HashSet<string>();
+            FindCycle();
+
+            // find redundant edge
+            for (int i = V - 1; i >= 0; i--)
+                if (cyclicEdges.Contains(edges[i][0] + "," + edges[i][1]))
+                    return edges[i];
+            return new int[0];
+
+            // local helper func
+            bool FindCycle(int cur = 1, int last = 0)
+            {
+                // cycle found
+                if (visited[cur] == true)
+                    // cycle found
+                    if (parent[last] != cur)
+                    {
+                        int par = cur;
+                        while (true)
+                        {
+                            cyclicEdges.Add(cur + "," + last);   // u->v
+                            cyclicEdges.Add(last + "," + cur);   // u->v
+                            cur = last;
+                            last = parent[last];
+                            if (par == cur) break;
+                        }
+                        return true;
+                    }
+                    else return false;
+
+                // mark visited
+                visited[cur] = true;
+                // update parent for current node
+                parent[cur] = last;
+
+                foreach (var adjacentEdge in g[cur])
+                    if (FindCycle(adjacentEdge, cur))
+                        return true;
+
+                // mark un-visited
+                visited[cur] = false;
+                return false;
+            }
+        }
+
 
         // Time O(n) || Space O(1)
         // After each increase or decrease operation CPU doesn't monitors utilization for 10 seconds
