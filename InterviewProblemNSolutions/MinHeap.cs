@@ -61,6 +61,7 @@ namespace InterviewProblemNSolutions
             Heapify();
             return ans;
         }
+        public int GetMin() => Count > 0 ? arr[0] : Int32.MinValue;
     }
 
     public class MinHeapPair

@@ -19645,5 +19645,57 @@ namespace InterviewProblemNSolutions
             }
             return groupFormed;
         }
+        // NeetCode https://youtu.be/amnrMCVd2YI
+        // Time O(n*logk) | Space O(n), k = no of unique values in 'nums' and n = length of hand
+        public static bool IsPossibleDivide(int[] nums, int k)
+        {
+            /* ALGO
+            1. Create a dict with nums as key and no of time it appears as value
+            2. We also add all unique values to MinHeap
+            3. While MinHeap Counter is > 0 we start to form a grp and pick starting point as minElement from Heap and use it to form grp
+            4. after 1st element in grp we see if dictionary has val+1 if yes we pick that up and continue forming current grp
+            5. At any point if next value is not present in dict we can return false
+            6. we also keep reducing counter-1 in dictionary whenever we are taking a val to form a grp and if it reaches 0 we also remove this value from MinHeap
+            6a. Imp point to note is we are trying to remove a value from Heap which is not the minmum that we can just return false,
+                Bcoz, if we have val,counter {1,2},{2,1},{3,1},{4,1},{5,6}
+                we start with 1 and reduce counter in dict {1,1},{2,1},{3,1},{4,1},{5,6}
+                now we look for 1+1 i.e. 2 and yes its present but on reduce it by 1 in dict we also need to pop it from Heap but Heap min is 1 not 2
+                hence we can return true because we know whenever we are going to create next grp we won't find net consecutive val for 1 which is still present once in dict
+            7. if at any point consecutive no is no found or we run of values while creating last group return false
+            */
+            if (nums.Length % k != 0) return false;
+            Dictionary<int, int> numFreq = new Dictionary<int, int>();
+            foreach (var val in nums)                   // O(n)
+                if (!numFreq.ContainsKey(val))
+                    numFreq[val] = 1;
+                else
+                    numFreq[val]++;
+
+            MinHeap heap = new MinHeap(numFreq.Count);
+            foreach (var num in numFreq.Keys)           // O(klogk)
+                heap.Insert(num);
+            int curGrpCount = 0, first;
+            while (heap.Count > 0)                      // O(n)
+            {
+                first = heap.GetMin();
+                if (--numFreq[first] == 0)
+                    heap.ExtractMin();                  // O(logn)
+                while (++curGrpCount < k)
+                    if (numFreq.ContainsKey(++first))
+                    {
+                        if (--numFreq[first] == 0)
+                        {
+                            if (heap.GetMin() != first)
+                                return false;
+                            else
+                                heap.ExtractMin();      // O(logn)
+                        }
+                    }
+                    else
+                        return false;
+                curGrpCount = 0;
+            }
+            return true;
+        }
     }
 }
