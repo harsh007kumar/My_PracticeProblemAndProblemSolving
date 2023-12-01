@@ -548,6 +548,7 @@ namespace InterviewProblemNSolutions
             ReverseBits();
             SumOfTwoIntegersWithoutUsingPlusOperator();
             RottingOranges();
+            HandOfStraights();
 
 
 
@@ -9087,6 +9088,27 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void HandOfStraights()
+        {
+            // https://leetcode.com/problems/hand-of-straights/description/
+            Utility.Print("846. Hand of Straights");
+            // https://leetcode.com/problems/divide-array-in-sets-of-k-consecutive-numbers/description/
+            Utility.Print("1296. Divide Array in Sets of K Consecutive Numbers");
+            int[][] numsArr = new int[][] {
+                new int[]{ 1, 2, 3, 6, 2, 3, 4, 7, 8 },
+                new int[]{ 1, 2, 3, 4, 5 },
+                new int[]{ 3, 2, 1, 2, 3, 4, 3, 4, 5, 9, 10, 11 },
+                new int[]{ 1, 2, 3, 3, 4, 4, 5, 6 }
+            };
+            int[] k = { 3, 4, 3, 4 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                numsArr[i].Print("Input Array");
+                Console.WriteLine($"with above input array it is possible to create consecutive grp os values with grp size {k[i]} => {DailyProblem.IsNStraightHand(numsArr[i], k[i])}");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

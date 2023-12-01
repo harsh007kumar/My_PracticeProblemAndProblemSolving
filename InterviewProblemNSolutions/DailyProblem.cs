@@ -19588,5 +19588,62 @@ namespace InterviewProblemNSolutions
                 return true;
             }
         }
+
+
+        // Time O(Max(klogk,n*k)) | Space O(n), k = no of unique values in 'hand' and n = length of hand
+        public static bool IsNStraightHand(int[] hand, int groupSize)
+        {
+            if (hand.Length % groupSize != 0) return false;
+            /*
+            1. Create a dict with hands as key and no of time it appears as valu
+            2. Now we sort this dict on keys (asc)
+            3. Start from 1st key and move on to next values while deducting the counter -1 from dict
+            till we get 'groupSize' consecutive elements
+            4. once create once group repeat process from 2#
+            5. if at any point consecutive no is no found or we run of values while creating last group return false
+            */
+            Dictionary<int, int> handCount = new Dictionary<int, int>();
+            foreach (var val in hand)                // O(n)
+                if (!handCount.ContainsKey(val))
+                    handCount[val] = 1;
+                else
+                    handCount[val]++;
+            var sorted = (from kvp in handCount
+                          orderby kvp.Key
+                          select kvp.Key).ToList();   // O(klogk)
+            bool groupFormed = false;
+            int idxInSorted = 0, len = hand.Length, totalHandsUsed = 0, curGrpCount = 0, lastVal = -1, curVal;
+            while (totalHandsUsed < len)               // O(n)
+            {
+                if (idxInSorted >= sorted.Count) return false;   // we don't have next consecutive val for current grp
+                curVal = sorted[idxInSorted]; // get next value for the group
+                                              // update sorted if counter for any value goes to zero
+                if (--handCount[sorted[idxInSorted]] == 0)
+                {
+                    sorted.RemoveAt(idxInSorted);   // O(k)
+                    idxInSorted--;  // to compensate for removed idx
+                }
+                // cur value is greater than 1 + lastVal
+                if (lastVal != -1 && lastVal + 1 != curVal)
+                    return false;
+
+                // Console.WriteLine($" Val {curVal} | Counter after removal {handCount[sorted[idxInSorted]]}");
+                if (++curGrpCount == groupSize)
+                {
+                    curGrpCount = 0;
+                    idxInSorted = 0;
+                    lastVal = -1;
+                    groupFormed = true;
+                }
+                else
+                {
+                    groupFormed = false;
+                    idxInSorted++;
+                    lastVal = curVal;
+                }
+                totalHandsUsed++;
+            }
+            return groupFormed;
+        }
     }
 }
