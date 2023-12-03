@@ -19697,5 +19697,23 @@ namespace InterviewProblemNSolutions
             }
             return true;
         }
+
+
+        // Time O(n) | Space O(1), n = length of triplets
+        public static bool MergeTriplets(int[][] triplets, int[] target)
+        {
+            bool gotA = false, gotB = false, gotC = false;
+            int tarA = target[0], tarB = target[1], tarC = target[2];
+            foreach (var triplet in triplets)
+                if (HasAllValuesSmallerOrEqualToTarget(triplet))
+                {
+                    gotA = gotA | tarA == triplet[0];
+                    gotB = gotB | tarB == triplet[1];
+                    gotC = gotC | tarC == triplet[2];
+                    if (gotA && gotB && gotC) return true;
+                }
+            return false;
+            bool HasAllValuesSmallerOrEqualToTarget(int[] A) => A[0] <= tarA && A[1] <= tarB && A[2] <= tarC;
+        }
     }
 }

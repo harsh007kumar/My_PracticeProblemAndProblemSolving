@@ -549,6 +549,7 @@ namespace InterviewProblemNSolutions
             SumOfTwoIntegersWithoutUsingPlusOperator();
             RottingOranges();
             HandOfStraights();
+            MergeTripletsToFormTargetTriplet();
 
 
 
@@ -9108,6 +9109,30 @@ namespace InterviewProblemNSolutions
                 numsArr[i].Print("Input Array");
                 Console.WriteLine($"with above input array it is possible to create consecutive grp os values with grp size {k[i]} => {DailyProblem.IsNStraightHand(numsArr[i], k[i])}");
                 Console.WriteLine($"with above input array it is possible to create consecutive grp os values with grp size (using Heap) {k[i]} => {DailyProblem.IsPossibleDivide(numsArr[i], k[i])}");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void MergeTripletsToFormTargetTriplet()
+        {
+            // https://leetcode.com/problems/merge-triplets-to-form-target-triplet
+            Utility.Print("1899. Merge Triplets to Form Target Triplet");
+            int[][][] tripletsArr = new int[][][] {
+                new int[][] { new int[] { 2, 5, 3 }, new int[] { 1, 8, 4 }, new int[] { 1, 7, 5 } },
+                new int[][] { new int[] { 3, 4, 5}, new int[] { 4, 5, 6 } },
+                new int[][] { new int[] { 2, 5, 3 }, new int[] { 2, 3, 4 }, new int[] { 1, 2, 5 }, new int[] { 5, 2, 3 } }
+            };
+            int[][] targetArr = new int[][] {
+                new int[]{ 2, 7, 5 },
+                new int[]{ 3, 2, 5 },
+                new int[]{ 5, 5, 5 }
+            };
+            for (int i = 0; i < targetArr.Length; i++)
+            {
+                tripletsArr[i].Print("Triplets Array");
+                targetArr[i].Print("Target Array");
+                Console.WriteLine($"from Triplets array its possible to create Target array by maximixing each individual elements of 1 or more triplets => {DailyProblem.MergeTriplets(tripletsArr[i], targetArr[i])}");
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
