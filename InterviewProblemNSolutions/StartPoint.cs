@@ -6646,9 +6646,12 @@ namespace InterviewProblemNSolutions
             // TECHDOSE https://youtu.be/KuE_Cn3xhxI
             // https://leetcode.com/problems/valid-parenthesis-string/
             Utility.Print("678. Valid Parenthesis String");
-            string[] sArr = { "()", "(*)", "(*))", "**)()", "*(" };
+            string[] sArr = { "()", "(*)", "(*))", "**)()", "*(", "(*)(" };
             foreach (var s in sArr)
+            {
                 Console.WriteLine($" '{s}' is valid parenthesis string: '{StringAlgorithms.CheckValidParenthesisString(s)}'\n");
+                Console.WriteLine($" '{s}' is valid parenthesis string: '{StringAlgorithms.CheckValidParenthesisStringConstantSpace(s)}'\n");
+            }
         }
 
 

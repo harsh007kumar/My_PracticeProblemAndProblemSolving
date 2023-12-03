@@ -921,6 +921,36 @@ namespace InterviewProblemNSolutions
                     return false;
             return true;
         }
+        // NeetCode https://youtu.be/QhPdNS143Qg
+        // Time = O(n) | Space = O(1) Soln
+        public static bool CheckValidParenthesisStringConstantSpace(string s)
+        {
+            int openBracketMin = 0, openBracketMax = 0;
+            foreach (var ch in s)
+            {
+                if (ch == '(')
+                {
+                    openBracketMin++;
+                    openBracketMax++;
+                }
+                else if (ch == ')')
+                {
+                    --openBracketMin;
+                    --openBracketMax;
+
+                }
+                else
+                {
+                    --openBracketMin;                       // * can close )
+                    openBracketMax++;                       // * can be open (
+                }
+                // if max possible left goes below zero we can never recover from it
+                if (openBracketMax < 0) return false;
+                // we only want to consider valid possibilities of min open brackets
+                if (openBracketMin < 0) openBracketMin = 0;
+            }
+            return openBracketMin == 0;
+        }
 
 
         // Time = Space = O(n)
