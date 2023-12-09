@@ -550,6 +550,7 @@ namespace InterviewProblemNSolutions
             RottingOranges();
             HandOfStraights();
             MergeTripletsToFormTargetTriplet();
+            EditDistance();
 
 
 
@@ -9137,6 +9138,20 @@ namespace InterviewProblemNSolutions
                 targetArr[i].Print("Target Array");
                 Console.WriteLine($"from Triplets array its possible to create Target array by maximixing each individual elements of 1 or more triplets => {DailyProblem.MergeTriplets(tripletsArr[i], targetArr[i])}");
                 Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void EditDistance()
+        {
+            // https://leetcode.com/problems/edit-distance/
+            Utility.Print("72. Edit Distance");
+            string[] word1Arr = { "horse", "intention" };
+            string[] word2Arr = { "ros", "execution" };
+            for (int i = 0; i < word1Arr.Length; i++)
+            {
+                Console.WriteLine($"The minimum number of operations required to convert word1 '{word1Arr[i]}' to word2 '{word2Arr[i]}' => {DynamicProgramming.MinDistance_Memoization(word1Arr[i], word2Arr[i])}");
+                Console.WriteLine($"The minimum number of operations required to convert word1 '{word1Arr[i]}' to word2 '{word2Arr[i]}' => {DynamicProgramming.MinDistance_Tabulation(word1Arr[i], word2Arr[i])}");
             }
         }
 

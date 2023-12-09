@@ -2899,5 +2899,82 @@ namespace InterviewProblemNSolutions
                 return dp[idx][BuySellCounter] = currIdxAndKMax;
             }
         }
+
+        // DP Memoization (Top-Down approach)
+        // Time = Space O(l1*l2), l1,l2 = length of word1 and word2 respectively
+        public static int MinDistance_Memoization(string w1, string w2)
+        {
+            /* ALGO
+            There are 3 choice we can make at each index:
+            a. if current character match // 0 Edit + (l1+1,l2+1)
+            b. we delete current character in w1 and call recursively // 1Edit + (l1+1,l2)
+            c. we replace currecnt character in w1 and call recursively // 1Edit + (l1+1,l2+1)
+            d. we insert required character from w2 and call recursively // 1Edit + (l1,l2+1)
+
+            we speed up the process by saving min edit required to get the match for each index in w1 & w2
+            */
+            int l1 = w1.Length, l2 = w2.Length;
+            Dictionary<int, Dictionary<int, int>> dp = new Dictionary<int, Dictionary<int, int>>();
+            return GetMinEdit(0, 0);
+
+            // local helper func
+            int GetMinEdit(int i1, int i2)
+            {
+                if (i2 == l2)  // we ran out of all characters from word2, delete all remaining characters in word1
+                    return l1 - i1;
+                if (i1 == l1)  // we ran out of all characters from word1, insert all left characters from word2
+                    return l2 - i2;
+
+                if (dp.ContainsKey(i1) && dp[i1].ContainsKey(i2))    // pre computed, sub problem
+                    return dp[i1][i2];
+
+                if (!dp.ContainsKey(i1))
+                    dp[i1] = new Dictionary<int, int>();
+
+                // char match or replace char
+                int editCount = (w1[i1] == w2[i2] ? 0 : 1) + GetMinEdit(i1 + 1, i2 + 1);
+                if (editCount == 0) return dp[i1][i2] = 0;
+
+                // delete char
+                editCount = Math.Min(editCount, 1 + GetMinEdit(i1 + 1, i2));
+                if (editCount == 0) return dp[i1][i2] = 0;
+                
+                // insert char
+                editCount = Math.Min(editCount, 1 + GetMinEdit(i1, i2 + 1));
+                
+                // update cache
+                return dp[i1][i2] = editCount;
+            }
+        }
+        // NeetCode https://youtu.be/XYi2-LPrwm4
+        // DP Tabulation (Bottom-Up approach)
+        // Time = Space = O(l1*l2), l1,l2 = length of word1 and word2 respectively
+        public static int MinDistance_Tabulation(string word1, string word2)
+        {
+            int m = word1.Length;
+            int n = word2.Length;
+
+            int[,] dp = new int[m + 1, n + 1];
+
+            for (int i = 0; i < m + 1; i++)
+                for (int j = 0; j < n + 1; j++)
+                    if (i == 0)
+                        dp[i, j] = j;
+                    else if (j == 0)
+                        dp[i, j] = i;
+
+            for (int i = 1; i < m + 1; i++)
+                for (int j = 1; j < n + 1; j++)
+                    if (word1[i - 1] == word2[j - 1])
+                        dp[i, j] = dp[i - 1, j - 1];
+                    else
+                    {
+                        int add = dp[i, j - 1];
+                        int delete = dp[i - 1, j];
+                        int replace = dp[i - 1, j - 1];
+                        dp[i, j] = 1 + Math.Min(add, Math.Min(delete, replace));
+                    }
+            return dp[m, n];
+        }
     }
 }
