@@ -3532,6 +3532,50 @@ namespace InterviewProblemNSolutions
             memo[sID, pID] = ans ? 1 : -1;
             return ans;
         }
+        // Time = Space = O(n*m), n,m are length of string 's' & 'p' respectively
+        public static bool RegularExpressionMatchingMemo_New(string s, string p)
+        {
+            /* ALGO
+            the recursive soln for this problem aka brute force way has way too big of decision tree
+            basicially for each star '*' we can either match it or skip using it.
+            hence we have 2 choice to make which wud take the Time complexity to O(2^n)
+
+            But if we cache the result for given index of 's' & 'p'
+            it gets reduced to O(n*m)
+
+            there are 2 main condition
+            a. we get matching characters in s & p or we got '.' dot in p
+            now we just need to check if recursive call to i+1,j+1 returns true
+            b. we have a char (either actual char or dot) followed by *
+            #b1 we dont use it i.e. i,j+2 we are are still to match any character from 's' and we skipped 2 characters in 'p'
+            #b2 we use it once to match a char in 's' but keep index of 'p' the same so we can decide in future/recursion if we want to use it again or not i.e. i+1,j
+             */
+            int sLen = s.Length, pLen = p.Length;
+            Dictionary<string, bool> cache = new Dictionary<string, bool>();
+            return DFS(0, 0);
+            // local helper func
+            bool DFS(int i, int j)
+            {
+                // reached end of Regex and found match
+                if (j == pLen) return i == sLen;
+
+                var key = i + "," + j;
+                // return if sub-problem is precomputed
+                if (cache.ContainsKey(key)) return cache[key];
+
+                // main check
+                bool currCharMatch = i < sLen && (s[i] == p[j] || p[j] == '.');
+                if (j + 1 < pLen && p[j + 1] == '*')
+                    // Don't use * (skipping 2 characters in pattern 'p') || Use * excatly once
+                    return cache[key] = DFS(i, j + 2) || (currCharMatch && DFS(i + 1, j));
+                // if match not found continue and we don't have * following current character try just current characters
+                else
+                    return cache[key] = currCharMatch && DFS(i + 1, j + 1);
+
+                // no match found
+                return cache[key] = false;
+            }
+        }
         // DP Bottom-Up Approach
         public static bool RegularExpressionMatchingTab(string s, string p) => true;
 
