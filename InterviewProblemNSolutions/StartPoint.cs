@@ -138,7 +138,7 @@ namespace InterviewProblemNSolutions
             //FlipColumnsForMaximumNumberOfEqualRows();
             //SubstringWithConcatenationOfAllWords();
             //LowestCommonAncestorDeepestLeaves();
-            //BurstBalloons();
+            BurstBalloons();
             PalindromePartitioning();
             //SquaresSortedArray();
             //BinaryTreeRightSideView();
@@ -2723,13 +2723,19 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Tushar Roy https://youtu.be/IFNibRVgFBo
+        // Tushar Roy https://youtu.be/IFNibRVgFBo Bottom-up
+        // NeetCode https://youtu.be/VFskby7lUbw Top-Down
         public static void BurstBalloons()
         {
             // https://leetcode.com/problems/burst-balloons/
             Utility.Print("312. Burst Balloons");
-            int[] nums = { 3, 1, 5, 8 };
-            Console.WriteLine($" Max coins collected by bursting the balloons wisely\t\'{DynamicProgramming.BurstBalloons(nums)}\'");
+            int[][] numsArr = new int[][] { new int[] { 3, 1, 5, 8 }, new int[] { 1, 5 } };
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Input array");
+                Console.WriteLine($" Max coins collected by bursting the balloons wisely\t\'{DynamicProgramming.BurstBalloons(nums)}\'");
+                Console.WriteLine($" Max coins collected by bursting the balloons wisely\t\'{DynamicProgramming.MaxCoins(nums)}\'");
+            }
         }
 
         public static void SquaresSortedArray()

@@ -1449,6 +1449,63 @@ namespace InterviewProblemNSolutions
             return dp[0, len - 1];
         }
 
+        // Time O(n^3) | Space O(n^2) , n = length of 'nums'
+        // since there are n^2 sub-arrays and for each subarray we try each value as the one which is removed at last
+        // DP Memoization (Top-Down) approach
+        // NeetCode https://youtu.be/VFskby7lUbw
+        public static int MaxCoins(int[] nums)
+        {
+            /*  ALGO
+            To Break down this probalem into appropriate size sub-problem.
+            we can instead of thinking what to pop first think what happens if we pop given idx value last.
+            problem states if there are no value to left or right consider default value as 1, so its easier to just pad left and rt corner with 1.
+
+            Now example we have original array 3 1 5 8
+            after default values padding it looks like 1 3 1 5 8 1
+            Now we start with lt and rt index as 1 & len+1 of original array respectively.
+
+            So now lets say we decide to remove value 3 at index i set to '1' at last
+            that means all the value to right will be remove before '3'
+            same for left values (which are none btw for this index)
+
+            hence coinCount = Val[ltBounder-1] * val[i] * val[rtBoundry+1]
+            coinCount = 1 * 3 * 1
+            now we add all total coins we get from rt and lt sub-problems/arrays
+            coinCount += DFS[lt,i-1] + DFS[i+1,rt]
+
+            we update the cache for current problem cache[lt,rt] = coinCount
+            and return the max value we get by moving i from left to right boundry
+            splitting array from different middle point.
+             */
+            int l = nums.Length;
+            int[] n = new int[l + 2];
+            n[0] = n[l + 1] = 1;  // set left and right boundry to one
+                                  // all nums from original array in new
+            for (int i = 0; i < l; i++)
+                n[i + 1] = nums[i];
+            // setting 
+            int[,] dp = new int[l + 2, l + 2];
+            for (int r = 0; r < l + 2; r++)
+                for (int c = 0; c < l + 2; c++)
+                    dp[r, c] = -1;
+            return DFS(1, l);
+
+            // local helper func
+            int DFS(int lt, int rt)
+            {
+                if (lt > rt) return 0;
+                if (dp[lt, rt] != -1) return dp[lt, rt];
+                dp[lt, rt] = 0;
+                for (int i = lt; i <= rt; i++)             // O(n)
+                {
+                    int coins = n[lt - 1] * n[i] * n[rt + 1];
+                    coins += DFS(lt, i - 1) + DFS(i + 1, rt); // O(n^2)
+                    dp[lt, rt] = Math.Max(dp[lt, rt], coins);
+                }
+                return dp[lt, rt];
+            }
+        }
+
 
         // Recursive Approach
         // Time = O(Row*(Col^2)) || Space = O(1)
