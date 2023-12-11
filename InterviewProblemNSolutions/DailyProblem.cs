@@ -3774,66 +3774,6 @@ namespace InterviewProblemNSolutions
             return merged.ToArray();
         }
 
-
-        // Time O(n) || Space O(1)
-        public static int[][] InsertIntervalsOld(int[][] intervals, int[] newInterval)
-        {
-            if (intervals.Length == 0) return new int[][] { newInterval };
-
-            List<int[]> sortedIntervals = new List<int[]>(intervals.Length);
-            // newInterval End is smaller than 1st interval
-            if (newInterval[1] < intervals[0][0])
-            {
-                sortedIntervals.Add(newInterval);
-                sortedIntervals.AddRange(intervals);
-                return sortedIntervals.ToArray();
-            }
-            // newInterval Start is larger than last interval
-            else if (newInterval[0] > intervals[intervals.Length - 1][1])
-            {
-                sortedIntervals.AddRange(intervals);
-                sortedIntervals.Add(newInterval);
-                return sortedIntervals.ToArray();
-            }
-
-            int i = 0, lastEnd = intervals[0][1];
-            while (i < intervals.Length)
-            {
-                // newInterval lies b/w two existing intervals
-                if (lastEnd < newInterval[0] && newInterval[1] < intervals[i][0])
-                {
-                    sortedIntervals.Add(newInterval);
-                    sortedIntervals.Add(intervals[i++]);
-                }
-
-                // If input end smaller than newInterval or input start greater than newInterval add input
-                else if (intervals[i][1] < newInterval[0] || intervals[i][0] > newInterval[1])
-                    sortedIntervals.Add(intervals[i++]);
-
-                // If input startTime <= newInterval and endTime >= than newInterval add input Interval
-                else if (intervals[i][0] <= newInterval[0] && intervals[i][1] >= newInterval[1])
-                    sortedIntervals.Add(intervals[i++]);
-
-                // Add 1 || startTime of interval is < startTime newInterval
-                else if (intervals[i][0] <= newInterval[0])
-                {
-                    int startTime = intervals[i][0];
-                    while (i < intervals.Length && intervals[i][0] <= newInterval[1]) i++;
-                    sortedIntervals.Add(new int[] { startTime, Math.Max(intervals[i - 1][1], newInterval[1]) });
-                }
-                // Add 1 || endTime of interval is <= endTime newInterval
-                else //if (intervals[i][1] <= newInterval[1])
-                {
-                    int last = Math.Max(newInterval[1], intervals[i++][1]);
-                    while (i < intervals.Length && intervals[i][0] <= newInterval[1])
-                        last = Math.Max(last, intervals[i++][1]);
-                    sortedIntervals.Add(new int[] { newInterval[0], last });
-                }
-                lastEnd = intervals[i - 1][1];
-            }
-
-            return sortedIntervals.ToArray();
-        }
         // Time O(n) || Space O(1)
         public static int[][] InsertIntervals(int[][] intervals, int[] newInterval)
         {
@@ -3877,6 +3817,45 @@ namespace InterviewProblemNSolutions
             if (!intervalAdded) ls.Add(newInterval);
 
             return ls.ToArray();
+        }
+        // Time = Space = O(n), n = length of 'intervals' array
+        public static int[][] InsertIntervalsNew(int[][] intervals, int[] newInterval)
+        {
+            if (intervals.Length < 1) return new int[][] { newInterval };
+            int start = newInterval[0], end = newInterval[1], i = -1, l = intervals.Length;
+            List<int[]> ans = new List<int[]>();
+            bool insertionDone = false;
+            while (++i < l)
+                // last interval endTime is smaller than to be inserted interval startTime
+                if (!insertionDone && intervals[i][1] >= start)
+                {
+                    insertionDone = true;
+                    // new interval endTime is smaller than current start i.e. new sit between current and last interval
+                    if (end < intervals[i][0])
+                    {
+                        ans.Add(newInterval);
+                        ans.Add(intervals[i]);
+                    }
+                    else // need to join overlapping intervals
+                    {
+                        start = Math.Min(start, intervals[i][0]);    // take min of both start times
+                        end = Math.Max(end, intervals[i][1]);    // take max of both end times
+                        while (i + 1 < l)
+                        {
+                            // next interval startTime is smaller than current endTime than merge next interval into current one
+                            if (intervals[i + 1][0] <= end)
+                                end = Math.Max(end, intervals[++i][1]);
+                            else break;
+                        }
+                        ans.Add(new int[] { start, end });
+                    }
+                }
+                else    // add before and after intervals which are not affected by insertion
+                    ans.Add(intervals[i]);
+            // all intervals were smaller than start hence insert at the end
+            if (!insertionDone)
+                ans.Add(newInterval);
+            return ans.ToArray();
         }
 
         // Time O(n) || Space O(1)
