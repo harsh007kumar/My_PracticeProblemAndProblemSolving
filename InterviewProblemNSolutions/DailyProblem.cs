@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 
 namespace InterviewProblemNSolutions
@@ -19737,6 +19738,25 @@ namespace InterviewProblemNSolutions
                 }
             return false;
             bool HasAllValuesSmallerOrEqualToTarget(int[] A) => A[0] <= tarA && A[1] <= tarB && A[2] <= tarC;
+        }
+
+
+        // Time O(nlogn) Space O(1), n = length of 'intervals' array
+        public static int EraseOverlapIntervals(int[][] intervals)
+        {
+            intervals = intervals.OrderBy(x => x[0]).ToArray();
+            int prvEnd = intervals[0][1], l = intervals.Length, removed = 0;
+            for (int i = 1; i < l; i++)
+                // no overlapping
+                if (intervals[i][0] >= prvEnd)
+                    prvEnd = intervals[i][1];
+                else
+                {
+                    removed++;
+                    // remove the interval which ends later and keep the one which end earlier
+                    prvEnd = Math.Min(prvEnd, intervals[i][1]);
+                }
+            return removed;
         }
     }
 }

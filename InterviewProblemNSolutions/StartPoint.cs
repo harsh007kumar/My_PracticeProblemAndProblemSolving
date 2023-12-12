@@ -551,6 +551,7 @@ namespace InterviewProblemNSolutions
             HandOfStraights();
             MergeTripletsToFormTargetTriplet();
             EditDistance();
+            NonOverlappingIntervals();
 
 
 
@@ -9159,6 +9160,25 @@ namespace InterviewProblemNSolutions
             {
                 Console.WriteLine($"The minimum number of operations required to convert word1 '{word1Arr[i]}' to word2 '{word2Arr[i]}' => {DynamicProgramming.MinDistance_Memoization(word1Arr[i], word2Arr[i])}");
                 Console.WriteLine($"The minimum number of operations required to convert word1 '{word1Arr[i]}' to word2 '{word2Arr[i]}' => {DynamicProgramming.MinDistance_Tabulation(word1Arr[i], word2Arr[i])}");
+            }
+        }
+
+        // NeetCode https://youtu.be/nONCGxWoUfM
+        public static void NonOverlappingIntervals()
+        {
+            // https://leetcode.com/problems/non-overlapping-intervals/description/
+            Utility.Print("435. Non-overlapping Intervals");
+            int[][][] inputArrays = new int[][][]
+            {
+                new int[][] { new int[] { 1, 2 }, new int[] { 2,3 }, new int[] { 3,4 }, new int[] { 1, 3 } },
+                new int[][] { new int[] { 1, 2 }, new int[] { 1, 2 }, new int[] { 1, 2 } },
+                new int[][] { new int[] { 1, 2 }, new int[] { 2, 3 } },
+                new int[][] { new int[] { 1, 2 }, new int[] { 2, 3 }, new int[] { 3, 4 }, new int[] { -100, -2 }, new int[] { 5, 7 } },
+            };
+            foreach(var inputArr in inputArrays)
+            {
+                inputArr.Print("Intervals");
+                Console.WriteLine($"Min no of intervals which had to be removed to make above non-overlapping intervals are => {DailyProblem.EraseOverlapIntervals(inputArr)}");
             }
         }
 
