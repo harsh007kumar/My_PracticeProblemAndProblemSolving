@@ -19758,5 +19758,87 @@ namespace InterviewProblemNSolutions
                 }
             return removed;
         }
+
+        // Optimized BRUTE FORCE
+        // Time O(n* range+m) Space O(m), n = length of intervals and m = length of queries
+        public static int[] MinInterval_BruteForce(int[][] intervals, int[] queries)
+        {
+            Dictionary<int, int> numSmallestInterval = new Dictionary<int, int>();
+            int smallest = Int32.MaxValue, largest = Int32.MinValue;
+            foreach (var num in queries)         // O(m)
+            {
+                numSmallestInterval[num] = Int32.MaxValue;
+                smallest = Math.Min(smallest, num);
+                largest = Math.Max(largest, num);
+            }
+
+            foreach (var interval in intervals)  // O(n)
+            {
+                int size = 1 + interval[1] - interval[0], lt = interval[0], rt = interval[1];
+                if (rt < smallest || lt > largest) continue;
+
+                while (lt <= rt)                 // O(range), range=largest-smallest
+                {
+                    if (numSmallestInterval.ContainsKey(lt))
+                        numSmallestInterval[lt] = Math.Min(numSmallestInterval[lt], size);
+                    if (++lt > largest)
+                        break;
+                }
+            }
+
+            int[] minInterval = new int[queries.Length];
+            for (int i = 0; i < queries.Length; i++)   // O(m)
+                minInterval[i] = numSmallestInterval[queries[i]] != Int32.MaxValue ? numSmallestInterval[queries[i]] : -1;
+            return minInterval;
+        }
+
+        // Time O(nlogn*m) Space O(m), n = length of intervals and m = length of queries
+        public static int[] MinInterval_Sorting(int[][] intervals, int[] queries)
+        {
+            /* ALGO
+            Sort the intervals array on the basis of size (1+right-left)
+            Create a dictionary which initially has all the numbers in queries as key and idx as value
+            Now start iterating on sorted intervals foreach sorted interval
+                for all the numbers in dictionary which lie b/w this interval
+                set the size (which we know wud be smallest as we have sorted the intervals in asc order)
+                also update the minSize array with the size for given num by using idx from dictionary and remvoe it from dictionary
+
+                we break this loop once dictionary has 0 elements or we run out of all the intervals
+            return minSize array;
+            */
+            // intervals = intervals.OrderBy(x => 1+x[1]-x[0]).ToArray();
+            int l = queries.Length, smallest = Int32.MaxValue, largest = Int32.MinValue, num;
+            Dictionary<int, List<int>> queryNumIdx = new Dictionary<int, List<int>>();
+            for (int i = 0; i < l; i++)            // O(m)
+            {
+                num = queries[i];
+                if (!queryNumIdx.ContainsKey(num))
+                    queryNumIdx[num] = new List<int>() { i };
+                else
+                    queryNumIdx[num].Add(i);
+
+                smallest = Math.Min(smallest, num);
+                largest = Math.Max(largest, num);
+            }
+            int[] minInterval = new int[l];
+            foreach (var n in intervals.OrderBy(x => 1 + x[1] - x[0]))   // O(nlogn)
+            {
+                int size = 1 + n[1] - n[0], lt = n[0], rt = n[1];
+                if (rt < smallest || lt > largest) continue; // optimization
+                var dict = queryNumIdx.ToList();
+                foreach (var kvp in dict)    // O(m)
+                    if (lt <= kvp.Key && kvp.Key <= rt)
+                    {
+                        foreach (var idx in kvp.Value)
+                            minInterval[idx] = size;
+                        queryNumIdx.Remove(kvp.Key);    // smallest found for current num hence we can remove from dictionary
+                    }
+            }
+            // set default value for num for which no size could be found
+            foreach (var indexRange in queryNumIdx.Values)
+                foreach (var idx in indexRange)
+                    minInterval[idx] = -1;
+            return minInterval;
+        }
     }
 }

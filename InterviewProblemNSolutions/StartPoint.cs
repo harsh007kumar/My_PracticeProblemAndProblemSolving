@@ -552,6 +552,7 @@ namespace InterviewProblemNSolutions
             MergeTripletsToFormTargetTriplet();
             EditDistance();
             NonOverlappingIntervals();
+            MinimumIntervalToIncludeEachQuery();
 
 
 
@@ -9179,6 +9180,33 @@ namespace InterviewProblemNSolutions
             {
                 inputArr.Print("Intervals");
                 Console.WriteLine($"Min no of intervals which had to be removed to make above non-overlapping intervals are => {DailyProblem.EraseOverlapIntervals(inputArr)}");
+            }
+        }
+
+
+        public static void MinimumIntervalToIncludeEachQuery()
+        {
+            // https://leetcode.com/problems/minimum-interval-to-include-each-query/
+            Utility.Print("1851. Minimum Interval to Include Each Query");
+            int[][][] intervalsArr = new int[][][]
+            {
+                new int[][] { new int[] {1, 4}, new int[] { 2, 4}, new int[] { 3, 6}, new int[] { 4, 4 } },
+                new int[][] { new int[] {2, 3}, new int[] { 2, 5}, new int[] { 1, 8}, new int[] { 20, 25 } },
+                new int[][] { new int[] {4, 5}, new int[] { 5, 8}, new int[] { 1, 9}, new int[] { 8, 10}, new int[] { 1, 6 } }
+            };
+            int[][] queriesArr = new int[][]
+            {
+                new int[] { 2, 3, 4, 5 },
+                new int[] { 2, 19, 5, 22 },
+                new int[] { 7, 9, 3, 9, 3 }
+            };
+            for(int i=0;i<queriesArr.Length;i++)
+            {
+                intervalsArr[i].Print("Intervals");
+                queriesArr[i].Print("Queries");
+                DailyProblem.MinInterval_BruteForce(intervalsArr[i], queriesArr[i]).Print("Size of the smallest interval i such that lefti <= queries[j] <= righti");
+                DailyProblem.MinInterval_Sorting(intervalsArr[i], queriesArr[i]).Print("Size of the smallest interval i such that lefti <= queries[j] <= righti");
+                Console.WriteLine(Utility.lineDelimeter);
             }
         }
 
