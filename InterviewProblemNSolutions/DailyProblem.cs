@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization.Formatters;
 using System.Text;
+using static InterviewProblemNSolutions.DailyProblem;
 
 namespace InterviewProblemNSolutions
 {
@@ -19792,7 +19793,7 @@ namespace InterviewProblemNSolutions
             return minInterval;
         }
 
-        // Time O(nlogn*m) Space O(m), n = length of intervals and m = length of queries
+        // Time O(Max(nlogn,n*m)) Space O(m), n = length of intervals and m = length of queries
         public static int[] MinInterval_Sorting(int[][] intervals, int[] queries)
         {
             /* ALGO
@@ -19826,6 +19827,8 @@ namespace InterviewProblemNSolutions
                 int size = 1 + n[1] - n[0], lt = n[0], rt = n[1];
                 if (rt < smallest || lt > largest) continue; // optimization
                 var dict = queryNumIdx.ToList();
+                // An improvement can be made by sorting the query array and finding the ranges of values which lie b / w lt and rt
+                // and only iterating and updating applicable those values instead of blindly search entire query array
                 foreach (var kvp in dict)    // O(m)
                     if (lt <= kvp.Key && kvp.Key <= rt)
                     {
@@ -19838,6 +19841,74 @@ namespace InterviewProblemNSolutions
             foreach (var indexRange in queryNumIdx.Values)
                 foreach (var idx in indexRange)
                     minInterval[idx] = -1;
+            return minInterval;
+        }
+        // Time O(nlogn+mlogm) Space O(n), n = length of intervals and m = length of queries
+        public static int[] MinInterval_Efficient_Heap_Sorting(int[][] intervals, int[] queries)
+        {
+            /* ALGO
+            a. sort the intervals basis their start value
+            b. sort the queries and keep original indexes in Dictionary
+            c. Now iterate thru the sorted intervals whose starting value is smaller than the current queries[i] where we are at (i starts from 0)
+            d. keep adding above values in to MinHeap which has size at the main value paired with ending index of a interval
+            e. now check and remove HeapMin its its ending value is smaller than queried values i.e. query is out of range
+            f. repeated step#e till we found a interval whoese end value is >= query value or Heap is empty
+            g. if Heap empty insert -1 in result array for current query value.
+            */
+            PriorityQueue<int,int> pq = new PriorityQueue<int, int>(intervals.Length);
+            Dictionary<int, List<int>> queryNumIdx = new Dictionary<int, List<int>>();
+            int queryLen = queries.Length, i;
+            int[] minInterval = new int[queryLen];                     // result array
+
+            // add all the numbers from the query into dictionary as key and their index in a list as value
+            for (i = 0; i < queryLen; i++)                             // O(m)
+                if (!queryNumIdx.ContainsKey(queries[i]))
+                    queryNumIdx[queries[i]] = new List<int>() { i };
+                else
+                    queryNumIdx[queries[i]].Add(i);
+            // sort the input query array
+            var sortedQuery = (from query in queryNumIdx
+                               orderby query.Key
+                               select query.Key).ToList();      // O(mlogm)
+            i = 0;
+            queryLen = sortedQuery.Count;
+
+
+            intervals = intervals.OrderBy(x => x[0]).ToArray(); // O(nlogn)
+            int j = 0, intervalLen = intervals.Length;
+            while (i < queryLen)                                // O(m)
+            {
+                var curQueryVal = sortedQuery[i++];
+                while (j < intervalLen)                         // O(n)
+                {
+                    // adding interval till the startValue is <= current queried value
+                    if (intervals[j][0] <= curQueryVal)
+                    {
+                        pq.Insert(1 + intervals[j][1] - intervals[j][0], intervals[j][1]);  // O(logn)
+                        j++;
+                    }
+                    else
+                        break;
+                }
+
+                // remove all invalid interval from MinHeap i.e. one which have end value smaller than current queried value
+                while (pq.Count > 0 && pq.arr[0].val < curQueryVal)
+                    pq.ExtractMin();                            // O(logn)
+
+                // update minsize
+                var minSize = pq.Count > 0 ? pq.arr[0].key : -1;
+                foreach (var idx in queryNumIdx[curQueryVal])
+                    minInterval[idx] = minSize;
+                
+                // now current query value is no longer needed
+                queryNumIdx.Remove(curQueryVal);
+            }
+
+            // set default value for any remaining index
+            foreach (var indexes in queryNumIdx.Values)
+                foreach (var idx in indexes)
+                    minInterval[idx] = -1;
+
             return minInterval;
         }
     }

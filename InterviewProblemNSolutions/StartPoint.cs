@@ -9204,8 +9204,9 @@ namespace InterviewProblemNSolutions
             {
                 intervalsArr[i].Print("Intervals");
                 queriesArr[i].Print("Queries");
-                DailyProblem.MinInterval_BruteForce(intervalsArr[i], queriesArr[i]).Print("Size of the smallest interval i such that lefti <= queries[j] <= righti");
-                DailyProblem.MinInterval_Sorting(intervalsArr[i], queriesArr[i]).Print("Size of the smallest interval i such that lefti <= queries[j] <= righti");
+                //DailyProblem.MinInterval_BruteForce(intervalsArr[i], queriesArr[i]).Print("Size of the smallest interval i such that lefti <= queries[j] <= righti");
+                //DailyProblem.MinInterval_Sorting(intervalsArr[i], queriesArr[i]).Print("Size of the smallest interval i such that lefti <= queries[j] <= righti");
+                DailyProblem.MinInterval_Efficient_Heap_Sorting(intervalsArr[i], queriesArr[i]).Print("Size of the smallest interval i such that lefti <= queries[j] <= righti");
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
