@@ -1599,6 +1599,36 @@ namespace InterviewProblemNSolutions
                 matrix[c][-1 + n - r] = temp;
             }
         }
+        // Time O(n^2) | Space O(1), n = no of rows/columns in 'matrix'
+        public static void RotateImageFourNumsAtATime(int[][] matrix)
+        {
+            int topBoundry = 0, rtBoundry = matrix.Length - 1, bottomBoundry = matrix.Length - 1, ltBoundry = 0;
+            while (topBoundry < bottomBoundry)
+            {
+                // we rotate 1 num from each side and once all the 4 boundry 1st num is rotated we move to next
+                for (int c = ltBoundry; c < rtBoundry; c++)
+                    RotateFour(c - ltBoundry);    // O(1)
+                topBoundry++;
+                rtBoundry--;
+                bottomBoundry--;
+                ltBoundry++;
+            }
+
+            // local helper func
+            void RotateFour(int distance)
+            {
+                /* SWAP 4 Corner numbers than next num in 1st row 2nd col and so on
+                a * b
+                * * *
+                c * d
+                */
+                int temp = matrix[topBoundry][ltBoundry + distance];
+                matrix[topBoundry][ltBoundry + distance] = matrix[bottomBoundry - distance][ltBoundry];
+                matrix[bottomBoundry - distance][ltBoundry] = matrix[bottomBoundry][rtBoundry - distance];
+                matrix[bottomBoundry][rtBoundry - distance] = matrix[topBoundry + distance][rtBoundry];
+                matrix[topBoundry + distance][rtBoundry] = temp;
+            }
+        }
         // Don't use below in interview difficult to explain the intution behind the approach
         // Time O(row) || Space O(1)
         public static void RotateFourRectangleApproach(int[][] matrix)
