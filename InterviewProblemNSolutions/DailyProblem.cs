@@ -894,6 +894,65 @@ namespace InterviewProblemNSolutions
 
             return spiralOrder;
         }
+        // Time O(rows*cols) | Space O(1)
+        public static List<int> SpiralOrder_Elegant(int[][] mat)
+        {
+            int topBoundry = 0, rightBoundry = mat[0].Length - 1, bottomBoundry = mat.Length - 1, leftBoundry = 0, r = 0, c = -1, dir = 0, total = mat[0].Length * mat.Length, i = 0;
+            List<int> ans = new List<int>();
+            while (++i <= total)
+                ans.Add(GetNextVal());
+            return ans;
+
+            // local helper func
+            int GetNextVal()
+            {
+                switch (dir)
+                {
+                    case 0: // lt->rt
+                        {
+                            if (++c > rightBoundry)
+                            {
+                                r = ++topBoundry;
+                                c = rightBoundry;
+                                ++dir;
+                            }
+                            break;
+                        }
+                    case 1: // top->bottom
+                        {
+                            if (++r > bottomBoundry)
+                            {
+                                r = bottomBoundry;
+                                c = --rightBoundry;
+                                ++dir;
+                            }
+                            break;
+                        }
+                    case 2: // rt->lt
+                        {
+
+                            if (--c < leftBoundry)
+                            {
+                                r = --bottomBoundry;
+                                c = leftBoundry;
+                                ++dir;
+                            }
+                            break;
+                        }
+                    case 3: // bottom->top
+                        {
+                            if (--r < topBoundry)
+                            {
+                                r = topBoundry;
+                                c = ++leftBoundry;
+                                dir = (++dir) % 4;
+                            }
+                            break;
+                        }
+                }
+                return mat[r][c];
+            }
+        }
 
         // Time O(N), N = no of moves given in input || Space O(9) ~O(1) 
         public static string WinnerOfTicTacToe(int[][] moves)

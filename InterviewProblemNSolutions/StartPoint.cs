@@ -1041,7 +1041,8 @@ namespace InterviewProblemNSolutions
             foreach (var matrix in matrixArr)
             {
                 matrix.Print("Input Matrix");
-                var spiralOrder = DailyProblem.SpiralMatrix(matrix);
+                // var spiralOrder = DailyProblem.SpiralMatrix(matrix);
+                var spiralOrder = DailyProblem.SpiralOrder_Elegant(matrix);
                 spiralOrder.Print("Spiral Order");
             }
         }
