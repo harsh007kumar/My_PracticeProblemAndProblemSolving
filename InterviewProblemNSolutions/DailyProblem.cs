@@ -3214,37 +3214,31 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time O(n^2) || Space O(1)
-        public static void SetMatrixZeroes(int[][] matrix)
-        {
-            bool firstColZero = false;
-            // Mark Rows and Cols which should be made Zeroes
-            for (int r = 0; r < matrix.Length; r++)
-            {
-                if (matrix[r][0] == 0) firstColZero = true;
-                for (int c = 1; c < matrix[0].Length; c++)
-                    if (matrix[r][c] == 0)
-                        matrix[0][c] = matrix[r][0] = 0;
-            }
-
-            // Now update Zeroes starting from 2nd row and 2nd col onwards
-            for (int r = 1; r < matrix.Length; r++)
-                for (int c = 1; c < matrix[0].Length; c++)
-                    if (matrix[r][0] == 0 || matrix[0][c] == 0)
-                        matrix[r][c] = 0;
-
-            // Check for 1st row
-            if (matrix[0][0] == 0)
-                for (int c = 0; c < matrix[0].Length; c++)
-                    matrix[0][c] = 0;
-
-            // Check for 1st col
-            if (firstColZero)
-                for (int r = 0; r < matrix.Length; r++)
-                    matrix[r][0] = 0;
-        }
-        // Time O(n^2) || Space O(1)
+        // Time O(r*c) | Space O(r+c)
         public static void SetMatrixZeroesEasy(int[][] matrix)
+        {
+            HashSet<int> rowsToBeZero = new HashSet<int>();
+            HashSet<int> colsToBeZero = new HashSet<int>();
+            int rows = matrix.Length, cols = matrix[0].Length;
+            for (int r = 0; r < rows; r++)
+                for (int c = 0; c < cols; c++)
+                    if (matrix[r][c] == 0)
+                    {
+                        rowsToBeZero.Add(r);
+                        colsToBeZero.Add(c);
+                    }
+            // update all cells of distinct rows
+            foreach (var r in rowsToBeZero)
+                for (int c = 0; c < cols; c++)
+                    matrix[r][c] = 0;
+            // update all cells of distinct cols
+            foreach (var c in colsToBeZero)
+                for (int r = 0; r < rows; r++)
+                    matrix[r][c] = 0;
+        }
+
+        // Time O(r*c) | Space O(1)
+        public static void SetMatrixZeroesWithConstantSpace(int[][] matrix)
         {
             bool setFirstRow = false;
             int row = matrix.Length, col = matrix[0].Length;

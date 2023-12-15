@@ -1869,8 +1869,8 @@ namespace InterviewProblemNSolutions
             Utility.Print("73. Set Matrix Zeroes");
             int[][] matrix = { new int[] { 0, 1, 2, 0 }, new int[] { 3, 4, 5, 2 }, new int[] { 1, 3, 1, 5 } };
             matrix.Print("INPUT MATRIX");
-            //DailyProblem.SetMatrixZeroes(matrix);
-            DailyProblem.SetMatrixZeroesEasy(matrix);
+            //DailyProblem.SetMatrixZeroesEasy(matrix);
+            DailyProblem.SetMatrixZeroesWithConstantSpace(matrix);
 
             matrix.Print("OUTPUT MATRIX");
 
