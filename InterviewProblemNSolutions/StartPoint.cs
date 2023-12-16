@@ -553,6 +553,8 @@ namespace InterviewProblemNSolutions
             EditDistance();
             NonOverlappingIntervals();
             MinimumIntervalToIncludeEachQuery();
+            MultiplyStrings();
+            DetectSquares();
 
 
 
@@ -9213,6 +9215,43 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+
+        public static void DetectSquares()
+        {
+            // https://leetcode.com/problems/detect-squares/description/
+            Utility.Print("2013. Detect Squares");
+            string[] instruction = { "DetectSquares", "add", "add", "add", "count", "count", "add", "count" };
+            int[][] pointsArr = new int[][]
+            {
+                new int[0] { }, new int[] { 3, 10 }, new int[] { 11, 2 }, new int[] { 3, 2 }, new int[] { 11, 10 }, new int[] { 14, 8 }, new int[] { 11, 2 }, new int[] { 11, 10 }
+            };
+            DetectSquares obj = null;
+            for (int i=0;i<instruction.Length;i++)
+            {
+                Console.Write($" Instruction => {instruction[i]} | ");
+                switch(instruction[i])
+                {
+                    case "DetectSquares":
+                        obj = new DetectSquares();
+                        Console.WriteLine("'DetectSquares' data-structure initialized now");
+                        break;
+                    case "add":
+                        obj.Add(pointsArr[i]);
+                        Console.WriteLine($"New point '{pointsArr[i][0]},{pointsArr[i][1]}' added to data-structure");
+                        break;
+                    case "count":
+                        Console.WriteLine($"Count no of square from point '{pointsArr[i][0]},{pointsArr[i][1]}' yielded in No of Square => '{obj.Count(pointsArr[i])}'");
+                        break;
+                }
+            }
+        }
+
+
+
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

@@ -51,6 +51,7 @@
     <Compile Include="CommonFunctions.cs" />
     <Compile Include="CountSmallerBST.cs" />
     <Compile Include="DailyProblem.cs" />
+    <Compile Include="DetectSquares.cs" />
     <Compile Include="DivideAndConquerAlgorithms.cs" />
     <Compile Include="DynamicProgramming.cs" />
     <Compile Include="Fancy.cs" />
