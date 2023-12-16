@@ -19994,5 +19994,56 @@ namespace InterviewProblemNSolutions
 
             return minInterval;
         }
+
+
+        // Time O(n*m) | Space O(Max(n,m)), n & m = length of string s1 & s2 respectively
+        public static string MultiplyStrings(string s1, string s2)
+        {
+            // base case
+            if (s1[0] == '0' || s2[0] == '0') return "0";
+            int l1 = s1.Length, l2 = s2.Length;
+            // we always want to process with s1 >= s2
+            if (l1 < l2) return MultiplyStrings(s2, s1);
+
+            // creat integer array with bigger number as num1 and smaller num padded with 0 on left as num2
+            int[] num1 = new int[l1];
+            int[] num2 = new int[l1];
+            for (int i = l1 - 1; i >= 0; i--) num1[i] = s1[i] - '0';
+            int k = l1;
+            for (int i = l2 - 1; i >= 0; i--) num2[--k] = s2[i] - '0';
+
+            Stack<int> lastMultiplication = new Stack<int>();
+            Stack<int> afterCurrentMultipliation;
+            int n1, n2, carry;
+            // multiple each digit in 2nd string by each num in 1st string i.e. 'num1' (right->left)
+            for (int j = l1 - 1; j >= l1 - l2; j--)
+            {
+                n2 = num2[j];
+                afterCurrentMultipliation = new Stack<int>();
+                // move previous values by 1 position to right
+                int move = j;
+                while (move++ < l1 - 1)
+                    afterCurrentMultipliation.Push(lastMultiplication.Count > 0 ? lastMultiplication.Pop() : 0);
+                carry = 0;
+                // start multiplication
+                for (int i = l1 - 1; i >= 0; i--)
+                {
+                    n1 = num1[i];
+                    carry += lastMultiplication.Count > 0 ? lastMultiplication.Pop() : 0;
+                    carry += (n1 * n2);
+                    afterCurrentMultipliation.Push(carry % 10);
+                    carry /= 10;
+                }
+                // add any remaining carry to computed ans
+                if (carry != 0) afterCurrentMultipliation.Push(carry);
+
+                lastMultiplication = new Stack<int>(afterCurrentMultipliation.ToArray());
+            }
+            // create final ans
+            StringBuilder sb = new StringBuilder();
+            foreach (var digit in lastMultiplication.Reverse())
+                sb.Append(digit);
+            return sb.ToString();
+        }
     }
 }

@@ -9216,6 +9216,15 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void MultiplyStrings()
+        {
+            // https://leetcode.com/problems/multiply-strings
+            Utility.Print("43. Multiply Strings");
+            string[] s1Arr = new string[] { "2", "123", "56", "9133" };
+            string[] s2Arr = new string[] { "3", "456", "123", "0" };
+            for (int i = 0; i < s1Arr.Length; i++)
+                Console.WriteLine($" Multiplication of num1 {s1Arr[i]} with num2 {s2Arr[i]} is equal to => {DailyProblem.MultiplyStrings(s1Arr[i], s2Arr[i])}");
+        }
 
 
         public static void DetectSquares()
