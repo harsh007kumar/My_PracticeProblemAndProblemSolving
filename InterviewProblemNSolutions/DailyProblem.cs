@@ -20050,6 +20050,12 @@ namespace InterviewProblemNSolutions
         // Time = Space = O(logN)
         public static double MyPower(double x, long n)
         {
+            /* ALGO
+            Instead of multiple number by itself N times we can just apply 'divide and conquer' technique
+            by calculating half the req power and multiplying the ans with itself again to get the actual power
+            + mod of 2 i.e. power 1 if any left after dividing the power in half
+             */
+
             // base case
             if (x == 0) return 0;
             if (x == 1) return 1;
