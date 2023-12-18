@@ -20045,5 +20045,32 @@ namespace InterviewProblemNSolutions
                 sb.Append(digit);
             return sb.ToString();
         }
+
+
+        // Time = Space = O(logN)
+        public static double MyPower(double x, long n)
+        {
+            // base case
+            if (x == 0) return 0;
+            if (x == 1) return 1;
+
+            // add base case for power
+            Dictionary<long, double> powerCache = new Dictionary<long, double>()
+            {
+                { 0, 1 },   // anything to power 0 is 1
+                { 1, x }    // power 1 means the original number itself
+            };
+            
+            return n >= 0 ? GetPower(Math.Abs(n)) : 1 / GetPower(Math.Abs(n));
+
+            // local helper func
+            double GetPower(long power)
+            {
+                if (powerCache.ContainsKey(power))
+                    return powerCache[power];
+                // we divide the work into half + carry if any
+                return powerCache[power] = GetPower(power / 2) * powerCache[power / 2] * GetPower(power % 2);
+            }
+        }
     }
 }

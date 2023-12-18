@@ -555,6 +555,7 @@ namespace InterviewProblemNSolutions
             MinimumIntervalToIncludeEachQuery();
             MultiplyStrings();
             DetectSquares();
+            Power();
 
 
 
@@ -9257,6 +9258,16 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void Power()
+        {
+            // https://leetcode.com/problems/powx-n/
+            Utility.Print("50. Pow(x, n)");
+            double[] x = { 2.0, 2.1, 2.0, 4.0, -54, 0, 1, 2 };
+            int[] n = { 0, 3, -2, -2, 0, 9, -2147483648, -2147483648 };
+            for (int i = 0; i < x.Length; i++)
+                Console.WriteLine($" Calculating number '{x[i]}' to the power '{n[i]}' results in => '{DailyProblem.MyPower(x[i], n[i])}'");
+        }
 
 
 
