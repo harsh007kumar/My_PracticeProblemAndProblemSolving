@@ -556,6 +556,7 @@ namespace InterviewProblemNSolutions
             MultiplyStrings();
             DetectSquares();
             Power();
+            KClosestPointsToOrigin();
 
 
 
@@ -9268,6 +9269,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < x.Length; i++)
                 Console.WriteLine($" Calculating number '{x[i]}' to the power '{n[i]}' results in => '{DailyProblem.MyPower(x[i], n[i])}'");
         }
+
 
 
 

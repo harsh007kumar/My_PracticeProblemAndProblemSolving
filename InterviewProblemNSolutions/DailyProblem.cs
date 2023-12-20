@@ -20078,5 +20078,7 @@ namespace InterviewProblemNSolutions
                 return powerCache[power] = GetPower(power / 2) * powerCache[power / 2] * GetPower(power % 2);
             }
         }
+
+
     }
 }
