@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace InterviewProblemNSolutions
+﻿namespace InterviewProblemNSolutions
 {
     public class CalendarNode
     {

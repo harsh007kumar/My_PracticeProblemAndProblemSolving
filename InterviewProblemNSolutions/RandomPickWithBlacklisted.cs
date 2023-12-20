@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InterviewProblemNSolutions
 {
@@ -66,7 +63,7 @@ namespace InterviewProblemNSolutions
         public int Pick() => ans[rand.Next(0, ans.Length)];
     }
     */
-    
+
     /* THIRD TRY[TLE on 63 / 67]
     public class RandomPickWithBlacklisted
     {
