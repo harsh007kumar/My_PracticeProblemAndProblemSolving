@@ -9271,6 +9271,24 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void KClosestPointsToOrigin()
+        {
+            // https://leetcode.com/problems/k-closest-points-to-origin
+            Utility.Print("973. K Closest Points to Origin");
+            int[][][] points = new int[][][] 
+            {
+                new int[][] { new int[] { 1, 3 }, new int[] { -2, 2 } },
+                new int[][] { new int[] { 3, 3 }, new int[] { 5, -1 }, new int[] { -2, 4 } },
+                new int[][] { new int[] { -5, 4 }, new int[] { -6, -5 }, new int[] { 4, 6 } } 
+            };
+            int[] k = { 1, 2, 2 };
+            for(int  i=0;i<k.Length;i++)
+            {
+                points[i].Print("Points array");
+                DailyProblem.KClosestPoints(points[i], k[i]).Print($" K=>'{k[i]}' closet points to origin i.e. (0,0) are => ");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

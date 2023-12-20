@@ -20080,5 +20080,43 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n*logk) | Space O(k), n = length of 'points' array
+        public static int[][] KClosestPoints(int[][] points, int k)
+        {
+            /* ALGO
+            we add each points in Maxheap with their distance to origin 0,0 as priority
+            for each new points add to MaxHeap
+                if Heap size is smaller than 'k'
+                if Heap top i.e. largest distance is larger than incoming
+                    element than remove top and add new point
+
+            at the end pop all the K points from Heap and add to result and return
+
+            Note: keep the priorty as double as we don't want to round of the distance by using int and skew the result
+             */
+            // base case
+            if (points.Length <= k) return points;
+
+            var maxHeap = new System.Collections.Generic.PriorityQueue<int[], double>(Comparer<double>.Create((x, y) => y.CompareTo(x)));
+            foreach (var point in points)                // O(n)
+            {
+                // Euclidean distance formula i.e., √((x1 - x2)^2 + (y1 - y2)^2).
+                var distance = Math.Sqrt(Math.Pow(point[0], 2) + Math.Pow(point[1], 2));
+                // Console.WriteLine($" Dist {distance} from origin for {point[0]},{point[1]}");
+                if (maxHeap.Count < k)
+                    maxHeap.Enqueue(point, distance);    // O(logk)
+                else
+                {
+                    maxHeap.TryPeek(out int[] element, out double priority);
+                    if (distance < priority)
+                        // remove top and immediately add new element
+                        maxHeap.DequeueEnqueue(point, distance);    // O(logk)
+                }
+            }
+            int[][] kCloset = new int[k][];
+            for (int i = 0; i < k; i++)                        // O(k)
+                kCloset[i] = maxHeap.Dequeue();           // O(logk)
+            return kCloset;
+        }
     }
 }
