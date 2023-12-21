@@ -16548,20 +16548,20 @@ namespace InterviewProblemNSolutions
         {
             int count = 0, day;
             // To keep count of apple as value & their expiery date as key in ascending order to expiry we use Min-PriorityQueue
-            PriorityQueue<int, int> pq = new PriorityQueue<int, int>(days.Length);
+            var pq = new PriorityQueue<int, int>(Comparer<int>.Create((x, y) => x.CompareTo(y)));
             for (day = 0; day < apples.Length; day++)               // O(n)
             {
                 // Added to Priority Queue, if atleast one apple is added && it can be eaten till atleast a day or more
                 if (apples[day] > 0 && days[day] > 0)
-                    pq.Insert(days[day] + day, apples[day]);        // O(logn)
-                // Remove all such entries which have either expired before or expiery today or have no apples left
-                while (pq.Count > 0 && (pq.arr[0].key <= day || pq.arr[0].val <= 0))
-                    pq.ExtractMin();                                // O(logn)
+                    pq.Enqueue(apples[day],days[day] + day);        // O(logn)
+                // Remove all such entries which have either expired before or expirying today or have no apples left
+                while (pq.TryPeek(out int appleCount, out int expiry) && (expiry <= day || appleCount <= 0))
+                    pq.Dequeue();                                   // O(logn)
 
-                if (pq.Count > 0)
+                if (pq.TryDequeue(out int apple, out int expiryDate))
                 {
-                    count++;            // have one apple
-                    pq.arr[0].val--;    // decreament count
+                    count++;                                        // have one apple
+                    pq.Enqueue(apple-1,expiryDate);                 // decreament count
                 }
             }
 
@@ -16569,16 +16569,17 @@ namespace InterviewProblemNSolutions
             // after 'n' days check if there are apples which you can still eat
             while (pq.Count > 0)
             {
-                while (pq.Count > 0 && (pq.arr[0].key <= day || pq.arr[0].val <= 0))
-                    pq.ExtractMin();                                // O(logn)
+                while (pq.TryPeek(out int appleCount, out int expiry) && (expiry <= day || appleCount <= 0))
+                    pq.Dequeue();                                   // O(logn)
 
-                if (pq.Count > 0)
+                if (pq.TryDequeue(out int apple, out int expiryDate))
                 {
-                    leftDays = pq.arr[0].key - day;
-                    min = Math.Min(pq.arr[0].val, leftDays);
+                    leftDays = expiryDate - day;
+                    min = Math.Min(apple, leftDays);
                     count += min;
-                    pq.arr[0].val -= min;
+                    apple -= min;
                     day += Math.Min(min, leftDays);
+                    pq.Enqueue(apple, expiryDate);
                 }
             }
             return count;
@@ -19935,7 +19936,7 @@ namespace InterviewProblemNSolutions
             f. repeated step#e till we found a interval whoese end value is >= query value or Heap is empty
             g. if Heap empty insert -1 in result array for current query value.
             */
-            PriorityQueue<int,int> pq = new PriorityQueue<int, int>(intervals.Length);
+            var pq = new PriorityQueue<int, int>(Comparer<int>.Create((x, y) => x.CompareTo(y)));
             Dictionary<int, List<int>> queryNumIdx = new Dictionary<int, List<int>>();
             int queryLen = queries.Length, i;
             int[] minInterval = new int[queryLen];                     // result array
@@ -19964,7 +19965,7 @@ namespace InterviewProblemNSolutions
                     // adding interval till the startValue is <= current queried value
                     if (intervals[j][0] <= curQueryVal)
                     {
-                        pq.Insert(1 + intervals[j][1] - intervals[j][0], intervals[j][1]);  // O(logn)
+                        pq.Enqueue(intervals[j][1], 1 + intervals[j][1] - intervals[j][0]);  // O(logn)
                         j++;
                     }
                     else
@@ -19972,11 +19973,11 @@ namespace InterviewProblemNSolutions
                 }
 
                 // remove all invalid interval from MinHeap i.e. one which have end value smaller than current queried value
-                while (pq.Count > 0 && pq.arr[0].val < curQueryVal)
-                    pq.ExtractMin();                            // O(logn)
+                while (pq.Count > 0 && pq.Peek() < curQueryVal)
+                    pq.Dequeue();                            // O(logn)
 
                 // update minsize
-                var minSize = pq.Count > 0 ? pq.arr[0].key : -1;
+                var minSize = pq.TryPeek(out int key, out int priority) ? priority : -1;
                 foreach (var idx in queryNumIdx[curQueryVal])
                     minInterval[idx] = minSize;
                 
