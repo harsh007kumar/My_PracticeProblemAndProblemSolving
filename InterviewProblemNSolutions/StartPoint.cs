@@ -557,6 +557,7 @@ namespace InterviewProblemNSolutions
             DetectSquares();
             Power();
             KClosestPointsToOrigin();
+            DesignTwitter();
 
 
 
@@ -9287,6 +9288,52 @@ namespace InterviewProblemNSolutions
                 points[i].Print("Points array");
                 DailyProblem.KClosestPoints(points[i], k[i]).Print($" K=>'{k[i]}' closet points to origin i.e. (0,0) are => ");
                 Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void DesignTwitter()
+        {
+            // https://leetcode.com/problems/design-twitter/
+            Utility.Print("355. Design Twitter");
+            string[] instruction =
+            {
+                "Twitter",
+                "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet",
+                "getNewsFeed", "follow", "getNewsFeed", "unfollow", "getNewsFeed"
+            };
+            int[][] input = new int[][] 
+            {
+                new int[0], 
+                new int[] { 1, 5 }, new int[] { 2, 3 }, new int[] { 1, 101 }, new int[] { 2, 13 }, new int[] { 2, 10 }, new int[] { 1, 2 }, new int[] { 1, 94 }, new int[] { 2, 505 }, new int[] { 1, 333 }, new int[] { 2, 22 }, new int[] { 1, 11 }, new int[] { 1, 205 }, new int[] { 2, 203 }, new int[] { 1, 201 }, new int[] { 2, 213 }, new int[] { 1, 200 }, new int[] { 2, 202 }, new int[] { 1, 204 }, new int[] { 2, 208 }, new int[] { 2, 233 }, new int[] { 1, 222 }, new int[] { 2, 211 },
+                new int[] { 1 }, new int[] { 1, 2 }, new int[] { 1 }, new int[] { 1, 2 }, new int[] { 1 }
+            };
+            Twitter obj = null;
+            for (int i = 0; i < instruction.Length; i++)
+            {
+                Console.Write($" Instruction => {instruction[i]} | ");
+                switch (instruction[i])
+                {
+                    case "Twitter":
+                        obj = new Twitter();
+                        Console.WriteLine("'Twitter' data-structure initialized now");
+                        break;
+                    case "postTweet":
+                        obj.PostTweet(input[i][0], input[i][1]);
+                        Console.WriteLine($"New Post from userId '{input[i][0]}, with tweetId '{input[i][1]}' added to data-structure");
+                        break;
+                    case "getNewsFeed":
+                        obj.GetNewsFeed(input[i][0]).Print($"Getting top 10 tweets for userId '{input[i][0]}");
+                        break;
+                    case "follow":
+                        Console.WriteLine($"User '{input[i][0]}' starting following '{input[i][1]}'");
+                        obj.Follow(input[i][0], input[i][1]);
+                        break;
+                    case "unfollow":
+                        Console.WriteLine($"User '{input[i][0]}' now unfollowing '{input[i][1]}'");
+                        obj.Unfollow(input[i][0], input[i][1]);
+                        break;
+                }
             }
         }
 
