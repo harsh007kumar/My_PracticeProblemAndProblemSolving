@@ -558,6 +558,7 @@ namespace InterviewProblemNSolutions
             Power();
             KClosestPointsToOrigin();
             DesignTwitter();
+            FindMedianFromDataStream();
 
 
 
@@ -9338,6 +9339,40 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void FindMedianFromDataStream()
+        {
+            // https://leetcode.com/problems/find-median-from-data-stream
+            Utility.Print("295. Find Median from Data Stream");
+            string[] instruction =
+            {
+                "MedianFinder",
+                "addNum","addNum","findMedian","addNum","addNum","addNum","addNum","findMedian"
+            };
+            int[][] input = new int[][] 
+            {
+                Array.Empty<int>(),
+                new int[] { 1 }, new int[] { 2 }, Array.Empty<int>(), new int[] { 3 }, new int[] { 21 }, new int[] { -10 }, new int[] { 7 }, Array.Empty<int>() 
+            };
+            MedianFinder obj = null;
+            for (int i = 0; i < instruction.Length; i++)
+            {
+                Console.Write($" Instruction => {instruction[i]} | ");
+                switch (instruction[i])
+                {
+                    case "MedianFinder":
+                        obj = new();
+                        Console.WriteLine($"'{nameof(MedianFinder)}' data-structure initialized now");
+                        break;
+                    case "addNum":
+                        obj.AddNum(input[i][0]);
+                        Console.WriteLine($"New Number '{input[i][0]}, added to data-structure");
+                        break;
+                    case "findMedian":
+                        Console.WriteLine($"The current mediam for stream of numbers is '{obj.FindMedian()}'");
+                        break;
+                }
+            }
+        }
 
 
 
