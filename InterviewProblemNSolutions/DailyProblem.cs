@@ -1399,11 +1399,15 @@ namespace InterviewProblemNSolutions
 
             for (int r = 0; r < rows; r++)
                 for (int c = 0; c < cols; c++)
+                {
                     DFS(board, currWord, result, t, rows, cols, r, c);
+
+                    // all words found than we can break out, no need to keep searching
+                    if (result.Count == words.Length) break;
+                }
 
             return result.ToList<string>();
         }
-
         public static void DFS(char[][] board, List<char> currWord, HashSet<string> result, Trie t, int rows, int cols, int r, int c)
         {
             // if invalid Row/column or Prefix doesn't exists hence we need not dive deeper to discover new possible words in GRID
@@ -1430,6 +1434,55 @@ namespace InterviewProblemNSolutions
             // remove current Node character from currWord
             currWord.RemoveAt(currWord.Count - 1);
         }
+
+
+        // Time O(N*(4*3^Min(L-1, N-1)) ~O(N*3^L) 
+        public static IList<string> WordProblemIIEfficient(char[][] board, string[] words)
+        {
+            Trie trieObj = new();
+            // add all the words in the Trie data-structure
+            foreach (var word in words)
+                trieObj.Add(word.ToCharArray());
+
+            int rows = board.Length, cols = board[0].Length;
+            HashSet<string> result = new();
+            List<char> ls = new();
+            // start DFS from each cell on the board to see if any valid word can be created from there
+            for (int r = 0; r < rows; r++)
+                for (int c = 0; c < cols; c++)
+                {
+                    DFS(r, c, ls, trieObj.root);
+                    // all words found than we can break out, no need to keep searching
+                    if (result.Count == words.Length) break;
+                }
+
+            return result.ToList();
+
+            // local helper func
+            void DFS(int r, int c, List<char> curWord, InterviewProblemNSolutions.TrieNode node)
+            {
+                if (r < 0 || r >= rows || c < 0 || c >= cols || !node.children.TryGetValue(board[r][c], out InterviewProblemNSolutions.TrieNode val)) return;
+                var originalChar = board[r][c];
+
+                // mark visited
+                board[r][c] = '#';
+                curWord.Add(originalChar);
+
+                // if current word exists add to result
+                if (val.isWord)
+                    result.Add(val.word);
+
+                DFS(r - 1, c, curWord, val);
+                DFS(r + 1, c, curWord, val);
+                DFS(r, c - 1, curWord, val);
+                DFS(r, c + 1, curWord, val);
+
+                // mark un-visited
+                board[r][c] = originalChar;
+                curWord.RemoveAt(curWord.Count - 1);
+            }
+        }
+
 
         // Time O((N-L)*L), N = len of haystack & L = len of needle being search, Space O(1)
         public static int ImplementIndexOf(string haystack, string needle)
@@ -11685,6 +11738,8 @@ namespace InterviewProblemNSolutions
         public class TrieNode
         {
             public Dictionary<char, TrieNode> child;
+
+            public string word = string.Empty;  // adding this helps later on while adding words to the result set, https://leetcode.com/problems/word-search-ii/
             public TrieNode() => child = new Dictionary<char, TrieNode>();
             // to add a node and return ref node of node which contains curr character
             public TrieNode Get(char ch)

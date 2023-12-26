@@ -28,6 +28,7 @@ namespace InterviewProblemNSolutions
                 temp = temp.children[ch];
             }
             temp.isWord = true;
+            temp.word = new string(word);
         }
         // Search Prefix
         public bool SearchPrefix(List<char> words)

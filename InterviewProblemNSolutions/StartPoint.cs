@@ -46,7 +46,7 @@ namespace InterviewProblemNSolutions
             //FindTheCelebrity();
             //IsPalindrome();
             //WordSearch();
-            //WordSearchII();
+            WordSearchII();
             //ImplementIndexOf();
             //UniquePaths();
             //UniquePathsII();
@@ -1245,7 +1245,8 @@ namespace InterviewProblemNSolutions
             string[] words = { "oath", "pea", "eat", "eating", "rain" };
             board.Print("GRID");
             words.Print("Words being searched");
-            var result = DailyProblem.WordProblemII(board, words);
+            //var result = DailyProblem.WordProblemII(board, words);
+            var result = DailyProblem.WordProblemIIEfficient(board, words);
             Console.Write($" Search for above list of words in above GRID found:");
             foreach (var matchedWord in result)
                 Console.Write($" \'{matchedWord}\'");
