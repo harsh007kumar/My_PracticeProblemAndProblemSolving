@@ -1113,7 +1113,8 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/lru-cache/
             Utility.Print("146. LRU Cache");
 
-            LRUCache lRUCache = new LRUCache(2);
+            //LRUCache lRUCache = new LRUCache(2);
+            LRUCacheFaster lRUCache = new LRUCacheFaster(2);
             lRUCache.Put(1, 1); // cache is {1=1}
             lRUCache.Put(2, 2); // cache is {1=1, 2=2}
             Console.WriteLine(lRUCache.Get(1));    // return 1
