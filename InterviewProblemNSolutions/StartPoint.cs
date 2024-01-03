@@ -559,6 +559,7 @@ namespace InterviewProblemNSolutions
             KClosestPointsToOrigin();
             DesignTwitter();
             FindMedianFromDataStream();
+            NumberOfLaserBeamsInABank();
 
 
 
@@ -9376,6 +9377,21 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void NumberOfLaserBeamsInABank()
+        {
+            // https://leetcode.com/problems/number-of-laser-beams-in-a-bank
+            Utility.Print("2125. Number of Laser Beams in a Bank");
+            string[][] banks = new string[][] 
+            {
+                new string[] { "011001", "000000", "010100", "001000" },
+                new string[] { "000", "111", "000" } 
+            };
+            foreach(var bank in banks)
+            {
+                bank.Print("Bank");
+                Console.WriteLine($"Total no lasers in banks => {DailyProblem.NumberOfBeams(bank)}");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

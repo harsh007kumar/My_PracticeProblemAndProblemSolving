@@ -20171,5 +20171,26 @@ namespace InterviewProblemNSolutions
                 kCloset[i] = maxHeap.Dequeue();           // O(logk)
             return kCloset;
         }
+
+
+        // Time O(m*n) | Space O(1)
+        public static int NumberOfBeams(string[] bank)
+        {
+            int lastRowSecurityDevices = 0, curRowDevices, lasers = 0;
+            foreach (var row in bank)           // O(m)
+            {
+                curRowDevices = 0;
+                // count no of security devices on current floor
+                foreach (var ch in row)         // O(n)
+                    if (ch == '1')
+                        curRowDevices++;
+
+                lasers += curRowDevices * lastRowSecurityDevices;
+                // update if last row has atleast 1 device
+                if (curRowDevices != 0)
+                    lastRowSecurityDevices = curRowDevices;
+            }
+            return lasers;
+        }
     }
 }
