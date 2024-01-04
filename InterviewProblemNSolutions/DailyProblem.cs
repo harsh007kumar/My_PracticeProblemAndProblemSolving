@@ -13636,7 +13636,7 @@ namespace InterviewProblemNSolutions
 
 
         // Time = Space = O(n), n = len of 's'
-        public static int LongestValidParentheses(string s)
+        public static int LongestValidParenthesesWithStack(string s)
         {
             int longestParentheses = 0, lt = 0, rt = 0, lastValidStart;
             Stack<int> openingBrackets = new Stack<int>();
@@ -13659,6 +13659,51 @@ namespace InterviewProblemNSolutions
                     longestParentheses = Math.Max(longestParentheses, rt - lastValidStart);
                 }
             return longestParentheses;
+        }
+        // Time O(n) | Space O(1), n = length of string 's'
+        public static int LongestValidParenthesesConstantSpace(string s)
+        {
+            /* ALGO
+            Using sliding window approach, We just need to check if the open and close bracket count is balanced or not
+                if yes we take the length of current window and update our maxima
+
+            if open bracket values is > 0 we continue on (hoping we wud soon get closing bracket to get even bigger maxima)
+            if ever open brackets values go below 0 than we need to move left pointer to current index
+                as even removing 1 open bracking in opening will render curr window in inbalanced state.
+
+            once we have iterated from left=>right, repeated same from right=>left(remember now to consider
+                closing as open and vice-versa) to get the correct ans after change in direction
+             */
+            int sLen = s.Length, longestValidParentheses = 0, left = -1, right = -1, leftBracketCounter = 0;
+            while (++right < sLen)             // O(n)
+            {
+                leftBracketCounter += s[right] == '(' ? 1 : -1;
+                // if balanced
+                if (leftBracketCounter == 0)
+                    longestValidParentheses = Math.Max(longestValidParentheses, right - left);
+                else if (leftBracketCounter < 0)
+                {
+                    left = right;
+                    leftBracketCounter = 0;
+                }
+            }
+            // now check right to left
+            left = sLen;
+            right = sLen;
+            leftBracketCounter = 0;
+            while (--right >= 0)               // O(n)
+            {
+                leftBracketCounter += s[right] == ')' ? 1 : -1;
+                // if balanced
+                if (leftBracketCounter == 0)
+                    longestValidParentheses = Math.Max(longestValidParentheses, left - right);
+                else if (leftBracketCounter < 0)
+                {
+                    left = right;
+                    leftBracketCounter = 0;
+                }
+            }
+            return longestValidParentheses;
         }
 
 

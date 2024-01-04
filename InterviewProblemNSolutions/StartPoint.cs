@@ -6107,9 +6107,12 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/longest-valid-parentheses/
             Utility.Print("32. Longest Valid Parentheses");
-            string[] sArray = { ")))))()()()()()()())()()))))))))", ")))))()()()()()()())()())(((((((", ")()())", "", "(()", "()(()", "(()()" };
+            string[] sArray = { ")))))()()()()()()())()()))))))))", ")))))()()()()()()())()())(((((((", ")()())", "", "(()", "()(()", "(()()", "())" };
             foreach (var str in sArray)
-                Console.WriteLine($" longest valid (well-formed) parentheses substring in '{str}' is of len: '{DailyProblem.LongestValidParentheses(str)}'\n");
+            {
+                Console.WriteLine($" longest valid (well-formed) parentheses substring in '{str}' is of len: '{DailyProblem.LongestValidParenthesesWithStack(str)}'");
+                Console.WriteLine($" longest valid (well-formed) parentheses substring in '{str}' is of len: '{DailyProblem.LongestValidParenthesesConstantSpace(str)}'\n");
+            }
         }
 
 
