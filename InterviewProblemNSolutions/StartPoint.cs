@@ -1,6 +1,7 @@
 ﻿using Sorting;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 
 namespace InterviewProblemNSolutions
@@ -136,7 +137,7 @@ namespace InterviewProblemNSolutions
             //BullsAndCows();
             //RemoveDuplicatesFromSortedArrayII();
             //FlipColumnsForMaximumNumberOfEqualRows();
-            //SubstringWithConcatenationOfAllWords();
+            SubstringWithConcatenationOfAllWords();
             //LowestCommonAncestorDeepestLeaves();
             BurstBalloons();
             PalindromePartitioning();
@@ -2697,13 +2698,14 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/substring-with-concatenation-of-all-words/
             Utility.Print("30. Substring with Concatenation of All Words");
-            string[] s = { "barfoothefoobarman", "wordgoodgoodgoodbestword", "barfoofoobarthefoobarman" };
-            string[][] words = { new string[] { "foo", "bar" }, new string[] { "word", "good", "best", "word" }, new string[] { "bar", "foo", "the" } };
+            string[] s = { "barfoothefoobarman", "wordgoodgoodgoodbestword", "barfoofoobarthefoobarman", "abarfoofoobarthefoobarman" };
+            string[][] words = { new string[] { "foo", "bar" }, new string[] { "word", "good", "best", "word" }, new string[] { "bar", "foo", "the" }, new string[] { "bar", "foo", "the" } };
             for (int i = 0; i < s.Length; i++)
             {
                 words[i].Print("Words");
                 Console.Write($" starting indices of substring(s) in s \'{s[i]}\' that is a concatenation of each word in words exactly once, in any order:");
-                foreach (var index in DailyProblem.SubstringWithConcatenationOfAllWords(s[i], words[i]))
+                //foreach (var index in DailyProblem.SubstringWithConcatenationOfAllWords(s[i], words[i]))
+                foreach (var index in DailyProblem.SubstringWithConcatenationOfAllWordsRecursive(s[i], words[i]))
                     Console.Write($" {index} ||");
                 Console.WriteLine("\n");
             }
@@ -9392,6 +9394,9 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"Total no lasers in banks => {DailyProblem.NumberOfBeams(bank)}");
             }
         }
+
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

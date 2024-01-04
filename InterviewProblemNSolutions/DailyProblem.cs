@@ -5392,6 +5392,48 @@ namespace InterviewProblemNSolutions
 
             return result;
         }
+        // Time O(Max(N*K,M)) || Space O(M), N = length of string 's',  M = no of strings in 'words' array & K = M * length of single word in 'words' array.
+        public static IList<int> SubstringWithConcatenationOfAllWordsRecursive(string s, string[] words)
+        {
+            IList<int> ans = new List<int>();
+            Dictionary<string, int> freq = new();
+            int sLen = s.Length, wLen = words.Length, oneWordLen = words[0].Length, startingIndex = 0, requiredCharacters = wLen * oneWordLen;
+            foreach (var word in words)
+                if (!freq.TryGetValue(word, out int value)) freq[word] = 1;
+                else freq[word] = ++value;
+
+            Find();
+            return ans;
+
+            // local helper func
+            void Find(int i = 0)
+            {
+                if (requiredCharacters == 0)
+                    ans.Add(startingIndex);
+                else
+                    // continue only if we have enouf characters left to for every remaining word
+                    while (sLen - i >= requiredCharacters)
+                    {
+                        // keep updating starting index till we find which result is answer
+                        if (requiredCharacters == wLen * oneWordLen)
+                            startingIndex = i;
+
+                        var nextWord = s.Substring(i, oneWordLen);
+                        if (freq.TryGetValue(nextWord, out int count) && count > 0)
+                        {
+                            freq[nextWord]--;
+                            requiredCharacters -= oneWordLen;
+                            Find(i + oneWordLen);
+                            freq[nextWord]++;
+                            requiredCharacters += oneWordLen;
+                        }
+                        // we can only move starting index all words need to b right next to each other
+                        if (requiredCharacters == wLen * oneWordLen)
+                            i++;
+                        else break;
+                    }
+            }
+        }
 
 
         // Time O(N*K), N = no of Nodes in Tree & K = no of deepest Nodes || Space O(K)
