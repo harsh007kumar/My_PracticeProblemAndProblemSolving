@@ -561,6 +561,7 @@ namespace InterviewProblemNSolutions
             DesignTwitter();
             FindMedianFromDataStream();
             NumberOfLaserBeamsInABank();
+            MinimumNumberOfArrowsToBurstBalloons();
 
 
 
@@ -9398,6 +9399,24 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void MinimumNumberOfArrowsToBurstBalloons()
+        {
+            // https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons
+            Utility.Print("52. Minimum Number of Arrows to Burst Balloons");
+            int[][][] pointsArr = new int[][][]
+            {
+                new int[][]{ new int[] { 1, 2}, new int[] { 2, 3}, new int[] { 3, 4}, new int[] { 4, 5 } },
+                new int[][]{ new int[] { 1,2}, new int[] { 3,4}, new int[] { 5,6}, new int[] { 7,8} },
+                new int[][]{ new int[] { 1,2}, new int[] { 2,3}, new int[] { 3,4}, new int[] { 4,5} },
+            };
+            foreach (var points in pointsArr)
+            {
+                points.Print("Points array");
+                Console.WriteLine($"Minimum No of arraows required to burst all the above ballons are => '{DailyProblem.FindMinArrowShots(points)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

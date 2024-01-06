@@ -20279,5 +20279,27 @@ namespace InterviewProblemNSolutions
             }
             return lasers;
         }
+
+
+        // Time O(nlogn) | Space O(1)
+        public static int FindMinArrowShots(int[][] points)
+        {
+            points = (from point in points              // O(nlogn)
+                      orderby point[1]    // sort in ascending order by end cordinate
+                      select point).ToArray();
+            int arrows = 1, xAxisEndOfLastBalloon = points[0][1];
+            for (int i = 1; i < points.Length; i++)            // O(n)
+            {
+                int start = points[i][0], end = points[i][1];
+                if (start <= xAxisEndOfLastBalloon)
+                    continue;
+                else
+                {
+                    arrows++;
+                    xAxisEndOfLastBalloon = end;
+                }
+            }
+            return arrows;
+        }
     }
 }
