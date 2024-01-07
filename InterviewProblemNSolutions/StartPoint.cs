@@ -562,6 +562,7 @@ namespace InterviewProblemNSolutions
             FindMedianFromDataStream();
             NumberOfLaserBeamsInABank();
             MinimumNumberOfArrowsToBurstBalloons();
+            MinimumNumberOfOperationsToMakeArrayEmpty();
 
 
 
@@ -2209,11 +2210,11 @@ namespace InterviewProblemNSolutions
             int[][] prices = {
                             new int[] { 2, 4, 1 },
                             new int[] { 3, 2, 6, 5, 0, 3 },
-                            new int[] { 3, 3, 5, 0, 0, 3, 1, 4 }, 
+                            new int[] { 3, 3, 5, 0, 0, 3, 1, 4 },
                             new int[] { 1, 2, 3, 4, 5 },
                             new int[] { 7, 6, 4, 3, 1 },
                             new int[] { 1 },
-                            new int[] { 1, 2, 4, 2, 5, 7, 2, 4, 9, 0 } 
+                            new int[] { 1, 2, 4, 2, 5, 7, 2, 4, 9, 0 }
                             };
             int[] k = { 2, 2, 2, 2, 2, 2, 2 };
             for (int i = 0; i < k.Length; i++)
@@ -2230,7 +2231,7 @@ namespace InterviewProblemNSolutions
             // NEETCODE https://youtu.be/I7j0F7AHpb8
             Utility.Print("309. Best Time to Buy and Sell Stock with Cooldown");
             int[][] pricesArr = { new int[] { 1, 2, 3, 0, 2 }, new int[] { 1 }, new int[] { 1, 2, 4 } };
-            foreach(var prices in pricesArr)
+            foreach (var prices in pricesArr)
             {
                 prices.Print("PRICES");
                 Console.WriteLine($" After completing at Buy-Sell on above with 1 day coolDown, MaxProfit: {DynamicProgramming.BestTimeToBuyAndSellStockWithCooldown_Recursive(prices)}");
@@ -2410,7 +2411,7 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Length of shortest transformation sequence from beginWord \'{beginWord[i]}\' to endWord \'{endWord[i]}\'" +
                     $" is: \'{DailyProblem.WordLadderFaster(beginWord[i], endWord[i], wordList[i])}\'");
                 Console.WriteLine($" Length of shortest transformation sequence from beginWord \'{beginWord[i]}\' to endWord \'{endWord[i]}\'" +
-                    $" is: \'{DailyProblem.WordLadderFastest(beginWord[i], endWord[i], wordList[i])}\'");                
+                    $" is: \'{DailyProblem.WordLadderFastest(beginWord[i], endWord[i], wordList[i])}\'");
             }
         }
 
@@ -3134,7 +3135,7 @@ namespace InterviewProblemNSolutions
                 edges.Print("UnDirected Graph Edges");
                 //int[] redundantEdge = DailyProblem.FindRedundantConnection(edges);
                 int[] redundantEdge = DailyProblem.FindRedundantConnection_Efficient(edges);
-                
+
                 Console.WriteLine($" Removing Edge: u({redundantEdge[0]})->v({redundantEdge[1]}) will make above Graph Cycle Free\n");
             }
         }
@@ -5854,7 +5855,7 @@ namespace InterviewProblemNSolutions
                 Console.Write($" List of grid coordinates where water can flow to both the Pacific and Atlantic ocean are: ");
                 // foreach (var coordinate in DailyProblem.PacificAtlantic_DFS(matrix))
                 foreach (var coordinate in DailyProblem.PacificAtlantic_BFS(matrix))
-                        Console.Write($" \'{coordinate[0]}, {coordinate[1]}\' ||");
+                    Console.Write($" \'{coordinate[0]}, {coordinate[1]}\' ||");
                 Console.WriteLine("\n");
             }
         }
@@ -8529,7 +8530,7 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/maximum-profit-in-job-scheduling/
             Utility.Print("1235. Maximum Profit in Job Scheduling");
-            int[][] startTime = new int[][] { new int[] { 1, 2, 3, 3 }, new int[] { 1, 2, 3, 4, 6 }, new int[] { 1, 1, 1 } }, 
+            int[][] startTime = new int[][] { new int[] { 1, 2, 3, 3 }, new int[] { 1, 2, 3, 4, 6 }, new int[] { 1, 1, 1 } },
                     endTime = new int[][] { new int[] { 3, 4, 5, 6 }, new int[] { 3, 5, 10, 6, 9 }, new int[] { 2, 3, 4 } },
                     profit = new int[][] { new int[] { 50, 10, 40, 70 }, new int[] { 20, 20, 100, 70, 60 }, new int[] { 5, 6, 4 } };
             for (int i = 0; i < startTime.Length; i++)
@@ -8649,6 +8650,7 @@ namespace InterviewProblemNSolutions
                 nums.Print(nameof(nums));
                 // Console.WriteLine($" No of all the arithmetic subsequences of nums(len>2) are: '{DynamicProgramming.NumberOfArithmeticSlices_Recursive(nums)}'\n");
                 Console.WriteLine($" No of all the arithmetic subsequences of nums(len>2) are: '{DynamicProgramming.NumberOfArithmeticSlices_DP(nums)}'\n");
+                
             }
         }
 
@@ -8720,7 +8722,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < k.Length; i++)
             {
                 grid[i].Print("GRID");
-                Console.WriteLine($" Shortest part from top-left to bottom right cell after removing max '{k[i]}' obstacles is: '{DailyProblem.ShortestPathWithObstaclesElimination(grid[i], k[i]) }'\n");
+                Console.WriteLine($" Shortest part from top-left to bottom right cell after removing max '{k[i]}' obstacles is: '{DailyProblem.ShortestPathWithObstaclesElimination(grid[i], k[i])}'\n");
             }
         }
 
@@ -8747,7 +8749,7 @@ namespace InterviewProblemNSolutions
             // The length of each part should be as equal as possible: no two parts should have a size differing by more than one.
             // This may lead to some parts being null.
             Utility.Print("725. Split Linked List in Parts");
-            ListNode[] linkedlist = { 
+            ListNode[] linkedlist = {
                 new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) } },
                 new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) { next = new ListNode(4) { next = new ListNode(5) { next = new ListNode(6) { next = new ListNode(7) { next = new ListNode(8) { next = new ListNode(9) { next = new ListNode(10) } } } } } } } } }
                                     };
@@ -8759,7 +8761,7 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"After splitting above list in '{k[i]}' parts");
                 foreach (var splitList in DailyProblem.SplitListToParts(linkedlist[i], k[i]))
                     splitList.Print($" SplitList: {++idx}");
-                
+
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
@@ -8851,12 +8853,12 @@ namespace InterviewProblemNSolutions
                 new string[] { "bread", "sandwich", "burger" },
                 new string[] { "ju", "fzjnm", "x", "e", "zpmcz", "h", "q" } };
             List<List<List<string>>> ingredientsArr = new List<List<List<string>>>() {
-                new List<List<string>>() { 
+                new List<List<string>>() {
                     new List<string>() { "yeast", "flour" } },
-                new List<List<string>>() { 
+                new List<List<string>>() {
                     new List<string>() { "yeast", "flour" },
                     new List<string>() { "bread", "meat" } },
-                new List<List<string>>() { 
+                new List<List<string>>() {
                     new List<string>() { "yeast", "flour" },
                     new List<string>() { "bread", "meat" },
                     new List<string>() { "sandwich", "meat", "bread" } },
@@ -8949,11 +8951,11 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/longest-common-prefix/
             Utility.Print("14. Longest Common Prefix");
             string[][] inputs = new string[][]
-            { 
+            {
                 new string[] { "flower","flow","flight" },
                 new string[] { "dog","racecar","car" }
             };
-            foreach(var inputStrArr in inputs)
+            foreach (var inputStrArr in inputs)
             {
                 inputStrArr.Print("Input array of strings");
                 Console.WriteLine($"Longest common prefix is => '{StringAlgorithms.LongestCommonPrefix(inputStrArr)}'");
@@ -9039,7 +9041,7 @@ namespace InterviewProblemNSolutions
                 new int[] { 2, 4, 1, 1, 3 },
                 new int[] { 3 },
                 new int[] { 4, 2, 1 },
-                new int[] { 3, 2 } 
+                new int[] { 3, 2 }
             };
             for (int i = 0; i < targetArr.Length; i++)
             {
@@ -9194,7 +9196,7 @@ namespace InterviewProblemNSolutions
                 new int[][] { new int[] { 1, 2 }, new int[] { 2, 3 } },
                 new int[][] { new int[] { 1, 2 }, new int[] { 2, 3 }, new int[] { 3, 4 }, new int[] { -100, -2 }, new int[] { 5, 7 } },
             };
-            foreach(var inputArr in inputArrays)
+            foreach (var inputArr in inputArrays)
             {
                 inputArr.Print("Intervals");
                 Console.WriteLine($"Min no of intervals which had to be removed to make above non-overlapping intervals are => {DailyProblem.EraseOverlapIntervals(inputArr)}");
@@ -9218,7 +9220,7 @@ namespace InterviewProblemNSolutions
                 new int[] { 2, 19, 5, 22 },
                 new int[] { 7, 9, 3, 9, 3 }
             };
-            for(int i=0;i<queriesArr.Length;i++)
+            for (int i = 0; i < queriesArr.Length; i++)
             {
                 intervalsArr[i].Print("Intervals");
                 queriesArr[i].Print("Queries");
@@ -9250,10 +9252,10 @@ namespace InterviewProblemNSolutions
                 new int[0] { }, new int[] { 3, 10 }, new int[] { 11, 2 }, new int[] { 3, 2 }, new int[] { 11, 10 }, new int[] { 14, 8 }, new int[] { 11, 2 }, new int[] { 11, 10 }
             };
             DetectSquares obj = null;
-            for (int i=0;i<instruction.Length;i++)
+            for (int i = 0; i < instruction.Length; i++)
             {
                 Console.Write($" Instruction => {instruction[i]} | ");
-                switch(instruction[i])
+                switch (instruction[i])
                 {
                     case "DetectSquares":
                         obj = new DetectSquares();
@@ -9286,14 +9288,14 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/k-closest-points-to-origin
             Utility.Print("973. K Closest Points to Origin");
-            int[][][] points = new int[][][] 
+            int[][][] points = new int[][][]
             {
                 new int[][] { new int[] { 1, 3 }, new int[] { -2, 2 } },
                 new int[][] { new int[] { 3, 3 }, new int[] { 5, -1 }, new int[] { -2, 4 } },
-                new int[][] { new int[] { -5, 4 }, new int[] { -6, -5 }, new int[] { 4, 6 } } 
+                new int[][] { new int[] { -5, 4 }, new int[] { -6, -5 }, new int[] { 4, 6 } }
             };
             int[] k = { 1, 2, 2 };
-            for(int  i=0;i<k.Length;i++)
+            for (int i = 0; i < k.Length; i++)
             {
                 points[i].Print("Points array");
                 DailyProblem.KClosestPoints(points[i], k[i]).Print($" K=>'{k[i]}' closet points to origin i.e. (0,0) are => ");
@@ -9312,9 +9314,9 @@ namespace InterviewProblemNSolutions
                 "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet",
                 "getNewsFeed", "follow", "getNewsFeed", "unfollow", "getNewsFeed"
             };
-            int[][] input = new int[][] 
+            int[][] input = new int[][]
             {
-                new int[0], 
+                new int[0],
                 new int[] { 1, 5 }, new int[] { 2, 3 }, new int[] { 1, 101 }, new int[] { 2, 13 }, new int[] { 2, 10 }, new int[] { 1, 2 }, new int[] { 1, 94 }, new int[] { 2, 505 }, new int[] { 1, 333 }, new int[] { 2, 22 }, new int[] { 1, 11 }, new int[] { 1, 205 }, new int[] { 2, 203 }, new int[] { 1, 201 }, new int[] { 2, 213 }, new int[] { 1, 200 }, new int[] { 2, 202 }, new int[] { 1, 204 }, new int[] { 2, 208 }, new int[] { 2, 233 }, new int[] { 1, 222 }, new int[] { 2, 211 },
                 new int[] { 1 }, new int[] { 1, 2 }, new int[] { 1 }, new int[] { 1, 2 }, new int[] { 1 }
             };
@@ -9357,10 +9359,10 @@ namespace InterviewProblemNSolutions
                 "MedianFinder",
                 "addNum","addNum","findMedian","addNum","addNum","addNum","addNum","findMedian"
             };
-            int[][] input = new int[][] 
+            int[][] input = new int[][]
             {
                 Array.Empty<int>(),
-                new int[] { 1 }, new int[] { 2 }, Array.Empty<int>(), new int[] { 3 }, new int[] { 21 }, new int[] { -10 }, new int[] { 7 }, Array.Empty<int>() 
+                new int[] { 1 }, new int[] { 2 }, Array.Empty<int>(), new int[] { 3 }, new int[] { 21 }, new int[] { -10 }, new int[] { 7 }, Array.Empty<int>()
             };
             MedianFinder obj = null;
             for (int i = 0; i < instruction.Length; i++)
@@ -9387,12 +9389,12 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/number-of-laser-beams-in-a-bank
             Utility.Print("2125. Number of Laser Beams in a Bank");
-            string[][] banks = new string[][] 
+            string[][] banks = new string[][]
             {
                 new string[] { "011001", "000000", "010100", "001000" },
-                new string[] { "000", "111", "000" } 
+                new string[] { "000", "111", "000" }
             };
-            foreach(var bank in banks)
+            foreach (var bank in banks)
             {
                 bank.Print("Bank");
                 Console.WriteLine($"Total no lasers in banks => {DailyProblem.NumberOfBeams(bank)}");
@@ -9419,6 +9421,19 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MinimumNumberOfOperationsToMakeArrayEmpty()
+        {
+            // https://leetcode.com/problems/minimum-number-of-operations-to-make-array-empty
+            Utility.Print("2870. Minimum Number of Operations to Make Array Empty");
+            int[][] numsArr = new int[][] { new int[] { 2, 3, 3, 2, 2, 4, 2, 3, 4 }, new int[] { 2, 1, 2, 2, 3, 3 }, new int[] { 2, 3, 3, 2, 2, 4, 2, 3, 100037 }, new int[] { 2, 3, 3, 2, 2, 4, 2, 3, 4 }, };
+            foreach(var nums in numsArr)
+            {
+                Dictionary<int, int> cache = new();
+                nums.Print("Input array");
+                Console.WriteLine($"Minimum Number of Operations to Make Array Empty => '{DailyProblem.MinOperations(nums, cache)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

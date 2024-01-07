@@ -20301,5 +20301,50 @@ namespace InterviewProblemNSolutions
             }
             return arrows;
         }
+
+
+        // Time = Space = O(n), n = length of 'nums' array
+        public static int MinOperations(int[] nums, Dictionary<int, int> cache)
+        {
+            Dictionary<int, int> freq = new();
+            foreach (var num in nums)
+                if (freq.TryGetValue(num, out int count))
+                    freq[num] = ++count;
+                else
+                    freq[num] = 1;
+            int opCount = 0;
+            foreach (var numFreq in freq.Values)
+                if (numFreq == 1) return -1;
+                else opCount += ReduceToZero(numFreq);
+            return opCount;
+
+            // local helper func
+            int ReduceToZero(int dividend)
+            {
+                // 1st approach Brute Force // Still Passed all TC's
+                // if(reduce.TryGetValue(n, out int redux)) return redux;
+                // else return reduce[n] = 1+Math.Min(ReduceToZero(n-3),ReduceToZero(n-2));
+
+                // 2nd alternative & a faster way is just to divide the no by 3 and than take mod 3 it can be three value 0, 1, 2
+                // if 0 no need to further reduce if its 2 means we need to reduce its +1 more time & its its 1 still need to reduce
+                // 1 more time,
+                // now before u wonder how do we reduce leftover 1
+                // ex: reduce 10
+                // Quotient: 10/3 = 3
+                // Remainder: 10%3 = 1
+                // total 3+1 i.e. 4 operation to reduce 10 to 0
+                // but it wud be like reduce 10 once by 3, that leave 7 again by 3 leave 4 now twice by 2 leave 0
+                // 1 + 1 + 2 = 4
+                // Ex: for 8
+                // Q: 8/3 = 2
+                // R: 8%3 = 2
+                // Reducing looks like 8 >> 5 >> 2 >> 0
+                // Twice by 3 once by 2     1 +  1 +  1
+                if (cache.TryGetValue(dividend, out int redux)) return redux;
+                int quotient = dividend / 3;
+                int remainder = dividend % 3;
+                return cache[dividend] = quotient + ((remainder == 0) ? 0 : 1);
+            }
+        }
     }
 }
