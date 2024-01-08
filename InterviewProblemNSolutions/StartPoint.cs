@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InterviewProblemNSolutions
 {
@@ -563,6 +564,7 @@ namespace InterviewProblemNSolutions
             NumberOfLaserBeamsInABank();
             MinimumNumberOfArrowsToBurstBalloons();
             MinimumNumberOfOperationsToMakeArrayEmpty();
+            CountTheNumberOfPowerfulIntegers();
 
 
 
@@ -5301,7 +5303,7 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/find-and-replace-in-string/
             Utility.Print("833. Find And Replace in String");
-            String[] S = { "abcd", "abcd" };
+            string[] S = { "abcd", "abcd" };
             int[][] indexesArr = { new int[] { 0, 2 }, new int[] { 0, 2 } };
             string[][] sourcesArr = { new string[] { "a", "cd" }, new string[] { "ab", "ec" } };
             string[][] targetArr = { new string[] { "eee", "ffff" }, new string[] { "eee", "ffff" } };
@@ -9434,6 +9436,23 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void CountTheNumberOfPowerfulIntegers()
+        {
+            // https://leetcode.com/problems/count-the-number-of-powerful-integers/
+            Utility.Print("10034. Count the Number of Powerful Integers");
+            int[] start = new int[] { 1, 15, 1000, 1, 1829505, 182 };
+            int[] finish = new int[] { 6000, 215, 2000, 971, 1255574165, 257 };
+            int[] limit = new int[] { 4, 6, 4, 9, 7, 9 };
+            string[] s = new string[] { "124", "10", "3000", "72", "11223", "1" };
+            for (int i = 0; i < start.Length; i++)
+                Console.WriteLine($"No of Powerful no b/w [{start[i]}...{finish[i]}] with suffix '{s[i]}' such that no digits is > limit '{limit[i]}' are =>\t{DynamicProgramming.NumberOfPowerfulInt(start[i], finish[i], limit[i], s[i])}");
+
+        }
+
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
