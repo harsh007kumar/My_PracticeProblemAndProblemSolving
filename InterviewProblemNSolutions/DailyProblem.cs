@@ -793,6 +793,18 @@ namespace InterviewProblemNSolutions
         // Time O(9^(N*N)) as every unassigned index has 9 possible options || Space O(1) || Auxillary Space O(N*N), N = 9
         public static void SudokuSolverEfficient(char[][] b)
         {
+            /* ALGO
+            We need 3 individual Hashset of size 9 to check if a given digit has been seen before or not in a row, column & grid
+            Now we simply go thru original board and mark all the digits in their respective rows, columns and grids
+
+            Now we start recursively filling all cells with '.'
+            we try all digits from 1...9
+            which ever yields in true we return from that point
+
+            if non of digits yields in success means we made a wrong entry somewhere earlier hence assign back '.' and return false
+
+            in the end if all the cells are filled return true
+             */
             int n = 9;
             bool[,] rCheck = new bool[n, n + 1], cCheck = new bool[n, n + 1], gCheck = new bool[n, n + 1];
             // fill the indicator for rows, columns & grid with current digits for each cell in board
