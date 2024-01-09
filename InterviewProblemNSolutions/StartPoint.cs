@@ -1018,7 +1018,7 @@ namespace InterviewProblemNSolutions
                                 new char[] {'2','8','7','4','1','9','6','3','5' },
                                 new char[] {'3','4','5','2','8','6','1','7','9' } };
 
-            DailyProblem.SudokuSolver(board);
+            DailyProblem.SudokuSolverEfficient(board);
             if (ValidateResult(board, expected))
                 Console.WriteLine($" Succesfully SOLVED above SUDOKU puzzle by filling the empty cells as below\n");
             board.Print("SOLVED SUDOKU BOARD");
@@ -9440,6 +9440,7 @@ namespace InterviewProblemNSolutions
 
         public static void CountTheNumberOfPowerfulIntegers()
         {
+            // CodingMohan https://youtu.be/xVT3ZuDfFnA
             // https://leetcode.com/problems/count-the-number-of-powerful-integers/
             Utility.Print("10034. Count the Number of Powerful Integers");
             int[] start = new int[] { 1, 15, 1000, 1, 1829505, 182 };
