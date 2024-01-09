@@ -565,6 +565,7 @@ namespace InterviewProblemNSolutions
             MinimumNumberOfArrowsToBurstBalloons();
             MinimumNumberOfOperationsToMakeArrayEmpty();
             CountTheNumberOfPowerfulIntegers();
+            MinimumNumberOfOperationsToMakeXAndYEqual();
 
 
 
@@ -9453,6 +9454,16 @@ namespace InterviewProblemNSolutions
 
         }
 
+
+        public static void MinimumNumberOfOperationsToMakeXAndYEqual()
+        {
+            // https://leetcode.com/problems/minimum-number-of-operations-to-make-x-and-y-equal
+            Utility.Print("2998. Minimum Number of Operations to Make X and Y Equal");
+            int[] x = { 26, 54, 25, 53, 52, 53 };
+            int[] y = { 1, 2, 30, 5, 10, 10 };
+            for (int i = 0; i < x.Length; i++)
+                Console.WriteLine($" Minimum Number of Operations to Make X '{x[i]}' and Y '{y[i]}' Equal => '{DynamicProgramming.MinimumOperationsToMakeEqual(x[i], y[i])}'");
+        }
 
 
 

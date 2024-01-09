@@ -3099,5 +3099,34 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+
+        // Time = Space = O(x)
+        public static int MinimumOperationsToMakeEqual(int xx, int yy)
+        {
+            int[] cache = new int[xx + 11];
+            for (int i = 0; i < cache.Length; i++) cache[i] = -1;
+            return ReduceXtoY(xx, yy);
+
+            // local helper func
+            int ReduceXtoY(int x, int y)
+            {
+                // as its mentioned in the problem we only can make increament by 1 on x if its smaller, all other ways r to reduce
+                if (x <= y) return y - x;
+                if (cache[x] != -1) return cache[x];
+                // case 1, just reducing x by 1 till we get y
+                int ans = x - y;
+                // case 2, reduce x till its perfectly divisble by 5 and 1 operation to divide it by 5
+                ans = Math.Min(ans, 1 + x % 5 + ReduceXtoY(x / 5, y));
+                // case 3, increament x till its perfectly divisble by 5 and 1 operation to divide it by 5
+                ans = Math.Min(ans, 1 + (5 - x % 5) + ReduceXtoY((x / 5) + 1, y));
+                // case 4, reduce x till its perfectly divisble by 11 and 1 operation to divide it by 11
+                ans = Math.Min(ans, 1 + x % 11 + ReduceXtoY(x / 11, y));
+                // case 5, increament x till its perfectly divisble by 11 and 1 operation to divide it by 11
+                ans = Math.Min(ans, 1 + (11 - x % 11) + ReduceXtoY((x / 11) + 1, y));
+                return cache[x] = ans;
+            }
+        }
+
     }
 }
