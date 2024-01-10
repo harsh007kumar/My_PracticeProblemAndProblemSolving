@@ -20414,5 +20414,78 @@ namespace InterviewProblemNSolutions
                 return cache[dividend] = quotient + ((remainder == 0) ? 0 : 1);
             }
         }
+
+
+        // Time O(n) | Space O(n), n = no of nodes in the binary-tree
+        public static int AmountOfTime(TreeNode root, int start)
+        {
+            // ALGO
+            // 1st pass we iterate and once we found start node we return back the distance+1 for root node and update it
+            // and also update both the child of start node & descendants
+
+            // 2nd iteration we will have the distance for the root node we keep update the distance for each node if its not updated already
+            // lastly we return the maximum distance found
+
+            Dictionary<int, int> nodesDistFromStart = new();
+            int maxDistance = 0, dist = GetDistanceOfStartFromRoot(root, start);     // O(n)
+
+            // left child is not updated, update the distance
+            if (root.left != null && !nodesDistFromStart.ContainsKey(root.left.val))
+                UpdateChild(root.left, ++dist);                                      // O(n)
+                                                                                     // right child is not updated, update the distance
+            if (root.right != null && !nodesDistFromStart.ContainsKey(root.right.val))
+                UpdateChild(root.right, ++dist);                                     // O(n)
+
+            return maxDistance;
+
+            // local helper func
+            int GetDistanceOfStartFromRoot(TreeNode r, int s)           // O(n)
+            {
+                if (r == null) return -1;
+                if (r.val == s)    // found start
+                {
+                    nodesDistFromStart[r.val] = 0;
+                    // update both child of start node
+                    UpdateChild(r.left, 1);
+                    UpdateChild(r.right, 1);
+                    // return the distance to parent of start
+                    return 1;
+                }
+                else
+                {
+                    var ltDist = GetDistanceOfStartFromRoot(r.left, s);
+                    if (ltDist != -1)  // start found in the left side
+                    {
+                        // update distance of cur root
+                        maxDistance = Math.Max(maxDistance, nodesDistFromStart[r.val] = ltDist++);
+                        // update distance of the other child
+                        UpdateChild(r.right, ltDist);
+                        // return the distance for the parent
+                        return ltDist;
+                    }
+                    else
+                    {
+                        var rtDist = GetDistanceOfStartFromRoot(r.right, s);
+                        if (rtDist != -1)  // start found in the right side
+                        {
+                            // update distance of cur root
+                            maxDistance = Math.Max(maxDistance, nodesDistFromStart[r.val] = rtDist++);
+                            // update distance of the other child
+                            UpdateChild(r.left, rtDist);
+                            // return the distance for the parent
+                            return rtDist;
+                        }
+                        return -1;
+                    }
+                }
+            }
+            void UpdateChild(TreeNode r, int dist)                       // O(n)
+            {
+                if (r == null) return;
+                maxDistance = Math.Max(maxDistance, nodesDistFromStart[r.val] = dist++);
+                UpdateChild(r.left, dist);
+                UpdateChild(r.right, dist);
+            }
+        }
     }
 }

@@ -566,6 +566,7 @@ namespace InterviewProblemNSolutions
             MinimumNumberOfOperationsToMakeArrayEmpty();
             CountTheNumberOfPowerfulIntegers();
             MinimumNumberOfOperationsToMakeXAndYEqual();
+            AmountOfTimeForBinaryTreeToBeInfected();
 
 
 
@@ -9465,6 +9466,31 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Minimum Number of Operations to Make X '{x[i]}' and Y '{y[i]}' Equal => '{DynamicProgramming.MinimumOperationsToMakeEqual(x[i], y[i])}'");
         }
 
+
+        public static void AmountOfTimeForBinaryTreeToBeInfected()
+        {
+            // https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected
+            Utility.Print("2385. Amount of Time for Binary Tree to Be Infected");
+            TreeNode root = new(1)
+            {
+                left = new(5)
+                {
+                    right = new(4)
+                    {
+                        left = new(9),
+                        right = new(2)
+                    }
+                },
+                right = new(3)
+                {
+                    left = new(10),
+                    right = new(6)
+                },
+            };
+            int track = 3;
+            root.InOrder("Input Binary Tree");
+            Console.WriteLine($" No of minutes needed for the entire tree to be infected from '{track}' Node => '{DailyProblem.AmountOfTime(root, track)}' minutes");
+        }
 
 
 
