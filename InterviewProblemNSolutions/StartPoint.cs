@@ -1858,8 +1858,9 @@ namespace InterviewProblemNSolutions
             };
 
             root.InOrder();
-            int min = int.MaxValue;
-            Console.WriteLine($" Maximum difference b/w Node and Ansector is: {DailyProblem.MaxAncestorDiff(root, ref min)}");
+            //int min = int.MaxValue;
+            //Console.WriteLine($" Maximum difference b/w Node and Ansector is: {DailyProblem.MaxAncestorDiff(root, ref min)}");
+            Console.WriteLine($" Maximum difference b/w Node and Ansector is: {DailyProblem.MaxAncestorDiffSimpler(root)}");
         }
 
 

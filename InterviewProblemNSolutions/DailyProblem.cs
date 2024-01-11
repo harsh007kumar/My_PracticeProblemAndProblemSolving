@@ -3186,6 +3186,29 @@ namespace InterviewProblemNSolutions
             // return max of currDiff or diff from left/right subTree
             return Math.Max(currDiff, Math.Max(leftDiff, rightDiff));
         }
+        // Time O(n) | Space O(1) | Auxillary Space O(n), n = no of nodes in the binarytree
+        public static int MaxAncestorDiffSimpler(TreeNode root)
+        {
+            int diff = 0;
+            MaxDiff(root.left, root.val, root.val);
+            MaxDiff(root.right, root.val, root.val);
+            return diff;
+
+            // local helper func
+            void MaxDiff(TreeNode r, int largestAncestor, int smallestAncestor)
+            {
+                if (r == null) return;
+                // update the max diff b/w Node and Ancestor
+                diff = Math.Max(Math.Max(Math.Abs(smallestAncestor - r.val), Math.Abs(largestAncestor - r.val)), diff);
+                // update the max
+                largestAncestor = Math.Max(largestAncestor, r.val);
+                // update the min
+                smallestAncestor = Math.Min(smallestAncestor, r.val);
+                // recursively calls the child nodes
+                MaxDiff(r.left, largestAncestor, smallestAncestor);
+                MaxDiff(r.right, largestAncestor, smallestAncestor);
+            }
+        }
 
 
         /// <summary>
