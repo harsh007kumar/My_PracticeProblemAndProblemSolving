@@ -567,6 +567,7 @@ namespace InterviewProblemNSolutions
             CountTheNumberOfPowerfulIntegers();
             MinimumNumberOfOperationsToMakeXAndYEqual();
             AmountOfTimeForBinaryTreeToBeInfected();
+            PermutationSequence();
 
 
 
@@ -9491,6 +9492,30 @@ namespace InterviewProblemNSolutions
             int track = 3;
             root.InOrder("Input Binary Tree");
             Console.WriteLine($" No of minutes needed for the entire tree to be infected from '{track}' Node => '{DailyProblem.AmountOfTime(root, track)}' minutes");
+        }
+
+
+        public static void PermutationSequence()
+        {
+            // Ref https://leetcode.com/problems/permutation-sequence/solutions/4478324/c-beats-100
+            // https://leetcode.com/problems/permutation-sequence
+            Utility.Print("60. Permutation Sequence");
+            int[] n = { 3, 4, 3, 4, 4, 4, 8, 8 };
+            int[] k = { 3, 9, 1, 24, 8, 10, 40313, 40319 };
+            Dictionary<int, int> factDict = new Dictionary<int, int>()
+            {
+                {1,1},
+                {2,2},
+                {3,6},
+                {4,24},
+                {5,120},
+                {6,720},
+                {7,5040},
+                {8,40320},
+                {9,362880},
+            };
+            for (int i = 0; i < n.Length; i++)
+                Console.WriteLine($"For Given n '{n[i]}' and k '{k[i]}', the kth permutation sequence is => '{DailyProblem.PermutationSequence(n[i], k[i], factDict)}'");
         }
 
 

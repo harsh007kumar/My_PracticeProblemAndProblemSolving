@@ -20510,5 +20510,42 @@ namespace InterviewProblemNSolutions
                 UpdateChild(r.right, dist);
             }
         }
+
+        // Time O(n^2) | Space O(n)
+        public static string PermutationSequence(int n, int k, Dictionary<int, int> factDict)
+        {
+            /*
+            Idea is to calculate each value of the permutation by dividing the complete range into sub-ranges.
+            We will create an array for storing indices of the sub-range and these indices will be used to get the final result.
+            */
+
+            // create a list with all numbers from 1..N
+            List<int> nums = new();
+            for (int i = 1; i <= n; i++) nums.Add(i);
+
+            List<char> ans = new();
+            Sequence(1, factDict[n], n);
+            return new string(ans.ToArray());
+
+            // local helper func
+            void Sequence(int start, int end, int numCount)
+            {
+                if (numCount == 0) return;
+                int range = end - start + 1;
+                int curRange = range / numCount;
+                for (int i = 1; i <= numCount; i++)             // O(n)
+                {
+                    int lower = start + (i - 1) * curRange;
+                    int upper = lower + curRange - 1;
+                    if (lower <= k && k <= upper)
+                    {
+                        ans.Add((char)(nums[i - 1] + '0'));     // add the number to the final ans
+                        nums.RemoveAt(i - 1);                   // remove the current no from the list
+                        Sequence(lower, upper, numCount - 1);   // O(n), recusively call the smaller range for n-1 numbers
+                        break;
+                    }
+                }
+            }
+        }
     }
 }
