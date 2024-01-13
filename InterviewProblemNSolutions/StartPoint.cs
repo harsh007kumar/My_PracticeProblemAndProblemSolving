@@ -568,6 +568,7 @@ namespace InterviewProblemNSolutions
             MinimumNumberOfOperationsToMakeXAndYEqual();
             AmountOfTimeForBinaryTreeToBeInfected();
             PermutationSequence();
+            TextJustification();
 
 
 
@@ -9517,6 +9518,28 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < n.Length; i++)
                 Console.WriteLine($"For Given n '{n[i]}' and k '{k[i]}', the kth permutation sequence is => '{DailyProblem.PermutationSequence(n[i], k[i], factDict)}'");
         }
+
+
+        public static void TextJustification()
+        {
+            // https://leetcode.com/problems/text-justification
+            Utility.Print("68. Text Justification");
+            string[][] words = new string[][] {
+                new string[] { "This", "is", "an", "example", "of", "text", "justification." },
+                new string[] { "What", "must", "be", "acknowledgment", "shall", "be" },
+                new string[] { "Science", "is", "what", "we", "understand", "well", "enough", "to", "explain", "to", "a", "computer.", "Art", "is", "everything", "else", "we", "do" }
+            };
+            int[] maxWidth = { 16, 16, 20 };
+            for (int i = 0; i < maxWidth.Length; i++)
+            {
+                words[i].Print("Input list of words");
+                StringAlgorithms.FullJustify(words[i], maxWidth[i]).Print($" Above set of words can be fully justied as below for maxWidth '{maxWidth[i]}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+
 
 
 

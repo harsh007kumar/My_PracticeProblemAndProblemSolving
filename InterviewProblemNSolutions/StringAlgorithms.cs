@@ -1443,5 +1443,75 @@ namespace InterviewProblemNSolutions
             }
             return ans;
         }
+
+
+        // Time = Space = O(n), n = length of 'words'
+        public static IList<string> FullJustify(string[] words, int maxWidth)
+        {
+            IList<string> justified = new List<string>();
+            StringBuilder sb = new();
+            List<string> curLine = new List<string>() { words[0] };
+            int curLineLen = words[0].Length, gapCount, paddingReq, spaceBwWords, spacesRequiredForWords, extraSpacesWhichNeedToBeAddedToLeft;
+            for (int i = 1; i < words.Length; i++)         // O(n)
+            {
+                string curWord = words[i];
+                // adding word to exisiting line with a single space b/w them
+                if (curLineLen + 1 + curWord.Length <= maxWidth)
+                {
+                    curLineLen += 1 + curWord.Length;
+                    curLine.Add(curWord);
+                }
+                // no more words can be added to current without excedding maxWidth
+                else
+                {
+                    // append curLine to ans before adding new word to fresh new line
+                    gapCount = curLine.Count - 1;
+                    if (gapCount > 0)
+                    {
+                        spacesRequiredForWords = curLineLen - gapCount;
+                        paddingReq = maxWidth - spacesRequiredForWords;
+
+                        spaceBwWords = paddingReq / gapCount;
+                        while (spaceBwWords-- > 0) sb.Append(' ');
+                        string minSpace = sb.ToString();
+                        sb.Clear();
+
+                        extraSpacesWhichNeedToBeAddedToLeft = paddingReq % gapCount;
+                        sb.Append(curLine[0]);
+                        for (int j = 1; j < curLine.Count; j++)
+                        {
+                            sb.Append(minSpace);
+                            if (extraSpacesWhichNeedToBeAddedToLeft-- > 0) sb.Append(' ');
+                            sb.Append(curLine[j]);
+                        }
+                        justified.Add(sb.ToString());
+                        sb.Clear();
+                    }
+                    // take care of single word in line
+                    else
+                    {
+                        sb.Append(curLine[0]);
+                        for (int k = maxWidth - curLine[0].Length; k > 0; k--) sb.Append(' ');
+                        justified.Add(sb.ToString());
+                        sb.Clear();
+                    }
+
+                    // now add new word to the fresh new line
+                    curLineLen = curWord.Length;
+                    curLine = new List<string>() { curWord };
+                }
+            }
+
+            sb.Append(curLine[0]);
+            for (int j = 1; j < curLine.Count; j++)
+                sb.Append(' ').Append(curLine[j]);
+
+            // fill all remaining space on right with spaces
+            for (int k = maxWidth - sb.Length; k > 0; k--) sb.Append(' ');
+            // append last Line to ans
+            justified.Add(sb.ToString());
+
+            return justified;
+        }
     }
 }
