@@ -211,7 +211,7 @@ namespace InterviewProblemNSolutions
             //BinaryPrefixDivisibleBy5();
             //SummaryRanges();
             //ThirdDistinctMax();
-            //DetermineIfTwoStringsAreClose();
+            DetermineIfTwoStringsAreClose();
             //SortTheMatrixDiagonally();
             //SmallestSubsequenceOfDistinctCharacters();
             //IncreasingDecreasingString();
@@ -3910,7 +3910,10 @@ namespace InterviewProblemNSolutions
             Utility.Print("1657. Determine if Two Strings Are Close");
             string[] s1 = { "abc", "a", "cabbba", "cabbba", "xyzz" }, s2 = { "bca", "aa", "abbccc", "aabbss", "xyyz" };
             for (int i = 0; i < s1.Length; i++)
+            {
                 Console.WriteLine($" \'{s1[i]}\' & \'{s2[i]}\'\t\t\tare close: \t\'{DailyProblem.DetermineIfTwoStringsAreClose(s1[i], s2[i])}\'");
+                Console.WriteLine($" \'{s1[i]}\' & \'{s2[i]}\'\t\t\tare close: \t\'{DailyProblem.DetermineIfTwoStringsAreCloseSlower(s1[i], s2[i])}\'");
+            }
         }
 
 
