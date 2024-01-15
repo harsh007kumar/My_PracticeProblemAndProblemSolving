@@ -20547,5 +20547,64 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+
+        // Time O(Max(n,wlogw+dlogd)) | Space O(n), n = length of matches, w = no of winners, d = no of 1 match defeated
+        // worst case we have 50% winner and loosers everthing wud be n/2 i.e n hence T (nlogn) | S O(n)
+        public static IList<IList<int>> FindWinners(int[][] matches)
+        {
+            /* ALGO
+            We have 2 dictionary:
+                winner
+                loosers
+            we iterate thru all the matches and for each match
+                we add the winner to winner list if he is not present in loosers already
+                for each looser we add them to loosers hashtable with matches lost count 1
+                    we also check if looser is present in winner we also remove them for it
+            */
+            HashSet<int> winners = new();
+            Dictionary<int, int> loosers = new();
+            foreach (var match in matches)               // O(n)
+            {
+                var winner = match[0];
+                var looser = match[1];
+
+                // add P1 to winners, if not already lost a match before
+                if (!loosers.ContainsKey(winner))
+                    winners.Add(winner);
+
+                // add P2 to loosers
+                if (loosers.TryGetValue(looser, out int lostMatchesCount))
+                    loosers[looser] = 1 + lostMatchesCount; // not the 1st match P2 lost
+                else
+                {
+                    // P2 lost 1st match and if they have won before need to remove from winners section
+                    if (winners.Contains(looser))
+                        winners.Remove(looser);
+                    // add lost matches count as '1' for P2
+                    loosers[looser] = 1;
+                }
+            }
+
+            // sort the winners                             // O(wlogw)
+            var sortedWinners = (from whoWon in winners
+                                 orderby whoWon
+                                 select whoWon).ToList();
+            List<IList<int>> ans = new List<IList<int>>();
+            // add winners
+            ans.Add(sortedWinners);
+
+            // find out 1 match loosers
+            List<int> oneMatchLoosers = new();
+            foreach (var kvp in loosers)                     // O(d)
+                if (kvp.Value == 1)
+                    oneMatchLoosers.Add(kvp.Key);
+            // sort the 1 match loosers
+            oneMatchLoosers.Sort();                         // O(dlogd)
+                                                            // add one match loosers
+            ans.Add(oneMatchLoosers);
+
+            return ans;
+        }
     }
 }

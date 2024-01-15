@@ -569,6 +569,7 @@ namespace InterviewProblemNSolutions
             AmountOfTimeForBinaryTreeToBeInfected();
             PermutationSequence();
             TextJustification();
+            FindPlayersWithZeroOrOneLosses();
 
 
 
@@ -3910,10 +3911,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("1657. Determine if Two Strings Are Close");
             string[] s1 = { "abc", "a", "cabbba", "cabbba", "xyzz" }, s2 = { "bca", "aa", "abbccc", "aabbss", "xyyz" };
             for (int i = 0; i < s1.Length; i++)
-            {
                 Console.WriteLine($" \'{s1[i]}\' & \'{s2[i]}\'\t\t\tare close: \t\'{DailyProblem.DetermineIfTwoStringsAreClose(s1[i], s2[i])}\'");
-                Console.WriteLine($" \'{s1[i]}\' & \'{s2[i]}\'\t\t\tare close: \t\'{DailyProblem.DetermineIfTwoStringsAreCloseSlower(s1[i], s2[i])}\'");
-            }
         }
 
 
@@ -9542,7 +9540,24 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void FindPlayersWithZeroOrOneLosses()
+        {
+            // https://leetcode.com/problems/find-players-with-zero-or-one-losses
+            Utility.Print("2225. Find Players With Zero or One Losses");
+            int[][][] matchesArr = new int[][][] 
+            {
+                new int[][] { new int[] { 1, 3 }, new int[] { 2, 3 }, new int[] { 3, 6 }, new int[] { 5, 6 }, new int[] { 5, 7 }, new int[] { 4, 5 }, new int[] { 4, 8 }, new int[] { 4, 9 }, new int[] { 10, 4 }, new int[] { 10, 9 } },
+                new int[][] { new int[] { 2, 3 }, new int[] { 1, 3 }, new int[] { 5, 4 }, new int[] { 6, 4 } }
+            };
+            foreach (var matches in matchesArr)
+            {
+                matches.Print("Matches array, 1st player won, 2nd player lost");
+                var WinnerOneMatchLooser = DailyProblem.FindWinners(matches);
+                WinnerOneMatchLooser[0].Print($"Winners who won all their matches");
+                WinnerOneMatchLooser[1].Print($"Players who lost excatly 1 match");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
