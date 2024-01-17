@@ -570,6 +570,7 @@ namespace InterviewProblemNSolutions
             PermutationSequence();
             TextJustification();
             FindPlayersWithZeroOrOneLosses();
+            MaximalRectangle();
 
 
 
@@ -9555,6 +9556,26 @@ namespace InterviewProblemNSolutions
                 var WinnerOneMatchLooser = DailyProblem.FindWinners(matches);
                 WinnerOneMatchLooser[0].Print($"Winners who won all their matches");
                 WinnerOneMatchLooser[1].Print($"Players who lost excatly 1 match");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void MaximalRectangle()
+        {
+            // https://leetcode.com/problems/maximal-rectangle
+            Utility.Print("85. Maximal Rectangle");
+            char[][][] matrixArr = new char[][][]
+            {
+                new char[][] { new char[] {'1','0','1','0','0'}, new char[] {'1','0','1','1','1'}, new char[] {'1','1','1','1','1'}, new char[] { '1', '0', '0', '1', '0' } },
+                new char[][] { new char[] {'0' } },
+                new char[][] { new char[] {'1' } },
+                new char[][] { new char[] {'0', '0', '1', '0'}, new char[] {'0', '0', '1', '0'}, new char[] {'0', '0', '1', '0'}, new char[] {'0', '0', '1', '1'}, new char[] {'0', '1', '1', '1'}, new char[] {'0', '1', '1', '1'}, new char[] { '1', '1', '1', '1' } },
+            };
+            foreach(var matrix in matrixArr)
+            {
+                matrix.Print("Input 2D Matrix of 0's & 1's");
+                Console.WriteLine($" The largest rectangle containing only 1's has area => '{DynamicProgramming.MaximalRectangle(matrix)}'");
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }

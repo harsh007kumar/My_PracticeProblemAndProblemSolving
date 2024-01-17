@@ -3128,5 +3128,58 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        // Time = Space = O(r*c), r ,c = no of rows & cols respectively of 'matrix' array
+        public static int MaximalRectangle(char[][] matrix)
+        {
+            /* ALGO
+            we will solve this problem by converting the 2D matrix into Histogram problem
+            we iterate over each row and height of each cell is if current cell is 1 than 1+hieght of cell above else 0
+            we calculate the largest rectangle in a histogram for current row than move on repeat above step for next row
+            */
+            int rows = matrix.Length, cols = matrix[0].Length, maxRectangleSize = 0, curRectangleSize, curBarHeight, lastIndex = 0, c;
+            int[] histogram = new int[cols];
+            Stack<Pair<int, int>> st = new();
+            for (int r = 0; r < rows; r++)                     // O(rows)
+            {
+                // update the Historgram for current row keeping above row in mind
+                if (r == 0)
+                {
+                    for (c = 0; c < cols; c++)
+                        histogram[c] = matrix[r][c] == '0' ? 0 : 1;
+                }
+                else // r>=1
+                {
+                    for (c = 0; c < cols; c++)
+                        histogram[c] = matrix[r][c] == '0' ? 0 : 1 + histogram[c];
+                }
+
+                // find largest rectangle for current row | Time = Space = O(cols)
+                for (c = 0; c < cols; c++)
+                {
+                    curBarHeight = histogram[c];
+                    if (st.Count == 0 || st.Peek().val <= curBarHeight)
+                        st.Push(new Pair<int,int>(c, curBarHeight));
+                    else
+                    {
+                        while (st.Count > 0 && st.Peek().val > curBarHeight)
+                        {
+                            var lastBar = st.Pop();
+                            lastIndex = lastBar.key;
+                            curRectangleSize = (c - lastIndex) * lastBar.val;
+                            maxRectangleSize = Math.Max(maxRectangleSize, curRectangleSize);
+                        }
+                        st.Push(new Pair<int, int>(lastIndex, curBarHeight));
+                    }
+                }
+                while (st.Count > 0)
+                {
+                    var lastBar = st.Pop();
+                    curRectangleSize = (c - lastBar.key) * lastBar.val;
+                    maxRectangleSize = Math.Max(maxRectangleSize, curRectangleSize);
+                }
+            }
+            return maxRectangleSize;
+        }
     }
 }
