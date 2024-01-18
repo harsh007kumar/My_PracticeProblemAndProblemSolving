@@ -571,6 +571,7 @@ namespace InterviewProblemNSolutions
             TextJustification();
             FindPlayersWithZeroOrOneLosses();
             MaximalRectangle();
+            WordBreakII();
 
 
 
@@ -9576,6 +9577,26 @@ namespace InterviewProblemNSolutions
             {
                 matrix.Print("Input 2D Matrix of 0's & 1's");
                 Console.WriteLine($" The largest rectangle containing only 1's has area => '{DynamicProgramming.MaximalRectangle(matrix)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void WordBreakII()
+        {
+            // https://leetcode.com/problems/word-break-ii
+            Utility.Print("140. Word Break II");
+            string[] s = { "catsanddog", "pineapplepenapple", "catsandog" };
+            string[][] wordDict = new string[][] 
+            {
+                new string[] { "cat", "cats", "and", "sand", "dog" },
+                new string[] { "apple", "pen", "applepen", "pine", "pineapple" },
+                new string[] { "cats", "dog", "sand", "and", "cat" }
+            };
+            for(int i = 0;i<s.Length;i++) 
+            {
+                wordDict[i].Print("Input wordDict");
+                StringAlgorithms.WordBreakII(s[i], wordDict[i]).Print($"=> using '{s[i]}' sentence below are the valid sentence which can be formed where each word is also present in above dictionary");
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }

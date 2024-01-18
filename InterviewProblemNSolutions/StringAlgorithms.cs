@@ -1513,5 +1513,56 @@ namespace InterviewProblemNSolutions
 
             return justified;
         }
+
+
+        // Time O(Max(n*m,l*n)) | Space O(n*m). n = length of 'wordDict', m = avg length of each word in wordDict, l = length of string 's'
+        public static IList<string> WordBreakII(string s, IList<string> wordDict)
+        {
+            /* ALGO
+            We create a Trie and add all the words from wordDict to trie
+            now we start creating sentence for that we start from 0th index
+            and for each word we try to see if given char is present in trie we move to next index if at any char we see we have form a word from trie
+            we add that to sentence & start creating next word
+            we stop at any point and go back it at any points we can't find next word in Trie
+
+            also once we have found 1 word we try to go further to possibly find even larger word from trie
+            once we reach end of the string 's' we add the current sentence to the list of answers.
+            */
+            Trie t = new();
+            // add all words to Trie data-structure
+            foreach (var word in wordDict)   // O(n)
+                t.Add(word.ToCharArray());            // O(m)
+
+            int l = s.Length;
+            // now start build all possible sentence from 's'
+            IList<string> ans = new List<string>();
+            Create(0, "");                   // O(l*n)
+            return ans;
+
+            // local helper func
+            void Create(int i, string sentence)
+            {
+                if (i == l) ans.Add(sentence);
+                else
+                {
+                    TrieNode cur = t.root;
+                    StringBuilder sb = new();
+                    if (sentence.Length > 0) sb.Append(' ');   // add a space if current word is not the 1st word we are trying to add to sentence
+                                                               // start build a word is next char is present in Trie else return
+                    while (i < l)
+                    {
+                        cur = Trie.ValidPath(cur, s[i]);
+                        if (cur != null)
+                        {
+                            sb.Append(s[i++]);
+                            if (cur.isWord)  // found one valid word now recursively call the func to find other words
+                                Create(i, sentence + sb.ToString());
+                        }
+                        // if valid path exists in Trie no points moving frwd hence return sentence cannot  be formed with current set of words
+                        else return;
+                    }
+                }
+            }
+        }
     }
 }
