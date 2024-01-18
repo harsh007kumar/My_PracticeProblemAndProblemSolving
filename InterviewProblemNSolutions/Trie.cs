@@ -52,6 +52,14 @@ namespace InterviewProblemNSolutions
             }
             return temp.isWord;
         }
+        // return child node if passed input trinode has given char ch in dictionary
+        public static TrieNode ValidPath(TrieNode r, char ch)
+        {
+            if (r.children.TryGetValue(ch, out TrieNode val))
+                return val;
+            else
+                return null;
+        }
     }
 
     public class TrieForAutoComplete : Trie

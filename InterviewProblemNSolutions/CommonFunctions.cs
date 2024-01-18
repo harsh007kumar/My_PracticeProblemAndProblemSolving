@@ -263,7 +263,7 @@ namespace InterviewProblemNSolutions
         }
         public static void Print(this IList<String> iterator, string msg = "")
         {
-            if (msg != "") Console.Write($" Printing \'{msg}\':");
+            if (msg != "") Console.WriteLine($" Printing \'{msg}\':");
             foreach (var element in iterator)
                 Console.Write($" \'{element}\' ||");
             Console.WriteLine();
