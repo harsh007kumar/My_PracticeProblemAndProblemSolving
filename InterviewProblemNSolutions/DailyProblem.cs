@@ -20606,5 +20606,49 @@ namespace InterviewProblemNSolutions
 
             return ans;
         }
+
+
+        // Time O(n^2) | Space O(n) , n = length of 'points' array
+        public static int MaxPointsOnALine(int[][] points)
+        {
+            Dictionary<string, HashSet<int>> slopeIntercept_LineCount = new();
+            double slope, intercept;
+
+            for (int p1 = 0; p1 < points.Length; p1++)
+                for (int p2 = p1 + 1; p2 < points.Length; p2++)
+                {
+                    (slope, intercept) = CalculateSlopeIntercept(points[p1], points[p2]);
+                    string key = slope + "," + intercept;
+                    if (slopeIntercept_LineCount.TryGetValue(key, out HashSet<int> unqPoints))
+                    {
+                        // both the points for the given (slope,intercept) key
+                        unqPoints.Add(p1);
+                        unqPoints.Add(p2);
+                    }
+                    else slopeIntercept_LineCount[key] = new HashSet<int>() { p1, p2 };
+                }
+
+            int maxPointsOnALine = 1;
+            // get the slope,intercept combo which has most no of points
+            foreach (var setOfPointsOnSlope in slopeIntercept_LineCount.Values)
+                maxPointsOnALine = Math.Max(maxPointsOnALine, setOfPointsOnSlope.Count);
+            return maxPointsOnALine;
+
+            // local helper func
+            (double, double) CalculateSlopeIntercept(int[] p1, int[] p2)
+            {
+                int x1 = p1[0], x2 = p2[0], y1 = p1[1], y2 = p2[1];
+                if (y1 == y2)
+                    return (0, y2);  // line parallel to X-axis, hence slope is zero
+                else if (x1 == x2)
+                    return (double.MaxValue, x1);  // line parallel to Y-Axis, avoid divide-by-zero-error simply return x cordinate
+                else
+                {
+                    double slope = (double)(y2 - y1) / (double)(x2 - x1);
+                    double intercept = y1 - (slope * x1);
+                    return (slope, intercept);
+                }
+            }
+        }
     }
 }

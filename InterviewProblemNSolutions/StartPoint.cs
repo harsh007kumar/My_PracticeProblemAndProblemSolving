@@ -574,6 +574,7 @@ namespace InterviewProblemNSolutions
             MaximalRectangle();
             WordBreakII();
             MinimumFallingPathSum();
+            MaxPointsOnALine();
 
 
 
@@ -9617,6 +9618,31 @@ namespace InterviewProblemNSolutions
             {
                 matrix.Print("Input Matrix");
                 Console.WriteLine($" The minimum sum of any falling path through above matrix is => '{DynamicProgramming.MinFallingPathSum(matrix)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void MaxPointsOnALine()
+        {
+            // Inside Code https://youtu.be/TaT5oAn4ezQ?si=D4GELzxndfAIQXEt
+            // https://leetcode.com/problems/max-points-on-a-line
+            Utility.Print("149. Max Points on a Line");
+            int[][][] pointsArr = new int[][][]
+            {
+                new int[][] { new int[] { 1, 1}, new int[] { 2, 2}, new int[] { 3, 3 } },
+                new int[][] { new int[] { -1, -1}, new int[] { -3, -2}, new int[] { -5, -3}, new int[] { -4, -1}, new int[] { -2, -3}, new int[] { -1, -4 } },
+                new int[][] { new int[] { 1, 0}, new int[] { 0, 0 } },
+                new int[][] { new int[] { 2, 3}, new int[] { 3, 3}, new int[] { -5, 3 } },
+                new int[][] { new int[] { 2, 3}, new int[] { 1, 1 } },
+                new int[][] { new int[] { 1, 1}, new int[] { 2, 6}, new int[] { 3, 11 } },
+                new int[][] { new int[] { 0, 0}, new int[] { 1, -1}, new int[] { 1, 1 } },
+                new int[][] { new int[] { 0, 0}, new int[] { 4,5}, new int[] { 7,8}, new int[] { 8,9}, new int[] { 5,6}, new int[] { 3,4}, new int[] { 1, 1 } },
+            };
+            foreach(var points in pointsArr)
+            {
+                points.Print("Points array");
+                Console.WriteLine($"Maximum number of points from above list of points that lie on the same straight line are => '{DailyProblem.MaxPointsOnALine(points)}'");
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }

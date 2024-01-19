@@ -1,7 +1,6 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30204.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApplication4_Byte_Enum", "ConsoleApplication4_Byte_Enum\ConsoleApplication4_Byte_Enum.csproj", "{2D145203-04DF-4695-A4B7-A1E93EA27A63}"
 EndProject
@@ -78,6 +77,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XaxisYaxis_ParallelLines_Quora", "XaxisYaxis_ParallelLines_Quora\XaxisYaxis_ParallelLines_Quora.csproj", "{E73E8396-4A24-456C-813D-8E1230BFA3D3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterviewProblemNSolutions", "InterviewProblemNSolutions\InterviewProblemNSolutions.csproj", "{00B50A4C-DD2B-4105-951F-2043D58CCDAB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6A11066C-644C-4392-8221-4F1A9A5EF664}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
