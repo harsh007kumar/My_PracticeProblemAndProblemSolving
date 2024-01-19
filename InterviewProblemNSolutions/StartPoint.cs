@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.IO;
 using System.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -572,6 +573,7 @@ namespace InterviewProblemNSolutions
             FindPlayersWithZeroOrOneLosses();
             MaximalRectangle();
             WordBreakII();
+            MinimumFallingPathSum();
 
 
 
@@ -9597,6 +9599,24 @@ namespace InterviewProblemNSolutions
             {
                 wordDict[i].Print("Input wordDict");
                 StringAlgorithms.WordBreakII(s[i], wordDict[i]).Print($"=> using '{s[i]}' sentence below are the valid sentence which can be formed where each word is also present in above dictionary");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void MinimumFallingPathSum()
+        {
+            // https://leetcode.com/problems/minimum-falling-path-sum/description/?envType=daily-question&envId=2024-01-19
+            Utility.Print("931. Minimum Falling Path Sum");
+            int[][][] matrixArr = new int[][][]
+            {
+                new int[][]{ new int[] { 2, 1, 3 }, new int[] { 6, 5, 4 }, new int[] { 7, 8, 9 } },
+                new int[][]{ new int[] { -19, 57 }, new int[] { -40, -5 } }
+            };
+            foreach(var matrix in matrixArr)
+            {
+                matrix.Print("Input Matrix");
+                Console.WriteLine($" The minimum sum of any falling path through above matrix is => '{DynamicProgramming.MinFallingPathSum(matrix)}'");
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }

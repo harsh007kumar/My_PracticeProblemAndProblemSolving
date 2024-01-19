@@ -3181,5 +3181,40 @@ namespace InterviewProblemNSolutions
             }
             return maxRectangleSize;
         }
+
+
+        // Time = Space = O(n^2), n = no of rows in the square 'matrix'
+        public static int MinFallingPathSum(int[][] matrix)
+        {
+            /* ALGO
+            We Create a recursive func that recusrively calls the row below and all 3 cells c-1, c, c+1 to see which yield the minPathSum
+            we add that to current cell value and save it in a cache before returning back the ans
+            */
+            int n = matrix.Length, notCalculatedYet = Int32.MaxValue, minFallingPath = Int32.MaxValue;
+            int[,] cache = new int[n, n];
+            for (int r = 0; r < n; r++)
+                for (int c = 0; c < n; c++)
+                    cache[r, c] = notCalculatedYet;    // set notCalculatedYet value
+            for (int c = 0; c < n; c++)
+                minFallingPath = Math.Min(minFallingPath, MinFallingPathSum(0, c));
+            return minFallingPath;
+
+            // local helper func
+            int MinFallingPathSum(int row, int col)
+            {
+                if (row == n) return 0;  // passed the end of the matrix
+                if (cache[row, col] != notCalculatedYet) return cache[row, col];
+                int minPath = notCalculatedYet;
+                // find min from all 3 possible path
+                if (col > 0)       // left
+                    minPath = Math.Min(minPath, MinFallingPathSum(row + 1, col - 1));
+                // just below
+                minPath = Math.Min(minPath, MinFallingPathSum(row + 1, col));
+                if (col + 1 < n)       // right
+                    minPath = Math.Min(minPath, MinFallingPathSum(row + 1, col + 1));
+
+                return cache[row, col] = minPath + matrix[row][col];
+            }
+        }
     }
 }
