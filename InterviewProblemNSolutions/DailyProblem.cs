@@ -13026,7 +13026,7 @@ namespace InterviewProblemNSolutions
                         result.Add(new List<int>() { r, c });
             return result;
         }
-    
+
 
         // Time O(m*n) || Auxiliary Space O(1) || Recursive Space O(m*n)
         public static int NumberOfEnclaves(int[][] grid)
@@ -16786,7 +16786,7 @@ namespace InterviewProblemNSolutions
             {
                 // Added to Priority Queue, if atleast one apple is added && it can be eaten till atleast a day or more
                 if (apples[day] > 0 && days[day] > 0)
-                    pq.Enqueue(apples[day],days[day] + day);        // O(logn)
+                    pq.Enqueue(apples[day], days[day] + day);        // O(logn)
                 // Remove all such entries which have either expired before or expirying today or have no apples left
                 while (pq.TryPeek(out int appleCount, out int expiry) && (expiry <= day || appleCount <= 0))
                     pq.Dequeue();                                   // O(logn)
@@ -16794,7 +16794,7 @@ namespace InterviewProblemNSolutions
                 if (pq.TryDequeue(out int apple, out int expiryDate))
                 {
                     count++;                                        // have one apple
-                    pq.Enqueue(apple-1,expiryDate);                 // decreament count
+                    pq.Enqueue(apple - 1, expiryDate);                 // decreament count
                 }
             }
 
@@ -19883,7 +19883,7 @@ namespace InterviewProblemNSolutions
             for (r = 0; r < rows; r++)
                 for (c = 0; c < cols; c++)
                     if (grid[r][c] == 2)   // rotten
-                        q.Enqueue(new Pair<int,int>(r, c));
+                        q.Enqueue(new Pair<int, int>(r, c));
 
             if (q.Count > 0) q.Enqueue(null);
             maxElaspedTime = Math.Max(maxElaspedTime, BFS());
@@ -20213,7 +20213,7 @@ namespace InterviewProblemNSolutions
                 var minSize = pq.TryPeek(out int key, out int priority) ? priority : -1;
                 foreach (var idx in queryNumIdx[curQueryVal])
                     minInterval[idx] = minSize;
-                
+
                 // now current query value is no longer needed
                 queryNumIdx.Remove(curQueryVal);
             }
@@ -20297,7 +20297,7 @@ namespace InterviewProblemNSolutions
                 { 0, 1 },   // anything to power 0 is 1
                 { 1, x }    // power 1 means the original number itself
             };
-            
+
             return n >= 0 ? GetPower(Math.Abs(n)) : 1 / GetPower(Math.Abs(n));
 
             // local helper func
@@ -20650,5 +20650,65 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+
+        // Time = Space = O(n), n = length of input 'arr'
+        public static int SumSubarrayMins(int[] arr)
+        {
+            int n = arr.Length, modulo = 1000000007, biggerThan;
+            long totalMinSum = 0, minTimes;
+            long[] smallerThanNumsOnLeft = new long[n];
+            Stack<Pair<int,int>> st = new();
+            // Count no of subarray each num is smaller than on the left
+            for (int i = 0; i < n; i++)
+            {
+                biggerThan = 1;
+                while (st.Count > 0 && st.Peek().key > arr[i])
+                    biggerThan += st.Pop().val;
+                st.Push(new Pair<int, int>(arr[i], biggerThan));
+                smallerThanNumsOnLeft[i] = biggerThan;
+            }
+            st.Clear();
+            // Count no of subarray each num is smaller than on the right
+            for (int i = n - 1; i >= 0; i--)
+            {
+                biggerThan = 1;
+                while (st.Count > 0 && st.Peek().key >= arr[i])  // remove the stack top even if its equal to curr num
+                    biggerThan += st.Pop().val;
+                st.Push(new Pair<int,int>(arr[i], biggerThan));
+                // now calculate the total after taking into account how many sub-arrays each num was part of in total
+                minTimes = (arr[i] * (smallerThanNumsOnLeft[i] * biggerThan) % modulo) % modulo;
+                totalMinSum = (totalMinSum + minTimes) % modulo;
+            }
+            return (int)totalMinSum;
+            #region TLE O(n^2)
+            // // Time = Space = O(n^2), n = length of input 'arr' || TLE
+            // public int SumSubarrayMins(int[] arr) {
+            //     int totalMinSum = 0, n = arr.Length, curMin,modulo=1000000007,arrMin = int.MaxValue;
+            //     foreach(var num in arr) arrMin = Math.Min(arrMin,num);
+            //     for(int startingIdx=0;startingIdx<n;startingIdx++)
+            //     {
+            //         curMin = int.MaxValue;
+            //         for(int endIdx=startingIdx;endIdx<n;endIdx++)
+            //         {
+            //             curMin = Math.Min(curMin,arr[endIdx]);
+            //             // optimization added to prevent further looking once we have found the minima of the entire array
+            //             if(curMin==arrMin)
+            //             {
+            //                 totalMinSum = (totalMinSum+((curMin*(n-endIdx))%modulo))%modulo;
+            //                 break;
+            //             }
+            //             Console.Write($" {curMin} ||");
+            //             totalMinSum = (totalMinSum+curMin)%modulo;
+            //         }
+            //         Console.WriteLine();
+            //     }
+            //     Console.WriteLine($"totalMinSum {totalMinSum}");
+            //     return totalMinSum;
+            // }
+            #endregion
+        }
+
+
     }
 }

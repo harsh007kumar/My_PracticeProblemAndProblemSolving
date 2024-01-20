@@ -575,6 +575,7 @@ namespace InterviewProblemNSolutions
             WordBreakII();
             MinimumFallingPathSum();
             MaxPointsOnALine();
+            SumOfSubarrayMinimums();
 
 
 
@@ -9644,6 +9645,23 @@ namespace InterviewProblemNSolutions
                 points.Print("Points array");
                 Console.WriteLine($"Maximum number of points from above list of points that lie on the same straight line are => '{DailyProblem.MaxPointsOnALine(points)}'");
                 Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void SumOfSubarrayMinimums()
+        {
+            // https://leetcode.com/problems/sum-of-subarray-minimums
+            Utility.Print("907. Sum of Subarray Minimums");
+            int[][] arrays = new int[][]
+            {
+                new int[]{ 3, 1, 2, 4 },
+                new int[] { 11, 81, 94, 43, 3 }
+            };
+            foreach(var arr in arrays)
+            {
+                arr.Print("Input Array");
+                Console.WriteLine($" For above arr the sum of all sub-array minimums => '{DailyProblem.SumSubarrayMins(arr)}'\n");
             }
         }
 
