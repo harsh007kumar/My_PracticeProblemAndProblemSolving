@@ -20655,6 +20655,24 @@ namespace InterviewProblemNSolutions
         // Time = Space = O(n), n = length of input 'arr'
         public static int SumSubarrayMins(int[] arr)
         {
+            /* ALGO
+            1# The brute force way to solve is simple find no of sub-array n^2 find min in each sub-array n i.e. n^3 Soln
+
+            2# better is while creating sub-array and adding each num keep track of the min hence Time get reduced to n^2 as loop for finding min is not req
+
+            3# To Solve it in O(n) we need to understand for each num how many sub-arrays it wud be part of (such that its the smallest num in all)
+            for this we need to use monotonic sequence
+            we calculate no of num on left each num is part of by
+                check while stack is not empty we see the top num if larger than pop and take its count of sub-array it was the smallest
+                now add current num to stack with smallest+1 as no of array it wud be the smallest on left
+            we also keep storing this count of each num in another array
+
+            we calculate in the same now from right to left, count of sub-arrays each num is smallest in
+                one added condition to avoid duplicates nums is this time we pop the top from stack even is its equal to current
+
+            Now its simple we get the total min sum by using below for each number in array
+            num * smallerOnLeftCount * smallerOnRightCount
+             */
             int n = arr.Length, modulo = 1000000007, biggerThan;
             long totalMinSum = 0, minTimes;
             long[] smallerThanNumsOnLeft = new long[n];
