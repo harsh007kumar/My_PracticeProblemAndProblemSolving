@@ -20728,15 +20728,31 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time O(n*distlog(dist)) | Space O(k), n = length of 'nums' k , dist are input params given in arguments | TLE
-        public static long DivideAnArrayIntoSubarraysWithMinimumCostII(int[] nums, int k, int dist)
+        // Time O(n*(logn)^2) | Space O(n)
+        public static long MinimumCost(int[] nums, int k, int dist)
         {
+            long minSum = long.MaxValue;
+            Window window = new Window(k - 2);
+            for (int l = 1 + 1; l < Math.Min(1 + dist, nums.Length - 1); l++)
+                window.Insert(nums[l]);
+
+            for (int i = 1; i < nums.Length - (k - 2); ++i)
+            {
+                if (i + dist < nums.Length)
+                    window.Insert(nums[i + dist]);
+                long temp = nums[0] + nums[i] + window.MinSum();
+                minSum = Math.Min(minSum, temp);
+                window.Remove(nums[i + 1]);
+            }
+            return minSum;
+            #region good Attempts but TLE
             /*
-            Create MaxHeap of k values from a given index
-            Now iterate till currIdx+dist add new elements if its smaller than MaxHeap by replacing Heap top with new element
+            // PriorityQueue based | TLE
+            // Time O(n*distlog(dist)) | Space O(k), n = length of 'nums' k , dist are input params given in arguments
+            //Create MaxHeap of k values from a given index
+            //Now iterate till currIdx+dist add new elements if its smaller than MaxHeap by replacing Heap top with new element
         
-            take the sum of of all elements in the Heap and update sumMinTotal if its smaller
-            */
+            //take the sum of of all elements in the Heap and update sumMinTotal if its smaller
             PriorityQueue<int, int> maxHeap = new PriorityQueue<int, int>(Comparer<int>.Create((a, b) => b.CompareTo(a)));
             long minCostKSubArray = long.MaxValue, curMinCost;
 
@@ -20762,6 +20778,32 @@ namespace InterviewProblemNSolutions
             }
 
             return minCostKSubArray + (long)nums[0];
+
+            // DP based | TLE
+            int l = nums.Length;
+            Dictionary<int, long>[] idxKMin = new Dictionary<int, long>[l];
+            for (int i = 1; i < l; i++) idxKMin[i] = new();
+            return nums[0] + Min(1, k - 1);
+            // local helper func
+            long Min(int i, int minValReq, int firstSplitIdx = -1)
+            {
+                if (minValReq == 0) return 0;
+                if (i >= l) return int.MaxValue;
+                if (idxKMin[i].TryGetValue(minValReq, out long val)) return val;
+
+                long minCost = long.MaxValue;
+                // skip current index
+                if(l-minValReq<i+1 && (firstSplitIdx==-1 || firstSplitIdx+dist- minValReq <= i+1))
+                    minCost = Math.Min(minCost, Min(i + 1, minValReq));
+
+                
+                // take one of the values from i...i+dist
+                for (int idx = i; idx <= Math.Min((firstSplitIdx!=-1 ? (firstSplitIdx + dist - (minValReq-1)) : (i + dist)), l - minValReq); idx++)
+                    minCost = Math.Min(minCost, nums[idx] + Min(idx + 1, minValReq - 1, firstSplitIdx==-1 ? idx : firstSplitIdx));
+                return idxKMin[i][minValReq] = minCost;
+            }
+            */
+            #endregion
         }
 
 

@@ -9687,7 +9687,7 @@ namespace InterviewProblemNSolutions
 
         public static void DivideAnArrayIntoSubarraysWithMinimumCostII()
         {
-            // 
+            // https://leetcode.com/problems/divide-an-array-into-subarrays-with-minimum-cost-ii/
             Utility.Print($"100178. Divide an Array Into Subarrays With Minimum Cost II");
             int[][] nums = new int[][]
             {
@@ -9701,7 +9701,8 @@ namespace InterviewProblemNSolutions
             for(int i=0;i<k.Length;i++) 
             {
                 nums[i].Print("Input Array");
-                Console.WriteLine($" with k '{k[i]}' and dist '{dist[i]}' min sub-array cost is => '{DailyProblem.DivideAnArrayIntoSubarraysWithMinimumCostII(nums[i], k[i], dist[i])}'");
+                Console.WriteLine($" with k '{k[i]}' and dist '{dist[i]}' min sub-array cost is => '{DailyProblem.MinimumCost(nums[i], k[i], dist[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
             }
         }
 
