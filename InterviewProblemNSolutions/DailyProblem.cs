@@ -20763,5 +20763,57 @@ namespace InterviewProblemNSolutions
 
             return minCostKSubArray + (long)nums[0];
         }
+
+
+        /// <summary>
+        /// Time O(n^2) | Space O(1), n = length of 'nums'
+        /// 1. Start from 0th index till n-1,
+        /// keep iterating thru indexes till we found a num which is smaller than next
+        /// 2. count on bits for cur and next numbers
+        /// if same swap the numbers in array
+        /// set index to i-1 to check if newly replaced num is smaller than even the last num
+        /// else return false
+        /// </summary>
+        public static bool CanSortArray(int[] nums)
+        {
+            // skip indexes which are already sorted
+            // when we encounter a value smaller than last value check if they can be sorted
+            // if yes swap
+            // now start from idx -1 again
+            int i = 0, l = nums.Length, cur, next, temp;
+            if (l < 2) return true;
+
+            while (i < l - 1)
+            {
+                cur = nums[i];
+                next = nums[i + 1];
+                if (cur > next)
+                {
+                    if (CountBits(cur) == CountBits(next))      // can swap
+                    {
+                        nums[i] = next;
+                        nums[i + 1] = cur;
+                        i = i > 0 ? i - 1 : i;
+                    }
+                    else
+                        return false;
+                }
+                else i++;
+            }
+
+            return true;
+
+            // local helper func which return no of on bits for a given number
+            int CountBits(int n)
+            {
+                int onBits = 0;
+                while (n > 0)
+                {
+                    onBits += n & 1;
+                    n >>= 1;
+                }
+                return onBits;
+            }
+        }
     }
 }

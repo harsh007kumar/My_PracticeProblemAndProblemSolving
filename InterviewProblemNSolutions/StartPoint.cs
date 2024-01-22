@@ -573,6 +573,7 @@ namespace InterviewProblemNSolutions
             MinimumFallingPathSum();
             MaxPointsOnALine();
             SumOfSubarrayMinimums();
+            FindifArrayCanBeSorted();
             DivideAnArrayIntoSubarraysWithMinimumCostII();
 
 
@@ -9661,6 +9662,25 @@ namespace InterviewProblemNSolutions
             {
                 arr.Print("Input Array");
                 Console.WriteLine($" For above arr the sum of all sub-array minimums => '{DailyProblem.SumSubarrayMins(arr)}'\n");
+            }
+        }
+
+
+        public static void FindifArrayCanBeSorted()
+        {
+            // https://leetcode.com/problems/find-if-array-can-be-sorted
+            Utility.Print("3011. Find if Array Can Be Sorted");
+            int[][] numsArr = new int[][]
+            {
+                new int[]{ 8, 4, 2, 30, 15 },
+                new int[]{ 1,2,3,4,5},
+                new int[]{3,16,8,4,2},
+            };
+            foreach(var nums in numsArr)
+            {
+                nums.Print("Input array");
+                Console.WriteLine($"With constraint i.e. in 1 operation, we can swap any two adjacent elements if they have the same number of set bits, can we sort above => '{DailyProblem.CanSortArray(nums)}'");
+
             }
         }
 
