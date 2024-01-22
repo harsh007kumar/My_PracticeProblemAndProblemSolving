@@ -20728,5 +20728,40 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(n*distlog(dist)) | Space O(k), n = length of 'nums' k , dist are input params given in arguments | TLE
+        public static long DivideAnArrayIntoSubarraysWithMinimumCostII(int[] nums, int k, int dist)
+        {
+            /*
+            Create MaxHeap of k values from a given index
+            Now iterate till currIdx+dist add new elements if its smaller than MaxHeap by replacing Heap top with new element
+        
+            take the sum of of all elements in the Heap and update sumMinTotal if its smaller
+            */
+            PriorityQueue<int, int> maxHeap = new PriorityQueue<int, int>(Comparer<int>.Create((a, b) => b.CompareTo(a)));
+            long minCostKSubArray = long.MaxValue, curMinCost;
+
+            for (int i = 1; i < nums.Length - dist; i++)         // O(n)
+            {
+                maxHeap.Clear();
+                curMinCost = 0;
+                for (int idx = i; idx <= i + dist; idx++)      // O(dist)
+                {
+                    if (maxHeap.Count < k - 1)
+                    {
+                        maxHeap.Enqueue(nums[idx], nums[idx]);  // O(log(dist))
+                        curMinCost += nums[idx];
+                    }
+                    else if (maxHeap.Peek() > nums[idx])
+                    {
+                        curMinCost -= maxHeap.Dequeue();        // O(log(dist))
+                        curMinCost += nums[idx];
+                        maxHeap.Enqueue(nums[idx], nums[idx]);  // O(log(dist))
+                    }
+                }
+                minCostKSubArray = Math.Min(minCostKSubArray, curMinCost);
+            }
+
+            return minCostKSubArray + (long)nums[0];
+        }
     }
 }

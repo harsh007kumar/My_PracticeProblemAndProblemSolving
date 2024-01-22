@@ -573,6 +573,7 @@ namespace InterviewProblemNSolutions
             MinimumFallingPathSum();
             MaxPointsOnALine();
             SumOfSubarrayMinimums();
+            DivideAnArrayIntoSubarraysWithMinimumCostII();
 
 
 
@@ -9660,6 +9661,27 @@ namespace InterviewProblemNSolutions
             {
                 arr.Print("Input Array");
                 Console.WriteLine($" For above arr the sum of all sub-array minimums => '{DailyProblem.SumSubarrayMins(arr)}'\n");
+            }
+        }
+
+
+        public static void DivideAnArrayIntoSubarraysWithMinimumCostII()
+        {
+            // 
+            Utility.Print($"100178. Divide an Array Into Subarrays With Minimum Cost II");
+            int[][] nums = new int[][]
+            {
+                new int[] { 1,3,2,6,4,2 },
+                new int[] { 10, 1, 2, 2, 2, 1 },
+                new int[] { 10, 8, 18, 9 },
+                new int[] { 1, 6, 3, 5 },
+            };
+            int[] k = new int[] { 3, 4, 3, 3 };
+            int[] dist = new int[] { 3, 3, 1, 2 };
+            for(int i=0;i<k.Length;i++) 
+            {
+                nums[i].Print("Input Array");
+                Console.WriteLine($" with k '{k[i]}' and dist '{dist[i]}' min sub-array cost is => '{DailyProblem.DivideAnArrayIntoSubarraysWithMinimumCostII(nums[i], k[i], dist[i])}'");
             }
         }
 
