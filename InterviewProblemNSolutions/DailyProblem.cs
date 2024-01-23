@@ -14933,7 +14933,7 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time O(n^2) || Recursive Space O(n)
+        // Time O(2^n) || Recursive Space O(n)
         public static int MaxLenConcatenatedStringWithUniqueCharacters(IList<string> arr)
         {
             int ans = 0;
@@ -14959,6 +14959,55 @@ namespace InterviewProblemNSolutions
                     if (++charSet[s[i] - 'a'] == 2)
                         return true;
                 return false;
+            }
+        }
+
+        // Time O(n^2) || Recursive Space O(n), n = length of 'arr' | DP Soln
+        public static int MaxLenConcatenatedStringWithUniqueCharacters_DP_CharMask(IList<string> arr)
+        {
+            List<int[]> wordMaskLen = new();
+            int mask, len;
+            foreach (var word in arr)                    // O(n)
+                // add to list if no duplicate characters present
+                if ((mask = GetCharMask(word)) != -1)    // O(26)
+                    wordMaskLen.Add(new int[] { mask, word.Length });
+
+            len = wordMaskLen.Count;
+            Dictionary<int, int>[] cache = new Dictionary<int, int>[len];
+            for (int i = 0; i < len; i++) cache[i] = new();    // initialize the Dictionary at each index
+            return GetMaxLenUnqString(0, 0);
+
+            // local helper func
+            int GetMaxLenUnqString(int i, int curMask)
+            {
+                if (i >= len) return 0;
+                // see if for current index we have prv calculated the maxLen with provided curMask
+                if (cache[i].TryGetValue(curMask, out int maxLenFromCurrentIdx)) return maxLenFromCurrentIdx;
+
+                int maxLen = 0;
+                // skip current word
+                maxLen = Math.Max(maxLen, GetMaxLenUnqString(i + 1, curMask));
+
+                // take current word, if it doesn't have any character which are already part of the final concatenation
+                if ((curMask & wordMaskLen[i][0]) == 0)
+                    maxLen = Math.Max(maxLen, wordMaskLen[i][1] + GetMaxLenUnqString(i + 1, curMask | wordMaskLen[i][0]));  // merge mask before making recursive call
+
+                // save to cache before returning the maxLength
+                return cache[i][curMask] = maxLen;
+            }
+            // create a mask for all characters present in the input wordand switch the ith bit on from left, ith bit = char distance from 'a'
+            int GetCharMask(string s)   // O(26)
+            {
+                int[] unqChar = new int[26];
+                int mask = 0;
+                foreach (var ch in s)    // Max(26,len), loop will run max of 26 times before we are sure to find a duplicate
+                {
+                    // return -1 if any word has even 1 duplicate character
+                    if (++unqChar[ch - 'a'] > 1)
+                        return -1;
+                    mask |= (1 << ch - 'a');
+                }
+                return mask;
             }
         }
 

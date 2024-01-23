@@ -6679,7 +6679,9 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < arr.Length; i++)
             {
                 arr[i].Print("String Array");
-                Console.WriteLine($" String s is a concatenation of a sub-sequence of arr which have unique characters has max len: '{DailyProblem.MaxLenConcatenatedStringWithUniqueCharacters(arr[i])}'\n");
+                Console.WriteLine($" [Recursive] String s is a concatenation of a sub-sequence of arr which have unique characters has max len: '{DailyProblem.MaxLenConcatenatedStringWithUniqueCharacters(arr[i])}'\n");
+                Console.WriteLine($" [DP] String s is a concatenation of a sub-sequence of arr which have unique characters has max len: '{DailyProblem.MaxLenConcatenatedStringWithUniqueCharacters_DP_CharMask(arr[i])}'\n");
+                Console.WriteLine(Utility.lineDelimeter);
             }
         }
 
