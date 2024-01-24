@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 
 namespace InterviewProblemNSolutions
 {
@@ -575,6 +576,7 @@ namespace InterviewProblemNSolutions
             SumOfSubarrayMinimums();
             FindifArrayCanBeSorted();
             DivideAnArrayIntoSubarraysWithMinimumCostII();
+            MinimizeLengthOfArrayUsingOperations();
 
 
 
@@ -772,7 +774,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("");
             string[] str = { "11", "1" };
             var sumOfBinary = DailyProblem.AddBinary(str[0], str[1]);
-            Console.WriteLine($" Adding Binary nums \'{str[0]}\' & \'{str[1]}\' results in: \'{sumOfBinary}\'");
+            Console.WriteLine($" Adding Binary numsArr \'{str[0]}\' & \'{str[1]}\' results in: \'{sumOfBinary}\'");
         }
 
         public static void MultiplyLargeNumbersRepresentedAsString()
@@ -2829,7 +2831,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Input");
-                Console.WriteLine($" There exists a triple of indices (i, j, k) such that i < j < k and nums[i] < nums[j] < nums[k] : {DailyProblem.IncreasingTripletSubsequence(nums)}");
+                Console.WriteLine($" There exists a triple of indices (i, j, k) such that i < j < k and numsArr[i] < numsArr[j] < numsArr[k] : {DailyProblem.IncreasingTripletSubsequence(nums)}");
             }
         }
 
@@ -2877,9 +2879,9 @@ namespace InterviewProblemNSolutions
             {
                 nums[i].Print("Input");
                 bool foundZero = false;
-                //int moves = DynamicProgramming.MinOperationsToReduceToZero(nums[i], 0, nums[i].Length - 1, x[i], ref foundZero);
-                //int moves = DynamicProgramming.MinOperationsToReduceToZero_DP(nums[i], 0, nums[i].Length - 1, x[i], ref foundZero, new Dictionary<string, int>(nums[i].Length));
-                //int moves = DynamicProgramming.MinOperationsToReduceXToZero(nums[i], x[i], new Dictionary<string, int>(), 0, nums[i].Length - 1);
+                //int moves = DynamicProgramming.MinOperationsToReduceToZero(numsArr[i], 0, numsArr[i].Length - 1, x[i], ref foundZero);
+                //int moves = DynamicProgramming.MinOperationsToReduceToZero_DP(numsArr[i], 0, numsArr[i].Length - 1, x[i], ref foundZero, new Dictionary<string, int>(numsArr[i].Length));
+                //int moves = DynamicProgramming.MinOperationsToReduceXToZero(numsArr[i], x[i], new Dictionary<string, int>(), 0, numsArr[i].Length - 1);
                 int moves = DynamicProgramming.MinOperations_SlidingWindow(nums[i], x[i]);
                 Console.WriteLine($" Minimum number of operations to reduce x \'{x[i]}\' to exactly 0: {moves}");
             }
@@ -3524,8 +3526,8 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < nums.Length; i++)
             {
                 nums[i].Print("Nums");
-                //Console.WriteLine($" A k-diff \'{k[i]}\' pair is an integer pair (nums[i], nums[j]), where the following are true: {DailyProblem.KDiffPairsInAnArray(nums[i], k[i])}");
-                Console.WriteLine($" A k-diff \'{k[i]}\' pair is an integer pair (nums[i], nums[j]), where the following are true: {DailyProblem.KDiffPairsInAnArrayFaster(nums[i], k[i])}\n");
+                //Console.WriteLine($" A k-diff \'{k[i]}\' pair is an integer pair (numsArr[i], numsArr[j]), where the following are true: {DailyProblem.KDiffPairsInAnArray(numsArr[i], k[i])}");
+                Console.WriteLine($" A k-diff \'{k[i]}\' pair is an integer pair (numsArr[i], numsArr[j]), where the following are true: {DailyProblem.KDiffPairsInAnArrayFaster(nums[i], k[i])}\n");
             }
         }
 
@@ -3632,7 +3634,7 @@ namespace InterviewProblemNSolutions
             foreach (int[] instructions in instructionsArr)
             {
                 instructions.Print("Instructions");
-                Console.WriteLine($" Total cost to insert all elements from instructions into nums: {DailyProblem.CreateSortedArrayThroughInstructions(instructions)}\n");
+                Console.WriteLine($" Total cost to insert all elements from instructions into numsArr: {DailyProblem.CreateSortedArrayThroughInstructions(instructions)}\n");
             }
         }
 
@@ -3695,7 +3697,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("1646. Get Maximum in Generated Array");
             int[] n = { 7, 2, 3, 91, 0, 1 };
             foreach (var num in n)
-                Console.WriteLine($" nums[{num}] : {DailyProblem.GetMaximumInGeneratedArray(num)}");
+                Console.WriteLine($" numsArr[{num}] : {DailyProblem.GetMaximumInGeneratedArray(num)}");
         }
 
 
@@ -3857,7 +3859,7 @@ namespace InterviewProblemNSolutions
             int[] k = { 2, 4, 24 };
             for (int i = 0; i < k.Length; i++)
             {
-                nums[i].Print("nums");
+                nums[i].Print("numsArr");
                 Console.Write($" Most Competitive Subsequence of length \'{k[i]}\' is ");
                 DailyProblem.MostCompetitiveSubsequence(nums[i], k[i]).Print();
                 Console.WriteLine();
@@ -5049,7 +5051,7 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 Console.WriteLine($" Length of one continuous subarray that if we only sort this subarray in ascending order" +
-                    $"\n entire 'nums' array is sorted in ascending order is: \'{DailyProblem.FindUnsortedSubarray(nums)}\'\n");
+                    $"\n entire 'numsArr' array is sorted in ascending order is: \'{DailyProblem.FindUnsortedSubarray(nums)}\'\n");
             }
         }
 
@@ -5599,7 +5601,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                //Console.WriteLine($" No Indicies which upon removing yields equal even-odd num sum: \'{DailyProblem.WaysToMakeFair(nums)}\'\n");
+                //Console.WriteLine($" No Indicies which upon removing yields equal even-odd num sum: \'{DailyProblem.WaysToMakeFair(numsArr)}\'\n");
                 Console.WriteLine($" No Indicies which upon removing yields equal even-odd num sum: \'{DailyProblem.WaysToMakeFairFaster(nums)}\'\n");
             }
         }
@@ -6195,7 +6197,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                //DailyProblem.DiagonalTraverseII(nums).Print($"Printing above Zig-Zag array in diagonal order");
+                //DailyProblem.DiagonalTraverseII(numsArr).Print($"Printing above Zig-Zag array in diagonal order");
                 DailyProblem.DiagonalTraverseIIFaster(nums).Print($"Printing above Zig-Zag array in diagonal order");
                 Console.WriteLine("\n");
             }
@@ -6306,7 +6308,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" Min difference between the largest and smallest value of nums after perfoming at most 3 moves. '{DailyProblem.MinDifference(nums)}'\n");
+                Console.WriteLine($" Min difference between the largest and smallest value of numsArr after perfoming at most 3 moves. '{DailyProblem.MinDifference(nums)}'\n");
             }
         }
 
@@ -6364,7 +6366,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("1432. Max Difference You Can Get From Changing an Integer");
             int[] nums = { 555, 9, 123456, 10000, 9288, 1, 111 };
             foreach (var num in nums)
-                Console.WriteLine($" Max diff after changing one digit in '{num}' to create 2 nums a-b results in: '{DailyProblem.MaxDiffFromChangingAnInteger(num)}'\n");
+                Console.WriteLine($" Max diff after changing one digit in '{num}' to create 2 numsArr a-b results in: '{DailyProblem.MaxDiffFromChangingAnInteger(num)}'\n");
         }
 
 
@@ -6374,7 +6376,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("667. Beautiful Arrangement II");
             int[] n = { 3, 3, 5, 5, 5, 5 }, k = { 1, 2, 1, 2, 3, 4 };
             for (int i = 0; i < n.Length; i++)
-                DailyProblem.BeautifulArrangementII(n[i], k[i]).Print($"Beautiful arrangement with array having distinct nums from [1...{n[i]}] with '{k[i]}' distinct difference among consecutive nums");
+                DailyProblem.BeautifulArrangementII(n[i], k[i]).Print($"Beautiful arrangement with array having distinct numsArr from [1...{n[i]}] with '{k[i]}' distinct difference among consecutive numsArr");
         }
 
 
@@ -6448,7 +6450,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < nums.Length; i++)
             {
                 nums[i].Print("Nums");
-                Console.WriteLine($" There are 2 distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= '{k[i]}' : '{DailyProblem.ContainsNearbyDuplicate(nums[i], k[i])}'\n");
+                Console.WriteLine($" There are 2 distinct indices i and j in the array such that numsArr[i] == numsArr[j] and abs(i - j) <= '{k[i]}' : '{DailyProblem.ContainsNearbyDuplicate(nums[i], k[i])}'\n");
             }
         }
 
@@ -6530,7 +6532,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                //Console.WriteLine($" Min +ve val of startValue such that the step by step sum is never less than 1: '{DailyProblem.MinStartValue(nums)}'\n");
+                //Console.WriteLine($" Min +ve val of startValue such that the step by step sum is never less than 1: '{DailyProblem.MinStartValue(numsArr)}'\n");
                 Console.WriteLine($" Min +ve val of startValue such that the step by step sum is never less than 1: '{DailyProblem.MinStartValueFaster(nums)}'\n");
             }
         }
@@ -6623,7 +6625,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" Max product achievable from 3 nums: '{DailyProblem.MaximumProductOfThreeNums(nums)}'\n");
+                Console.WriteLine($" Max product achievable from 3 numsArr: '{DailyProblem.MaximumProductOfThreeNums(nums)}'\n");
             }
         }
 
@@ -6664,7 +6666,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" No of tuples (a, b, c, d) such that a * b = c * d where a, b, c, and d are elements of nums, and a != b != c != d are: '{DailyProblem.TupleSameProduct(nums)}'\n");
+                Console.WriteLine($" No of tuples (a, b, c, d) such that a * b = c * d where a, b, c, and d are elements of numsArr, and a != b != c != d are: '{DailyProblem.TupleSameProduct(nums)}'\n");
             }
         }
 
@@ -6785,7 +6787,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" No of nice pairs of indices such that nums[i] + rev(nums[j]) == nums[j] + rev(nums[i]) :'{DailyProblem.CountNicePairs(nums)}'\n");
+                Console.WriteLine($" No of nice pairs of indices such that numsArr[i] + rev(numsArr[j]) == numsArr[j] + rev(numsArr[i]) :'{DailyProblem.CountNicePairs(nums)}'\n");
             }
         }
 
@@ -6896,7 +6898,7 @@ namespace InterviewProblemNSolutions
             int[] x = { 2, 3, 2, 555, 1 }, y = { 3, 5, 1, 321, 1 }, bound = { 10, 15, 10, 2, 1 };
             for (int i = 0; i < x.Length; i++)
             {
-                Console.WriteLine($" Printing Unique nums which satify condition:\tPower of '{x[i]}' + Power of '{y[i]}' <= '{bound[i]}'");
+                Console.WriteLine($" Printing Unique numsArr which satify condition:\tPower of '{x[i]}' + Power of '{y[i]}' <= '{bound[i]}'");
                 foreach (var sumOfPowerOfXAndY in DailyProblem.PowerfulIntegers(x[i], y[i], bound[i]))
                     Console.Write($" {sumOfPowerOfXAndY} ,");
                 Console.WriteLine("\n");
@@ -7064,7 +7066,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < nums.Length; i++)
             {
                 nums[i].Print("Nums");
-                Console.WriteLine($" Checking if there are 2 distinct indices i & j in the array such that abs(nums[i] - nums[j]) <= '{t[i]}' and abs(i - j) <= '{k[i]}': '{DailyProblem.ContainsNearbyAlmostDuplicate(nums[i], k[i], t[i])}'\n");
+                Console.WriteLine($" Checking if there are 2 distinct indices i & j in the array such that abs(numsArr[i] - numsArr[j]) <= '{t[i]}' and abs(i - j) <= '{k[i]}': '{DailyProblem.ContainsNearbyAlmostDuplicate(nums[i], k[i], t[i])}'\n");
             }
         }
 
@@ -7868,7 +7870,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("307. Range Sum Query - Mutable");
             RangeSumNumArray numArray = new RangeSumNumArray(new int[] { 1, 3, 5 });
             numArray.SumRange(0, 2); // return 1 + 3 + 5 = 9
-            numArray.Update(1, 2);   // nums = [1, 2, 5]
+            numArray.Update(1, 2);   // numsArr = [1, 2, 5]
             numArray.SumRange(0, 2); // return 1 + 2 + 5 = 8
         }
 
@@ -7997,10 +7999,10 @@ namespace InterviewProblemNSolutions
                 nums.Print("Nums");
 
                 //// BST based approach, TLE on LeetCode for C# soln
-                //DailyProblem.CountSmaller(nums).Print(" Count of no of smaller elements to the right of nums[i]");
+                //DailyProblem.CountSmaller(numsArr).Print(" Count of no of smaller elements to the right of numsArr[i]");
 
                 // Segment-Tree based approach
-                DailyProblem.CountSmaller_SegmentTree(nums).Print(" Count of no of smaller elements to the right of nums[i]");
+                DailyProblem.CountSmaller_SegmentTree(nums).Print(" Count of no of smaller elements to the right of numsArr[i]");
             }
         }
 
@@ -8304,7 +8306,7 @@ namespace InterviewProblemNSolutions
             // Coding Decoded https://youtu.be/7-RZ0Lw6VRg
             // https://leetcode.com/problems/beautiful-array/
             Utility.Print("932. Beautiful Array");
-            int[] nArr = { 1, 7, 2, 3, 4 };    // For every i < j, there is no k with i < k < j such that nums[k] * 2 = nums[i] + nums[j].
+            int[] nArr = { 1, 7, 2, 3, 4 };    // For every i < j, there is no k with i < k < j such that numsArr[k] * 2 = numsArr[i] + numsArr[j].
 
             var cache = new Dictionary<int, int[]>();
             cache[1] = new int[1] { 1 };
@@ -8405,7 +8407,7 @@ namespace InterviewProblemNSolutions
             int[][] numsArr = { new int[] { 1, 2, 2 }, new int[] { 0 } };
             foreach (var nums in numsArr)
             {
-                nums.Print("nums");
+                nums.Print("numsArr");
                 DailyProblem.SubsetsWithDup(nums).Print($"Below are all possible subsets (the power set) without duplicate subsets");
                 Console.WriteLine();
             }
@@ -8664,8 +8666,8 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print(nameof(nums));
-                // Console.WriteLine($" No of all the arithmetic subsequences of nums(len>2) are: '{DynamicProgramming.NumberOfArithmeticSlices_Recursive(nums)}'\n");
-                Console.WriteLine($" No of all the arithmetic subsequences of nums(len>2) are: '{DynamicProgramming.NumberOfArithmeticSlices_DP(nums)}'\n");
+                // Console.WriteLine($" No of all the arithmetic subsequences of numsArr(len>2) are: '{DynamicProgramming.NumberOfArithmeticSlices_Recursive(numsArr)}'\n");
+                Console.WriteLine($" No of all the arithmetic subsequences of numsArr(len>2) are: '{DynamicProgramming.NumberOfArithmeticSlices_DP(nums)}'\n");
                 
             }
         }
@@ -8842,7 +8844,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Distinct Unique Array of Integers");
-                //Console.WriteLine($" Number which is netiher Min nor Max is : '{DailyProblem.FindNonMinOrMax(nums)}'");
+                //Console.WriteLine($" Number which is netiher Min nor Max is : '{DailyProblem.FindNonMinOrMax(numsArr)}'");
                 Console.WriteLine($" Number which is netiher Min nor Max is : '{DailyProblem.FindNonMinOrMax_Faster(nums)}'");
             }
         }
@@ -9707,6 +9709,27 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void MinimizeLengthOfArrayUsingOperations()
+        {
+            // Ref https://youtu.be/KIT3Y3Yis2k?si=PB5HpHhs0uCbyLY8
+            // https://leetcode.com/problems/minimize-length-of-array-using-operations/
+            Utility.Print("3012. Minimize Length of Array Using Operations");
+            int[][] numsArr = new int[][]
+            {
+                new int[] { 1, 4, 3, 1 },
+                new int[] { 5,5,5,10,5 },
+                new int[] { 5,5,5,11,5 },
+                new int[] { 2,3,4 },
+            };
+            foreach(var nums in numsArr)
+            {
+                nums.Print("Input Array");
+                Console.WriteLine($" Minimum length of nums after performing the operation any number of times => '{DailyProblem.MinimumArrayLength(nums)}'");
+            }
+        }
+
 
 
 

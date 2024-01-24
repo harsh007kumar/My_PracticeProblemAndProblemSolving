@@ -20906,5 +20906,40 @@ namespace InterviewProblemNSolutions
                 return onBits;
             }
         }
+
+
+        // Time O(n) | Space O(1), n = length of 'nums'
+        public static int MinimumArrayLength(int[] nums)
+        {
+            /* ALGO
+            The only thing to keep in mind is
+            smallerNum % largerNum = smallerNum
+            so we can actully reduce the length of entire array to the no of smallest element frequeny
+            and than since any num % num = 0, we wud need up with (smallerNumFreq+1)/2 numbers after all the operations
+                even no of nums result in freq/2 zero's
+                odd no result in 1 + freq/2 zero's
+                hence just (1+freq of smallest)/2 to get final count
+
+            2nd point to keep in mind is is there a way to further reduce the minNum we have in the array (which is not zero)
+            this is crucial bcoz if we get a even smaller num we know we can reduce all other numbers by that num & utlimatly be left with array of size 1
+            */
+            int smallest = int.MaxValue, minValue = 0, minFreq = 0;
+            foreach (var n in nums)              // O(n)
+                if (n < smallest)                  // found new smallest
+                {
+                    smallest = minValue = n;
+                    minFreq = 1;
+                }
+                else if (n == smallest)
+                    minFreq++;                  //update the freq of smallest
+
+            // try to get a min value smaller than current minValue
+            foreach (var n in nums)              // O(n)
+                                                 // if we can further reduce the minValue just return 1
+                if (n % minValue != 0)   // if mod is not zero it surely will be smaller than current minValue
+                    return 1;
+
+            return ++minFreq / 2;
+        }
     }
 }
