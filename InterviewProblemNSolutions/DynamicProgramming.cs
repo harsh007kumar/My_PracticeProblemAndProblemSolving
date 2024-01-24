@@ -3216,5 +3216,36 @@ namespace InterviewProblemNSolutions
                 return cache[row, col] = minPath + matrix[row][col];
             }
         }
+
+
+        // Time = O(r*c) | Space O(c), {r,c} = no of rows and cols in dungeon respectively
+        public static int CalculateMinimumHP(int[][] dungeon)
+        {
+            // we need to find the minPath cost from bottom-rt to top-lt with condition that at no point its goes below 1
+            // reason to calculate it backwards is we need to make sure about the minPower req to reach princess instead of hopinh x power starting from top will be good enouf
+            int rows = dungeon.Length, cols = dungeon[0].Length; ;
+            int[] cache = new int[cols + 1];
+            // we set the default value to MaxValue
+            Array.Fill(cache, int.MaxValue);
+            // except for the cell which has princess we set MinPower required to 1 as we should be alive to reach our destination (0=dead)
+            cache[cols - 1] = 1;
+
+            for (int r = rows - 1; r >= 0; r--)
+                for (int c = cols - 1; c >= 0; c--)
+                {
+                    // minPower requirement coming from below
+                    var bottomPathCost = cache[c];
+                    // minPower requirement coming from right
+                    var rightPathCost = cache[c + 1];
+
+                    // we select the minimum of the 2 and subtract power lost (if any) from current cell
+                    var minPowerReq = Math.Min(bottomPathCost, rightPathCost) - dungeon[r][c];
+
+                    // if minPower goes <=0 means we are carrying surplus power (as going thru current cell was net +ve hence we can start with just 1)
+                    // hence adjust it back to 1 or if +ve power means we are going to keep the current power we have as its getting utilized
+                    cache[c] = Math.Max(1, minPowerReq);
+                }
+            return cache[0];
+        }
     }
 }

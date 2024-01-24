@@ -577,6 +577,7 @@ namespace InterviewProblemNSolutions
             FindifArrayCanBeSorted();
             DivideAnArrayIntoSubarraysWithMinimumCostII();
             MinimizeLengthOfArrayUsingOperations();
+            DungeonGame();
 
 
 
@@ -9730,6 +9731,24 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void DungeonGame()
+        {
+            // Coding Decoded https://youtu.be/BS3ce52jU8I?si=yWXPbZzHLlR6WDxi
+            // https://leetcode.com/problems/dungeon-game
+            Utility.Print("174. Dungeon Game");
+            int[][][] dungeonsArr = new int[][][]
+            {
+                new int[][]{ new int[] { -2, -3, 3 }, new int[] { -5, -10, 1 }, new int[] { 10, 30, -5 } },
+                new int[][]{ new int[] { 0 } }
+            };
+            foreach (var dungeon in dungeonsArr)
+            {
+                dungeon.Print("Dungeon 2D array");
+                Console.WriteLine($"knight's minimum initial health so that he can rescue the princess ='{DynamicProgramming.CalculateMinimumHP(dungeon)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
