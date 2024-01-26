@@ -1564,5 +1564,41 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+
+        // Time O(n^2) | Space O(n), n = length of string 's'
+        public static string ShortestPalindrome(string s)
+        {
+            /* ALGO
+            1. for each char from the rtMostIdx we try to match with char from 0th idx
+            2. if we are able to find a palindrome great
+            3. else we add the last most char to a StringBuilder & move the --rtIdx
+            4. as we have forcibly match the last char or remaining string
+            5. Now repeat from step#1 till we find a palindrome or rt index reaches 0
+            6. return whatever is in StringBuilder + input string 's'
+            */
+            int rtIdx = s.Length - 1, start, last;
+            StringBuilder charAdded = new();
+            while (rtIdx >= 0)
+            {
+                start = 0;
+                last = rtIdx;
+                // check if remaining string is palindrome
+                while (start < last)
+                    if (s[start] != s[last])
+                        break;
+                    else
+                    {
+                        start++;
+                        last--;
+                    }
+
+                if (start >= last)     // palindrome found
+                    break;
+                else    // add last char and start matching again with reduced rt boundry
+                    charAdded.Append(s[rtIdx--]);
+            }
+            return charAdded.ToString() + s;
+        }
     }
 }

@@ -578,6 +578,7 @@ namespace InterviewProblemNSolutions
             DivideAnArrayIntoSubarraysWithMinimumCostII();
             MinimizeLengthOfArrayUsingOperations();
             DungeonGame();
+            ShortestPalindrome();
 
 
 
@@ -9748,6 +9749,17 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"knight's minimum initial health so that he can rescue the princess ='{DynamicProgramming.CalculateMinimumHP(dungeon)}'");
                 Console.WriteLine(Utility.lineDelimeter);
             }
+        }
+
+
+        public static void ShortestPalindrome()
+        {
+            // https://leetcode.com/problems/shortest-palindrome
+            Utility.Print("214. Shortest Palindrome");
+            string[] sArr = { "aacecaaa", "abcd", "dabcd",
+            "dabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabb" };
+            foreach (var s in sArr)
+                Console.WriteLine($" For Input string => '{s}'\n by adding minimum characters in front to make palindrome is => '{StringAlgorithms.ShortestPalindrome(s)}'");
         }
 
 
