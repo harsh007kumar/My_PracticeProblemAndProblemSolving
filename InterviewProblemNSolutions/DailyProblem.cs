@@ -14549,56 +14549,92 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time O(col*col*row) || Space O(col*row)
+        // Time O(r^2 * c) | Space O(c), r = no of rows & c = no of cols in matrix 2D array
         public static int NumSubmatrixSumTarget(int[][] matrix, int target)
         {
-            /* First calculate the Prefix sum for each row in the the entire 2D array so we can find the sum of any sub-matrix in O(1)
-             * 
-             * Now iterate thru all the combinations of cols .i.e, c1..c2 where 0 <= c1 < cols & c1 <= c2 <= cols
-             * for each of the sub-matrix b/w above c1..c2,
-             * we create seperate 1D array where each rth index is holding "total row sum" for that row
-             * and now try finding out how many sub-matrix have sum equal to target
-             */
-            int rows = matrix.Length, cols = matrix[0].Length, i, j, result = 0;
-            // calculate prefix Sum for 2D array
-            int[,] prefixSum = new int[rows, cols];
-            for (i = 0; i < rows; i++)
-                for (j = 0; j < cols; j++)
-                    prefixSum[i, j] = (j > 0 ? prefixSum[i, j - 1] : 0) + matrix[i][j];
+            int rows = matrix.Length, cols = matrix[0].Length, result = 0, rowSum, runningSum, targetSum;
+            // get the prefix sum vertially (top-bottom) for each column
+            for (int r = 1; r < rows; r++)
+                for (int c = 0; c < cols; c++)
+                    matrix[r][c] += matrix[r - 1][c];
 
-            Dictionary<int, int> sumFrequency = new Dictionary<int, int>();
-            // Iterate thru all columns combination
-            for (int c1 = 0; c1 < cols; c1++)
-            {
-                int[] combinedRowSum = new int[rows];
-                for (int c2 = c1; c2 < cols; c2++)
+            Dictionary<int, int> sumFreq = new();
+            for (int r1 = 0; r1 < rows; r1++)          // O(r)
+                for (int r2 = r1; r2 < rows; r2++)     // O(r)
                 {
-                    // find the total sum for each rth row in this sub-matrix
-                    for (int r = 0; r < rows; r++)
-                        combinedRowSum[r] = prefixSum[r, c2] - (c1 > 0 ? prefixSum[r, c1 - 1] : 0);
-
-
-                    // count 'Sub-Matrices' whose sum match 'target'
-                    sumFrequency.Clear();
-                    sumFrequency.Add(0, 1);     // base case
-                    int runningSum = 0, targetSum;
-
-                    for (int r = 0; r < rows; r++)
+                    // find the Prefix sum for each cth col in this sub-matrix
+                    int[] combinedSum = new int[cols];
+                    for (int c = 0; c < cols; c++)     // O(c)
                     {
-                        runningSum += combinedRowSum[r];
+                        rowSum = matrix[r2][c] - (r1 > 0 ? matrix[r1 - 1][c] : 0);
+                        combinedSum[c] = rowSum + (c > 0 ? combinedSum[c - 1] : 0);
+                    }
+                    // count 'Sub-Matrix' whose sum match 'target'
+                    // above loop iterating from 0...Cols can be merged with below
+                    // but for the sake of simplicity i have kept it seperate
+                    sumFreq.Clear();
+                    sumFreq[0] = 1;       // base case
+                    for (int c = 0; c < cols; c++)     // O(c)
+                    {
+                        runningSum = combinedSum[c];
                         targetSum = runningSum - target;
-
-                        if (sumFrequency.ContainsKey(targetSum))
-                            result += sumFrequency[targetSum];
-
-                        if (!sumFrequency.ContainsKey(runningSum))
-                            sumFrequency[runningSum] = 1;
-                        else
-                            sumFrequency[runningSum]++;
+                        if (sumFreq.TryGetValue(targetSum, out int freq))
+                            result += freq;
+                        // update running sum Freq
+                        if (sumFreq.TryGetValue(runningSum, out int val))
+                            sumFreq[runningSum] = 1 + val;
+                        else sumFreq[runningSum] = 1;
                     }
                 }
-            }
             return result;
+            ///* First calculate the Prefix sum for each row in the the entire 2D array so we can find the sum of any sub-matrix in O(1)
+            // * 
+            // * Now iterate thru all the combinations of cols .i.e, c1..c2 where 0 <= c1 < cols & c1 <= c2 <= cols
+            // * for each of the sub-matrix b/w above c1..c2,
+            // * we create seperate 1D array where each rth index is holding "total row sum" for that row
+            // * and now try finding out how many sub-matrix have sum equal to target
+            // * Time O(col*col*row) || Space O(col*row)
+            // */
+            //int rows = matrix.Length, cols = matrix[0].Length, i, j, result = 0;
+            //// calculate prefix Sum for 2D array
+            //int[,] prefixSum = new int[rows, cols];
+            //for (i = 0; i < rows; i++)
+            //    for (j = 0; j < cols; j++)
+            //        prefixSum[i, j] = (j > 0 ? prefixSum[i, j - 1] : 0) + matrix[i][j];
+
+            //Dictionary<int, int> sumFrequency = new Dictionary<int, int>();
+            //// Iterate thru all columns combination
+            //for (int c1 = 0; c1 < cols; c1++)
+            //{
+            //    int[] combinedRowSum = new int[rows];
+            //    for (int c2 = c1; c2 < cols; c2++)
+            //    {
+            //        // find the total sum for each rth row in this sub-matrix
+            //        for (int r = 0; r < rows; r++)
+            //            combinedRowSum[r] = prefixSum[r, c2] - (c1 > 0 ? prefixSum[r, c1 - 1] : 0);
+
+
+            //        // count 'Sub-Matrices' whose sum match 'target'
+            //        sumFrequency.Clear();
+            //        sumFrequency.Add(0, 1);     // base case
+            //        int runningSum = 0, targetSum;
+
+            //        for (int r = 0; r < rows; r++)
+            //        {
+            //            runningSum += combinedRowSum[r];
+            //            targetSum = runningSum - target;
+
+            //            if (sumFrequency.ContainsKey(targetSum))
+            //                result += sumFrequency[targetSum];
+
+            //            if (!sumFrequency.ContainsKey(runningSum))
+            //                sumFrequency[runningSum] = 1;
+            //            else
+            //                sumFrequency[runningSum]++;
+            //        }
+            //    }
+            //}
+            //return result;
         }
 
 
