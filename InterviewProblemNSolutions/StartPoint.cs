@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InterviewProblemNSolutions
 {
@@ -579,6 +581,7 @@ namespace InterviewProblemNSolutions
             MinimizeLengthOfArrayUsingOperations();
             DungeonGame();
             ShortestPalindrome();
+            NumberOfDigitOne();
 
 
 
@@ -9760,6 +9763,17 @@ namespace InterviewProblemNSolutions
             "dabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabb" };
             foreach (var s in sArr)
                 Console.WriteLine($" For Input string => '{s}'\n by adding minimum characters in front to make palindrome is => '{StringAlgorithms.ShortestPalindrome(s)}'");
+        }
+
+
+        public static void NumberOfDigitOne()
+        {
+            // Ref https://youtu.be/Shz1Qo5PNso
+            // https://leetcode.com/problems/number-of-digit-one
+            Utility.Print("233.Number of Digit One");
+            int[] arr = { 13, 0, 12345 };
+            foreach (var n in arr)
+                Console.WriteLine($"Total number of digit 1 appearing in all non-negative integers less than or equal to '{n}' are => '{DailyProblem.CountDigitOne(n)}'");
         }
 
 

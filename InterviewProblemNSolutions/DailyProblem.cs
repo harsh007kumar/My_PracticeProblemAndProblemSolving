@@ -20977,5 +20977,24 @@ namespace InterviewProblemNSolutions
 
             return ++minFreq / 2;
         }
+
+
+        // Time O(n/10) ~O(1) | Space O(1), n = input number
+        public static int CountDigitOne(int n)
+        {
+            if (n == 0) return 0;
+            long baseNum = 1, sum = 0, lt, cur, rt;
+            while (baseNum <= n)
+            {
+                lt = n / baseNum / 10;
+                cur = n / baseNum % 10;
+                rt = n % baseNum;
+                if (cur > 1) sum += (lt + 1) * baseNum;
+                else if (cur == 1) sum += (lt * baseNum) + rt + 1;
+                else sum += lt * baseNum;
+                baseNum *= 10;
+            }
+            return (int)sum;
+        }
     }
 }
