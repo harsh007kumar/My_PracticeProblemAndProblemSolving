@@ -582,6 +582,7 @@ namespace InterviewProblemNSolutions
             DungeonGame();
             ShortestPalindrome();
             NumberOfDigitOne();
+            DivideArrayIntoArraysWithMaxDifference();
 
 
 
@@ -9774,6 +9775,25 @@ namespace InterviewProblemNSolutions
             int[] arr = { 13, 0, 12345 };
             foreach (var n in arr)
                 Console.WriteLine($"Total number of digit 1 appearing in all non-negative integers less than or equal to '{n}' are => '{DailyProblem.CountDigitOne(n)}'");
+        }
+
+
+        public static void DivideArrayIntoArraysWithMaxDifference()
+        {
+            // https://leetcode.com/problems/divide-array-into-arrays-with-max-difference
+            Utility.Print("2966. Divide Array Into Arrays With Max Difference");
+            int[][] inputArr = new int[][]
+            {
+                new int[] { 1, 3, 4, 8, 7, 9, 3, 5, 1 },
+                new int[] { 1, 3, 3, 2, 7, 3 }
+            };
+            int[] kArr = { 2, 3 };
+            for (int i = 0; i < kArr.Length; i++)
+            {
+                inputArr[i].Print("Input");
+                DailyProblem.DivideArray(inputArr[i], kArr[i]).Print($"List of array after dividing above into grp of 3 such that no grp has max diff > '{kArr[i]}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
         }
 
 

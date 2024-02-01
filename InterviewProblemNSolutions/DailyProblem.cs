@@ -20996,5 +20996,22 @@ namespace InterviewProblemNSolutions
             }
             return (int)sum;
         }
+
+
+        // Time O(nlogn) | Space O(n), n = length of 'nums' array
+        public static int[][] DivideArray(int[] nums, int k)
+        {
+            List<int[]> ans = new List<int[]>();
+            Array.Sort(nums);               // O(nlogn)
+
+            // see if grouping from left to right any pair of 3 nums min to max don't fit within K than return empty
+            for (int i = 2; i < nums.Length; i += 3)  // O(n/3) ~O(n)
+                // check min-max diff is within 'k'
+                if (nums[i] - nums[i - 2] > k)
+                    return new int[0][];
+                else
+                    ans.Add(new int[3] { nums[i - 2], nums[i - 1], nums[i] });
+            return ans.ToArray();
+        }
     }
 }
