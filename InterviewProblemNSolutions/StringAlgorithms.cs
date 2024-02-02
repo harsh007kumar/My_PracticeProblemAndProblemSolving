@@ -1600,5 +1600,93 @@ namespace InterviewProblemNSolutions
             }
             return charAdded.ToString() + s;
         }
+
+
+        // Time O(2^n) | Space O(n) | Auxillary Space O(n), n = length of 's'
+        public static List<string> RemoveInvalidParentheses(string s)
+        {
+            Stack<char> st = new();
+            // removing leading closing bracket
+            for (int i = 0; i < s.Length; i++)                     // O(n)
+                if (char.IsLetter(s[i])) st.Push(s[i]);
+                else if (s[i] == '(')    // stop once u find a opening bracket
+                {
+                    // all prefix letters + get the entire string from current idx to end
+                    s = new string(st.Reverse().ToArray()) + s.Substring(i);
+                    break;
+                }
+
+            // removing open bracket from the end
+            st.Clear();
+            for (int i = s.Length - 1; i >= 0; i--)                  // O(n)
+                if (char.IsLetter(s[i])) st.Push(s[i]);
+                else if (s[i] == ')')    // stop once u find a closing bracket
+                {
+                    // get entire string from 0th index till current idx + all letter suffix
+                    s = s.Substring(0, 1 + i) + new string(st.ToArray());
+                    break;
+                }
+
+            // if after trimming nothing left return
+            if (s.Length == 0) return new List<string>();
+
+            int invalidBracketsLt = 0, invalidBracketsRt = 0, open = 0, minRemovals;
+            for (int i = 0; i < s.Length; i++)                     // O(n)
+                if (!char.IsLetter(s[i]))
+                    if (s[i] == '(')
+                        open++;
+                    else if (--open < 0)
+                    {
+                        invalidBracketsLt++;
+                        open = 0;   // reset
+                    }
+            // also append any left open bracket which did not find their closing
+            invalidBracketsLt += open;
+            open = 0;
+            for (int i = s.Length - 1; i >= 0; i--)                  // O(n)
+                if (!char.IsLetter(s[i]))
+                    if (s[i] == ')')
+                        open++;
+                    else if (--open < 0)
+                    {
+                        invalidBracketsRt++;
+                        open = 0;   // reset
+                    }
+            invalidBracketsRt += open;
+            minRemovals = Math.Min(invalidBracketsLt, invalidBracketsRt);
+
+
+            HashSet<string> set = new();
+            st.Clear();
+            Recursion(0, 0, 0);         // O(2^n)
+            return set.ToList();
+
+            // local helper func
+            void Recursion(int i, int openBrackets, int removedSoFar)
+            {
+                if (i == s.Length)
+                {
+                    if (openBrackets == 0 && removedSoFar <= minRemovals) // balance
+                        set.Add(new string(st.Reverse().ToArray()));
+                }
+                else if (char.IsLetter(s[i]))
+                {
+                    st.Push(s[i]);
+                    Recursion(i + 1, openBrackets, removedSoFar);
+                    st.Pop();
+                }
+                else if (openBrackets >= 0)    // balance should never go -ve
+                {
+                    // use
+                    st.Push(s[i]);
+                    Recursion(i + 1, openBrackets + (s[i] == '(' ? 1 : -1), removedSoFar);
+                    st.Pop();
+
+                    // remove
+                    if (removedSoFar < minRemovals)
+                        Recursion(i + 1, openBrackets, removedSoFar + 1);
+                }
+            }
+        }
     }
 }

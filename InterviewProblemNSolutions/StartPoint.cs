@@ -584,6 +584,7 @@ namespace InterviewProblemNSolutions
             NumberOfDigitOne();
             DivideArrayIntoArraysWithMaxDifference();
             SequentialDigits();
+            RemoveInvalidParentheses();
 
 
 
@@ -9806,17 +9807,30 @@ namespace InterviewProblemNSolutions
             int[] high = { 300, 13000, 155 };
             for (int i = 0; i < low.Length; i++)
                 DailyProblem.SequentialDigits(low[i], high[i]).Print($"Below are the sequential digits b/w '{low[i]}'...'{high[i]}'");
+                //DailyProblem.SequentialDigits_Alternate(low[i], high[i]).Print($"Below are the sequential digits b/w '{low[i]}'...'{high[i]}'");
+        }
 
+
+        public static void RemoveInvalidParentheses()
+        {
+            // https://leetcode.com/problems/remove-invalid-parentheses
+            Utility.Print("301. Remove Invalid Parentheses");
+            string[] sArr = { "()())()", "(a)())()", ")(", ")))))))))()())()", ")))))))))()())()((((", ")))))))))((((", "x(", "x()b" };
+            foreach (var s in sArr)
+            {
+                StringAlgorithms.RemoveInvalidParentheses(s).Print($"Below Strings are result of input '{s}' after removing the minimum number of invalid parentheses to make the input string valid");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
         }
 
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
-        /// <summary>
-        /// Calculate the minimum steps required to minimize any given no to '1', using below avaliable rules/steps only
-        /// Number - 1 || Number / 3 || Number / 2
-        /// </summary>
+                /// <summary>
+                /// Calculate the minimum steps required to minimize any given no to '1', using below avaliable rules/steps only
+                /// Number - 1 || Number / 3 || Number / 2
+                /// </summary>
         public static void MinimumStepsToMinimizeToOne()
         {
             Utility.Print("MinimumStepsToMinimize_NoTo1 || Dynamic Programming");
