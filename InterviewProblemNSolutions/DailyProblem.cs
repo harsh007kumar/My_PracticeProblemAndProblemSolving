@@ -21013,5 +21013,91 @@ namespace InterviewProblemNSolutions
                     ans.Add(new int[3] { nums[i - 2], nums[i - 1], nums[i] });
             return ans.ToArray();
         }
+
+
+        // Time O(k) | Space O(n), k = diff in no of digits in (high - low), n = no of valid answers
+        public static IList<int> SequentialDigits(int low, int high)
+        {
+            /* ALGO
+                1. convert the low and high into string
+                2. now take a empty int array who's length if equal to no of digits in low
+                3. append 0th index with first index
+                4. check if initial digits allow creating sequence
+                    - which is possible is all numbers are excatly 1 plus the last number
+                    - or we get a idx which has lower digit than prv means we can add any digit instead and it won't violate low <= curNum
+                5. now for length of current array we start with 1st digit and the icreamental digit till entire array is full
+                6. after combination are used for a given length we increament the length of curr array
+                6. special condition need to be taken care is when cur array length == no of digits in High
+                    - we keep checking each digit we add is smaller than the digit as given index in high
+                    - once we see we are adding a smaller digit than equaivalent digit in high for given idx we can skip checking rest of the digits
+                    - at any point if we are adding digit greather than high digit we break out as no further sequential would be within bounds
+                7. create the number with all the digits in array and append to final list
+             */
+            IList<int> ans = new List<int>();
+            string start = low + "", end = high + "";
+            int[] cur = new int[start.Length];
+            cur[0] = start[0] - '0';
+
+            // checking the low number is sequential or not
+            for (int i = 1; i < start.Length; i++)          // O(9)
+                // next digit is smaller than prv digit which allows adding any bigger digit without exceeding low
+                if (start[i] < start[i - 1]) break;
+                // else check if digits are sequential
+                else if (start[i]-'0' != 1 + start[i-1]-'0')
+                {
+                    // if not increament the starting digit as we cannot start with given 1st digit
+                    cur[0] = 1 + start[0] - '0';
+                    break;
+                }
+                
+            while (cur.Length <= end.Length)                // O(k)
+            {
+                // add all possible combinations
+                var digit = cur[0];
+                
+                while (digit <= 9)                          // O(9)
+                {
+                    // no points in starting with a digit so big that we run out of sequential digits by the last index
+                    if (digit + cur.Length > 10) break;
+
+                    bool digitCheckRequired = cur.Length == end.Length;
+
+                    // assign digits
+                    for (int i = 0; i < cur.Length; i++)    // O(9)
+                        // no check required
+                        if (!digitCheckRequired)
+                            cur[i] = digit + i;
+                        else // check required
+                        {
+
+                            if (digit + i < end[i] - '0')
+                            {   // since a smaller digit found earlier further digit check not needed
+                                digitCheckRequired = false;
+                                cur[i] = digit + i;
+                            }
+                            else if (digit + i == end[i] - '0')
+                                cur[i] = digit + i;
+                            else return ans;
+                        }
+                    
+                    // create the current number
+                    var num = 0;
+                    foreach (var d in cur)                  // O(9)
+                        num = num * 10 + d;
+                    
+                    // add to final list
+                    ans.Add(num);
+
+                    // increment starting digit for next iteration of num with same total no of digits
+                    digit++;
+                }
+
+                // increament the no of digits in current by 1
+                cur = new int[cur.Length + 1];
+                // and assigned 1 as starting digit
+                cur[0] = 1;
+            }
+            return ans;
+        }
     }
 }

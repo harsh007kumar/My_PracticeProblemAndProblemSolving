@@ -583,6 +583,7 @@ namespace InterviewProblemNSolutions
             ShortestPalindrome();
             NumberOfDigitOne();
             DivideArrayIntoArraysWithMaxDifference();
+            SequentialDigits();
 
 
 
@@ -9794,6 +9795,18 @@ namespace InterviewProblemNSolutions
                 DailyProblem.DivideArray(inputArr[i], kArr[i]).Print($"List of array after dividing above into grp of 3 such that no grp has max diff > '{kArr[i]}'");
                 Console.WriteLine(Utility.lineDelimeter);
             }
+        }
+
+
+        public static void SequentialDigits()
+        {
+            // https://leetcode.com/problems/sequential-digits
+            Utility.Print("1291. Sequential Digits");
+            int[] low = { 100, 1000, 58 };
+            int[] high = { 300, 13000, 155 };
+            for (int i = 0; i < low.Length; i++)
+                DailyProblem.SequentialDigits(low[i], high[i]).Print($"Below are the sequential digits b/w '{low[i]}'...'{high[i]}'");
+
         }
 
 
