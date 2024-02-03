@@ -3247,5 +3247,37 @@ namespace InterviewProblemNSolutions
                 }
             return cache[0];
         }
+
+
+        // Time O(n*k) | Space O(n), n = length of 'arr'
+        public static int MaxSumAfterPartitioning(int[] arr, int k)
+        {
+            int l = arr.Length;
+            int[] cache = new int[l];
+            Array.Fill(cache, -1);   // set default
+            return GetMax(0, 0);
+
+            // local helper func
+            int GetMax(int i, int distanceFromlastParition, int maxSoFar = 0)
+            {
+                int LastParitionSum = distanceFromlastParition * maxSoFar;
+                if (i >= l) return LastParitionSum;
+
+                /// 1# start a fresh parition from cur idx
+                int maxFromNewParitition = 0, maxByJoiningLastParition = 0;
+                // if we have computed max for fresh partition from current index return it, else compute save and return
+                if (cache[i] != -1) maxFromNewParitition = cache[i];
+                else maxFromNewParitition = cache[i] = GetMax(i + 1, 1, arr[i]);
+
+                /// 2# include current index in last parition if within 'k' limits
+                if (distanceFromlastParition < k)
+                {
+                    maxSoFar = Math.Max(maxSoFar, arr[i]);
+                    maxByJoiningLastParition = GetMax(i + 1, distanceFromlastParition + 1, maxSoFar);
+                }
+
+                return Math.Max(LastParitionSum + maxFromNewParitition, maxByJoiningLastParition);
+            }
+        }
     }
 }

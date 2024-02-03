@@ -585,6 +585,7 @@ namespace InterviewProblemNSolutions
             DivideArrayIntoArraysWithMaxDifference();
             SequentialDigits();
             RemoveInvalidParentheses();
+            PartitionArrayForMaximumSum();
 
 
 
@@ -9822,6 +9823,27 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void PartitionArrayForMaximumSum()
+        {
+            // https://leetcode.com/problems/partition-array-for-maximum-sum
+            Utility.Print("1043. Partition Array for Maximum Sum");
+            int[][] arr = new int[][]
+            {
+                new int[]{ 1, 15, 7, 9, 2, 5, 10 },
+                new int[]{ 1, 4, 1, 5, 7, 3, 6, 1, 9, 9, 3 },
+                new int[] { 1 }
+            };
+            int[] k = { 3, 4, 1 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                arr[i].Print("Input array");
+                Console.WriteLine($"After partition the above array into (contiguous) subarrays of length at most k = '{k[i]}'" +
+                    $" and each subarray values changed to the maximum value of that subarray. MaxSum => '{DynamicProgramming.MaxSumAfterPartitioning(arr[i], k[i])}'");
+            }
+        }
+
 
 
 
