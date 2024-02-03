@@ -1605,6 +1605,18 @@ namespace InterviewProblemNSolutions
         // Time O(2^n) | Space O(n) | Auxillary Space O(n), n = length of 's'
         public static List<string> RemoveInvalidParentheses(string s)
         {
+            /* ALGO
+            1. Get the count of minNo of remvals required to make 's' valid
+            - take min of (get minRemoval when iterating from left & n than right)
+            2. Now we use Stack to keep track of all characters pushed so far, also easier when backtracking
+            3. for each char there are 3 possibilities
+                - if Letter, push to stack
+                - if bracket
+                - 1# use bracket
+                - 2# don't use bracket
+            5. once u reach end of string check is string is balanced and no of removals are <= minReqRemovals, append to HashSet
+            6. at the end convert the set to List and return as we only want unique strings
+             */
             Stack<char> st = new();
             // removing leading closing bracket
             for (int i = 0; i < s.Length; i++)                     // O(n)
