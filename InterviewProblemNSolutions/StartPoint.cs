@@ -586,6 +586,7 @@ namespace InterviewProblemNSolutions
             SequentialDigits();
             RemoveInvalidParentheses();
             PartitionArrayForMaximumSum();
+            MaximumGoodSubarraySum();
 
 
 
@@ -9844,6 +9845,26 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void MaximumGoodSubarraySum()
+        {
+            // https://leetcode.com/problems/maximum-good-subarray-sum/
+            Utility.Print("3026. Maximum Good Subarray Sum");
+            int[][] numsArr = new int[][]
+            {
+                new int[] { 1, 2, 3, 4, 5, 6 },
+                new int[] { -1, 3, 2, 4, 5 },
+                new int[]{ -1, -2, -3, -4 },
+                new int[]{ 2, 5, 3}
+            };
+            int[] k = { 1, 3, 2, 1 };
+            for (int i = 0; i < k.Length; i++)
+            {
+                numsArr[i].Print("Input array");
+                // Console.WriteLine($"Max SubArray => '{DailyProblem.MaximumSubarraySum(numsArr[i], k[i])}'");
+                Console.WriteLine($"Max SubArray => '{DailyProblem.MaximumSubarraySum_Faster(numsArr[i], k[i])}'");
+            }
+        }
 
 
 

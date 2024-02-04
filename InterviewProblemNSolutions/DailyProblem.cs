@@ -21143,5 +21143,72 @@ namespace InterviewProblemNSolutions
                 123456789
             }).Where(x => x >= low && x <= high).ToList();
         }
+
+
+        // Time O(n^2) | Space O(n) | TLE
+        public static long MaximumSubarraySum(int[] nums, int k)
+        {
+            long maxGood = long.MinValue, curSum;
+            long[] prefixSum = new long[nums.Length + 1];
+            Pair<int,int>[] numIdx = new Pair<int, int>[nums.Length];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                prefixSum[i + 1] = prefixSum[i] + nums[i];
+                numIdx[i] = new(nums[i], i);
+            }
+            var sorted = (from pair in numIdx
+                          orderby pair.key
+                          select pair).ToArray();
+
+            for (int start = 0; start < nums.Length; start++)
+                for (int last = start + 1; last < nums.Length; last++)
+                {
+                    long diff = sorted[last].key - sorted[start].key;
+                    if (diff < k) continue;
+                    else if (diff == k)
+                    {
+                        int i1 = sorted[last].val, i2 = sorted[start].val;
+                        curSum = i1 > i2 ? prefixSum[i1 + 1] - prefixSum[i2] : prefixSum[i2 + 1] - prefixSum[i1];
+                        if (curSum > maxGood)
+                            maxGood = curSum;
+                    }
+                    else if (diff > k)
+                        break;
+                }
+
+            return maxGood != long.MinValue ? maxGood : 0;
+        }
+
+        // Time = Space = O(n), n = length of 'nums'
+        public static long MaximumSubarraySum_Faster(int[] nums, int k)
+        {
+            long maxGood = long.MinValue;
+            long[] prefixSum = new long[nums.Length + 1];
+            Dictionary<int, List<int>> numIdx = new();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                // calculate prefix sum
+                prefixSum[i + 1] = prefixSum[i] + nums[i];
+
+                // store num as key and indicies is shows up as Value in Dictionary/HashTable
+                if (numIdx.ContainsKey(nums[i]))
+                    numIdx[nums[i]].Add(i);
+                else
+                    numIdx[nums[i]] = new List<int>() { i };
+
+                long plusK = nums[i] + k;
+                long minusK = nums[i] - k;
+                // if(plusK<=int.MaxValue)
+                if (numIdx.ContainsKey((int)plusK))
+                    foreach (var idx in numIdx[(int)plusK])
+                        maxGood = Math.Max(maxGood, idx > i ? prefixSum[idx + 1] - prefixSum[i] : prefixSum[i + 1] - prefixSum[idx]);
+                // if(minusK>=int.MinValue)
+                if (numIdx.ContainsKey((int)minusK))
+                    foreach (var idx in numIdx[(int)minusK])
+                        maxGood = Math.Max(maxGood, idx > i ? prefixSum[idx + 1] - prefixSum[i] : prefixSum[i + 1] - prefixSum[idx]);
+            }
+            return maxGood != long.MinValue ? maxGood : 0;
+        }
     }
 }
