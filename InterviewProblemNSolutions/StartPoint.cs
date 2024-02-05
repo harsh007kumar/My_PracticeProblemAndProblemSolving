@@ -587,6 +587,7 @@ namespace InterviewProblemNSolutions
             RemoveInvalidParentheses();
             PartitionArrayForMaximumSum();
             MaximumGoodSubarraySum();
+            FindTheNumberOfWaysToPlacePeople();
 
 
 
@@ -9867,13 +9868,32 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void FindTheNumberOfWaysToPlacePeople()
+        {
+            // https://leetcode.com/problems/find-the-number-of-ways-to-place-people-i
+            // https://leetcode.com/problems/find-the-number-of-ways-to-place-people-ii
+            Utility.Print("3025. Find the Number of Ways to Place People I");
+            Utility.Print("3027. Find the Number of Ways to Place People II");
+            int[][][] pointsArr = new int[][][]
+            {
+                new int[][] { new int[] { 1, 1}, new int[] {2, 2}, new int[] { 3, 3 } },
+                new int[][] { new int[] { 6,2}, new int[] {4,4}, new int[] { 2, 6 } },
+                new int[][] { new int[] { 3,1}, new int[] {1,3}, new int[] { 1, 1 } },
+            };
+            foreach (var points in pointsArr)
+            {
+                points.Print("Points array");
+                Console.WriteLine($"No of ways to palce Chisato and Takina so that there is noone between them of on the line of rect drawn b/w them => {DailyProblem.NumberOfPairs(points)}");
+            }
+        }
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
-                /// <summary>
-                /// Calculate the minimum steps required to minimize any given no to '1', using below avaliable rules/steps only
-                /// Number - 1 || Number / 3 || Number / 2
-                /// </summary>
+        /// <summary>
+        /// Calculate the minimum steps required to minimize any given no to '1', using below avaliable rules/steps only
+        /// Number - 1 || Number / 3 || Number / 2
+        /// </summary>
         public static void MinimumStepsToMinimizeToOne()
         {
             Utility.Print("MinimumStepsToMinimize_NoTo1 || Dynamic Programming");
