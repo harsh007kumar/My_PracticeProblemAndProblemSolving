@@ -20761,7 +20761,7 @@ namespace InterviewProblemNSolutions
             int n = arr.Length, modulo = 1000000007, biggerThan;
             long totalMinSum = 0, minTimes;
             long[] smallerThanNumsOnLeft = new long[n];
-            Stack<Pair<int,int>> st = new();
+            Stack<Pair<int, int>> st = new();
             // Count no of subarray each num is smaller than on the left
             for (int i = 0; i < n; i++)
             {
@@ -20778,7 +20778,7 @@ namespace InterviewProblemNSolutions
                 biggerThan = 1;
                 while (st.Count > 0 && st.Peek().key >= arr[i])  // remove the stack top even if its equal to curr num
                     biggerThan += st.Pop().val;
-                st.Push(new Pair<int,int>(arr[i], biggerThan));
+                st.Push(new Pair<int, int>(arr[i], biggerThan));
                 // now calculate the total after taking into account how many sub-arrays each num was part of in total
                 minTimes = (arr[i] * (smallerThanNumsOnLeft[i] * biggerThan) % modulo) % modulo;
                 totalMinSum = (totalMinSum + minTimes) % modulo;
@@ -21043,18 +21043,18 @@ namespace InterviewProblemNSolutions
                 // next digit is smaller than prv digit which allows adding any bigger digit without exceeding low
                 if (start[i] < start[i - 1]) break;
                 // else check if digits are sequential
-                else if (start[i]-'0' != 1 + start[i-1]-'0')
+                else if (start[i] - '0' != 1 + start[i - 1] - '0')
                 {
                     // if not increament the starting digit as we cannot start with given 1st digit
                     cur[0] = 1 + start[0] - '0';
                     break;
                 }
-                
+
             while (cur.Length <= end.Length)                // O(k)
             {
                 // add all possible combinations
                 var digit = cur[0];
-                
+
                 while (digit <= 9)                          // O(9)
                 {
                     // no points in starting with a digit so big that we run out of sequential digits by the last index
@@ -21079,12 +21079,12 @@ namespace InterviewProblemNSolutions
                                 cur[i] = digit + i;
                             else return ans;
                         }
-                    
+
                     // create the current number
                     var num = 0;
                     foreach (var d in cur)                  // O(9)
                         num = num * 10 + d;
-                    
+
                     // add to final list
                     ans.Add(num);
 
@@ -21150,7 +21150,7 @@ namespace InterviewProblemNSolutions
         {
             long maxGood = long.MinValue, curSum;
             long[] prefixSum = new long[nums.Length + 1];
-            Pair<int,int>[] numIdx = new Pair<int, int>[nums.Length];
+            Pair<int, int>[] numIdx = new Pair<int, int>[nums.Length];
             for (int i = 0; i < nums.Length; i++)
             {
                 prefixSum[i + 1] = prefixSum[i] + nums[i];
@@ -21233,6 +21233,58 @@ namespace InterviewProblemNSolutions
                         if (!foundMiddle) waysToPlace++;
                     }
             return waysToPlace;
+        }
+
+
+        // BRUTE FORCE Time O(n^2) | Space O(1), n =  length of nums | TLE
+        public static int CountRangeSumBruteForce(int[] nums, int lower, int upper)
+        {
+            int count = 0, l = nums.Length;
+            long rangeSum;
+            for (int start = 0; start < l; start++)
+            {
+                rangeSum = 0;
+                for (int end = start; end < l; end++)
+                {
+                    rangeSum += nums[end];
+                    if (lower <= rangeSum && rangeSum <= upper)
+                        count++;
+                }
+            }
+            return count;
+        }
+        // Time O(nlogn) | Space O(n), n =  length of nums
+        public static int CountRangeSum(int[] nums, int lower, int upper)
+        {
+            int l = nums.Length;
+            long[] prefixSum = new long[l + 1];
+            for (int i = 0; i < l; i++)
+                prefixSum[i + 1] = prefixSum[i] + nums[i];
+
+            return CountMerge(0, l + 1);       // nlogn
+
+            // local herlper func
+            int CountMerge(int start, int end)
+            {
+                if (end - start <= 1) return 0;
+                int mid = (start + end) >> 1;
+                long[] sorted = new long[end - start];
+                int count = CountMerge(start, mid) + CountMerge(mid, end);
+                int j = mid, k = mid, t = mid;
+                for (int i = start, r = 0; i < mid; i++, r++)
+                {
+                    while (k < end && prefixSum[k] - prefixSum[i] < lower)
+                        k++;
+                    while (j < end && prefixSum[j] - prefixSum[i] <= upper)
+                        j++;
+                    while (t < end && prefixSum[t] < prefixSum[i])
+                        sorted[r++] = prefixSum[t++];
+                    sorted[r] = prefixSum[i];
+                    count += j - k;
+                }
+                Array.Copy(sorted, 0, prefixSum, start, t - start);
+                return count;
+            }
         }
     }
 }

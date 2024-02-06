@@ -588,6 +588,7 @@ namespace InterviewProblemNSolutions
             PartitionArrayForMaximumSum();
             MaximumGoodSubarraySum();
             FindTheNumberOfWaysToPlacePeople();
+            CountOfRangeSum();
 
 
 
@@ -9886,6 +9887,27 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"No of ways to palce Chisato and Takina so that there is noone between them of on the line of rect drawn b/w them => {DailyProblem.NumberOfPairs(points)}");
             }
         }
+
+
+        public static void CountOfRangeSum()
+        {
+            // https://leetcode.com/problems/count-of-range-sum
+            Utility.Print("327. Count of Range Sum");
+            int[][] nums = new int[][]
+            {
+                new int[]{ -2, 5, -1 },
+                new int[]{ 0 },
+                new int[]{ -2147483647,0,-2147483647,2147483647 },
+            };
+            int[] lower = { -2, 0, -564 }, upper = { 2, 0, 3864 };
+            for (int i = 0; i < upper.Length; i++)
+            {
+                nums[i].Print("Input array");
+                Console.WriteLine($"No of subarrays with rangeSum in bound [{lower[i]}...{upper[i]}] are => {DailyProblem.CountRangeSum(nums[i], lower[i], upper[i])}");
+            }
+        }
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
