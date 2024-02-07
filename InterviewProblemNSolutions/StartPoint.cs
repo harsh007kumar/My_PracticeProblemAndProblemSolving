@@ -589,6 +589,7 @@ namespace InterviewProblemNSolutions
             MaximumGoodSubarraySum();
             FindTheNumberOfWaysToPlacePeople();
             CountOfRangeSum();
+            SelfCrossing();
 
 
 
@@ -9908,6 +9909,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void SelfCrossing()
+        {
+            // Happy Coding https://youtu.be/b8iINtg7zbs
+            // https://leetcode.com/problems/self-crossing
+            Utility.Print("335. Self Crossing");
+            int[][] distanceArr = new int[][]
+            {
+                new int[]{ 2, 1, 1, 2 },
+                new int[]{ 1,2,3,4 },
+                new int[]{ 1,1,1,2,1 }
+            };
+            foreach (var distance in distanceArr)
+            {
+                distance.Print("Distance array");
+                Console.WriteLine($"In above array any lines crosses/touches another line => '{DailyProblem.IsSelfCrossing(distance)}'");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

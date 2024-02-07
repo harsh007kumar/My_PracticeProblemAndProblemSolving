@@ -21286,5 +21286,48 @@ namespace InterviewProblemNSolutions
                 return count;
             }
         }
+
+
+        // Time O(n) | Space O(1)
+        public static bool IsSelfCrossing(int[] x)
+        {
+            /* ALGO there are only 3 diff ways a line will cross another line
+            Case1
+            _________
+            |       |
+            |       |
+            |_______|____  ----> itersection with i-3
+                    |
+            Case4
+            _________
+            |       |
+            |       |
+            |       |  ----> itersection with i-4
+            |_______|
+
+            Case3
+            _________
+            |    ___|___________ ------> intersection with i-5
+            |       |          |
+            |       |          | 
+            |__________________|
+            */
+            // compare each point at idx i with i-3, i-4 & i-5 points and see if it crosses them than return true
+            for (int i = 3; i < x.Length; i++)
+            {
+                // case 1# i-3
+                if (x[i] >= x[i - 2] && x[i - 1] <= x[i - 3])
+                    return true;
+                // case 2# i-4
+                if (i >= 4)
+                    if (x[i] + x[i - 4] == x[i - 2] && x[i - 1] == x[i - 3])
+                        return true;
+                // case 3# i-5
+                if (i >= 5)
+                    if (x[i] + x[i - 4] >= x[i - 2] && x[i - 1] + x[i - 5] >= x[i - 3] && x[i - 2] > x[i - 4] && x[i - 3] > x[i - 1])
+                        return true;
+            }
+            return false;
+        }
     }
 }
