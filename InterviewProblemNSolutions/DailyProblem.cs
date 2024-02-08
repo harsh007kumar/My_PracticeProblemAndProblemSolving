@@ -21329,5 +21329,46 @@ namespace InterviewProblemNSolutions
             }
             return false;
         }
+
+
+        // Time = Space = O(n)
+        public static int NumSquares(int n, Dictionary<int, int> minPerfectSq)
+        {
+            /* ALGO
+            1. Have a cache to store the soln of minPrefect sq which sum up to current no
+            2. Now for each no which is not present in cache set the max ans to number itself as 1 is perfect * no makes the ans
+            3. Now there r 3 cases:
+            -  no is divisible by 2, check if half of current return min ans if yes our ans is 2*minPerfectSq to build half
+            - similar if no divisible by 3, check if third of current return min ans if yes our ans is 3*minPerfectSq to build third
+            - Now check all possible no b/w no-1...2 if any no is perf sq our ans => 1 + minPerfSq to make remaining number
+            - at end save the result in cache and return
+             */
+            // if present in cache return from there
+            if (minPerfectSq.TryGetValue(n, out int minSq)) return minSq;
+
+            int ans = n;    // default value
+
+            // check if current no is a square of another no if yes than min sq to make n is 1
+            int root = (int)Math.Sqrt(n);
+            if (root * root == n)
+                ans = 1;
+            else
+            {
+                // divisible bt 2
+                if (n % 2 == 0)
+                    ans = Math.Min(ans, 2 * NumSquares(n >> 1, minPerfectSq));
+                // divisible by 3
+                if (n % 3 == 0)
+                    ans = Math.Min(ans, 3 * NumSquares(n / 3, minPerfectSq));
+                // try all possible combinations
+                for (int cur = n - 1; cur > 1; cur--)
+                {
+                    root = (int)Math.Sqrt(cur);
+                    if (root * root == cur)  // we got a break-up which is a perfect square
+                        ans = Math.Min(ans, 1 + NumSquares(n - cur, minPerfectSq));
+                }
+            }
+            return minPerfectSq[n] = ans;
+        }
     }
 }

@@ -590,6 +590,7 @@ namespace InterviewProblemNSolutions
             FindTheNumberOfWaysToPlacePeople();
             CountOfRangeSum();
             SelfCrossing();
+            PerfectSquares();
 
 
 
@@ -9926,6 +9927,29 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"In above array any lines crosses/touches another line => '{DailyProblem.IsSelfCrossing(distance)}'");
             }
         }
+
+
+        public static void PerfectSquares()
+        {
+            // https://leetcode.com/problems/perfect-squares
+            Utility.Print("279. Perfect Squares");
+            int[] arr = { 12, 13, 6, 9, 2389, 5947, 1000, 9754 };
+            Dictionary<int, int> minPerfectSq = new()
+            {
+                {1, 1},
+                {2, 2},
+                {3, 3},
+                {4, 1},
+            };
+            foreach (var n in arr)
+                Console.WriteLine($"Min no of perfect square that sum-up to '{n}' are => {DailyProblem.NumSquares(n, minPerfectSq)}");
+        }
+
+
+
+
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
