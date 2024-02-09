@@ -21370,5 +21370,37 @@ namespace InterviewProblemNSolutions
             }
             return minPerfectSq[n] = ans;
         }
+
+
+        // Time O(n^2) | Space O(n), n = length of 'nums'
+        public static List<int> LargestDivisibleSubset(int[] nums)
+        {
+            Array.Sort(nums);   // O(nlogn)
+            int l = nums.Length;
+            List<int>[] cache = new List<int>[l];
+            return DFS(0, 1);
+
+            // local helper func
+            List<int> DFS(int idx, int lastNum)         // O(n^2)
+            {
+                if (idx >= l) return new List<int>();
+
+                List<int> afterTaking = new();
+                // take curr no (if mod with last is 0)
+                if (nums[idx] % lastNum == 0)
+                    if (cache[idx] != null)
+                        afterTaking = new List<int>(cache[idx]);
+                    else
+                    {
+                        afterTaking.Add(nums[idx]);
+                        afterTaking.AddRange(DFS(idx + 1, nums[idx]));
+                        // update in cache
+                        cache[idx] = new List<int>(afterTaking);
+                    }
+                // skip curr num
+                var withoutTaking = DFS(idx + 1, lastNum);
+                return afterTaking.Count > withoutTaking.Count ? afterTaking : withoutTaking;
+            }
+        }
     }
 }

@@ -591,6 +591,7 @@ namespace InterviewProblemNSolutions
             CountOfRangeSum();
             SelfCrossing();
             PerfectSquares();
+            LargestDivisibleSubset();
 
 
 
@@ -9946,8 +9947,24 @@ namespace InterviewProblemNSolutions
         }
 
 
-
-
+        public static void LargestDivisibleSubset()
+        {
+            // https://leetcode.com/problems/largest-divisible-subset
+            Utility.Print("368. Largest Divisible Subset");
+            int[][] numArr = new int[][]
+            {
+                new int[] { 1, 2, 3 },
+                new int[] { 1, 2, 4, 8 },
+                new int[] { 1, 2, 8, 4 },
+                new int[] { 4 },
+            };
+            foreach (var nums in numArr)
+            {
+                nums.Print("Input array");
+                DailyProblem.LargestDivisibleSubset(nums).Print($"largest subset such that every pair (ans[i], ans[j]) of elements in this subset satisfies ans[i]%ans[j]==0 or ans[j]%ans[i]==0");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
