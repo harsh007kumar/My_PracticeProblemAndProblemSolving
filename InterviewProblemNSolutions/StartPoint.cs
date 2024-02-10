@@ -592,6 +592,7 @@ namespace InterviewProblemNSolutions
             SelfCrossing();
             PerfectSquares();
             LargestDivisibleSubset();
+            DataStreamAsDisjointIntervals();
 
 
 
@@ -9965,6 +9966,42 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void DataStreamAsDisjointIntervals()
+        {
+            // https://leetcode.com/problems/data-stream-as-disjoint-intervals
+            Utility.Print("352. Data Stream as Disjoint Intervals");
+            string[] inputType = { "SummaryRanges", "addNum", "getIntervals", "addNum", "getIntervals", "addNum", "getIntervals", "addNum", "getIntervals", "addNum", "getIntervals" };
+            int[] values = { -1, 1, -1, 3, -1, 7, -1, 2, -1, 6, -1 };
+            SummaryRanges obj = null;
+            for (int i = 0; i < inputType.Length; i++)
+            {
+                switch (inputType[i])
+                {
+                    case "SummaryRanges":
+                        {
+                            Console.WriteLine($"Initialize SummaryRanges class obj");
+                            obj = new();
+                            break;
+                        }
+                    case "addNum":
+                        {
+                            Console.WriteLine($"Adding '{values[i]}' to the range");
+                            obj.AddNum(values[i]);
+                            break;
+                        }
+                    case "getIntervals":
+                        {
+                            Console.WriteLine("Summarize the numbers seen so far as a list of disjoint intervals.");
+                            obj.GetIntervals().Print();
+                            break;
+                        }
+                }
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
 
 
 
