@@ -1700,5 +1700,62 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+
+        // Time O(n^2) | Space O(n), n = length of string 's' | TLE
+        public static long MaxProductOfTwoPalindromicSubstrings(string s)
+        {
+            /* ALGO
+            1. Find the longest odd length palidrome possible for each index in 's'
+            2. Now in first loop divide the s into 2 parts from idx 1...len-2 so we kept a left and right part
+            3. Now for each part check all the index and get the longest possible palindrome within the substring limit/bounder
+            4. Multiply the length of longest from each part and if its greather than update maxProduct.
+            */
+            int l = s.Length, lt, rt;
+            long maxPorductOfOddLengthPalindromes = 1;
+            if (l == 2) return maxPorductOfOddLengthPalindromes;
+
+            // find the longest odd pali from each idx
+            int[] longestPali = new int[l];
+            for (int centre = 0; centre < l; centre++)                 // O(n^2)
+            {
+                longestPali[centre]++;   // each single char is pali of len 1
+                lt = centre - 1;
+                rt = centre + 1;
+                while (lt >= 0 && rt < l && s[lt--] == s[rt++])
+                    longestPali[centre] += 2;     // as we increase length by 2 chars
+            }
+            // Divide into 2 parts, dividing idx is considered part of left
+            for (int divideFrom = 0; divideFrom < l - 1; divideFrom++) // O(n^2)
+            {
+                int cur = -1, longestLt = 1, longestRt = 1, paliLenAtCurIdx, half, maxExtent;
+
+                // find longest palidrome in left half
+                while (++cur <= divideFrom)
+                {
+                    paliLenAtCurIdx = longestPali[cur];
+                    half = (paliLenAtCurIdx - 1) / 2;
+                    // take min of the half length of pali or the boundry/division point
+                    maxExtent = Math.Min(half, divideFrom - cur);
+                    // update longest pali found so far
+                    longestLt = Math.Max(longestLt, 1 + (2 * maxExtent));
+                }
+                // find longest palidrome in right half
+                while (cur < l)
+                {
+                    paliLenAtCurIdx = longestPali[cur];
+                    half = (paliLenAtCurIdx - 1) / 2;
+                    // take min of the half length of pali or the boundry/division point
+                    maxExtent = Math.Min(half, -1 + cur - divideFrom);
+                    // update longest pali found so far
+                    longestRt = Math.Max(longestRt, 1 + (2 * maxExtent));
+
+                    cur++;
+                }
+                // update the maximum product of the 2 odd length pali found of each side
+                maxPorductOfOddLengthPalindromes = Math.Max(longestLt * longestRt, maxPorductOfOddLengthPalindromes);
+            }
+            return maxPorductOfOddLengthPalindromes;
+        }
     }
 }
