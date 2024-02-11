@@ -148,7 +148,7 @@ namespace InterviewProblemNSolutions
             //MinimumCostToHireKWorkers();
             //IncreasingTripletSubsequence();
             //PermutationInString();
-            //CherryPickupII();
+            CherryPickupII();
             //MinOperationsToReduceToZero();
             //DecodedStringAtIndex();
             //SmallestRangeII();
@@ -2879,7 +2879,8 @@ namespace InterviewProblemNSolutions
             {
                 grid.Print("FIELD OF CHERRIES");
                 //Console.WriteLine($" Maximum number of cherries collected using both robots: {DynamicProgramming.CherryPickupII(grid, -1, grid[0].Length, 0, grid[0].Length - 1)}\n");
-                Console.WriteLine($" Maximum number of cherries collected using both robots: {DynamicProgramming.CherryPickupII_DP(grid, -1, grid[0].Length, 0, grid[0].Length - 1, new Dictionary<string, int>())}\n\n");
+                //Console.WriteLine($" Maximum number of cherries collected using both robots: {DynamicProgramming.CherryPickupII_DP(grid, -1, grid[0].Length, 0, grid[0].Length - 1, new Dictionary<string, int>())}\n\n");
+                Console.WriteLine($" Maximum number of cherries collected using both robots: {DynamicProgramming.CherryPickupII_DP_Efficient(grid)}");
             }
         }
 

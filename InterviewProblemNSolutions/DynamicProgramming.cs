@@ -1537,6 +1537,39 @@ namespace InterviewProblemNSolutions
                         }
             return sum;
         }
+        // Time = O(r*c^2) | Space = O(r*c), c,c= no of rows and cols in Grid
+        public static int CherryPickupII_DP_Efficient(int[][] grid)
+        {
+            int rows = grid.Length, cols = grid[0].Length;
+            Dictionary<string, int> cache = new();
+            return DFS(0, 0, cols - 1);
+
+            // local helper func
+            int DFS(int r, int i, int j)
+            {
+                string key = r + "," + i + "," + j;
+                // if curRow value with given i,j is calculated previously return from cache
+                if (cache.TryGetValue(key, out int max))
+                    return max;
+
+                int curMax = 0;
+                // check all possible combinations
+                if (r + 1 < rows)
+                    for (int a = Math.Max(0, i - 1); a <= Math.Min(cols - 2, i + 1); a++)
+                        for (int b = Math.Max(a + 1, j - 1); b <= Math.Min(cols - 1, j + 1); b++)
+                        {
+                            string nextRowKey = (r + 1) + "," + a + "," + b;
+                            // if nextRow value not present in cache calculate and save in cache
+                            if (!cache.ContainsKey(nextRowKey))
+                                cache[nextRowKey] = DFS(r + 1, a, b);
+
+                            curMax = Math.Max(curMax, cache[nextRowKey]);
+                        }
+
+                // add cur row values from both robot plus max we got from next row in cache before returning
+                return cache[key] = curMax + grid[r][i] + grid[r][j];
+            }
+        }
 
 
         public static int MinOperationsToReduceToZero(int[] nums, int start, int last, int reqSum, ref bool is0)
