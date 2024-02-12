@@ -10009,9 +10009,12 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/maximum-product-of-the-length-of-two-palindromic-substrings
             Utility.Print("1960. Maximum Product of the Length of Two Palindromic Substrings");
-            string[] sArr = { "ababbb", "zaaaxbbby", "aaabbb", "aaaaaa", "aaaaaaaa", "aaaabbb" };
+            string[] sArr = { "ababbb", "zaaaxbbby", "aaabbb", "aaaaaa", "aaaaaaaa", "aaaabbb", "ceedeeaeedceb" };
             foreach (var s in sArr)
-                Console.WriteLine($"In '{s}' the Maximum Product of the Length of Two Odd length Palindromic Substrings is => '{StringAlgorithms.MaxProductOfTwoPalindromicSubstrings(s)}'");
+            {
+                Console.WriteLine($"In string '{s}' the Max Product of the Length of Two Odd length Palindromic Substrings is => '{StringAlgorithms.MaxProductOfTwoPalindromicSubstringsBruteForce(s)}'");
+                Console.WriteLine($"[Manacher's Algo] In string '{s}' the Max Product of the Length of Two Odd length Palindromic Substrings is => '{StringAlgorithms.MaxProductOfTwoPalindromicSubstrings(s)}'");
+            }
         }
 
 
