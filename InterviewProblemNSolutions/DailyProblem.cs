@@ -21402,5 +21402,58 @@ namespace InterviewProblemNSolutions
                 return afterTaking.Count > withoutTaking.Count ? afterTaking : withoutTaking;
             }
         }
+
+
+        // Time = Space = O(n), n = length of 'nums'
+        public static int[] RearrangeArray(int[] nums)
+        {
+            /* ALGO
+            1. Set pos to 0 and neg to 1 to denote the where each type of num is to be placed in result array
+            2. Iterate thru all the indicies in orignal array
+            3.  if num is +ve add the num in result array and increament pos idx by 2
+            4. else add num in result array and increament neg idx by 2
+             */
+            int pos = 0, neg = 1, l = nums.Length;
+            int[] result = new int[l];
+            for (int i = 0; i < l; i++)
+                if (nums[i] > 0)   // +ve
+                {
+                    result[pos] = nums[i];
+                    pos += 2;
+                }
+                else            // -ve
+                {
+                    result[neg] = nums[i];
+                    neg += 2;
+                }
+            return result;
+            /* 2 Pass Soln | Time = Space = O(n), n = length of 'nums'
+                int l = nums.Length, i = 0, j = 0;
+                int[] result = new int[l];
+                // update +ve values
+                while(i<l-1)                // O(n) 
+                {
+                    // get next +ve idx in original array
+                    while(nums[j]<0)
+                        j++;
+                    // assign +ve value in new array
+                    result[i] = nums[j++];
+                    i+=2;
+                }
+                i=1;
+                j=0;
+                // update -ve values
+                while(i<l)                  // O(n) 
+                {
+                    // get next -ve idx in original array
+                    while(nums[j]>0)
+                        j++;
+                    // assign -ve value in new array
+                    result[i] = nums[j++];
+                    i+=2;
+                }
+                return result;
+            */
+        }
     }
 }

@@ -594,6 +594,7 @@ namespace InterviewProblemNSolutions
             //LargestDivisibleSubset();
             DataStreamAsDisjointIntervals();
             MaximumProductLengthOfTwoPalindromicSubstrings();
+            RearrangeArrayElementsBySign();
 
 
 
@@ -10016,6 +10017,27 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"[Manacher's Algo] In string '{s}' the Max Product of the Length of Two Odd length Palindromic Substrings is => '{StringAlgorithms.MaxProductOfTwoPalindromicSubstrings(s)}'");
             }
         }
+
+
+        public static void RearrangeArrayElementsBySign()
+        {
+            // https://leetcode.com/problems/rearrange-array-elements-by-sign
+            Utility.Print("2149. Rearrange Array Elements by Sign");
+            int[][] arrays = new int[][]
+            {
+                new int[]{ 3, 1, -2, -5, 2, -4 },
+                new int[]{ -1,1 },
+                new int[]{ -3, -1, -2, 5, 2, 4 },
+                new int[]{ 3, 1, 2, -5, -2, -4 },
+            };
+            foreach (var arr in arrays)
+            {
+                arr.Print();
+                DailyProblem.RearrangeArray(arr).Print("After rearrange the elements of above into consecutive pair of integers having opposite signs");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
 
 
 
