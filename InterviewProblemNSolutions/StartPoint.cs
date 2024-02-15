@@ -115,6 +115,7 @@ namespace InterviewProblemNSolutions
             //MinDepthOfBinaryTree();
             NumbersAtMostNGivenDigitSet();
             InsertDeleteGetRandomO1();  // RandomizedSet
+            InsertDeleteGetRandomO1Duplicates();
             //UniqueMorseCodeWords();
             //WordLadder();
             WordLadderII();
@@ -2416,7 +2417,19 @@ namespace InterviewProblemNSolutions
             Console.WriteLine(randomizedSet.Insert(2));
             Console.WriteLine(randomizedSet.GetRandom());
         }
-
+        public static void InsertDeleteGetRandomO1Duplicates()
+        {
+            // https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed
+            Utility.Print("381. Insert Delete GetRandom O(1) - Duplicates allowed");
+            var randomizedSet = new InsertDeleteGetRandomO1WithDuplicates();
+            Console.WriteLine(randomizedSet.Insert(1));
+            Console.WriteLine(randomizedSet.Insert(1));
+            Console.WriteLine(randomizedSet.Insert(2));
+            Console.WriteLine(randomizedSet.GetRandom());   // - return 1 with probability 2/3, or
+                                                            // - return 2 with probability 1/3.
+            Console.WriteLine(randomizedSet.Remove(1));
+            Console.WriteLine(randomizedSet.GetRandom());   // getRandom should return 1 or 2, both equally likely.
+        }
 
         public static void UniqueMorseCodeWords()
         {
@@ -10039,7 +10052,7 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
