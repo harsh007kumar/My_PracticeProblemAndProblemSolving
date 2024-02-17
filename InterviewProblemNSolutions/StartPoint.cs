@@ -1,8 +1,10 @@
 ﻿using Sorting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Net.NetworkInformation;
+using static System.Formats.Asn1.AsnWriter;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -596,6 +598,8 @@ namespace InterviewProblemNSolutions
             DataStreamAsDisjointIntervals();
             MaximumProductLengthOfTwoPalindromicSubstrings();
             RearrangeArrayElementsBySign();
+            MaximumNumberOfOperationsWithTheSameScoreII();
+            MaximizeConsecutiveElementsInAnArrayAfterModification();
 
 
 
@@ -10054,7 +10058,27 @@ namespace InterviewProblemNSolutions
         }
 
 
-        
+        public static void MaximumNumberOfOperationsWithTheSameScoreII()
+        {
+            // https://leetcode.com/problems/maximum-number-of-operations-with-the-same-score-ii/
+            Utility.Print("3040. Maximum Number of Operations With the Same Score II");
+            int[][] arrays = new int[][]
+            {
+                new int[] { 3, 2, 1, 2, 3, 4 },
+                new int[] { 3, 2, 6, 1, 4 },
+                new int[] { 3, 2, 1, 4, 5 },
+                new int[] { 1, 7, 4, 5 },
+                new int[] { 2, 2, 1, 2, 1 },
+            };
+            foreach(var arr in arrays)
+            {
+                arr.Print("Input array");
+                Console.WriteLine($"Max operations that can be performed, such that all operations have the same score => {DynamicProgramming.MaxOperationsSameScoreII(arr)}");
+            }
+        }
+
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

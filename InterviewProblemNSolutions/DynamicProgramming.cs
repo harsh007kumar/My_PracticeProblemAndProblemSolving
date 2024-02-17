@@ -3312,5 +3312,59 @@ namespace InterviewProblemNSolutions
                 return Math.Max(LastParitionSum + maxFromNewParitition, maxByJoiningLastParition);
             }
         }
+
+
+        // Time = Space = O(n^2), n = length of 'nums'
+        public static int MaxOperationsSameScoreII(int[] nums)
+        {
+            /* ALGO
+            1. There are 3 choice we have after starting with a given sum/score
+            2. select first 2 values
+            3. select last 2 values
+            4. select first & last values
+            5. We need to try all 3 possible combinations to speed things up
+                just use a cache to store the ans of solved subproblems for
+                a pair of index when trying to maximize for a given sum/score
+             */
+            int l = nums.Length, sameScoreCounter = 0;
+            if (l == 2) return 1;  // base case
+            Dictionary<string, int> cache = new();
+
+            // take 1st two nums score
+            sameScoreCounter = Math.Max(sameScoreCounter, MaxOperations(2, l - 1, nums[0] + nums[1]));
+
+            // take last two nums score
+            sameScoreCounter = Math.Max(sameScoreCounter, MaxOperations(0, l - 3, nums[l - 2] + nums[l - 1]));
+
+            // take 1st and last nums score
+            sameScoreCounter = Math.Max(sameScoreCounter, MaxOperations(1, l - 2, nums[0] + nums[l - 1]));
+
+            return sameScoreCounter + 1;  // 1 is added since 1st sum we are doing before calling recursively
+
+            // local helper func
+            int MaxOperations(int lt, int rt, int score)
+            {
+                if (lt >= rt) return 0;
+                string key = lt + "," + rt + "," + score;
+                if (cache.TryGetValue(key, out int maxOpCount))
+                    return maxOpCount;
+
+                int count = 0;
+                // take 1st two nums score
+                if (nums[lt] + nums[lt + 1] == score)
+                    count = Math.Max(count, 1 + MaxOperations(lt + 2, rt, score));
+
+                // take last two nums score
+                if (nums[rt - 1] + nums[rt] == score)
+                    count = Math.Max(count, 1 + MaxOperations(lt, rt - 2, score));
+
+                // take 1st and last nums score
+                if (nums[lt] + nums[rt] == score)
+                    count = Math.Max(count, 1 + MaxOperations(lt + 1, rt - 1, score));
+
+                return cache[key] = count;
+            }
+        }
+
     }
 }
