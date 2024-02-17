@@ -15186,7 +15186,7 @@ namespace InterviewProblemNSolutions
 
 
         // Time O(n *log(ladders)) || Space O(ladders), n = len of arr 'heights'
-        public static int FurthestBuilding(int[] heights, int bricks, int ladders, int i = 0)
+        public static int FurthestBuilding(int[] heights, int bricks, int ladders)
         {
             MinHeap ob = new MinHeap(ladders);
             int k = 0, bricksSum = 0, diff;
@@ -15214,6 +15214,33 @@ namespace InterviewProblemNSolutions
                 }
             }
             return k - 1;
+        }
+        // Time O(n*logl) | Space O(l), n = length of 'heights' & l = ladders
+        public static int FurthestBuildingUsingPriorityQueueADT(int[] heights, int bricks, int ladders)
+        {
+            PriorityQueue<int, int> minJump = new();
+            int idx = 0, l = heights.Length, gap, bricksUsedSoFar = 0;
+            while (++idx < l)                          // O(n)
+            {
+                gap = heights[idx] - heights[idx - 1];
+                if (gap > 0)   // is last building was smaller only than we need to use bricks or ladders
+                {
+                    // if we have ladders use them first
+                    if (ladders-- > 0)
+                        minJump.Enqueue(gap, gap);   // O(logl)
+                    else    // try using bricks
+                    {
+                        // min heap is not empty and minJump using ladders is smaller current gap
+                        // its wise to use bricks for prv smaller jump and use ladder for current
+                        if (minJump.TryPeek(out int smallestJumpSoFar, out int priority) && smallestJumpSoFar < gap)
+                            // use the minHeap top and add new gap for which ladder is being used
+                            bricksUsedSoFar += minJump.DequeueEnqueue(gap, gap);   // O(logl)
+                        else bricksUsedSoFar += gap;
+                    }
+                    if (bricksUsedSoFar > bricks) break;
+                }
+            }
+            return idx - 1;
         }
 
 

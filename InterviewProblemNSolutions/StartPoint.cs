@@ -6807,6 +6807,8 @@ namespace InterviewProblemNSolutions
                 heights[i].Print("Heights");
                 Console.WriteLine($" Farthest idx we can reach in above array starting with '{bricks[i]}' bricks & '{ladders[i]}' ladders is:" +
                     $" '{DailyProblem.FurthestBuilding(heights[i], bricks[i], ladders[i])}'\n");
+                Console.WriteLine($"[PriorityQueueADT] Farthest idx we can reach in above array starting with '{bricks[i]}' bricks & '{ladders[i]}' ladders is:" +
+                    $" '{DailyProblem.FurthestBuildingUsingPriorityQueueADT(heights[i], bricks[i], ladders[i])}'\n");
             }
         }
 
