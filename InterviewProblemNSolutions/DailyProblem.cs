@@ -21502,5 +21502,86 @@ namespace InterviewProblemNSolutions
                 return result;
             */
         }
+
+
+        // Time O(nlogn + mlogm)  | Space O(m), m = length of 'meetings'
+        public static int MeetingRoomsIII(int n, int[][] meetings)
+        {
+            /* ALGO
+            Add all meeting to Delayed PQ
+            add all rooms to free PQ
+            while delayed meeting > 0
+                a. take the the startTime of top
+                b. all meetings which end before current meeting start gets added to free list
+                c. if free room > 0 
+                    assign smallest roomID to current meeting and all the time when this meeting will get free
+                d. no free rooms avaliable
+                    extract the roomID of first meeting which will end and assign that room to cur meeting also add the time when this meeting will get free
+            */
+
+            // minHeap to store the list of free/unsed rooms (roomID as Key & Priority)
+            PriorityQueue<int, int> freeRooms = new();
+            for (int i = 0; i < n; i++)                                        // O(nlogn)
+                freeRooms.Enqueue(i, i);
+
+            // minHeap to store the list of delayed meetings (totalTime as Key and startTime as Priority)
+            PriorityQueue<int, long> delayedMeeting = new();
+            for (int i = 0; i < meetings.Length; i++)                          // O(m)
+            {
+                int startTime = meetings[i][0], totalMeetingTime = meetings[i][1] - meetings[i][0];
+                delayedMeeting.Enqueue(totalMeetingTime, startTime);     // O(logm)
+            }
+
+            // minHeap to track the time when a roomID gets free (roomID as Key and int[] { endTime, roomID } as Priority)
+            // (sorted by meeting end time, if 2 meetings end at same one with smaller roomID gets precedence)
+            PriorityQueue<int, long[]> whenRoomGetsFree = new PriorityQueue<int, long[]>(Comparer<long[]>.Create((a, b) => a[0] != b[0] ? a[0].CompareTo(b[0]) : a[1].CompareTo(b[1])));
+
+            // Array to track no of time a room is used
+            int[] timesUsed = new int[n];
+
+            // iterate thru all the meetings and assign the rooms
+            while (delayedMeeting.TryDequeue(out int totalMeetingTime, out long curMeetingStartTime))     // O(mlogm)
+            {
+                // check to see which all meetings have finished and if their room can be added back to free list
+                while (whenRoomGetsFree.TryPeek(out int freeRoomID, out long[] endIDRoomID))
+                {
+                    var endTime = endIDRoomID[0];
+                    if (endTime <= curMeetingStartTime)    // if room getting free before current meeting, assign to free room list
+                        freeRooms.Enqueue(freeRoomID, whenRoomGetsFree.Dequeue());
+                    else break;
+                }
+
+                // if room avaliable assign the room with smallest ID first
+                // public bool TryDequeue (out TElement element, out TPriority priority);
+                if (freeRooms.TryDequeue(out int roomId, out int priority))
+                {
+                    // increament the Counter
+                    timesUsed[roomId]++;
+                    // update the 'whenRoomGetsFree' PQ
+                    whenRoomGetsFree.Enqueue(roomId, new long[] { curMeetingStartTime + totalMeetingTime, roomId });
+                }
+                // no room is free to be assigned yet
+                else
+                {
+                    // take the time of first meetings which gets free
+                    whenRoomGetsFree.TryDequeue(out int nextFreeRoomID, out long[] nextEndIDRoomID);
+                    // increament the Counter
+                    timesUsed[nextFreeRoomID]++;
+                    // update the 'whenRoomGetsFree' PQ with time from when this room gets free
+                    var endTime = nextEndIDRoomID[0];
+                    whenRoomGetsFree.Enqueue(nextFreeRoomID, new long[] { endTime + totalMeetingTime, nextFreeRoomID });
+                }
+            }
+
+            // return the room which is used most (if multiple return the idx of room which is smaller)
+            int mostUsed = 0, roomIdx = -1;
+            for (int i = 0; i < n; i++)
+                if (timesUsed[i] > mostUsed)
+                {
+                    mostUsed = timesUsed[i];
+                    roomIdx = i;
+                }
+            return roomIdx;
+        }
     }
 }

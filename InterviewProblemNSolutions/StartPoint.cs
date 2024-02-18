@@ -46,6 +46,7 @@ namespace InterviewProblemNSolutions
             //LRUCache();
             //CompressedStringIterator();
             //MeetingRoomsII();
+            MeetingRoomsIII();
             //NumberOfIslands();
             TrapRainWater();
             //FindTheCelebrity();
@@ -1205,6 +1206,28 @@ namespace InterviewProblemNSolutions
             {
                 input.Print("Meetings schedule");
                 Console.WriteLine($" Min no of meeting rooms required to accomodate above listed meetings : {DailyProblem.MeetingRoomsII(input)}");
+            }
+        }
+
+
+        public static void MeetingRoomsIII()
+        {
+            // https://leetcode.com/problems/meeting-rooms-iii/
+            Utility.Print("2402. Meeting Rooms III");
+            int[][][] arr =
+            {
+                new int[][] { new int[] { 79989, 379989}, new int[] { 79990, 379990}, new int[] { 79991, 379991}, new int[] { 79992, 379992}, new int[] { 79993, 379993}, new int[] { 79994, 379994}, new int[] { 79995, 379995}, new int[] { 79996, 379996}, new int[] { 79997, 379997}, new int[] { 79998, 379998}, new int[] { 79999, 379999}, new int[] { 80000, 380000}, new int[] { 80001, 300000}, new int[] { 80002, 80003}, new int[] { 80003, 80004}, new int[] { 80004, 80005}, new int[] { 80005, 80006}, new int[] { 80006, 80007}, new int[] { 80007, 80008}, new int[] { 80008, 80009}, new int[] { 80009, 80010}, new int[] { 80010, 80011}, new int[] { 80011, 80012 } },
+                new int[][]{ new int[] { 0, 10}, new int[] {1, 5}, new int[] {2, 7}, new int[] {3, 4 } },
+                new int[][]{ new int[] { 1, 20}, new int[] {2, 10}, new int[] {3, 5}, new int[] {4, 9 }, new int[] { 6, 8 } },
+                new int[][]{ new int[] { 1, 5}, new int[] {2, 7}, new int[] {3, 4}, new int[] { 0, 10 } },
+                new int[][]{ new int[] { 19, 20}, new int[] {14, 15}, new int[] {13, 14}, new int[] { 11, 20 } },
+            };
+            int[] n = { 10, 2, 3, 2, 4 };
+            for(int i=0;i<arr.Length; i++)
+            {
+                arr[i].Print("Input Meetings schedule");
+                Console.WriteLine($" Room Idx of the room that held the most meetings when we had only '{n[i]}' rooms => {DailyProblem.MeetingRoomsIII(n[i], arr[i])}");
+                Console.WriteLine(Utility.lineDelimeter);
             }
         }
 
@@ -10076,6 +10099,7 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"Max operations that can be performed, such that all operations have the same score => {DynamicProgramming.MaxOperationsSameScoreII(arr)}");
             }
         }
+
 
 
 
