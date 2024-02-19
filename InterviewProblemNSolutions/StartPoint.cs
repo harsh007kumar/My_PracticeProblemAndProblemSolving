@@ -10101,6 +10101,31 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MaximizeConsecutiveElementsInAnArrayAfterModification()
+        {
+            // https://leetcode.com/problems/maximize-consecutive-elements-in-an-array-after-modification
+            Utility.Print("3041. Maximize Consecutive Elements in an Array After Modification");
+            int[][] arrays = new int[][]
+            {
+                new int[] { 8,10,6,12,9,12,2,3,13,19,11,18,10,16 },
+                new int[] { 2, 1, 5, 1, 1 },
+                new int[] { 1,4,7,10 },
+                new int[] { 1, 1, 2, 3 },
+                new int[] { 2,1,5,1,4 },
+                new int[] { 3, 2, 1, 2, 3, 4 },
+                new int[] { 3, 2, 6, 1, 4 },
+                new int[] { 3, 2, 1, 4, 5 },
+                new int[] { 1, 7, 4, 5 },
+                new int[] { 2, 2, 1, 2, 1 },
+            };
+            foreach (var arr in arrays)
+            {
+                arr.Print("Input array");
+                Console.WriteLine($"Max consecutive elements (with choice to increase val of any element in the array by at most 1)" +
+                    $" when sorted in increasing order => {DynamicProgramming.MaxConsecutiveSelectedElements(arr)}");
+            }
+        }
+
 
 
 

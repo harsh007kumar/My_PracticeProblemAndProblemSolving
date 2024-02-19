@@ -3366,5 +3366,42 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static int MaxConsecutiveSelectedElements(int[] nums)
+        {
+            Array.Sort(nums);
+            int l = nums.Length, maxConsecutive = 0;
+
+            Dictionary<string, int> cache = new();
+
+            for (int start = 0; start < l; start++)
+            {
+                maxConsecutive = Math.Max(maxConsecutive, 1 + GetMaxConsecutive(nums[start], start + 1));
+                maxConsecutive = Math.Max(maxConsecutive, 1 + GetMaxConsecutive(nums[start] + 1, start + 1));
+            }
+
+            return maxConsecutive;
+
+            // local helper func
+            int GetMaxConsecutive(int lastNum, int idx)
+            {
+                if (idx >= l) return 0;
+                string key = lastNum + "," + idx;
+
+                if (cache.TryGetValue(key, out int mLen)) return mLen;
+
+                int len = 0;
+                // without increasing cur num
+                if (nums[idx] == lastNum + 1)
+                    len = 1 + GetMaxConsecutive(nums[idx], 1 + idx);
+                // after increasing cur num by 1
+                if (nums[idx] + 1 == lastNum + 1)
+                    len = Math.Max(len, 1 + GetMaxConsecutive(nums[idx] + 1, 1 + idx));
+                // skipping cur num if same as last num
+                if (nums[idx] == lastNum)
+                    len = Math.Max(len, GetMaxConsecutive(lastNum, 1 + idx));
+
+                return cache[key] = len;
+            }
+        }
     }
 }
