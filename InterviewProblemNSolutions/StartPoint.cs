@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Numerics;
 using static System.Formats.Asn1.AsnWriter;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -602,6 +603,7 @@ namespace InterviewProblemNSolutions
             MaximumNumberOfOperationsWithTheSameScoreII();
             MaximizeConsecutiveElementsInAnArrayAfterModification();
             PerfectRectangle();
+            BitwiseOfNumbersRange();
 
 
 
@@ -10145,6 +10147,18 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"Return true if all the rectangles together form an exact cover of a prefect rectangular region => {DailyProblem.IsRectangleCover(rectangles[i])}");
                 Console.WriteLine(Utility.lineDelimeter);
             }
+        }
+
+
+        public static void BitwiseOfNumbersRange()
+        {
+            // Ref https://youtu.be/R3T0olAhUq0
+            // https://leetcode.com/problems/bitwise-and-of-numbers-range
+            Utility.Print("201. Bitwise AND of Numbers Range");
+            int[] left = { 5, 0, 1, 1111, 126 };
+            int[] right = { 7, 0, int.MaxValue, int.MaxValue, 256 };
+            for (int i = 0; i < left.Length; i++)
+                Console.WriteLine($"Bitwise AND of all numbers in the range [{left[i]}..{right[i]}] is => {DailyProblem.RangeBitwiseAnd(left[i], right[i])}\n");
         }
 
 

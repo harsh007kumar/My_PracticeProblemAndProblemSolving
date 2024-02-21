@@ -21634,5 +21634,33 @@ namespace InterviewProblemNSolutions
             return set.Count == 4 && area == (x2 - x1) * (y2 - y1)
             && set.Contains(x1 + "," + y1) && set.Contains(x1 + "," + y2) && set.Contains(x2 + "," + y1) && set.Contains(x2 + "," + y2);
         }
+
+
+        // Time = Space = O(1), since at max we are going to run the loop 32 times
+        public static int RangeBitwiseAnd(int left, int right)
+        {
+            /* ALGO
+            1. First bit i.e. right most bit of either num 'a' or 'a+1' one of them atleast have 0 as 1st bit
+                hence AND of that bits will result in 0 no matter what numbers come after
+            2. Using above approach we can just see if the diff b/w left and right most numbers is atleast 1
+                there is bound to be a numbers in the range that will have 1st bit as zero
+                hence the final AND for the bit will be always zero
+            3. We keep applying above approach and right shift left and right most num by 1 bit till left!=right
+            4. As soon as they match it means from this point onwards whatever is to the left
+                will remain same in the final ans
+            5. Hence just left-shifting the remaing matching number
+                by no of iteration or bits we have evaluated to 0 will result in final ans
+             */
+            int ithBitFromRight = 0;
+            while (left != right)
+            {
+                // since left and right don't match the 1st bit will definatly have 0 once or more in the range left..right
+                left >>= 1;
+                right >>= 1;
+                // since 1st bit is certain to be 0 we right shift both nums by 1 position to match them again
+                ithBitFromRight++;
+            }
+            return left << ithBitFromRight;
+        }
     }
 }
