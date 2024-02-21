@@ -601,6 +601,7 @@ namespace InterviewProblemNSolutions
             RearrangeArrayElementsBySign();
             MaximumNumberOfOperationsWithTheSameScoreII();
             MaximizeConsecutiveElementsInAnArrayAfterModification();
+            PerfectRectangle();
 
 
 
@@ -10127,6 +10128,24 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void PerfectRectangle()
+        {
+            // ref https://youtu.be/P8x2wgJOPVE
+            // https://leetcode.com/problems/perfect-rectangle
+            Utility.Print("391. Perfect Rectangle");
+            int[][][] rectangles = new int[][][]
+            {
+                new int[][] { new int[] { 1, 1, 3, 3}, new int[] { 3, 1, 4, 2}, new int[] { 3, 2, 4, 4}, new int[] { 1, 3, 2, 4}, new int[] { 2, 3, 3, 4 } },
+                new int[][] { new int[] { 1, 1, 2, 3}, new int[] { 1, 3, 2, 4}, new int[] { 3, 1, 4, 2}, new int[] { 3, 2, 4, 4 } },
+                new int[][] { new int[] { 1, 1, 3, 3}, new int[] { 3, 1, 4, 2}, new int[] { 1, 3, 2, 4}, new int[] { 2, 2, 4, 4 } },
+            };
+            for (int i = 0; i < rectangles.Length; i++)
+            {
+                rectangles[i].Print("Input Array of Rectangles Points");
+                Console.WriteLine($"Return true if all the rectangles together form an exact cover of a prefect rectangular region => {DailyProblem.IsRectangleCover(rectangles[i])}");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

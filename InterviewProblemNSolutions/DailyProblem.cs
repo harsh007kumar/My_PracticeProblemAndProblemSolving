@@ -21583,5 +21583,56 @@ namespace InterviewProblemNSolutions
                 }
             return roomIdx;
         }
+
+
+        // Time = Space = O(r), r = length of 'rectangles'
+        public static bool IsRectangleCover(int[][] rectangles)
+        {
+            /* ALGO
+            1. Create a HashSet to hold all 4 points of each rectangle
+            2. Initialize a TotalAreaOfAllRectangle which keeps on adding area for each rectangle we traverse
+            3. Now while iterating thru each rect all 4 points, we see if any point is
+                already present in the HashSet remove it as we don't want duplicate points
+                not present add to the HashSet
+                (if you see in the figure of the example we can figure all points except
+                the points of the perfect rectangle would occur twice, this way we can filter all points except extreme ones)
+            4. At return true if set has excatly 4 poins and area of those points == TotalAreaOfAllRectangle
+            */
+            HashSet<string> set = new();
+            int x1 = int.MaxValue, x2 = int.MinValue, y1 = int.MaxValue, y2 = int.MinValue;
+            long area = 0;
+            foreach (var r in rectangles)                // O(n)
+            {
+                // calculate the extreme 4 points of final perfect rectangle
+                x1 = Math.Min(x1, r[0]);
+                x2 = Math.Max(x2, r[2]);
+                y1 = Math.Min(y1, r[1]);
+                y2 = Math.Max(y2, r[3]);
+
+                // extract all corner of the rectangle
+                string leftBottom = r[0] + "," + r[1],
+                leftTop = r[0] + "," + r[3],
+                rtBottom = r[2] + "," + r[1],
+                rtTop = r[2] + "," + r[3];
+
+                // add the area of cur rectangle to the total
+                // Rect Area = (a-x) * (b-y)
+                area += (r[2] - r[0]) * (r[3] - r[1]);
+
+                // if points is not present add to the Set if already present remove from the set
+                if (set.Contains(leftBottom)) set.Remove(leftBottom);
+                else set.Add(leftBottom);
+                if (set.Contains(leftTop)) set.Remove(leftTop);
+                else set.Add(leftTop);
+                if (set.Contains(rtBottom)) set.Remove(rtBottom);
+                else set.Add(rtBottom);
+                if (set.Contains(rtTop)) set.Remove(rtTop);
+                else set.Add(rtTop);
+            }
+            // set has only 4 unq points left and the area of perfect rectangle matches sum of total area of each rectangle
+            // and all 4 final points of perfect rectangle are present in the set
+            return set.Count == 4 && area == (x2 - x1) * (y2 - y1)
+            && set.Contains(x1 + "," + y1) && set.Contains(x1 + "," + y2) && set.Contains(x2 + "," + y1) && set.Contains(x2 + "," + y2);
+        }
     }
 }
