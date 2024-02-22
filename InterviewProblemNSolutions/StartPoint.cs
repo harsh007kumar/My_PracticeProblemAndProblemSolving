@@ -604,6 +604,7 @@ namespace InterviewProblemNSolutions
             MaximizeConsecutiveElementsInAnArrayAfterModification();
             PerfectRectangle();
             BitwiseOfNumbersRange();
+            FrogJump();
 
 
 
@@ -10160,6 +10161,25 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < left.Length; i++)
                 Console.WriteLine($"Bitwise AND of all numbers in the range [{left[i]}..{right[i]}] is => {DailyProblem.RangeBitwiseAnd(left[i], right[i])}\n");
         }
+
+
+        public static void FrogJump()
+        {
+            // https://leetcode.com/problems/frog-jump
+            Utility.Print("403. Frog Jump");
+            int[][] stonesArr =
+            {
+                new int[] { 0, 1, 3, 5, 6, 8, 12, 17 },
+                new int[] { 0, 1, 2, 3, 4, 8, 9, 11 },
+            };
+            foreach (var stones in stonesArr)
+            {
+                stones.Print("Input Stones Array");
+                Console.WriteLine($"The frog can cross the river by landing on the last stone by starting on 1st stone with 1st jump of 1 => '{DynamicProgramming.CanCross(stones)}'");
+            }
+        }
+
+
 
 
 

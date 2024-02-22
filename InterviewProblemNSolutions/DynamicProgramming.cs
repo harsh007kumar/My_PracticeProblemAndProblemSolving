@@ -3403,5 +3403,48 @@ namespace InterviewProblemNSolutions
                 return cache[key] = len;
             }
         }
+
+        // Time O(n^2) | Space O(n), n = length of 'stones' array
+        public static bool CanCross(int[] stones)
+        {
+            /* ALGO
+            1. Its Clear for each jump we can only have 3 diff values in range [lastJump-1, lastJump, lastJump+1]
+            2. Now for each idx starting from 1 (as its given in problem 1st jump is starting from idx 0 with jump value 1)
+            3. For each idx we land on need to iterate from idx+1..stones.Length-1 
+                is there any indicies we can reach with current jump value that leads us to last index (our goal)
+                with constraint diff b/w current & next idx lies b/w min..max value based on lastJump value
+            4. Save all sub-problem in cache before returning so if can be reused.
+             */
+            Dictionary<string, bool> cache = new();
+            return stones[1] == 1 && CanReach(1, 1);
+
+            // local helper func
+            bool CanReach(int idx, int lastJump)
+            {
+                if (idx >= stones.Length - 1) return true;
+                string key = idx + "," + lastJump;
+                // if this sub-Problem is solved before return asn from cache
+                if (cache.TryGetValue(key, out bool isReachable))
+                    return isReachable;
+                // else calculate if last index is reachable from current idx is last jump value was = 'lastJump'
+                long min = Math.Max(1, lastJump - 1);
+                long max = Math.Min(int.MaxValue, lastJump + 1);
+                for (int i = idx + 1; i < stones.Length; i++)
+                {
+                    long distance = stones[i] - stones[idx];
+                    if (min <= distance && distance <= max)
+                    {
+                        // reached last index return true
+                        if (CanReach(i, (int)distance))
+                            return cache[key] = true;
+                    }
+                    // no point in moving frwd as stones are sorted in increasing order and gap/distance is only going to increase
+                    else if (distance > max)
+                        break;
+                }
+                // could not reach last idx return false after saving in cache
+                return cache[key] = false;
+            }
+        }
     }
 }
