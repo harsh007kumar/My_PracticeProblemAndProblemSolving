@@ -538,7 +538,7 @@ namespace InterviewProblemNSolutions
             //NeitherMinimumNorMaximum();
             //LongestSubstringWithoutRepeatingCharacters();
             //FindAllPossibleRecipesFromGivenSupplies();
-            //FindAllPeopleWithSecret();
+            FindAllPeopleWithSecret();
             //RecoverBinarySearchTree();
             //MergeTwoBinaryTrees();
             //LongestCommonPrefix();
@@ -8983,7 +8983,8 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < peoplesArr.Length; i++)
             {
                 meetingsArr[i].Print($"For '{peoplesArr[i]}' peoples starting with firstPerson => '{firstPersonsArr[i]}' who knows the secret below are the details of the meetings where x0:P1, x1:P2 & x3: Time at which meeting occurred");
-                DailyProblem.FindAllPeople(peoplesArr[i], meetingsArr[i], firstPersonsArr[i]).Print("Below peoples know the Secret at the end of all the meetings");
+                DailyProblem.FindAllPeopleUsingQueue(peoplesArr[i], meetingsArr[i], firstPersonsArr[i]).Print("Below peoples know the Secret at the end of all the meetings");
+                DailyProblem.FindAllPeopleUsingDFS(peoplesArr[i], meetingsArr[i], firstPersonsArr[i]).Print("Below peoples know the Secret at the end of all the meetings");
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }

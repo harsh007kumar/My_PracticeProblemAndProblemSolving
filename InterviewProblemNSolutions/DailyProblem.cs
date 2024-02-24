@@ -19548,7 +19548,7 @@ namespace InterviewProblemNSolutions
 
         // Ref https://leetcode.com/problems/find-all-people-with-secret/solutions/1600202/java-hashmap-and-queue/
         // Time O(n^2) Space O(Max(m,n)), n = length of meetings
-        public static IList<int> FindAllPeople(int n, int[][] meetings, int firstPerson)
+        public static IList<int> FindAllPeopleUsingQueue(int n, int[][] meetings, int firstPerson)
         {
             /*  Create a graph with Key a person and Value as list of meetings they had with others in the format {meetingWith, meetTime}
 
@@ -19614,6 +19614,82 @@ namespace InterviewProblemNSolutions
 
         }
 
+        // SLOWER (but passes all Tests)
+        // Time O(Max(mlogm,m*n)) | Space O(n*m), m = length of 'meetings'
+        public static IList<int> FindAllPeopleUsingDFS(int n, int[][] meetings, int firstPerson)
+        {
+            /* ALGO
+            Sort the meetings by time
+            Create HashSet 'knows' to store the id of people who know the secret
+            Iterate thru first time x given in the meeting Create a undirected graph of all people involved in meeting connected as per their meeting
+            perform start DFS from each person who knows the secret and mark all ppl they met as visited and knows secret
+            At the end convert the 'knows' set to list, sort and return
+            */
+            Dictionary<int, List<int>> g = new();
+            bool[] knows = new bool[n];
+            bool[] visited = new bool[n];
+            knows[0] = knows[firstPerson] = true;
+
+            // sort the meeting as per time (asc)
+            Array.Sort(meetings, (a, b) => a[2].CompareTo(b[2]));         // O(mlogm)
+            int p1, p2, curTime = meetings[0][2];
+            for (int i = 0; i < meetings.Length; i++)                          // O(m)
+            {
+                // this cur meeting is part of new grp/time
+                if (curTime != meetings[i][2])
+                {
+                    // evaluate how many new ppl got to know the secret
+                    foreach (var person in g.Keys)
+                        if (knows[person])
+                            DFS(person);                                // O(n)
+
+                    // create a new graph
+                    g = new();
+                    // reset visited
+                    for (int j = 0; j < n; j++) visited[j] = false;
+                    // update the curTime
+                    curTime = meetings[i][2];
+                }
+
+                // Ooptimization: can be added is everyone knows the secret at time 'X" stop iterating thru rest of the meetings
+
+                // add meeting to the undirect graph
+                p1 = meetings[i][0];
+                p2 = meetings[i][1];
+                // add p1 meeting
+                if (g.TryGetValue(p1, out List<int> p1Meetings)) p1Meetings.Add(p2);
+                else g[p1] = new List<int>() { p2 };
+                // add p2 meeting
+                if (g.TryGetValue(p2, out List<int> p2Meetings)) p2Meetings.Add(p1);
+                else g[p2] = new List<int>() { p1 };
+            }
+            // run the DFS for the last meeting
+            // evaluate how many new ppl got to know the secret
+            foreach (var person in g.Keys)
+                if (knows[person])
+                    DFS(person);                                     // O(n)
+
+            IList<int> result = new List<int>();
+            for (int i = 0; i < n; i++)
+                if (knows[i])
+                    result.Add(i);
+            return result;
+
+            // local helper func
+            void DFS(int personWhoKnows)
+            {
+                // already visited return
+                if (visited[personWhoKnows]) return;
+                // mark visited
+                visited[personWhoKnows] = true;
+                // add to knows set
+                knows[personWhoKnows] = true;
+                // spread secret in all meetings
+                if (g.TryGetValue(personWhoKnows, out List<int> meetingWithPpl))
+                    foreach (var personIMet in meetingWithPpl)
+                        DFS(personIMet);
+            }
+        }
         // Time O(nlogn) | Space O(n)
         public static void RecoverTree(TreeNode root)
         {
