@@ -605,6 +605,7 @@ namespace InterviewProblemNSolutions
             PerfectRectangle();
             BitwiseOfNumbersRange();
             FrogJump();
+            GreatestCommonDivisorTraversal();
 
 
 
@@ -10181,6 +10182,26 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void GreatestCommonDivisorTraversal()
+        {
+            // Ref https://leetcode.com/problems/greatest-common-divisor-traversal/editorial/ (Algo) + https://youtu.be/jZ-RVp5CVYY (For calculating PRIME factors)
+            // https://leetcode.com/problems/greatest-common-divisor-traversal
+            Utility.Print("2709. Greatest Common Divisor Traversal");
+            int[][] numsArr =
+            {
+                new int[] { 2, 3, 6 },
+                new int[] { 3, 9, 5 },
+                new int[] { 4, 3, 12, 8 },
+                new int[] { 4 },
+            };
+            foreach(var nums in numsArr) 
+            {
+                nums.Print("Input arr");
+                Console.WriteLine($"With condition: 'can traverse between index i and index j, i != j, if and only if gcd(nums[i], nums[j]) > 1'\n" +
+                    $"Every pair of indices i and j in nums, where i < j, there exists a sequence of traversals that can take us from i to j => {DailyProblem.CanTraverseAllPairs(nums)}");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

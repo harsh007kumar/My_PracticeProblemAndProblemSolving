@@ -19586,27 +19586,21 @@ namespace InterviewProblemNSolutions
                     meetSchedule[p2].Add(new int[] { p1, time });
             }
 
-            Queue<int> q = new Queue<int>();
+            Queue<int> q = new();
             q.Enqueue(0);
             q.Enqueue(firstPerson);
-            while (q.Count > 0)                                     // O(n), all person know the secret
-            {
-                var currPerson = q.Dequeue();
-                if (!meetSchedule.ContainsKey(currPerson)) continue; // no meetings present for a given person
-                foreach (var meet in meetSchedule[currPerson])      // O(n)
-                {
-                    // P1 meeting with P2 happened before P1 knew Secret or P2 knew secret before his meeting with P1
-                    if (SecretKnowTime[currPerson] > meet[1] || SecretKnowTime[meet[0]] <= meet[1])
-                        continue;
-                    else
-                    {
-                        q.Enqueue(meet[0]);
-                        SecretKnowTime[meet[0]] = meet[1];  // update the secret known time for P2 to earlier duration
-                    }
-                }
-            }
+            while (q.TryDequeue(out int person1))                                     // O(n), all person know the secret
+                if (meetSchedule.TryGetValue(person1, out List<int[]> meetingsP1Had))
+                    foreach (var person2 in meetingsP1Had)      // O(n)
+                        // P1 meeting with P2 happened before P1 knew Secret or P2 knew secret before his meeting with P1
+                        if (SecretKnowTime[person1] > person2[1] || SecretKnowTime[person2[0]] <= person2[1]) continue;
+                        else // secret was passed for 1st time/earliest time to p2 from p1 at time 't'
+                        {
+                            q.Enqueue(person2[0]);
+                            SecretKnowTime[person2[0]] = person2[1];  // update the secret known time for P2 to earlier duration
+                        }
 
-            List<int> knowSecret = new List<int>();
+            List<int> knowSecret = new();
             for (int i = 0; i < n; i++)                        // O(n)
                 if (SecretKnowTime[i] != int.MaxValue)
                     knowSecret.Add(i);
@@ -21737,6 +21731,88 @@ namespace InterviewProblemNSolutions
                 ithBitFromRight++;
             }
             return left << ithBitFromRight;
+        }
+
+
+        // Time O(nlogMAX) | Space O(n), n = length of 'nums', MAX = 100000
+        public static bool CanTraverseAllPairs(int[] nums)
+        {
+            /* ALGO
+            Handle the edge cases, if n = 1, return true, if nums[i] = 1, return false.
+            Create an Graph which will store the Node for all unique values & primeFactor (except 1)
+            For each element nums[i], iterate over all its prime factors, and for each prime factor add an undirected edge between num and prime
+            Also we keep adding all the nodes we create in graph to NotVisited set which is used later to find if its 1 connected graph
+            Run DFS from any value ex: 1st value in num to count the number of components.
+            Return true if the graph has one component, and false otherwise.
+             */
+            int l = nums.Length, min = nums.Min();
+            if (l == 1) return true;   // only 1 num in input (hence connected graph)
+            if (min == 1) return false;// there wud be atleast 1 node which won't be connected to anything since GCD of 1 is only 1 which we are not considering as given in problem
+
+            Dictionary<int, List<int>> g = new();
+            HashSet<int> NotVisited = new();
+            // add PrimeFactor as dummyNode and connect it to the num is divides
+            for (int i = 0; i < l; i++)                            // O(n)
+                                                                   // cal PrimeFactor only for unq numbers
+                if (!g.ContainsKey(nums[i]))
+                {
+                    g[nums[i]] = new();
+                    NotVisited.Add(nums[i]);
+                    int prime = 2, n = nums[i];
+                    // prime factor algo
+                    while (prime * prime <= n)                   // O(logMAX)
+                    {
+                        if (n % prime == 0)
+                        {
+                            // prime to num edge
+                            if (g.TryGetValue(prime, out List<int> dividesNums))
+                                dividesNums.Add(nums[i]);
+                            else g[prime] = new List<int>() { nums[i] };
+
+                            // num to prime edge
+                            g[nums[i]].Add(prime);
+
+                            // add primeNode to not visited Set
+                            NotVisited.Add(prime);
+
+                            // keep reducing the number till just added prime number divides it perfectly (so its not duplicated)
+                            while (n % prime == 0)
+                                n /= prime;
+                        }
+                        prime++;
+                    }
+                    // add the last largest prime which is not 1 or
+                    // the num itself as node for the num is already added
+                    if (n > 1 && n != nums[i])
+                    {
+                        // prime to num edge
+                        if (g.TryGetValue(n, out List<int> dividesNums))
+                            dividesNums.Add(nums[i]);
+                        else g[n] = new List<int>() { nums[i] };
+
+                        // num to prime edge
+                        g[nums[i]].Add(n);
+
+                        // add primeNode to not visited Set
+                        NotVisited.Add(n);
+                    }
+                }
+            // run DFS from any node ex: 1st numbers and it should be able to visit all nodes if its 1 connected graph
+            DFS(nums[0]);                                   // O(n)
+            return NotVisited.Count == 0;
+
+
+            // local helper func
+            void DFS(int node)
+            {
+                // new node Not visited yet
+                if (NotVisited.Contains(node))
+                {
+                    NotVisited.Remove(node); // remove from set now
+                    foreach (var adjNode in g[node])
+                        DFS(adjNode);
+                }
+            }
         }
     }
 }
