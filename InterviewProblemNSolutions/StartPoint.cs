@@ -606,6 +606,7 @@ namespace InterviewProblemNSolutions
             BitwiseOfNumbersRange();
             FrogJump();
             GreatestCommonDivisorTraversal();
+            FindBottomLeftTreeValue();
 
 
 
@@ -10202,6 +10203,44 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void FindBottomLeftTreeValue()
+        {
+            // https://leetcode.com/problems/find-bottom-left-tree-value
+            Utility.Print("513. Find Bottom Left Tree Value");
+            TreeNode[] treeArray = new TreeNode[]
+            {
+                new(2)
+                {
+                    left = new(1),
+                    right = new(3),
+                },
+                new(1)
+                {
+                    left = new(2)
+                    {
+                        left = new (4)
+                    },
+                    right = new(3)
+                    {
+                        left = new (5)
+                        {
+                            left = new (7)
+                        },
+                        right = new (6)
+                    },
+                },
+            };
+            foreach (var tree in treeArray)
+            {
+                tree.InOrder("Input Binary-Tree");
+                Console.WriteLine($"For above binary tree, the leftmost value in the last row of the tree is  => {DailyProblem.FindBottomLeftValue(tree)}");
+            }
+        }
+
+
+
 
 
 

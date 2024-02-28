@@ -21814,5 +21814,46 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+
+        // Time = Space = O(n), n = no of nodes in tree
+        public static int FindBottomLeftValue(TreeNode root)
+        {
+            /* Algo 
+            1. Create Queue which will node elements of type TreeNode
+            2. leftMost stores the left most node we have seen till now
+            3. isFirstNodeOfNextLevel tells whether the next element we traverse
+                is going to be the leftMost or not or next level
+            4. Add root and than Null to the queue
+            5. a Null marks cur level traversal is complete
+            6. Iterate thru the queue and keep on adding left n right child if not null
+            7. once we get null if there are still elements left in queue i.e.
+                next level than add Null pointer which will mark end of next level
+            9. reset 'isFirstNodeOfNextLevel' so leftmost is captured
+             */
+            int leftMost = root.val;
+            bool isFirstNodeOfNextLevel = false;
+            Queue<TreeNode> q = new();
+            q.Enqueue(root);
+            q.Enqueue(null);
+            while (q.TryDequeue(out TreeNode cur))
+                if (cur == null)
+                {
+                    if (q.Count > 0)
+                        q.Enqueue(null);
+                    isFirstNodeOfNextLevel = true;
+                }
+                else
+                {
+                    if (isFirstNodeOfNextLevel)
+                    {
+                        leftMost = cur.val;
+                        isFirstNodeOfNextLevel = false;
+                    }
+                    if (cur.left != null) q.Enqueue(cur.left);
+                    if (cur.right != null) q.Enqueue(cur.right);
+                }
+            return leftMost;
+        }
     }
 }
