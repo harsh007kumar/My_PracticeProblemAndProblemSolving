@@ -1,13 +1,8 @@
 ﻿using Sorting;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Metrics;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Numerics;
-using static System.Formats.Asn1.AsnWriter;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Security.Cryptography;
 
 namespace InterviewProblemNSolutions
 {
@@ -607,6 +602,7 @@ namespace InterviewProblemNSolutions
             FrogJump();
             GreatestCommonDivisorTraversal();
             FindBottomLeftTreeValue();
+            EvenOddTree();
 
 
 
@@ -10240,7 +10236,65 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void EvenOddTree()
+        {
+            // https://leetcode.com/problems/even-odd-tree
+            Utility.Print("1609. Even Odd Tree");
+            TreeNode[] treeArray =
+            [
+                new(1)
+                {
+                    left = new(10)
+                    {
+                        left = new(3)
+                        {
+                            left = new(12),
+                            right = new(8),
+                        },
+                    },
+                    right = new(4)
+                    {
+                        left = new(7)
+                        {
+                            left = new(6)
+                        },
+                        right = new (9)
+                        {
+                            right = new(2)
+                        }
+                    }
+                },
+                new(5)
+                {
+                    left = new(4)
+                    {
+                        left = new(3),
+                        right = new(3)
+                    },
+                    right = new(2)
+                    {
+                        left = new(7)
+                    }
+                },
+                new(5)
+                {
+                    left = new(9)
+                    {
+                        left = new(3),
+                        right = new(5)
+                    },
+                    right = new(1)
+                    {
+                        left = new(7)
+                    }
+                },
+            ];
+            foreach (var tree in treeArray)
+            {
+                tree.InOrder("Input Binary-Tree");
+                Console.WriteLine($"For above binary tree, is Even-Odd tree => {DailyProblem.IsEvenOddTree(tree)}");
+            }
+        }
 
 
 

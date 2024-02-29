@@ -21855,5 +21855,63 @@ namespace InterviewProblemNSolutions
                 }
             return leftMost;
         }
+
+
+        // Time = Space = O(n), n = no of nodes in 'Binary Tree'
+        public static bool IsEvenOddTree(TreeNode root)
+        {
+            List<TreeNode> curLevel = [root], nextLevel = [];
+            bool evenIndexedLevel = true;
+            TreeNode lastVal;
+
+            while (curLevel.Count > 0)
+            {
+                lastVal = curLevel[0];
+                // add left child to next level
+                if (lastVal.left != null) nextLevel.Add(lastVal.left);
+                // add right child to next level
+                if (lastVal.right != null) nextLevel.Add(lastVal.right);
+
+                
+                if (evenIndexedLevel)
+                {
+                    if (lastVal.val % 2 == 0) return false;  // 1st value not odd
+                    for (int i = 1; i < curLevel.Count; i++)
+                    {
+                        // all nums should be odd & increasing value
+                        if (curLevel[i].val % 2 == 0 || lastVal.val >= curLevel[i].val) return false;
+                        else lastVal = curLevel[i];
+
+                        // add left child to next level
+                        if (curLevel[i].left != null) nextLevel.Add(curLevel[i].left);
+                        // add right child to next level
+                        if (curLevel[i].right != null) nextLevel.Add(curLevel[i].right);
+                    }
+                }
+                else
+                {
+                    if (lastVal.val % 2 == 1) return false;  // 1st value not even
+                    for (int i = 1; i < curLevel.Count; i++)
+                    {
+                        // all nums should be even & decreasing value
+                        if (curLevel[i].val % 2 == 1 || lastVal.val <= curLevel[i].val) return false;
+                        else lastVal = curLevel[i];
+
+                        // add left child to next level
+                        if (curLevel[i].left != null) nextLevel.Add(curLevel[i].left);
+                        // add right child to next level
+                        if (curLevel[i].right != null) nextLevel.Add(curLevel[i].right);
+                    }
+                }
+
+                // update next level onto current
+                curLevel = nextLevel;
+                // reset next level
+                nextLevel = new();
+                // switch 'evenIndexedLevel' boolean
+                evenIndexedLevel = !evenIndexedLevel;
+            }
+            return true;
+        }
     }
 }
