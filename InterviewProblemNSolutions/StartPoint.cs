@@ -603,6 +603,7 @@ namespace InterviewProblemNSolutions
             GreatestCommonDivisorTraversal();
             FindBottomLeftTreeValue();
             EvenOddTree();
+            BearAndSteadyGene();
 
 
 
@@ -10294,6 +10295,16 @@ namespace InterviewProblemNSolutions
                 tree.InOrder("Input Binary-Tree");
                 Console.WriteLine($"For above binary tree, is Even-Odd tree => {DailyProblem.IsEvenOddTree(tree)}");
             }
+        }
+
+
+        public static void BearAndSteadyGene()
+        {
+            // https://www.hackerrank.com/challenges/bear-and-steady-gene/problem
+            Utility.Print("Bear and Steady Gene");
+            string[] geneArr = { "GAAATAAA", "CGAT", "AAAA", "AAAAAAAAAAAA", "AAAAAAAACAGT" };
+            foreach (var gene in geneArr)
+                Console.WriteLine($"For Input '{gene}' smallest substring len which can be replaced to make is a steady gene where each DNA freq is len/4 of gene is => '{StringAlgorithms.SteadyGene(gene)}'");
         }
 
 

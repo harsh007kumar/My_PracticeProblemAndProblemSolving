@@ -37,7 +37,7 @@ namespace InterviewProblemNSolutions
         /// here d = no of ASCII characters, q is largest prime smaller than 10^m, h = d^(m-1)
         /// m = length of pattern
         /// n = length of input
-        /// s = leading character in current hash value
+        /// s = leading character in current hash freq
         /// Time Best case O(n+m) worst O(n×m)|| Space O(1)
         /// </summary>
         /// <param name="input"></param>
@@ -53,14 +53,14 @@ namespace InterviewProblemNSolutions
             var m = pattern.Length;
             var q = primeNo;
             var h = 1;
-            int pHash = 0;                          // hash value for pattern
-            int tHash = 0;                          // hash value for subset of input
+            int pHash = 0;                          // hash freq for pattern
+            int tHash = 0;                          // hash freq for subset of input
 
-            // calculate value of h                 // h = d^(m-1)
+            // calculate freq of h                 // h = d^(m-1)
             for (int i = 0; i < m - 1; i++)
                 h = (h * d) % q;
 
-            // calculate the hash value for pattern and first subset in input
+            // calculate the hash freq for pattern and first subset in input
             for (int i = 0; i < m; i++)
             {
                 pHash = (pHash * d + pArr[i]) % q;
@@ -69,7 +69,7 @@ namespace InterviewProblemNSolutions
 
             for (int i = 0; i < n - m + 1; i++)
             {
-                // if Hash value matches, check entire pattern with current input subset
+                // if Hash freq matches, check entire pattern with current input subset
                 if (pHash == tHash)
                 {
                     var j = 0;
@@ -82,7 +82,7 @@ namespace InterviewProblemNSolutions
                 if (i < n - m)
                     tHash = (d * (tHash - (tArr[i] * h)) + tArr[i + m]) % q;
 
-                // We might get negative value of tHash, converting it to positive 
+                // We might get negative freq of tHash, converting it to positive 
                 if (tHash < 0)
                     tHash = tHash + q;
 
@@ -116,7 +116,7 @@ namespace InterviewProblemNSolutions
                     }
                 }
                 else if (j > 0)
-                    j = lps[j - 1];                 // while j>0 go back to prev index value in lps and start matching again
+                    j = lps[j - 1];                 // while j>0 go back to prev index freq in lps and start matching again
                 else i++;                           // characters didn't match, start comparing from next character in input
             }
         }
@@ -130,13 +130,13 @@ namespace InterviewProblemNSolutions
             {
                 if (pArr[i] == pArr[j])             // characters match
                 {
-                    // mark the occurance of current char at lps[i] as the value of j + 1, which indicates where to start matching again in lps
+                    // mark the occurance of current char at lps[i] as the freq of j + 1, which indicates where to start matching again in lps
                     lps[i] = j + 1;                 // can be done in single line => lps[i++] = 1 + j++;
                     i++;
                     j++;
                 }
                 else if (j > 0)
-                    j = lps[j - 1];                 // while j>0 go back to prev index value in lps and start matching again
+                    j = lps[j - 1];                 // while j>0 go back to prev index freq in lps and start matching again
                 else i++;
             }
         }
@@ -1767,7 +1767,7 @@ namespace InterviewProblemNSolutions
             2. Now transfer o/p of manacher's into 2 arrays:
             - 1st contains length of longest palindrome on left of each index
             - 2nd contains length of longest palindrome on right of each index
-            3. Iterate thru 0..l-2 indicies and for each index update the 'maxProduct' if greater value of LongestPaliOnleft[i]*LongestPaliOnright[i+1] is found
+            3. Iterate thru 0..l-2 indicies and for each index update the 'maxProduct' if greater freq of LongestPaliOnleft[i]*LongestPaliOnright[i+1] is found
              */
             int l = s.Length;
             if (l == 2) return 1;       // base case
@@ -1790,7 +1790,7 @@ namespace InterviewProblemNSolutions
                 var j = i + half;
                 longestPaliOnLeft[j] = Math.Max(longestPaliOnLeft[j], paliLen);
             }
-            // update for shorter palindrome so for large palindrome the index before show have -2 value atleast
+            // update for shorter palindrome so for large palindrome the index before show have -2 freq atleast
             for (int i = l - 2; i >= 0; i--)
                 longestPaliOnLeft[i] = Math.Max(longestPaliOnLeft[i], longestPaliOnLeft[i + 1] - 2);
             // Now we have
@@ -1824,7 +1824,7 @@ namespace InterviewProblemNSolutions
                 longestPaliOnRight[j] = Math.Max(longestPaliOnRight[j], paliLen);
 
             }
-            // update for shorter palindrome so for large palindrome the index before show have -2 value atleast
+            // update for shorter palindrome so for large palindrome the index before show have -2 freq atleast
             for (int i = 1; i < l; i++)
                 longestPaliOnRight[i] = Math.Max(longestPaliOnRight[i], longestPaliOnRight[i - 1] - 2);
             // Now we have
@@ -1876,6 +1876,59 @@ namespace InterviewProblemNSolutions
                     mana[j++] = P[i];
                 return mana;
             }
+        }
+
+
+        // Time O(n) | Space O(1), n = length of input string 'gene'
+        public static int SteadyGene(string gene)
+        {
+            int l = gene.Length, reqFreq = l / 4;
+            Dictionary<char, int> geneCount = new()
+            {
+                {'C',0},
+                {'G',0},
+                {'A',0},
+                {'T',0},
+            };
+
+            // get the frequency for all 4 diff genes
+            foreach (var g in gene)                              // O(n)
+                geneCount[g]++;
+
+            int unwantedGenesCount = 0;
+            Dictionary<char, int> genesInExcess = new();
+            foreach (var geneFreq in geneCount)                  // O(4)
+                if (geneFreq.Value > reqFreq)
+                {
+                    unwantedGenesCount += geneFreq.Value - reqFreq;
+                    genesInExcess[geneFreq.Key] = geneFreq.Value - reqFreq;
+                }
+
+            // no modification req
+            if (genesInExcess.Count == 0) return 0;
+
+            // need to find the smallest substring which has all the required Excess gene which are in surplus
+            int i = -1, left = 0, allExtraGeneFound = 0, minReplaceLen = int.MaxValue;
+            int[] curGeneCount = new int[26];
+            while (++i < l)                                        // O(n)
+                if (genesInExcess.TryGetValue(gene[i], out int freq) && ++curGeneCount[gene[i] - 'A'] <= freq)
+                {
+                    ++allExtraGeneFound;
+
+                    // we have found all extra genes which can be replace with what we want to get all genes in 4's multiple
+                    while (allExtraGeneFound == unwantedGenesCount)
+                    {
+                        minReplaceLen = Math.Min(minReplaceLen, 1 + i - left);
+                        // smaller substring to be replaced found
+                        if (minReplaceLen == unwantedGenesCount)
+                            return minReplaceLen;
+
+                        var ch = gene[left++];
+                        if (genesInExcess.TryGetValue(ch, out int excessValue) && --curGeneCount[ch - 'A'] < excessValue)
+                            allExtraGeneFound--;
+                    }
+                }
+            return minReplaceLen;
         }
     }
 }
