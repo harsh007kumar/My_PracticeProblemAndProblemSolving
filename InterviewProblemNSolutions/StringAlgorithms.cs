@@ -1930,5 +1930,42 @@ namespace InterviewProblemNSolutions
                 }
             return minReplaceLen;
         }
+
+        // Time O(n) | Space O(26), n = length of 's'
+        public static string LastNonEmptyString(string s)
+        {
+            /* ALGO
+            Count the freq of each char
+            Now go thru the freq of each and create a HashSet which only has characters with freq == maxFreq
+            Now since we know only max freq char wud be left after all removal
+            from the end iterate and add to Char stack if that char is present in above hashset (& remove from set after adding to stack)
+            at end return string formed by Stack chars
+             */
+            int[] charFreq = new int[26];
+            int maxFreq = 0, l = s.Length;
+
+            for (int i = 0; i < l; i++)
+                charFreq[s[i] - 'a']++;
+
+            HashSet<char> charsWithMaxFreq = new();
+            for (int i = 0; i < 26; i++)
+                if (charFreq[i] > maxFreq)
+                {
+                    maxFreq = charFreq[i];
+                    charsWithMaxFreq = new HashSet<char>() { (char)(i + 'a') };
+                }
+                else if (charFreq[i] == maxFreq)
+                    charsWithMaxFreq.Add((char)(i + 'a'));
+
+            Stack<char> st = new();
+            // find 1st occurrences from the end and add to final ans for each max freq char
+            for (int i = l - 1; i >= 0; i--)
+                if (charsWithMaxFreq.Contains(s[i]))
+                {
+                    st.Push(s[i]);
+                    charsWithMaxFreq.Remove(s[i]);
+                }
+            return new string(st.ToArray());
+        }
     }
 }

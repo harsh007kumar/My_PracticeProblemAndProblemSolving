@@ -604,6 +604,7 @@ namespace InterviewProblemNSolutions
             FindBottomLeftTreeValue();
             EvenOddTree();
             BearAndSteadyGene();
+            ApplyOperationsToMakeStringEmpty();
 
 
 
@@ -10306,6 +10307,17 @@ namespace InterviewProblemNSolutions
             foreach (var gene in geneArr)
                 Console.WriteLine($"For Input '{gene}' smallest substring len which can be replaced to make is a steady gene where each DNA freq is len/4 of gene is => '{StringAlgorithms.SteadyGene(gene)}'");
         }
+
+
+        public static void ApplyOperationsToMakeStringEmpty()
+        {
+            // https://leetcode.com/problems/apply-operations-to-make-string-empty
+            Utility.Print("3039. Apply Operations to Make String Empty");
+            string[] strArr = { "aabcbbca", "abcd" };
+            foreach (var s in strArr)
+                Console.WriteLine($"Value of the string '{s}' after applying req operation and right before being empty is => '{StringAlgorithms.LastNonEmptyString(s)}'");
+        }
+
 
 
 
