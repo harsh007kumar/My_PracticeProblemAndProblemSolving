@@ -605,7 +605,7 @@ namespace InterviewProblemNSolutions
             EvenOddTree();
             BearAndSteadyGene();
             ApplyOperationsToMakeStringEmpty();
-
+            BagOfTokens();
 
 
 
@@ -10319,6 +10319,24 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void BagOfTokens()
+        {
+            // https://leetcode.com/problems/bag-of-tokens
+            Utility.Print("948. Bag of Tokens");
+            int[][] tokens =
+            {
+                [100 ],
+                [200,100],
+                [100,200,300,400],
+            };
+            int[] power = [50, 150, 200];
+            for (int i = 0; i < power.Length; i++)
+            {
+                tokens[i].Print("Token arr");
+                Console.WriteLine($"With start power {power[i]} and tokenCount 0 max token we can get with given constraints is => {DynamicProgramming.BagOfTokensScoreSlower(tokens[i], power[i])}");
+                Console.WriteLine($"With start power {power[i]} and tokenCount 0 max token we can get with given constraints is => {DailyProblem.BagOfTokensScore(tokens[i], power[i])}");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

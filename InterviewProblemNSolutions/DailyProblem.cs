@@ -21913,5 +21913,39 @@ namespace InterviewProblemNSolutions
             }
             return true;
         }
+
+
+        // Time O(nlogn) Space O(1), n = length of 'tokens'
+        public static int BagOfTokensScore(int[] tokens, int curPower)
+        {
+            /* ALGO
+            1. Sort the array
+            2. now our aim is to increase the score and return the max we can get at any point in time
+            3. we set the boundery to lt = 0 and rt = n-1
+            4. if we can increase the score i.e. smallest token which is on left is <= curPower, increase the token+1 and reduce power, update max
+            5. if above not possible try to max power which is on the right most side by sacrificing 1 token, if we have atleast 1
+            6. return the maxToken
+             */
+            Array.Sort(tokens);                     // O(nlogn)
+            int lt = 0, rt = tokens.Length - 1, curToken = 0, maxToken = 0;
+            while (lt <= rt)                           // O(n)
+                                                       // increase score if we can
+                if (tokens[lt] <= curPower)
+                {
+                    // increament the token and update the max seen so far
+                    maxToken = Math.Max(maxToken, ++curToken);
+                    // reduce the power and move the lt pointer frwd
+                    curPower -= tokens[lt++];
+                }
+                else if (curToken > 0)
+                {
+                    // increament the power and move the rt pointer -1
+                    curPower += tokens[rt--];
+                    // reduce the token count by 1
+                    --curToken;
+                }
+                else break;
+            return maxToken;
+        }
     }
 }

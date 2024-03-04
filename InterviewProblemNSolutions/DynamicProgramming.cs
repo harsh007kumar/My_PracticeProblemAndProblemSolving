@@ -3446,5 +3446,35 @@ namespace InterviewProblemNSolutions
                 return cache[key] = false;
             }
         }
+
+
+        // DP-Top-Down
+        // Time = Space = O(n^2), n = length of 'tokens'
+        public static int BagOfTokensScoreSlower(int[] tokens, int power)
+        {
+            int l = tokens.Length;
+            Array.Sort(tokens);                     // O(nlogn)
+            Dictionary<string, int> cache = [];
+            return MaxScore(0, l - 1, power, 0);         // O(n^2)
+
+            // local helper func
+            int MaxScore(int lt, int rt, int p, int t)
+            {
+                if (lt > rt) return t;
+
+                string key = lt + "," + rt + "," + p + "," + t;
+                if (cache.TryGetValue(key, out int value)) return value;
+                // there are 2 possibilities
+                int maxToken = t;
+                // face-down from left side (to gain score, losing power)
+                if (tokens[lt] <= p)
+                    maxToken = Math.Max(maxToken, MaxScore(lt + 1, rt, p - tokens[lt], 1 + t));
+                // face-up from right side (to gain power, losing 1 score)
+                if (t > 0)
+                    maxToken = Math.Max(maxToken, MaxScore(lt, rt - 1, p + tokens[rt], t - 1));
+
+                return cache[key] = maxToken;
+            }
+        }
     }
 }
