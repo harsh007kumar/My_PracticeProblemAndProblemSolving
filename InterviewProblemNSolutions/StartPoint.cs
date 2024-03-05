@@ -606,6 +606,7 @@ namespace InterviewProblemNSolutions
             BearAndSteadyGene();
             ApplyOperationsToMakeStringEmpty();
             BagOfTokens();
+            MinLengthStringAfterDeletingSimilar();
 
 
 
@@ -10337,6 +10338,18 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"With start power {power[i]} and tokenCount 0 max token we can get with given constraints is => {DailyProblem.BagOfTokensScore(tokens[i], power[i])}");
             }
         }
+
+
+        public static void MinLengthStringAfterDeletingSimilar()
+        {
+            // https://leetcode.com/problems/minimum-length-of-string-after-deleting-similar-ends
+            Utility.Print("1750. Minimum Length of String After Deleting Similar Ends");
+            string[] sArr = ["ca", "cabaabac", "aabccabba", "bbbbbbbbbbbbbbbbbbbbbbbbbbbabbbbbbbbbbbbbbbccbcbcbccbbabbb"];
+            foreach (var s in sArr)
+                Console.WriteLine($"For input '{s}' after deleting similar end the min length possible is => '{DailyProblem.MinimumLengthStr(s)}'");
+        }
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

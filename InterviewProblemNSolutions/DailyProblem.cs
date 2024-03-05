@@ -21947,5 +21947,23 @@ namespace InterviewProblemNSolutions
                 else break;
             return maxToken;
         }
+
+
+        // Time O(n) Space O(1), n = length of 's'
+        public static int MinimumLengthStr(string s)
+        {
+            /* ALGO
+            1. For each matching left and right most character remove as many characters from both end as possible
+            2. At the end return the distance b/w rt and lt pointer
+             */
+            int lt = 0, rt = s.Length - 1;
+            while (lt < rt && s[lt] == s[rt])
+            {
+                char cur = s[lt];
+                while (lt < rt && s[lt] == cur) lt++;
+                while (lt <= rt && s[rt] == cur) rt--;
+            }
+            return 1 + rt - lt;
+        }
     }
 }
