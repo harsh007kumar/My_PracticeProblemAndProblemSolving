@@ -18277,17 +18277,26 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time O(nlogn), n = length of 'str'
-        public static string CustomSortString_Sorting(string order, string str)
+        // Time O(n+mlogm) | Space O(n+m), n & m = length of string 'order' and 's' respectively
+        public static string CustomSortString_Sorting(string order, string s)
         {
-            int[] priority = new int[26];
-            // set the priority from 0..25 for each letter in 'order'
-            for (int i = 0; i < order.Length; i++)      // O(m)
-                priority[order[i] - 'a'] = i + 1;
-            // now using above priority sort the str
-            char[] sArr = str.ToCharArray();            // O(n)
-            Array.Sort(sArr, (x, y) => priority[x - 'a'].CompareTo(priority[y - 'a'])); // O(nlogn)
-            return new string(sArr);
+            /* ALGO
+            1. Find & save the priority of characters in 'charPriority' by iterating thru 1st string 'order'.
+            2. The left most characters has the highest priority assign it 26 and decrease priority value by 1 for next char to come
+            3. this way for each character present in 'order' we wud have set its priority ranging from 26..1, any char which is not present will have the priority '0'
+            4. Now we simple sort the 2nd string 's' where we compare each character being sorted with their values from 'charPriority' array
+            5. Higher the value == higher the priority and will come before next character
+            6. All characters which are not present in 'order' have 0 priority hence will automatically we sorted and moved towards the end.
+             */
+            int priority = 26; // highest priority
+            int[] charPriority = new int[26];
+            // set the priority of all characters in 1st string 'order'
+            foreach (var ch in order)        // O(n)
+                charPriority[ch - 'a'] = priority--;
+            // sort 2nd string 's' as per above priority
+            var sorted = s.ToCharArray();   // O(m)
+            Array.Sort(sorted, (x, y) => charPriority[y - 'a'].CompareTo(charPriority[x - 'a'])); // O(mlogm)
+            return new string(sorted);
         }
         // Time O(Max(n,m), n,m = length of 'str' & 'order' respectively
         public static string CustomSortString(string order, string str)
@@ -21965,5 +21974,7 @@ namespace InterviewProblemNSolutions
             }
             return 1 + rt - lt;
         }
+
+
     }
 }
