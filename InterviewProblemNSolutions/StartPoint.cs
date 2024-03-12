@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 
 namespace InterviewProblemNSolutions
 {
@@ -10364,6 +10363,112 @@ namespace InterviewProblemNSolutions
             foreach (var s in sArr)
                 Console.WriteLine($"For input '{s}' after deleting similar end the min length possible is => '{DailyProblem.MinimumLengthStr(s)}'");
         }
+
+
+        public static void RemoveZeroSumConsecutiveNodesFromLinkedList()
+        {
+            // https://leetcode.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list
+            Utility.Print("1171. Remove Zero Sum Consecutive Nodes from Linked List");
+            // [1,2,-3,3,1]
+            // [1,2,3,-3,4]
+            // [1,2,3,-3,-2]
+            // [1,3,2,-3,-2,5,5,-5,1]
+            // [1,1,1,0,-1,1,-1]
+            ListNode[] headArr =
+                [
+                    new ListNode(1)
+                    {
+                        next = new ListNode(2)
+                        {
+                            next = new ListNode(-3)
+                            {
+                                next = new ListNode(3)
+                                {
+                                    next = new ListNode(1)
+                                }
+                            }
+                        }
+                    },
+                    new ListNode(1)
+                    {
+                        next = new ListNode(2)
+                        {
+                            next = new ListNode(3)
+                            {
+                                next = new ListNode(-3)
+                                {
+                                    next = new ListNode(4)
+                                }
+                            }
+                        }
+                    },
+                    new ListNode(1)
+                    {
+                        next = new ListNode(2)
+                        {
+                            next = new ListNode(3)
+                            {
+                                next = new ListNode(-3)
+                                {
+                                    next = new ListNode(-2)
+                                }
+                            }
+                        }
+                    },
+                    new ListNode(1)
+                    {
+                        next = new ListNode(3)
+                        {
+                            next = new ListNode(2)
+                            {
+                                next = new ListNode(-3)
+                                {
+                                    next = new ListNode(-2)
+                                    {
+                                        next = new ListNode(5)
+                                        {
+                                            next = new ListNode(5)
+                                            {
+                                                next = new ListNode(-5)
+                                                {
+                                                    next = new ListNode(1)
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    new ListNode(1)
+                    {
+                        next = new ListNode(1)
+                        {
+                            next = new ListNode(1)
+                            {
+                                next = new ListNode(0)
+                                {
+                                    next = new ListNode(-1)
+                                    {
+                                        next = new ListNode(1)
+                                        {
+                                            next = new ListNode(-1)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ];
+            foreach (var head in headArr)
+            {
+                head.Print("Input linked-list");
+                DailyProblem.RemoveZeroSumSublists(head).Print("After repeatedly deleting consecutive sequences of nodes that sum to Zero");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

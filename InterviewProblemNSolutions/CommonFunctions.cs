@@ -244,11 +244,11 @@ namespace InterviewProblemNSolutions
 
         public static void Print(this ListNode head, string msg = "")
         {
-            if (msg != "") Console.Write($" Printing \'{msg}\':");
+            if (msg != "") Console.Write($" Printing {msg} =>");
             ListNode temp = head;
             while (temp != null)
             {
-                Console.Write($" {temp.val} <<");
+                Console.Write($" {temp.val} | ");
                 temp = temp.next;
             }
             Console.WriteLine();

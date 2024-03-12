@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace InterviewProblemNSolutions
 {
@@ -22129,5 +22130,57 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time = Space = O(n), n = no of nodes in LinkedList
+        public static ListNode RemoveZeroSumSublists(ListNode cur)
+        {
+            /* ALGO
+            1.Add a DummyNode at start
+            2. Create a Dictionary<int,ListNode> to store the preFixSumMap seen so far and the node at which it was seen
+            3. We keep adding each node value to int 'sumSoFar' till and check if it's present in Dictionary/Hashtable
+                if present // now deletion starts
+                a. initialize 'deleteFrom' pointer to next value of node who's preFix matched with 'sumSoFar'
+                b. Initialize 'deletePrefixSum' with startingFrom.value as delete will happen after this node
+                c. add 'deleteFrom' node value to 'deletePrefixSum'
+                d. remove 'deletePrefixSum' from dictionary // marking deletion of that node
+                e. repeat above steps till deleteFrom!=cur
+                f. at last assigned the startingFrom.next to cur.next as even cur Node wud be deleted
+            4. move cur to cur.next
+            5. return dummy.next
+            */
+
+            ListNode dummy = new ListNode(0), deleteNode;
+            dummy.next = cur;
+            // remove all 0 value nodes
+            cur = dummy;
+            while(cur.next!=null)
+            {
+                if(cur.next.val==0)
+                    cur.next = cur.next.next;
+                else cur = cur.next;
+            }
+            Dictionary<int, ListNode> preFixSumMap = new();
+            cur = dummy;
+            int sumSoFar = 0, deletePrefixSum = 0;
+            while (cur != null)                // O(n)
+            {
+                sumSoFar += cur.val;
+                if (preFixSumMap.TryGetValue(sumSoFar, out ListNode startingFrom))
+                {
+                    deleteNode = startingFrom.next;
+                    deletePrefixSum = sumSoFar;
+                    while (deleteNode != cur)
+                    {
+                        deletePrefixSum += deleteNode.val;
+                        preFixSumMap.Remove(deletePrefixSum);
+                        deleteNode = deleteNode.next;
+                    }
+                    startingFrom.next = cur.next;
+                }
+                else preFixSumMap[sumSoFar] = cur;
+
+                cur = cur.next;
+            }
+            return dummy.next;
+        }
     }
 }
