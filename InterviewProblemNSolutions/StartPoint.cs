@@ -45,6 +45,7 @@ namespace InterviewProblemNSolutions
             MeetingRoomsIII();
             //NumberOfIslands();
             TrapRainWater();
+            TrappingRainWaterII();
             //FindTheCelebrity();
             //IsPalindrome();
             //WordSearch();
@@ -607,6 +608,8 @@ namespace InterviewProblemNSolutions
             ApplyOperationsToMakeStringEmpty();
             BagOfTokens();
             MinLengthStringAfterDeletingSimilar();
+            RemoveZeroSumConsecutiveNodesFromLinkedList();
+
 
 
 
@@ -1266,6 +1269,19 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Maximum Vol of water that can be trapped in above Map is (2-Pointers based approach): {DailyProblem.TrapRainWater_2Pointer(height)}");
             }
         }
+        public static void TrappingRainWaterII()
+        {
+            // https://leetcode.com/problems/trapping-rain-water-ii
+            Utility.Print("407. Trapping Rain Water II");
+            int[][][] heightMapArr = [[[1, 4, 3, 1, 3, 2], [3, 2, 1, 3, 2, 4], [2, 3, 3, 2, 3, 1]], [[3, 3, 3, 3, 3], [3, 2, 2, 2, 3], [3, 2, 1, 2, 3], [3, 2, 2, 2, 3], [3, 3, 3, 3, 3]], [[5, 5, 5, 1], [5, 1, 1, 5], [5, 1, 5, 5], [5, 2, 5, 8]], [[14, 17, 18, 16, 14, 16], [17, 3, 10, 2, 3, 8], [11, 10, 4, 7, 1, 7], [13, 7, 2, 9, 8, 10], [13, 1, 3, 4, 8, 6], [20, 3, 3, 9, 10, 8]]];
+            foreach (var heightMap in heightMapArr)
+            {
+                heightMap.Print("Elevation Map");
+                Console.WriteLine($"Maximum Vol of water that can be trapped in above Map is (stack based approach): {DailyProblem.TrapRainWaterII(heightMap)}");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
 
         public static void FindTheCelebrity()
         {
@@ -8199,7 +8215,7 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/custom-sort-string/
             Utility.Print("791. Custom Sort String");
             string order = "cba", str = "abcd";
-            //Console.WriteLine($" After permuting the characters of '{str}' so that they match the '{order}' sorted order : '{DailyProblem.CustomSortString_Sorting(order, str)}'");
+            Console.WriteLine($" After permuting the characters of '{str}' so that they match the '{order}' sorted order : '{DailyProblem.CustomSortString_Sorting(order, str)}'");
             Console.WriteLine($" After permuting the characters of '{str}' so that they match the '{order}' sorted order : '{DailyProblem.CustomSortString(order, str)}'");
         }
 
@@ -10348,8 +10364,6 @@ namespace InterviewProblemNSolutions
             foreach (var s in sArr)
                 Console.WriteLine($"For input '{s}' after deleting similar end the min length possible is => '{DailyProblem.MinimumLengthStr(s)}'");
         }
-
-
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

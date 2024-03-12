@@ -21976,5 +21976,158 @@ namespace InterviewProblemNSolutions
         }
 
 
+        // Time O(r*c*uniqHeights) | Space O(r*c), r & c = no of rows and cols respectively, uniqHeights = 20000
+        public static int TrapRainWaterII(int[][] heightMap)
+        {
+            /* ALGO
+            1. Identify all the cells which can collected water and those from where waters falls out ulitmately via any of 4 edges
+            2. Base case: Neither of the boundry cells cannot collect water
+            
+            3. Now group cells which can hold water as value in a Dictionary with cell height as the key
+            4. Get the list of uniq height sorted in ascending order from above Dictionary Keys
+            5. Now starting with the cell which has the minimum ht look in all 4 direction
+                a. see a wall or another cell with different ht update => 'smallestBoundryWallHeight'
+                b. cell of same ht, run DFS on it too if not already visited and add it to the list of 'recentlyVisitedCells'
+            6. using 'recentlyVisitedCells' list we know which cells can be filled to next closed wall/cell
+                hence use the diff for each cell with 'smallestBoundryWallHeight' to calculate water it can store currently
+                Note: [this cell might collect more water which wud be calculated when we are iterating thru next ht]
+            7. Also remember to add cell with increase ht back to the dictionary 'sameHeightCells' to it can be used again
+            8. Update update grand total 'totalWaterCollected'
+
+            by following step#5 we keep increasing the height of each cell till the point water collection is no longer possible for it
+            */
+            int rows = heightMap.Length, cols = heightMap[0].Length, totalWaterCollected = 0;
+            int[][] direction = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+            bool[,] canCollect = new bool[rows, cols];
+            bool[,] visited = new bool[rows, cols];
+            for (int r = 0; r < rows; r++)
+                for (int c = 0; c < cols; c++)
+                    canCollect[r, c] = true;
+
+            Queue<int[]> q = new();
+            // mark all boundry as Cannot collect water and add these Cells to Queue which cannot hold water
+            for (int r = 0; r < rows; r++) // left and right most column
+            {
+                canCollect[r, 0] = canCollect[r, cols - 1] = false;
+                visited[r, 0] = visited[r, cols - 1] = true;
+                q.Enqueue([r, 0]);
+                q.Enqueue([r, cols - 1]);
+            }
+            for (int c = 1; c < cols - 1; c++) // 1st and last row
+            {
+                canCollect[0, c] = canCollect[rows - 1, c] = false;
+                visited[0, c] = visited[rows - 1, c] = true;
+                q.Enqueue([0, c]);
+                q.Enqueue([rows - 1, c]);
+            }
+
+            // identify cells which can hold water
+            while (q.TryDequeue(out int[] cur))
+            {
+                int r = cur[0], c = cur[1];
+                // if(visited[r,c]) continue;
+                // visited[r,c] = true;
+
+                // check if any of 4 cells has higher ht means water will flow for it too via cur cell as its neighbour
+                foreach (var dir in direction)
+                {
+                    int adj_rID = r + dir[0], adj_cID = c + dir[1];
+                    if (ValidCell(adj_rID, adj_cID) && heightMap[adj_rID][adj_cID] >= heightMap[r][c] && !visited[adj_rID, adj_cID])
+                    {
+                        canCollect[adj_rID, adj_cID] = false;
+                        visited[adj_rID, adj_cID] = true;
+                        q.Enqueue([adj_rID, adj_cID]);
+                    }
+                }
+            }
+
+
+            // grp all the cells that can hold water by their heights
+            Dictionary<int, List<int[]>> sameHeightCells = [];
+            for (int r = 1; r < rows - 1; r++)
+                for (int c = 1; c < cols - 1; c++)
+                    if (canCollect[r, c])
+                    {
+                        var ht = heightMap[r][c];
+                        // current height is already present, add new cell as value to key with given ht
+                        if (sameHeightCells.TryGetValue(ht, out List<int[]> val))
+                            val.Add([r, c]);
+                        else sameHeightCells[ht] = new List<int[]>() { new int[] { r, c } };
+                    }
+            // get all the unique heights in ascending order
+            var unqHeights = (from kvp in sameHeightCells
+                                       orderby kvp.Key
+                                       select kvp.Key).ToArray();
+
+
+            int smallestBoundryWallHeight, waterTrappedInCurPond = 0;
+            List<int[]> recentlyVisitedCells = null;
+            foreach (var ht in unqHeights)
+            {
+                // reset visited
+                visited = new bool[rows, cols];
+
+                foreach (var cell in sameHeightCells[ht].ToList())
+                {
+                    recentlyVisitedCells = [];
+                    smallestBoundryWallHeight = int.MaxValue;
+                    int r = cell[0], c = cell[1];
+                    // not already visited
+                    if (!visited[r, c])
+                        // we calculate the smallestWall surrounding current cell and any adjacent cell of same ht only
+                        FindSameHtAdjCells(r, c);   // run DFS to find cells in same pond
+
+                    // Skip as we don't want to add -ve water
+                    if (smallestBoundryWallHeight <= heightMap[r][c]) continue;
+
+                    waterTrappedInCurPond = 0;
+                    // Fill the cell(s) just iterated to the height of next neareset cell or wall
+                    foreach(var sameHtCell in recentlyVisitedCells)
+                    {
+
+                        int r1 = sameHtCell[0], c1 = sameHtCell[1];
+                        //Console.WriteLine($"Water trapped at [{r1},{c1}] which has ht {heightMap[r1][c1]}: {smallestBoundryWallHeight - heightMap[r1][c1]}");
+
+                        // calculate water trapped by current cell
+                        waterTrappedInCurPond += smallestBoundryWallHeight - heightMap[r1][c1];
+                        // fill to next boundry
+                        heightMap[r1][c1] = smallestBoundryWallHeight;
+
+                        // if new height is already present, add cur cell to same list
+                        if (sameHeightCells.TryGetValue(smallestBoundryWallHeight, out List<int[]> val))
+                            val.Add([r1, c1]);
+                    }
+                    // update grand total
+                    totalWaterCollected += waterTrappedInCurPond;
+                }
+            }
+            return totalWaterCollected;
+
+            // local helper func
+            bool ValidCell(int r, int c) => r >= 0 && r < rows && c >= 0 && c < cols;
+
+            void FindSameHtAdjCells(int r, int c)               // DFS
+            {
+                if (!visited[r, c])
+                {
+                    // mark cur cell as visited
+                    visited[r, c] = true;
+                    recentlyVisitedCells.Add([r, c]);
+
+                    // look in all 4 direct and update boundry
+                    foreach (var dir in direction)
+                    {
+                        int r1 = r + dir[0], c1 = c + dir[1];
+                        // if another adjacent cell of same height
+                        if (canCollect[r1, c1] && heightMap[r1][c1] == heightMap[r][c])
+                            FindSameHtAdjCells(r1, c1);
+                        // if boundry found update the wall height
+                        else smallestBoundryWallHeight = Math.Min(smallestBoundryWallHeight, heightMap[r1][c1]);
+                    }
+                }
+            }
+        }
+
+
     }
 }
