@@ -22182,5 +22182,59 @@ namespace InterviewProblemNSolutions
             }
             return dummy.next;
         }
+
+
+        // Time = Space = O(n) | Linear Soln
+        public static int PivotInteger_Linear(int n)
+        {
+            int[] prefixSum = new int[n + 1];
+            for (int i = 1; i <= n; i++)            // O(n)
+                prefixSum[i] = prefixSum[i - 1] + (i);
+            int lt = 1, rt = n, mid, ltSum, rtSum;
+            // find the pivot element
+            while (lt <= rt)                        // O(logn)
+            {
+                mid = (lt + rt) / 2;
+                ltSum = prefixSum[mid];
+                rtSum = prefixSum[n] - prefixSum[mid - 1];
+
+                if (ltSum == rtSum) return mid;
+                else if (ltSum < rtSum) lt = mid + 1;
+                else rt = mid - 1;
+            }
+            return -1;
+        }
+        // Time O(logn) | Space = O(1) | Logarithmic Soln
+        public static int PivotInteger_Logarithmic(int n)
+        {
+            /* ALGO
+            1. We need to have a way to quickly check for any no what is the sum of its left half and right half, pivot being inclusive in both sections
+            2. You can use prefixSum also for each pivot b/w 1..N
+                but using Maths formula => n*(n+1)/2 is bttr/faster
+                as it eleminates the need to traverse array
+            3. Now use binary search to check all the pivot points b/w 1..N
+            4. if ltSum==rtSum return pivot
+            5. else if ltSum < rtSum, move lt pointer = mid+1
+            6. else move rt pointer to mid-1;
+            7. If no ans found return -1 at the end.
+             */
+            int lt = 1, rt = n, mid, ltSum, rtSum, totalSum = ComputeSum(n);
+            // find the pivot element
+            while (lt <= rt)                        // O(logn)
+            {
+                mid = (lt + rt) / 2;
+                ltSum = ComputeSum(mid);
+                rtSum = totalSum - ComputeSum(mid - 1);
+
+                if (ltSum == rtSum) return mid;
+                else if (ltSum < rtSum) lt = mid + 1;
+                else rt = mid - 1;
+            }
+            return -1;
+
+            // local helper func
+            static int ComputeSum(int n) => n * (n + 1) / 2;
+        }
+        
     }
 }

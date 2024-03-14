@@ -608,6 +608,7 @@ namespace InterviewProblemNSolutions
             BagOfTokens();
             MinLengthStringAfterDeletingSimilar();
             RemoveZeroSumConsecutiveNodesFromLinkedList();
+            FindThePivotInteger();
 
 
 
@@ -10467,6 +10468,20 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void FindThePivotInteger()
+        {
+            // https://leetcode.com/problems/find-the-pivot-integer
+            Utility.Print("2485. Find the Pivot Integer");
+            int[] nums = [8, 1, 4, 99, 999, 1000, 128];
+            foreach (var n in nums)
+                //Console.WriteLine($"For the Numbers in the range [{1}..{n}]\n" +
+                //    $" The pivot integer such that sum of all elements between 1..x inclusively equals sum of all elements between x..n => {DailyProblem.PivotInteger_Linear(n)}");
+                Console.WriteLine($"For the Numbers in the range [{1}..{n}]\n" +
+                    $" The pivot integer such that sum of all elements between 1..x inclusively equals sum of all elements between x..n => {DailyProblem.PivotInteger_Logarithmic(n)}");
+        }
+
 
 
 
