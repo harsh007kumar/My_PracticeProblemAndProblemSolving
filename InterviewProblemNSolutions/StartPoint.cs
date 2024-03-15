@@ -609,6 +609,7 @@ namespace InterviewProblemNSolutions
             MinLengthStringAfterDeletingSimilar();
             RemoveZeroSumConsecutiveNodesFromLinkedList();
             FindThePivotInteger();
+            BinarySubarraysWithSum();
 
 
 
@@ -10482,6 +10483,19 @@ namespace InterviewProblemNSolutions
                     $" The pivot integer such that sum of all elements between 1..x inclusively equals sum of all elements between x..n => {DailyProblem.PivotInteger_Logarithmic(n)}");
         }
 
+
+        public static void BinarySubarraysWithSum()
+        {
+            // https://leetcode.com/problems/binary-subarrays-with-sum/description/
+            Utility.Print("930. Binary Subarrays With Sum");
+            int[][] nums = [[1, 0, 1, 0, 1], [0, 0, 0, 0, 0]];
+            int[] goal = [2, 0];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Input Array");
+                Console.WriteLine($"In above array the no of non-empty subarrays with a sum '{goal[i]}' => {DailyProblem.NumSubarraysWithSum(nums[i], goal[i])}");
+            }
+        }
 
 
 

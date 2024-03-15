@@ -22235,6 +22235,24 @@ namespace InterviewProblemNSolutions
             // local helper func
             static int ComputeSum(int n) => n * (n + 1) / 2;
         }
-        
+
+
+        // Time = Space = O(n), n = length of nums
+        public static int NumSubarraysWithSum(int[] nums, int goal)
+        {
+            Dictionary<int, int> sumFreq = [];
+            int curSum = 0, subArrayCount = 0;
+            for (int i = 0; i < nums.Length; i++)      // O(n)
+            {
+                curSum += nums[i];
+                if (curSum == goal) subArrayCount++;
+                if (sumFreq.TryGetValue(curSum - goal, out int counter))
+                    subArrayCount += counter;
+
+                if (sumFreq.TryGetValue(curSum, out int freqOfCurSum)) sumFreq[curSum] = 1 + freqOfCurSum;
+                else sumFreq[curSum] = 1;
+            }
+            return subArrayCount;
+        }
     }
 }
