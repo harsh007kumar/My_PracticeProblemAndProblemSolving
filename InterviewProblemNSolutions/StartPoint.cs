@@ -100,7 +100,7 @@ namespace InterviewProblemNSolutions
             GroupAnagrams();
             //LongestMountain();
             //MergeIntervals();
-            //InsertIntervals();
+            InsertIntervals();
             //MaximumProductSubarray();
             //MirroReflection();
             //GenerateParenthesis();
@@ -2167,8 +2167,8 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/merge-intervals/
             Utility.Print("56. Merge Intervals");
             int[][][] intervalsArr = { new int[][] { new int[] { 1, 3 }, new int[] { 2, 6 }, new int[] { 8, 10 }, new int[] { 15, 18 } },
-                                        new int[][] { new int[] { 1, 4 }, new int[] { 2, 3 } },
-                                        new int[][] { new int[] { 2, 3 }, new int[] { 2, 2 }, new int[] { 3, 3 }, new int[] { 1, 3 }, new int[] { 5, 7 }, new int[] { 2, 2 }, new int[] { 4, 6 } } };
+                                       new int[][] { new int[] { 1, 4 }, new int[] { 2, 3 } },
+                                       new int[][] { new int[] { 2, 3 }, new int[] { 2, 2 }, new int[] { 3, 3 }, new int[] { 1, 3 }, new int[] { 5, 7 }, new int[] { 2, 2 }, new int[] { 4, 6 } } };
             foreach (var intervals in intervalsArr)
             {
                 intervals.Print("Input Intervals");
@@ -2182,17 +2182,20 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/insert-interval/
             Utility.Print("57. Insert Interval");
-            int[][][] intervalsArr = { new int[][] { new int[] { 1, 3 }, new int[] { 6, 9 } },
-                                        new int[][] { new int[] { 1, 5 } },
-                                        new int[][] { new int[] { 1, 5 } },
-                                        new int[][] { new int[] { 1, 5 } },
-                                        new int[][] { new int[] { 1, 5 } },
-                                        new int[][] { new int[] { 1, 5 } },
-                                        new int[][] { new int[] { 1, 5 }, new int[] { 6, 8 } },
-                                        new int[][] { new int[] { 3, 5 }, new int[] { 12, 15 } },
-                                        new int[][] { new int[] { 1, 5 }, new int[] { 9, 12 } },
-                                        new int[][] { new int[] { 1, 2 }, new int[] { 3, 5 }, new int[] { 6, 7 }, new int[] { 8, 10 }, new int[] { 12, 16 } },
-                                        new int[][] { new int[] { 1, 4 }, new int[] { 9, 12 }, new int[] { 19, 22 } } };
+            int[][][] value = {
+                new int[][] { new int[] { 1, 3 }, new int[] { 6, 9 } },
+                new int[][] { new int[] { 1, 5 } },
+                new int[][] { new int[] { 1, 5 } },
+                new int[][] { new int[] { 1, 5 } },
+                new int[][] { new int[] { 1, 5 } },
+                new int[][] { new int[] { 1, 5 } },
+                new int[][] { new int[] { 1, 5 }, new int[] { 6, 8 } },
+                new int[][] { new int[] { 3, 5 }, new int[] { 12, 15 } },
+                new int[][] { new int[] { 1, 5 }, new int[] { 9, 12 } },
+                new int[][] { new int[] { 1, 2 }, new int[] { 3, 5 }, new int[] { 6, 7 }, new int[] { 8, 10 }, new int[] { 12, 16 } },
+                new int[][] { new int[] { 1, 4 }, new int[] { 9, 12 }, new int[] { 19, 22 } }
+            };
+            int[][][] intervalsArr = value;
             int[][] newInterval = { new int[] { 2, 5 }, new int[] { 2, 3 }, new int[] { 2, 7 }, new int[] { 0, 3 }, new int[] { 6, 8 }, new int[] { 0, 6 }, new int[] { 0, 9 }, new int[] { 6, 6 }, new int[] { 0, 4 }, new int[] { 4, 8 }, new int[] { 7, 13 } };
             for (int i = 0; i < intervalsArr.Length; i++)
             {

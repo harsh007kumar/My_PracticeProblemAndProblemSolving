@@ -4001,49 +4001,36 @@ namespace InterviewProblemNSolutions
             return merged.ToArray();
         }
 
-        // Time O(n) || Space O(1)
+        // Time = Space = O(n), n = length of 'intervals' array
         public static int[][] InsertIntervals(int[][] intervals, int[] newInterval)
         {
-            bool intervalAdded = false;
-            List<int[]> ls = new List<int[]>();
+            List<int[]> merged = [];
+            int i = 0, l = intervals.Length, start = newInterval[0], end = newInterval[1];
 
-            int i = 0, j, l = intervals.Length;
+            // add all intervals whose end time is smaller than new
+            while (i < l && intervals[i][1] < start)
+                merged.Add(intervals[i++]);
 
-            // all intervals who's end-time smaller than newInterval start-time
-            while (i < l && intervals[i][1] < newInterval[0])
-                ls.Add(intervals[i++]);
-
-            if (i < l)
+            // update merged interval start, if it overlaps with next
+            if (i < l && ((start <= intervals[i][0] && intervals[i][0] <= end) || (start <= intervals[i][1] && intervals[i][1] <= end)))
             {
-                intervalAdded = true;
-                int[] merge = new int[2];
-
-                j = i;
-
-                // start-time should from Minimum of current interval or newInterval
-                merge[0] = Math.Min(intervals[j][0], newInterval[0]);
-
-                // skip thru all interval who's start-time is smaller than equal to newInterval end-time
-                while (j < l && intervals[j][0] <= newInterval[1])
-                    j++;
-
-                if (j > i)      // we have atleast skipped one interval
-                    merge[1] = Math.Max(intervals[j - 1][1], newInterval[1]);
-                else            // all intervals have start-time larger than newInterval end-time
-                    merge[1] = newInterval[1];
-
-                ls.Add(merge);
-                i = j;  // update i
+                start = Math.Min(start, intervals[i][0]);
+                end = Math.Max(end, intervals[i++][1]);
             }
 
-            // add any remaining intervals who's start-time greater than newInterval end-time
-            while (i < l)
-                ls.Add(intervals[i++]);
+            // keep merging next intervals till there start is smaller than merged interval end time
+            while (i < l && intervals[i][0] <= end)
+            {
+                start = Math.Min(start, intervals[i][0]);
+                end = Math.Max(end, intervals[i++][1]);
+            }
 
-            // still newInterval not added than add at the end
-            if (!intervalAdded) ls.Add(newInterval);
+            merged.Add([start, end]);
 
-            return ls.ToArray();
+            // add all remaining intervals
+            while (i < l) merged.Add(intervals[i++]);
+
+            return [.. merged];
         }
         // Time = Space = O(n), n = length of 'intervals' array
         public static int[][] InsertIntervalsNew(int[][] intervals, int[] newInterval)
