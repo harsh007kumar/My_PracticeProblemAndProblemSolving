@@ -6789,70 +6789,77 @@ namespace InterviewProblemNSolutions
                 return slow;
             }
         }
+        // Time = Space O(n), n = no of nodes in LinkedList
+        public static void ReOrderList_UsingList(ListNode head)
+        {
+            if (head?.next == null) return;    // base case nothing to reorder
 
+            ListNode cur = head, fast = head, prv = null, curnext;
+            List<ListNode> ls = [];
+            // add all the nodes from first half to a list
+            while (fast?.next != null)
+            {
+                ls.Add(cur);
+                cur = cur.next;
+                fast = fast.next.next;
+            }
+
+            // reverse the 2nd half
+            fast = cur;
+            while (fast != null)
+            {
+                cur = fast;
+                fast = fast.next;
+                cur.next = prv;
+                prv = cur;
+            }
+
+            // merge both the list as per given condition
+            head = ls[0];
+            for (int i = 0; i < ls.Count; i++)
+            {
+                ls[i].next = cur;   // appending from reverse of 2nd half
+                curnext = cur?.next;
+                if (cur != null && i + 1 < ls.Count) cur.next = ls[i + 1];
+                cur = curnext;
+            }
+        }
         /// <summary>
         /// Given a singly linked list L: L0→L1→…→Ln-1→Ln,
         /// re-order it to:               L0→Ln→L1→Ln-1→L2→Ln-2→…
-        /// Time O(n) || Space O(1)
+        /// Time O(n) Space O(1), n = no of nodes in LinkedList
         /// </summary>
         /// <param name="head"></param>
         public static void ReorderList_Iterative(ListNode head)
         {
-            var l = Len(head);
-            if (l < 2) return;
-            var beforemid = SecondHalf(head, l);
-            var mid = Reverse(beforemid.next);
-            beforemid.next = null;
-            ListNode cur, l1nxt, l2nxt, l1 = head, l2 = mid, last = null;
-            while (l1 != null && l2 != null)
+            ListNode slow = head, fast = head, prv = null;
+            // get Mid Node
+            while (fast?.next != null)
             {
-                l1nxt = l1.next;
-                l2nxt = l2.next;
-
-                cur = l1;
-                l1.next = l2;
-                l2.next = null;
-
-                if (last != null)
-                    last.next = cur;
-                last = l2;
-                l1 = l1nxt;
-                l2 = l2nxt;
+                slow = slow.next;
+                fast = fast.next.next;
             }
 
-            // odd length input list, this is extra step
-            if (l1 != null) last.next = l1;
+            // Reverse the 2nd half
+            fast = slow;
+            while (fast != null)
+            {
+                slow = fast;
+                fast = fast.next;
+                slow.next = prv;
+                prv = slow;
+            }
 
-            // local helper func
-            ListNode SecondHalf(ListNode v, int len)
+
+            ListNode firstHalf = head, secondHalf = slow, temp;
+            // Reorder
+            while (secondHalf.next != null)
             {
-                var middle = (len + 1) >> 1;
-                while (--middle > 0)
-                    v = v.next;
-                return v;
-            }
-            int Len(ListNode v)
-            {
-                int size = 0;
-                while (v != null)
-                {
-                    size++;
-                    v = v.next;
-                }
-                return size;
-            }
-            ListNode Reverse(ListNode next)
-            {
-                ListNode prv = null, current = next;
-                while (current != null)
-                {
-                    next = current.next;
-                    current.next = prv;
-                    prv = current;
-                    if (next == null) break;
-                    current = next;
-                }
-                return current;
+                temp = firstHalf.next;
+                firstHalf.next = secondHalf;
+                secondHalf = secondHalf.next;
+                firstHalf.next.next = temp;
+                firstHalf = temp;
             }
         }
 

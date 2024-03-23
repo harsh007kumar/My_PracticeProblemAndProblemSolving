@@ -3335,6 +3335,7 @@ namespace InterviewProblemNSolutions
             ListNode head = new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) { next = new ListNode(4) } } };
             head.Print("ORIGINAL LINKED LIST");
             // DailyProblem.ReOrderList_UsingStack(head);
+            // DailyProblem.ReOrderList_UsingList(head);
             DailyProblem.ReorderList_Iterative(head);
             head.Print("RE-ORDERED LINKED LIST");
         }
