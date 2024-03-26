@@ -183,13 +183,13 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < len; i++)
             {
                 //// prepare initial Queue for first K elements
-                //if (i < k - 1)
+                //if (n < k - 1)
                 //{
                 //    // first remove all elements smallers than current element from back of queue till Queue is not empty
-                //    while (q.Count > 0 && nums[q[q.Count - 1]] < nums[i])
+                //    while (q.Count > 0 && nums[q[q.Count - 1]] < nums[n])
                 //        q.RemoveAt(q.Count - 1);
                 //    // Insert new element index at end of the Queue
-                //    q.Add(i);
+                //    q.Add(n);
                 //}
                 //else
                 //{
@@ -197,7 +197,7 @@ namespace InterviewProblemNSolutions
                 while (q.Count > 0 && (nums[q[q.Count - 1]] < nums[i] || q.Count == k || q[0] == i - k))
                     if (nums[q[q.Count - 1]] < nums[i])
                         q.RemoveAt(q.Count - 1);
-                    else //if (q.Count == k || q[0] == i - k)
+                    else //if (q.Count == k || q[0] == n - k)
                         q.RemoveAt(0);
                 // Insert new element at end of the Queue
                 q.Add(i);
@@ -205,7 +205,7 @@ namespace InterviewProblemNSolutions
                 // Check to not add elements to result till initial Queue is created
                 if (i < k - 1) continue;
 
-                // add largest from last window i.e. Front of Queue to result array
+                // add largest from last window n.e. Front of Queue to result array
                 result[i - k + 1] = nums[q[0]];
                 //}
             }
@@ -237,8 +237,8 @@ namespace InterviewProblemNSolutions
         public static void SortArrayByParityII_OnePass(int[] nums)
         {
             int i = 0, odd = nums.Length - 1, even = nums.Length - 2;
-            // swap no from the end if no is not present at its proper index i.e. Even not at even & odd not present at odd idx
-            while (!(i > odd || i > even))   // while(i<nums.Length)
+            // swap no from the end if no is not present at its proper index n.e. Even not at even & odd not present at odd idx
+            while (!(i > odd || i > even))   // while(n<nums.Length)
                 if (i % 2 == 0)    // even index
                 {
                     if (nums[i] % 2 == 1)    // odd no
@@ -360,7 +360,7 @@ namespace InterviewProblemNSolutions
         public static string AlienDictionary(string[] input)
         {
             string lastword = "";
-            // Stores each character as Graph Vertex(u) and the alphabets which should come after it i.e. its adjacent vertex(v)
+            // Stores each character as Graph Vertex(u) and the alphabets which should come after it n.e. its adjacent vertex(v)
             // Edge(u,v) meants 'u' should come before 'v' in the final ordering
             Dictionary<char, List<char>> graph = new Dictionary<char, List<char>>();
             foreach (var word in input)
@@ -375,7 +375,7 @@ namespace InterviewProblemNSolutions
                     if (lastword[i] != word[i])
                     {
                         isNewWordPrefix = false;
-                        // first check if reverse/cycle dependencies won't be created by adding edge from lastword[i]] -> Add(word[i]
+                        // first check if reverse/cycle dependencies won't be created by adding edge from lastword[n]] -> Add(word[n]
                         if (CycleExists(graph, word[i], lastword[i])) return "";
 
                         // add new edge/dependencies
@@ -439,18 +439,18 @@ namespace InterviewProblemNSolutions
             int[] ltProduct = new int[l];
             int[] rtProduct = new int[l];
             int[] ans = new int[l];
-            for (int i = l - 1; i >= 0; i--)         // O(n)
+            for (int n = l - 1; n >= 0; n--)         // O(n)
             {
-                ltProduct[i] = rtProduct[i] = nums[i];
-                if (i < l - 1) rtProduct[i] *= rtProduct[i + 1];   // product from of all elements on right
+                ltProduct[n] = rtProduct[n] = nums[n];
+                if (n < l - 1) rtProduct[n] *= rtProduct[n + 1];   // product from of all elements on right
             }
-            for (int i = 0; i < l; i++)            // O(n)
+            for (int n = 0; n < l; n++)            // O(n)
             {
 
-                if (i > 0) ltProduct[i] *= ltProduct[i - 1];     // product from of all elements on left
-                var ltP = i > 0 ? ltProduct[i - 1] : 1;
-                var rtP = i < l - 1 ? rtProduct[i + 1] : 1;
-                ans[i] = ltP * rtP;
+                if (n > 0) ltProduct[n] *= ltProduct[n - 1];     // product from of all elements on left
+                var ltP = n > 0 ? ltProduct[n - 1] : 1;
+                var rtP = n < l - 1 ? rtProduct[n + 1] : 1;
+                ans[n] = ltP * rtP;
             }
             return ans;
             */
@@ -488,12 +488,12 @@ namespace InterviewProblemNSolutions
                 var mod = k != 0 ? sumUptoI % k : sumUptoI;
 
                 /* if we have found an sum whose mod with 'k' is already present in HashTable,
-                 * signifies there exists some index i whose sumI % k=x & index j whose sumJ % k=x
-                 * Than there must be numbers in b/w i+1..j which have sum as in multiple of 'k'
+                 * signifies there exists some index n whose sumI % k=x & index j whose sumJ % k=x
+                 * Than there must be numbers in b/w n+1..j which have sum as in multiple of 'k'
                  * a%k = x
                  * b%k = x
                  * (a - b) %k = x -x = 0
-                 * here a - b = the sum between i and j.
+                 * here a - b = the sum between n and j.
                  */
                 if (moduloIndex.ContainsKey(mod))
                 { if (i - moduloIndex[mod] > 1) return new Tuple<bool, int, int>(true, moduloIndex[mod] + 1, i); }
@@ -568,7 +568,7 @@ namespace InterviewProblemNSolutions
                         last--;
                     else if (nums[start] + nums[last] + nums[i] < 0)
                         start++;
-                    else // if(nums[start] + nums[last] + nums[i]==0)
+                    else // if(nums[start] + nums[last] + nums[n]==0)
                     {
                         result.Add(new List<int>() { nums[i], nums[start++], nums[last--] });
                         // Increment start prv value is same to avoid duplicates in the result.
@@ -618,7 +618,7 @@ namespace InterviewProblemNSolutions
             return result;
         }
 
-        // Given four arrays A, B, C, D of integer values, compute how many tuples (i, j, k, l) there are such that A[i] + B[j] + C[k] + D[l] is zero.
+        // Given four arrays A, B, C, D of integer values, compute how many tuples (n, j, k, l) there are such that A[n] + B[j] + C[k] + D[l] is zero.
         // Time O(N^2) || Space O(N^2)
         public static int FourSumCount(int[] A, int[] B, int[] C, int[] D)
         {
@@ -645,7 +645,7 @@ namespace InterviewProblemNSolutions
         {
             /* Add all banned words to HashSet to reference later in O(1) time
              * Take each word in paragraph convert to it lower case and add to Dictionary<string,int> to maintain the count how many times it was seen in paragraph
-             * while adding word to Dictionary escape last char if its ASCII value is <65 i.e. Not a alphabet
+             * while adding word to Dictionary escape last char if its ASCII value is <65 n.e. Not a alphabet
              * Remove all the word in Dictionary which are in Set of Banned words
              * Iterate thru the Dictionary to find the word with Max occurence
              */
@@ -685,7 +685,7 @@ namespace InterviewProblemNSolutions
 
 
         // Func() returns True is given partially filled board of SUDOKO is valid or not
-        // Time O(n^2) || Space O(n), where n = no of rows/col of Sudoko i.e. 9 on reducing we can express both time & space as O(1) as it's always going to be fixed val of 9x9=81 
+        // Time O(n^2) || Space O(n), where n = no of rows/col of Sudoko n.e. 9 on reducing we can express both time & space as O(1) as it's always going to be fixed val of 9x9=81 
         public static bool ValidSudoku(char[][] board)
         {
             int rows = board.Length;
@@ -893,9 +893,9 @@ namespace InterviewProblemNSolutions
         /// Explanation for given num ex- 100 LogBase10(num) gives 2 adding 1 to ans gives no of digits required to represent the number in that base.
         /// Similar for num = 5, LogBase2(num) will give 2 adding 1 to it give 3 which is excatly no of bits required to represent the num in binary
         /// Now right shifting 1 by no of digits required give a numbers which has just 1 bit set a 1 rest all zero
-        /// For 5 i.e. 101
+        /// For 5 n.e. 101
         /// 'NoOfBitsToRepresent' = 2 + 1 = 3
-        /// Now 'Mask' can be calculated by right shifting 1 NoOfBitsToRepresent times i.e. 1<< 3 = 8 i.e. 1000 in binary
+        /// Now 'Mask' can be calculated by right shifting 1 NoOfBitsToRepresent times n.e. 1<< 3 = 8 i.e. 1000 in binary
         /// Now subtracting 1 from 'Mask' us all bits reversed except the left most bit
         /// 8 - 1 or 1000 - 1 = 0111
         /// XOR of (Mask-1) & num = 111 ^ 101 = 010 = 2 in decimal
@@ -905,7 +905,7 @@ namespace InterviewProblemNSolutions
         public static int ComplimenetBase10Fastest(int num) => (num == 0) ? 1 : (num ^ ((1 << (int)(Math.Log(num, 2) + 1)) - 1));
 
         // Reads the elements from all four border n spiralling inwards till no more element is left to read
-        // Time O(N), N = rows*cols i.e, No of elements in matrix || Space O(N)
+        // Time O(N), N = rows*cols n.e, No of elements in matrix || Space O(N)
         public static IList<int> SpiralMatrix(int[][] matrix)
         {
             if (matrix == null || matrix.Length < 1) return new List<int>();
@@ -1372,14 +1372,14 @@ namespace InterviewProblemNSolutions
             //int[] ltMax = new int[l];
             //int[] rtMax = new int[l];
             //ltMax[0] = rtMax[l - 1] = 0;
-            //for (int i = 1; i < l; i++)
-            //    ltMax[i] = Math.Max(height[i - 1], ltMax[i - 1]);
-            //for (int i = l - 2; i >= 0; i--)
-            //    rtMax[i] = Math.Max(height[i + 1], rtMax[i + 1]);
+            //for (int n = 1; n < l; n++)
+            //    ltMax[n] = Math.Max(height[n - 1], ltMax[n - 1]);
+            //for (int n = l - 2; n >= 0; n--)
+            //    rtMax[n] = Math.Max(height[n + 1], rtMax[n + 1]);
 
-            //for (int i = 0; i < l; i++)
+            //for (int n = 0; n < l; n++)
             //    // we only want to add +ve water units, and water at current idx which is bascially min of left max, rt max - curr ht
-            //    trapped += Math.Max(0, Math.Min(ltMax[i], rtMax[i]) - height[i]);
+            //    trapped += Math.Max(0, Math.Min(ltMax[n], rtMax[n]) - height[n]);
             //return trapped;
             #endregion
         }
@@ -1624,7 +1624,7 @@ namespace InterviewProblemNSolutions
             for (int r = 0; r < row; r++)
                 for (int c = 1; c < col; c++)
                     dp[c] += dp[c - 1];     // visualizing for 2D GRID each cell[row,col] computed as = cell[row-1,col] + cell[row,cell-1],
-                                            // to save space consider prv row value i.e cell[row-1,col] as current value of cell[row,col]
+                                            // to save space consider prv row value n.e cell[row-1,col] as current value of cell[row,col]
             return dp[col - 1];
             /* Space O(row*col) solution below
              * fill 1st row & 1st col with '1' before starting
@@ -1838,7 +1838,7 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Returns 1st missing +ve number (i.e. num which is not part of the input array)
+        // Returns 1st missing +ve number (n.e. num which is not part of the input array)
         // Time O(n) || Space O(n)
         public static int FirstMissingPositiveUsingHashSet(int[] nums)
         {
@@ -1853,38 +1853,37 @@ namespace InterviewProblemNSolutions
                     largest = Math.Max(largest, nums[i]);
                 }
 
-            for (int i = 1; i <= largest; i++)              // O(n) will terminate on finding 1st +ve
-                if (!allPositiveNums.Contains(i)) return i;
+            for (int n = 1; n <= largest; n++)              // O(n) will terminate on finding 1st +ve
+                if (!allPositiveNums.Contains(n)) return n;
             return largest + 1;
         }
-        // Returns 1st missing +ve number (i.e. num which is not part of the input array)
+        // Returns 1st missing +ve number (n.e. num which is not part of the input array)
         // Time O(n) Space O(1) Approach using input array itself as HashTable
         public static int FirstMissingPositive(int[] nums)
         {
+            // mark all -vs, 0 and numbers greather than n as '1' also keep track of if 1 was present in the original array or not
+            bool onePresent = false;
             int len = nums.Length;
-            if (len == 0) return 1;
-            //else if (len==1) return nums[0]==1? 2:1;
-
-            // check if '1' not present return 1
-            bool foundOne = false;
-            for (int i = 0; i < len; i++) if (nums[i] == 1) { foundOne = true; break; }
-            if (!foundOne) return 1;
-
-            // update all elements less than 0 or more than len as 1, if len found update nums[0] to -len
-            for (int i = 0; i < len; i++) if (nums[i] <= 0 || nums[i] > len) nums[i] = 1;
-
-
-            // Use all remaining elements value as index and update nums value at those index to -ve if not already -ve
             for (int i = 0; i < len; i++)
-                if (Math.Abs(nums[i]) == len) nums[0] = -len;
-                else if (nums[Math.Abs(nums[i])] > 0) nums[Math.Abs(nums[i])] *= -1;
+                if (nums[i] <= 0 || nums[i] > len)
+                {
+                    nums[i] = 1;
+                }
+                else if (nums[i] == 1)
+                    onePresent = true;
+            // if one not present return it as its the smallest pos integer
+            if (!onePresent) return 1;
 
-            // return 1st non negative index
-            for (int i = 1; i < len; i++) if (nums[i] > 0) return i;
-
-            // check if array had an element with value = len of array than 0th index must be having -len value
-            // hence return len+1, if above is not the case simnply return len
-            return nums[0] < 0 ? len + 1 : len;
+            // iterate thru all index 1..N and mark them -ve if that num is present in array
+            for (int i = 0; i < nums.Length; i++)
+                if (nums[Math.Abs(nums[i]) - 1] > 0)
+                    nums[Math.Abs(nums[i]) - 1] *= -1;    // marking -ve if not already negative
+                                                          // return 1st positive value's (index+1) as ans
+            for (int i = 0; i < len; i++)
+                if (nums[i] > 0)
+                    return 1 + i;
+            // if all nums present in array are continuous values from 1..N than return N+1
+            return len + 1;
         }
 
 
@@ -1906,7 +1905,7 @@ namespace InterviewProblemNSolutions
             int startIndex = 0;
             for (int i = 0; i < S.Length; i++)
             {
-                //if(!toTrack.Contains(S[i]))    toTrack.Add(S[i]);
+                //if(!toTrack.Contains(S[n]))    toTrack.Add(S[n]);
                 toTrack.Add(S[i]);
 
                 // decreament the count
@@ -2277,7 +2276,7 @@ namespace InterviewProblemNSolutions
             }
             // as we are calculate for previous operator upon reaching next operator,
             // hence for last operator we need to do explicitly after we have finished pre-processing rest of the data
-            // we can move this above by replacing the else if with => if ((s[i]!=' ' && !Char.IsDigit(s[i])) || i==s.Length-1)
+            // we can move this above by replacing the else if with => if ((s[n]!=' ' && !Char.IsDigit(s[n])) || n==s.Length-1)
             switch (lastOperator)
             {
                 case '+':
@@ -2382,7 +2381,7 @@ namespace InterviewProblemNSolutions
             // Start Heapification from middle of Array
             for (int i = (len - 1) / 2; i >= 0; i--)
             {
-                // Call heapify for each element present at index 'i'
+                // Call heapify for each element present at index 'n'
                 int j = i;
                 while (j < len)
                 {
@@ -2456,7 +2455,7 @@ namespace InterviewProblemNSolutions
         }
 
         // LC#1000. "Minimum Cost to Merge Stones"
-        // There are N piles of stones arranged in a row.  The i-th pile has stones[i] stones.
+        // There are N piles of stones arranged in a row.  The n-th pile has stones[n] stones.
         // A move consists of merging exactly K consecutive piles into one pile, and the cost of this move is equal to the total number of stones in these K piles.
         // Find the minimum cost to merge all piles of stones into one pile.If it is impossible, return -1
         // Time O((N^2)*(N/K)) || Space: O(N^2)
@@ -2491,7 +2490,7 @@ namespace InterviewProblemNSolutions
                         // mid divides start...last into (1, rest), (K, rest), (2K-1, rest), and so on....
                         for (int mid = start; mid < last; mid += K - 1)
                             minMergeCost[start, last] = Math.Min(minMergeCost[start, last], minMergeCost[start, mid] + minMergeCost[mid + 1, last]);
-                        // above only calculate cost of merging K piles, i.e. 1 on left * K-1 piles on rt (cost of creating those 2 piles)
+                        // above only calculate cost of merging K piles, n.e. 1 on left * K-1 piles on rt (cost of creating those 2 piles)
                         // But we still need to add cost of merging left half & right half of the pile to get 1 pile
                         // Here, len of pile - 1 == last - start
                         if ((last - start) % (K - 1) == 0)
@@ -2583,7 +2582,7 @@ namespace InterviewProblemNSolutions
             int rev = 0;
             while (num != 0)
             {
-                // need to check if multiplying by 10 would lead to num greater than limit i.e. MaxValue
+                // need to check if multiplying by 10 would lead to num greater than limit n.e. MaxValue
                 // & also if rev is enumcatly 1/10 of MaxValue so last possible value that coud b added without overflowing is 7
                 // MaxValue value 2147483647, MinValue -2147483648
                 if (rev > int.MaxValue / 10 || (rev == int.MaxValue / 10 && num % 10 > (isPositive ? 7 : 8)))
@@ -2798,7 +2797,7 @@ namespace InterviewProblemNSolutions
             //for (int inputDigit = 2; inputDigit < 10; inputDigit++)
             //{
             //    dict.Add(inputDigit, new List<char>(3));
-            //    for (int i = 0; i < (((inputDigit == 7) || (inputDigit == 9)) ? 4 : 3); i++)
+            //    for (int n = 0; n < (((inputDigit == 7) || (inputDigit == 9)) ? 4 : 3); n++)
             //        dict[inputDigit].Add(startingLetter++);
             //}
 
@@ -2959,7 +2958,7 @@ namespace InterviewProblemNSolutions
         {
             int len = nums.Length;
             int rightBoundry = nums[len - 1];//int.MinValue;
-            //for (int i = 0; i < nums.Length; i++) rightBoundry = Math.Max(rightBoundry, nums[i]);   // O(N) time
+            //for (int n = 0; n < nums.Length; n++) rightBoundry = Math.Max(rightBoundry, nums[n]);   // O(N) time
 
             int leftBoundry = (rightBoundry % threshold == 0) ? rightBoundry / threshold : (rightBoundry / threshold) + 1;
             int divisor = leftBoundry;
@@ -3009,7 +3008,7 @@ namespace InterviewProblemNSolutions
             //// Set of leap years
             //HashSet<int> leapYr = new HashSet<int>(32);
             //int[] leapYears1970To2100 = { 1972, 1976, 1980, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012, 2016, 2020, 2024, 2028, 2032, 2036, 2040, 2044, 2048, 2052, 2056, 2060, 2064, 2068, 2072, 2076, 2080, 2084, 2088, 2092, 2096 };
-            //for (int i = 0; i < leapYears1970To2100.Length; i++) leapYr.Add(leapYears1970To2100[i]);
+            //for (int n = 0; n < leapYears1970To2100.Length; n++) leapYr.Add(leapYears1970To2100[n]);
 
             // (noOfYearsSince1971 * 365) + day
             int totalNoOfDays = ((year - 1971) * 365) + day;
@@ -3596,7 +3595,7 @@ namespace InterviewProblemNSolutions
 
 
 
-        // Return Max Possible Sum of "nums[i]*(i+1)" for the input array
+        // Return Max Possible Sum of "nums[n]*(n+1)" for the input array
         // Time O(n) || Space O(1)
         public static int MaxPossibleSumOfProductOfTheIndexesMultipliedByElement(int[] nums)
         {
@@ -3628,7 +3627,7 @@ namespace InterviewProblemNSolutions
                         maxIndexProductSum += -positiveSum + negativeSum;
                     else if (Math.Abs(nums[i]) == positiveSum)  // [zero impact, including/excluding this -ve integers makes no diff to final Sum]
                     { }
-                    else // (Math.Abs(nums[i]) < positiveSum)   // [NO impact, but need tfurther increases as we iterate left]
+                    else // (Math.Abs(nums[n]) < positiveSum)   // [NO impact, but need tfurther increases as we iterate left]
                     {
                         negativeSum += Math.Abs(nums[i]);
                         maxIndexProductSum += nums[i] * (i + 1);
@@ -3772,10 +3771,10 @@ namespace InterviewProblemNSolutions
 
             there are 2 main condition
             a. we get matching characters in s & p or we got '.' dot in p
-            now we just need to check if recursive call to i+1,j+1 returns true
+            now we just need to check if recursive call to n+1,j+1 returns true
             b. we have a char (either actual char or dot) followed by *
-            #b1 we dont use it i.e. i,j+2 we are are still to match any character from 's' and we skipped 2 characters in 'p'
-            #b2 we use it once to match a char in 's' but keep index of 'p' the same so we can decide in future/recursion if we want to use it again or not i.e. i+1,j
+            #b1 we dont use it n.e. n,j+2 we are are still to match any character from 's' and we skipped 2 characters in 'p'
+            #b2 we use it once to match a char in 's' but keep index of 'p' the same so we can decide in future/recursion if we want to use it again or not n.e. n+1,j
              */
             int sLen = s.Length, pLen = p.Length;
             Dictionary<string, bool> cache = new Dictionary<string, bool>();
@@ -3812,7 +3811,7 @@ namespace InterviewProblemNSolutions
         {
             /* SOLUTION FROM LEETCODE
              * How many states does a pig have
-             * If there is no time to test, i.e.minutesToTest / minutesToDie = 0, the pig has only one state -alive.
+             * If there is no time to test, n.e.minutesToTest / minutesToDie = 0, the pig has only one state -alive.
              * If minutesToTest / minutesToDie = 1 then the pig has a time to die from the poison, that means that now there are two states available for the pig : alive or dead.
              * One more step.If minutesToTest / minutesToDie = 2 then there are three available states for the pig : alive / dead after the first test / dead after the second test.
              * 
@@ -3828,7 +3827,7 @@ namespace InterviewProblemNSolutions
              * How many buckets could test x pigs with s available states
              * After the discussion above, the answer is quite obvious : s ^ x buckets.
              * 
-             * Let's consider as an example one pig with 3 states, i.e. s = minutesToTest / minutesToDie + 1 = 2 + 1 = 3, and show that he could test 3 buckets.
+             * Let's consider as an example one pig with 3 states, n.e. s = minutesToTest / minutesToDie + 1 = 2 + 1 = 3, and show that he could test 3 buckets.
              * 
              * Solution:
              * Hence the problem is to find x such that states ^ x >= bucklets,
@@ -3974,7 +3973,7 @@ namespace InterviewProblemNSolutions
                     max = Math.Max(max, longestIncreasing);
                     decreasing = true;
                 }
-                else // if (A[i-1]==A[i])
+                else // if (A[n-1]==A[n])
                     longestIncreasing = 1;
             }
             return max;
@@ -4044,7 +4043,7 @@ namespace InterviewProblemNSolutions
                 if (!insertionDone && intervals[i][1] >= start)
                 {
                     insertionDone = true;
-                    // new interval endTime is smaller than current start i.e. new sit between current and last interval
+                    // new interval endTime is smaller than current start n.e. new sit between current and last interval
                     if (end < intervals[i][0])
                     {
                         ans.Add(newInterval);
@@ -4187,7 +4186,7 @@ namespace InterviewProblemNSolutions
             return maxProfit;
         }
 
-        // first attempt, fails when buying price for 1st tranx is best buying price even for 2nd tranx, i.e. making single buy + sell is better than 2
+        // first attempt, fails when buying price for 1st tranx is best buying price even for 2nd tranx, n.e. making single buy + sell is better than 2
         // Time O(n) || Space O(1)
         public static int BestTimeToBuyAndSellStockIII(int[] prices)
         {
@@ -4264,27 +4263,27 @@ namespace InterviewProblemNSolutions
 
             //int[] left = new int[len];
             //// left to right pass [Sell after considering we have previously bought]
-            //for (int i = 1; i < len; i++)
+            //for (int n = 1; n < len; n++)
             //{
-            //    // max profit possilble at current index is max of either profit at i-1 or curr selling price my Lmin
-            //    left[i] = Math.Max(left[i - 1], prices[i] - Lmin);
-            //    Lmin = Math.Min(Lmin, prices[i]);
+            //    // max profit possilble at current index is max of either profit at n-1 or curr selling price my Lmin
+            //    left[n] = Math.Max(left[n - 1], prices[n] - Lmin);
+            //    Lmin = Math.Min(Lmin, prices[n]);
             //}
 
             //int[] right = new int[len];
             //// right to left pass [Buy after considering we have previously sold]
-            //for (int i = len - 2; i >= 0; i--)
+            //for (int n = len - 2; n >= 0; n--)
             //{
-            //    // max profit possilble at current index is max of either profit at i+1 or curr buying price my Rmax
-            //    right[i] = Math.Max(right[i + 1], Rmax - prices[i]);
-            //    Rmax = Math.Max(Rmax, prices[i]);
+            //    // max profit possilble at current index is max of either profit at n+1 or curr buying price my Rmax
+            //    right[n] = Math.Max(right[n + 1], Rmax - prices[n]);
+            //    Rmax = Math.Max(Rmax, prices[n]);
             //}
 
             ///* One optimization is calculating the total profit while calculating max profit for 'right array' above*/
             //int totalProfit = 0;
             //// taking each index as mid point for dividing the entire array to maximize totalProfit
-            //for (int i = 0; i < len; i++)
-            //    totalProfit = Math.Max(totalProfit, left[i] + right[i]);
+            //for (int n = 0; n < len; n++)
+            //    totalProfit = Math.Max(totalProfit, left[n] + right[n]);
             //return totalProfit;
         }
 
@@ -4507,8 +4506,8 @@ namespace InterviewProblemNSolutions
 
             for (int i = K - 1; i >= 0; i--)
             {
-                /* Compute dp[i] using below formula
-                 * Lets dp[i] be the no of ways to write valid Number if N becomes N[i], N[i+1], N[i+2],...
+                /* Compute dp[n] using below formula
+                 * Lets dp[n] be the no of ways to write valid Number if N becomes N[n], N[n+1], N[n+2],...
                  * Ex int n = 2345 = string num = "2345", then 
                  * dp[0] would be maximum 2345
                  * dp[1] would be max 345
@@ -4516,9 +4515,9 @@ namespace InterviewProblemNSolutions
                  * dp[3] would be max 5
                  * 
                  * By above we can infer that formula :
-                 *  dp[i] = (no of single_d in digits < num[i]) * Math.Power(digits.Length,K-i-1)
+                 *  dp[n] = (no of single_d in digits < num[n]) * Math.Power(digits.Length,K-n-1)
                  *          +
-                 *          if any single_d in digits == num[i] than add dp[i+1] as well.
+                 *          if any single_d in digits == num[n] than add dp[n+1] as well.
                  */
                 int currNumDigit = num[i] - '0';
                 foreach (var no in digits)
@@ -4764,7 +4763,7 @@ namespace InterviewProblemNSolutions
                 Now create second graph which holds values of all possible
                 transformation and from where they created
                 ex: '*ot' will have value => ''hot' , 'got' , 'rot' , etc
-                i.e. all possible matching values within 1 edit distance from wordList
+                n.e. all possible matching values within 1 edit distance from wordList
     
                 Now we just run BFS from source and return depth of transformation on reaching endWord
                 else return 0
@@ -4893,7 +4892,7 @@ namespace InterviewProblemNSolutions
              *  Do this recursively at every node.
              *  
              *  As one can notice this problem is ideal candidate for solving using DP as sub-problems are repeating 
-             *  Hence to speed up the execution, save the result of current Node in a data-structure (i used Dictionary/HashTable)
+             *  Hence to speed up the execution, save the result of current Node in a data-structure (n used Dictionary/HashTable)
              *  which can we refer later if we encounter same sub-problem again
              */
 
@@ -5275,7 +5274,7 @@ namespace InterviewProblemNSolutions
             while (--i >= 0)
                 if (nums[i] < nums[i + 1])
                 {
-                    // search 1st number from last index which is great than nums[i]
+                    // search 1st number from last index which is great than nums[n]
                     for (int j = len - 1; j > i; j--)
                         if (nums[j] > nums[i])
                         {
@@ -5286,7 +5285,7 @@ namespace InterviewProblemNSolutions
                         }
                     break;
                 }
-            // Sort the array in ascending from last => i+1 to End
+            // Sort the array in ascending from last => n+1 to End
             Array.Sort(nums, i + 1, len - i - 1);
         }
 
@@ -5344,8 +5343,8 @@ namespace InterviewProblemNSolutions
         public static int PairOfSongs(int[] time)
         {
             /* Since we for each song we need another song which on sum gives total in multiple of 60
-             * we can re-phrase it as we need to find a song j whose time[j]%60 + current song i time[i]%60 is multiple of 60
-             * or in other words (time[i] + time[j]) % 60 == 0
+             * we can re-phrase it as we need to find a song j whose time[j]%60 + current song n time[n]%60 is multiple of 60
+             * or in other words (time[n] + time[j]) % 60 == 0
              * 
              *      So for each song we check if there exists any song whose reminder on addition to current song time give total sum 60
              *      if such a song is not present we save current song mod 60 in array, so next this can be used as pair to complete total time in 60s multiple
@@ -5675,7 +5674,7 @@ namespace InterviewProblemNSolutions
              *  
              *  first find and sort workers in increasing order of their ratio of 'wage/quality'
              *  Now add first 'K' workers to MaxHeap (based upon their 'quality'), also keep total sum of their quality
-             *  we can calculate Min Cost to HIRE these first K workers by seleting ratio of highest wage/quality worker i.e. Kth worker(remeber sorted list)
+             *  we can calculate Min Cost to HIRE these first K workers by seleting ratio of highest wage/quality worker n.e. Kth worker(remeber sorted list)
              *  and multiplying by total quality sum.
              *  
              *  After Kth index, now we check new worker has quality smaller than worker on Top of MaxHeap, repalce n Heapify
@@ -6112,7 +6111,7 @@ namespace InterviewProblemNSolutions
             {
                 if (ls[i] < ls[i - 1])
                 {
-                    // replace current digit with least significant digit greater than current digit i.e. ls[i]
+                    // replace current digit with least significant digit greater than current digit n.e. ls[n]
                     for (int k = 0; k < i; k++)
                         if (ls[k] > ls[i])
                         {
@@ -6332,9 +6331,9 @@ namespace InterviewProblemNSolutions
             // Find the Cycle and add Nodes in cycle to HashSet
             HashSet<int> cycle = new HashSet<int>();
 
-            //for (int i = 1; i <= V; i++)
-            //    if (graph[i].Count > 1)  // In Order for Cycle to Pass thru Node it must have atleast 2 edges
-            //        if (DetectCycle(graph, i, cycle, new int[V + 1]))
+            //for (int n = 1; n <= V; n++)
+            //    if (graph[n].Count > 1)  // In Order for Cycle to Pass thru Node it must have atleast 2 edges
+            //        if (DetectCycle(graph, n, cycle, new int[V + 1]))
             //            break;
             DetectCycle(graph, 1, cycle, new int[V + 1]);
 
@@ -6571,7 +6570,7 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time O(Max(E,V^3)) || Space O(V), V = no of productsNodes & E = no of edges i.e. Total no of Connections b/w 2 products
+        // Time O(Max(E,V^3)) || Space O(V), V = no of productsNodes & E = no of edges n.e. Total no of Connections b/w 2 products
         public static int GetMinTrioSum(int productsNodes, List<int> productsFrom, List<int> productsTo)
         {
             int ans = int.MaxValue;
@@ -6580,7 +6579,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < productsNodes; i++)
                 graph[i + 1] = new HashSet<int>();  // Note: Products are 1 indexed
 
-            // Create the mapping i.e Graph as per given relations
+            // Create the mapping n.e Graph as per given relations
             for (int i = 0; i < productsFrom.Count; i++)
             {
                 int u = productsFrom[i];
@@ -6593,7 +6592,7 @@ namespace InterviewProblemNSolutions
             for (int i = 1; i <= productsNodes; i++)
                 for (int j = 1; j <= productsNodes; j++)
                     for (int k = 1; k <= productsNodes; k++)
-                        // given i,j,k form an Trio i.e. Triangle than compute their Outer Product Sum
+                        // given n,j,k form an Trio n.e. Triangle than compute their Outer Product Sum
                         if (graph[i].Contains(j) && graph[i].Contains(k) &&
                             graph[j].Contains(i) && graph[j].Contains(k) &&
                             graph[k].Contains(j) && graph[k].Contains(i))
@@ -7124,13 +7123,13 @@ namespace InterviewProblemNSolutions
             #region OLD implementation same approach
             //int[] ans = new int[T.Length];
             //Stack<int> nextHigher = new Stack<int>(T.Length);
-            //for (int i = T.Length - 1; i >= 0; i--)
+            //for (int n = T.Length - 1; n >= 0; n--)
             //{
-            //    while (nextHigher.Count > 0 && T[nextHigher.Peek()] <= T[i])
+            //    while (nextHigher.Count > 0 && T[nextHigher.Peek()] <= T[n])
             //        nextHigher.Pop();
             //    // if stack is empty means no higher value exists else take the Stack Top
-            //    ans[i] = nextHigher.Count > 0 ? nextHigher.Peek() - i : 0;
-            //    nextHigher.Push(i);      // add current val to Stack
+            //    ans[n] = nextHigher.Count > 0 ? nextHigher.Peek() - n : 0;
+            //    nextHigher.Push(n);      // add current val to Stack
             //}
             //return ans;
             #endregion
@@ -7498,7 +7497,7 @@ namespace InterviewProblemNSolutions
             {
                 if (chars[i] == lastChar)
                     count++;
-                else // if(chars[i]!=lastChar)
+                else // if(chars[n]!=lastChar)
                 {
                     if (count > 1)
                     {
@@ -7800,7 +7799,7 @@ namespace InterviewProblemNSolutions
              * right child is at index = dist * 2 + 2
              * 
              * While doing the LevelOrder Traversal keep adding Nodes to queue along with their distance
-             * at end of each level update maxWidth i.e. if distance b/w 1st node in queue n last added node in queue + 1 is greater
+             * at end of each level update maxWidth n.e. if distance b/w 1st node in queue n last added node in queue + 1 is greater
              */
             int maxWidth = 1;
             Queue<TreePair> q = new Queue<TreePair>();
@@ -7920,7 +7919,7 @@ namespace InterviewProblemNSolutions
                 }
                 if (winCount >= k || winCount > l) break;
                 i = (i + 1) % l;
-                if (arr[i] == larger) i = (i + 1) % l;  // if at any point arr[i]==larger then increament i by 1 more
+                if (arr[i] == larger) i = (i + 1) % l;  // if at any point arr[n]==larger then increament n by 1 more
             }
             return larger;
         }
@@ -7976,29 +7975,29 @@ namespace InterviewProblemNSolutions
         // Time O(n^2) || Space O(1), n = length of arr
         public static int CountTripletsThatCanFormTwoArraysOfEqualXORFaster(int[] arr)
         {
-            /*  Main idea is that if we fix two points i and j can we do something in between ??
+            /*  Main idea is that if we fix two points n and j can we do something in between ??
                 considering the fact that `a` and `b` values asked in question are xor values of
-                two consecutive contiguous subarrays(i meant those two subarrays share a border).. if we can somehow find third point which gives us
-                two equal xor values as asked..In that case total xor must be zero(for whatever segment considered by i and j values)
-                this implies we can consider xor for any point k i.e(k > i and k <= j) forming segments[i..k - 1] and[k..j]
+                two consecutive contiguous subarrays(n meant those two subarrays share a border).. if we can somehow find third point which gives us
+                two equal xor values as asked..In that case total xor must be zero(for whatever segment considered by n and j values)
+                this implies we can consider xor for any point k n.e(k > n and k <= j) forming segments[n..k - 1] and[k..j]
                 which are values of `a` and `b` given in question and of course equal as total segment xor is 0   
-                there can be points like(i, k, j), (i, k + 1, j)...(i, k, k) which will all have total xor as 0   
-                i.e xor[i..k - 1] = xor[k..j] and xor[i..k] = xor[k + 1..j] and so on   
+                there can be points like(n, k, j), (n, k + 1, j)...(n, k, k) which will all have total xor as 0   
+                n.e xor[n..k - 1] = xor[k..j] and xor[n..k] = xor[k + 1..j] and so on   
                 but they are different triplets.
             */
 
             int l = arr.Length, triplets = 0, xor;
             for (int i = 0; i < l; i++)
             {
-                // calculate cur_segment_xor between i..j and j > i
+                // calculate cur_segment_xor between n..j and j > n
                 xor = arr[i];
                 for (int j = i + 1; j < l; j++)
                 {
                     xor ^= arr[j];
-                    // xor of cur_segment [i..j] is 0
+                    // xor of cur_segment [n..j] is 0
                     if (xor == 0)
-                        // total number of possible values of k in between as k goes from i + 1..j
-                        // i.e j - (i + 1) + 1 ==> j - i values in total
+                        // total number of possible values of k in between as k goes from n + 1..j
+                        // n.e j - (n + 1) + 1 ==> j - n values in total
                         triplets += j - i;
                 }
             }
@@ -8156,7 +8155,7 @@ namespace InterviewProblemNSolutions
                 if (charFreq2.ContainsKey(freq2[i])) charFreq2[freq2[i]]++;
                 else charFreq2.Add(freq2[i], 1);
             }
-            // check if all unique characters have same frequency i.e. 3 characters from word1
+            // check if all unique characters have same frequency n.e. 3 characters from word1
             // will only match if there is any characters in word2 which is also present 3 times
             foreach (var kvp in charFreq1)
                 if (!charFreq2.TryGetValue(kvp.Key, out int noOfCharsWithXFreqFromW2) || noOfCharsWithXFreqFromW2 != kvp.Value) return false;
@@ -8295,7 +8294,7 @@ namespace InterviewProblemNSolutions
             {
                 if (currOctet == 4)             // all 4 octet found
                 {
-                    if (i == len)               // if valid IP i.e. no more remaining numbers
+                    if (i == len)               // if valid IP n.e. no more remaining numbers
                         ans.Add(ip[0] + "." + ip[1] + "." + ip[2] + "." + ip[3]);
                 }
                 else
@@ -8392,7 +8391,7 @@ namespace InterviewProblemNSolutions
         public static int LongestSubstringContainingVowelsInEvenCounts(string s)
         {
             HashSet<char> odd = new HashSet<char>(5), even = new HashSet<char>(5);
-            //even.Add('a'); even.Add('e'); even.Add('i'); even.Add('o'); even.Add('u');
+            //even.Add('a'); even.Add('e'); even.Add('n'); even.Add('o'); even.Add('u');
             int ans = 0;
 
             for (int i = 0; i < s.Length; i++)
@@ -8427,13 +8426,13 @@ namespace InterviewProblemNSolutions
         // Time O(n^2) || Space O(1)
         public static int LongestSubstringContainingVowelsInEvenCountsEfficient(string s)
         {
-            /* We start with evenStatus as 0 indicating even no of vowels 'a' 'e' 'i' 'o' 'u'
+            /* We start with evenStatus as 0 indicating even no of vowels 'a' 'e' 'n' 'o' 'u'
              * Now we traverse thru all possible substrings of 's'
              * while traversing each substring we do below
              *  if vowel
              *      a => xor 1 to 1st bit
              *      e => xor 1 to 2nd bit
-             *      i => xor 1 to 3rd bit
+             *      n => xor 1 to 3rd bit
              *      o => xor 1 to 4th bit
              *      u => xor 1 to 5th bit
              *  else do nothing
@@ -8693,7 +8692,7 @@ namespace InterviewProblemNSolutions
                 decimalValue = (((decimalValue << Length(i)) % 1000000007) + i);
 
             return Convert.ToInt32(decimalValue);
-            // Local func to get length of integer in binary i.e. no of 1's & 0's by using formula => 1 + Log (base2) of Num
+            // Local func to get length of integer in binary n.e. no of 1's & 0's by using formula => 1 + Log (base2) of Num
             int Length(int num) => 1 + (int)(Math.Log10(num) / Math.Log10(2));
         }
 
@@ -8958,16 +8957,16 @@ namespace InterviewProblemNSolutions
             if (nums.Length < 2) return 0;
             int max = nums[0], min = nums[0];
 
-            for (int i = 1; i < nums.Length; i++)
+            for (int n = 1; n < nums.Length; n++)
             {
-                if (nums[i] < min)
+                if (nums[n] < min)
                     // if curr num is odd try multiple by 2 to reduce deviation
-                    if (nums[i] % 2 == 1 && (nums[i] <= max / 2 || Math.Abs(nums[i] * 2 - max) < Math.Abs(nums[i] - min))) nums[i] *= 2;
-                else if (nums[i] > max)
+                    if (nums[n] % 2 == 1 && (nums[n] <= max / 2 || Math.Abs(nums[n] * 2 - max) < Math.Abs(nums[n] - min))) nums[n] *= 2;
+                else if (nums[n] > max)
                     // if curr num is even try reducing by half to reduce deviation
-                    while (nums[i] % 2 == 0 && (nums[i] / 2 >= min || Math.Abs(nums[i] / 2 - min) < Math.Abs(nums[i] - max))) nums[i] /= 2;
-                min = Math.Min(min, nums[i]);
-                max = Math.Max(max, nums[i]);
+                    while (nums[n] % 2 == 0 && (nums[n] / 2 >= min || Math.Abs(nums[n] / 2 - min) < Math.Abs(nums[n] - max))) nums[n] /= 2;
+                min = Math.Min(min, nums[n]);
+                max = Math.Max(max, nums[n]);
             }
             while (max % 2 == 0 && Math.Abs(max / 2 - min) < Math.Abs(max - min)) max /= 2;
             while (min % 2 == 1 && Math.Abs(max - min * 2) < Math.Abs(max - min)) min *= 2;
@@ -9102,14 +9101,14 @@ namespace InterviewProblemNSolutions
             {
                 made = new HashSet<int>();
                 todo = new HashSet<int>();
-                // Now check each letter for window starting at index 'i' and ending at 'i+m-1'
+                // Now check each letter for window starting at index 'n' and ending at 'n+m-1'
                 for (int j = 0; j < m; j++)         // O(m)
                     if (target[i + j] == stamp[j])
                         made.Add(i + j);
                     else
                         todo.Add(i + j);
 
-                ls.Add(new StampWindow(made, todo));// update made and todo list for window starting at 'i' index in list
+                ls.Add(new StampWindow(made, todo));// update made and todo list for window starting at 'n' index in list
 
                 if (todo.Count == 0)                // all letters matched
                 {
@@ -9155,7 +9154,7 @@ namespace InterviewProblemNSolutions
 
             int[] result = new int[ans.Count];
             i = 0;
-            while (ans.Count > 0) result[i++] = ans.Pop();      // starting indicies are saved into result in reverse order i.e from first stamp to last stamp made
+            while (ans.Count > 0) result[i++] = ans.Pop();      // starting indicies are saved into result in reverse order n.e from first stamp to last stamp made
 
             return result;
         }
@@ -9195,7 +9194,7 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time O(m*klogk) Space O(n), n = length of nums, m = length of l, k = avg diff r[i]-l[i]
+        // Time O(m*klogk) Space O(n), n = length of nums, m = length of l, k = avg diff r[n]-l[n]
         public static IList<bool> CheckArithmeticSubarrays(int[] nums, int[] l, int[] r)
         {
             bool[] ans = new bool[l.Length];
@@ -9380,13 +9379,13 @@ namespace InterviewProblemNSolutions
              * Use a, b, and c respectively to represent the above three cases.
              * 
              * Then you can get the following relationship:
-             * a[i] = b[i-1]，b[i] = c[i-1], c[i] = a[i-1] + b[i-1] + c[i-1]
+             * a[n] = b[n-1]，b[n] = c[n-1], c[n] = a[n-1] + b[n-1] + c[n-1]
              * 
-             * Then the total num[i] = a[i] + b[i] + c[i]
+             * Then the total num[n] = a[n] + b[n] + c[n]
              * 
              * When A==1, A can be at any position of [1, n].
-             * When A is placed at i position, the possible numbers of the corresponding left and right sides are num[i-1], num[ni], respectively.
-             * Then the total number of A in the i position is num[i-1] * num[ni].
+             * When A is placed at n position, the possible numbers of the corresponding left and right sides are num[n-1], num[ni], respectively.
+             * Then the total number of A in the n position is num[n-1] * num[ni].
              * 
              * The most important thing about this question is to find the final recursive relationship,
              * but when looking for a recursive relationship, you need to take A out of consideration,
@@ -9412,7 +9411,7 @@ namespace InterviewProblemNSolutions
             LateAndPresentCombo[2] = 4;     // for 2 days => student can either be LL, PL, XP (x can be either L or P) hence total 4
             a[2] = 1;       // LL
             b[2] = 1;       // PL
-            c[2] = 2;       // XP i.e. LP & PP
+            c[2] = 2;       // XP n.e. LP & PP
 
             for (int i = 3; i <= n; i++)
             {
@@ -9425,7 +9424,7 @@ namespace InterviewProblemNSolutions
             // Now since we can have 2 states Absent == 0  or Absent == 1
             long ans = LateAndPresentCombo[n];      // Abscent == 0
             for (int i = 1; i <= n; i++)            // for Abscent == 1, try marking abscent at each possible day from Day-1 to Day-N
-                // placing 'A' at i index and finding all valid combo's on left multiplied by valid combo's on right
+                // placing 'A' at n index and finding all valid combo's on left multiplied by valid combo's on right
                 ans = ((LateAndPresentCombo[i - 1] * LateAndPresentCombo[n - i]) % mod + ans) % mod;
 
             return (int)ans;
@@ -9564,7 +9563,7 @@ namespace InterviewProblemNSolutions
             if (desiredTotal <= 0) return true;
 
             int tSum = 0;
-            //for (int i = 1; i <= maxChoosableInteger; i++) tSum += i;
+            //for (int n = 1; n <= maxChoosableInteger; n++) tSum += n;
             tSum = (1 + maxChoosableInteger) * maxChoosableInteger / 2;     // (n+1)*n/2
             if (tSum < desiredTotal) return false;      // if sum of all numbers still is less than desired than return false
 
@@ -9581,13 +9580,13 @@ namespace InterviewProblemNSolutions
                     // Mark ith bit ON to indicate ith number is being used, Ex: 100 in binary means num 3 is used, 10000 in binary means num 5 is used
                     bitMask = 1 << (i - 1);
 
-                    if ((choices & bitMask) == 0)   // If Number 'i+1' is not already used
+                    if ((choices & bitMask) == 0)   // If Number 'n+1' is not already used
                     {
                         choices ^= bitMask;         // mark current number as used
                         remainingTotal -= i;        // decrease remaining total by currently choosen num
 
                         if (remainingTotal <= 0) return true;
-                        // if 2nd player doesnt wins, than it means P1 wins using num 'i'
+                        // if 2nd player doesnt wins, than it means P1 wins using num 'n'
                         if (!FirstToMoveWins(choices, remainingTotal)) return true;
 
                         remainingTotal += i;        // reset remaining total
@@ -9606,22 +9605,22 @@ namespace InterviewProblemNSolutions
             //{
             //    if (leftSum <= 0)
             //        return true;
-            //    for (int i = chooseFrom.Length - 1; i >= 0; i--)
-            //        if (!chooseFrom[i])     // not already Used
+            //    for (int n = chooseFrom.Length - 1; n >= 0; n--)
+            //        if (!chooseFrom[n])     // not already Used
             //        {
-            //            chooseFrom[i] = true;          // mark as Used
-            //            // if 2nd player doesnt wins, than it means P1 wins using num 'i'
-            //            if (leftSum - i <= 0)
+            //            chooseFrom[n] = true;          // mark as Used
+            //            // if 2nd player doesnt wins, than it means P1 wins using num 'n'
+            //            if (leftSum - n <= 0)
             //            {
-            //                chooseFrom[i] = false;     // mark back as Not Used
+            //                chooseFrom[n] = false;     // mark back as Not Used
             //                return true;
             //            }
-            //            if (!FirstToMoveWins(chooseFrom, leftSum - i))
+            //            if (!FirstToMoveWins(chooseFrom, leftSum - n))
             //            {
-            //                chooseFrom[i] = false;     // mark back as Not Used
+            //                chooseFrom[n] = false;     // mark back as Not Used
             //                return true;
             //            }
-            //            chooseFrom[i] = false;         // mark back as Not Used
+            //            chooseFrom[n] = false;         // mark back as Not Used
             //        }
             //    return false;
             //}
@@ -9961,7 +9960,7 @@ namespace InterviewProblemNSolutions
             {
                 currSet = new List<int>();
                 string bitMask = BinaryString(i);
-                // Map a subset to each bitmask: 1 on the ith position in bitmask means the presence of nums[i] in the subset, and 0 means its absence.
+                // Map a subset to each bitmask: 1 on the ith position in bitmask means the presence of nums[n] in the subset, and 0 means its absence.
                 for (int j = 0; j < n; j++)
                     if (bitMask[j] == '1')
                         currSet.Add(nums[j]);
@@ -10027,7 +10026,7 @@ namespace InterviewProblemNSolutions
             {
                 // base value for maxLen for curr index & times this maxLen for current index is achievable
                 dp[i, 0] = dp[i, 1] = 1;
-                for (int j = 0; j < i; j++)     // iterate thru each index from 0 to i-1 to find max len for i
+                for (int j = 0; j < i; j++)     // iterate thru each index from 0 to n-1 to find max len for n
                     if (nums[j] < nums[i])
                         if (dp[i, 0] < dp[j, 0] + 1)        // bigger maxLen found, update maxLen for index and time achievable
                         {
@@ -10067,14 +10066,14 @@ namespace InterviewProblemNSolutions
             //int l = tasks.Length, timer = 0;
             //if (n == 0) return l;
             //int[] charCount = new int[26];
-            //for (int i = 0; i < l; i++) charCount[tasks[i] - 'A']--;
+            //for (int n = 0; n < l; n++) charCount[tasks[n] - 'A']--;
             //Array.Sort(charCount);      // sorted in descending order
 
             //Queue<int[]> q = new Queue<int[]>();
-            //for (int i = 0; i < 26; i++)
-            //    if (charCount[i] != 0)
+            //for (int n = 0; n < 26; n++)
+            //    if (charCount[n] != 0)
             //        // 1st index indicates frequency of task and 2nd informs about time till it cannot be picked up next
-            //        q.Enqueue(new int[] { -charCount[i], 0 });
+            //        q.Enqueue(new int[] { -charCount[n], 0 });
 
             //while (q.Count > 0)
             //{
@@ -10108,15 +10107,15 @@ namespace InterviewProblemNSolutions
 
             //// calculate frequencies of the tasks
             //int[] frequency = new int[26];
-            //for (int i = 0; i < l; i++) frequency[tasks[i] - 'A']++;// O(n)
+            //for (int n = 0; n < l; n++) frequency[tasks[n] - 'A']++;// O(n)
 
             //Array.Sort(frequency);                                  // O(26log26)
 
             //int maxFreqTask = frequency[25], maxIdleTime = (maxFreqTask - 1) * coolDownTime;
 
             //// not we try reducing idleTime by iterating over remaining tasks and see how many can be completed within coolDown time for maxFreqTask
-            //for (int i = 24; i >= 0 && maxIdleTime > 0; i--)        // O(25)
-            //    maxIdleTime -= Math.Min(maxFreqTask - 1, frequency[i]);
+            //for (int n = 24; n >= 0 && maxIdleTime > 0; n--)        // O(25)
+            //    maxIdleTime -= Math.Min(maxFreqTask - 1, frequency[n]);
 
             //// idle time can be >= 0
             //return l + Math.Max(0, maxIdleTime);
@@ -10332,12 +10331,12 @@ namespace InterviewProblemNSolutions
         public static int SubArraySumEqualsK(int[] nums, int k)
         {
             /* 
-             * Algo: If the cumulative sum(represented by sum[i] for sum up to ith index) is same as some sum[j]
+             * Algo: If the cumulative sum(represented by sum[n] for sum up to ith index) is same as some sum[j]
              * the sum of the elements lying in between those indices is zero. 
              * 
              * Extending the same thought further, 
-             * if the cumulative sum up to two indices, say i & j is at a difference of k i.e. if sum[i]−sum[j]=k,
-             * the sum of elements lying between indices i & j is k.
+             * if the cumulative sum up to two indices, say n & j is at a difference of k n.e. if sum[n]−sum[j]=k,
+             * the sum of elements lying between indices n & j is k.
              * 
              * Based on this, we make use of a hashmap mapmap which is used to store the cumulative sum up to all the indices possible
              * along with the number of times the same sum occurs.
@@ -10370,11 +10369,11 @@ namespace InterviewProblemNSolutions
         {
             /* Intuition
              * As is typical with problems involving subarrays, we use prefix sums to add each subarray.
-             * Let P[i+1] = A[0] + A[1] + ... + A[i]. Then, each subarray can be written as P[j] - P[i] (for j > i).
-             * Thus, we have P[j] - P[i] equal to 0 modulo K, or equivalently P[i] and P[j] are the same value modulo K.
+             * Let P[n+1] = A[0] + A[1] + ... + A[n]. Then, each subarray can be written as P[j] - P[n] (for j > n).
+             * Thus, we have P[j] - P[n] equal to 0 modulo K, or equivalently P[n] and P[j] are the same value modulo K.
              * 
              * Algorithm
-             * Count all the P[i]'s modulo K.
+             * Count all the P[n]'s modulo K.
              * For example, take A = [4,5,0,-2,-3,1] and K = 5.
              * Then P = [0,4,9,9,7,4,5], and C_0 = 2, C_2 = 1, C_4 = 4
              * With C_0 = 2 (at P[0], P[6]), we get no of pairs using formula => n*(n-1)/2
@@ -10478,8 +10477,8 @@ namespace InterviewProblemNSolutions
             Array.Sort(arr);
 
             // sort array again as mentioned in problem
-            /* A value arr[i] is said to be stronger than a value arr[j] if |arr[i] - m| > |arr[j] - m| where m is the median of the array.
-             * If |arr[i] - m| == |arr[j] - m|, then arr[i] is said to be stronger than arr[j] if arr[i] > arr[j].
+            /* A value arr[n] is said to be stronger than a value arr[j] if |arr[n] - m| > |arr[j] - m| where m is the median of the array.
+             * If |arr[n] - m| == |arr[j] - m|, then arr[n] is said to be stronger than arr[j] if arr[n] > arr[j].
              * 
              * Median is the middle value in an ordered integer list. More formally,
              * if the length of the list is n, the median is the element in position ((n - 1) / 2) in the sorted list (0-indexed).
@@ -10537,7 +10536,7 @@ namespace InterviewProblemNSolutions
              * Its clear in above algo that we would be verifying multiple subarrays again and again un-neccessarily
              * Hence we can optimize this by saving state of an sub-array in cahe and then build the soln from bottoms-up
              * 
-             * i.e. first mark all 1 & 2 length arrays as valid sequence,
+             * n.e. first mark all 1 & 2 length arrays as valid sequence,
              * now for each sequence of 3 of more we only have to check if the diff b/w 1st 2 elements is same as diff b/w 2nd & 3rd element
              * and sub-array from 2nd element to last is valid sequence, if so we increament counter by 1
              */
@@ -10566,10 +10565,10 @@ namespace InterviewProblemNSolutions
              * now for each new element we check if its different with last is same as the diff b/w last and last to last element, if so
              * we know adding this new element to existing sequences would return all prv valid sequences again + 1 more as last 2 elements n this new num forms additional seq
              * 
-             * hence we update count of sequences at this index i as dp[i] = 1+dp[i-1]
-             * also we increament counter by value of dp[i]
+             * hence we update count of sequences at this index n as dp[n] = 1+dp[n-1]
+             * also we increament counter by value of dp[n]
              * 
-             * QuickNote: instead of using O(n) space we can achieve same result by just using an variable to store last dp[i-1] value
+             * QuickNote: instead of using O(n) space we can achieve same result by just using an variable to store last dp[n-1] value
              * and when adding new number breaks sequence we update this dp value to '0'
              */
             int noOfArthimeticSequence = 0, count = 0;
@@ -10892,7 +10891,7 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time = O(K*Min(N,2^K)) || Space = O(2^K), K = number of cells(i.e. 8) & N = number of steps
+        // Time = O(K*Min(N,2^K)) || Space = O(2^K), K = number of cells(n.e. 8) & N = number of steps
         public static int[] PrisonAfterNDays(int[] cells, int N)
         {
             /* once we can find out the anser using Brute force,
@@ -10963,11 +10962,11 @@ namespace InterviewProblemNSolutions
         public static int MinFlipsMonoIncr(string S)
         {
             #region FAILED 1st ATTEMPT 72nd of 81 cases
-            //int zerosAfterFirst1 = 0, ones = 0, i = 0;
-            //while (i < S.Length && S[i] == '0')   // skip all starting zero's
-            //    i++;
-            //while (i < S.Length)
-            //    if (S[i++] == '1')
+            //int zerosAfterFirst1 = 0, ones = 0, n = 0;
+            //while (n < S.Length && S[n] == '0')   // skip all starting zero's
+            //    n++;
+            //while (n < S.Length)
+            //    if (S[n++] == '1')
             //        ones++;
             //    else
             //        zerosAfterFirst1++;
@@ -10976,8 +10975,8 @@ namespace InterviewProblemNSolutions
             //    return zerosAfterFirst1;
             //else                        // we encountered some zero's after 1st one.
             //{
-            //    i = S.Length - 1;
-            //    while (i >= 0 && S[i--] == '1')
+            //    n = S.Length - 1;
+            //    while (n >= 0 && S[n--] == '1')
             //        ones--;
             //    return Math.Min(zerosAfterFirst1, ones);
             //}
@@ -11007,7 +11006,7 @@ namespace InterviewProblemNSolutions
                 minFlips = Math.Min(minFlips, onesOnLeft + (l - i - 1) - (totalOnes - onesOnLeft));
 
                 // Above expression can be expanded as below for better understanding
-                //elementsOnRtOfCurrentIdx = (l - i - 1);
+                //elementsOnRtOfCurrentIdx = (l - n - 1);
                 //onesOnRight = totalOnes - onesOnLeft;
                 //minFlips = Math.Min(minFlips, onesOnLeft + elementsOnRtOfCurrentIdx - onesOnRight);
             }
@@ -11291,7 +11290,7 @@ namespace InterviewProblemNSolutions
                 // Create the charCount for each string
                 foreach (var ch in A[i])
                     charMap[ch - 'a']++;
-                // Now update each index of ansMap with minimum of (ansMap[i],charMap[i])
+                // Now update each index of ansMap with minimum of (ansMap[n],charMap[n])
                 for (int j = 0; j < ansMap.Length; j++)
                 {
                     ansMap[j] = Math.Min(ansMap[j], charMap[j]);
@@ -11470,7 +11469,7 @@ namespace InterviewProblemNSolutions
                         frequencyQ++;
 
                 for (int j = 0; j < frequencyW.Length; j++)     // O(m)
-                    // f(queries[i]) < f(W)
+                    // f(queries[n]) < f(W)
                     if (frequencyQ < frequencyW[j])
                         ans[i]++;
             }
@@ -11495,8 +11494,8 @@ namespace InterviewProblemNSolutions
             return uniqueCandy.Count;
 
             // Another O(n) but slightly slower approach is to return Math.Min(l/2,uniqueCandy.Count) after traversing entire array
-            //for (int i = 0; i < candyType.Length; i++)
-            //    uniqueCandy.Add(candyType[i]);
+            //for (int n = 0; n < candyType.Length; n++)
+            //    uniqueCandy.Add(candyType[n]);
             //return Math.Min(candyType.Length / 2, uniqueCandy.Count);
         }
 
@@ -11522,7 +11521,7 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time O(nlogn) || Space O(n), n = length of input i.e. Total no of ppl attending party
+        // Time O(nlogn) || Space O(n), n = length of input n.e. Total no of ppl attending party
         public static List<string> OrderOfSplitOfLoafOfBread(List<string> input)
         {
             if (input == null || input.Count == 0) return new List<string>();
@@ -11623,13 +11622,13 @@ namespace InterviewProblemNSolutions
             /* FIRST APPROACH => TLE
             IList<string> ans = new List<string>();
             int l = nums.Length, missingTill;
-            for (int i = 0; i < l; i++)
-                if (nums[i] == lower)
+            for (int n = 0; n < l; n++)
+                if (nums[n] == lower)
                     lower++;
                 else    // found a missing no
                 {
                     missingTill = lower;
-                    while (missingTill != nums[i])
+                    while (missingTill != nums[n])
                         missingTill++;
 
                     if (lower == missingTill - 1)       // single num was missing
@@ -11720,15 +11719,15 @@ namespace InterviewProblemNSolutions
         {
             /* if len of A != len of B return false at start
              * 
-             * Traverse thru the A & B & match each index A[i] with B[i]
+             * Traverse thru the A & B & match each index A[n] with B[n]
              * also keep count of no of distinct characters along with their frquencies.
              * once any character appears more than once update sameCharSwapPossible to true
              * 
-             * if A[i]!=B[i]
-             * update a varaible misMatchAt which was initially set to -1 with current 'i'
+             * if A[n]!=B[n]
+             * update a varaible misMatchAt which was initially set to -1 with current 'n'
              * if misMatchAt != -1 mean we can previously encountered one more misMatch
              * 
-             * check for A[misMatchAt]!=B[i] || B[misMatchAt]!=A[i] than return false as swap cannot be completed
+             * check for A[misMatchAt]!=B[n] || B[misMatchAt]!=A[n] than return false as swap cannot be completed
              * else update oneSwapMade to true
              * 
              * at any point if no off diff characters are > 2 return false
@@ -11829,7 +11828,7 @@ namespace InterviewProblemNSolutions
         /// A valid encoding of an array of words is any reference string s and array of indices indices such that:
         ///         words.length == indices.length
         ///         The reference string s ends with the '#' character.
-        ///         For each index indices[i], the substring of s starting from indices[i] and up to(but not including) the next '#' character is equal to words[i].
+        ///         For each index indices[n], the substring of s starting from indices[n] and up to(but not including) the next '#' character is equal to words[n].
         /// </summary>
         /// <param name="words"></param>
         /// <returns></returns>
@@ -11909,7 +11908,7 @@ namespace InterviewProblemNSolutions
              * we know that the best swap must occur with the digit we are currently considering.
              * 
              * Algorithm:
-             * We will compute \text{last[d] = i}last[d] = i, the index \text{i}i of the last occurrence of digit \text{d}d (if it exists).
+             * We will compute \text{last[d] = n}last[d] = n, the index \text{n}n of the last occurrence of digit \text{d}d (if it exists).
              * Afterwards, when scanning the number from left to right, if there is a larger digit in the future,
              * we will swap it with the largest such digit.
              * if there are multiple such digits, we will swap it with the one that occurs the latest/closet idx from end.
@@ -12105,7 +12104,7 @@ namespace InterviewProblemNSolutions
 
 
                     r = row - 1;
-                    // If there is atleast 1 cell which was empty than Candy count would be less than column length i.e no of rows
+                    // If there is atleast 1 cell which was empty than Candy count would be less than column length n.e no of rows
                     //if (q.Count != row)
                     while (q.Count > 0)
                         // updates cells from bottom till Queue in not empty
@@ -12256,7 +12255,7 @@ namespace InterviewProblemNSolutions
              */
             for (int i = 0; i < currentState.Length - 1; i++)
                 if (currentState[i] == '+' && currentState[i + 1] == '+')   // valid move of converting '++' to '--'
-                    if (!FlipGameII(currentState.Substring(0, i) + "--" + currentState.Substring(i + 2)))   // if opp cannot win i.e. we won
+                    if (!FlipGameII(currentState.Substring(0, i) + "--" + currentState.Substring(i + 2)))   // if opp cannot win n.e. we won
                         return true;
             return false;
         }
@@ -12489,8 +12488,8 @@ namespace InterviewProblemNSolutions
         public static int[] CreateMaximumNumberTrimAndMerge(int[] nums1, int[] nums2, int k)
         {
             /* First we trim the original arrays(if possible)
-             * than we try every combination of removing i,j elements from A & B
-             * ex: if k = 3 we try these >> i=0 j=3 >> i=1 j=2 >> i=2 j =1 >> i=3 j =0
+             * than we try every combination of removing n,j elements from A & B
+             * ex: if k = 3 we try these >> n=0 j=3 >> n=1 j=2 >> n=2 j =1 >> n=3 j =0
              * after trying removing minimum digits from both array we merge trimmed A & B to check if we have landed upon biggest number possible
              */
             nums1 = Trim(nums1, k);     // O(n)
@@ -12501,7 +12500,7 @@ namespace InterviewProblemNSolutions
 
             int[] max = null, curr;
             for (int i = k, j = 0; i >= 0; i--, j++)// O(k^2*(n+m))
-                // Make sure we can remove i & j no of nums from A & B respectively
+                // Make sure we can remove n & j no of nums from A & B respectively
                 if (nums1.Length >= i && nums2.Length >= j)
                 {
                     curr = Merge(Trim(nums1, i), Trim(nums2, j), k);
@@ -12598,7 +12597,7 @@ namespace InterviewProblemNSolutions
              *      Example: wordlist = ["Yellow"], query = "yellow": correct = "Yellow"
              *      Example: wordlist = ["yellow"], query = "yellow": correct = "yellow"
              * 
-             * Vowel Errors: If after replacing the vowels ('a', 'e', 'i', 'o', 'u') of the query word with any vowel individually,
+             * Vowel Errors: If after replacing the vowels ('a', 'e', 'n', 'o', 'u') of the query word with any vowel individually,
              * it matches a word in the wordlist (case-insensitive), then the query word is returned with the same case as the match in the wordlist.
              *      Example: wordlist = ["YellOw"], query = "yollow": correct = "YellOw"
              *      Example: wordlist = ["YellOw"], query = "yeellow": correct = "" (no match)
@@ -12612,7 +12611,7 @@ namespace InterviewProblemNSolutions
              *      If the query has no matches in the wordlist, you should return the empty string.
              * 
              * 
-             * Given some queries, return a list of words answer, where answer[i] is the correct word for query = queries[i].
+             * Given some queries, return a list of words answer, where answer[n] is the correct word for query = queries[n].
              */
 
 
@@ -12728,8 +12727,8 @@ namespace InterviewProblemNSolutions
         {
             /* Sort Array
              * Traverse ith index in the outer loop from 0th to len - 2 index,
-            *      Traverse the inner loop with start = i+1 & last = len-1
-            *      if at any point arr[i] + arr[j] + arr[k] == target
+            *      Traverse the inner loop with start = n+1 & last = len-1
+            *      if at any point arr[n] + arr[j] + arr[k] == target
             *      
             *      find no of index after jth index which have value equal to arr[j]
             *      also find no of index before kth index which have value equal to arr[k]
@@ -12739,8 +12738,8 @@ namespace InterviewProblemNSolutions
             * 
             * Note:
             *   Interesting point is that we don't care about the order of the values,
-            *   meaning A[i] does not necessarily have to be smaller than A[j], therefore sorting doesn't harm,
-            *   because i < j < k just wants us to no have any duplicates, like tuple i,j,k and k,j,i should be counted twice
+            *   meaning A[n] does not necessarily have to be smaller than A[j], therefore sorting doesn't harm,
+            *   because n < j < k just wants us to no have any duplicates, like tuple n,j,k and k,j,n should be counted twice
             */
             Array.Sort(arr);    // nlogn
             long mod = 1000000007, ans = 0;
@@ -13807,8 +13806,8 @@ namespace InterviewProblemNSolutions
         public static bool IsIdealPermutation(int[] A)
         {
             /* Because the count of local should <= count of global, all we care is when local < global happens.
-             * The difference between local and global is global also include nonadjacent i and j,
-             * so simplify the question to for every i, find in range 0 to i-2, see if there is a element larger than A[i],
+             * The difference between local and global is global also include nonadjacent n and j,
+             * so simplify the question to for every n, find in range 0 to n-2, see if there is a element larger than A[n],
              * if it exist, we can return false directly.
              */
             int max = -1;
@@ -13838,7 +13837,7 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time = Space = O(r*c), r = no of rows in nums, c = max no of columns in any nums[i]
+        // Time = Space = O(r*c), r = no of rows in nums, c = max no of columns in any nums[n]
         public static int[] DiagonalTraverseII(IList<IList<int>> nums)
         {
             List<int> ans = new List<int>();
@@ -13891,13 +13890,13 @@ namespace InterviewProblemNSolutions
              * n = even median = 6
              * 5	3	1
              * we now see 'min no of operations' to convert all numbers to median for even 'n' values
-             * is just sum of nums[i] in the range 0<= i< (n+1)/2
+             * is just sum of nums[n] in the range 0<= n< (n+1)/2
              * 
              * 1	3	5	7	9
              * n = odd median = 5
              * 4	2	0
              * we now see 'min no of operations' to convert all numbers to median for odd 'n' values
-             * is just sum of nums[i] in the range 0<= i< (n+1)/2   -  (n+1)/2;
+             * is just sum of nums[n] in the range 0<= n< (n+1)/2   -  (n+1)/2;
              */
             int operation = 0, i = 0, currNum = 1;
             while (i++ < (n + 1) / 2)        // O(n/2)
@@ -13932,11 +13931,11 @@ namespace InterviewProblemNSolutions
             return sortedUnqNums.Count - idx;
             /* via SortedDictionary
             Dictionary<int, int> numFreq = new Dictionary<int, int>();
-            for (int i = 0; i < arr.Length; i++)                // O(n)
-                if (!numFreq.ContainsKey(arr[i]))
-                    numFreq.Add(arr[i], 1);
+            for (int n = 0; n < arr.Length; n++)                // O(n)
+                if (!numFreq.ContainsKey(arr[n]))
+                    numFreq.Add(arr[n], 1);
                 else
-                    numFreq[arr[i]]++;
+                    numFreq[arr[n]]++;
 
             SortedDictionary<int, List<int>> sameFreqNums = new SortedDictionary<int, List<int>>();
             foreach (var kvp in numFreq)
@@ -14009,7 +14008,7 @@ namespace InterviewProblemNSolutions
             char curStateOfRemaingBulbs = '0';
             int flips = 0;
             for (int i = 0; i < target.Length; i++)
-                if (target[i] != curStateOfRemaingBulbs)   // 'i'th Bulb state doesnt matches, we need to flip the switch fr all bulbs after 'i'th index
+                if (target[i] != curStateOfRemaingBulbs)   // 'n'th Bulb state doesnt matches, we need to flip the switch fr all bulbs after 'n'th index
                 {
                     flips++;
                     curStateOfRemaingBulbs = curStateOfRemaingBulbs == '0' ? '1' : '0';
@@ -14137,9 +14136,9 @@ namespace InterviewProblemNSolutions
 
             //int row = matrix.Length, col = matrix[0].Length, longest = 0;
             //int[,] dp = new int[row, col];
-            //for (int i = 0; i < row; i++)
+            //for (int n = 0; n < row; n++)
             //    for (int j = 0; j < col; j++)
-            //        longest = Math.Max(longest, DFS(i, j));
+            //        longest = Math.Max(longest, DFS(n, j));
             //return longest;
             //int DFS(int r, int c)
             //{
@@ -14468,11 +14467,11 @@ namespace InterviewProblemNSolutions
              * which gives us sum of values b/w any 2 index in just O(1) time.
              * 
              * now our problem can be re-written as below
-             * find i & j index such that
-             * prefixSum[i] <= prefixSum[j]-prefixSum[i] <= prefixSum[n-1]-prefixSum[j]
+             * find n & j index such that
+             * prefixSum[n] <= prefixSum[j]-prefixSum[n] <= prefixSum[n-1]-prefixSum[j]
              * 
-             * so bascially we need to iterate i thru [1..n-2] we need atleast 1 values for mid & rt sub-array
-             * & for each index i, we need to find l & r such that
+             * so bascially we need to iterate n thru [1..n-2] we need atleast 1 values for mid & rt sub-array
+             * & for each index n, we need to find l & r such that
              *      min index l such that sum of mid-array is greater or equal to left-sub-array)
              *      max index r such that sum of mid-array is smaller than or equal to sum of rt-sub-array)
              * 
@@ -14586,7 +14585,7 @@ namespace InterviewProblemNSolutions
                     }
                     // count 'Sub-Matrix' whose sum match 'target'
                     // above loop iterating from 0...Cols can be merged with below
-                    // but for the sake of simplicity i have kept it seperate
+                    // but for the sake of simplicity n have kept it seperate
                     sumFreq.Clear();
                     sumFreq[0] = 1;       // base case
                     for (int c = 0; c < cols; c++)     // O(c)
@@ -14604,18 +14603,18 @@ namespace InterviewProblemNSolutions
             return result;
             ///* First calculate the Prefix sum for each row in the the entire 2D array so we can find the sum of any sub-matrix in O(1)
             // * 
-            // * Now iterate thru all the combinations of cols .i.e, c1..c2 where 0 <= c1 < cols & c1 <= c2 <= cols
+            // * Now iterate thru all the combinations of cols .n.e, c1..c2 where 0 <= c1 < cols & c1 <= c2 <= cols
             // * for each of the sub-matrix b/w above c1..c2,
             // * we create seperate 1D array where each rth index is holding "total row sum" for that row
             // * and now try finding out how many sub-matrix have sum equal to target
             // * Time O(col*col*row) || Space O(col*row)
             // */
-            //int rows = matrix.Length, cols = matrix[0].Length, i, j, result = 0;
+            //int rows = matrix.Length, cols = matrix[0].Length, n, j, result = 0;
             //// calculate prefix Sum for 2D array
             //int[,] prefixSum = new int[rows, cols];
-            //for (i = 0; i < rows; i++)
+            //for (n = 0; n < rows; n++)
             //    for (j = 0; j < cols; j++)
-            //        prefixSum[i, j] = (j > 0 ? prefixSum[i, j - 1] : 0) + matrix[i][j];
+            //        prefixSum[n, j] = (j > 0 ? prefixSum[n, j - 1] : 0) + matrix[n][j];
 
             //Dictionary<int, int> sumFrequency = new Dictionary<int, int>();
             //// Iterate thru all columns combination
@@ -14668,7 +14667,7 @@ namespace InterviewProblemNSolutions
              * and return rt at end as answer.
              */
             if (m * k > bloomDay.Length) return -1;
-            int left = 1, mid, rt = 1000000000; // rt can be either max possible value of bloomDay[i] or max value in present in array
+            int left = 1, mid, rt = 1000000000; // rt can be either max possible value of bloomDay[n] or max value in present in array
             while (left < rt)                   // O(log(10^9))
             {
                 mid = left + (rt - left) / 2;
@@ -14795,12 +14794,12 @@ namespace InterviewProblemNSolutions
             //GetCombo(new List<int>(), target);
             //return res;
             //// local func
-            //void GetCombo(List<int> curr, int t, int i = 0)
+            //void GetCombo(List<int> curr, int t, int n = 0)
             //{
             //    if (t < 0) return;
             //    else if (t == 0) res.Add(new List<int>(curr));
             //    else
-            //        for (int idx = i; idx < candidates.Length; idx++)
+            //        for (int idx = n; idx < candidates.Length; idx++)
             //        {
             //            curr.Add(candidates[idx]);
             //            GetCombo(curr, t - candidates[idx], idx);
@@ -15070,7 +15069,7 @@ namespace InterviewProblemNSolutions
             while (++i < l)
                 if (nums[i] == 1)
                     ans = Math.Max(ans, (++ones) + zeros);
-                else //if(nums[i]==0)
+                else //if(nums[n]==0)
                     if (++zeros <= k)
                     ans = Math.Max(ans, ones + zeros);
                 else
@@ -15149,9 +15148,9 @@ namespace InterviewProblemNSolutions
                         // Update 'starting time' of parent node is found one via Adjacent Vertex
                         nodeWithEarlistTimeReachable[u] = Math.Min(nodeWithEarlistTimeReachable[u], nodeWithEarlistTimeReachable[v]);
 
-                        //-- now coming back i.e. back-tracking after above recursive call --//
+                        //-- now coming back n.e. back-tracking after above recursive call --//
 
-                        // if Vertex 'V' can say to Vertex 'U' that i have found a Vertex better than you or i have found another way to reach to you
+                        // if Vertex 'V' can say to Vertex 'U' that n have found a Vertex better than you or n have found another way to reach to you
                         if (nodeWithEarlistTimeReachable[v] <= startingTime[u])
                             continue;
                         else // if (nodeWithEarlistTimeReachable[v] > startingTime[u]), meaning Vertex V only connection with Vertex 'U' is edge U---V
@@ -15669,9 +15668,9 @@ namespace InterviewProblemNSolutions
                     else
                     {
                         if (i + 1 < l && nums[i - 1] <= nums[i + 1])
-                            nums[i] = nums[i - 1];  // increase the value of nums[i] to i-1
+                            nums[i] = nums[i - 1];  // increase the value of nums[n] to n-1
                         else if (i - 1 > 0 && nums[i - 2] <= nums[i])
-                            nums[i - 1] = nums[i - 2];// decrease the value of nums[i-1] to i-2
+                            nums[i - 1] = nums[i - 2];// decrease the value of nums[n-1] to n-2
                         else
                             return false;           // single modification to make non-decreasing not possible
                     }
@@ -15701,7 +15700,7 @@ namespace InterviewProblemNSolutions
                     }
                 }
                 currSum = 0;                            // Reset current sub-array Sum to 0
-                back = Math.Max(back, front);           // update the back pointer to current idx i.e. Front
+                back = Math.Max(back, front);           // update the back pointer to current idx n.e. Front
             }
             return maxSum;
         }
@@ -15724,7 +15723,7 @@ namespace InterviewProblemNSolutions
                 if (A[i] >= 0) foundPositive = true;
             }
             // if all nums in array are -ve, return maxNum from array
-            // else in normal case return the maximum of maxSum or totalSum - minSum i.e. maxSum in case of wrap around sub-array
+            // else in normal case return the maximum of maxSum or totalSum - minSum n.e. maxSum in case of wrap around sub-array
             return foundPositive ? Math.Max(maxSum, totalSum - minSum) : maxNum;
         }
 
@@ -15740,7 +15739,7 @@ namespace InterviewProblemNSolutions
                     return true;
                 // add current num to set
                 set.Add(nums[i]);
-                // if set size is greater than 'k' remove 'i-k'th num
+                // if set size is greater than 'k' remove 'n-k'th num
                 if (i >= k) set.Remove(nums[i - k]);
             }
             return false;
@@ -15748,21 +15747,21 @@ namespace InterviewProblemNSolutions
             /* JAVA TreeSet (balanced BST) based solution using floor & ceiling APIs
             public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
                 TreeSet<Long> balancedBST = new TreeSet();
-                for(int i=0;i<nums.length;i++)
+                for(int n=0;n<nums.length;n++)
                 {
-                    Long ceil = balancedBST.ceiling((long)nums[i]);
-                    if(ceil!=null && Math.abs(ceil-nums[i])<=t)
+                    Long ceil = balancedBST.ceiling((long)nums[n]);
+                    if(ceil!=null && Math.abs(ceil-nums[n])<=t)
                         return true;
             
-                    Long floor = balancedBST.floor((long)nums[i]);
-                    if(floor!=null && Math.abs(floor-nums[i])<=t)
+                    Long floor = balancedBST.floor((long)nums[n]);
+                    if(floor!=null && Math.abs(floor-nums[n])<=t)
                         return true;
             
                     // add curr num to tree-set
-                    balancedBST.add((long)nums[i]);
-                    // remove the 'i-k'th num if set size exceeds k
+                    balancedBST.add((long)nums[n]);
+                    // remove the 'n-k'th num if set size exceeds k
                     if(balancedBST.size()>k)
-                        balancedBST.remove((long)nums[i-k]);
+                        balancedBST.remove((long)nums[n-k]);
                 }
                 return false;
             }
@@ -15902,7 +15901,7 @@ namespace InterviewProblemNSolutions
                 else
                     for (int i = 0; i < tnx.Count; i++)
                         for (int j = 0; j < tnx.Count; j++)
-                            // check if any tnx from same grp i.e. same name doesnt exceed threshold amt & also doesn't occur with 60min of any other tnx in different city
+                            // check if any tnx from same grp n.e. same name doesnt exceed threshold amt & also doesn't occur with 60min of any other tnx in different city
                             if (i != j && (Convert.ToInt32(tnx[i][2]) > 1000 || (Math.Abs(Convert.ToInt32(tnx[j][1]) - Convert.ToInt32(tnx[i][1])) <= 60 && tnx[j][3] != tnx[i][3])))
                             {
                                 invalid.Add(tnx[i][0] + "," + tnx[i][1] + "," + tnx[i][2] + "," + tnx[i][3]);
@@ -16648,7 +16647,7 @@ namespace InterviewProblemNSolutions
         }
 
 
-        // Time O(n!) Space O(n^2), n = 9 i.e. no of rows
+        // Time O(n!) Space O(n^2), n = 9 n.e. no of rows
         public static IList<IList<string>> SolveNQueens(int n)
         {
             /* We need to place 'n' quees in a chessboard of 'n' rows & 'n' cols
@@ -16749,7 +16748,7 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
-        // Time O(n!) Space O(n^2), n = 9 i.e. no of rows
+        // Time O(n!) Space O(n^2), n = 9 n.e. no of rows
         public static IList<IList<string>> SolveNQueensFaster(int n)
         {
             /* We need to place 'n' quees in a chessboard of 'n' rows & 'n' cols
@@ -16838,7 +16837,7 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
-        // Time O(n!) Space O(n), n = 9 i.e. no of rows
+        // Time O(n!) Space O(n), n = 9 n.e. no of rows
         public static int TotalNQueens(int n)
         {
             // Algo same as 'SolveNQueensFaster' we just dont store dots & Queens position anywhere
@@ -17545,7 +17544,7 @@ namespace InterviewProblemNSolutions
                 {
                     currNum = nums[i];
                     currLongestSeq = 1;
-                    // find longest seq starting from nums[i]
+                    // find longest seq starting from nums[n]
                     while (set.Contains(++currNum))
                         currLongestSeq++;
                     ans = Math.Max(ans, currLongestSeq);
@@ -17676,7 +17675,7 @@ namespace InterviewProblemNSolutions
             We start from the top and for each cell and all valid 4 direction we add max of (waterLevel required to reach current, curr cell val)
             in a min heap priority queue 
 
-            after adding we pickup the smallest wt i.e. GetMin() from min-heap
+            after adding we pickup the smallest wt n.e. GetMin() from min-heap
             and repeat this step and stop once we reach the destination
             */
             int n = grid.Length, w = 0, r, c;
@@ -17840,13 +17839,13 @@ namespace InterviewProblemNSolutions
             public IList<IList<int>> PalindromePairs(string[] words)
             {
                 IList<IList<int>> ans = new List<IList<int>>();
-                for(int i=0;i<words.Length;i++)
-                    for(int j=i+1;j<words.Length;j++)
+                for(int n=0;n<words.Length;n++)
+                    for(int j=n+1;j<words.Length;j++)
                     {
-                        if(IsPalindrome(words[i],words[j]))
-                            ans.Add(new int[] {i,j});
-                        if(IsPalindrome(words[j],words[i]))
-                            ans.Add(new int[] {j,i});
+                        if(IsPalindrome(words[n],words[j]))
+                            ans.Add(new int[] {n,j});
+                        if(IsPalindrome(words[j],words[n]))
+                            ans.Add(new int[] {j,n});
                     }
                 return ans;
 
@@ -18018,8 +18017,8 @@ namespace InterviewProblemNSolutions
             SegmentTree_SmallerCount bst = new SegmentTree_SmallerCount(nums);
             for (int i = nums.Length - 1; i >= 0; i--)
             {
-                bst.UpdateTree(bst.root, nums[i], 1);           // update count for 'nums[i]' idx
-                nums[i] = bst.SumRange(bst.root, bst.Start, nums[i] - 1);   // calculate no of no in range Start..nums[i]-1
+                bst.UpdateTree(bst.root, nums[i], 1);           // update count for 'nums[n]' idx
+                nums[i] = bst.SumRange(bst.root, bst.Start, nums[i] - 1);   // calculate no of no in range Start..nums[n]-1
             }
             return nums;
         }
@@ -18062,11 +18061,11 @@ namespace InterviewProblemNSolutions
         {
             /* Each child must have 1 candy base case
             * first we scan from left to right
-            *       if ith rating > i-1th rating
-            *       update ith = (i-1th candies) + 1
+            *       if ith rating > n-1th rating
+            *       update ith = (n-1th candies) + 1
             * now second pass we move from right
-            *       if i-1th rating > ith rating & candyCount[i-1] <= candyCount[i]
-            *       candyCount[i-1] = candyCount[i] + 1
+            *       if n-1th rating > ith rating & candyCount[n-1] <= candyCount[n]
+            *       candyCount[n-1] = candyCount[n] + 1
             */
             int l = ratings.Length, totalCandy = 0;
             int[] candyCount = new int[l];
@@ -18180,15 +18179,15 @@ namespace InterviewProblemNSolutions
             return maxUnits;
             /*
             Array.Sort(boxTypes, (x,y) => y[1].CompareTo(x[1])); // O(nlogn)
-            int maxUnits = 0, i=0;
-            while(truckSize > 0 && i < boxTypes.Length)         // O(Min(n,m)
+            int maxUnits = 0, n=0;
+            while(truckSize > 0 && n < boxTypes.Length)         // O(Min(n,m)
             {
-                maxUnits+=boxTypes[i][1];
+                maxUnits+=boxTypes[n][1];
                 // decreament truck capacity by 1
                 truckSize--;
                 // decreament the no of boxes of ith type
-                if(--boxTypes[i][0] == 0)
-                    i++;
+                if(--boxTypes[n][0] == 0)
+                    n++;
             }   
             return maxUnits;
              */
@@ -18351,7 +18350,7 @@ namespace InterviewProblemNSolutions
                 while (left < right)
                     if (nums[left] + nums[right] > nums[i])     // triangle can be formed
                         triplets += right-- - left;             // update count and reduce right by 1 to see again if more triplets can be formed,
-                                                                // once we found a pair left,right,i we increament count by diff of right-left
+                                                                // once we found a pair left,right,n we increament count by diff of right-left
                                                                 // Bcoz all remaining nums between left to right can also form triplet
                     else
                         left++;                                 // keep moving left towards right to increase value of left side
@@ -18410,7 +18409,7 @@ namespace InterviewProblemNSolutions
             /*
             we initially set the last state as 'L'
             we inspect each char from 0th index to len-1
-            if current state is empty i.e. '.' we increament the counter count which initially is set 0
+            if current state is empty n.e. '.' we increament the counter count which initially is set 0
             if the current state is :
 
                 Case 1  => '.'
@@ -18625,12 +18624,12 @@ namespace InterviewProblemNSolutions
         public static int FindIntegersWithoutConsecutiveOnes(int n)
         {
             int bLen = 0;
-            // find the distance of farthest 1 i.e. On bit from right
+            // find the distance of farthest 1 n.e. On bit from right
             for (int i = 0; i < 32; i++)
                 if ((1 << i & n) > 0)
                     bLen = i + 1;
 
-            // we set initial count as '2' because smallest input i.e. n==1 has 0 & 1 as valid ans i.e. 2 nums
+            // we set initial count as '2' because smallest input n.e. n==1 has 0 & 1 as valid ans n.e. 2 nums
             int count = 2;
             // now we start with initial number 1
             // and add Zero & One after left shifting the num by 1 place <<1
@@ -19079,7 +19078,7 @@ namespace InterviewProblemNSolutions
             Console.WriteLine($" {real1},{imag1},{real2},{imag2}");
             int r1r2 = real1 * real2, r1i2 = real1 * imag2, i1r2 = imag1 * real2, i1i2 = imag1 * imag2;
 
-            return (r1r2 - i1i2) + "+" + (r1i2 + i1r2) + "i";
+            return (r1r2 - i1i2) + "+" + (r1i2 + i1r2) + "n";
         }
 
 
@@ -19153,7 +19152,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < nums.Length; i++)
             {
                 //curMax = -1;
-                //val = i;
+                //val = n;
                 //while (val >= 0)
                 //{
                 //    nVal = nums[val];
@@ -19465,7 +19464,7 @@ namespace InterviewProblemNSolutions
                     if (min < nums[i] && nums[i] < max) return nums[i];
                     else if (nums[i] < min) return min;
                     else return max;
-                    // var unique = new List<int>() {min,max,nums[i]};
+                    // var unique = new List<int>() {min,max,nums[n]};
                     // unique.Sort(); // sort 3 unique numbers we have
                     // return unique[1]; // return the middle one
                 }
@@ -19558,12 +19557,12 @@ namespace InterviewProblemNSolutions
 
                 Initialize 1st time ppl knew secret for each person as int.MaxValue and update it to 0 for firstPerson which got to know the secret from person at index o (lets all this array 'SecretKnowTime')
 
-                Now Initialize the queue with the people who know the secret at time t0 i.e. 0th and firstPerson
+                Now Initialize the queue with the people who know the secret at time t0 n.e. 0th and firstPerson
 
                 Now while Dequeuing the person p1 from the Q
                 go thru all meetings done by p1 (if any)
 
-                while going thru meetings check if it was held at time i.e. after they knew secret than skip to next meeting
+                while going thru meetings check if it was held at time n.e. after they knew secret than skip to next meeting
                 also skip if the p2 who is meeting p1 knew the secret from schedule meeting time.
 
                 we only add p2 to queue if current meeting is when they got to know the secret for the very first time.
@@ -19734,8 +19733,8 @@ namespace InterviewProblemNSolutions
                 InOrder(r.left);
                 if (prv != null && prv.val > r.val)
                 {
-                    if (first == null) first = prv;     // 1st bad node i.e. prv is stored in 'first'
-                    second = r;                         // 2nd bad node i.e. root is stored in 'second'
+                    if (first == null) first = prv;     // 1st bad node n.e. prv is stored in 'first'
+                    second = r;                         // 2nd bad node n.e. root is stored in 'second'
                 }
                 prv = r;
                 InOrder(r.right);
@@ -19760,8 +19759,8 @@ namespace InterviewProblemNSolutions
                 curr = st.Pop();
                 if (prv != null && prv.val > curr.val)
                 {
-                    second = curr;                      // 2nd bad node i.e. root is stored in 'second'
-                    if (first == null) first = prv;     // 1st bad node i.e. prv is stored in 'first'
+                    second = curr;                      // 2nd bad node n.e. root is stored in 'second'
+                    if (first == null) first = prv;     // 1st bad node n.e. prv is stored in 'first'
                     else break;                         // 2nd instance nodes r not in order, we got both the nodes no need to iterate further
                 }
                 prv = curr;
@@ -19840,7 +19839,7 @@ namespace InterviewProblemNSolutions
         }
 
         // Time O(nlogn) | Space O(n), n = no of cars in positions/speed array
-        // requirs sorting better if target value is very high as compared to no of cars i.e. target >>> nlogn
+        // requirs sorting better if target value is very high as compared to no of cars n.e. target >>> nlogn
         public static int CarFleet(int target, int[] position, int[] speed)
         {
             #region ALGO
@@ -19984,7 +19983,7 @@ namespace InterviewProblemNSolutions
                     charRemoved = true;
                 }
                 // check now if all elements have same frequency, by passing in a copy of current dictionary
-                if (Check(freq.ToDictionary(entry => entry.Key, entry => entry.Value))) // O(26) i.e. O(1)
+                if (Check(freq.ToDictionary(entry => entry.Key, entry => entry.Value))) // O(26) n.e. O(1)
                     return true;
 
                 // Restore back original freq of current character
@@ -20204,7 +20203,7 @@ namespace InterviewProblemNSolutions
             6a. Imp point to note is we are trying to remove a value from Heap which is not the minmum that we can just return false,
                 Bcoz, if we have val,counter {1,2},{2,1},{3,1},{4,1},{5,6}
                 we start with 1 and reduce counter in dict {1,1},{2,1},{3,1},{4,1},{5,6}
-                now we look for 1+1 i.e. 2 and yes its present but on reduce it by 1 in dict we also need to pop it from Heap but Heap min is 1 not 2
+                now we look for 1+1 n.e. 2 and yes its present but on reduce it by 1 in dict we also need to pop it from Heap but Heap min is 1 not 2
                 hence we can return true because we know whenever we are going to create next grp we won't find net consecutive val for 1 which is still present once in dict
             7. if at any point consecutive no is no found or we run of values while creating last group return false
             */
@@ -20369,9 +20368,9 @@ namespace InterviewProblemNSolutions
             /* ALGO
             a. sort the intervals basis their start value
             b. sort the queries and keep original indexes in Dictionary
-            c. Now iterate thru the sorted intervals whose starting value is smaller than the current queries[i] where we are at (i starts from 0)
+            c. Now iterate thru the sorted intervals whose starting value is smaller than the current queries[n] where we are at (n starts from 0)
             d. keep adding above values in to MinHeap which has size at the main value paired with ending index of a interval
-            e. now check and remove HeapMin its its ending value is smaller than queried values i.e. query is out of range
+            e. now check and remove HeapMin its its ending value is smaller than queried values n.e. query is out of range
             f. repeated step#e till we found a interval whoese end value is >= query value or Heap is empty
             g. if Heap empty insert -1 in result array for current query value.
             */
@@ -20411,7 +20410,7 @@ namespace InterviewProblemNSolutions
                         break;
                 }
 
-                // remove all invalid interval from MinHeap i.e. one which have end value smaller than current queried value
+                // remove all invalid interval from MinHeap n.e. one which have end value smaller than current queried value
                 while (pq.Count > 0 && pq.Peek() < curQueryVal)
                     pq.Dequeue();                            // O(logn)
 
@@ -20452,7 +20451,7 @@ namespace InterviewProblemNSolutions
             Stack<int> lastMultiplication = new Stack<int>();
             Stack<int> afterCurrentMultipliation;
             int n1, n2, carry;
-            // multiple each digit in 2nd string by each num in 1st string i.e. 'num1' (right->left)
+            // multiple each digit in 2nd string by each num in 1st string n.e. 'num1' (right->left)
             for (int j = l1 - 1; j >= l1 - l2; j--)
             {
                 n2 = num2[j];
@@ -20490,7 +20489,7 @@ namespace InterviewProblemNSolutions
             /* ALGO
             Instead of multiple number by itself N times we can just apply 'divide and conquer' technique
             by calculating half the req power and multiplying the ans with itself again to get the actual power
-            + mod of 2 i.e. power 1 if any left after dividing the power in half
+            + mod of 2 n.e. power 1 if any left after dividing the power in half
              */
 
             // base case
@@ -20524,7 +20523,7 @@ namespace InterviewProblemNSolutions
             we add each points in Maxheap with their distance to origin 0,0 as priority
             for each new points add to MaxHeap
                 if Heap size is smaller than 'k'
-                if Heap top i.e. largest distance is larger than incoming
+                if Heap top n.e. largest distance is larger than incoming
                     element than remove top and add new point
 
             at the end pop all the K points from Heap and add to result and return
@@ -20537,7 +20536,7 @@ namespace InterviewProblemNSolutions
             var maxHeap = new System.Collections.Generic.PriorityQueue<int[], double>(Comparer<double>.Create((x, y) => y.CompareTo(x)));
             foreach (var point in points)                // O(n)
             {
-                // Euclidean distance formula i.e., √((x1 - x2)^2 + (y1 - y2)^2).
+                // Euclidean distance formula n.e., √((x1 - x2)^2 + (y1 - y2)^2).
                 var distance = Math.Sqrt(Math.Pow(point[0], 2) + Math.Pow(point[1], 2));
                 // Console.WriteLine($" Dist {distance} from origin for {point[0]},{point[1]}");
                 if (maxHeap.Count < k)
@@ -20629,7 +20628,7 @@ namespace InterviewProblemNSolutions
                 // ex: reduce 10
                 // Quotient: 10/3 = 3
                 // Remainder: 10%3 = 1
-                // total 3+1 i.e. 4 operation to reduce 10 to 0
+                // total 3+1 n.e. 4 operation to reduce 10 to 0
                 // but it wud be like reduce 10 once by 3, that leave 7 again by 3 leave 4 now twice by 2 leave 0
                 // 1 + 1 + 2 = 4
                 // Ex: for 8
@@ -20756,7 +20755,7 @@ namespace InterviewProblemNSolutions
 
 
         // Time O(Max(n,wlogw+dlogd)) | Space O(n), n = length of matches, w = no of winners, d = no of 1 match defeated
-        // worst case we have 50% winner and loosers everthing wud be n/2 i.e n hence T (nlogn) | S O(n)
+        // worst case we have 50% winner and loosers everthing wud be n/2 n.e n hence T (nlogn) | S O(n)
         public static IList<IList<int>> FindWinners(int[][] matches)
         {
             /* ALGO
@@ -20862,7 +20861,7 @@ namespace InterviewProblemNSolutions
         public static int SumSubarrayMins(int[] arr)
         {
             /* ALGO
-            1# The brute force way to solve is simple find no of sub-array n^2 find min in each sub-array n i.e. n^3 Soln
+            1# The brute force way to solve is simple find no of sub-array n^2 find min in each sub-array n n.e. n^3 Soln
 
             2# better is while creating sub-array and adding each num keep track of the min hence Time get reduced to n^2 as loop for finding min is not req
 
@@ -20962,11 +20961,11 @@ namespace InterviewProblemNSolutions
             PriorityQueue<int, int> maxHeap = new PriorityQueue<int, int>(Comparer<int>.Create((a, b) => b.CompareTo(a)));
             long minCostKSubArray = long.MaxValue, curMinCost;
 
-            for (int i = 1; i < nums.Length - dist; i++)         // O(n)
+            for (int n = 1; n < nums.Length - dist; n++)         // O(n)
             {
                 maxHeap.Clear();
                 curMinCost = 0;
-                for (int idx = i; idx <= i + dist; idx++)      // O(dist)
+                for (int idx = n; idx <= n + dist; idx++)      // O(dist)
                 {
                     if (maxHeap.Count < k - 1)
                     {
@@ -20988,25 +20987,25 @@ namespace InterviewProblemNSolutions
             // DP based | TLE
             int l = nums.Length;
             Dictionary<int, long>[] idxKMin = new Dictionary<int, long>[l];
-            for (int i = 1; i < l; i++) idxKMin[i] = new();
+            for (int n = 1; n < l; n++) idxKMin[n] = new();
             return nums[0] + Min(1, k - 1);
             // local helper func
-            long Min(int i, int minValReq, int firstSplitIdx = -1)
+            long Min(int n, int minValReq, int firstSplitIdx = -1)
             {
                 if (minValReq == 0) return 0;
-                if (i >= l) return int.MaxValue;
-                if (idxKMin[i].TryGetValue(minValReq, out long val)) return val;
+                if (n >= l) return int.MaxValue;
+                if (idxKMin[n].TryGetValue(minValReq, out long val)) return val;
 
                 long minCost = long.MaxValue;
                 // skip current index
-                if(l-minValReq<i+1 && (firstSplitIdx==-1 || firstSplitIdx+dist- minValReq <= i+1))
-                    minCost = Math.Min(minCost, Min(i + 1, minValReq));
+                if(l-minValReq<n+1 && (firstSplitIdx==-1 || firstSplitIdx+dist- minValReq <= n+1))
+                    minCost = Math.Min(minCost, Min(n + 1, minValReq));
 
                 
-                // take one of the values from i...i+dist
-                for (int idx = i; idx <= Math.Min((firstSplitIdx!=-1 ? (firstSplitIdx + dist - (minValReq-1)) : (i + dist)), l - minValReq); idx++)
+                // take one of the values from n...n+dist
+                for (int idx = n; idx <= Math.Min((firstSplitIdx!=-1 ? (firstSplitIdx + dist - (minValReq-1)) : (n + dist)), l - minValReq); idx++)
                     minCost = Math.Min(minCost, nums[idx] + Min(idx + 1, minValReq - 1, firstSplitIdx==-1 ? idx : firstSplitIdx));
-                return idxKMin[i][minValReq] = minCost;
+                return idxKMin[n][minValReq] = minCost;
             }
             */
             #endregion
@@ -21019,7 +21018,7 @@ namespace InterviewProblemNSolutions
         /// keep iterating thru indexes till we found a num which is smaller than next
         /// 2. count on bits for cur and next numbers
         /// if same swap the numbers in array
-        /// set index to i-1 to check if newly replaced num is smaller than even the last num
+        /// set index to n-1 to check if newly replaced num is smaller than even the last num
         /// else return false
         /// </summary>
         public static bool CanSortArray(int[] nums)
@@ -21417,33 +21416,33 @@ namespace InterviewProblemNSolutions
             _________
             |       |
             |       |
-            |_______|____  ----> itersection with i-3
+            |_______|____  ----> itersection with n-3
                     |
             Case4
             _________
             |       |
             |       |
-            |       |  ----> itersection with i-4
+            |       |  ----> itersection with n-4
             |_______|
 
             Case3
             _________
-            |    ___|___________ ------> intersection with i-5
+            |    ___|___________ ------> intersection with n-5
             |       |          |
             |       |          | 
             |__________________|
             */
-            // compare each point at idx i with i-3, i-4 & i-5 points and see if it crosses them than return true
+            // compare each point at idx n with n-3, n-4 & n-5 points and see if it crosses them than return true
             for (int i = 3; i < x.Length; i++)
             {
-                // case 1# i-3
+                // case 1# n-3
                 if (x[i] >= x[i - 2] && x[i - 1] <= x[i - 3])
                     return true;
-                // case 2# i-4
+                // case 2# n-4
                 if (i >= 4)
                     if (x[i] + x[i - 4] == x[i - 2] && x[i - 1] == x[i - 3])
                         return true;
-                // case 3# i-5
+                // case 3# n-5
                 if (i >= 5)
                     if (x[i] + x[i - 4] >= x[i - 2] && x[i - 1] + x[i - 5] >= x[i - 3] && x[i - 2] > x[i - 4] && x[i - 3] > x[i - 1])
                         return true;
@@ -21549,29 +21548,29 @@ namespace InterviewProblemNSolutions
                 }
             return result;
             /* 2 Pass Soln | Time = Space = O(n), n = length of 'nums'
-                int l = nums.Length, i = 0, j = 0;
+                int l = nums.Length, n = 0, j = 0;
                 int[] result = new int[l];
                 // update +ve values
-                while(i<l-1)                // O(n) 
+                while(n<l-1)                // O(n) 
                 {
                     // get next +ve idx in original array
                     while(nums[j]<0)
                         j++;
                     // assign +ve value in new array
-                    result[i] = nums[j++];
-                    i+=2;
+                    result[n] = nums[j++];
+                    n+=2;
                 }
-                i=1;
+                n=1;
                 j=0;
                 // update -ve values
-                while(i<l)                  // O(n) 
+                while(n<l)                  // O(n) 
                 {
                     // get next -ve idx in original array
                     while(nums[j]>0)
                         j++;
                     // assign -ve value in new array
-                    result[i] = nums[j++];
-                    i+=2;
+                    result[n] = nums[j++];
+                    n+=2;
                 }
                 return result;
             */
@@ -21714,7 +21713,7 @@ namespace InterviewProblemNSolutions
         public static int RangeBitwiseAnd(int left, int right)
         {
             /* ALGO
-            1. First bit i.e. right most bit of either num 'a' or 'a+1' one of them atleast have 0 as 1st bit
+            1. First bit n.e. right most bit of either num 'a' or 'a+1' one of them atleast have 0 as 1st bit
                 hence AND of that bits will result in 0 no matter what numbers come after
             2. Using above approach we can just see if the diff b/w left and right most numbers is atleast 1
                 there is bound to be a numbers in the range that will have 1st bit as zero
@@ -21742,9 +21741,9 @@ namespace InterviewProblemNSolutions
         public static bool CanTraverseAllPairs(int[] nums)
         {
             /* ALGO
-            Handle the edge cases, if n = 1, return true, if nums[i] = 1, return false.
+            Handle the edge cases, if n = 1, return true, if nums[n] = 1, return false.
             Create an Graph which will store the Node for all unique values & primeFactor (except 1)
-            For each element nums[i], iterate over all its prime factors, and for each prime factor add an undirected edge between num and prime
+            For each element nums[n], iterate over all its prime factors, and for each prime factor add an undirected edge between num and prime
             Also we keep adding all the nodes we create in graph to NotVisited set which is used later to find if its 1 connected graph
             Run DFS from any value ex: 1st value in num to count the number of components.
             Return true if the graph has one component, and false otherwise.
@@ -21831,7 +21830,7 @@ namespace InterviewProblemNSolutions
             4. Add root and than Null to the queue
             5. a Null marks cur level traversal is complete
             6. Iterate thru the queue and keep on adding left n right child if not null
-            7. once we get null if there are still elements left in queue i.e.
+            7. once we get null if there are still elements left in queue n.e.
                 next level than add Null pointer which will mark end of next level
             9. reset 'isFirstNodeOfNextLevel' so leftmost is captured
              */
@@ -21926,7 +21925,7 @@ namespace InterviewProblemNSolutions
             1. Sort the array
             2. now our aim is to increase the score and return the max we can get at any point in time
             3. we set the boundery to lt = 0 and rt = n-1
-            4. if we can increase the score i.e. smallest token which is on left is <= curPower, increase the token+1 and reduce power, update max
+            4. if we can increase the score n.e. smallest token which is on left is <= curPower, increase the token+1 and reduce power, update max
             5. if above not possible try to max power which is on the right most side by sacrificing 1 token, if we have atleast 1
             6. return the maxToken
              */

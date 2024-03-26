@@ -1438,6 +1438,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Input");
+                //var firstMissingPositiveNo = DailyProblem.FirstMissingPositiveUsingHashSet(nums);
                 var firstMissingPositiveNo = DailyProblem.FirstMissingPositive(nums);
                 Console.WriteLine($" First Missing Positive number in above input array is: {firstMissingPositiveNo}\n");
             }
