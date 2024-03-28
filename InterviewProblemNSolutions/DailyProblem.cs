@@ -22247,5 +22247,26 @@ namespace InterviewProblemNSolutions
             }
             return subArrayCount;
         }
+
+        // Time = Space = O(n), n = length of 'nums'
+        public static int MaxSubarrayLength(int[] nums, int k)
+        {
+            Dictionary<int, int> numFreq = [];
+            int lt = 0, rt = -1, maxGoodLen = 1, l = nums.Length;
+            while (++rt < l)               // O(n)
+            {
+                if (numFreq.TryGetValue(nums[rt], out int freq))
+                {
+                    numFreq[nums[rt]] = ++freq;
+                    // need to move the left pointer to decrease the freq of the number which just breached 'k'
+                    while (numFreq[nums[rt]] > k)
+                        --numFreq[nums[lt++]];
+                }
+                else numFreq[nums[rt]] = 1;
+                // update the good sub-array length
+                maxGoodLen = Math.Max(maxGoodLen, 1 + rt - lt);
+            }
+            return maxGoodLen;
+        }
     }
 }

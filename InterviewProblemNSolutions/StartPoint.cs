@@ -610,6 +610,7 @@ namespace InterviewProblemNSolutions
             RemoveZeroSumConsecutiveNodesFromLinkedList();
             FindThePivotInteger();
             BinarySubarraysWithSum();
+            LengthOfLongestSubarrayWithAtMostKFrequency();
 
 
 
@@ -10499,6 +10500,20 @@ namespace InterviewProblemNSolutions
             {
                 nums[i].Print("Input Array");
                 Console.WriteLine($"In above array the no of non-empty subarrays with a sum '{goal[i]}' => {DailyProblem.NumSubarraysWithSum(nums[i], goal[i])}");
+            }
+        }
+
+
+        public static void LengthOfLongestSubarrayWithAtMostKFrequency()
+        {
+            // https://leetcode.com/problems/length-of-longest-subarray-with-at-most-k-frequency/
+            Utility.Print("2958. Length of Longest Subarray With at Most K Frequency");
+            int[][] nums = [[1, 2, 3, 1, 2, 3, 1, 2], [1, 2, 1, 2, 1, 2, 1, 2], [5, 5, 5, 5, 5, 5, 5]];
+            int[] k = [2, 1, 4];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Input array");
+                Console.WriteLine($"Max good sub-array length such that all numbers have freq less than equal to '{k[i]}' is =>\t\t'{DailyProblem.MaxSubarrayLength(nums[i], k[i])}'");
             }
         }
 
