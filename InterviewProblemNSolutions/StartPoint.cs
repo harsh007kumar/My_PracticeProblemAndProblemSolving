@@ -1,4 +1,5 @@
-﻿using Sorting;
+﻿using InterviewProblemNSolutions;
+using Sorting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -611,6 +612,7 @@ namespace InterviewProblemNSolutions
             FindThePivotInteger();
             BinarySubarraysWithSum();
             LengthOfLongestSubarrayWithAtMostKFrequency();
+            CountSubarraysWhereMaxElementAppearsAtLeastKTimes();
 
 
 
@@ -10517,6 +10519,20 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void CountSubarraysWhereMaxElementAppearsAtLeastKTimes()
+        {
+            // NeetCode https://youtu.be/CZ-z1ViskzE
+            // https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times
+            Utility.Print("2962. Count Subarrays Where Max Element Appears at Least K Times");
+            int[][] nums = [[1, 3, 2, 3, 3], [1, 4, 2, 1], [1, 3, 2, 3, 3, 2, 3]];
+            int[] k = [2, 3, 2];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("input array");
+                Console.WriteLine($"Count of sub-arrays where global max appears at least '{k[i]}' times => '{DailyProblem.CountSubarrays(nums[i], k[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

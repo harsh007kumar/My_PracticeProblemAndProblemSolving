@@ -22268,5 +22268,47 @@ namespace InterviewProblemNSolutions
             }
             return maxGoodLen;
         }
+
+        // Time O(n), Space O(1), n = length of 'nums'
+        public static long CountSubarrays(int[] nums, int k)
+        {
+            int maxNum = nums.Max(), freqMax = 0, lt = 0, rt = -1, l = nums.Length;
+            long countSubArrWithMaxNumAppearsAtleastKTime = 0;
+            while (++rt < l)
+            {
+                // increament the global max number if found at cur idx
+                if (nums[rt] == maxNum)
+                    freqMax++;
+
+                // move the left pointer till freq == k
+                while (freqMax == k)
+                    // move left pointer and reduce freq if global max is found
+                    freqMax -= nums[lt++] == maxNum ? 1 : 0;
+
+                // update the sub-array count, since we are reducing freq till its k-1 hence we don't need to add lt+1 just adding left pointer works
+                countSubArrWithMaxNumAppearsAtleastKTime += lt;
+            }
+            return countSubArrWithMaxNumAppearsAtleastKTime;
+
+            #region Easy to understand
+            // // Time O(n), Space O(1), n = length of 'nums'
+            // public long CountSubarrays(int[] nums, int k) {
+            //     int maxNum = nums.Max(), freqMax = 0, lt = 0, rt = -1 , l = nums.Length;
+            //     long countSubArrWithMaxNumAppearsAtleastKTime = 0;
+            //     while(++rt<l)
+            //     {
+            //         if(nums[rt]==maxNum)
+            //             freqMax++;
+
+            //         while(freqMax>k || (freqMax==k && nums[lt]!=maxNum))
+            //             freqMax-=nums[lt++] == maxNum ? 1 : 0;
+
+            //         countSubArrWithMaxNumAppearsAtleastKTime += freqMax==k ? lt+1 : 0;
+            //     }
+            //     return countSubArrWithMaxNumAppearsAtleastKTime;
+            // }
+            #endregion
+        }
+
     }
 }
