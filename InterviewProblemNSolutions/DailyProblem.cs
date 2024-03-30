@@ -22310,5 +22310,48 @@ namespace InterviewProblemNSolutions
             #endregion
         }
 
+
+        // sliding window with 3 pointers
+        // Time = Space = O(n), n = length of 'nums'
+        public static int SubarraysWithKDistinct(int[] nums, int k)
+        {
+            Dictionary<int, int> numFreq = [];
+            int ltFar = 0, ltNear = 0, rt = -1, countSubArrayWithKDistinctNums = 0, l = nums.Length;
+            while (++rt < l)
+            {
+                if (numFreq.TryGetValue(nums[rt], out int freq))
+                    numFreq[nums[rt]] = 1 + freq;
+                else numFreq[nums[rt]] = 1;
+
+                if (numFreq.Count > k)             // O(n)
+                {
+                    // since we have excess of distinct we keep reducing the window till we have just 'k'
+                    while (numFreq.Count > k)
+                    {
+                        // one number is no longer part of subaray, hence reducing total distinct count to 'K'
+                        if (--numFreq[nums[ltNear++]] == 0)
+                        {
+                            numFreq.Remove(nums[ltNear - 1]);
+                            break;
+                        }
+                    }
+                    // since we have just 'k' distinct now which is both the longest and shorted valid subarray set both the left pointers to same idx
+                    ltFar = ltNear;
+                }
+
+                if (numFreq.Count == k)
+                {
+                    // try reducing if we can reduce the sliding window to min by removing
+                    // duplicate of the cur num just traversed in array
+                    while (numFreq[nums[ltNear]] > 1)
+                        --numFreq[nums[ltNear++]];
+
+                    // update the valid sub-array count
+                    countSubArrayWithKDistinctNums += 1 + ltNear - ltFar;
+                }
+            }
+            return countSubArrayWithKDistinctNums;
+        }
+
     }
 }

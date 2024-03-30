@@ -613,6 +613,7 @@ namespace InterviewProblemNSolutions
             BinarySubarraysWithSum();
             LengthOfLongestSubarrayWithAtMostKFrequency();
             CountSubarraysWhereMaxElementAppearsAtLeastKTimes();
+            SubarraysWithKDifferentIntegers();
 
 
 
@@ -10531,6 +10532,20 @@ namespace InterviewProblemNSolutions
                 nums[i].Print("input array");
                 Console.WriteLine($"Count of sub-arrays where global max appears at least '{k[i]}' times => '{DailyProblem.CountSubarrays(nums[i], k[i])}'");
                 Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+        public static void SubarraysWithKDifferentIntegers()
+        {
+            // NeetCode https://youtu.be/etI6HqWVa8U
+            // https://leetcode.com/problems/subarrays-with-k-different-integers
+            Utility.Print("992. Subarrays with K Different Integers");
+            int[][] nums = [[1, 2, 1, 2, 3], [1, 2, 1, 3, 4], [1, 3, 2, 3, 3, 2, 3]];
+            int[] k = [2, 3, 2];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("input array");
+                Console.WriteLine($"Count of sub-arrays with '{k[i]}' distinct numbers are =>  '{DailyProblem.SubarraysWithKDistinct(nums[i], k[i])}'");
             }
         }
 
