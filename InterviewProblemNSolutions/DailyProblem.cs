@@ -22353,5 +22353,40 @@ namespace InterviewProblemNSolutions
             return countSubArrayWithKDistinctNums;
         }
 
+
+        // sliding window with 3 pointers
+        // Time = Space = O(n), n = length of 'nums'
+        public static long CountSubarraysWithinBound(int[] nums, int minK, int maxK)
+        {
+            int minIdxQ = -1, maxIdxQ = -1;
+            int ltFar = 0, ltNear = 0, rt = -1, l = nums.Length, n;
+            long countSubArrayWithBounds = 0;
+            while (++rt < l)
+            {
+                n = nums[rt];
+                // out-of-bounds value
+                if (n < minK || n > maxK)
+                {
+                    minIdxQ = maxIdxQ = -1;
+                    ltFar = ltNear = rt + 1;
+                }
+                // within bounds value
+                else
+                {
+                    if (n == minK)     // if found min store its index
+                        minIdxQ = rt;
+                    if (n == maxK)     // if found max store its index
+                        maxIdxQ = rt;
+
+                    ltNear = Math.Min(minIdxQ, maxIdxQ);
+                    // if we have both boundry values
+                    if (ltNear != -1)
+                        // update the valid sub-array count
+                        countSubArrayWithBounds += 1 + ltNear - ltFar;
+                }
+            }
+            return countSubArrayWithBounds;
+        }
+
     }
 }

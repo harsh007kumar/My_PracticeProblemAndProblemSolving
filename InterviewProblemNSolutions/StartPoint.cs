@@ -614,6 +614,7 @@ namespace InterviewProblemNSolutions
             LengthOfLongestSubarrayWithAtMostKFrequency();
             CountSubarraysWhereMaxElementAppearsAtLeastKTimes();
             SubarraysWithKDifferentIntegers();
+            CountSubarraysWithFixedBounds();
 
 
 
@@ -10546,8 +10547,25 @@ namespace InterviewProblemNSolutions
             {
                 nums[i].Print("input array");
                 Console.WriteLine($"Count of sub-arrays with '{k[i]}' distinct numbers are =>  '{DailyProblem.SubarraysWithKDistinct(nums[i], k[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+        public static void CountSubarraysWithFixedBounds()
+        {
+            // https://leetcode.com/problems/count-subarrays-with-fixed-bounds
+            Utility.Print("2444. Count Subarrays With Fixed Bounds");
+            int[][] nums = [[1, 3, 5, 2, 7, 5], [1, 1, 1, 1], [1, 3, 2, 3, 3, 2, 3]];
+            int[] mink = [1, 1, 2];
+            int[] maxk = [5, 1, 3];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums.Print("InputArray");
+                Console.WriteLine($"No of sub-arrays where the min and max values are '{mink[i]}' &  '{maxk[i]}' respectively => '{DailyProblem.CountSubarraysWithinBound(nums[i], mink[i], maxk[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
 
 
 
