@@ -615,7 +615,7 @@ namespace InterviewProblemNSolutions
             CountSubarraysWhereMaxElementAppearsAtLeastKTimes();
             SubarraysWithKDifferentIntegers();
             CountSubarraysWithFixedBounds();
-
+            NumberOfStudentsUnableToEatLunch();
 
 
 
@@ -10566,8 +10566,22 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void NumberOfStudentsUnableToEatLunch()
+        {
+            // https://leetcode.com/problems/number-of-students-unable-to-eat-lunch
+            Utility.Print("1700. Number of Students Unable to Eat Lunch");
+            int[][] students = [[1, 1, 0, 0], [1, 1, 1, 0, 0, 1]];
+            int[][] sandwiches = [[0, 1, 0, 1], [1, 0, 0, 0, 1, 1]];
+            for (int i = 0; i < students.Length; i++)
+            {
+                students[i].Print("students-array");
+                sandwiches[i].Print("sandwiches-array");
+                Console.WriteLine($"Given above array the no of students who would go hungry are => '{DailyProblem.CountStudentsUnableToEatLunch(students[i], sandwiches[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
-
+        
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

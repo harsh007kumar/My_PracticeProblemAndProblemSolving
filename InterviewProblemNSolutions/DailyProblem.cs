@@ -22388,5 +22388,67 @@ namespace InterviewProblemNSolutions
             return countSubArrayWithBounds;
         }
 
+
+        // Time O(n) 2-Pass | Space O(1), n = length total no of 'students'
+        public static int CountStudentsUnableToEatLunch(int[] students, int[] sandwiches)
+        {
+            /* ALGO
+            1. take 2 counters to track no of sandwichs avaliable of each type
+            2. Now iterate from 0..N-1 index and keep increamenting the counter when you see a sandwich of that type
+            3. Also keep decrementing the counter when a kid who wants a given sandwich shows up
+            4. If after iterating once thru the array's the total count of both sandwiches is 0 means we have excatly the amount of sandwich as the studends wants.
+            5. If not, we just need to find which type of sandwich is more as sandwich can only be one of the 2 given types
+            6. whichever sandwich type is in excess we need to find out how many students have been fed of opp type till now,
+                as once we found the excess one, post that students would keep going back to queue.
+            7. we keep decreamenting from the total no of students of the opposite/minority type till be reach the excessive sandwich index
+            8. return the remaingCount of minority preference which could not be fed once all the students are fed of sandwich type which are in excess.
+             */
+            int circularSandwichCount = 0, squareSandwichCount = 0, ableToEat = 0, l = students.Length, totalCircularKids = 0, totalSquareKids = 0;
+            for (int i = 0; i < l; i++)            // O(n)
+            {
+                // update sandwich counters
+                if (sandwiches[i] == 1) squareSandwichCount++;
+                else circularSandwichCount++;
+
+                // reduce the sandwich which is preferred by current student
+                if (students[i] == 1)
+                {
+                    squareSandwichCount--;
+                    totalSquareKids++;
+                }
+                else
+                {
+                    circularSandwichCount--;
+                    totalCircularKids++;
+                }
+            }
+
+            // all preferences can be matched, hence 0 hungry
+            if (circularSandwichCount == 0 && squareSandwichCount == 0) return 0;
+
+            // sandwich and preference NOT MATCHING | Find which kind of sandwich are in excess leading to hungry kids of opp choice
+            if (circularSandwichCount > 0)                     // more circular sandwich than req
+            {
+                // find the 1st excess circular-sandwich
+                for (int i = 0; i < l; i++)        // O(n)
+                    if (sandwiches[i] == 0)
+                    {
+                        if (--totalCircularKids < 0)
+                            return totalSquareKids;
+                    }
+                    else --totalSquareKids;
+            }
+            else                                            // more square sandwich than req
+                                                            // find the 1st excess square-sandwich
+                for (int i = 0; i < l; i++)        // O(n)
+                    if (sandwiches[i] == 1)
+                    {
+                        if (--totalSquareKids < 0)
+                            return totalCircularKids;
+                    }
+                    else --totalCircularKids;
+
+            return 0;
+        }
     }
 }
