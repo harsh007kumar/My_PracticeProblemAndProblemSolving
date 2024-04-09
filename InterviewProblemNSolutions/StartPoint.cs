@@ -616,6 +616,7 @@ namespace InterviewProblemNSolutions
             SubarraysWithKDifferentIntegers();
             CountSubarraysWithFixedBounds();
             NumberOfStudentsUnableToEatLunch();
+            TimeNeededToBuyTickets();
 
 
 
@@ -10581,7 +10582,22 @@ namespace InterviewProblemNSolutions
             }
         }
 
-        
+
+        public static void TimeNeededToBuyTickets()
+        {
+            // https://leetcode.com/problems/time-needed-to-buy-tickets
+            Utility.Print("2073. Time Needed to Buy Tickets");
+            int[][] tickets = [[2, 3, 2], [5, 1, 1, 1], [1, 1, 5, 1], [1, 1, 5, 1, 2, 9], [1, 11, 5, 1, 12, 9], [1, 11, 5, 1, 2, 3], [15, 66, 3, 47, 71, 27, 54, 43, 97, 34, 94, 33, 54, 26, 15, 52, 20, 71, 88, 42, 50, 6, 66, 88, 36, 99, 27, 82, 7, 72]];
+            int[] k = [2, 0, 2, 2, 2, 2, 2, 18];
+            for (int i = 0; i < tickets.Length; i++)
+            {
+                tickets[i].Print("Input-Array");
+                Console.WriteLine($"Time taken for the person at position '{k[i]}' to finish buying tickets => '{DailyProblem.TimeRequiredToBuy(tickets[i], k[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M

@@ -22450,5 +22450,25 @@ namespace InterviewProblemNSolutions
 
             return 0;
         }
+
+
+        // Time O(n) | Space O(1), n = length of 'tickets'
+        public static int TimeRequiredToBuy(int[] tickets, int k)
+        {
+            /* ALGO
+            1. People in front make us wait for Min of (no of ticket they want, no of tickets we want) // as we leave once we have r quota
+            2. People in back of us made us wait for Min of (no of ticket they want, -1 + no of tickets we want) // as we don't wait for them for our last ticket
+             */
+            int waitTimeAfterGoingBackToQueue = 0, l = tickets.Length;
+            for (int i = 0; i < l; i++)            // O(n)
+                                                   // calculate time wasted for going around the line
+                                                   // people will keep us waiting for the 1 * no of tickets they need with upper cap being our TotalReqTickets post which we leave the Q
+                if (i <= k)
+                    waitTimeAfterGoingBackToQueue += Math.Min(tickets[k], tickets[i]);
+                else    // this would be for last ticket as don't need to queue back again
+                    waitTimeAfterGoingBackToQueue += Math.Min(tickets[k] - 1, tickets[i]);
+
+            return waitTimeAfterGoingBackToQueue;
+        }
     }
 }
