@@ -22470,5 +22470,33 @@ namespace InterviewProblemNSolutions
 
             return waitTimeAfterGoingBackToQueue;
         }
+
+
+        // Time O(nlogn) | Space O(n), n = length of 'deck' array
+        public static int[] DeckRevealedIncreasing(int[] deck)
+        {
+            /* ALGO
+            1. Sort he deck in descresing order
+            2. Create a Queue and add top-card from deck to its front
+            3. Now for all the card 2nd index onwards, Pull the Q front and add it to the back before adding new card to queue
+            4. Repeat Step #3 until deck is empty
+            5. Return the reverse of the queue as result at the end
+            */
+            // Sort in decreasing order
+            Array.Sort(deck, (x, y) => y.CompareTo(x));   // O(nlogn)
+            int l = deck.Length;
+            Queue<int> q = [];
+            q.Enqueue(deck[0]); // enqueue the top card
+
+            for (int i = 1; i < l; i++)
+            {
+                // remove from front and add to back
+                q.Enqueue(q.Dequeue());
+                // add new deck to the front
+                q.Enqueue(deck[i]);
+            }
+
+            return q.Reverse().ToArray();
+        }
     }
 }

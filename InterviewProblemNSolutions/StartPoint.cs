@@ -617,6 +617,7 @@ namespace InterviewProblemNSolutions
             CountSubarraysWithFixedBounds();
             NumberOfStudentsUnableToEatLunch();
             TimeNeededToBuyTickets();
+            RevealCardsInIncreasingOrder();
 
 
 
@@ -10597,6 +10598,18 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void RevealCardsInIncreasingOrder()
+        {
+            // https://leetcode.com/problems/reveal-cards-in-increasing-order
+            Utility.Print("950. Reveal Cards In Increasing Order");
+            int[][] deck = [[17, 13, 11, 2, 3, 5, 7], [1, 1000]];
+            for (int i = 0; i < deck.Length; i++)
+            {
+                deck[i].Print("Deck-Array");
+                DailyProblem.DeckRevealedIncreasing(deck[i]).Print($"Return an ordering of the deck that would reveal the cards in increasing order");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
