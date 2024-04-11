@@ -10,3 +10,6 @@
 *.ide
 *.ide-shm
 *.ide-wal
+*/obj/
+obj/
+obj
