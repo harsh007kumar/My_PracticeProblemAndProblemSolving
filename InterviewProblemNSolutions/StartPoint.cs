@@ -9670,14 +9670,14 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/maximal-rectangle
             Utility.Print("85. Maximal Rectangle");
-            char[][][] matrixArr = new char[][][]
-            {
-                new char[][] { new char[] {'1','0','1','0','0'}, new char[] {'1','0','1','1','1'}, new char[] {'1','1','1','1','1'}, new char[] { '1', '0', '0', '1', '0' } },
-                new char[][] { new char[] {'0' } },
-                new char[][] { new char[] {'1' } },
-                new char[][] { new char[] {'0', '0', '1', '0'}, new char[] {'0', '0', '1', '0'}, new char[] {'0', '0', '1', '0'}, new char[] {'0', '0', '1', '1'}, new char[] {'0', '1', '1', '1'}, new char[] {'0', '1', '1', '1'}, new char[] { '1', '1', '1', '1' } },
-            };
-            foreach(var matrix in matrixArr)
+            char[][][] matrixArr =
+            [
+                [['1','0','1','0','0'],['1','0','1','1','1'],['1','1','1','1','1'],[ '1', '0', '0', '1', '0' ]],
+                [['0']],
+                [['1']],
+                [['0', '0', '1', '0'],['0', '0', '1', '0'],['0', '0', '1', '0'],['0', '0', '1', '1'],['0', '1', '1', '1'],['0', '1', '1', '1'],[ '1', '1', '1', '1']],
+            ];
+            foreach (var matrix in matrixArr)
             {
                 matrix.Print("Input 2D Matrix of 0's & 1's");
                 Console.WriteLine($" The largest rectangle containing only 1's has area => '{DynamicProgramming.MaximalRectangle(matrix)}'");

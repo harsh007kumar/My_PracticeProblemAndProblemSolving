@@ -3170,49 +3170,41 @@ namespace InterviewProblemNSolutions
             we iterate over each row and height of each cell is if current cell is 1 than 1+hieght of cell above else 0
             we calculate the largest rectangle in a histogram for current row than move on repeat above step for next row
             */
-            int rows = matrix.Length, cols = matrix[0].Length, maxRectangleSize = 0, curRectangleSize, curBarHeight, lastIndex = 0, c;
+            int rows = matrix.Length, cols = matrix[0].Length, maxRectangle = 0, lastIdx = 0;
             int[] histogram = new int[cols];
-            Stack<Pair<int, int>> st = new();
-            for (int r = 0; r < rows; r++)                     // O(rows)
+            Stack<Pair<int,int>> st = [];
+            for (int r = 0; r < rows; r++)
             {
-                // update the Historgram for current row keeping above row in mind
-                if (r == 0)
-                {
-                    for (c = 0; c < cols; c++)
-                        histogram[c] = matrix[r][c] == '0' ? 0 : 1;
-                }
-                else // r>=1
-                {
-                    for (c = 0; c < cols; c++)
-                        histogram[c] = matrix[r][c] == '0' ? 0 : 1 + histogram[c];
-                }
+                // Create Histogram for current row
+                for (int c = 0; c < cols; c++)
+                    histogram[c] = matrix[r][c] == '0' ? 0 : 1 + histogram[c];
 
-                // find largest rectangle for current row | Time = Space = O(cols)
-                for (c = 0; c < cols; c++)
+                // calculate largest Rectangle in histogram
+                for (int c = 0; c < cols; c++)
                 {
-                    curBarHeight = histogram[c];
-                    if (st.Count == 0 || st.Peek().val <= curBarHeight)
-                        st.Push(new Pair<int,int>(c, curBarHeight));
+                    if (st.Count == 0 || st.Peek().val <= histogram[c])
+                        // pushing with width '1'
+                        st.Push(new Pair<int, int>(c, histogram[c]));
                     else
                     {
-                        while (st.Count > 0 && st.Peek().val > curBarHeight)
+                        while (st.Count > 0 && st.Peek().val > histogram[c])
                         {
-                            var lastBar = st.Pop();
-                            lastIndex = lastBar.key;
-                            curRectangleSize = (c - lastIndex) * lastBar.val;
-                            maxRectangleSize = Math.Max(maxRectangleSize, curRectangleSize);
+                            var lastbar = st.Pop();
+                            lastIdx = lastbar.key;
+                            maxRectangle = Math.Max(maxRectangle, (c - lastIdx) * lastbar.val);
                         }
-                        st.Push(new Pair<int, int>(lastIndex, curBarHeight));
+                        // push current bar, with width including that of last bar higher than current one
+                        st.Push(new Pair<int, int>(lastIdx, histogram[c]));
                     }
                 }
                 while (st.Count > 0)
                 {
-                    var lastBar = st.Pop();
-                    curRectangleSize = (c - lastBar.key) * lastBar.val;
-                    maxRectangleSize = Math.Max(maxRectangleSize, curRectangleSize);
+                    var lastbar = st.Pop();
+                    lastIdx = lastbar.key;
+                    maxRectangle = Math.Max(maxRectangle, (cols - lastIdx) * lastbar.val);
                 }
             }
-            return maxRectangleSize;
+            return maxRectangle;
         }
 
 
