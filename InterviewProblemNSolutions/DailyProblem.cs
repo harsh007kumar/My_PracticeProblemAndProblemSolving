@@ -11968,32 +11968,25 @@ namespace InterviewProblemNSolutions
 
         // Time O(n) || Recursive Space O(n) || Auxillary Space O(1)
         // Given the root of a binary tree, then value v and depth d, you need to add a row of nodes with value v at the given depth d. The root node is at depth 1.
-        public static TreeNode AddOneRowToTree(TreeNode root, int v, int d)
+        public static TreeNode AddOneRowToTree(TreeNode root, int val, int depth, bool replaceLeft = true)
         {
-            return UpdatedTree(root, true, d - 1);
-            // local func
-            TreeNode UpdatedTree(TreeNode r, bool isleft, int depth)
+            /* ALGO
+            1. Trverse thru all the nodes in the tree till u reach height = depth provided as input
+            2. Set the replaceLeft to true when moving left and false when moving to right child-node
+            2. Once u have reached the level where additional nodes are to be added
+            3. Add new node and rest of the child below to appropriate left or right side basis the boolean flag and return the new node
+            4. at each level once we recursively call the func itself keep assign back the result to left and right child if Root not Null
+             */
+            // add new node at given level/depth
+            if (depth == 1)
+                return replaceLeft ? new TreeNode(val, root) : new TreeNode(val, null, root);
+            // keep iterating until till depth>1
+            if (root != null && depth > 1)
             {
-                if (depth == 0)
-                {
-                    TreeNode addOne = new TreeNode(v);
-
-                    if (isleft) addOne.left = r;
-                    else addOne.right = r;
-
-                    return addOne;
-                }
-                else
-                {
-                    if (r == null) return r;
-
-                    r.left = UpdatedTree(r.left, true, depth - 1);
-                    r.right = UpdatedTree(r.right, false, depth - 1);
-
-                    return r;
-                }
-
+                root.left = AddOneRowToTree(root.left, val, depth - 1, true);
+                root.right = AddOneRowToTree(root.right, val, depth - 1, false);
             }
+            return root;
         }
 
         // Time O(5^(n/2)) || Space O(1)

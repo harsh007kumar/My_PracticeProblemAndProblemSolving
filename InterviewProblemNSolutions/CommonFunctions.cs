@@ -10,6 +10,12 @@ namespace InterviewProblemNSolutions
         public TreeNode left = null;
         public TreeNode right = null;
         public TreeNode(int num) => val = num;
+        public TreeNode(int num, TreeNode lt = null, TreeNode rt = null)
+        {
+            val = num; ;
+            left = lt;
+            right = rt;
+        }
         public TreeNode() => left = right = null;
     }
     public class ListNode
