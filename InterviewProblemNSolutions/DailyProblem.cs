@@ -7349,6 +7349,49 @@ namespace InterviewProblemNSolutions
             GetStrings(root.left, pathTillHere, ref ans);
             GetStrings(root.right, pathTillHere, ref ans);
         }
+        // Time O(n + (l*h)), Space O(h), n = no of nodes in the BinaryTree, l = no of leaf nodes, h = height of the tree
+        public string SmallestStringStartingFromLeafUsingStack(TreeNode root)
+        {
+            /*
+            Time => O(n + (l*h)),
+            n = no of nodes in the BinaryTree needed for complete traversal
+            +
+            (l = no of leaf nodes where the comparison actually happens
+            *
+            h = height of the tree to convert stack to String before every comparison)
+
+            Note:
+            1. Also the worst time for the algo will happen when we encounter a Fully-Balanced Tree,
+            2. because in case of skewed tree there would be just 1 comparison hence Time gets Reduced to n + h,
+            3. which can be written as n + n as height of skewed tree is equal to no of nodes which ultimately results in => O(n) time.
+
+            Space => O(h), h = height of the tree (worst case == n, skewed tree)
+             */
+            Stack<char> cur = [];
+            string smallest = "";
+            FindSmallest(root);
+            return smallest;
+
+            // local helper func
+            void FindSmallest(TreeNode r)
+            {
+                // add cur node character
+                cur.Push((char)(r.val + 'a'));
+
+                if (r.left == null && r.right == null)
+                    smallest = MinString(smallest, new string(cur.ToArray()));
+                else
+                {
+                    if (r.left != null) FindSmallest(r.left);
+                    if (r.right != null) FindSmallest(r.right);
+                }
+
+                // remove cur character before exiting
+                cur.Pop();
+            }
+
+            string MinString(string s1, string s2) => s1 == "" ? s2 : s1.CompareTo(s2) < 0 ? s1 : s2;
+        }
 
 
         /// <summary>

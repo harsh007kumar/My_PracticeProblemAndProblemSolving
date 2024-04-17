@@ -3554,7 +3554,8 @@ namespace InterviewProblemNSolutions
             };
             TreeNode root2 = new TreeNode(0) { right = new TreeNode(1) };
             root.InOrder("Input");
-            Console.WriteLine($" lexicographically smallest string that starts at a leaf of this tree and ends at the root \'{DailyProblem.SmallestStringStartingFromLeaf(root)}\'");
+            Console.WriteLine($"[Using String Concat] lexicographically smallest string that starts at a leaf of this tree and ends at the root \'{DailyProblem.SmallestStringStartingFromLeaf(root)}\'");
+            Console.WriteLine($"[Using Stack] lexicographically smallest string that starts at a leaf of this tree and ends at the root \'{DailyProblem.SmallestStringStartingFromLeafUsingStack(root)}\'");
         }
 
 
