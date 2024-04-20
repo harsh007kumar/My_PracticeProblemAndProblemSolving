@@ -7350,7 +7350,7 @@ namespace InterviewProblemNSolutions
             GetStrings(root.right, pathTillHere, ref ans);
         }
         // Time O(n + (l*h)), Space O(h), n = no of nodes in the BinaryTree, l = no of leaf nodes, h = height of the tree
-        public string SmallestStringStartingFromLeafUsingStack(TreeNode root)
+        public static string SmallestStringStartingFromLeafUsingStack(TreeNode root)
         {
             /*
             Time => O(n + (l*h)),
@@ -22566,6 +22566,55 @@ namespace InterviewProblemNSolutions
             }
 
             return q.Reverse().ToArray();
+        }
+
+
+        // Time = Space = O(n*m), n,m = rows and cols of "Land"
+        public static int[][] FindFarmland(int[][] land)
+        {
+            /* ALGO
+            1. We need to find no of grps of farmland i.e cells which are famrland and touching each other via atleast 1 common boundry
+            2. so we iterate from 0..n-1 rows and from left i.e. 0..m-1 cols
+            3. For each cell if its a Farmland we mark all the connected farmland as visited
+            4. While doing above #3 we also keep updating the left-top and bottom right corner for each cell {r,c} we encounter while using DFS
+            5. store the points in a list and convert to array and return.
+            6. NOTE: BFS can also be used instead of DFS
+             */
+
+            // find islands/grp of farmland
+            // foreach farmland get the top left and bottom rt corner
+            List<int[]> result = [];
+            int rows = land.Length, cols = land[0].Length, r1 = 0, c1 = 0, r2 = 0, c2 = 0;
+            for (int r = 0; r < rows; r++)
+                for (int c = 0; c < cols; c++)
+                    if (land[r][c] == 1)   // found a farmland
+                    {
+                        r1 = c1 = int.MaxValue;
+                        r2 = c2 = 0;
+                        DFS(r, c);   // mark all linked area as visited
+                        result.Add([r1, c1, r2, c2]);
+                    }
+            return result.ToArray();
+
+            // local helper func
+            void DFS(int r, int c)
+            {
+                if (land[r][c] == 0) return;
+                // mark visited
+                land[r][c] = 0;
+
+                // update corners
+                r1 = Math.Min(r, r1);
+                c1 = Math.Min(c, c1);
+                r2 = Math.Max(r, r2);
+                c2 = Math.Max(c, c2);
+
+                // move in all 4 valid directions
+                if (r - 1 >= 0) DFS(r - 1, c);
+                if (c - 1 >= 0) DFS(r, c - 1);
+                if (r + 1 < rows) DFS(r + 1, c);
+                if (c + 1 < cols) DFS(r, c + 1);
+            }
         }
     }
 }

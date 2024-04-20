@@ -618,6 +618,7 @@ namespace InterviewProblemNSolutions
             NumberOfStudentsUnableToEatLunch();
             TimeNeededToBuyTickets();
             RevealCardsInIncreasingOrder();
+            FindAllGroupsOfFarmland();
 
 
 
@@ -10615,6 +10616,23 @@ namespace InterviewProblemNSolutions
 
 
 
+        public static void FindAllGroupsOfFarmland()
+        {
+            // https://leetcode.com/problems/find-all-groups-of-farmland
+            Utility.Print("1992. Find All Groups of Farmland");
+            int[][][] land = 
+            [
+                [[1,0,0],[0,1,1],[0,1,1]],
+                [[1,1],[1,1]],
+                [[0]]
+            ];
+            for (int i = 0; i < land.Length; i++)
+            {
+                land[i].Print("Input-Array");
+                DailyProblem.FindFarmland(land[i]).Print($"Top-Left and Bottom-right corner of all the FarmLand in above array");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
