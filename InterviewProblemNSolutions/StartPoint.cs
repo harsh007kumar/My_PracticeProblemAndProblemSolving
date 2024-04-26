@@ -575,6 +575,7 @@ namespace InterviewProblemNSolutions
             //MaximalRectangle();
             //WordBreakII();
             //MinimumFallingPathSum();
+            MinimumFallingPathSumII();
             //MaxPointsOnALine();
             //SumOfSubarrayMinimums();
             //FindifArrayCanBeSorted();
@@ -9726,6 +9727,26 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MinimumFallingPathSumII()
+        {
+            // https://leetcode.com/problems/minimum-falling-path-sum-ii
+            Utility.Print("1289. Minimum Falling Path Sum II");
+            int[][][] matrixArr = 
+                [
+                    [[2, 1, 3], [6, 5, 4], [7, 8, 9]],
+                    [[-19, 57], [-40, -5]],
+                    [[1,2,3],[4,5,6],[7,8,9]],
+                    [[7]]
+                ];
+            foreach (var matrix in matrixArr)
+            {
+                matrix.Print("Input Matrix");
+                Console.WriteLine($" The minimum sum of any falling path through above matrix is => '{DynamicProgramming.MinFallingPathSumII(matrix)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
         public static void MaxPointsOnALine()
         {
             // Inside Code https://youtu.be/TaT5oAn4ezQ?si=D4GELzxndfAIQXEt
@@ -10633,7 +10654,6 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
-
 
 
 

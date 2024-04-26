@@ -3241,6 +3241,37 @@ namespace InterviewProblemNSolutions
                 return cache[row, col] = minPath + matrix[row][col];
             }
         }
+        // Time = Space = O(n^2), n = no of rows in 'grid'
+        public static int MinFallingPathSumII(int[][] grid)
+        {
+            /* ALGO
+            1. Brute force approach by going thru each and every cell starting from 0..n-1 row
+            2. for each row we choose a column which should not be same as prv row
+            3. add current cell value + ans of whatever minFallingSum we get from nextRow and remember to update the column id with current column we choose.
+            4. Save the ans for each cell r,c in cache before returing the ans so it can be reused
+             */
+            int n = grid.Length;
+            int[,] cache = new int[n, n];
+            for (int r = 0; r < n; r++)
+                for (int c = 0; c < n; c++)
+                    cache[r, c] = int.MinValue;    // set default value
+            return FallingSum(0, -1);
+            // local helper func
+            int FallingSum(int rID, int lastColUsed)
+            {
+                if (rID == n) return 0;
+
+                int minFallingSumFromCurrentCell = int.MaxValue;
+                for (int c = 0; c < n; c++)
+                    if (c != lastColUsed)  // we cannot use same column as used in prv row
+                    {
+                        cache[rID, c] = cache[rID, c] != int.MinValue ? cache[rID, c] : grid[rID][c] + FallingSum(rID + 1, c);
+                        minFallingSumFromCurrentCell = Math.Min(minFallingSumFromCurrentCell, cache[rID, c]);
+                    }
+
+                return minFallingSumFromCurrentCell;
+            }
+        }
 
 
         // Time = O(r*c) | Space O(c), {r,c} = no of rows and cols in dungeon respectively
