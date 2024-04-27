@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Net.NetworkInformation;
 
 namespace InterviewProblemNSolutions
 {
@@ -3497,6 +3498,49 @@ namespace InterviewProblemNSolutions
                     maxToken = Math.Max(maxToken, MaxScore(lt, rt - 1, p + tokens[rt], t - 1));
 
                 return cache[key] = maxToken;
+            }
+        }
+
+
+        // Time O(m*n) | Space O(m), n = length of 'ring' and 'm' length of 'key'
+        public static int FindRotateSteps(string ring, string key)
+        {
+            /* ALGO
+            1. we try to calculate min rotations req to match all the character in the key by rotating ring
+            2. for each char in ring we need to calculate min operationg needed for current char match + no of operations to match rest of the characters
+            3. Each choice hence = no of rotation for cur Char + future no of rotation if we select current idx instead of any other index
+            4. as its possible choosing a slightly further matching idx rt now results in fewer rotation later on
+            5. we save the combination of both ring and key index in cache to save sub-problem so it can be utilized later on
+            6. At end we add no of centre button pushed + min operation req to match all the characters in key
+             */
+            int ringLen = ring.Length, keyLen = key.Length;
+            int[,] cache = new int[ringLen, keyLen];
+            for (int i = 0; i < ringLen; i++)
+                for (int j = 0; j < keyLen; j++)
+                    cache[i, j] = -1;       // se default value
+            // return 'no of centre button presses' + min 'no of rotation required to spell key
+            return key.Length + MinRotation(0, 0);
+
+            // local helper func
+            int MinRotation(int ringIdx, int keyIdx)
+            {
+                if (keyIdx == keyLen) return 0;
+                // if this sub-problem has been solved before return from cache
+                if (cache[ringIdx, keyIdx] != -1) return cache[ringIdx, keyIdx];
+
+                int rotationsNeeded = int.MaxValue;
+                var currCh = key[keyIdx];
+
+                // we try to match all the characters all different indicies that match with curr index char in Key and calculate min rotation needed after current char match
+                for (int i = 0; i < ringLen; i++)          // O(n)
+                    if (ring[i] == key[keyIdx])
+                    {
+                        // min rotation from last position to come to current idx in ring, either by moving lt or rt i.e. anit-clock or clock-wise
+                        var minRotation = i <= ringIdx ? Math.Min(ringIdx - i, (ringLen - ringIdx) + i) : Math.Min(i - ringIdx, (ringLen - i) + ringIdx);
+                        rotationsNeeded = Math.Min(rotationsNeeded, minRotation + MinRotation(i, keyIdx + 1));
+                    }
+                // save to cache before returing
+                return cache[ringIdx, keyIdx] = rotationsNeeded;
             }
         }
     }

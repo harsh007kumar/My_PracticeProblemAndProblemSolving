@@ -2,6 +2,7 @@
 using Sorting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace InterviewProblemNSolutions
@@ -620,6 +621,7 @@ namespace InterviewProblemNSolutions
             TimeNeededToBuyTickets();
             RevealCardsInIncreasingOrder();
             FindAllGroupsOfFarmland();
+            FreedomTrail();
 
 
 
@@ -10656,6 +10658,15 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void FreedomTrail()
+        {
+            // https://leetcode.com/problems/freedom-trail
+            Utility.Print("514. Freedom Trail");
+            string[] rings = ["godding", "godding", "iotfo", "ababcab"];
+            string[] keys = ["gd", "godding", "fioot", "acbaacba"];
+            for (int i = 0; i < rings.Length; i++)
+                Console.WriteLine($"Min no of operations req to spell '{keys[i]}' by rotation ring '{rings[i]}' => '{DynamicProgramming.FindRotateSteps(rings[i], keys[i])}'");
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
