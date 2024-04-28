@@ -622,6 +622,7 @@ namespace InterviewProblemNSolutions
             RevealCardsInIncreasingOrder();
             FindAllGroupsOfFarmland();
             FreedomTrail();
+            SumOfDistancesInTree();
 
 
 
@@ -10667,6 +10668,28 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < rings.Length; i++)
                 Console.WriteLine($"Min no of operations req to spell '{keys[i]}' by rotation ring '{rings[i]}' => '{DynamicProgramming.FindRotateSteps(rings[i], keys[i])}'");
         }
+
+
+        public static void SumOfDistancesInTree()
+        {
+            // Aryan Mittal https://youtu.be/kM3A6AjHvjM
+            // https://leetcode.com/problems/sum-of-distances-in-tree
+            Utility.Print("834. Sum of Distances in Tree");
+            int[] nodes = [6, 1, 2];
+            int[][][] edgesArr =
+                [
+                    [[0,1],[0,2],[2,3],[2,4],[2,5]],
+                    [],
+                    [[1,0]]
+                ];
+            for (int i = 0; i < nodes.Length; i++)
+            {
+                edgesArr[i].Print("Input-Array");
+                DailyProblem.SumOfDistancesInTree(nodes[i], edgesArr[i]).Print($"For tree/graph with '{nodes[i]}' nodes and above given edges the sum of the distances between the ith node in the tree and all other nodes is\n");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

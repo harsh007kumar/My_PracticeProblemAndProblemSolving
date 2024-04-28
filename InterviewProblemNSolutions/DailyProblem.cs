@@ -22616,5 +22616,72 @@ namespace InterviewProblemNSolutions
                 if (c + 1 < cols) DFS(r, c + 1);
             }
         }
+
+
+        // Time = Space = O(n), n = no of nodes in the tree/graph
+        public static int[] SumOfDistancesInTree(int n, int[][] edges)
+        {
+            /* ALGO
+            1. to calculate the sum of distance of all children we need to split the problem in 2 halves
+            2. **FIRST** calculate the final/correct soln for 1 node lets take root as '0'
+            3. to calculate partial ans for each node we need 2 things:
+                - Make recursive call to children so during backtracking we have below 2
+                - no of children a node has / total no of node below cur node
+                - total of 'sum of distances for each child' to calculate cur node ans
+            4. Above operation via DFS gives us correct result for only root node and partial ans for rest of the nodes
+            5. **SECOND** we need to calculate final ans for each remaining node except root
+            6. to update the final ans for each node we need:
+                - correct ans for parent
+                - no of child cur node has (note this was added to parents ans in 1st DFS call)
+                - no of child the parents had i.e. N - no of child i have
+                - ans[node] = ans[parent] - child[node] - (N-child[node])
+                - than make recursive all to child of cur node as we have final ans for cur node
+            7. return the ans at the end
+             */
+            List<int>[] g = new List<int>[n];
+            int[] count = new int[n], sumOfAllcountDistance = new int[n];
+            // Intializing graph and setting default count for each node
+            for (int i = 0; i < n; i++)            // O(n)
+            {
+                g[i] = new();
+                count[i] = 1; // so that even root node returns 1 child back to its parents (this can also be done before making recursive call to childresn)
+            }
+            // Create Graph
+            foreach (var edge in edges)      // O(n)
+            {
+                var u = edge[0];
+                var v = edge[1];
+                g[u].Add(v);
+                g[v].Add(u);
+            }
+            // calculate correct ans for root node
+            DFSForRoot(0);
+            // complete calculation for all other nodes except root
+            DFSForAll(0);
+            return sumOfAllcountDistance;
+
+            // local helper func
+            void DFSForRoot(int node, int parent = -1)
+            {
+                foreach (var ch in g[node])
+                    if (ch != parent)  // call child 1st and then calculate for node
+                    {
+                        DFSForRoot(ch, node);
+                        // increament count for cur node with what cur child has (initially it was set to 1 for all nodes)
+                        count[node] += count[ch];
+                        // add the sum of ans of cur child + total no of children child has
+                        sumOfAllcountDistance[node] += sumOfAllcountDistance[ch] + count[ch];
+                    }
+            }
+            void DFSForAll(int node, int parent = -1)
+            {
+                foreach (var ch in g[node])
+                    if (ch != parent)  // calculate for cur node 1st and then call children(s)
+                    {
+                        sumOfAllcountDistance[ch] = sumOfAllcountDistance[node] - count[ch] + (n - count[ch]);
+                        DFSForAll(ch, node);
+                    }
+            }
+        }
     }
 }
