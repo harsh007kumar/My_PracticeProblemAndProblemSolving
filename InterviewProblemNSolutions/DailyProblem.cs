@@ -22683,5 +22683,31 @@ namespace InterviewProblemNSolutions
                     }
             }
         }
+
+
+        // Time O(n) | Space O(1), n = length of 'nums' array
+        public static int MinOperations(int[] nums, int k)
+        {
+            /* ALGO
+            1. get the xor of all the numbers in array and 'k'
+            2. no we only need to flip bits that are still On
+            3. count the no of bits that are still on by taking the & with 1 of the right most bit in 'xor'
+            4. right shift the xor by 1 so we can evaluate the next bit
+            5. repeat from #3 till xor !=0
+             */
+            int bitFlipsNeeded = 0;
+            // get XOR of 'k' with all the numbers in the array
+            for (int i = 0; i < nums.Length; i++)  // O(n)
+                k ^= nums[i];
+
+            // no of bits that needed to be flipped equal to no of bits that are still on
+            while (k!= 0)                   // O(32)
+            {
+                // if right most bit is one we increament 1 to bits that need to be flipped
+                bitFlipsNeeded += k & 1;
+                k >>= 1;   // right shift the xor by 1 place
+            }
+            return bitFlipsNeeded;
+        }
     }
 }

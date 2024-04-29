@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InterviewProblemNSolutions
 {
@@ -595,34 +596,35 @@ namespace InterviewProblemNSolutions
             //SelfCrossing();
             //PerfectSquares();
             //LargestDivisibleSubset();
-            DataStreamAsDisjointIntervals();
-            MaximumProductLengthOfTwoPalindromicSubstrings();
-            RearrangeArrayElementsBySign();
-            MaximumNumberOfOperationsWithTheSameScoreII();
-            MaximizeConsecutiveElementsInAnArrayAfterModification();
-            PerfectRectangle();
-            BitwiseOfNumbersRange();
-            FrogJump();
-            GreatestCommonDivisorTraversal();
-            FindBottomLeftTreeValue();
-            EvenOddTree();
-            BearAndSteadyGene();
-            ApplyOperationsToMakeStringEmpty();
-            BagOfTokens();
-            MinLengthStringAfterDeletingSimilar();
-            RemoveZeroSumConsecutiveNodesFromLinkedList();
-            FindThePivotInteger();
-            BinarySubarraysWithSum();
-            LengthOfLongestSubarrayWithAtMostKFrequency();
-            CountSubarraysWhereMaxElementAppearsAtLeastKTimes();
-            SubarraysWithKDifferentIntegers();
-            CountSubarraysWithFixedBounds();
-            NumberOfStudentsUnableToEatLunch();
-            TimeNeededToBuyTickets();
-            RevealCardsInIncreasingOrder();
-            FindAllGroupsOfFarmland();
-            FreedomTrail();
-            SumOfDistancesInTree();
+            //DataStreamAsDisjointIntervals();
+            //MaximumProductLengthOfTwoPalindromicSubstrings();
+            //RearrangeArrayElementsBySign();
+            //MaximumNumberOfOperationsWithTheSameScoreII();
+            //MaximizeConsecutiveElementsInAnArrayAfterModification();
+            //PerfectRectangle();
+            //BitwiseOfNumbersRange();
+            //FrogJump();
+            //GreatestCommonDivisorTraversal();
+            //FindBottomLeftTreeValue();
+            //EvenOddTree();
+            //BearAndSteadyGene();
+            //ApplyOperationsToMakeStringEmpty();
+            //BagOfTokens();
+            //MinLengthStringAfterDeletingSimilar();
+            //RemoveZeroSumConsecutiveNodesFromLinkedList();
+            //FindThePivotInteger();
+            //BinarySubarraysWithSum();
+            //LengthOfLongestSubarrayWithAtMostKFrequency();
+            //CountSubarraysWhereMaxElementAppearsAtLeastKTimes();
+            //SubarraysWithKDifferentIntegers();
+            //CountSubarraysWithFixedBounds();
+            //NumberOfStudentsUnableToEatLunch();
+            //TimeNeededToBuyTickets();
+            //RevealCardsInIncreasingOrder();
+            //FindAllGroupsOfFarmland();
+            //FreedomTrail();
+            //SumOfDistancesInTree();
+            MinimumNumberOfOperationsToMakeArrayXOREqualToK();
 
 
 
@@ -10690,6 +10692,23 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void MinimumNumberOfOperationsToMakeArrayXOREqualToK()
+        {
+            // https://leetcode.com/problems/minimum-number-of-operations-to-make-array-xor-equal-to-k/description/
+            int[][] nums =
+                [
+                    [2,1,3,4],
+                    [2,0,2,0]
+                ];
+            int[] k = [1, 0];
+            Utility.Print("2997. Minimum Number of Operations to Make Array XOR Equal to K");
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Input-Array");
+                Console.WriteLine($"Minimum Number of Operations to Make above Array XOR Equal to K '{k[i]}' => '{DailyProblem.MinOperations(nums[i], k[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
