@@ -625,6 +625,7 @@ namespace InterviewProblemNSolutions
             //FreedomTrail();
             //SumOfDistancesInTree();
             MinimumNumberOfOperationsToMakeArrayXOREqualToK();
+            NumberOfWonderfulSubstrings();
 
 
 
@@ -10709,6 +10710,20 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void NumberOfWonderfulSubstrings()
+        {
+            // https://leetcode.com/problems/number-of-wonderful-substrings
+            Utility.Print("1915. Number of Wonderful Substrings");
+            string[] words = ["aba", "aabb", "he"];
+            for (int i = 0; i < words.Length; i++)
+                Console.WriteLine($"Total no of wonderful substring in the word '{words[i]}' are => '{StringAlgorithms.WonderfulSubstrings(words[i])}'");
+        }
+
+
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

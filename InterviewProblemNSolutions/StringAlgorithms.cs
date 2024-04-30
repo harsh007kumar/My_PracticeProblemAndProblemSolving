@@ -1967,5 +1967,50 @@ namespace InterviewProblemNSolutions
                 }
             return new string(st.ToArray());
         }
+
+
+        // Time = Space = O(n), n = length of string 'word'
+        public static long WonderfulSubstrings(string word)
+        {
+            /* ALGO
+            1. problem can be broken down into 2 parts
+            2. we need to find no of prefix which has appeared before current index which have excatly same words parity for all the 10 characters,
+                i.e. if cur string as even no of 'a' there exist a prefix which also has even no of 'a'
+            3. also we need to find no of occurence where a prefix is different by from current string parity for just one word
+                we can do so by left shiting 1 by 0..9 times to test parity for all character 1 by 1.
+                i.e. if cur string has even 'a' and odd 'b' and if there exist a prefix which has (even'a' and even 'b') OR (odd 'a' and odd 'b')
+                this ensure the string in b/w the prefix and cur index will have all characters in even parity and just 1 in odd
+            4. we use BitMask to store the even/odd parity as there are only 10 characters
+                1st/rightMost bit indiciates parity for 'a'
+                2nd bit from rt shows parity for 'b'
+                3rd bit from rt shows parity for 'c'
+                ...
+                10th bit from rt show parity for 'j'
+            5. use XOR operator we update parity for a given character if its on it gets changed to 0 and vice-versa
+            6. All keep updating the Dictionary which stores freq of all diff bitMask seen till now.
+             */
+            Dictionary<int, int> maskFreq = [];
+            int bitMask = 0;
+            long ans = 0;
+            // default entry with all characters even times    
+            maskFreq[bitMask] = 1;
+            foreach (var ch in word)         // O(n)
+            {
+                bitMask ^= (1 << (ch - 'a'));
+                // check if bitmask which differes by atmost 1 bit has ever appeared before means one characters b/w then & now have odd occurence
+                for (int i = 0; i < 10; i++)       // O(10)
+                    if (maskFreq.TryGetValue(bitMask ^ (1 << i), out int oneBitDiffFreq))
+                        ans += oneBitDiffFreq;
+
+                // check if same bitmask has appear before means all characters b/w then & now have even occurence
+                if (maskFreq.TryGetValue(bitMask, out int freq))
+                {
+                    ans += freq;
+                    maskFreq[bitMask]++;
+                }
+                else maskFreq[bitMask] = 1;
+            }
+            return ans;
+        }
     }
 }
