@@ -626,6 +626,7 @@ namespace InterviewProblemNSolutions
             //SumOfDistancesInTree();
             MinimumNumberOfOperationsToMakeArrayXOREqualToK();
             NumberOfWonderfulSubstrings();
+            MaximizeHappinessOfSelectedChildren();
 
 
 
@@ -10722,7 +10723,26 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void MaximizeHappinessOfSelectedChildren()
+        {
+            // https://leetcode.com/problems/maximize-happiness-of-selected-children
+            Utility.Print("3075. Maximize Happiness of Selected Children");
+            int[][] happiness =
+                [
+                    [12,1,42],
+                    [1,1,1,1],
+                    [2,3,4,5],
+                    [1,2,3,4,5,6],
+                    [12,1,42]
+                ];
+            int[] k = [2, 2, 1, 3, 3];
+            for (int i = 0; i < k.Length; i++)
+            {
+                happiness[i].Print("Happiness-Array");
+                Console.WriteLine($"Max sum of the happiness values of the selected children you can achieve by selecting k '{k[i]}' children => '{DailyProblem.MaximumHappinessSum(happiness[i], k[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

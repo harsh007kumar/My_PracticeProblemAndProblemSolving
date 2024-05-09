@@ -22709,5 +22709,42 @@ namespace InterviewProblemNSolutions
             }
             return bitFlipsNeeded;
         }
+
+
+        // Time O(nlogk) | Space O(k), n = length of 'happiness'
+        public static long MaximumHappinessSum(int[] happiness, int k)
+        {
+            /* ALGO
+            1. Create a MinHeap/PQ of top 'k' happiness
+            2. we iterate thru happniess from 0..n-1 idx
+                a. if pq.Count < k we push to queue
+                b. else pq.Count == k, we check if smallest/top is smaller than current than we remove top and push current
+            3. now we have top 'k' values
+            4. we store all the values in a array in descending orderr, biggest value comes first and smallest at end
+            5. now just take the sum of all the happiness we have and reducing the each happiness by no of turns/picks we have completed so far.
+             */
+            // Create Min Heap of Top 'k' happiness
+            var pq = new PriorityQueue<int, int>(k);
+            foreach (var hIdx in happiness)              // O(n)
+                if (pq.Count < k)
+                    pq.Enqueue(hIdx, hIdx);  // <Element, Priority>
+                                             // if new happinessIdx is greater than the smallest than remove top and insert higher happiness in Queue
+                else if (pq.Peek() < hIdx)
+                    pq.DequeueEnqueue(hIdx, hIdx);       // O(logk)
+
+            // fill all values from Queue in a array in descending order
+            int[] maxKHappy = new int[k];
+            for (int i = 0; i < k; i++)                        // O(k)
+                maxKHappy[k - 1 - i] = pq.Dequeue();
+
+            long maxHappinessExtracted = 0;
+            for (int i = 0; i < k; i++)                        // O(k)
+            {
+                var curHappiness = maxKHappy[i] - i;
+                if (curHappiness <= 0) break;  // no point collecting more happiness after this point all we are going to get is 0
+                maxHappinessExtracted += curHappiness;
+            }
+            return maxHappinessExtracted;
+        }
     }
 }
