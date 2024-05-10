@@ -22746,5 +22746,37 @@ namespace InterviewProblemNSolutions
             }
             return maxHappinessExtracted;
         }
+
+
+        // Time O(n^2*logK) | Space O(k), n = lenght of 'arr'
+        public static int[] KthSmallestPrimeFraction(int[] arr, int k)
+        {
+            /* ALGO
+            1. create a maxHeap/Pq to hold top 'k' fractions
+            2. keep pq key/element as the array [a,b] and priority as the double fraction value
+            3. now we need 2 loops to iterate thru all possible combination of i,j
+            4. for each valid pair of i,j we do below
+                a. if pq.Count < k, add the Element and Fraction to pq
+                b. if pq.Count == k, check the top/biggest fraction by Peeking,
+                    if > than current fraction, remove top and add new entry to pq
+            5. at the end return the top of pq as its the 'k' biggest fraction
+             */
+            var pq = new PriorityQueue<int[], double>(Comparer<double>.Create((a, b) => b.CompareTo(a)));
+            for (int i = 0; i < arr.Length - 1; i++)
+                for (int j = i + 1; j < arr.Length; j++)
+                {
+                    double curFraction = arr[i] / (double)arr[j];
+                    // add to heap if total is < k
+                    if (pq.Count < k)
+                        pq.Enqueue([arr[i], arr[j]], curFraction);
+                    // if we have 'k' max fractions
+                    else if (pq.TryPeek(out int[] Element, out double Priority))
+                        // replace the max/top if we found a fraction which is smaller than it
+                        if (Priority > curFraction)
+                            pq.DequeueEnqueue([arr[i], arr[j]], curFraction);
+                }
+            // return the kth fraction
+            return pq.Dequeue();
+        }
     }
 }

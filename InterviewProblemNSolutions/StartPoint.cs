@@ -627,6 +627,7 @@ namespace InterviewProblemNSolutions
             MinimumNumberOfOperationsToMakeArrayXOREqualToK();
             NumberOfWonderfulSubstrings();
             MaximizeHappinessOfSelectedChildren();
+            KthSmallestPrimeFraction();
 
 
 
@@ -10744,6 +10745,19 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        public static void KthSmallestPrimeFraction()
+        {
+            // https://leetcode.com/problems/k-th-smallest-prime-fraction/\
+            int[][] nums = [[1, 2, 3, 5], [1, 7]];
+            int[] k = [3, 1];
+            Utility.Print("786. K-th Smallest Prime Fraction");
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Input-Array");
+                var result = DailyProblem.KthSmallestPrimeFraction(nums[i], k[i]);
+                Console.WriteLine($"{k[i]}th smallest fraction in above array is => '{result[0]}/{result[1]} i.e. {result[0] / (double)result[1]}'");
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
