@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InterviewProblemNSolutions.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -5667,55 +5668,53 @@ namespace InterviewProblemNSolutions
         // Time O(nLogn) || Space O(n), n = no of workers
         public static double MincostToHireWorkers(int[] quality, int[] wage, int k)
         {
-            /* The Problem is to HIRE 'K' workers in least total amt:
-             * Following Rules apply:
-             *      Every worker in the paid group should be paid in the ratio of their quality compared to other workers in the paid group.
-             *      Every worker in the paid group must be paid at least their minimum wage expectation.
-             *  
-             *  first find and sort workers in increasing order of their ratio of 'wage/quality'
-             *  Now add first 'K' workers to MaxHeap (based upon their 'quality'), also keep total sum of their quality
-             *  we can calculate Min Cost to HIRE these first K workers by seleting ratio of highest wage/quality worker n.e. Kth worker(remeber sorted list)
-             *  and multiplying by total quality sum.
-             *  
-             *  After Kth index, now we check new worker has quality smaller than worker on Top of MaxHeap, repalce n Heapify
-             *  also update the sum of quality of K workers
-             *  calculate MinCost = Math.Min(minCost,sumOfQuality * ratioOfKthWorker)
+            /* ALGO
+            1.The Problem is to HIRE 'K' workers in least total amt:
+                Following Rules apply:
+                    Every worker in paid group be paid in ratio of their quality compared to other workers in the paid group.
+                    Every worker in the paid group must be paid at least their minimum wage expectation.
+            2. First find and sort workers in increasing order of their ratio of 'wage/quality'
+            3. Now add first 'K' workers to MaxHeap (based upon their 'quality'), also keep total sum of their quality
+            4. We can calculate Min Cost to HIRE these first K workers by seleting ratio of highest wage/quality worker
+                i.e. Kth worker(remeber sorted list) and multiplying by total quality sum.
+            5. After Kth index, now we check new worker has quality smaller than worker on Top of MaxHeap, repalce n Heapify
+            also update the sum of quality of K workers
+            calculate MinCost = Math.Min(minCost,sumOfQuality * ratioOfKthWorker)
              */
-            int len = quality.Length;
-            Worker[] workers = new Worker[len];                 // Space O(n)
-            for (int i = 0; i < len; i++)                       // Time O(n)
-                workers[i] = new Worker(quality[i], wage[i]);
+            int l = quality.Length;
+            WorkerPair[] increasingWageForSameQuality = new WorkerPair[l];
+            for (int i = 0; i < l; i++)
+                increasingWageForSameQuality[i] = new WorkerPair(quality[i], wage[i]);
+            // sort in increasing order of cost per single unit of quality
+            increasingWageForSameQuality = (from eachWorker in increasingWageForSameQuality     // O(nlogn)
+                                            orderby eachWorker.costPerSingleUnitOfQuality
+                                            select eachWorker).ToArray();
 
-            Array.Sort(workers);                                // Time (nLogn)
-
-            int qualitySum = 0;
-            MaxHeap h = new MaxHeap(k);
-            for (int i = 0; i < k; i++)                         // Time O(kLogk)
+            int totalQuality = 0;
+            var maxPQ = new PriorityQueue<int, int>(k);
+            // first gather first 'k' worker
+            for (int i = 0; i < k; i++)                                                                // O(klogk)
             {
-                h.Insert(workers[i].quality);
-                qualitySum += workers[i].quality;
+                totalQuality += increasingWageForSameQuality[i].quality;
+                maxPQ.Enqueue(increasingWageForSameQuality[i].quality, -increasingWageForSameQuality[i].quality);
             }
-            // compute initial result with sum of 0...k-1 index ratio sorted workers
-            double minTotalCost = (double)qualitySum * workers[k - 1].WageQualityRatio();
+            // set the initial Total Cost i.e. costPer1Unit-quality aka of kth most efficient worker * totalQualityGathered
+            // notice we are not using the 0th worker quality as its most efficient
+            // since we need to pay atleast minWage of all worker hence worse rate currently is of 'k' worker is selected which is higher than all worker before it
+            double totalCost = increasingWageForSameQuality[k - 1].costPerSingleUnitOfQuality * totalQuality;
 
-            for (int i = k; i < len; i++)                       // Time O((n-k)Logk)
-                if (h.arr[0] > workers[i].quality)
+            for (int i = k; i < l; i++)                                                                // O((n-k)*logk)
+                if (maxPQ.Peek() > increasingWageForSameQuality[i].quality)
                 {
-                    qualitySum += (workers[i].quality - h.arr[0]);
-                    h.arr[0] = workers[i].quality;
-                    h.MaxHeapify();
-                    minTotalCost = Math.Min(minTotalCost, qualitySum * workers[i].WageQualityRatio());
+                    // update TotalQuality by removing the worker which had the max Quality from KGrp/Heap and replacing with current lower quality worker
+                    totalQuality += increasingWageForSameQuality[i].quality - maxPQ.Dequeue();
+                    // replace the KGrp/Heap with worker which has lower quality
+                    maxPQ.Enqueue(increasingWageForSameQuality[i].quality, -increasingWageForSameQuality[i].quality);
+                    // try reducing totalCost
+                    totalCost = Math.Min(totalCost, increasingWageForSameQuality[i].costPerSingleUnitOfQuality * totalQuality);
                 }
 
-            return minTotalCost;
-        }
-        class Worker : IComparable<Worker>
-        {
-            public int quality, wage;
-            public Worker(int q, int w)
-            { quality = q; wage = w; }
-            public double WageQualityRatio() => (double)wage / (double)quality;
-            int IComparable<Worker>.CompareTo(Worker another) => this.WageQualityRatio().CompareTo(another.WageQualityRatio());
+            return totalCost;
         }
 
 
