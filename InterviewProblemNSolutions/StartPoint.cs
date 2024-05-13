@@ -3,6 +3,7 @@ using Sorting;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -628,6 +629,7 @@ namespace InterviewProblemNSolutions
             NumberOfWonderfulSubstrings();
             MaximizeHappinessOfSelectedChildren();
             KthSmallestPrimeFraction();
+            ScoreAfterFlippingMatrix();
 
 
 
@@ -10758,6 +10760,29 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"{k[i]}th smallest fraction in above array is => '{result[0]}/{result[1]} i.e. {result[0] / (double)result[1]}'");
             }
         }
+
+
+        public static void ScoreAfterFlippingMatrix()
+        {
+            // https://leetcode.com/problems/score-after-flipping-matrix
+            Utility.Print("861. Score After Flipping Matrix");
+            int[][][] grid =
+                [
+                    [[0, 0, 1, 1], [1, 0, 1, 0], [1, 1, 0, 0]],
+                    [[0]],
+                    [[0],[1]],
+                    [[1,0,0],[1,0,1]],
+                ];
+            for (int i = 0; i < grid.Length; i++)
+            {
+                grid[i].Print("Input-Grid");
+                Console.WriteLine($"Highest possible score after making any number of flipping entire rows/columns => '{DailyProblem.MatrixScore(grid[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

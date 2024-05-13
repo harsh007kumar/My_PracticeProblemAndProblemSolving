@@ -22777,5 +22777,48 @@ namespace InterviewProblemNSolutions
             // return the kth fraction
             return pq.Dequeue();
         }
+
+
+        // Time O(r*c) | Space O(1), r , c = no of rows and columns respectively
+        public static int MatrixScore(int[][] g)
+        {
+            /* ALGO
+            1. for all the rows from 0..Rows-1
+                check and if 1st/0th/left most column is 0 than flip entire row else do not,
+                (deciding here on basis of most significant bit
+                as all other bit combined don't have same effect on final number)
+            2. for all the cols from 0..Cols-1
+                for each col count no of 1's by iterating from 0..Rows-1, 
+                if they are less than half than flip entire column else no need, we need to maximize the no of 1's
+            3. calculate the totalSum by calculating the number for each row basis on bits for each row
+                and keep adding each row number to total.
+             */
+            int rows = g.Length, cols = g[0].Length, totalSum = 0;
+            // flip the bits in a given row if the left most significant bit is 0 any other bit doesnt contribute as much as the left most does
+            for (int r = 0; r < rows; r++)
+                if (g[r][0] == 0)
+                    // using XOR to flip bits
+                    for (int c = 0; c < cols; c++)
+                        g[r][c] ^= 1;
+            // flip the bits in a given column if the no of zero's are more than one's
+            for (int c = 0; c < cols; c++)
+            {
+                int countOnes = 0;
+                for (int r = 0; r < rows; r++)
+                    countOnes += g[r][c];
+                if (countOnes * 2 < rows)   // flip the column as there are less 1's than 0's
+                    for (int r = 0; r < rows; r++)
+                        g[r][c] ^= 1;
+            }
+            // calculate the sum of all the rows (each row is a number)
+            for (int r = 0; r < rows; r++)
+            {
+                int curRowNum = 0;
+                for (int c = 0; c < cols; c++)
+                    curRowNum = (curRowNum << 1) + g[r][c];
+                totalSum += curRowNum;
+            }
+            return totalSum;
+        }
     }
 }
