@@ -630,6 +630,7 @@ namespace InterviewProblemNSolutions
             MaximizeHappinessOfSelectedChildren();
             KthSmallestPrimeFraction();
             ScoreAfterFlippingMatrix();
+            FindTheSafestPathInGrid();
 
 
 
@@ -10782,7 +10783,18 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void FindTheSafestPathInGrid()
+        {
+            // https://leetcode.com/problems/find-the-safest-path-in-a-grid
+            int[][][] grid = [[[1, 0, 0], [0, 0, 0], [0, 0, 1]], [[0, 0, 1], [0, 0, 0], [0, 0, 0]], [[0, 0, 0, 1], [0, 0, 0, 0], [0, 0, 0, 0], [1, 0, 0, 0]]];
+            Utility.Print("2812. Find the Safest Path in a Grid");
+            for (int i = 0; i < grid.Length; i++)
+            {
+                grid[i].Print("Input-GRID");
+                Console.WriteLine($"Maximum safeness factor of all paths leading to cell from [0,0] to [n-1, n-1] => '{DailyProblem.MaximumSafenessFactor(grid[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

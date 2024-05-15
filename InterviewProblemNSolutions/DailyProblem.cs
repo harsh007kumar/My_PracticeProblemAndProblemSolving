@@ -22820,5 +22820,110 @@ namespace InterviewProblemNSolutions
             }
             return totalSum;
         }
+
+        // Time O(logn * n^2) | Space O(n^2), n = length of 'grid'
+        public static int MaximumSafenessFactor(int[][] grid)
+        {
+            /* ALGO
+            1. Create and initialize an 2-D array 'distanceToClosedThief' with 2*n value for each cell which contains the distance to closet thief for each cell.
+            2. Now go thru all the thief cell i.e. with value ==1 and add them to Queue to that we can in 1 BFS find out the min distance to a thief for all cells, use visited 2-D array to keep track of what cells have been already updated.
+            3. Now using Binary Search we set the lower bound to 1 and upper bound to 2*n for safetyFactor
+            4. Now using BFS try to find it their exists path b/w source to destination with no cell having distanceToClosedThief < safetyFactor
+            5. if yes, update the 'safestPath' and lower bound for binary-search
+            6. if no such path exists update the upper bound to safetyFactor-1
+            7. return safestPath at end.
+            8. NOTE: if 0,0 or n-1,n-1 cell itself has theif just return 0 as ans without any calculations.
+             */
+            int n = grid.Length;
+            // base case, starting or ending cells has thief there is no safe path possible
+            if (grid[0][0] == 1 || grid[n - 1][n - 1] == 1) return 0;
+            int[,] distanceToClosedThief = new int[n, n];
+
+            for (int r = 0; r < n; r++)
+                for (int c = 0; c < n; c++)
+                    distanceToClosedThief[r, c] = 2 * n;
+
+            // calculate the distance of nearest thief for all cells using BFS
+            Queue<int[]> q = [];
+            bool[,] visited = new bool[n, n];
+            for (int r = 0; r < n; r++)
+                for (int c = 0; c < n; c++)
+                    if (grid[r][c] == 1)
+                        q.Enqueue([r, c, r, c]);
+
+            while (q.TryDequeue(out int[] val))
+            {
+                int i = val[0], j = val[1], r = val[2], c = val[3];
+
+                // if alredy visited continue
+                if (visited[i, j]) continue;
+
+                // else mark visited
+                visited[i, j] = true;
+
+                // update distance to cur thief
+                distanceToClosedThief[i, j] = Math.Min(distanceToClosedThief[i, j], ManhattanDist(i, j, r, c));
+
+                // traverse in all 4 valid directions
+                if (i > 0 && !visited[i - 1, j])
+                    q.Enqueue([i - 1, j, r, c]);
+                if (i < n - 1 && !visited[i + 1, j])
+                    q.Enqueue([i + 1, j, r, c]);
+                if (j > 0 && !visited[i, j - 1])
+                    q.Enqueue([i, j - 1, r, c]);
+                if (j < n - 1 && !visited[i, j + 1])
+                    q.Enqueue([i, j + 1, r, c]);
+            }
+
+            // starting from 0,0 using BFS find if there exists a safe path with safestFactor 'v'
+            int safestPath = 0, minSafeness = 1, maxSafeness = 2 * (n - 1), safeFactor;
+            // Binary-Search to max safeness factor 'sf'
+            while (minSafeness <= maxSafeness)                 // O(logn * n^2)
+            {
+                safeFactor = (minSafeness + maxSafeness) / 2;
+                visited = new bool[n, n];
+                // if can reach destination from source for current safeness Factor 'sf'
+                if (BFS(0, 0))
+                {
+                    safestPath = safeFactor;
+                    minSafeness = safeFactor + 1;
+                }
+                else
+                    maxSafeness = safeFactor - 1;
+            }
+            return safestPath;
+
+            // local helper func
+            bool BFS(int i, int j)
+            {
+                q.Clear();
+                q.Enqueue([i, j]);
+                while (q.TryDequeue(out int[] val))
+                {
+                    int r = val[0], c = val[1];
+                    // return if already visited cell || or min distance is smaller than req safeness factor
+                    if (visited[r, c] || distanceToClosedThief[r, c] < safeFactor) continue;
+                    // mark visited
+                    visited[r, c] = true;
+
+                    // check if we reached destination, return true
+                    if (r == n - 1 && c == n - 1)
+                        return true;
+
+                    // traverse in all 4 valid directions
+                    if (r > 0 && !visited[r - 1, c])
+                        q.Enqueue([r - 1, c]);
+                    if (r < n - 1 && !visited[r + 1, c])
+                        q.Enqueue([r + 1, c]);
+                    if (c > 0 && !visited[r, c - 1])
+                        q.Enqueue([r, c - 1]);
+                    if (c < n - 1 && !visited[r, c + 1])
+                        q.Enqueue([r, c + 1]);
+                }
+                return false;
+            }
+
+            static int ManhattanDist(int x1, int y1, int x2, int y2) => Math.Abs(x1 - x2) + Math.Abs(y1 - y2);
+        }
     }
 }
