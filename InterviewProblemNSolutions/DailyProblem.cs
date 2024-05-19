@@ -22925,5 +22925,66 @@ namespace InterviewProblemNSolutions
 
             static int ManhattanDist(int x1, int y1, int x2, int y2) => Math.Abs(x1 - x2) + Math.Abs(y1 - y2);
         }
+
+
+        // Time = Space = O(n), n = length of 'nums'
+        public static long MaximumValueSum(int[] nums, int k, int[][] edges)
+        {
+            /* ALGO
+            1. XOR of any number 'A' with any other number 'K" twice results in original number i.e. A^k^k = A
+            2. we can take any two 2 nodes as its a connected graph/tree all nodes are connected directly or indirectly
+            3. Two nodes indirectly connected can be XOR here think of all nodes in b/w them would selected any XORed,
+                all in b/w nodes get XOR twice hence retaining their original value.
+            4. we just need to find all delta node pairs would increase the totalSum.
+            5. in case of EVEN count of +ve delta, we know for sure adding all pair will definatly increase the sum
+            6. in case of ODD count of +ve delta extra steps are needed
+                we just create MaxHeap of size 3 to keep using the biggest 2 values as Pair
+                and at the end we see if the (largestValue in -ve delta + only element left in heap) total is positive we add them too.
+             */
+            int n = nums.Length, firstPosIdx = -1, posDeltaCount = 0;
+            long[] delta = new long[n];
+            long originalSum = 0, increaseBy = 0;
+            // calculate the delta for each node if its XOR with k
+            // also calcualte the original total Sum of nodes
+            for (int i = 0; i < n; i++)                // O(n)
+            {
+                originalSum += nums[i];
+                delta[i] = (nums[i] ^ k) - nums[i];
+                if (delta[i] > 0)
+                    posDeltaCount++;
+            }
+            // we have ODD no of +ve delta's
+            if (posDeltaCount % 2 == 1)
+            {
+                long smallestNeg = long.MinValue;
+                var maxHeap = new PriorityQueue<long, long>(Comparer<long>.Create((x, y) => y.CompareTo(x)));
+                // find the no of pair of +ve nodes we can XOR to achieve even greater sum
+                // but also try to maximize the values in case of ODD count
+                for (int i = 0; i < n; i++)                // O(n)
+                    if (delta[i] > 0)
+                    {
+                        maxHeap.Enqueue(delta[i], delta[i]);
+                        if (maxHeap.Count == 3)
+                            increaseBy += maxHeap.Dequeue() + maxHeap.Dequeue();
+                    }
+                    else
+                        smallestNeg = Math.Max(smallestNeg, delta[i]);
+
+                // if only left +ve delta + largest-ve-delta total is +ve we add them too
+                increaseBy += Math.Max(maxHeap.Dequeue() + smallestNeg, 0);
+            }
+            // we have EVEN no of +ve delta's
+            else
+                for (int i = 0; i < n; i++)                // O(n)
+                    if (delta[i] > 0)
+                        if (firstPosIdx == -1)
+                            firstPosIdx = i;
+                        else
+                        {
+                            increaseBy += delta[i] + delta[firstPosIdx];
+                            firstPosIdx = -1;
+                        }
+            return originalSum + increaseBy;
+        }
     }
 }

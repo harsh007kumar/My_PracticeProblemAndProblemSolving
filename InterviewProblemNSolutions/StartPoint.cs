@@ -631,6 +631,7 @@ namespace InterviewProblemNSolutions
             KthSmallestPrimeFraction();
             ScoreAfterFlippingMatrix();
             FindTheSafestPathInGrid();
+            FindTheMaximumSumOfNodeValues();
 
 
 
@@ -10793,6 +10794,28 @@ namespace InterviewProblemNSolutions
                 grid[i].Print("Input-GRID");
                 Console.WriteLine($"Maximum safeness factor of all paths leading to cell from [0,0] to [n-1, n-1] => '{DailyProblem.MaximumSafenessFactor(grid[i])}'");
                 Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void FindTheMaximumSumOfNodeValues()
+        {
+            // NeetCode https://youtu.be/bnBp6_b4GCw
+            // https://leetcode.com/problems/find-the-maximum-sum-of-node-values
+            Utility.Print("3068. Find the Maximum Sum of Node Values");
+            int[][] nums =
+                [
+                    [1,2,1],
+                    [2,3],
+                    [7,7,7,7,7,7],
+                    [24,78,1,97,44],
+                ];
+            int[] k = [3, 7, 3, 6];
+            int[][] edges = new int[1][];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Nodes-Value");
+                Console.WriteLine($"maximum sum of values of tree nodes after any no of XOR operation on any edge are => '{DailyProblem.MaximumValueSum(nums[i], k[i], edges)}");
             }
         }
 
