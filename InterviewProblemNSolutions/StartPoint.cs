@@ -632,6 +632,7 @@ namespace InterviewProblemNSolutions
             ScoreAfterFlippingMatrix();
             FindTheSafestPathInGrid();
             FindTheMaximumSumOfNodeValues();
+            NumberOfBeautifulSubsets();
 
 
 
@@ -10818,6 +10819,50 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"maximum sum of values of tree nodes after any no of XOR operation on any edge are => '{DailyProblem.MaximumValueSum(nums[i], k[i], edges)}");
             }
         }
+
+
+        public static void NumberOfBeautifulSubsets()
+        {
+            // NeetCode https://youtu.be/Dle_SpjHTio
+            // https://leetcode.com/problems/the-number-of-beautiful-subsets/
+            Utility.Print("2597. The Number of Beautiful Subsets");
+            int[][] nums = [[2, 4, 6], [1], [4, 2, 5, 9, 10, 3], [10, 4, 5, 7, 2, 1]];
+            int[] k = [2, 1, 1, 3];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Input-Array");
+                Console.WriteLine($"Total no of beautiful subset of nums that can be obtained by deleting some (possibly none) elements from nums such that no 2 nums diff equal '{k[i]}' => '{DailyProblem.BeautifulSubsets(nums[i], k[i])}'");
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

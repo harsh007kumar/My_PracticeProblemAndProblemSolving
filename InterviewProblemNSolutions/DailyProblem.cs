@@ -22986,5 +22986,39 @@ namespace InterviewProblemNSolutions
                         }
             return originalSum + increaseBy;
         }
+
+
+        // Time O(2^n) | Space O(n), n = length of 'nums'
+        public static int BeautifulSubsets(int[] nums, int k)
+        {
+            /* ALGO - BruteForce
+            1. Sort the input array so we only iterate thru nums in non-decreasing order (aka increasing but array can have duplicates)
+            2. Create a HashSet to keep track of all the numbers included so far in cur subset
+            3. Now start recursion from 0th index, at each index we have 2 choice
+                a. skip taking cur num and make recursive call to next idx
+                b. include cur num if there exists no other num in HashSet which is equal to 'curNum-k'
+            4. whenever we include a number to a subset, add +1 to global 'beautiful' counter.
+             */
+            int l = nums.Length, beautiful = 0;
+            Array.Sort(nums);            // O(nlogn)
+            HashSet<int> prvNums = [];
+            Get(0);                      // O(n^2)
+            return beautiful;
+
+            void Get(int idx)
+            {
+                if (idx == l) return;
+                // skip current num
+                Get(idx + 1);
+                // take current num if possible
+                if (!prvNums.Contains(nums[idx] - k))
+                {
+                    prvNums.Add(nums[idx]);
+                    beautiful++;
+                    Get(idx + 1);
+                    prvNums.Remove(nums[idx]);
+                }
+            }
+        }
     }
 }
