@@ -23020,5 +23020,78 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+
+        // Time O(2^n) | Space O(n), n = length of 'words'
+        public static int MaxScoreWords(string[] words, char[] letters, int[] score)
+        {
+            /* ALGO
+            1. first thing is to count unqCharacters and their freq for each word in words and save it into a array of Dictionary<char,int>
+            2. next get the freq of all the avaliable characters from letter including duplicate so we know how many characters we have in Bank to construct new words
+            3. Now we call a recursive func from 0th index
+            4. for each index we do:
+                a. get the max score we can get it we skip taking cur word and move to next index instead in 'scoreIfSkip'
+                b. see if we have enouf words left in Bank to form cur words if yes get the score for current word and update Bank by decreasing freq of used words and this score to 'scoreIfInclude' and also include score by recursively calling next index with reduced Bank.
+            5. while Backtracking when we used a word a given index remeber to add back the freq of used words as we are no longer using them
+            6. At the end return the Max (scoreIfSkip / scoreIfInclude)
+             */
+
+            int l = words.Length;
+            // Get the unqWordFreq in words
+            Dictionary<char, int>[] unqWordFreq = new Dictionary<char, int>[l];
+            for (int i = 0; i < l; i++)                                // O(n) = O(14)
+            {
+                unqWordFreq[i] = [];    // initialize the dictionary foreach index
+                foreach (var ch in words[i])                     // O(15)
+                    if (unqWordFreq[i].ContainsKey(ch))
+                        unqWordFreq[i][ch]++;
+                    else
+                        unqWordFreq[i][ch] = 1;
+            }
+
+
+            // Get the freq of each character in letters
+            int[] charBank = new int[26];
+            foreach (var ch in letters)                          // O(m) = O(100)
+                charBank[ch - 'a']++;
+
+            return MaxScore(0);                                 // O(2^n)
+
+            // local helper func
+            int MaxScore(int idx)
+            {
+                if (idx == l) return 0;
+
+                // skip adding cur word
+                int scoreIfSkip = MaxScore(idx + 1);
+
+
+                // add cur word is we have enouf characters left for it in charBank
+                int scoreIfInclude = 0;
+                // remvoe the characters that are need to carve cur word from bank
+                var scoreFromCurWord = GetCurWordScore(idx);                // O(26) ~O(1)
+                if (scoreFromCurWord > 0)
+                {
+                    scoreIfInclude = scoreFromCurWord + MaxScore(idx + 1);
+                    // add back the characters that were used back to bank
+                    foreach (var chFreq in unqWordFreq[idx])                // O(26) ~O(1)
+                        charBank[chFreq.Key - 'a'] += chFreq.Value;
+                }
+                return Math.Max(scoreIfSkip, scoreIfInclude);
+            }
+            int GetCurWordScore(int idx)
+            {
+                var updatedBank = charBank.ToArray();
+                int wordScore = 0;
+                foreach (var chFreq in unqWordFreq[idx])
+                {
+                    updatedBank[chFreq.Key - 'a'] -= chFreq.Value;
+                    if (updatedBank[chFreq.Key - 'a'] >= 0) wordScore += (score[chFreq.Key - 'a'] * chFreq.Value);
+                    else return 0;
+                }
+                charBank = updatedBank;
+                return wordScore;
+            }
+        }
     }
 }

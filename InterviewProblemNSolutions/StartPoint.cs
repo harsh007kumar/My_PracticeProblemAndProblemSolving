@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Linq;
+using static System.Formats.Asn1.AsnWriter;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InterviewProblemNSolutions
@@ -633,6 +634,7 @@ namespace InterviewProblemNSolutions
             FindTheSafestPathInGrid();
             FindTheMaximumSumOfNodeValues();
             NumberOfBeautifulSubsets();
+            MaximumScoreWordsFormedByLetters();
 
 
 
@@ -10836,6 +10838,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MaximumScoreWordsFormedByLetters()
+        {
+            // https://leetcode.com/problems/maximum-score-words-formed-by-letters
+            Utility.Print("1255. Maximum Score Words Formed by Letters");
+            string[][] words = [["dog", "cat", "dad", "good"], ["xxxz", "ax", "bx", "cx"], ["leetcode"]];
+            char[][] letters = [['a', 'a', 'c', 'd', 'd', 'd', 'g', 'o', 'o'], ['z', 'a', 'b', 'c', 'x', 'x', 'x'], ['l', 'e', 't', 'c', 'o', 'd']];
+            int[][] score = [[1, 0, 9, 5, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 10], [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]];
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                words[i].Print("Words-Array");
+                letters[i].Print("letters-Array");
+                score[i].Print("score-Array");
+                Console.WriteLine($"Max score of any valid set of words formed by using the given letters => '{DailyProblem.MaxScoreWords(words[i], letters[i], score[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
