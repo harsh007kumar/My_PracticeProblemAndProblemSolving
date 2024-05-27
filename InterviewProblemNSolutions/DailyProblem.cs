@@ -23093,5 +23093,51 @@ namespace InterviewProblemNSolutions
                 return wordScore;
             }
         }
+
+
+        // Time O(nlogn) | Space O(1), n = length of 'nums'
+        public static int SpecialArray(int[] nums)
+        {
+            /* ALGO
+            1. sort the input array
+            2. we need to try all the numbers from 0..largestNuminArray
+                as possible 'X'
+            3. 1st thing we need to check if number equal to array length
+                and also equal to (smallestNum-1) i.e. 'nums[0]-1'
+                satifies the condition as base case.
+            4. so we try to see if any number 'X' from 0..MaxNum satifies
+                the condition
+            5. we keep iterating from 0th index to last idx in array to check
+                if cur numbers == length - curIdx, if true return cur num
+            6. we also have to account for missing numbers b/w last number
+                read from array and cur numbers in array which we track
+                using variable lastNum
+            7. lastNum while loop execute till the point we have a numbers
+                smaller than cur index number, if any of in b/w num satifies
+                the condition return that as answer.
+            8. else return -1 at the end
+             */
+
+            Array.Sort(nums);               // O(nlogn)
+            int l = nums.Length, lastNum = -1;
+            // check if 'X' equal to input array length and smaller 1st elements satisfies both the condition
+            if (l < nums[0]) return l;
+
+            // check for all possible 'X' values from 0..N-1 idx
+            for (int x = 0; x < l; x++)       // O(n)
+            {
+                // check for all the X that are b/w the last idx number and cur idx number in array
+                while (++lastNum < nums[x])
+                    if (lastNum == l - x) return lastNum;
+
+                // check if one of the numbers in array fulfils all 'X" conditions
+                if (nums[x] == l - x) return nums[x];
+
+                // skip all duplicates, as problem stats there has to be strictly 'X' numbers greather than equal to given num
+                while (x + 1 < l && nums[x] == nums[x + 1])
+                    x++;
+            }
+            return -1;
+        }
     }
 }

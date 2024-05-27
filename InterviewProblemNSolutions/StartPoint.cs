@@ -635,6 +635,7 @@ namespace InterviewProblemNSolutions
             FindTheMaximumSumOfNodeValues();
             NumberOfBeautifulSubsets();
             MaximumScoreWordsFormedByLetters();
+            SpecialArrayWithXElementsGreaterThanOrEqualX();
 
 
 
@@ -10856,6 +10857,19 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void SpecialArrayWithXElementsGreaterThanOrEqualX()
+        {
+            // https://leetcode.com/problems/special-array-with-x-elements-greater-than-or-equal-x
+            Utility.Print("1608. Special Array With X Elements Greater Than or Equal X");
+            int[][] nums = [[3, 5], [0, 0], [0, 4, 3, 0, 4], [3, 6, 7, 7, 0], [2, 3, 0, 2]];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Input-Array");
+                Console.WriteLine($"Array is considered special if there exists a number 'x' such that there are exactly 'x' numbers in nums that are greater than or equal to 'x' => '{DailyProblem.SpecialArray(nums[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
