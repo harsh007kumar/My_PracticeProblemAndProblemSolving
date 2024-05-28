@@ -636,6 +636,7 @@ namespace InterviewProblemNSolutions
             NumberOfBeautifulSubsets();
             MaximumScoreWordsFormedByLetters();
             SpecialArrayWithXElementsGreaterThanOrEqualX();
+            GetEqualSubstringsWithinBudget();
 
 
 
@@ -10872,6 +10873,17 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void GetEqualSubstringsWithinBudget()
+        {
+            // https://leetcode.com/problems/get-equal-substrings-within-budget
+            Utility.Print("1208. Get Equal Substrings Within Budget");
+            string[] s = ["abcd", "abcd", "abcd"];
+            string[] t = ["bcdf", "cdef", "acde"];
+            int[] maxCost = [3, 3, 0];
+            for (int i = 0; i < s.Length; i++)
+                Console.WriteLine($"Max len of a substring of s '{s[i]}' that can be changed to be the same as the corresponding substring of t '{t[i]}'" +
+                    $" with a cost less than or equal to maxCost '{maxCost[i]}' => '{DailyProblem.EqualSubstring(s[i], t[i], maxCost[i])}'");
+        }
 
 
 

@@ -23139,5 +23139,32 @@ namespace InterviewProblemNSolutions
             }
             return -1;
         }
+
+
+        // Time O(n) | Space O(1), n = length of string 's'
+        public static int EqualSubstring(string s, string t, int maxCost)
+        {
+            /* ALGO
+            1. we need to find a substring whose total cost is within maxCost of update range
+            2. So we start iterating from 0..N-1 index using rt pointer
+            3. if we get a matching word we increase substring length and update global maxLen
+            4. if we have to update characters at given index we add that cost to curTotalCost
+            5. if curTotalCost is <= maxCost allowed we again update the global max substr len
+            6. but if curTotalCost > maxCost we move the left pointers initially at 0th idx which reduce the update cost and also the substring length
+            7. at the end return the global maxLen
+             */
+            int l = s.Length, maxEqualSubstringLen = 0, lt = -1, rt = -1, curCost = 0;
+            while (++rt < l)
+            {
+                curCost += Math.Abs(s[rt] - t[rt]);
+                // matching characters or added cost within bounds
+                if (curCost <= maxCost)
+                    maxEqualSubstringLen = Math.Max(maxEqualSubstringLen, rt - lt);
+                else // cur index 'rt' update cost addition leads to curCost more than max allowed, then move the lt pointer to reduce the cost and length of substring
+                    while (curCost > maxCost)
+                        curCost -= Math.Abs(s[++lt] - t[lt]);
+            }
+            return maxEqualSubstringLen;
+        }
     }
 }
