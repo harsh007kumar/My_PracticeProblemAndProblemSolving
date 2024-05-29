@@ -637,6 +637,7 @@ namespace InterviewProblemNSolutions
             MaximumScoreWordsFormedByLetters();
             SpecialArrayWithXElementsGreaterThanOrEqualX();
             GetEqualSubstringsWithinBudget();
+            NumberOfStepsToReduceANumberInBinaryRepresentationToOne();
 
 
 
@@ -10886,6 +10887,14 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void NumberOfStepsToReduceANumberInBinaryRepresentationToOne()
+        {
+            // https://leetcode.com/problems/number-of-steps-to-reduce-a-number-in-binary-representation-to-one
+            Utility.Print("1404. Number of Steps to Reduce a Number in Binary Representation to One");
+            string[] sArr = ["1101", "10", "1", "1111"];
+            foreach (var str in sArr)
+                Console.WriteLine($"Number of steps to reduce '{str}' to 1 => '{DailyProblem.NumSteps(str)}'");
+        }
 
 
 

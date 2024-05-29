@@ -23166,5 +23166,59 @@ namespace InterviewProblemNSolutions
             }
             return maxEqualSubstringLen;
         }
+
+
+        // Time O(nlogn) | Space O(n), = length of string 's'
+        public static int NumSteps(string s)
+        {
+            /* ALGO
+            1. Create list to represent the number fo same length as input 's'
+            2. if bit is one the bool value of same index is true else false for '0'
+            3. Now we start reducing the number, if the number is
+                a. Even: Meaning divide /2 i.e. rt most bits is delete and all
+                    other bits r rt shifted by 1
+                    which i am simulating by reducing the length of num list by 1
+                b. Odd: meaning we have to add 1 to last bit, if its zero we add
+                    and break out if its already ON we update it to 0 and take the
+                    carry and try repeating this process to left bit.
+
+                    until we encounter a bit thats OFF or we run out of index
+                    means a new ON bit has to be added to left most side (most sifnificant bit)
+                    Also remeber to increase the length by 1 if new bit is added to left most side.
+            4. keep increamenting the steps counter irrespective of what operation is performed above.
+             */
+            int l = s.Length, stepsNeeded = 0;
+            List<bool> num = new List<bool>();
+            for (int i = 0; i < l; i++)            // O(n)
+                num.Add(s[i] == '1');
+            while (l > 1)                      // O(nlogn)
+            {
+                // last bit is 0 means number is even
+                // (hence divide by 2 i.e. right shift all bits by 1 also means lastBit is gone)
+                if (!num[l - 1])
+                    l--;
+                // last bit is 1 means number is odd (add 1 to right most bit)
+                else //if(num[l-1])
+                {
+                    var carry = true;
+                    var idx = l - 1;
+                    while (carry)
+                        if (idx >= 0)
+                        {
+                            carry &= num[idx];
+                            num[idx] = !num[idx--];
+                        }
+                        else
+                        {
+                            num.Insert(0, carry);
+                            l++;
+                            break;
+                        }
+                }
+                // increament the step counter
+                stepsNeeded++;
+            }
+            return stepsNeeded;
+        }
     }
 }
