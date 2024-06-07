@@ -2012,5 +2012,42 @@ namespace InterviewProblemNSolutions
             }
             return ans;
         }
+
+
+        // Time O(Max(n*l,m)) | Space O(n*l+m), n = length of 'dictionary', l = avg length of each word in 'dictionary' & m = length of 'sentence'
+        public static string ReplaceWords(List<string> dictionary, string sentence)
+        {
+            /* ALGO
+            1. Create a trie and all the words in 'dictionary' list
+            2. Now split the 'sentence' by white-space
+            3. Iterate thru list of words in sentence
+            4. For each word start from the root of the trie and see if valid path exists
+            5. if at any point/at any char we found the prefix (by checking isWord)
+                we dont need to iterate further and can return true to signify a prefix
+                is found (its automatically the smallest because we are using tried
+                and moving from 0th node)
+            6. if func FindPrefix() return true add the prefix in StringBuilder
+                to final result, else add the original word meaning no prefix was found.
+             */
+            StringBuilder sb = new(), curWordPrefix = new();
+            Trie t = new();
+            foreach (var word in dictionary)     // O(n)
+                t.Add(word.ToCharArray());                    // O(l)
+
+            var words = sentence.Split(' ');    // O(m)
+            for (int i = 0; i < words.Length; i++)     // O(m)
+            {
+                if (i > 0) sb.Append(" ");
+
+                // found a prefix for cur word appending it to final List
+                if (t.FindPrefix(t.root, words[i], 0, curWordPrefix))
+                    sb.Append(curWordPrefix.ToString());
+                // no prefix found append the entire word
+                else sb.Append(words[i]);
+
+                curWordPrefix.Clear();
+            }
+            return sb.ToString();
+        }
     }
 }

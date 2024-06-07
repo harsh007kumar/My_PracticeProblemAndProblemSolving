@@ -638,6 +638,7 @@ namespace InterviewProblemNSolutions
             SpecialArrayWithXElementsGreaterThanOrEqualX();
             GetEqualSubstringsWithinBudget();
             NumberOfStepsToReduceANumberInBinaryRepresentationToOne();
+            ReplaceWords();
 
 
 
@@ -10897,6 +10898,19 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void ReplaceWords()
+        {
+            // https://leetcode.com/problems/replace-words
+            Utility.Print("648. Replace Words");
+            string[][] dictionary = [["cat", "bat", "rat"], ["a", "b", "c"]];
+            string[] sentence = ["the cattle was rattled by the battery", "aadsfasf absbs bbab cadsfafs"];
+            for (int i = 0; i < sentence.Length; i++)
+            {
+                dictionary[i].Print("Dictionary");
+                Console.WriteLine($"The input sentence => '{sentence[i]}'\nafter the replacement => '{StringAlgorithms.ReplaceWords(dictionary[i].ToList(), sentence[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace InterviewProblemNSolutions
 {
@@ -40,6 +41,18 @@ namespace InterviewProblemNSolutions
                 temp = temp.children[ch];
             }
             return true;
+        }
+        public bool FindPrefix(TrieNode cur, string s, int idx, StringBuilder sb)
+        {
+            if (cur.isWord) return true;
+            else if (idx == s.Length) return false;
+
+            if (cur.children.TryGetValue(s[idx], out TrieNode subTree))
+            {
+                sb.Append(s[idx]);
+                return FindPrefix(subTree, s, idx + 1, sb);
+            }
+            else return false;
         }
         // Search Word
         public bool SearchWord(List<char> words)
