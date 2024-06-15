@@ -639,6 +639,7 @@ namespace InterviewProblemNSolutions
             GetEqualSubstringsWithinBudget();
             NumberOfStepsToReduceANumberInBinaryRepresentationToOne();
             ReplaceWords();
+            IPO();
 
 
 
@@ -10913,7 +10914,22 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void IPO()
+        {
+            // https://leetcode.com/problems/ipo
+            Utility.Print("502. IPO");
+            int[] k = [2, 3, 1, 11];
+            int[] w = [0, 0, 2, 11];
+            int[][] profits = [[1, 2, 3], [1, 2, 3], [1, 2, 3], [1, 2, 3]];
+            int[][] capital = [[0, 1, 1], [0, 1, 2], [1, 1, 2], [11, 12, 13]];
+            for (int i = 0; i < k.Length; i++)
+            {
+                profits[i].Print("Profits");
+                capital[i].Print("Capital");
+                Console.WriteLine($"From above Projects after choosing at most k '{k[i]}' distinct projects from given projects to maximize your final capital when starting cap '{w[i]}'," +
+                    $"\n the final maximized capital is => \t'{DailyProblem.FindMaximizedCapital(k[i], w[i], profits[i], capital[i])}'");
+            }
+        }
 
 
 

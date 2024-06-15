@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -23219,6 +23220,41 @@ namespace InterviewProblemNSolutions
                 stepsNeeded++;
             }
             return stepsNeeded;
+        }
+
+        // Time O(nlogn) | Space O(n), n = no of task/length of 'profits'
+        public static int FindMaximizedCapital(int k, int w, int[] profits, int[] capital)
+        {
+            /* ALGO
+            1. store the captial as key and profit as value in min PQ 'minCapTask' for all the tasks from 0..n-1 index
+            2. while k > 0 
+                iterate thru the minCapTask PQ and till we reach a task for which we don't have enouf capital
+                and keep adding [profit,profit] as key & value in maxPriorityQueue
+            3. Take maxPriorityQueue top if NOT EMPTY and update total capital raised by adding its profit
+                also now remove pq top
+            3. if maxPriorityQueue is EMPTY break as we don't have any task which we can pick with captial we have
+             */
+            int l = profits.Length;
+            PriorityQueue<int, int> minCapTask = new();
+            for (int i = 0; i < l; i++)    // O(nlogn)
+                minCapTask.Enqueue(profits[i], capital[i]);  // add <Element>, <Priority> to PQ
+
+            PriorityQueue<int, int> maxTotalGain = new PriorityQueue<int, int>(Comparer<int>.Create((a, b) => b.CompareTo(a)));
+            while (k-- > 0)
+            {
+                // pull all tasks for which we have enouf captial
+                while (minCapTask.TryPeek(out int profit, out int minCapitalReq) && minCapitalReq <= w)
+                {
+                    minCapTask.Dequeue();
+                    // and add them to maxTotalGain PQ
+                    maxTotalGain.Enqueue(profit, profit);
+                }
+                // pick most profitable task that can be finished and add its profit to captial
+                if (maxTotalGain.TryDequeue(out int newProfit, out int p))
+                    w += newProfit;
+                else break;
+            }
+            return w;
         }
     }
 }
