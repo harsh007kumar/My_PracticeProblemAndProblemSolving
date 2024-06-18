@@ -640,6 +640,7 @@ namespace InterviewProblemNSolutions
             NumberOfStepsToReduceANumberInBinaryRepresentationToOne();
             ReplaceWords();
             IPO();
+            MostProfitAssigningWork();
 
 
 
@@ -10931,6 +10932,24 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void MostProfitAssigningWork()
+        {
+            // https://leetcode.com/problems/most-profit-assigning-work
+            Utility.Print("826. Most Profit Assigning Work");
+            int[][] difficulty = [[2, 4, 6, 8, 10], [85, 47, 57]];
+            int[][] profit = [[10, 20, 30, 40, 50], [24, 66, 99]];
+            int[][] worker = [[4, 5, 6, 7], [40, 25, 25]];
+
+            for (int i = 0; i < profit.Length; i++)
+            {
+                difficulty[i].Print("Difficulty");
+                profit[i].Print("Profit");
+                worker[i].Print("Worker-Ability");
+                Console.WriteLine($"Total max profit all the worker can generate in total => '{DailyProblem.MaxProfitAssignment(difficulty[i], profit[i], worker[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

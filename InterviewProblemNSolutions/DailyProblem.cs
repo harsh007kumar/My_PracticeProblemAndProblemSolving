@@ -23256,5 +23256,35 @@ namespace InterviewProblemNSolutions
             }
             return w;
         }
+
+
+        // Time O(Max(nlogn,mlogn)) | Space O(n), n = length of profit & m = length of worker
+        public static int MaxProfitAssignment(int[] difficulty, int[] profit, int[] worker)
+        {
+            int n = difficulty.Length, m = worker.Length, totalProfit = 0, lastProfit = 0;
+
+            PriorityQueue<int, int> minPQ = new();
+            // add difficult and profit to a min Priority Queue which has sorted the task in non-decreasing diffculty
+            for (int i = 0; i < n; i++)            // O(nlogn)
+                minPQ.Enqueue(profit[i], difficulty[i]);
+
+            Array.Sort(worker);
+            for (int i = 0; i < m; i++)            // O(mlogn)
+            {
+                while (minPQ.TryPeek(out int curTaskProfit, out int curTaskDifficulty))
+                    // if ith worker has >= ability when current PQ top (it means it can compelte this task)
+                    if (worker[i] >= curTaskDifficulty)
+                        // remove the top task from PQ & update max profit seen so far
+                        lastProfit = Math.Max(minPQ.Dequeue(), lastProfit);
+                    else break; // worker ability is smaller than smallest difficult task i.e. minPQ Top hence break
+
+                // assign the max last profit that the current worker can do 
+                // (all worker following this can also use this value as they
+                // will have same or greater ability as they are sorted in asc order)
+                totalProfit += lastProfit;
+            }
+
+            return totalProfit;
+        }
     }
 }
