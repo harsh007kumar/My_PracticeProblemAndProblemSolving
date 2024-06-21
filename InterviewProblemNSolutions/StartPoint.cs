@@ -626,21 +626,22 @@ namespace InterviewProblemNSolutions
             //FindAllGroupsOfFarmland();
             //FreedomTrail();
             //SumOfDistancesInTree();
-            MinimumNumberOfOperationsToMakeArrayXOREqualToK();
-            NumberOfWonderfulSubstrings();
-            MaximizeHappinessOfSelectedChildren();
-            KthSmallestPrimeFraction();
-            ScoreAfterFlippingMatrix();
-            FindTheSafestPathInGrid();
-            FindTheMaximumSumOfNodeValues();
-            NumberOfBeautifulSubsets();
-            MaximumScoreWordsFormedByLetters();
-            SpecialArrayWithXElementsGreaterThanOrEqualX();
-            GetEqualSubstringsWithinBudget();
-            NumberOfStepsToReduceANumberInBinaryRepresentationToOne();
-            ReplaceWords();
-            IPO();
-            MostProfitAssigningWork();
+            //MinimumNumberOfOperationsToMakeArrayXOREqualToK();
+            //NumberOfWonderfulSubstrings();
+            //MaximizeHappinessOfSelectedChildren();
+            //KthSmallestPrimeFraction();
+            //ScoreAfterFlippingMatrix();
+            //FindTheSafestPathInGrid();
+            //FindTheMaximumSumOfNodeValues();
+            //NumberOfBeautifulSubsets();
+            //MaximumScoreWordsFormedByLetters();
+            //SpecialArrayWithXElementsGreaterThanOrEqualX();
+            //GetEqualSubstringsWithinBudget();
+            //NumberOfStepsToReduceANumberInBinaryRepresentationToOne();
+            //ReplaceWords();
+            //IPO();
+            //MostProfitAssigningWork();
+            MagneticForceBetweenTwoBalls();
 
 
 
@@ -10951,6 +10952,19 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void MagneticForceBetweenTwoBalls()
+        {
+            // https://leetcode.com/problems/magnetic-force-between-two-balls
+            Utility.Print("1552. Magnetic Force Between Two Balls");
+            int[][] position = [[1, 2, 3, 4, 7], [5, 4, 3, 2, 1, 1000000000]];
+            int[] noOfBalls = [3, 2];
+            for (int i = 0; i < position.Length; i++)
+            {
+                position[i].Print("Buckets-Position");
+                Console.WriteLine($"Min magnetic force b/w any two balls when placing '{noOfBalls[i]}' balls is Maximum is => '{DailyProblem.MaxDistance(position[i], noOfBalls[i])}'");
+            }
+        }
 
 
 

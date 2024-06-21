@@ -23286,5 +23286,38 @@ namespace InterviewProblemNSolutions
 
             return totalProfit;
         }
+
+
+        // Time O(n * log(Max(n,max))) | Space O(1), n = length of 'position' array & max = maximum value in Array
+        public static int MaxDistance(int[] position, int m)
+        {
+            Array.Sort(position);       // O(nlogn)
+            int n = position.Length, min = 1, max = position.Max(), minMagForce = 1, reqSpaceBwBalls = 1;
+            while (min <= max)
+            {
+                reqSpaceBwBalls = min + (max - min) / 2;
+                if (CanPlaceAllBalls())
+                {
+                    minMagForce = reqSpaceBwBalls;
+                    min = reqSpaceBwBalls + 1;
+                }
+                else
+                    max = reqSpaceBwBalls - 1;
+            }
+            return minMagForce;
+
+            // local helper func
+            bool CanPlaceAllBalls()
+            {
+                int ballsLeftToBePlaced = m, lastBallPlacedAt = -reqSpaceBwBalls;
+                for (int i = 0; i < n; i++)
+                    if (position[i] - lastBallPlacedAt >= reqSpaceBwBalls)
+                    {
+                        if (--ballsLeftToBePlaced == 0) return true;
+                        lastBallPlacedAt = position[i];
+                    }
+                return false;
+            }
+        }
     }
 }
