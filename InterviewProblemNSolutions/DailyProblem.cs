@@ -23319,5 +23319,38 @@ namespace InterviewProblemNSolutions
                 return false;
             }
         }
+
+
+        // Time O(n) | Space O(k), n = length of 'nums', 1-Pass-Soln
+        public static int NumberOfSubarrays(int[] nums, int k)
+        {
+            /* ALGO
+            1. iterate thru all the index from 0..n-1 in nums
+            2. for each index if number is Odd add its idx to oddIndex Queue
+            3. If queue length is more than 'k' means we have more than 'k' odds
+            4. hence we now move the left pointer thereby shrinking the window
+                till we have removed that extra Odd number
+            5. if we have 'k' Odds
+                Update the nice subarray counter by adding all subarray b/w
+                1st Odd in window (can be found by Peek queue) and left pointer
+             */
+            int n = nums.Length, nice = 0, lt = 0, rt = -1;
+            Queue<int> oddIdx = new();
+            while (++rt < n)
+            {
+                // add oddIndex to the Queue if cur number is Odd
+                if (nums[rt] % 2 == 1)
+                    oddIdx.Enqueue(rt);
+                // if we have more than 'k' odd move the left of the window till it match excat 'k' Odds
+                while (oddIdx.Count > k)
+                    if (nums[lt++] % 2 == 1)     // found Odd
+                        oddIdx.Dequeue();   // remvoe the the extra Odd from left
+
+                // if we have 'k' Odds than increase the no of nice subarrays by add all subarray b/w 1st Odd in window and left pointer
+                if (oddIdx.Count == k)
+                    nice += 1 + oddIdx.Peek() - lt;
+            }
+            return nice;
+        }
     }
 }

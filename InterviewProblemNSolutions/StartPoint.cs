@@ -642,6 +642,7 @@ namespace InterviewProblemNSolutions
             //IPO();
             //MostProfitAssigningWork();
             MagneticForceBetweenTwoBalls();
+            CountNumberOfNiceSubarrays();
 
 
 
@@ -10967,6 +10968,19 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void CountNumberOfNiceSubarrays()
+        {
+            // https://leetcode.com/problems/count-number-of-nice-subarrays
+            Utility.Print("1248. Count Number of Nice Subarrays");
+            int[][] nums = [[2, 2, 2, 1, 2, 2, 1, 2, 2, 2], [2, 4, 6], [1, 1, 2, 1, 1]];
+            int[] k = [2, 1, 3];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums.Print("Input-Array");
+                Console.WriteLine($"No of nice sub-arrays which have excatly '{k[i]}' odd numbers are => '{DailyProblem.NumberOfSubarrays(nums[i], k[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
