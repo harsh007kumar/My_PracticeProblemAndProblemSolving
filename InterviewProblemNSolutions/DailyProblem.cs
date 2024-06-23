@@ -23352,5 +23352,75 @@ namespace InterviewProblemNSolutions
             }
             return nice;
         }
+
+
+        // Time O(n) | Space O(n), n = length of 'nums'
+        public static int LongestSubarray(int[] nums, int limit)
+        {
+            /* ALGO
+            1. Create two double sided Queue (using List here as C-sharp
+                doesn't have the req ADT) 'min' and 'max' to keep track of all
+                min & max numbers index.
+            2. Set 2 pointers lt = -1 and rt to -1
+            3. using 'rt' pointer iterate from 0..N-1 index
+            4. for each cur number if do 2 steps below
+                a. check if min last element is >= than cur we remove it
+                b. check if max last element is <= than cur we remove it
+            we do above operation to only keep index of numbers which can
+            affect min/max when we slide the window by moving lt pointer
+            ex: if we have 5 in 'min' and cur is no is 2 it does makes
+                sense to keep 5 as its obivously > cur hence remove it
+            2nd ex: if we have 4 in min and cur number is 11 we keep 4
+                at front and add 11 to back as it possible during moving
+                lt pointer 4 goes out of the window and then 11 will be
+                our minimum no.
+            Note: we are storing index and not the actual numbers in lists
+            5. Add cur number index to the end of the both the queues.
+            6. Calculate Abs diff by subtracting the max front from min front
+            6. while abs > limit
+                we keep moving the lt pointer if lt pointer matches the index
+                of front from either queue we remove that index
+            7. now finally we know Abs diff is <= limit, hence update the
+                longest sub-array length.
+             */
+            List<int> min = new(), max = new();
+            int l = nums.Length, lt = -1, rt = -1, longest = 1, cur, abs;
+            while (++rt < l)
+            {
+                cur = nums[rt];
+                // update the Min Queue
+                // if we have a number larger than cur than remove it as we have a new minimum
+                while (min.Count > 0 && nums[min[min.Count-1]] >= cur)
+                    min.RemoveAt(min.Count - 1);
+                // add cur idx to minimum Queue
+                min.Add(rt);
+
+                // update the Max Queue
+                // if we have a number smaller than cur than remove it as we have a new maxmimum
+                while (max.Count > 0 && nums[max[max.Count - 1]] <= cur)
+                    max.RemoveAt(max.Count - 1);
+                // add cur idx to minimum Queue
+                max.Add(rt);
+
+                // calculate the abs diff b/w max and min of cur subarray
+                abs = Math.Abs(nums[max[0]] - nums[min[0]]);
+
+                // if sub-array not valid than move the left pointer towards right
+                while (abs > limit)
+                {
+                    ++lt;
+                    if (min[0] == lt)
+                        min.RemoveAt(0);
+                    if (max[0] == lt)
+                        max.RemoveAt(0);
+                    // update the absolute
+                    abs = Math.Abs(nums[max[max.Count - 1]] - nums[min[min.Count - 1]]);
+                }
+
+                // the the longest valid subArray
+                longest = Math.Max(longest, rt - lt);
+            }
+            return longest;
+        }
     }
 }

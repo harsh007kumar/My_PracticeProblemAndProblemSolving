@@ -643,6 +643,7 @@ namespace InterviewProblemNSolutions
             //MostProfitAssigningWork();
             MagneticForceBetweenTwoBalls();
             CountNumberOfNiceSubarrays();
+            LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit();
 
 
 
@@ -10983,6 +10984,24 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit()
+        {
+            // https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit
+            Utility.Print("1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit");
+            int[][] nums = [
+                [8,2,4,7],
+                [10,1,2,4,7,2],
+                [4,2,2,2,4,4,2,2],
+                [2,2,2,4,4,2,5,5,5,5,5,2],
+                [18,100,79,85,88,90,11,57,31,49,56,51,22,42,57,17,80,63,28,16,56,77,69,53,16,85,38,36,32,49,96,72,1,25,68,57,75,3,4,81,78,32,34,27,23,37,19,70,26,35,40,75,97,33,88,58,22,70,46,63,54,16,99,27,74,50,27,37,14,4,16,73,96,2,70,38,87,98,93,84,18,10,65,48,74,40,56,65,87,46,98,68,42,1,16,57,92]];
+            int[] limit = [4, 5, 0, 2, 55];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Input-Array");
+                Console.WriteLine($"Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit '{limit[i]}' => '{DailyProblem.LongestSubarray(nums[i], limit[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
