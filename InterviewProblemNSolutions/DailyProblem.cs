@@ -23422,5 +23422,30 @@ namespace InterviewProblemNSolutions
             }
             return longest;
         }
+
+
+        // Time O(n) | Space O(k), n = length of 'nums'
+        public static int MinKBitFlips(int[] nums, int k)
+        {
+            int n = nums.Length, flipsReq = 0;
+            Queue<int> indexFlipped = new();
+            for (int i = 0; i < n; i++)
+            {
+                // we flip only it we encounter 0
+                if ((nums[i] + indexFlipped.Count) % 2 == 0)
+                {
+                    // we cannot update idex if window is smaller than 'k'
+                    if (i + k > n) return -1;
+
+                    flipsReq++;                 // increment flip counter
+                    indexFlipped.Enqueue(i);    // add the index just flipped to the queue
+
+                }
+                // remove index which goes out of the sliding window of size 'k'
+                if (indexFlipped.TryPeek(out int front) && front == 1 + i - k)
+                    indexFlipped.Dequeue();
+            }
+            return flipsReq;
+        }
     }
 }

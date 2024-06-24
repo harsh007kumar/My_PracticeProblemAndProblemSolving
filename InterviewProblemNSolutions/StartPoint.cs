@@ -641,9 +641,10 @@ namespace InterviewProblemNSolutions
             //ReplaceWords();
             //IPO();
             //MostProfitAssigningWork();
-            MagneticForceBetweenTwoBalls();
-            CountNumberOfNiceSubarrays();
-            LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit();
+            //MagneticForceBetweenTwoBalls();
+            //CountNumberOfNiceSubarrays();
+            //LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit();
+            MinNumberOfKConsecutiveBitFlips();
 
 
 
@@ -11003,6 +11004,21 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void MinNumberOfKConsecutiveBitFlips()
+        {
+            // NeetCode https://youtu.be/Fv3M9uO5ovU
+            // https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips
+            Utility.Print("995. Minimum Number of K Consecutive Bit Flips");
+            int[][] nums = [[0, 1, 0], [1, 1, 0], [0, 0, 0, 1, 0, 1, 1, 0]];
+            int[] k = [1, 2, 3];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Input-Array");
+                Console.WriteLine($"Min number of '{k[i]}'-bit flips required so that there is no 0 in the array => '{DailyProblem.MinKBitFlips(nums[i], k[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
