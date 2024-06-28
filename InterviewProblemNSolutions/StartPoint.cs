@@ -645,6 +645,7 @@ namespace InterviewProblemNSolutions
             //CountNumberOfNiceSubarrays();
             //LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit();
             MinNumberOfKConsecutiveBitFlips();
+            MaximumTotalImportanceOfRoads();
 
 
 
@@ -11019,6 +11020,32 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void MaximumTotalImportanceOfRoads()
+        {
+            // https://leetcode.com/problems/maximum-total-importance-of-roads/
+            Utility.Print("2285. Maximum Total Importance of Roads");
+            int[][][] roads = [
+                [[0,1],[1,2],[2,3],[0,2],[1,3],[2,4]],
+                [[0,3],[2,4],[1,3]],
+                [[0,1]],
+                [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8],[0,9],[1,2]]
+                ];
+            int[] n = [5, 5, 5, 10];
+            for (int i = 0; i < roads.Length; i++)
+            {
+                roads[i].Print("Roads");
+                Console.WriteLine($"The maximum total importance of all roads possible after assigning the values optimally to all '{n[i]}' Cities => '{DailyProblem.MaximumImportance(n[i], roads[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+
+
+
+
 
 
 

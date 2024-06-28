@@ -23447,5 +23447,44 @@ namespace InterviewProblemNSolutions
             }
             return flipsReq;
         }
+
+
+        // Time O(nlogn) | Space O(n)
+        public static long MaximumImportance(int n, int[][] roads)
+        {
+            /* ALGO
+            1. Create a Graph datastructure of length 'n' and assign index
+                to each node from 0..n-1
+                and keep the list of no of roads connected to each empty
+            2. Now add all the roads for each city as per the array 'roads'
+            3. Now we sort the cities basis on no of roads connected
+                city with least roads or 0 roads on left
+                and city with max connected roads on right
+                we select only the original index where city was to form
+                'increasingImportance' array
+            4. Now we move from rt-most i.e. most important city to least imp
+            5. and we add to total => 'value of city' * 'roads connected'
+            6. 'TIP' : don't need list of cities having only an integer to keep
+                track of no of roads is also sufficient to solve this problem.
+             */
+            long totalImportance = 0;
+            int[][] g = new int[n][];
+            for (int i = 0; i < n; i++) g[i] = [i, 0];
+            foreach (var road in roads)          // O(n)
+            {
+                g[road[0]][1]++;     // u->v
+                g[road[1]][1]++;     // v->u
+            }
+            // Sort the Cities in the increasing order of importance
+            // (i.e city with least road is on left and most roads on right end)
+            var increasingImportance = (from node in g                  // O(nlogn)
+                                        orderby node[1]                 // sorting by no of roads
+                                        select node[0]).ToArray();      // selecting the original index in graph for each City
+            // starting from rt most i.e. most importance city we assign it max value and keep decreasing it by 1 while moving lt
+            for (int i = n - 1; i >= 0; i--)             // O(n)
+                // Importance of City * no of roads connected to it
+                totalImportance += (long)(i + 1) * g[increasingImportance[i]][1];
+            return totalImportance;
+        }
     }
 }
