@@ -23486,5 +23486,88 @@ namespace InterviewProblemNSolutions
                 totalImportance += (long)(i + 1) * g[increasingImportance[i]][1];
             return totalImportance;
         }
+
+
+        // Time O(nlogn) | Space O(n+E), n = no of Nodes and E = no of edges in graph
+        public static IList<IList<int>> GetAncestors(int n, int[][] edges)
+        {
+            /* ALGO
+            1. Create the Directed-Graph with edges given in input array
+            2. while adding edges to graph all keep adding all sibilings
+                to a HashSet 'NotAncestor'.
+            3. Now we traverse thru all the node and which are not present
+                in 'NotAncestor' are 0th level node i.e. Node with 0 parents.
+            4. All 0th level nodes are added to queue and we add -1 at end
+                to mark end of 0th level nodes.
+            5. Now we continue iterating while queue is not empty
+                a. if cur node in front of queue is NOT -1 i.e. actual node
+                    we add it as a parents in all its sibiling
+                    all add parents of parent as ansectors in sibiling
+                    add sibiling to HashSet 'nextLevelParents'
+                b. if cur node is -1 i.e. reached end of cur level
+                    now we see if their are more nodes left to be processed
+                    if yes we add all those nodes in queue
+                    add -1 to mark end of next level
+                    clear 'nextLevelParents' so it can store next level sibilings
+            6. At the end we just prepare the ans in desired format i.e. sort all the ansectors for each node before returing the 'sortedAns'.
+             */
+            List<int>[] g = new List<int>[n];
+            HashSet<int>[] result = new HashSet<int>[n];
+            for (int i = 0; i < n; i++)                            // O(n)
+            {
+                g[i] = new();
+                result[i] = new();
+            }
+            // Create the DAG
+            HashSet<int> NotAncestor = new();
+            foreach (var edge in edges)                      // Min(2000,nlogn)
+            {
+                // add directed edge u->v
+                g[edge[0]].Add(edge[1]);
+                NotAncestor.Add(edge[1]);   // all sibiling are added to HashSet
+            }
+
+            Queue<int> q = new();
+            // now to filter 0th Level Ancestor i.e. Node with no parents
+            // just traverse thru all the Node which are not part of NotAncestor are 0th level Node
+            for (int i = 0; i < n; i++)                            // O(n)
+                if (!NotAncestor.Contains(i))
+                    q.Enqueue(i);
+            q.Enqueue(-1);  // mark end of first level parents
+
+            HashSet<int> nextLevelParents = new();
+            while (q.TryDequeue(out int parent))             // O(n)
+                if (parent != -1)
+                    foreach (var sibiling in g[parent])
+                    {
+                        // add parent as ancestor
+                        result[sibiling].Add(parent);
+                        // also add all ancestor of parents node
+                        foreach (var ansector in result[parent])
+                            result[sibiling].Add(ansector);
+
+                        // add sibiling to datastructure which is going to be processed next
+                        nextLevelParents.Add(sibiling);
+                    }
+                else //if(parent==-1) // end of cur level
+                    if (nextLevelParents.Count > 0)    // still have more nodes to visit
+                    {
+                        foreach (var nextParent in nextLevelParents)
+                            q.Enqueue(nextParent);
+                        q.Enqueue(-1);  // mark end of cur level
+                        // clear nextLevelParents object now
+                        nextLevelParents.Clear();
+                    }
+
+            // prepare the final answer which contains all the nodes and each nodes has ansectors in sorted order
+            List<IList<int>> sortedAns = new List<IList<int>>();
+            for (int i = 0; i < n; i++)                            // O(n)
+            {
+                var sorted = result[i].ToList();
+                sorted.Sort((a, b) => a.CompareTo(b));
+                sortedAns.Add(sorted);
+            }
+            return sortedAns;
+        }
     }
 }

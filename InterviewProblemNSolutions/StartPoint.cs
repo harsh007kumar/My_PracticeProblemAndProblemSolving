@@ -646,6 +646,7 @@ namespace InterviewProblemNSolutions
             //LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit();
             MinNumberOfKConsecutiveBitFlips();
             MaximumTotalImportanceOfRoads();
+            AllAncestorsOfANodeInADirectedAcyclicGraph();
 
 
 
@@ -11040,6 +11041,61 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void AllAncestorsOfANodeInADirectedAcyclicGraph()
+        {
+            // https://leetcode.com/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph
+            int[][][] edges = [
+                [[0,3],[0,4],[1,3],[2,4],[2,7],[3,5],[3,6],[3,7],[4,6]],
+                [[0,1],[0,2],[0,3],[0,4],[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]],
+                ];
+            int[] n = [8, 5];
+            Utility.Print("2192. All Ancestors of a Node in a Directed Acyclic Graph");
+            for (int i = 0; i < n.Length; i++)
+            {
+                edges[i].Print($"Edges in DAG with '{n[i]}' Nodes");
+                DailyProblem.GetAncestors(n[i], edges[i]).Print($"List of answer(s), where answer[i] is the list of ancestors of the ith node, sorted in ascending order");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
