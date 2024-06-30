@@ -647,6 +647,7 @@ namespace InterviewProblemNSolutions
             MinNumberOfKConsecutiveBitFlips();
             MaximumTotalImportanceOfRoads();
             AllAncestorsOfANodeInADirectedAcyclicGraph();
+            RemoveMaxNumberOfEdgesToKeepGraphFullyTraversable();
 
 
 
@@ -733,7 +734,7 @@ namespace InterviewProblemNSolutions
         }
 
         /// <summary>
-        /// The Dutch national flag || Time Complexity O(n) || Space O(1)
+        /// The Dutch national flag || Time Complexity O(nodes) || Space O(1)
         /// can also be solved by 3-way QuickSort for implementation check : 'Sort' class >> QuickSort3Way() [avaliable under Sorting project]
         /// </summary>
         public static void DutchFlagProblem()
@@ -752,7 +753,7 @@ namespace InterviewProblemNSolutions
                                , new int[]{ 1, 3, 2, 1, 2, 1, 2, 1, 1, 1, 3, 2, 1, 3 } };           // Input array
             foreach (var arr in arrays)
             {
-                Console.Write("\n\nInput Array : ");
+                Console.Write("\nodes\nInput Array : ");
                 arr.Print();
                 int low, mid, high;         // to save current index of 3 distinct inputs
                 #region My Orignal Solution Time O(n+k) 1 Pass
@@ -834,7 +835,7 @@ namespace InterviewProblemNSolutions
                     Console.WriteLine($" index:{i} \tPetrol: {petrolsPumps[i, 0]} \tDistanceToNext Pump: {petrolsPumps[i, 1]}");
                 }
                 var startAtIndex = DailyProblem.PetrolPump(pumps, pumps.Count);
-                Console.WriteLine($" To Complete Entire circle Start at Pump with Index: \t{startAtIndex}\n");
+                Console.WriteLine($" To Complete Entire circle Start at Pump with Index: \t{startAtIndex}\nodes");
             }
         }
 
@@ -855,7 +856,7 @@ namespace InterviewProblemNSolutions
                 var num1 = pair[0];
                 var num2 = pair[1];
                 var result = DailyProblem.MultiplyLargeNumbersRepresentedAsString(num1, num1.Length, num2, num2.Length);
-                Console.WriteLine($" Multiplication of below numbers\n \tNum1: \t{num1}\n \tNum2: \t{num2}\n \tResult: \t{result}\n");
+                Console.WriteLine($" Multiplication of below numbers\nodes \tNum1: \t{num1}\nodes \tNum2: \t{num2}\nodes \tResult: \t{result}\nodes");
             }
         }
 
@@ -951,7 +952,7 @@ namespace InterviewProblemNSolutions
             foreach (var input in inputArr)
             {
                 input.Print("Alien Dictionary");
-                Console.WriteLine($" Derived Order of characters in above language is: \'{DailyProblem.AlienDictionary(input)}\'\n");
+                Console.WriteLine($" Derived Order of characters in above language is: \'{DailyProblem.AlienDictionary(input)}\'\nodes");
             }
         }
 
@@ -1003,7 +1004,7 @@ namespace InterviewProblemNSolutions
                 nums.Print("Input");
                 var results = DailyProblem.ThreeSum(nums);
                 foreach (var pair in results)
-                    Console.WriteLine($" Nums in above array which evaluate to Zero: {pair[0]} + {pair[1]} + {pair[2]} == '0'\n");
+                    Console.WriteLine($" Nums in above array which evaluate to Zero: {pair[0]} + {pair[1]} + {pair[2]} == '0'\nodes");
             }
         }
 
@@ -1035,7 +1036,7 @@ namespace InterviewProblemNSolutions
             B.Print("B");
             C.Print("C");
             D.Print("D");
-            Console.WriteLine($" No Of Tuples such that A[i]+B[j]+C[k]+D[l]==0 are {DailyProblem.FourSumCount(A, B, C, D)}\n");
+            Console.WriteLine($" No Of Tuples such that A[i]+B[j]+C[k]+D[l]==0 are {DailyProblem.FourSumCount(A, B, C, D)}\nodes");
         }
 
 
@@ -1054,7 +1055,7 @@ namespace InterviewProblemNSolutions
                     Console.Write($" \'{bannedWord}\'");
 
                 var mostCommonWord = DailyProblem.MostCommonWord(paragraph[i], banned[i]);
-                Console.WriteLine($"\n Most Common Word which isn't banned is: \'{mostCommonWord}\'\n");
+                Console.WriteLine($"\nodes Most Common Word which isn't banned is: \'{mostCommonWord}\'\nodes");
             }
         }
 
@@ -1102,7 +1103,7 @@ namespace InterviewProblemNSolutions
             //DailyProblem.SudokuSolver(board);
             DailyProblem.SudokuSolverEfficient(board);
             if (ValidateResult(board, expected))
-                Console.WriteLine($" Succesfully SOLVED above SUDOKU puzzle by filling the empty cells as below\n");
+                Console.WriteLine($" Succesfully SOLVED above SUDOKU puzzle by filling the empty cells as below\nodes");
             board.Print("SOLVED SUDOKU BOARD");
 
             bool ValidateResult(char[][] c1, char[][] c2)
@@ -1178,7 +1179,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Input Array");
-                Console.WriteLine($" Majority Element with more than n/2 majority is: {DailyProblem.MajorityElement(nums)}\n");
+                Console.WriteLine($" Majority Element with more than nodes/2 majority is: {DailyProblem.MajorityElement(nums)}\nodes");
             }
         }
 
@@ -1192,7 +1193,7 @@ namespace InterviewProblemNSolutions
                 nums.Print("Input Array");
                 var result = DailyProblem.MajorityElementII(nums);
                 foreach (var element in result)
-                    Console.WriteLine($" Majority Element with more than n/3 majority is: {element}\n");
+                    Console.WriteLine($" Majority Element with more than nodes/3 majority is: {element}\nodes");
             }
         }
 
@@ -1237,7 +1238,7 @@ namespace InterviewProblemNSolutions
                         Console.Write($" {iterator.Next()}");
                     else
                         Console.Write($" {iterator.HasNext()}");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -1410,7 +1411,7 @@ namespace InterviewProblemNSolutions
             {
                 input.Print("GRID");
                 var result = DailyProblem.UniquePathsWithObstacles(input);
-                Console.WriteLine($" No Of Unqiue Paths for above GRID (with obstacles) starting from Top-Left to Bottom-Right: {result}\n");
+                Console.WriteLine($" No Of Unqiue Paths for above GRID (with obstacles) starting from Top-Left to Bottom-Right: {result}\nodes");
             }
         }
 
@@ -1476,7 +1477,7 @@ namespace InterviewProblemNSolutions
                 nums.Print("Input");
                 //var firstMissingPositiveNo = DailyProblem.FirstMissingPositiveUsingHashSet(nums);
                 var firstMissingPositiveNo = DailyProblem.FirstMissingPositive(nums);
-                Console.WriteLine($" First Missing Positive number in above input array is: {firstMissingPositiveNo}\n");
+                Console.WriteLine($" First Missing Positive number in above input array is: {firstMissingPositiveNo}\nodes");
             }
         }
 
@@ -1504,7 +1505,7 @@ namespace InterviewProblemNSolutions
                 //var no = DailyProblem.RomanToInteger(roman);
                 var no = DailyProblem.RomanToInteger_ReadingFromLast(roman);
                 Console.WriteLine($" \'{num}\' in Integer Translates to \'{roman}\' in Roman");
-                Console.WriteLine($" \'{roman}\' in Roman Translates to \'{no}\' in Integer\n");
+                Console.WriteLine($" \'{roman}\' in Roman Translates to \'{no}\' in Integer\nodes");
             }
         }
 
@@ -1610,11 +1611,11 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/reverse-words-in-a-string/
             Utility.Print("151. Reverse Words in a String");
             string[] inputArr = { "the sky is blue", "  hello world  ", "a good   example", "  Bob    Loves  Alice   ", "Alice does not even like bob",
-                "58jQ7q9wVX       R    IpHr  PhhTE a8PVETA6a    8gRZzYIcm0 5e      O0       G0KMWhibvb   3T4xjF     ZVvCk0     RfDxBA4D86   EXPD7DHbt  3e43ty   ttSQf  vrQ3CL       ecN       PvX8HYN4uy       VoTmn9 B8mWctu PDzb8     lJgpP9Ed      u  I   Ks5ehQz1YC   A3WQ    yTx0b      9i      ZxfhD13 V0  0    d       XE  SGQVF  xo      4IW9nR    6b1zL5D6     AiGw Fel       94Ydz   4Z8hUM      Kp7lqan  w  2K   0w8hqDv Eu578UQu VYeUzIfj9       OcVb7MkfT       BWqda0Uv1E     oXK   0m       yX   eSuYZAKvZ      lPCcdP4IqB      OkgWkrgwy       b      Dwocr0S    79RG       dzBvAbNP4      AeYHAp3       tu      Sg4Rl SmaUYK   BiYtjAtEG ONXS0  8YUQZMt RMo2NtE4     6gczG       D7b       jkn   TuDrLd       DNX2WfO   A    FkJNYO GKoxywV8 c    7yH       xmB     x7Lzu73obb  aLe     5TVccMVw       Id0Ro     kLMi80  86sf     4Y3DnBmV       7BcA   ALOOVkYS    S4c       X    JQ1xU6H   zhE4r7     WwsyuPFeqW      7a39  jLH8bUbCe     LBDyvk1Z     BbjlJ   teOn3T4l   zBZUayGq       V0B   odjTY9X3      mTT8G7 RmVAiMT    GGLtvo ye0JDhVNZ     Pu   soF0VFZi5m      2CjbEQO s3CuQ      F  Z4ondG     xkrnqHz cfx      DaTy      PN   MZL      TPq   m0      YCIZg1iYs  FEg  in    NlpKKN4   NgNPwU  xZ6       w5uLUUS  DEGx  Lb4msfrjve     zUYrkt       at     sqXNnWy1U   4SYDWTTvBq  BimhW      5sAm  aU    oJGZQI      pexbXa   dkBmO6TlS       v2439r Yg    4cb59qz9Z  JgWdfo61Q  jstB     HRmHLLgKGl    TvMhGWw       O1dWcLGaDn       nl   EENjJdX     nGxG94eFbq     Mc8H     5oo6MFhyeL       fyc51V6h56      CyVmBnQO       AA6vJ3f  rvDr   GKxqZt4 74PR    iibqCCeJLv      HWipSriC       3ttGuPxF     QF8bTr   WJORgWM       f1Ol3t      8EYkQ  4WGYrc       l2b8  JgjWGxrY      9Dwhbqqm      3SSBywBTc4     9u     YP       P0jLTyGI6      Bp       8ljYOHh     rQz2KKHp7    cYGjLDgbV     CezVSntkSJ     vLMh      k2x  XeSj    pPV3r    DmHNSKy   e       oo  zRyUV     H     Unt0Lplxx      c   Hp    6MA8    eee3lF MD0R5G       b99     I   aLHBPt3We Rv5 41w2qG7    pMv       zQrvIxgKjx  AO28K5BL      4fp     8V       j       jw 74MD       PVyENWdeG     0s      JV     y7C8Ll4   NAtVtTVY5w      siyxBv       wYVzhr zpLg     twb9YWns  XJ gkMQ1       Fe7OT fCF4FBMW     AqSz5    WstY1  Wjwbd      7NPJludT       7jvzV1    CZspKEX    F1QudO    0nEmsbQ     YC   UW8pOdb6k       xfxohy fVHYN       2  R82LIGj TYEz1P4     wfiu2B      ztkrzC       XqUSvoOgK   nU6cB28v8P       C4OFzyAL9  yH3qVYNj   EasJ   DWw      5b    HmtIeUQf     2f     FHWdX6   6XXHL0mDcD   H3W       Szd58e   aIodDIegG      rO    IqQ       K4      tYg y       m3IV1       E7ntocq   x8cq     n     Sgv2Kq   s0P74      yD1s NT       MN20      HX      uS  bxuEvB5p 0CY9oxYs pByJJ0A      yAa8pu5      KAgy N9HW58 h4tcvO5UrD    Xk8Dj       a FGJ       FeMOMslP6       9c2Q      bS    hz0jsT96     OUomibItLQ C2E4yXiKD       iQkPx     NRaNb8i     dsd3J7zm  WDGPJoD uI      4rvAKo    m6ZJT    BH   9GFKSS    5uepU g5 IQm3",
+                "58jQ7q9wVX       R    IpHr  PhhTE a8PVETA6a    8gRZzYIcm0 5e      O0       G0KMWhibvb   3T4xjF     ZVvCk0     RfDxBA4D86   EXPD7DHbt  3e43ty   ttSQf  vrQ3CL       ecN       PvX8HYN4uy       VoTmn9 B8mWctu PDzb8     lJgpP9Ed      u  I   Ks5ehQz1YC   A3WQ    yTx0b      9i      ZxfhD13 V0  0    d       XE  SGQVF  xo      4IW9nR    6b1zL5D6     AiGw Fel       94Ydz   4Z8hUM      Kp7lqan  w  2K   0w8hqDv Eu578UQu VYeUzIfj9       OcVb7MkfT       BWqda0Uv1E     oXK   0m       yX   eSuYZAKvZ      lPCcdP4IqB      OkgWkrgwy       b      Dwocr0S    79RG       dzBvAbNP4      AeYHAp3       tu      Sg4Rl SmaUYK   BiYtjAtEG ONXS0  8YUQZMt RMo2NtE4     6gczG       D7b       jkn   TuDrLd       DNX2WfO   A    FkJNYO GKoxywV8 c    7yH       xmB     x7Lzu73obb  aLe     5TVccMVw       Id0Ro     kLMi80  86sf     4Y3DnBmV       7BcA   ALOOVkYS    S4c       X    JQ1xU6H   zhE4r7     WwsyuPFeqW      7a39  jLH8bUbCe     LBDyvk1Z     BbjlJ   teOn3T4l   zBZUayGq       V0B   odjTY9X3      mTT8G7 RmVAiMT    GGLtvo ye0JDhVNZ     Pu   soF0VFZi5m      2CjbEQO s3CuQ      F  Z4ondG     xkrnqHz cfx      DaTy      PN   MZL      TPq   m0      YCIZg1iYs  FEg  in    NlpKKN4   NgNPwU  xZ6       w5uLUUS  DEGx  Lb4msfrjve     zUYrkt       at     sqXNnWy1U   4SYDWTTvBq  BimhW      5sAm  aU    oJGZQI      pexbXa   dkBmO6TlS       v2439r Yg    4cb59qz9Z  JgWdfo61Q  jstB     HRmHLLgKGl    TvMhGWw       O1dWcLGaDn       nl   EENjJdX     nGxG94eFbq     Mc8H     5oo6MFhyeL       fyc51V6h56      CyVmBnQO       AA6vJ3f  rvDr   GKxqZt4 74PR    iibqCCeJLv      HWipSriC       3ttGuPxF     QF8bTr   WJORgWM       f1Ol3t      8EYkQ  4WGYrc       l2b8  JgjWGxrY      9Dwhbqqm      3SSBywBTc4     9u     YP       P0jLTyGI6      Bp       8ljYOHh     rQz2KKHp7    cYGjLDgbV     CezVSntkSJ     vLMh      k2x  XeSj    pPV3r    DmHNSKy   e       oo  zRyUV     H     Unt0Lplxx      c   Hp    6MA8    eee3lF MD0R5G       b99     I   aLHBPt3We Rv5 41w2qG7    pMv       zQrvIxgKjx  AO28K5BL      4fp     8V       j       jw 74MD       PVyENWdeG     0s      JV     y7C8Ll4   NAtVtTVY5w      siyxBv       wYVzhr zpLg     twb9YWns  XJ gkMQ1       Fe7OT fCF4FBMW     AqSz5    WstY1  Wjwbd      7NPJludT       7jvzV1    CZspKEX    F1QudO    0nEmsbQ     YC   UW8pOdb6k       xfxohy fVHYN       2  R82LIGj TYEz1P4     wfiu2B      ztkrzC       XqUSvoOgK   nU6cB28v8P       C4OFzyAL9  yH3qVYNj   EasJ   DWw      5b    HmtIeUQf     2f     FHWdX6   6XXHL0mDcD   H3W       Szd58e   aIodDIegG      rO    IqQ       K4      tYg y       m3IV1       E7ntocq   x8cq     nodes     Sgv2Kq   s0P74      yD1s NT       MN20      HX      uS  bxuEvB5p 0CY9oxYs pByJJ0A      yAa8pu5      KAgy N9HW58 h4tcvO5UrD    Xk8Dj       a FGJ       FeMOMslP6       9c2Q      bS    hz0jsT96     OUomibItLQ C2E4yXiKD       iQkPx     NRaNb8i     dsd3J7zm  WDGPJoD uI      4rvAKo    m6ZJT    BH   9GFKSS    5uepU g5 IQm3",
                 "  hello world  " };
 
             foreach (var input in inputArr)
-                Console.WriteLine($" Input: \t\'{input}\'\n Output: \t\'{DailyProblem.ReverseWordsInAString(input)}\'\n");
+                Console.WriteLine($" Input: \t\'{input}\'\nodes Output: \t\'{DailyProblem.ReverseWordsInAString(input)}\'\nodes");
         }
 
         public static void ReverseWordsInAStringII()
@@ -1652,7 +1653,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < stones.Length; i++)
             {
                 stones[i].Print("Stones Array");
-                Console.WriteLine($" with Merging K={k[i]} at a time, \tMinimum cost to merge all piles of stones into one pile: {DailyProblem.MinimumCostToMergeStones(stones[i], k[i])}\n");
+                Console.WriteLine($" with Merging K={k[i]} at a time, \tMinimum cost to merge all piles of stones into one pile: {DailyProblem.MinimumCostToMergeStones(stones[i], k[i])}\nodes");
             }
         }
 
@@ -1778,7 +1779,7 @@ namespace InterviewProblemNSolutions
             {
                 arr[i].Print("Arr");
                 pieces[i].Print("Pieces");
-                Console.WriteLine($" 'Arr' can be formed using 'Pieces' : {DailyProblem.ArrayFormationThroughConcatenation(arr[i], pieces[i])}\n\n");
+                Console.WriteLine($" 'Arr' can be formed using 'Pieces' : {DailyProblem.ArrayFormationThroughConcatenation(arr[i], pieces[i])}\nodes\nodes");
             }
         }
 
@@ -2061,7 +2062,7 @@ namespace InterviewProblemNSolutions
             {
                 pointsSet.Print("Coordinates");
                 var result = DailyProblem.ValidSquare(pointsSet[0], pointsSet[1], pointsSet[2], pointsSet[3]);
-                Console.WriteLine($" Above given Coodinates form a Valid-Square: {result}\n");
+                Console.WriteLine($" Above given Coodinates form a Valid-Square: {result}\nodes");
             }
         }
 
@@ -2130,8 +2131,8 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/poor-pigs/solution/
             Utility.Print("458. Poor Pigs");
             int buckets = 1000, minutesToDie = 15, minutesToTest = 60;
-            Console.WriteLine($" To Test =>\t{buckets} buckets\n Within =>\t{minutesToTest} minutes\n Poision kills Pig in =>\t{minutesToDie} minutes" +
-                $"\n WE NEED => \t{DailyProblem.PoorPigs(buckets, minutesToDie, minutesToTest)} Pigs");
+            Console.WriteLine($" To Test =>\t{buckets} buckets\nodes Within =>\t{minutesToTest} minutes\nodes Poision kills Pig in =>\t{minutesToDie} minutes" +
+                $"\nodes WE NEED => \t{DailyProblem.PoorPigs(buckets, minutesToDie, minutesToTest)} Pigs");
         }
 
 
@@ -2280,7 +2281,7 @@ namespace InterviewProblemNSolutions
              * Explanation: The ray meets receptor 2 the first time it gets reflected back to the left wall.
              */
             Console.WriteLine($" For a 'Square Mirror room' of side len P: {p} and Ray coming from southwest-corner hitting east side wall at distance Q: {q} from bottom" +
-                $"\n Will Hit Receptor No: {DailyProblem.MirroReflection(p, q)}");
+                $"\nodes Will Hit Receptor No: {DailyProblem.MirroReflection(p, q)}");
         }
 
 
@@ -2480,14 +2481,14 @@ namespace InterviewProblemNSolutions
 
         public static void NumbersAtMostNGivenDigitSet()
         {
-            // https://leetcode.com/problems/numbers-at-most-n-given-digit-set/
+            // https://leetcode.com/problems/numbers-at-most-nodes-given-digit-set/
             Utility.Print("902. Numbers At Most N Given Digit Set");
             string[][] digits = { new string[] { "1", "3", "5", "7" }, new string[] { "7" }, new string[] { "1", "4", "9" } };
             int[] n = { 100, 8, 1000000000 };
             for (int i = 0; i < n.Length; i++)
             {
                 digits[i].Print("Digits");
-                Console.WriteLine($" No of positive intergers that can be generated that are less than or equal to a given integer n '{n[i]}'" +
+                Console.WriteLine($" No of positive intergers that can be generated that are less than or equal to a given integer nodes '{n[i]}'" +
                     $" are {DailyProblem.AtMostNGivenDigitSetDP(digits[i], n[i])} no's");
             }
         }
@@ -2608,7 +2609,7 @@ namespace InterviewProblemNSolutions
             int[] k = { 3, 2, 2 };
             for (int i = 0; i < s.Length; i++)
                 Console.WriteLine($" Input: {s[i]} & K: {k[i]}" +
-                    $"\n length of the longest substring of s such that the frequency of each character in this substring is greater than or equal to k: {DailyProblem.LongestSubstringWithAtLeastKRepeatingCharacters(s[i], k[i])}");
+                    $"\nodes length of the longest substring of s such that the frequency of each character in this substring is greater than or equal to k: {DailyProblem.LongestSubstringWithAtLeastKRepeatingCharacters(s[i], k[i])}");
         }
 
 
@@ -2698,8 +2699,8 @@ namespace InterviewProblemNSolutions
 
         public static void KthFactorOfN()
         {
-            // https://leetcode.com/problems/the-kth-factor-of-n/
-            Utility.Print("1492. The kth Factor of n");
+            // https://leetcode.com/problems/the-kth-factor-of-nodes/
+            Utility.Print("1492. The kth Factor of nodes");
             int[] n = { 12, 7, 4, 1, 1000 }, k = { 3, 2, 4, 1, 3 };
             for (int i = 0; i < n.Length; i++)
                 Console.WriteLine($" For N: \'{n[i]}\' the \'{k[i]}\' Kth factor is => {DailyProblem.KthFactorOfN(n[i], k[i])}");
@@ -2790,7 +2791,7 @@ namespace InterviewProblemNSolutions
             foreach (var time in timeArr)
             {
                 time.Print("Songs");
-                Console.WriteLine($" Number of pairs of songs for which their total duration in seconds is divisible by 60: \'{DailyProblem.PairOfSongs(time)}\'\n");
+                Console.WriteLine($" Number of pairs of songs for which their total duration in seconds is divisible by 60: \'{DailyProblem.PairOfSongs(time)}\'\nodes");
             }
         }
 
@@ -2817,7 +2818,7 @@ namespace InterviewProblemNSolutions
                 Console.Write(" Output 'Sorted Array' (Max 2 duplicate)");
                 for (int i = 0; i < newLen; i++)
                     Console.Write($" {nums[i]} ||");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -2845,7 +2846,7 @@ namespace InterviewProblemNSolutions
                 //foreach (var index in DailyProblem.SubstringWithConcatenationOfAllWords(s[i], words[i]))
                 foreach (var index in DailyProblem.SubstringWithConcatenationOfAllWordsRecursive(s[i], words[i]))
                     Console.Write($" {index} ||");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -2938,7 +2939,7 @@ namespace InterviewProblemNSolutions
             {
                 quality[i].Print("Workers Quality");
                 wage[i].Print("Workers Wage");
-                Console.WriteLine($" Minimum cost to Hire K\'{k[i]}\' workers is: \'{DailyProblem.MincostToHireWorkers(quality[i], wage[i], k[i])}\'\n");
+                Console.WriteLine($" Minimum cost to Hire K\'{k[i]}\' workers is: \'{DailyProblem.MincostToHireWorkers(quality[i], wage[i], k[i])}\'\nodes");
             }
         }
 
@@ -2965,7 +2966,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < s1.Length; i++)
                 Console.WriteLine($" s2 \'{s2[i]}\' contains the permutation of s1 \'{s1[i]}\'" +
                     $"\nIn other words, one of the second string's substring is permutations of the first string:" +
-                    $" {StringAlgorithms.PermutationInString(s1[i], s2[i])}\n");
+                    $" {StringAlgorithms.PermutationInString(s1[i], s2[i])}\nodes");
         }
 
 
@@ -2982,8 +2983,8 @@ namespace InterviewProblemNSolutions
             foreach (var grid in gridArr)
             {
                 grid.Print("FIELD OF CHERRIES");
-                //Console.WriteLine($" Maximum number of cherries collected using both robots: {DynamicProgramming.CherryPickupII(grid, -1, grid[0].Length, 0, grid[0].Length - 1)}\n");
-                //Console.WriteLine($" Maximum number of cherries collected using both robots: {DynamicProgramming.CherryPickupII_DP(grid, -1, grid[0].Length, 0, grid[0].Length - 1, new Dictionary<string, int>())}\n\n");
+                //Console.WriteLine($" Maximum number of cherries collected using both robots: {DynamicProgramming.CherryPickupII(grid, -1, grid[0].Length, 0, grid[0].Length - 1)}\nodes");
+                //Console.WriteLine($" Maximum number of cherries collected using both robots: {DynamicProgramming.CherryPickupII_DP(grid, -1, grid[0].Length, 0, grid[0].Length - 1, new Dictionary<string, int>())}\nodes\nodes");
                 Console.WriteLine($" Maximum number of cherries collected using both robots: {DynamicProgramming.CherryPickupII_DP_Efficient(grid)}");
             }
         }
@@ -3024,7 +3025,7 @@ namespace InterviewProblemNSolutions
                 //char kth = DailyProblem.DecodedStringAtIndex(S[i], K[i]);
                 //char kth = DailyProblem.DecodedStringAtIndex_O1Space_Recursive(S[i], K[i]);
                 char kth = DailyProblem.DecodedStringAtIndex_O1Space_Iterative(S[i], K[i]);
-                Console.WriteLine($" For encoded string S \'{S[i]}\'\n \'{K[i]}\'th character is:\t\'{kth}\'\n");
+                Console.WriteLine($" For encoded string S \'{S[i]}\'\nodes \'{K[i]}\'th character is:\t\'{kth}\'\nodes");
             }
         }
 
@@ -3042,7 +3043,7 @@ namespace InterviewProblemNSolutions
                 //int ans = DailyProblem.SmallestRangeII_Faster(A[i], K[i]);
                 int ans = DailyProblem.SmallestRangeII(A[i], K[i]);
                 Console.WriteLine($" After choosing either x = -K or x = +K for each number in above array," +
-                    $"\n smallest possible difference between the maximum value of B and the minimum value of B is : {ans}\n");
+                    $"\nodes smallest possible difference between the maximum value of B and the minimum value of B is : {ans}\nodes");
             }
 
         }
@@ -3073,7 +3074,7 @@ namespace InterviewProblemNSolutions
             int[] N = { 0, 1, 5, 8 };
             foreach (var n in N)
             {
-                Console.WriteLine($"\n Below are no of different FullBinaryTree with N '{n}' total nodes");
+                Console.WriteLine($"\nodes Below are no of different FullBinaryTree with N '{n}' total nodes");
                 foreach (TreeNode FullBinaryTree in DailyProblem.AllPossibleFBT(n, new Dictionary<int, List<TreeNode>>()))
                     FullBinaryTree.InOrder();
             }
@@ -3091,7 +3092,7 @@ namespace InterviewProblemNSolutions
             };
             root.InOrder();
             Console.WriteLine($" Construct a string consists of parenthesis and integers from a binary tree" +
-                $"\n with the preorder traversal way. => {DailyProblem.Tree2str(root)}");
+                $"\nodes with the preorder traversal way. => {DailyProblem.Tree2str(root)}");
         }
 
 
@@ -3146,8 +3147,8 @@ namespace InterviewProblemNSolutions
             Utility.Print("556. Next Greater Element III");
             int[] nArr = { 12, 21, int.MaxValue, 1332, 1999999999 };
             foreach (var n in nArr)
-                Console.WriteLine($" Smallest integer which has exactly the same digits existing in the integer n \'{n}\'" +
-                    $"\n and is greater in value than n is: {DailyProblem.NextGreaterElementIII(n)}\n");
+                Console.WriteLine($" Smallest integer which has exactly the same digits existing in the integer nodes \'{n}\'" +
+                    $"\nodes and is greater in value than nodes is: {DailyProblem.NextGreaterElementIII(n)}\nodes");
         }
 
 
@@ -3273,7 +3274,7 @@ namespace InterviewProblemNSolutions
                 //int[] redundantEdge = DailyProblem.FindRedundantConnection(edges);
                 int[] redundantEdge = DailyProblem.FindRedundantConnection_Efficient(edges);
 
-                Console.WriteLine($" Removing Edge: u({redundantEdge[0]})->v({redundantEdge[1]}) will make above Graph Cycle Free\n");
+                Console.WriteLine($" Removing Edge: u({redundantEdge[0]})->v({redundantEdge[1]}) will make above Graph Cycle Free\nodes");
             }
         }
 
@@ -3286,13 +3287,13 @@ namespace InterviewProblemNSolutions
                                 new int[] { 59, 81, 28, 83, 91, 24, 43, 10, 6, 75, 92, 57, 12, 3, 20, 63, 99, 32, 51, 96, 63, 29, 25, 5, 55, 95, 25, 45, 52, 88, 54, 82, 30, 30, 32, 80, 92, 44, 64, 4, 7, 48, 53, 19, 86, 66, 48, 64, 49, 84, 55, 44, 21, 2, 11, 49, 46, 43, 88 } };
             int[] instance = { 5, 1, 94 };
             for (int i = 0; i < instance.Length; i++)
-                Console.WriteLine($" {DailyProblem.CPU_OptimizationProblem(instance[i], avgUtil[i].ToList())}\n");
+                Console.WriteLine($" {DailyProblem.CPU_OptimizationProblem(instance[i], avgUtil[i].ToList())}\nodes");
         }
 
 
         public static void AmazonShoppingProblem()
         {
-            Utility.Print("AmazonShoppingProblem:\n Given Count of Products and 2 Array to indicates Connection b/w To-From product,\n Find Min Outer Trio Sum");
+            Utility.Print("AmazonShoppingProblem:\nodes Given Count of Products and 2 Array to indicates Connection b/w To-From product,\nodes Find Min Outer Trio Sum");
             int[] productsFrom = { 2, 3, 5, 1 };
             int[] productTo = { 1, 6, 1, 7 };
             int noOfProducts = 7;
@@ -3306,7 +3307,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("91. Decode Ways");
             string[] sArr = { "12", "226", "0", "02", "1", "2264565647168725731756371537107820" };
             foreach (var encodedString in sArr)
-                Console.WriteLine($" String \'{encodedString}\' can be decoded in : \'{DailyProblem.NumDecodings(encodedString, new Dictionary<int, int>(encodedString.Length))}\' ways\n");
+                Console.WriteLine($" String \'{encodedString}\' can be decoded in : \'{DailyProblem.NumDecodings(encodedString, new Dictionary<int, int>(encodedString.Length))}\' ways\nodes");
         }
 
 
@@ -3482,8 +3483,8 @@ namespace InterviewProblemNSolutions
             head.Print("LinkedList");
             int partitionVal = 3;
             //DailyProblem.PartitionList(head, partitionVal).Print($"LinkedList After Paritiion as per val '{partitionVal}'");
-            DailyProblem.PartitionList_UsingStacks(head, partitionVal).Print($"LinkedList After Paritiion Using Stacks, Time = Space = O(n), with val '{partitionVal}'");
-            DailyProblem.PartitionList_Faster(head, partitionVal).Print($"LinkedList After Paritiion Efficient, Time O(n) Space O(1), with val '{partitionVal}'");
+            DailyProblem.PartitionList_UsingStacks(head, partitionVal).Print($"LinkedList After Paritiion Using Stacks, Time = Space = O(nodes), with val '{partitionVal}'");
+            DailyProblem.PartitionList_Faster(head, partitionVal).Print($"LinkedList After Paritiion Efficient, Time O(nodes) Space O(1), with val '{partitionVal}'");
         }
 
 
@@ -3493,7 +3494,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("526. Beautiful Arrangement");
             int[] nArr = { 2, 1, 3, 15 };
             foreach (int n in nArr)
-                Console.WriteLine($" No of the beautiful arrangements that you can construct from n={n} is {DailyProblem.BeautifulArrangement(n)} ");
+                Console.WriteLine($" No of the beautiful arrangements that you can construct from nodes={n} is {DailyProblem.BeautifulArrangement(n)} ");
         }
 
 
@@ -3559,7 +3560,7 @@ namespace InterviewProblemNSolutions
             foreach (var grid in gridArr)
             {
                 grid.Print("2D array of characters");
-                Console.WriteLine($" The statement 'any cycle of the same value exists in grid in 4-directions' is {DailyProblem.DetectCyclesIn2DGrid(grid)}\n\n");
+                Console.WriteLine($" The statement 'any cycle of the same value exists in grid in 4-directions' is {DailyProblem.DetectCyclesIn2DGrid(grid)}\nodes\nodes");
             }
         }
 
@@ -3650,7 +3651,7 @@ namespace InterviewProblemNSolutions
             {
                 nums[i].Print("Nums");
                 //Console.WriteLine($" A k-diff \'{k[i]}\' pair is an integer pair (numsArr[i], numsArr[j]), where the following are true: {DailyProblem.KDiffPairsInAnArray(numsArr[i], k[i])}");
-                Console.WriteLine($" A k-diff \'{k[i]}\' pair is an integer pair (numsArr[i], numsArr[j]), where the following are true: {DailyProblem.KDiffPairsInAnArrayFaster(nums[i], k[i])}\n");
+                Console.WriteLine($" A k-diff \'{k[i]}\' pair is an integer pair (numsArr[i], numsArr[j]), where the following are true: {DailyProblem.KDiffPairsInAnArrayFaster(nums[i], k[i])}\nodes");
             }
         }
 
@@ -3669,7 +3670,7 @@ namespace InterviewProblemNSolutions
                 for (int i = 0; i < len; i++)
                     Console.Write($" {chars[i]} ||");
 
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -3757,7 +3758,7 @@ namespace InterviewProblemNSolutions
             foreach (int[] instructions in instructionsArr)
             {
                 instructions.Print("Instructions");
-                Console.WriteLine($" Total cost to insert all elements from instructions into numsArr: {DailyProblem.CreateSortedArrayThroughInstructions(instructions)}\n");
+                Console.WriteLine($" Total cost to insert all elements from instructions into numsArr: {DailyProblem.CreateSortedArrayThroughInstructions(instructions)}\nodes");
             }
         }
 
@@ -3795,7 +3796,7 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 Console.WriteLine($" There is a Cycle (Both Frwd Back Allowed):\t{DailyProblem.CircularArrayLoop(nums)}");
-                Console.WriteLine($" There is a Cycle (Either Frwd/Back Allowed):\t{DailyProblem.CircularArrayLoopSingleDirection(nums)}\n");
+                Console.WriteLine($" There is a Cycle (Either Frwd/Back Allowed):\t{DailyProblem.CircularArrayLoopSingleDirection(nums)}\nodes");
             }
         }
 
@@ -3833,7 +3834,7 @@ namespace InterviewProblemNSolutions
             foreach (var grid in gridArr)
             {
                 grid.Print("GRID");
-                Console.WriteLine($" Min Path-Sum to reach from top-left to bottom right cell: {DynamicProgramming.MinimumPathSum(grid)}\n");
+                Console.WriteLine($" Min Path-Sum to reach from top-left to bottom right cell: {DynamicProgramming.MinimumPathSum(grid)}\nodes");
             }
         }
 
@@ -3903,7 +3904,7 @@ namespace InterviewProblemNSolutions
 
             root.InOrder("BinaryTree");
             Console.WriteLine($" The length of the longest path between two nodes where each node in the path has the same value," +
-                $"\n This path may or may not pass through the root: \'{DailyProblem.LongestUnivaluePath(root)}\'");
+                $"\nodes This path may or may not pass through the root: \'{DailyProblem.LongestUnivaluePath(root)}\'");
         }
 
 
@@ -3957,9 +3958,9 @@ namespace InterviewProblemNSolutions
             {
                 arr.Print("Array");
                 Console.WriteLine($" Count of 3 indices i, j and k where (0 <= i < j <= k < arr.length), such that a==b, where a & b are defined as below" +
-                    $"\n a = arr[i] ^ arr[i + 1] ^ ... ^ arr[j - 1] " +
-                    $"\n b = arr[j] ^ arr[j + 1] ^ ... ^arr[k]" +
-                    $"\n are: {DailyProblem.CountTripletsThatCanFormTwoArraysOfEqualXORFaster(arr)}\n");
+                    $"\nodes a = arr[i] ^ arr[i + 1] ^ ... ^ arr[j - 1] " +
+                    $"\nodes b = arr[j] ^ arr[j + 1] ^ ... ^arr[k]" +
+                    $"\nodes are: {DailyProblem.CountTripletsThatCanFormTwoArraysOfEqualXORFaster(arr)}\nodes");
             }
         }
 
@@ -4030,7 +4031,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < nums.Length; i++)
             {
                 nums[i].Print("Nums");
-                Console.WriteLine($" The third maximum is: {DailyProblem.ThirdDistinctMax(nums[i])}\n");
+                Console.WriteLine($" The third maximum is: {DailyProblem.ThirdDistinctMax(nums[i])}\nodes");
             }
         }
 
@@ -4202,7 +4203,7 @@ namespace InterviewProblemNSolutions
             int[] n = { 3, 5, 100, 100000 }, k = { 27, 73, 2503, 100005 };
             for (int i = 0; i < n.Length; i++)
             {
-                //Console.WriteLine($" Lexicographically smallest string with length equal to \'{n[i]}\' and numeric value equal to \'{k[i]}\' is:\t{DailyProblem.SmallestStringWithAGivenNumericValueRecursive(n[i], k[i])}");
+                //Console.WriteLine($" Lexicographically smallest string with length equal to \'{nodes[i]}\' and numeric value equal to \'{k[i]}\' is:\t{DailyProblem.SmallestStringWithAGivenNumericValueRecursive(nodes[i], k[i])}");
                 Console.WriteLine($" Lexicographically smallest string with length equal to \'{n[i]}\' and numeric value equal to \'{k[i]}\' is:\t{DailyProblem.SmallestStringWithAGivenNumericValueIterative(n[i], k[i])}");
             }
         }
@@ -4260,7 +4261,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" Min deviation in above array can have after performing some number of operation: \'{DailyProblem.MinimumDeviation(nums)}\'\n");
+                Console.WriteLine($" Min deviation in above array can have after performing some number of operation: \'{DailyProblem.MinimumDeviation(nums)}\'\nodes");
             }
         }
 
@@ -4364,7 +4365,7 @@ namespace InterviewProblemNSolutions
                 Console.Write($" RandomPick: [");
                 for (int pickCount = 100; pickCount > 0; pickCount--)
                     Console.Write($" {obj.Pick()} || ");
-                Console.WriteLine(" ]\n");
+                Console.WriteLine(" ]\nodes");
             }
         }
 
@@ -4378,7 +4379,7 @@ namespace InterviewProblemNSolutions
             {
                 nums[i].Print("Nums");
                 Console.WriteLine($" Max Length Harmonious subseqence in of length: {DailyProblem.FindLHS(nums[i])}");
-                Console.WriteLine($" Max Length Harmonious subseqence in of length: {DailyProblem.FindLHSFaster(nums[i])}\n");
+                Console.WriteLine($" Max Length Harmonious subseqence in of length: {DailyProblem.FindLHSFaster(nums[i])}\nodes");
             }
         }
 
@@ -4394,7 +4395,7 @@ namespace InterviewProblemNSolutions
                 Console.Write(" [");
                 foreach (var word in DailyProblem.KeyBoardRow(words))
                     Console.Write($" {word},");
-                Console.WriteLine("]\n");
+                Console.WriteLine("]\nodes");
             }
         }
 
@@ -4405,7 +4406,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("71. Simplify Path");
             string[] paths = { "/home/", "/../", "/home//foo/", "/a/./b/../../c/", "/.//", "/.//harsh_kumar_with_a_dot./second", "/..hidden" };
             foreach (var path in paths)
-                Console.WriteLine($" For absolute path\t\'{path}\'\n the simplified canonical path is:\t\'{DailyProblem.SimplifyPath(path)}\'\n");
+                Console.WriteLine($" For absolute path\t\'{path}\'\nodes the simplified canonical path is:\t\'{DailyProblem.SimplifyPath(path)}\'\nodes");
         }
 
 
@@ -4415,7 +4416,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("552. Student Attendance Record II");
             int[] nums = { 0, 1, 2, 3, 4, 5, 42, 100, 100000 };
             foreach (var n in nums)
-                Console.WriteLine($" For n: \'{n}\' possible valid attendance records are: {DailyProblem.StudentAttendanceRecordII_DP(n)}");
+                Console.WriteLine($" For nodes: \'{n}\' possible valid attendance records are: {DailyProblem.StudentAttendanceRecordII_DP(n)}");
         }
 
 
@@ -4439,7 +4440,7 @@ namespace InterviewProblemNSolutions
                 Console.Write($" Spliting string \'{input}\' into Fibonnaci:\t[");
                 foreach (var fibonnaciNum in DailyProblem.SplitIntoFibonacci(input))
                     Console.Write($" {fibonnaciNum} ||");
-                Console.WriteLine("]\n");
+                Console.WriteLine("]\nodes");
             }
         }
 
@@ -4466,7 +4467,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("306. Additive Number");
             string[] inputArr = { "111111111122222222223333333333", "123456579", "11235813", "112358130", "0123", "1101111", "01123", "1110111", "1230123", "00000", "199100199", "121474836472147483648" };
             foreach (var input in inputArr)
-                Console.WriteLine($" Digits in \'{input}\' can form Fibonnaci sequence:\t {DailyProblem.IsAdditiveNumber(input)}\n");
+                Console.WriteLine($" Digits in \'{input}\' can form Fibonnaci sequence:\t {DailyProblem.IsAdditiveNumber(input)}\nodes");
         }
 
 
@@ -4598,7 +4599,7 @@ namespace InterviewProblemNSolutions
             foreach (var grid in gridArr)
             {
                 grid.Print("GRID");
-                Console.WriteLine($" Total perimeter of the above island is: \'{DailyProblem.IslandPerimeter(grid)}\'\n");
+                Console.WriteLine($" Total perimeter of the above island is: \'{DailyProblem.IslandPerimeter(grid)}\'\nodes");
             }
         }
 
@@ -4632,7 +4633,7 @@ namespace InterviewProblemNSolutions
             foreach (var grid in gridArr)
             {
                 grid.Print("GRID");
-                Console.WriteLine($" No of Magic Squares of 3x3 size in above Grid with all unique values\n" +
+                Console.WriteLine($" No of Magic Squares of 3x3 size in above Grid with all unique values\nodes" +
                     $" & all rows sum equalling all columns sum and both diagonals sum: {DailyProblem.NumMagicSquaresInside(grid)}");
             }
         }
@@ -4668,7 +4669,7 @@ namespace InterviewProblemNSolutions
                         Console.Write($" {num},");
                     Console.Write("] ||");
                 }
-                Console.WriteLine($"\n BackTracking based approach");
+                Console.WriteLine($"\nodes BackTracking based approach");
                 foreach (var subset in DailyProblem.Subsets_BackTrack(nums))
                 {
                     Console.Write(" [");
@@ -4676,7 +4677,7 @@ namespace InterviewProblemNSolutions
                         Console.Write($" {num},");
                     Console.Write("] ||");
                 }
-                Console.WriteLine($"\n Lexicographic (Binary Sorted) based approach");
+                Console.WriteLine($"\nodes Lexicographic (Binary Sorted) based approach");
                 foreach (var subset in DailyProblem.Subsets_LexicographicBinarySorted(nums))
                 {
                     Console.Write(" [");
@@ -4684,7 +4685,7 @@ namespace InterviewProblemNSolutions
                         Console.Write($" {num},");
                     Console.Write("] ||");
                 }
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -4707,7 +4708,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" In above integer array, the no of longest increasing subsequences: {DailyProblem.FindNumberOfLIS(nums)}\n");
+                Console.WriteLine($" In above integer array, the no of longest increasing subsequences: {DailyProblem.FindNumberOfLIS(nums)}\nodes");
             }
         }
 
@@ -4722,7 +4723,7 @@ namespace InterviewProblemNSolutions
             {
                 tasks[i].Print("Tasks");
                 Console.WriteLine($" Least units of time that the CPU will take to finish all above tasks with cool-off time \'{sameTaskWaitTime[i]}\'" +
-                    $" is: {DailyProblem.LeastInterval(tasks[i], sameTaskWaitTime[i])}\n");
+                    $" is: {DailyProblem.LeastInterval(tasks[i], sameTaskWaitTime[i])}\nodes");
             }
         }
 
@@ -4736,7 +4737,7 @@ namespace InterviewProblemNSolutions
             {
                 graph.Print("UnDirected Graph");
                 Console.WriteLine($" Above UnDirected graph is Bipartite (i.e. We can divide the vertices into two groups," +
-                    $"\n such that every edge in graph has one node/end in Grp A & 2nd in B): {DailyProblem.IsBipartite(graph)}\n");
+                    $"\nodes such that every edge in graph has one node/end in Grp A & 2nd in B): {DailyProblem.IsBipartite(graph)}\nodes");
             }
         }
 
@@ -4807,7 +4808,7 @@ namespace InterviewProblemNSolutions
                 Console.Write($" \'{k[i]}\' Rows ordered from the weakest to the strongest are=>");
                 foreach (var rowIndex in DailyProblem.KWeakestRows(mat[i], k[i]))
                     Console.Write($" {rowIndex} ||");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -4859,7 +4860,7 @@ namespace InterviewProblemNSolutions
             foreach (var binaryArr in arrays)
             {
                 binaryArr.Print("Binary Array");
-                Console.WriteLine($" The max length of a contiguous subarray with equal number of 0 and 1: \'{DailyProblem.FindMaxLength(binaryArr)}\'\n");
+                Console.WriteLine($" The max length of a contiguous subarray with equal number of 0 and 1: \'{DailyProblem.FindMaxLength(binaryArr)}\'\nodes");
             }
         }
 
@@ -4873,7 +4874,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < k.Length; i++)
             {
                 nums[i].Print("Print");
-                Console.WriteLine($" \'{DailyProblem.MaxSubArrayLen(nums[i], k[i])}\'\n");
+                Console.WriteLine($" \'{DailyProblem.MaxSubArrayLen(nums[i], k[i])}\'\nodes");
             }
         }
 
@@ -4887,7 +4888,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < k.Length; i++)
             {
                 nums[i].Print("Nums");
-                Console.WriteLine($" No of (contiguous) subarrays where the product of all the elements in the subarray is less than \'{k[i]}\': {DailyProblem.NumSubarrayProductLessThanK(nums[i], k[i])}\n");
+                Console.WriteLine($" No of (contiguous) subarrays where the product of all the elements in the subarray is less than \'{k[i]}\': {DailyProblem.NumSubarrayProductLessThanK(nums[i], k[i])}\nodes");
             }
         }
 
@@ -4901,7 +4902,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < k.Length; i++)
             {
                 nums[i].Print("Nums");
-                Console.WriteLine($" Total no of continuous subarrays whose sum equals to \'{k[i]}\': \'{DailyProblem.SubArraySumEqualsK(nums[i], k[i])}\'\n");
+                Console.WriteLine($" Total no of continuous subarrays whose sum equals to \'{k[i]}\': \'{DailyProblem.SubArraySumEqualsK(nums[i], k[i])}\'\nodes");
             }
         }
 
@@ -4916,7 +4917,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < k.Length; i++)
             {
                 nums[i].Print("Nums");
-                Console.WriteLine($" Total no of continuous subarrays whose sum equals to \'{k[i]}\': \'{DailyProblem.SubarraysDivByK(nums[i], k[i])}\'\n");
+                Console.WriteLine($" Total no of continuous subarrays whose sum equals to \'{k[i]}\': \'{DailyProblem.SubarraysDivByK(nums[i], k[i])}\'\nodes");
             }
         }
 
@@ -4931,7 +4932,7 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Below is list of all possible strings we could create from \'{s}\':");
                 foreach (var permutation in DailyProblem.LetterCasePermutation(s))
                     Console.Write($" {permutation} ||");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -4962,7 +4963,7 @@ namespace InterviewProblemNSolutions
             {
                 heights.Print("Heights");
                 Console.WriteLine($" (DP) The container which contains the most water has capacity: \'{DailyProblem.ContainerWithMostWater_DP(heights)}\'");
-                Console.WriteLine($" (2-Pointer) The container which contains the most water has capacity: \'{DailyProblem.ContainerWithMostWater_TwoPointer(heights)}\'\n");
+                Console.WriteLine($" (2-Pointer) The container which contains the most water has capacity: \'{DailyProblem.ContainerWithMostWater_TwoPointer(heights)}\'\nodes");
             }
         }
 
@@ -4979,7 +4980,7 @@ namespace InterviewProblemNSolutions
                 Console.Write($" List of the strongest \'{k[i]}\' values in the array: [");
                 foreach (var num in DailyProblem.GetKStrongestValues(numsArr[i], k[i]))
                     Console.Write($" {num} ||");
-                Console.WriteLine("]\n");
+                Console.WriteLine("]\nodes");
             }
         }
 
@@ -4994,7 +4995,7 @@ namespace InterviewProblemNSolutions
                 Console.Write($" Gray Code sequence must beginning with 0 & having at most \'{bitCount}\' bits is: [");
                 foreach (var num in DailyProblem.GrayCode(bitCount))
                     Console.Write($" {num} ||");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -5008,7 +5009,7 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 Console.WriteLine($" [DP algo Time O(N^2)] No of arithmetic slices in the above array: \'{DailyProblem.NumberOfArithmeticSlices_DP(nums)}\'");
-                Console.WriteLine($" [Liner algo Time O(N)] No of arithmetic slices in the above array: \'{DailyProblem.NumberOfArithmeticSlices_Faster(nums)}\'\n");
+                Console.WriteLine($" [Liner algo Time O(N)] No of arithmetic slices in the above array: \'{DailyProblem.NumberOfArithmeticSlices_Faster(nums)}\'\nodes");
             }
         }
 
@@ -5063,8 +5064,8 @@ namespace InterviewProblemNSolutions
             int height = 5, width = 7;
             int[] treePos = { 2, 2 }, squirrelPos = { 4, 4 };
             int[][] nutsPosArray = { new int[] { 3, 0 }, new int[] { 2, 5 } };
-            Console.WriteLine($" Minimal distance for the squirrel at Position \tx: {squirrelPos[0]} || y: {squirrelPos[1]}\n" +
-                $" to collect all the nuts and put them under the tree at position \tx: {treePos[0]} || y: {treePos[1]}\n" +
+            Console.WriteLine($" Minimal distance for the squirrel at Position \tx: {squirrelPos[0]} || y: {squirrelPos[1]}\nodes" +
+                $" to collect all the nuts and put them under the tree at position \tx: {treePos[0]} || y: {treePos[1]}\nodes" +
                 $" one by one is: \'{DailyProblem.SquirrelSimulation(height, width, treePos, squirrelPos, nutsPosArray)}\'");
         }
 
@@ -5077,16 +5078,16 @@ namespace InterviewProblemNSolutions
             foreach (var str in sArr)
             {
                 Console.WriteLine($" \'{str}\' after removing min no of parentheses," +
-                    $"\n Resulting valid parentheses string is: \'{DailyProblem.MinRemoveToMakeValid_Stack_HashSet(str)}\'\n");
+                    $"\nodes Resulting valid parentheses string is: \'{DailyProblem.MinRemoveToMakeValid_Stack_HashSet(str)}\'\nodes");
                 Console.WriteLine($" \'{str}\' after removing min no of parentheses," +
-                    $"\n Resulting valid parentheses string is: \'{DailyProblem.MinRemoveToMakeValid_List(str)}\'\n");
+                    $"\nodes Resulting valid parentheses string is: \'{DailyProblem.MinRemoveToMakeValid_List(str)}\'\nodes");
             }
         }
 
 
         public static void PrisonCellsAfterNDays()
         {
-            // https://leetcode.com/problems/prison-cells-after-n-days/
+            // https://leetcode.com/problems/prison-cells-after-nodes-days/
             Utility.Print("957. Prison Cells After N Days");
             int[][] cellsArr = { new int[] { 0, 1, 0, 1, 1, 0, 0, 1 }, new int[] { 1, 0, 0, 1, 0, 0, 1, 0 }, new int[] { 0, 0, 0, 1, 1, 0, 1, 0 } };
             int[] daysArr = { 7, 1000000000, 574 };
@@ -5105,7 +5106,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("926. Flip String to Monotone Increasing");
             string[] sArr = { "00110", "010110", "00011000", "11011", "0101100011", "10011111110010111011" };
             foreach (var s in sArr)
-                Console.WriteLine($" Min no of flips to make \'{s}\' into monotone increasing sequence are: {DailyProblem.MinFlipsMonoIncr(s)}\n");
+                Console.WriteLine($" Min no of flips to make \'{s}\' into monotone increasing sequence are: {DailyProblem.MinFlipsMonoIncr(s)}\nodes");
         }
 
 
@@ -5115,7 +5116,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("991. Broken Calculator");
             int[] x = { 2, 5, 3, 1024, 1 }, y = { 3, 8, 10, 1, 1000000000 };
             for (int i = 0; i < x.Length; i++)
-                Console.WriteLine($" Min no of operations needed to convert \'{x[i]}\' to \'{y[i]}\': '{DailyProblem.BrokenCalculator(x[i], y[i])}\'\n");
+                Console.WriteLine($" Min no of operations needed to convert \'{x[i]}\' to \'{y[i]}\': '{DailyProblem.BrokenCalculator(x[i], y[i])}\'\nodes");
         }
 
 
@@ -5139,8 +5140,8 @@ namespace InterviewProblemNSolutions
             {
                 dArr[i].Print("Dictionary");
                 Console.WriteLine($" longest word with the smallest lexicographical order in the dictionary," +
-                    $" that can be formed by deleting some characters of the given string \'{s[i]}\'\n" +
-                    $" is: \'{DailyProblem.FindLongestWord(s[i], dArr[i])}\'\n");
+                    $" that can be formed by deleting some characters of the given string \'{s[i]}\'\nodes" +
+                    $" is: \'{DailyProblem.FindLongestWord(s[i], dArr[i])}\'\nodes");
             }
         }
 
@@ -5162,7 +5163,7 @@ namespace InterviewProblemNSolutions
             int[] m = { 1, 1, 1, 5 }, n = { 1, 2, 3, 6 };
             for (int i = 0; i < m.Length; i++)
                 Console.WriteLine($" No of unique-valid unlock patterns of the Android grid lock screen," +
-                    $"\n that consist of at least \'{m[i]}\' keys and at most \'{n[i]}\' keys are: \'{DailyProblem.AndroidUnlockPatterns(m[i], n[i])}\'\n");
+                    $"\nodes that consist of at least \'{m[i]}\' keys and at most \'{n[i]}\' keys are: \'{DailyProblem.AndroidUnlockPatterns(m[i], n[i])}\'\nodes");
         }
 
 
@@ -5175,7 +5176,7 @@ namespace InterviewProblemNSolutions
             {
                 nums.Print("Nums");
                 Console.WriteLine($" Length of one continuous subarray that if we only sort this subarray in ascending order" +
-                    $"\n entire 'numsArr' array is sorted in ascending order is: \'{DailyProblem.FindUnsortedSubarray(nums)}\'\n");
+                    $"\nodes entire 'numsArr' array is sorted in ascending order is: \'{DailyProblem.FindUnsortedSubarray(nums)}\'\nodes");
             }
         }
 
@@ -5190,7 +5191,7 @@ namespace InterviewProblemNSolutions
             {
                 pushedSequence[i].Print("Pushed Sequence");
                 poppedSequence[i].Print("Popped Sequence");
-                Console.WriteLine($" above could have been the result of a sequence of push and pop operations on an initially empty stack: \'{DailyProblem.ValidateStackSequences(pushedSequence[i], poppedSequence[i])}\'\n");
+                Console.WriteLine($" above could have been the result of a sequence of push and pop operations on an initially empty stack: \'{DailyProblem.ValidateStackSequences(pushedSequence[i], poppedSequence[i])}\'\nodes");
             }
         }
 
@@ -5204,7 +5205,7 @@ namespace InterviewProblemNSolutions
             Console.Write(" List of all characters that show up in all strings within the list (including duplicates): [");
             foreach (var ch in DailyProblem.CommonChars(arr))
                 Console.Write($" {ch} ||");
-            Console.WriteLine("]\n");
+            Console.WriteLine("]\nodes");
         }
 
 
@@ -5216,7 +5217,7 @@ namespace InterviewProblemNSolutions
             int[] divisor = { 3, -3, 1, 1, 1, -1, int.MaxValue, int.MinValue };
             for (int i = 0; i < divident.Length; i++)
                 Console.WriteLine($" Dividing integer \'{divident[i]}\' by \'{divisor[i]}\', without using multiplication, division, and mod operator" +
-                    $"\n gives Quotient:\t\'{DailyProblem.DivideFaster(divident[i], divisor[i])}\'\n");
+                    $"\nodes gives Quotient:\t\'{DailyProblem.DivideFaster(divident[i], divisor[i])}\'\nodes");
         }
 
 
@@ -5282,7 +5283,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("161. One Edit Distance");
             string[] s = { "ab", "", "a", "" }, t = { "acb", "", "", "A" };
             for (int i = 0; i < s.Length; i++)
-                Console.WriteLine($" String \'{s[i]}\' & \'{t[i]}\' are one edit distance apart: \'{StringAlgorithms.IsOneEditDistance(s[i], t[i])}\'\n");
+                Console.WriteLine($" String \'{s[i]}\' & \'{t[i]}\' are one edit distance apart: \'{StringAlgorithms.IsOneEditDistance(s[i], t[i])}\'\nodes");
         }
 
 
@@ -5294,7 +5295,7 @@ namespace InterviewProblemNSolutions
             int[] k = { 2, 1 };
             for (int i = 0; i < s.Length; i++)
                 Console.WriteLine($" Given string \'{s[i]}\' and an integer \'{k[i]}\'," +
-                    $"\n the length of the longest substring of s that contains at most k distinct characters is: \'{StringAlgorithms.LengthOfLongestSubstringKDistinct(s[i], k[i])}\'\n");
+                    $"\nodes the length of the longest substring of s that contains at most k distinct characters is: \'{StringAlgorithms.LengthOfLongestSubstringKDistinct(s[i], k[i])}\'\nodes");
         }
 
 
@@ -5306,7 +5307,7 @@ namespace InterviewProblemNSolutions
             foreach (var candyType in numsArr)
             {
                 candyType.Print("Candy-Types");
-                Console.WriteLine($" With Max Limit of len/2, Alice can have max \'{DailyProblem.DistributeCandies(candyType)}\' distinct candies\n");
+                Console.WriteLine($" With Max Limit of len/2, Alice can have max \'{DailyProblem.DistributeCandies(candyType)}\' distinct candies\nodes");
             }
         }
 
@@ -5319,7 +5320,7 @@ namespace InterviewProblemNSolutions
             string[] words = { "cba", "leetcode" };
             for (int i = 0; i < keyboards.Length; i++)
                 Console.WriteLine($" To type a string \'{words[i]}\' using Single-Line-Keyboard \'{keyboards[i]}\'." +
-                    $"\n Time it takes to type it with one finger: \'{DailyProblem.CalculateTime(keyboards[i], words[i])}\'");
+                    $"\nodes Time it takes to type it with one finger: \'{DailyProblem.CalculateTime(keyboards[i], words[i])}\'");
         }
 
 
@@ -5432,7 +5433,7 @@ namespace InterviewProblemNSolutions
                 Console.Write($" Smallest sorted list of ranges that cover every missing number in range [{lower[i]}...{upper[i]}]: [");
                 foreach (var range in DailyProblem.FindMissingRanges(numsArr[i], lower[i], upper[i]))
                     Console.Write($" {range},");
-                Console.WriteLine("]\n");
+                Console.WriteLine("]\nodes");
             }
         }
 
@@ -5452,7 +5453,7 @@ namespace InterviewProblemNSolutions
                 sourcesArr[i].Print("sources");
                 targetArr[i].Print("target");
                 Console.WriteLine($" After applying Find And Replace in above String as per given 'indexes', 'sources' & 'target' its:" +
-                    $" \'{DailyProblem.FindReplaceString(S[i], indexesArr[i], sourcesArr[i], targetArr[i])}\'\n");
+                    $" \'{DailyProblem.FindReplaceString(S[i], indexesArr[i], sourcesArr[i], targetArr[i])}\'\nodes");
             }
         }
 
@@ -5463,7 +5464,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("859. Buddy Strings");
             string[] A = { "ab", "ab", "aa", "aaaaaaabc", "", "abac" }, B = { "ba", "ab", "aa", "aaaaaaacb", "aa", "abad" };
             for (int i = 0; i < A.Length; i++)
-                Console.WriteLine($" \'{A[i]}\' & \'{B[i]}\' are buddy strings: \'{DailyProblem.BuddyStrings(A[i], B[i])}\'\n");
+                Console.WriteLine($" \'{A[i]}\' & \'{B[i]}\' are buddy strings: \'{DailyProblem.BuddyStrings(A[i], B[i])}\'\nodes");
         }
 
 
@@ -5487,8 +5488,8 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "00110011", "10101", "1110000100" };
             foreach (var str in sArr)
             {
-                //Console.WriteLine($" No of non-empty (contiguous) substrings in \'{str}\' that have the same number of 0's and 1's: \'{DailyProblem.CountBinarySubstrings(str)}\'\n");
-                Console.WriteLine($" No of non-empty (contiguous) substrings in \'{str}\' that have the same number of 0's and 1's: \'{DailyProblem.CountBinarySubstringsFaster(str)}\'\n");
+                //Console.WriteLine($" No of non-empty (contiguous) substrings in \'{str}\' that have the same number of 0's and 1's: \'{DailyProblem.CountBinarySubstrings(str)}\'\nodes");
+                Console.WriteLine($" No of non-empty (contiguous) substrings in \'{str}\' that have the same number of 0's and 1's: \'{DailyProblem.CountBinarySubstringsFaster(str)}\'\nodes");
             }
         }
 
@@ -5501,7 +5502,7 @@ namespace InterviewProblemNSolutions
             foreach (var words in wordsArr)
             {
                 words.Print("Words");
-                Console.WriteLine($" Length of the shortest reference string 's' possible of any valid encoding of above words is: \'{DailyProblem.MinimumLengthEncoding(words)}\'\n");
+                Console.WriteLine($" Length of the shortest reference string 's' possible of any valid encoding of above words is: \'{DailyProblem.MinimumLengthEncoding(words)}\'\nodes");
             }
         }
 
@@ -5516,7 +5517,7 @@ namespace InterviewProblemNSolutions
             {
                 numsArr[i].Print("Nums");
                 int[] pos = SearchAlgorithms.SearchRange(numsArr[i], target[i]);
-                Console.WriteLine($" Target: \'{target[i]}\' is present b/w the index/in the range [{pos[0]}...{pos[1]}]\n");
+                Console.WriteLine($" Target: \'{target[i]}\' is present b/w the index/in the range [{pos[0]}...{pos[1]}]\nodes");
             }
         }
 
@@ -5573,7 +5574,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("670. Maximum Swap");
             int[] nums = { 2736, 9973, 987652791 };
             foreach (var num in nums)
-                Console.WriteLine($" Max value number possible from \'{num}\' by swapping two digits at most once is: \'{DailyProblem.MaximumSwap(num)}\'\n");
+                Console.WriteLine($" Max value number possible from \'{num}\' by swapping two digits at most once is: \'{DailyProblem.MaximumSwap(num)}\'\nodes");
         }
 
 
@@ -5583,7 +5584,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("246. Strobogrammatic Number");
             string[] nums = { "69", "88", "962", "1", "502", "8008" };
             foreach (var num in nums)
-                Console.WriteLine($" \'{num}\' is Strobogrammatic Number: \'{StringAlgorithms.IsStrobogrammatic(num)}\'\n");
+                Console.WriteLine($" \'{num}\' is Strobogrammatic Number: \'{StringAlgorithms.IsStrobogrammatic(num)}\'\nodes");
         }
 
 
@@ -5614,13 +5615,13 @@ namespace InterviewProblemNSolutions
         {
             // https://leetcode.com/problems/strobogrammatic-number-ii/
             Utility.Print("247. Strobogrammatic Number II");
-            int[] nums = { 1, 2, 3, 4 }; // max n given in problem was <=14
+            int[] nums = { 1, 2, 3, 4 }; // max nodes given in problem was <=14
             foreach (var n in nums)
             {
                 Console.WriteLine($" No of possible Strobogrammatic Number of length: \'{n}\' are");
                 foreach (var strobogrammaticNum in DailyProblem.FindStrobogrammatic(n))
                     Console.Write($" \'{strobogrammaticNum}\'");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -5632,7 +5633,7 @@ namespace InterviewProblemNSolutions
             string[] s = { "00110110", "00110", "0110", "0110", "0000000001011100" };
             int[] k = { 2, 2, 1, 2, 4 };
             for (int i = 0; i < k.Length; i++)
-                Console.WriteLine($" Every binary code of length \'{k[i]}\' is a substring of s\'{s[i]}\': {DailyProblem.HasAllCodes(s[i], k[i])}\n");
+                Console.WriteLine($" Every binary code of length \'{k[i]}\' is a substring of s\'{s[i]}\': {DailyProblem.HasAllCodes(s[i], k[i])}\nodes");
         }
 
 
@@ -5666,7 +5667,7 @@ namespace InterviewProblemNSolutions
             foreach (var grid in gridArr)
             {
                 grid.Print("MATRIX");
-                Console.WriteLine($"  longest line of consecutive one in the above matrix has len: \'{DailyProblem.LongestLine(grid)}\'\n");
+                Console.WriteLine($"  longest line of consecutive one in the above matrix has len: \'{DailyProblem.LongestLine(grid)}\'\nodes");
             }
         }
 
@@ -5679,7 +5680,7 @@ namespace InterviewProblemNSolutions
             foreach (var arr in arrays)
             {
                 arr.Print("Distinct Values Array");
-                Console.WriteLine($" number of binary trees we can make such that root.val = root.left * root.right = \'{DynamicProgramming.NumFactoredBinaryTrees(arr)}\'\n");
+                Console.WriteLine($" number of binary trees we can make such that root.val = root.left * root.right = \'{DynamicProgramming.NumFactoredBinaryTrees(arr)}\'\nodes");
             }
         }
 
@@ -5725,8 +5726,8 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                //Console.WriteLine($" No Indicies which upon removing yields equal even-odd num sum: \'{DailyProblem.WaysToMakeFair(numsArr)}\'\n");
-                Console.WriteLine($" No Indicies which upon removing yields equal even-odd num sum: \'{DailyProblem.WaysToMakeFairFaster(nums)}\'\n");
+                //Console.WriteLine($" No Indicies which upon removing yields equal even-odd num sum: \'{DailyProblem.WaysToMakeFair(numsArr)}\'\nodes");
+                Console.WriteLine($" No Indicies which upon removing yields equal even-odd num sum: \'{DailyProblem.WaysToMakeFairFaster(nums)}\'\nodes");
             }
         }
 
@@ -5738,8 +5739,8 @@ namespace InterviewProblemNSolutions
             TinyURL obj = new TinyURL();
             string longURL = "https://leetcode.com/problems/design-tinyurl";
             string shortURL = obj.Encode(longURL);  // Encode long to short
-            Console.WriteLine($" Encoding longURL: \'{longURL}\'\n to shortURl yields: \'{shortURL}\'\n");
-            Console.WriteLine($" De-Coding shortURL: \'{shortURL}\'\n back to original URL yields: \'{obj.Decode(shortURL)}\'\n"); // decode long from short
+            Console.WriteLine($" Encoding longURL: \'{longURL}\'\nodes to shortURl yields: \'{shortURL}\'\nodes");
+            Console.WriteLine($" De-Coding shortURL: \'{shortURL}\'\nodes back to original URL yields: \'{obj.Decode(shortURL)}\'\nodes"); // decode long from short
         }
 
 
@@ -5755,7 +5756,7 @@ namespace InterviewProblemNSolutions
                 //int profit = DynamicProgramming.BestTimeToBuyAndSellStockWithTransactionFee_Depricated(pricesArr[i], transactionFees[i]); // Fails for 3rd input
                 int profit = DynamicProgramming.BestTimeToBuyAndSellStockWithTransactionFee(pricesArr[i], transactionFees[i]);
                 Console.WriteLine($" Max profit we can achieve by completing multiple transactions & paying the transaction fee of \'{transactionFees[i]}\'" +
-                    $" for each transaction: \'{profit}\'\n");
+                    $" for each transaction: \'{profit}\'\nodes");
             }
         }
 
@@ -5805,7 +5806,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" longest wiggle sequence of alternatine +ve & -ve difference is of len: \'{DailyProblem.WiggleMaxLength(nums)}\'\n");
+                Console.WriteLine($" longest wiggle sequence of alternatine +ve & -ve difference is of len: \'{DailyProblem.WiggleMaxLength(nums)}\'\nodes");
             }
         }
 
@@ -5829,7 +5830,7 @@ namespace InterviewProblemNSolutions
                     for (int j = 0; j < lenB; j++)
                         cache[i, j] = -1;  // Set Default Value
 
-                Console.WriteLine($" Max number of connecting lines we can draw in above arrays \'{DynamicProgramming.MaxUncrossedLines_DP(A[idx], B[idx], 0, 0, cache)}\'\n");
+                Console.WriteLine($" Max number of connecting lines we can draw in above arrays \'{DynamicProgramming.MaxUncrossedLines_DP(A[idx], B[idx], 0, 0, cache)}\'\nodes");
             }
         }
 
@@ -5843,7 +5844,7 @@ namespace InterviewProblemNSolutions
             foreach (var rooms in roomsArr)
             {
                 rooms.Print("Rooms");
-                Console.WriteLine($" Starting from unlocked room '0' its possible to unlocke every other room: \'{DailyProblem.CanVisitAllRooms(rooms)}\'\n");
+                Console.WriteLine($" Starting from unlocked room '0' its possible to unlocke every other room: \'{DailyProblem.CanVisitAllRooms(rooms)}\'\nodes");
             }
         }
 
@@ -5896,7 +5897,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("869. Reordered Power of 2");
             int[] nums = { 1, 10, 16, 24, 46, 123452345 };
             foreach (var n in nums)
-                Console.WriteLine($" By reordering the digits of Num: \'{n}\' in any order such that resulting num is 'PowerOf2' possible: \'{DailyProblem.ReorderedPowerOf2(n)}\'\n");
+                Console.WriteLine($" By reordering the digits of Num: \'{n}\' in any order such that resulting num is 'PowerOf2' possible: \'{DailyProblem.ReorderedPowerOf2(n)}\'\nodes");
         }
 
 
@@ -5932,7 +5933,7 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(" List of matching ans in the order of Query");
                 DailyProblem.Spellchecker(wordlist[i], queries[i]).Print("Answers");        // Using Dictionary
                 //Spellchecker.VowelSpellchecker(wordlist[i], queries[i]).Print("Answers"); // Using Trie Data-Structure
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -5950,8 +5951,8 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < arrays.Length; i++)
             {
                 arrays[i].Print("Input Arr");
-                //Console.WriteLine($" No of tuples i, j, k such that i < j < k and arr[i] + arr[j] + arr[k] == {k[i]}, are: \'{DailyProblem.ThreeSumMulti(arrays[i], k[i])}\'\n");
-                Console.WriteLine($" No of tuples i, j, k such that i < j < k and arr[i] + arr[j] + arr[k] == {k[i]}, are: \'{DailyProblem.ThreeSumMultiConstantSpacec(arrays[i], k[i])}\'\n");
+                //Console.WriteLine($" No of tuples i, j, k such that i < j < k and arr[i] + arr[j] + arr[k] == {k[i]}, are: \'{DailyProblem.ThreeSumMulti(arrays[i], k[i])}\'\nodes");
+                Console.WriteLine($" No of tuples i, j, k such that i < j < k and arr[i] + arr[j] + arr[k] == {k[i]}, are: \'{DailyProblem.ThreeSumMultiConstantSpacec(arrays[i], k[i])}\'\nodes");
             }
         }
 
@@ -5968,7 +5969,7 @@ namespace InterviewProblemNSolutions
                 B[i].Print("B");
                 Console.WriteLine("Permutation of 'A' that maximizes its advantage with respect to 'B'");
                 DailyProblem.AdvantageCount(A[i], B[i]).Print("ReShuffled A");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -5996,7 +5997,7 @@ namespace InterviewProblemNSolutions
                 // foreach (var coordinate in DailyProblem.PacificAtlantic_DFS(matrix))
                 foreach (var coordinate in DailyProblem.PacificAtlantic_BFS(matrix))
                     Console.Write($" \'{coordinate[0]}, {coordinate[1]}\' ||");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -6011,7 +6012,7 @@ namespace InterviewProblemNSolutions
             foreach (var grid in gridArr)
             {
                 grid.Print("GRID");
-                Console.WriteLine($" No of cells in grid for which we cannot walk off the boundary of the grid in any number of moves: \'{DailyProblem.NumberOfEnclaves(grid)}\'\n");
+                Console.WriteLine($" No of cells in grid for which we cannot walk off the boundary of the grid in any number of moves: \'{DailyProblem.NumberOfEnclaves(grid)}\'\nodes");
             }
         }
 
@@ -6027,7 +6028,7 @@ namespace InterviewProblemNSolutions
                 A.Print("A");
                 B.Print("B");
                 DailyProblem.WordSubsets(A, B).Print("Universals Words in 'A'");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -6077,7 +6078,7 @@ namespace InterviewProblemNSolutions
             {
                 tickets.Print("Tickets");
                 DailyProblem.FindItinerary(tickets).Print("Itinerary");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -6088,7 +6089,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("423. Reconstruct Original Digits from English");
             string[] input = { "zeroonetwothreefourfivesixseveneightnine", "owoztneoer", "fviefuro", "zerozerooneonetwozeroonefviefuro" };
             foreach (var str in input)
-                Console.WriteLine($" Output of the digits in ascending order: \'{DailyProblem.OriginalDigits(str)}\'\n");
+                Console.WriteLine($" Output of the digits in ascending order: \'{DailyProblem.OriginalDigits(str)}\'\nodes");
         }
 
 
@@ -6118,7 +6119,7 @@ namespace InterviewProblemNSolutions
             foreach (var envelopes in envelopesArr)
             {
                 envelopes.Print("Envelopes");
-                Console.WriteLine($" Max no of envelopes can you Russian doll (i.e., put one inside the other) in above is: \'{DynamicProgramming.MaxEnvelopes(envelopes)}\'\n");
+                Console.WriteLine($" Max no of envelopes can you Russian doll (i.e., put one inside the other) in above is: \'{DynamicProgramming.MaxEnvelopes(envelopes)}\'\nodes");
             }
         }
 
@@ -6134,7 +6135,7 @@ namespace InterviewProblemNSolutions
             {
                 left[i].Print("Positions of Ants moving left");
                 right[i].Print("Positions of Ants moving right");
-                Console.WriteLine($" Given Plank of length \'{n[i]}\', it would take \'{DailyProblem.GetLastMoment(n[i], left[i], right[i])}\' seconds for all ants to fall-off the plank\n");
+                Console.WriteLine($" Given Plank of length \'{n[i]}\', it would take \'{DailyProblem.GetLastMoment(n[i], left[i], right[i])}\' seconds for all ants to fall-off the plank\nodes");
             }
         }
 
@@ -6151,7 +6152,7 @@ namespace InterviewProblemNSolutions
                 bookings[i].Print("Bookings");
                 Console.WriteLine($" Based upon above bookings of Flight between '1'st & '{n[i]}'th Flight");
                 DailyProblem.CorpFlightBookings(bookings[i], n[i]).Print("Total no of seats reserved for flight i(indexed 1).");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -6165,9 +6166,9 @@ namespace InterviewProblemNSolutions
             {
                 rating.Print("Ratings");
                 Console.WriteLine($" Maximum no of grps of '3' soldiers that can be build such that rating[i] < rating[j] < rating[k]) or" +
-                    $" (rating[i] > rating[j] > rating[k]) where (0 <= i < j < k < n)");
-                Console.Write($" Brute Force O(n^3) : '{DailyProblem.NumTeamsBruteForce(rating)}' ||");
-                Console.WriteLine($" Efficient O(n^2) : '{DailyProblem.NumTeams(rating)}'\n");
+                    $" (rating[i] > rating[j] > rating[k]) where (0 <= i < j < k < nodes)");
+                Console.Write($" Brute Force O(nodes^3) : '{DailyProblem.NumTeamsBruteForce(rating)}' ||");
+                Console.WriteLine($" Efficient O(nodes^2) : '{DailyProblem.NumTeams(rating)}'\nodes");
             }
         }
 
@@ -6178,7 +6179,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("1399. Count Largest Group");
             int[] nums = { 13, 2, 15, 24 };
             foreach (var n in nums)
-                Console.WriteLine($" B/w 1...{n}, no of groups(number r grouped based upon sum of their digits) having the largest size are: '{DailyProblem.CountLargestGroup(n)}'\n");
+                Console.WriteLine($" B/w 1...{n}, no of groups(number r grouped based upon sum of their digits) having the largest size are: '{DailyProblem.CountLargestGroup(n)}'\nodes");
         }
 
 
@@ -6192,13 +6193,13 @@ namespace InterviewProblemNSolutions
             ListNode oddLenNotPalindrome = new ListNode(1) { next = new ListNode(2) { next = new ListNode(3) { next = new ListNode(2) { next = new ListNode(9) } } } };
 
             evenLenPalindrome.Print("even Len Palindrome");
-            Console.WriteLine($" Is List Palindrome: '{DailyProblem.IsPalindrome(evenLenPalindrome)}'\n");
+            Console.WriteLine($" Is List Palindrome: '{DailyProblem.IsPalindrome(evenLenPalindrome)}'\nodes");
             evenLenNotPalindrome.Print("even Len Not-Palindrome");
-            Console.WriteLine($" Is List Palindrome: '{DailyProblem.IsPalindrome(evenLenNotPalindrome)}'\n");
+            Console.WriteLine($" Is List Palindrome: '{DailyProblem.IsPalindrome(evenLenNotPalindrome)}'\nodes");
             oddLenPalindrome.Print("odd Len Palindrome");
-            Console.WriteLine($" Is List Palindrome: '{DailyProblem.IsPalindrome(oddLenPalindrome)}'\n");
+            Console.WriteLine($" Is List Palindrome: '{DailyProblem.IsPalindrome(oddLenPalindrome)}'\nodes");
             oddLenNotPalindrome.Print("odd Len Not-Palindrome");
-            Console.WriteLine($" Is List Palindrome: '{DailyProblem.IsPalindrome(oddLenNotPalindrome)}'\n");
+            Console.WriteLine($" Is List Palindrome: '{DailyProblem.IsPalindrome(oddLenNotPalindrome)}'\nodes");
         }
 
 
@@ -6212,7 +6213,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < strs.Length; i++)
             {
                 strs[i].Print("Input");
-                Console.WriteLine($" Size of the largest subset of strs such that there are at most {m[i]} Zero's and {n[i]} One's in the subset is: '{DailyProblem.FindMaxForm(strs[i], m[i], n[i])}'\n");
+                Console.WriteLine($" Size of the largest subset of strs such that there are at most {m[i]} Zero's and {n[i]} One's in the subset is: '{DailyProblem.FindMaxForm(strs[i], m[i], n[i])}'\nodes");
             }
         }
 
@@ -6227,7 +6228,7 @@ namespace InterviewProblemNSolutions
             {
                 rounds[i].Print("Rounds");
                 DailyProblem.MostVisited(n[i], rounds[i]).Print($"'Most visited sectors' b/w 1...{n[i]} sorted in ascending order are");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -6240,7 +6241,7 @@ namespace InterviewProblemNSolutions
             foreach (var sights in sightValuesArr)
             {
                 sights.Print("Sight scores");
-                Console.WriteLine($" maximum score of a pair of sightseeing spots using formula [values[i] + values[j] + i - j] is: '{DailyProblem.MaxScoreSightseeingPair(sights)}'\n");
+                Console.WriteLine($" maximum score of a pair of sightseeing spots using formula [values[i] + values[j] + i - j] is: '{DailyProblem.MaxScoreSightseeingPair(sights)}'\nodes");
             }
         }
 
@@ -6253,7 +6254,7 @@ namespace InterviewProblemNSolutions
             foreach (var str in sArray)
             {
                 Console.WriteLine($" longest valid (well-formed) parentheses substring in '{str}' is of len: '{DailyProblem.LongestValidParenthesesWithStack(str)}'");
-                Console.WriteLine($" longest valid (well-formed) parentheses substring in '{str}' is of len: '{DailyProblem.LongestValidParenthesesConstantSpace(str)}'\n");
+                Console.WriteLine($" longest valid (well-formed) parentheses substring in '{str}' is of len: '{DailyProblem.LongestValidParenthesesConstantSpace(str)}'\nodes");
             }
         }
 
@@ -6267,7 +6268,7 @@ namespace InterviewProblemNSolutions
             foreach (var points in pointsArr)
             {
                 points.Print("Points");
-                Console.WriteLine($" Time to travel all above points: '{DailyProblem.MinTimeToVisitAllPoints(points)}'\n");
+                Console.WriteLine($" Time to travel all above points: '{DailyProblem.MinTimeToVisitAllPoints(points)}'\nodes");
             }
         }
 
@@ -6295,7 +6296,7 @@ namespace InterviewProblemNSolutions
             foreach (var A in arrays)
             {
                 A.Print("Input Array");
-                Console.WriteLine($" No of global inversions is equal to the number of local inversions: {DailyProblem.IsIdealPermutation(A)}\n");
+                Console.WriteLine($" No of global inversions is equal to the number of local inversions: {DailyProblem.IsIdealPermutation(A)}\nodes");
             }
         }
 
@@ -6323,7 +6324,7 @@ namespace InterviewProblemNSolutions
                 nums.Print("Nums");
                 //DailyProblem.DiagonalTraverseII(numsArr).Print($"Printing above Zig-Zag array in diagonal order");
                 DailyProblem.DiagonalTraverseIIFaster(nums).Print($"Printing above Zig-Zag array in diagonal order");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -6334,7 +6335,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("1551. Minimum Operations to Make Array Equal");
             int[] arr = { 3, 6, 5, 1 };
             foreach (var num in arr)
-                Console.WriteLine($" Min no of operations needed to make all the elements of arr with size '{num}' equal: '{DailyProblem.MinimumOperationsToMakeArrayEqual(num)}'\n");
+                Console.WriteLine($" Min no of operations needed to make all the elements of arr with size '{num}' equal: '{DailyProblem.MinimumOperationsToMakeArrayEqual(num)}'\nodes");
         }
 
 
@@ -6347,7 +6348,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < k.Length; i++)
             {
                 arr[i].Print("Input");
-                Console.WriteLine($" least number of unique integers after removing exactly '{k[i]}' elements: '{DailyProblem.FindLeastNumOfUniqueInts(arr[i], k[i])}'\n");
+                Console.WriteLine($" least number of unique integers after removing exactly '{k[i]}' elements: '{DailyProblem.FindLeastNumOfUniqueInts(arr[i], k[i])}'\nodes");
             }
         }
 
@@ -6362,7 +6363,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < arrays.Length; i++)
             {
                 arrays[i].Print("Input");
-                Console.WriteLine($" There exists a pattern of length '{m[i]}' that is consecutively repeated '{k[i]}' or more times'{DailyProblem.DetectKPatternOfLenM(arrays[i], m[i], k[i])}'\n");
+                Console.WriteLine($" There exists a pattern of length '{m[i]}' that is consecutively repeated '{k[i]}' or more times'{DailyProblem.DetectKPatternOfLenM(arrays[i], m[i], k[i])}'\nodes");
             }
         }
 
@@ -6374,7 +6375,7 @@ namespace InterviewProblemNSolutions
             string[] s = { "bab", "leetcode", "anagram", "xxyyzz", "friend" };
             string[] t = { "aba", "practice", "mangaar", "xxyyzz", "family" };
             for (int i = 0; i < t.Length; i++)
-                Console.WriteLine($" Min no of steps to make '{t[i]}' an anagram of '{s[i]}' is: '{DailyProblem.MinSteps(s[i], t[i])}'\n");
+                Console.WriteLine($" Min no of steps to make '{t[i]}' an anagram of '{s[i]}' is: '{DailyProblem.MinSteps(s[i], t[i])}'\nodes");
         }
 
 
@@ -6384,7 +6385,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("1529. Bulb Switcher IV");
             string[] targetArr = { "10111", "101", "00000", "001011101" };
             foreach (var target in targetArr)
-                Console.WriteLine($" Min no of flips required to form '{target}' :'{DailyProblem.BulbSwitcherIV(target)}'\n");
+                Console.WriteLine($" Min no of flips required to form '{target}' :'{DailyProblem.BulbSwitcherIV(target)}'\nodes");
         }
 
 
@@ -6395,7 +6396,7 @@ namespace InterviewProblemNSolutions
             string[] s = { "abciiidef", "aeiou", "leetcode", "rhythms", "tryhard" };
             int[] k = { 3, 2, 3, 4, 4 };
             for (int i = 0; i < s.Length; i++)
-                Console.WriteLine($" Max no of vowels in any substring of len '{k[i]}' in string '{s[i]}' are: '{DailyProblem.MaxVowelsInSubstringOfLengthK(s[i], k[i])}'\n");
+                Console.WriteLine($" Max no of vowels in any substring of len '{k[i]}' in string '{s[i]}' are: '{DailyProblem.MaxVowelsInSubstringOfLengthK(s[i], k[i])}'\nodes");
         }
 
 
@@ -6408,7 +6409,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < words.Length; i++)
             {
                 words[i].Print("Order of words");
-                Console.WriteLine($" Given sequence of above words in alien lang. & order of alphabets '{order[i]}' we can say words are sorted lexographically: '{DailyProblem.IsAlienSorted(words[i], order[i])}'\n");
+                Console.WriteLine($" Given sequence of above words in alien lang. & order of alphabets '{order[i]}' we can say words are sorted lexographically: '{DailyProblem.IsAlienSorted(words[i], order[i])}'\nodes");
             }
         }
 
@@ -6420,7 +6421,7 @@ namespace InterviewProblemNSolutions
             string[] s1 = { "xx", "xy", "xx", "xxyyxyxyxx" };
             string[] s2 = { "yy", "yx", "xy", "xyyxyxxxyx" };
             for (int i = 0; i < s1.Length; i++)
-                Console.WriteLine($" Min swaps required to make '{s1[i]}' and '{s2[i]}' equal: '{DailyProblem.MinSwapToMakeStringsEqual(s1[i], s2[i])}'\n");
+                Console.WriteLine($" Min swaps required to make '{s1[i]}' and '{s2[i]}' equal: '{DailyProblem.MinSwapToMakeStringsEqual(s1[i], s2[i])}'\nodes");
         }
 
 
@@ -6432,7 +6433,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" Min difference between the largest and smallest value of numsArr after perfoming at most 3 moves. '{DailyProblem.MinDifference(nums)}'\n");
+                Console.WriteLine($" Min difference between the largest and smallest value of numsArr after perfoming at most 3 moves. '{DailyProblem.MinDifference(nums)}'\nodes");
             }
         }
 
@@ -6447,7 +6448,7 @@ namespace InterviewProblemNSolutions
             foreach (var mat in matrices)
             {
                 mat.Print("Matrix");
-                Console.WriteLine($" longest increasing path in above matrix is of length: '{DailyProblem.LongestIncreasingPath(mat)}'\n");
+                Console.WriteLine($" longest increasing path in above matrix is of length: '{DailyProblem.LongestIncreasingPath(mat)}'\nodes");
             }
         }
 
@@ -6458,8 +6459,8 @@ namespace InterviewProblemNSolutions
             Utility.Print("1328. Break a Palindrome");
             string[] palindromes = { "abccba", "aba", "a", "aa", "zz", "bbb", "aabaa" };
             foreach (var paldindrome in palindromes)
-                //Console.WriteLine($" After breaking plaindrome '{paldindrome}' in lexographically smallest possible way resultant string is: '{DailyProblem.BreakPalindrome(paldindrome)}'\n");
-                Console.WriteLine($" After breaking plaindrome '{paldindrome}' in lexographically smallest possible way resultant string is: '{DailyProblem.BreakPalindrome_Clean(paldindrome)}'\n");
+                //Console.WriteLine($" After breaking plaindrome '{paldindrome}' in lexographically smallest possible way resultant string is: '{DailyProblem.BreakPalindrome(paldindrome)}'\nodes");
+                Console.WriteLine($" After breaking plaindrome '{paldindrome}' in lexographically smallest possible way resultant string is: '{DailyProblem.BreakPalindrome_Clean(paldindrome)}'\nodes");
         }
 
 
@@ -6469,7 +6470,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("1410. HTML Entity Parser");
             string[] texts = { "&amp; is an HTML entity but &ambassador; is not.", "and I quote: &quot;...&quot;", "Stay home! Practice on Leetcode :)", "x &gt; y &amp;&amp; x &lt; y is always false", "leetcode.com&frasl;problemset&frasl;all", "&&gt;" };
             foreach (var text in texts)
-                Console.WriteLine($" '{text}'\n ======= after HTML parsing becomes =======\n '{DailyProblem.HTMLEntityParser(text)}'\n");
+                Console.WriteLine($" '{text}'\nodes ======= after HTML parsing becomes =======\nodes '{DailyProblem.HTMLEntityParser(text)}'\nodes");
         }
 
 
@@ -6480,7 +6481,7 @@ namespace InterviewProblemNSolutions
             string[] s1 = { "My name is Haley", "of", "Eating right now", "Luky", "CwFfRo regR", "xD iP tqchblXgqvNVdi" };
             string[] s2 = { "My Haley", "A lot of words", "Eating", "Lucccky", "CwFfRo H regR", "FmtdCzv Gp YZf UYJ xD iP tqchblXgqvNVdi" };
             for (int i = 0; i < s1.Length; i++)
-                Console.WriteLine($" '{s1[i]}' & '{s2[i]}' are similar: '{DailyProblem.AreSentencesSimilar(s1[i], s2[i])}' \n");
+                Console.WriteLine($" '{s1[i]}' & '{s2[i]}' are similar: '{DailyProblem.AreSentencesSimilar(s1[i], s2[i])}' \nodes");
         }
 
 
@@ -6490,7 +6491,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("1432. Max Difference You Can Get From Changing an Integer");
             int[] nums = { 555, 9, 123456, 10000, 9288, 1, 111 };
             foreach (var num in nums)
-                Console.WriteLine($" Max diff after changing one digit in '{num}' to create 2 numsArr a-b results in: '{DailyProblem.MaxDiffFromChangingAnInteger(num)}'\n");
+                Console.WriteLine($" Max diff after changing one digit in '{num}' to create 2 numsArr a-b results in: '{DailyProblem.MaxDiffFromChangingAnInteger(num)}'\nodes");
         }
 
 
@@ -6511,7 +6512,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("87. Scramble String");
             string[] s1 = { "great", "abcde", "a", "abc" }, s2 = { "rgeat", "caebd", "a", "bca" };
             for (int i = 0; i < s1.Length; i++)
-                Console.WriteLine($" '{s1[i]}' & '{s2[i]}'\n are scrambled string: '{DynamicProgramming.IsScramble(s1[i], s2[i])}'\n");
+                Console.WriteLine($" '{s1[i]}' & '{s2[i]}'\nodes are scrambled string: '{DynamicProgramming.IsScramble(s1[i], s2[i])}'\nodes");
         }
 
 
@@ -6521,7 +6522,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("1759. Count Number of Homogenous Substrings");
             string[] sArr = { "abbcccaa", "xy", "zzzzz" };
             foreach (var s in sArr)
-                Console.WriteLine($" No of homogenous substrings of '{s}' are: '{DailyProblem.CountHomogenous(s)}'\n");
+                Console.WriteLine($" No of homogenous substrings of '{s}' are: '{DailyProblem.CountHomogenous(s)}'\nodes");
         }
 
 
@@ -6547,7 +6548,7 @@ namespace InterviewProblemNSolutions
             foreach (var trees in treesArray)
             {
                 trees.Print("Trees");
-                Console.WriteLine($" Total amount of fruit we can collect in '2' baskets are: '{DailyProblem.TotalFruitIntoBaskets(trees)}'\n");
+                Console.WriteLine($" Total amount of fruit we can collect in '2' baskets are: '{DailyProblem.TotalFruitIntoBaskets(trees)}'\nodes");
             }
         }
 
@@ -6560,7 +6561,7 @@ namespace InterviewProblemNSolutions
             foreach (var seats in seatsArray)
             {
                 seats.Print("Seats");
-                Console.WriteLine($" Max distance between Alex and the closest person to him is maximized: '{DailyProblem.MaximizeDistToClosestPerson(seats)}'\n");
+                Console.WriteLine($" Max distance between Alex and the closest person to him is maximized: '{DailyProblem.MaximizeDistToClosestPerson(seats)}'\nodes");
             }
         }
 
@@ -6574,7 +6575,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < nums.Length; i++)
             {
                 nums[i].Print("Nums");
-                Console.WriteLine($" There are 2 distinct indices i and j in the array such that numsArr[i] == numsArr[j] and abs(i - j) <= '{k[i]}' : '{DailyProblem.ContainsNearbyDuplicate(nums[i], k[i])}'\n");
+                Console.WriteLine($" There are 2 distinct indices i and j in the array such that numsArr[i] == numsArr[j] and abs(i - j) <= '{k[i]}' : '{DailyProblem.ContainsNearbyDuplicate(nums[i], k[i])}'\nodes");
             }
         }
 
@@ -6586,7 +6587,7 @@ namespace InterviewProblemNSolutions
             string[] s = { "abcd", "deeedbbcccbdaa", "pbbcggttciiippooaais" };
             int[] k = { 2, 3, 2 };
             for (int i = 0; i < s.Length; i++)
-                Console.WriteLine($" '{s[i]}' after repeatedly make '{k[i]}' duplicate removals on becomes: '{StringAlgorithms.RemoveAdjacentDuplicatesII(s[i], k[i])}'\n");
+                Console.WriteLine($" '{s[i]}' after repeatedly make '{k[i]}' duplicate removals on becomes: '{StringAlgorithms.RemoveAdjacentDuplicatesII(s[i], k[i])}'\nodes");
         }
 
 
@@ -6599,7 +6600,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" No of ways to split above array such that Sum of leftHalf<=Mid<=rtHalf are: '{DailyProblem.WaysToSplit(nums)}'\n");
+                Console.WriteLine($" No of ways to split above array such that Sum of leftHalf<=Mid<=rtHalf are: '{DailyProblem.WaysToSplit(nums)}'\nodes");
             }
         }
 
@@ -6610,7 +6611,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("Riddle Game: replace missing alphabets such that its doesnt matches left or rt adjacnet characters");
             string[] sArr = { "ab?ac?", "rd?e?wg??", "????????", "?asd", "??asdasd?", "a", "?" };
             foreach (var s in sArr)
-                Console.WriteLine($" '{s}' gets converts to '{DailyProblem.ReplaceMissingCharacters(s)}'\n");
+                Console.WriteLine($" '{s}' gets converts to '{DailyProblem.ReplaceMissingCharacters(s)}'\nodes");
         }
 
 
@@ -6627,7 +6628,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < matrix.Length; i++)
             {
                 matrix[i].Print("Matrix");
-                Console.WriteLine($" No of non-empty submatrices that sum to '{target[i]}' are: '{DailyProblem.NumSubmatrixSumTarget(matrix[i], target[i])}'\n");
+                Console.WriteLine($" No of non-empty submatrices that sum to '{target[i]}' are: '{DailyProblem.NumSubmatrixSumTarget(matrix[i], target[i])}'\nodes");
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
@@ -6643,7 +6644,7 @@ namespace InterviewProblemNSolutions
             {
                 bloomDayArray[i].Print("BloomDay");
                 Console.WriteLine($" Min no of days you need to wait to be able to make '{bouquetsReq[i]}' bouquets with '{flowersPerBouquet[i]}' " +
-                    $"flowers each from the garden: '{DailyProblem.MinDaysToMakeFlowerBouquets(bloomDayArray[i], bouquetsReq[i], flowersPerBouquet[i])}'\n");
+                    $"flowers each from the garden: '{DailyProblem.MinDaysToMakeFlowerBouquets(bloomDayArray[i], bouquetsReq[i], flowersPerBouquet[i])}'\nodes");
             }
         }
 
@@ -6656,8 +6657,8 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                //Console.WriteLine($" Min +ve val of startValue such that the step by step sum is never less than 1: '{DailyProblem.MinStartValue(numsArr)}'\n");
-                Console.WriteLine($" Min +ve val of startValue such that the step by step sum is never less than 1: '{DailyProblem.MinStartValueFaster(nums)}'\n");
+                //Console.WriteLine($" Min +ve val of startValue such that the step by step sum is never less than 1: '{DailyProblem.MinStartValue(numsArr)}'\nodes");
+                Console.WriteLine($" Min +ve val of startValue such that the step by step sum is never less than 1: '{DailyProblem.MinStartValueFaster(nums)}'\nodes");
             }
         }
 
@@ -6671,7 +6672,7 @@ namespace InterviewProblemNSolutions
             {
                 strs.Print("Strs");
                 Console.WriteLine($" Min possible no of indicies which have to be deleted in order to make characters" +
-                    $" inside each string lexograpically sorteda are: '{DynamicProgramming.MinDeletionSize(strs)}'\n");
+                    $" inside each string lexograpically sorteda are: '{DynamicProgramming.MinDeletionSize(strs)}'\nodes");
             }
         }
 
@@ -6685,7 +6686,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < nums.Length; i++)
             {
                 nums[i].Print("Nums");
-                Console.WriteLine($" No of possible combinations/sequences that add up to target: '{DailyProblem.CombinationSum4(nums[i], target[i])}'\n");
+                Console.WriteLine($" No of possible combinations/sequences that add up to target: '{DailyProblem.CombinationSum4(nums[i], target[i])}'\nodes");
             }
         }
 
@@ -6724,7 +6725,7 @@ namespace InterviewProblemNSolutions
             r.InOrder("BST");
             int[] kth = { 1, 3, 4 };
             foreach (var k in kth)
-                Console.WriteLine($" '{k}'th elements(1-indexed) in above BST is: '{DailyProblem.KthSmallestInBST(r, k)}'\n");
+                Console.WriteLine($" '{k}'th elements(1-indexed) in above BST is: '{DailyProblem.KthSmallestInBST(r, k)}'\nodes");
         }
 
 
@@ -6736,7 +6737,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" Removing a subarray (can be empty) of len: '{DailyProblem.FindLengthOfShortestSubarray(nums)}' from arr such that the remaining elements in arr are non-decreasing.\n");
+                Console.WriteLine($" Removing a subarray (can be empty) of len: '{DailyProblem.FindLengthOfShortestSubarray(nums)}' from arr such that the remaining elements in arr are non-decreasing.\nodes");
             }
         }
 
@@ -6749,7 +6750,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" Max product achievable from 3 numsArr: '{DailyProblem.MaximumProductOfThreeNums(nums)}'\n");
+                Console.WriteLine($" Max product achievable from 3 numsArr: '{DailyProblem.MaximumProductOfThreeNums(nums)}'\nodes");
             }
         }
 
@@ -6777,7 +6778,7 @@ namespace InterviewProblemNSolutions
             foreach (var wall in walls)
             {
                 wall.Print("Wall");
-                Console.WriteLine($" Drawing a vertical line from the top to the bottom which crosses the least bricks are: '{DailyProblem.LeastCrossedBricks(wall)}'\n");
+                Console.WriteLine($" Drawing a vertical line from the top to the bottom which crosses the least bricks are: '{DailyProblem.LeastCrossedBricks(wall)}'\nodes");
             }
         }
 
@@ -6790,7 +6791,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" No of tuples (a, b, c, d) such that a * b = c * d where a, b, c, and d are elements of numsArr, and a != b != c != d are: '{DailyProblem.TupleSameProduct(nums)}'\n");
+                Console.WriteLine($" No of tuples (a, b, c, d) such that a * b = c * d where a, b, c, and d are elements of numsArr, and a != b != c != d are: '{DailyProblem.TupleSameProduct(nums)}'\nodes");
             }
         }
 
@@ -6805,8 +6806,8 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < arr.Length; i++)
             {
                 arr[i].Print("String Array");
-                Console.WriteLine($" [Recursive] String s is a concatenation of a sub-sequence of arr which have unique characters has max len: '{DailyProblem.MaxLenConcatenatedStringWithUniqueCharacters(arr[i])}'\n");
-                Console.WriteLine($" [DP] String s is a concatenation of a sub-sequence of arr which have unique characters has max len: '{DailyProblem.MaxLenConcatenatedStringWithUniqueCharacters_DP_CharMask(arr[i])}'\n");
+                Console.WriteLine($" [Recursive] String s is a concatenation of a sub-sequence of arr which have unique characters has max len: '{DailyProblem.MaxLenConcatenatedStringWithUniqueCharacters(arr[i])}'\nodes");
+                Console.WriteLine($" [DP] String s is a concatenation of a sub-sequence of arr which have unique characters has max len: '{DailyProblem.MaxLenConcatenatedStringWithUniqueCharacters_DP_CharMask(arr[i])}'\nodes");
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
@@ -6820,8 +6821,8 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "()", "(*)", "(*))", "**)()", "*(", "(*)(" };
             foreach (var s in sArr)
             {
-                Console.WriteLine($" '{s}' is valid parenthesis string: '{StringAlgorithms.CheckValidParenthesisString(s)}'\n");
-                Console.WriteLine($" '{s}' is valid parenthesis string: '{StringAlgorithms.CheckValidParenthesisStringConstantSpace(s)}'\n");
+                Console.WriteLine($" '{s}' is valid parenthesis string: '{StringAlgorithms.CheckValidParenthesisString(s)}'\nodes");
+                Console.WriteLine($" '{s}' is valid parenthesis string: '{StringAlgorithms.CheckValidParenthesisStringConstantSpace(s)}'\nodes");
             }
         }
 
@@ -6835,7 +6836,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < k.Length; i++)
             {
                 nums[i].Print("Nums");
-                Console.WriteLine($" Max no of consecutive 1's in the array if you can flip at most '{k[i]}' 0's are: '{DailyProblem.MaxConsecutiveOnesIII(nums[i], k[i])}'\n");
+                Console.WriteLine($" Max no of consecutive 1's in the array if you can flip at most '{k[i]}' 0's are: '{DailyProblem.MaxConsecutiveOnesIII(nums[i], k[i])}'\nodes");
             }
         }
 
@@ -6855,7 +6856,7 @@ namespace InterviewProblemNSolutions
                 }
             };
             r.InOrder("Binary-Tree");
-            Console.WriteLine($" No of good nodes in the above binary tree are: '{DailyProblem.CountGoodNodes(r)}'\n");
+            Console.WriteLine($" No of good nodes in the above binary tree are: '{DailyProblem.CountGoodNodes(r)}'\nodes");
         }
 
 
@@ -6881,7 +6882,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < k.Length; i++)
             {
                 nums[i].Print("Nums");
-                Console.WriteLine($" Max possible frequency of an element after performing at most '{k[i]}' operations(adding 1): '{DailyProblem.FrequencyOfTheMostFrequentElement(nums[i], k[i])}'\n");
+                Console.WriteLine($" Max possible frequency of an element after performing at most '{k[i]}' operations(adding 1): '{DailyProblem.FrequencyOfTheMostFrequentElement(nums[i], k[i])}'\nodes");
             }
         }
 
@@ -6898,9 +6899,9 @@ namespace InterviewProblemNSolutions
             {
                 heights[i].Print("Heights");
                 Console.WriteLine($" Farthest idx we can reach in above array starting with '{bricks[i]}' bricks & '{ladders[i]}' ladders is:" +
-                    $" '{DailyProblem.FurthestBuilding(heights[i], bricks[i], ladders[i])}'\n");
+                    $" '{DailyProblem.FurthestBuilding(heights[i], bricks[i], ladders[i])}'\nodes");
                 Console.WriteLine($"[PriorityQueueADT] Farthest idx we can reach in above array starting with '{bricks[i]}' bricks & '{ladders[i]}' ladders is:" +
-                    $" '{DailyProblem.FurthestBuildingUsingPriorityQueueADT(heights[i], bricks[i], ladders[i])}'\n");
+                    $" '{DailyProblem.FurthestBuildingUsingPriorityQueueADT(heights[i], bricks[i], ladders[i])}'\nodes");
             }
         }
 
@@ -6913,7 +6914,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" No of nice pairs of indices such that numsArr[i] + rev(numsArr[j]) == numsArr[j] + rev(numsArr[i]) :'{DailyProblem.CountNicePairs(nums)}'\n");
+                Console.WriteLine($" No of nice pairs of indices such that numsArr[i] + rev(numsArr[j]) == numsArr[j] + rev(numsArr[i]) :'{DailyProblem.CountNicePairs(nums)}'\nodes");
             }
         }
 
@@ -6943,7 +6944,7 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Printing below '{k[i]}' most frequent elements (same freq-words are picked as per their lexographical order");
                 foreach (var mostfrequentWord in DailyProblem.TopKFrequent(input[i], k[i]))
                     Console.Write($" {mostfrequentWord} ||");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -6956,7 +6957,7 @@ namespace InterviewProblemNSolutions
             foreach (var matrix in matrices)
             {
                 matrix.Print("Matrix");
-                Console.WriteLine($" above matrix is Toeplitz if every diagonal from top-left to bottom-right has the same elements: '{DailyProblem.IsToeplitzMatrix(matrix)}'\n");
+                Console.WriteLine($" above matrix is Toeplitz if every diagonal from top-left to bottom-right has the same elements: '{DailyProblem.IsToeplitzMatrix(matrix)}'\nodes");
             }
         }
 
@@ -6992,7 +6993,7 @@ namespace InterviewProblemNSolutions
             foreach (var chessBoard in boardArr)
             {
                 chessBoard.Print("Chess Board");
-                Console.WriteLine($" No of black pawn White Rook can capture : '{DailyProblem.NumRookCaptures(chessBoard)}'\n");
+                Console.WriteLine($" No of black pawn White Rook can capture : '{DailyProblem.NumRookCaptures(chessBoard)}'\nodes");
             }
         }
 
@@ -7012,7 +7013,7 @@ namespace InterviewProblemNSolutions
             foreach (var grid in gridArr)
             {
                 grid.Print("GRID");
-                Console.WriteLine($" Total no of communicating servers in above grid are : '{DailyProblem.CountCommunicatingServers(grid)}'\n");
+                Console.WriteLine($" Total no of communicating servers in above grid are : '{DailyProblem.CountCommunicatingServers(grid)}'\nodes");
             }
         }
 
@@ -7027,7 +7028,7 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" Printing Unique numsArr which satify condition:\tPower of '{x[i]}' + Power of '{y[i]}' <= '{bound[i]}'");
                 foreach (var sumOfPowerOfXAndY in DailyProblem.PowerfulIntegers(x[i], y[i], bound[i]))
                     Console.Write($" {sumOfPowerOfXAndY} ,");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -7076,7 +7077,7 @@ namespace InterviewProblemNSolutions
             foreach (var dominoes in dominoesArr)
             {
                 dominoes.Print("DominoesArray");
-                Console.WriteLine($" number of pairs (i, j) for which 0 <= i < j < dominoes.length, and dominoes[i] is equivalent to dominoes[j] are: '{DailyProblem.NumEquivDominoPairs(dominoes)}'\n");
+                Console.WriteLine($" number of pairs (i, j) for which 0 <= i < j < dominoes.length, and dominoes[i] is equivalent to dominoes[j] are: '{DailyProblem.NumEquivDominoPairs(dominoes)}'\nodes");
             }
         }
 
@@ -7089,7 +7090,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" min no of operation to keep above arr Zig-Zagged: '{DailyProblem.MovesToMakeZigzag(nums)}'\n");
+                Console.WriteLine($" min no of operation to keep above arr Zig-Zagged: '{DailyProblem.MovesToMakeZigzag(nums)}'\nodes");
             }
         }
 
@@ -7113,7 +7114,7 @@ namespace InterviewProblemNSolutions
             foreach (var courses in coursesArr)
             {
                 courses.Print("Courses (duration,lastDayToComplete)");
-                Console.WriteLine($" Max no of course we can complete: '{DailyProblem.ScheduleCourse(courses)}'\n");
+                Console.WriteLine($" Max no of course we can complete: '{DailyProblem.ScheduleCourse(courses)}'\nodes");
             }
         }
 
@@ -7126,7 +7127,7 @@ namespace InterviewProblemNSolutions
             foreach (var stonesValues in stonesArr)
             {
                 stonesValues.Print("Stones-Values");
-                Console.WriteLine($" In above arr of stones if 'Alice' starts 1st, than result is: '{DynamicProgramming.StoneGameIII(stonesValues)}'\n");
+                Console.WriteLine($" In above arr of stones if 'Alice' starts 1st, than result is: '{DynamicProgramming.StoneGameIII(stonesValues)}'\nodes");
             }
         }
 
@@ -7141,14 +7142,14 @@ namespace InterviewProblemNSolutions
             {
                 candidates[i].Print("Candidates");
                 DailyProblem.CombinationSumII(candidates[i], target[i]).Print($" Unique combinations in candidates where the candidate numbers sum to '{target[i]}'");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
 
         public static void FindNUniqueIntegersSumUptoZero()
         {
-            // https://leetcode.com/problems/find-n-unique-integers-sum-up-to-zero/
+            // https://leetcode.com/problems/find-nodes-unique-integers-sum-up-to-zero/
             Utility.Print("1304. Find N Unique Integers Sum up to Zero");
             int[] arr = { 5, 3, 1, 4 };
             foreach (var n in arr)
@@ -7164,7 +7165,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" checking if above arr could become non-decreasing by modifying at most one element: '{DailyProblem.NondecreasingArray(nums)}'\n");
+                Console.WriteLine($" checking if above arr could become non-decreasing by modifying at most one element: '{DailyProblem.NondecreasingArray(nums)}'\nodes");
             }
         }
 
@@ -7178,7 +7179,7 @@ namespace InterviewProblemNSolutions
             foreach (var A in array)
             {
                 A.Print("Input-Array");
-                Console.WriteLine($" maximum possible sum of subarray in above circular array is: '{DailyProblem.MaxSubarraySumCircular(A)}'\n");
+                Console.WriteLine($" maximum possible sum of subarray in above circular array is: '{DailyProblem.MaxSubarraySumCircular(A)}'\nodes");
             }
         }
 
@@ -7192,7 +7193,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < nums.Length; i++)
             {
                 nums[i].Print("Nums");
-                Console.WriteLine($" Checking if there are 2 distinct indices i & j in the array such that abs(numsArr[i] - numsArr[j]) <= '{t[i]}' and abs(i - j) <= '{k[i]}': '{DailyProblem.ContainsNearbyAlmostDuplicate(nums[i], k[i], t[i])}'\n");
+                Console.WriteLine($" Checking if there are 2 distinct indices i & j in the array such that abs(numsArr[i] - numsArr[j]) <= '{t[i]}' and abs(i - j) <= '{k[i]}': '{DailyProblem.ContainsNearbyAlmostDuplicate(nums[i], k[i], t[i])}'\nodes");
             }
         }
 
@@ -7209,7 +7210,7 @@ namespace InterviewProblemNSolutions
             {
                 list.Print("Sorted-Linked-List");
                 DailyProblem.SortedListToBST(list).InOrder("Converted BST");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -7221,7 +7222,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("906. Super Palindromes");
             string[] left = { "4", "1", "1654867168715", "40000000000000000" }, right = { "1000", "2", "9654867168715", "50000000000000000" };
             for (int i = 0; i < left.Length; i++)
-                Console.WriteLine($" No of Super Palindromes b/w '{left[i]}'...'{right[i]}' are: '{DailyProblem.SuperpalindromesInRange(left[i], right[i])}'\n");
+                Console.WriteLine($" No of Super Palindromes b/w '{left[i]}'...'{right[i]}' are: '{DailyProblem.SuperpalindromesInRange(left[i], right[i])}'\nodes");
         }
 
 
@@ -7253,7 +7254,7 @@ namespace InterviewProblemNSolutions
             foreach (var coordinate in coordinatesArr)
             {
                 coordinate.Print("Coordinates");
-                Console.WriteLine($" Above Coordinates represent a straight line: '{DailyProblem.CheckStraightLine(coordinate)}'\n");
+                Console.WriteLine($" Above Coordinates represent a straight line: '{DailyProblem.CheckStraightLine(coordinate)}'\nodes");
             }
         }
 
@@ -7279,7 +7280,7 @@ namespace InterviewProblemNSolutions
             foreach (var target in targetArr)
             {
                 target.Print("Target");
-                Console.WriteLine($" Checking if above array can be create from same length array of 1's: '{DailyProblem.ConstructTargetArrayWithMultipleSums(target)}'\n");
+                Console.WriteLine($" Checking if above array can be create from same length array of 1's: '{DailyProblem.ConstructTargetArrayWithMultipleSums(target)}'\nodes");
             }
         }
 
@@ -7310,8 +7311,8 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < k.Length; i++)
             {
                 cards[i].Print("Cards");
-                //Console.WriteLine($" Max no of points we can get by chosing '{k[i]}' from in any way from left & right of array is: '{DynamicProgramming.MaxScore_DP(cards[i], k[i])}'\n");
-                Console.WriteLine($" Max no of points we can get by chosing '{k[i]}' from in any way from left & right of array is: '{DailyProblem.MaxScore(cards[i], k[i])}'\n");
+                //Console.WriteLine($" Max no of points we can get by chosing '{k[i]}' from in any way from left & right of array is: '{DynamicProgramming.MaxScore_DP(cards[i], k[i])}'\nodes");
+                Console.WriteLine($" Max no of points we can get by chosing '{k[i]}' from in any way from left & right of array is: '{DailyProblem.MaxScore(cards[i], k[i])}'\nodes");
             }
         }
 
@@ -7349,8 +7350,8 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" Index of element strictly greater than its neighbours is: '{DailyProblem.FindPeakElement_Linear(nums)}'\n");
-                Console.WriteLine($" Index of element strictly greater than its neighbours is: '{DailyProblem.FindPeakElement_BinarySearch(nums)}'\n");
+                Console.WriteLine($" Index of element strictly greater than its neighbours is: '{DailyProblem.FindPeakElement_Linear(nums)}'\nodes");
+                Console.WriteLine($" Index of element strictly greater than its neighbours is: '{DailyProblem.FindPeakElement_BinarySearch(nums)}'\nodes");
             }
         }
 
@@ -7371,7 +7372,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("917. Reverse Only Letters");
             string[] str = { "ab-cd", "a-bC-dEf-ghIj", "Test1ng-Leet=code-Q!", "7_28]" };
             foreach (var s in str)
-                Console.WriteLine($" Reverse of '{s}' after keeping non-letters at original index is '{StringAlgorithms.ReverseOnlyLetters(s)}'\n");
+                Console.WriteLine($" Reverse of '{s}' after keeping non-letters at original index is '{StringAlgorithms.ReverseOnlyLetters(s)}'\nodes");
         }
 
 
@@ -7383,7 +7384,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < k.Length; i++)
             {
                 arr[i].Print("Input");
-                Console.WriteLine($" Mac score when k='{k[i]}' for above array is: '{DailyProblem.GetMaxBySkipFrwdByMaxK(arr[i], k[i])}'\n ");
+                Console.WriteLine($" Mac score when k='{k[i]}' for above array is: '{DailyProblem.GetMaxBySkipFrwdByMaxK(arr[i], k[i])}'\nodes ");
             }
         }
 
@@ -7402,7 +7403,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("65. Valid Number");
             string[] sArr = { "0", "e", ".", ".1", "2", "0089", "-0.1", "+3.14", "4.", "-.9", "2e10", "-90E3", "3e+7", "+6e-1", "53.5e93", "-123.456e789", "abc", "1a", "1e", "e3", "99e2.5", "--6", "-+3", "95a54e53" };
             foreach (var s in sArr)
-                Console.WriteLine($" '{s}' is valid number: {DailyProblem.IsNumber(s)}\n");
+                Console.WriteLine($" '{s}' is valid number: {DailyProblem.IsNumber(s)}\nodes");
         }
 
 
@@ -7486,7 +7487,7 @@ namespace InterviewProblemNSolutions
             foreach (var binaryTree in listOfTrees)
             {
                 binaryTree.InOrder("Binary-Tree");
-                Console.WriteLine($" Min no of Camera's we need to monitor all nodes in above Tree are: '{DailyProblem.MinCameraCover(binaryTree)}'\n");
+                Console.WriteLine($" Min no of Camera's we need to monitor all nodes in above Tree are: '{DailyProblem.MinCameraCover(binaryTree)}'\nodes");
             }
         }
 
@@ -7499,7 +7500,7 @@ namespace InterviewProblemNSolutions
             foreach (var words in wordsArr)
             {
                 words.Print("WOrds");
-                Console.WriteLine($" Length of longest chain in above words-array is of len: '{DailyProblem.LongestStrChain(words)}'\n");
+                Console.WriteLine($" Length of longest chain in above words-array is of len: '{DailyProblem.LongestStrChain(words)}'\nodes");
             }
         }
 
@@ -7514,7 +7515,7 @@ namespace InterviewProblemNSolutions
             {
                 paths.Print("Paths");
                 DailyProblem.FindDuplicateFileInSystem(paths).Print("Duplicate files in the file system in terms of their paths");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
@@ -7525,21 +7526,21 @@ namespace InterviewProblemNSolutions
             Utility.Print("1405. Longest Happy String");
             int[][] abc_Array = { new int[] { 1, 1, 7 }, new int[] { 2, 2, 1 }, new int[] { 7, 1, 0 }, new int[] { 0, 7, 0 }, new int[] { 0, 0, 0 } };
             foreach (var abc in abc_Array)
-                Console.WriteLine($" Longest Happy String when we have {abc[0]} a's , {abc[1]} b's & {abc[2]} c's is: '{DailyProblem.LongestDiverseString(abc[0], abc[1], abc[2])}'\n");
+                Console.WriteLine($" Longest Happy String when we have {abc[0]} a's , {abc[1]} b's & {abc[2]} c's is: '{DailyProblem.LongestDiverseString(abc[0], abc[1], abc[2])}'\nodes");
         }
 
 
         public static void MinimumMovesToEqualArrayElements()
         {
             // https://leetcode.com/problems/minimum-moves-to-equal-array-elements/
-            // https://leetcode.com/problems/minimum-moves-to-equal-array-elements/discuss/1217713/C++-python-Just-Some-Clever-Math-O(n)-or-O(1)
+            // https://leetcode.com/problems/minimum-moves-to-equal-array-elements/discuss/1217713/C++-python-Just-Some-Clever-Math-O(nodes)-or-O(1)
             Utility.Print("453. Minimum Moves to Equal Array Elements");
             int[][] numsArr = { new int[] { 1, 2, 3 }, new int[] { 1, 1, 1 }, new int[] { 1, 3, 5, 8 } };
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" O(nlogn)  Min number of moves required to make all array elements equal: '{DailyProblem.MinimumMovesToEqualArrayElements(nums)}'\n");
-                Console.WriteLine($" O(n) Algo Min number of moves required to make all array elements equal: '{DailyProblem.MinimumMovesToEqualArrayElementsFaster(nums)}'\n");
+                Console.WriteLine($" O(nlogn)  Min number of moves required to make all array elements equal: '{DailyProblem.MinimumMovesToEqualArrayElements(nums)}'\nodes");
+                Console.WriteLine($" O(nodes) Algo Min number of moves required to make all array elements equal: '{DailyProblem.MinimumMovesToEqualArrayElementsFaster(nums)}'\nodes");
             }
         }
 
@@ -7553,7 +7554,7 @@ namespace InterviewProblemNSolutions
             foreach (var points in pointsArr)
             {
                 points.Print("Points");
-                Console.WriteLine($" Min area of a rectangle formed from above points, with sides parallel to the x and y axes has area: '{DailyProblem.MinAreaRect(points)}'\n");
+                Console.WriteLine($" Min area of a rectangle formed from above points, with sides parallel to the x and y axes has area: '{DailyProblem.MinAreaRect(points)}'\nodes");
             }
         }
 
@@ -7567,7 +7568,7 @@ namespace InterviewProblemNSolutions
             foreach (var words in wordsArr)
             {
                 words.Print("Words");
-                Console.WriteLine($" Longest & lexographically smallest word whose all prefixes are present in above dictionary and is '{DailyProblem.LongestPrefixWord(words)}'\n");
+                Console.WriteLine($" Longest & lexographically smallest word whose all prefixes are present in above dictionary and is '{DailyProblem.LongestPrefixWord(words)}'\nodes");
             }
         }
 
@@ -7582,14 +7583,14 @@ namespace InterviewProblemNSolutions
             {
                 wordsArr[i].Print("Words");
                 StringAlgorithms.FindAndReplacePattern(wordsArr[i], pattern[i]).Print($"List of words from above array which match pattern '{pattern[i]}' =>");
-                Console.WriteLine("\n");
+                Console.WriteLine("\nodes");
             }
         }
 
 
         public static void N_Queens()
         {
-            // https://leetcode.com/problems/n-queens/
+            // https://leetcode.com/problems/nodes-queens/
             Utility.Print("51. N-Queens");
             int[] queensCount = { 4, 1, 2, 9 };
             foreach (var qCount in queensCount)
@@ -7601,11 +7602,11 @@ namespace InterviewProblemNSolutions
         }
         public static void N_QueensII()
         {
-            // https://leetcode.com/problems/n-queens/
+            // https://leetcode.com/problems/nodes-queens/
             Utility.Print("52. N-Queens II");
             int[] queensCount = { 4, 1, 2, 9 };
             foreach (var qCount in queensCount)
-                Console.WriteLine($" Total possible configuration of placing '{qCount}' Queens in {qCount}x{qCount} chessboard are: '{DailyProblem.TotalNQueens(qCount)}'\n");
+                Console.WriteLine($" Total possible configuration of placing '{qCount}' Queens in {qCount}x{qCount} chessboard are: '{DailyProblem.TotalNQueens(qCount)}'\nodes");
         }
 
 
@@ -7619,7 +7620,7 @@ namespace InterviewProblemNSolutions
             {
                 apples[i].Print("Apples");
                 days[i].Print("Days");
-                Console.WriteLine($" Max no of apples we can eat: '{DailyProblem.EatenApples(apples[i], days[i])}'\n");
+                Console.WriteLine($" Max no of apples we can eat: '{DailyProblem.EatenApples(apples[i], days[i])}'\nodes");
             }
         }
 
@@ -7635,7 +7636,7 @@ namespace InterviewProblemNSolutions
             foreach (var tokens in tokensArr)
             {
                 tokens.Print("Tokens");
-                Console.WriteLine($" Above Reverse Polish Notation evalute to : '{DailyProblem.EvalRPN(tokens)}'\n");
+                Console.WriteLine($" Above Reverse Polish Notation evalute to : '{DailyProblem.EvalRPN(tokens)}'\nodes");
             }
         }
 
@@ -7666,7 +7667,7 @@ namespace InterviewProblemNSolutions
             foreach (var words in wordsArr)
             {
                 words.Print("Words");
-                Console.WriteLine($" Max value of length(word[i]) * length(word[j]) where the two words do not share common letters is: '{DailyProblem.MaxProductOfWordsLength(words)}'\n");
+                Console.WriteLine($" Max value of length(word[i]) * length(word[j]) where the two words do not share common letters is: '{DailyProblem.MaxProductOfWordsLength(words)}'\nodes");
             }
         }
 
@@ -7679,7 +7680,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" Max score we can get by erasing excatly one unique sub-array is: '{DailyProblem.MaximumUniqueSubarray(nums)}'\n");
+                Console.WriteLine($" Max score we can get by erasing excatly one unique sub-array is: '{DailyProblem.MaximumUniqueSubarray(nums)}'\nodes");
             }
         }
 
@@ -7695,7 +7696,7 @@ namespace InterviewProblemNSolutions
             foreach (var matrix in matrixArr)
             {
                 matrix.Print("Matrix");
-                Console.WriteLine($" Area of the largest submatrix within matrix where every element of the submatrix is 1 after reordering the columns optimally is: '{DailyProblem.LargestSubmatrix(matrix)}'\n");
+                Console.WriteLine($" Area of the largest submatrix within matrix where every element of the submatrix is 1 after reordering the columns optimally is: '{DailyProblem.LargestSubmatrix(matrix)}'\nodes");
             }
         }
 
@@ -7709,7 +7710,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" Maximum Gap b/w any two consecutive no if above array was sorted is: '{DailyProblem.MaximumGap(nums)}'\n");
+                Console.WriteLine($" Maximum Gap b/w any two consecutive no if above array was sorted is: '{DailyProblem.MaximumGap(nums)}'\nodes");
             }
         }
 
@@ -7755,9 +7756,9 @@ namespace InterviewProblemNSolutions
                         s2 = { "axy", "dbbca", "dbbca", "", "", "b" },
                         s3 = { "aaxaby", "aadbbcbcac", "aadbbbaccc", "", "a", "a" };
             for (int i = 0; i < s1.Length; i++)
-                //Console.WriteLine($" '{s3[i]}' can be created from interleaving of '{s1[i]}' & '{s2[i]}': '{DynamicProgramming.IsInterleave_Recursive(s1[i], s2[i], s3[i])}'\n");
-                //Console.WriteLine($" '{s3[i]}' can be created from interleaving of '{s1[i]}' & '{s2[i]}': '{DynamicProgramming.IsInterleave_DP(s1[i], s2[i], s3[i])}'\n");
-                Console.WriteLine($" '{s3[i]}' can be created from interleaving of '{s1[i]}' & '{s2[i]}': '{DynamicProgramming.IsInterleave_DP_TopDown(s1[i], s2[i], s3[i])}'\n");
+                //Console.WriteLine($" '{s3[i]}' can be created from interleaving of '{s1[i]}' & '{s2[i]}': '{DynamicProgramming.IsInterleave_Recursive(s1[i], s2[i], s3[i])}'\nodes");
+                //Console.WriteLine($" '{s3[i]}' can be created from interleaving of '{s1[i]}' & '{s2[i]}': '{DynamicProgramming.IsInterleave_DP(s1[i], s2[i], s3[i])}'\nodes");
+                Console.WriteLine($" '{s3[i]}' can be created from interleaving of '{s1[i]}' & '{s2[i]}': '{DynamicProgramming.IsInterleave_DP_TopDown(s1[i], s2[i], s3[i])}'\nodes");
 
         }
 
@@ -7768,7 +7769,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("1781. Sum of Beauty of All Substrings");
             string[] sArr = { "aabcb", "aabcbaa" };
             foreach (var s in sArr)
-                Console.WriteLine($" Sum of Beauty of all substrings of '{s}' is: '{DailyProblem.BeautySum(s)}'\n");
+                Console.WriteLine($" Sum of Beauty of all substrings of '{s}' is: '{DailyProblem.BeautySum(s)}'\nodes");
         }
 
 
@@ -7778,7 +7779,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("1832. Check if the Sentence Is Pangram");
             string[] sArr = { "thequickbrownfoxjumpsoverthelazydog", "leetcode" };
             foreach (var s in sArr)
-                Console.WriteLine($" String '{s}' is Pangram(have atleast one of all 26 characters): '{DailyProblem.CheckIfPangram(s)}'\n");
+                Console.WriteLine($" String '{s}' is Pangram(have atleast one of all 26 characters): '{DailyProblem.CheckIfPangram(s)}'\nodes");
         }
 
 
@@ -7788,7 +7789,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("680. Valid Palindrome II");
             string[] sArr = { "aba", "abca", "abc", "aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuculmgmqfvnbgtapekouga" };
             foreach (var s in sArr)
-                Console.WriteLine($" '{s}' can be palindrome after deleting at most one character from it: '{StringAlgorithms.ValidPalindromeII(s)}'\n");
+                Console.WriteLine($" '{s}' can be palindrome after deleting at most one character from it: '{StringAlgorithms.ValidPalindromeII(s)}'\nodes");
         }
 
 
@@ -7798,7 +7799,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("1839. Longest Substring Of All Vowels in Order");
             string[] sArr = { "aeiaaioaaaaeiiiiouuuooaauuaeiu", "aeeeiiiioooauuuaeiou", "a" };
             foreach (var s in sArr)
-                Console.WriteLine($" In '{s}' Longest substring of all vowels in order is: '{StringAlgorithms.LongestBeautifulSubstringOfAllVowels(s)}'\n");
+                Console.WriteLine($" In '{s}' Longest substring of all vowels in order is: '{StringAlgorithms.LongestBeautifulSubstringOfAllVowels(s)}'\nodes");
         }
 
 
@@ -7808,7 +7809,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("767. Reorganize String");
             string[] sArr = { "aab", "aaab", "a", "vvvlo", "vdjvevvvs" };
             foreach (var s in sArr)
-                Console.WriteLine($" Input '{s}' can be reorganized into: '{DailyProblem.ReorganizeString(s)}'\n ");
+                Console.WriteLine($" Input '{s}' can be reorganized into: '{DailyProblem.ReorganizeString(s)}'\nodes ");
         }
 
 
@@ -7824,7 +7825,7 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($" In a cafe of dimension => '{h[i]}' x '{w[i]}'");
                 horizontalCutsArr[i].Print("horizontal-Cuts");
                 verticalCutsArr[i].Print("vertical-Cuts");
-                Console.WriteLine($" Max Area of single piece of Cake is: '{DailyProblem.MaxAreaOfPieceOfCake(h[i], w[i], horizontalCutsArr[i], verticalCutsArr[i])}'\n");
+                Console.WriteLine($" Max Area of single piece of Cake is: '{DailyProblem.MaxAreaOfPieceOfCake(h[i], w[i], horizontalCutsArr[i], verticalCutsArr[i])}'\nodes");
             }
         }
 
@@ -7841,7 +7842,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < target.Length; i++)
             {
                 deadends[i].Print("Deadends");
-                Console.WriteLine($" Min no of moves to get from '0000' => '{target[i]}' position is: '{DailyProblem.OpenLock(deadends[i], target[i])}'\n");
+                Console.WriteLine($" Min no of moves to get from '0000' => '{target[i]}' position is: '{DailyProblem.OpenLock(deadends[i], target[i])}'\nodes");
             }
         }
 
@@ -7862,7 +7863,7 @@ namespace InterviewProblemNSolutions
                 speed[i].Print("Speed");
                 efficiency[i].Print("Efficiency");
                 Console.WriteLine($" From above list of '{n[i]}' players, team with max performance consisting of maximum '{k[i]}' players has score =>" +
-                    $" '{DailyProblem.MaxPerformanceTeam(n[i], speed[i], efficiency[i], k[i])}'\n");
+                    $" '{DailyProblem.MaxPerformanceTeam(n[i], speed[i], efficiency[i], k[i])}'\nodes");
             }
         }
 
@@ -7873,7 +7874,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("273. Integer to English Words");
             int[] nums = { 123, 12345, 1234567, 1234567891, 0, 123000000, 1230000000, 100 };
             foreach (var num in nums)
-                Console.WriteLine($" '{num}' get converted into '{DailyProblem.NumberToWords(num)}'\n");
+                Console.WriteLine($" '{num}' get converted into '{DailyProblem.NumberToWords(num)}'\nodes");
         }
 
 
@@ -7888,7 +7889,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" length of the longest consecutive elements sequence in O(n) time is: '{DailyProblem.LongestConsecutive(nums)}'\n");
+                Console.WriteLine($" length of the longest consecutive elements sequence in O(nodes) time is: '{DailyProblem.LongestConsecutive(nums)}'\nodes");
             }
         }
 
@@ -7902,8 +7903,8 @@ namespace InterviewProblemNSolutions
             foreach (var cost in costArr)
             {
                 cost.Print("Stair-Cost");
-                Console.WriteLine($" [Recursive] Min cost to climb to top starting from 0th or 1st idx is: '{DynamicProgramming.MinCostClimbingStairs(cost)}'\n");
-                Console.WriteLine($" [Iterative] Min cost to climb to top starting from 0th or 1st idx is: '{DynamicProgramming.MinCostClimbingStairsIterative(cost)}'\n");
+                Console.WriteLine($" [Recursive] Min cost to climb to top starting from 0th or 1st idx is: '{DynamicProgramming.MinCostClimbingStairs(cost)}'\nodes");
+                Console.WriteLine($" [Iterative] Min cost to climb to top starting from 0th or 1st idx is: '{DynamicProgramming.MinCostClimbingStairsIterative(cost)}'\nodes");
             }
         }
 
@@ -7921,7 +7922,7 @@ namespace InterviewProblemNSolutions
             {
                 nums[i].Print("Nums");
                 Console.WriteLine($" Starting from 0th idx max score we can get my jumping max '{k[i]}' positions everytime till we reach last" +
-                    $" idx in above array we score: '{DynamicProgramming.JumpGameVI(nums[i], k[i])}'\n");
+                    $" idx in above array we score: '{DynamicProgramming.JumpGameVI(nums[i], k[i])}'\nodes");
             }
         }
 
@@ -7949,7 +7950,7 @@ namespace InterviewProblemNSolutions
             foreach (var stones in stonesArr)
             {
                 stonesArr.Print("Stones");
-                Console.WriteLine($" Min difference in Alice and Bob's score if they both play optimally is: '{DynamicProgramming.StoneGameVII(stones)}'\n");
+                Console.WriteLine($" Min difference in Alice and Bob's score if they both play optimally is: '{DynamicProgramming.StoneGameVII(stones)}'\nodes");
             }
         }
 
@@ -7967,7 +7968,7 @@ namespace InterviewProblemNSolutions
             {
                 nums[i].Print("Nums");
                 Console.WriteLine($" No of contiguous non-empty subarrays such that the value of the maximum array element in that subarray is in the range [{left[i]}, {right[i]}]" +
-                    $" are: {DailyProblem.NumberOfSubarraysWithBoundedMaximum(nums[i], left[i], right[i])}\n");
+                    $" are: {DailyProblem.NumberOfSubarraysWithBoundedMaximum(nums[i], left[i], right[i])}\nodes");
             }
         }
 
@@ -7984,7 +7985,7 @@ namespace InterviewProblemNSolutions
                 arr1[i].Print("Arr1");
                 arr2[i].Print("Arr1");
                 Console.WriteLine($" Distance value is defined as the number of elements arr1[i] such that there is not any element arr2[j]" +
-                    $" where |arr1[i]-arr2[j]| <= d are: '{DailyProblem.FindTheDistanceValueBetweenTwoArrays(arr1[i], arr2[i], d[i])}'\n");
+                    $" where |arr1[i]-arr2[j]| <= d are: '{DailyProblem.FindTheDistanceValueBetweenTwoArrays(arr1[i], arr2[i], d[i])}'\nodes");
             }
         }
 
@@ -8008,8 +8009,8 @@ namespace InterviewProblemNSolutions
             Utility.Print("629. K Inverse Pairs Array");
             int[] n = { 3, 3 }, k = { 0, 1 };
             for (int i = 0; i < n.Length; i++)
-                Console.WriteLine($" Given 2 integers {n[i]} and {k[i]}, the no of different arrays consist of numbers from 1 to n such that" +
-                    $" there are exactly k inverse pairs are: '{DailyProblem.KInversePairs(n[i], k[i])}'\n");
+                Console.WriteLine($" Given 2 integers {n[i]} and {k[i]}, the no of different arrays consist of numbers from 1 to nodes such that" +
+                    $" there are exactly k inverse pairs are: '{DailyProblem.KInversePairs(n[i], k[i])}'\nodes");
         }
 
 
@@ -8048,8 +8049,8 @@ namespace InterviewProblemNSolutions
             foreach (var grid in gridArr)
             {
                 grid.Print("GRID");
-                Console.WriteLine($" Starting at the top left square (0, 0). The least time until we can reach the bottom right square (N-1, N-1) is: '{DailyProblem.SwimInRisingWater(grid)}'\n");
-                Console.WriteLine($" Starting at the top left square (0, 0). The least time until we can reach the bottom right square (N-1, N-1) is: '{DailyProblem.SwimInRisingWater_PriorityQueue(grid)}'\n");
+                Console.WriteLine($" Starting at the top left square (0, 0). The least time until we can reach the bottom right square (N-1, N-1) is: '{DailyProblem.SwimInRisingWater(grid)}'\nodes");
+                Console.WriteLine($" Starting at the top left square (0, 0). The least time until we can reach the bottom right square (N-1, N-1) is: '{DailyProblem.SwimInRisingWater_PriorityQueue(grid)}'\nodes");
             }
         }
 
@@ -8064,7 +8065,7 @@ namespace InterviewProblemNSolutions
             {
                 stations[i].Print("Stations");
                 Console.WriteLine($" Min no of refueling stops the car must make in order to reach its destination '{target[i]}'" +
-                    $"\n while passing thru above Fuel pumps with starting fuel '{startFuel[i]}' are : '{DailyProblem.MinRefuelStops(target[i], startFuel[i], stations[i])}'\n");
+                    $"\nodes while passing thru above Fuel pumps with starting fuel '{startFuel[i]}' are : '{DailyProblem.MinRefuelStops(target[i], startFuel[i], stations[i])}'\nodes");
             }
         }
 
@@ -8080,7 +8081,7 @@ namespace InterviewProblemNSolutions
             {
                 words.Print("Words");
                 Console.WriteLine($" From above string array all the pairs of the distinct indices (i, j) in the given list," +
-                    $"\n so that the concatenation of the two words words[i] + words[j] is a palindrome are");
+                    $"\nodes so that the concatenation of the two words words[i] + words[j] is a palindrome are");
                 DailyProblem.PalindromePairs(words).Print("PalindromePairs");
                 Console.WriteLine();
             }
@@ -8096,8 +8097,8 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < s.Length; i++)
             {
                 words[i].Print("Words");
-                //Console.WriteLine($" No of words from above array that is a subsequence of '{s[i]}' are: '{DailyProblem.NumMatchingSubseq_BruteForce(s[i], words[i])}'\n");
-                Console.WriteLine($" No of words from above array that is a subsequence of '{s[i]}' are: '{DailyProblem.NumMatchingSubseq(s[i], words[i])}'\n");
+                //Console.WriteLine($" No of words from above array that is a subsequence of '{s[i]}' are: '{DailyProblem.NumMatchingSubseq_BruteForce(s[i], words[i])}'\nodes");
+                Console.WriteLine($" No of words from above array that is a subsequence of '{s[i]}' are: '{DailyProblem.NumMatchingSubseq(s[i], words[i])}'\nodes");
             }
         }
 
@@ -8109,8 +8110,8 @@ namespace InterviewProblemNSolutions
             int[] m = { 2, 1 }, n = { 2, 3 }, maxMove = { 2, 3 }, startRow = { 0, 0 }, startColumn = { 0, 1 };
             for (int i = 0; i < m.Length; i++)
                 Console.WriteLine($" In a '{m[i]}x{n[i]}' GRID with maxMoves '{maxMove[i]}' & starting from Pos '{startRow[i]},{startColumn[i]}'" +
-                    $"\n diff paths to move ball out of boundry are: '{DailyProblem.OutOfBoundaryPaths(m[i], n[i], maxMove[i], startRow[i], startColumn[i])}'\n");
-            //OutOfBoundaryPathsBruteForce(m[i], n[i], maxMove[i], startRow[i], startColumn[i])
+                    $"\nodes diff paths to move ball out of boundry are: '{DailyProblem.OutOfBoundaryPaths(m[i], n[i], maxMove[i], startRow[i], startColumn[i])}'\nodes");
+            //OutOfBoundaryPathsBruteForce(m[i], nodes[i], maxMove[i], startRow[i], startColumn[i])
         }
 
 
@@ -8158,7 +8159,7 @@ namespace InterviewProblemNSolutions
             foreach (var ratings in ratingsArr)
             {
                 ratings.Print("Ratings");
-                Console.WriteLine($" Min no of candies you need to have to distribute the candies to the children => '{DailyProblem.Candy(ratings)}'\n");
+                Console.WriteLine($" Min no of candies you need to have to distribute the candies to the children => '{DailyProblem.Candy(ratings)}'\nodes");
             }
         }
 
@@ -8184,8 +8185,8 @@ namespace InterviewProblemNSolutions
             Utility.Print("1220. Count Vowels Permutation");
             int[] numbers = { 1, 2, 5, 10, 15, 1000 };
             foreach (var n in numbers)
-                //Console.WriteLine($" Count of strings of length {n} can be formed under the given rules are: {DailyProblem.CountVowelPermutation_BruteForce(n)}\n");
-                Console.WriteLine($" Count of strings of length {n} can be formed under the given rules are: '{DynamicProgramming.CountVowelPermutation(n)}'\n");
+                //Console.WriteLine($" Count of strings of length {nodes} can be formed under the given rules are: {DailyProblem.CountVowelPermutation_BruteForce(nodes)}\nodes");
+                Console.WriteLine($" Count of strings of length {n} can be formed under the given rules are: '{DynamicProgramming.CountVowelPermutation(n)}'\nodes");
         }
 
 
@@ -8199,7 +8200,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < truckSize.Length; i++)
             {
                 boxTypes[i].Print("BoxTypes");
-                Console.WriteLine($" with truckSize '{truckSize[i]}', the max no of boxes that can be put on the truck are: '{DailyProblem.MaximumUnits(boxTypes[i], truckSize[i])}'\n");
+                Console.WriteLine($" with truckSize '{truckSize[i]}', the max no of boxes that can be put on the truck are: '{DailyProblem.MaximumUnits(boxTypes[i], truckSize[i])}'\nodes");
             }
         }
 
@@ -8231,7 +8232,7 @@ namespace InterviewProblemNSolutions
             foreach (var arr in arrays)
             {
                 arr.Print("Input Array");
-                Console.WriteLine($" Min size of the set so that at least half of the integers of above array are removed is: '{DailyProblem.ReduceArraySizeToTheHalf(arr)}'\n");
+                Console.WriteLine($" Min size of the set so that at least half of the integers of above array are removed is: '{DailyProblem.ReduceArraySizeToTheHalf(arr)}'\nodes");
             }
         }
 
@@ -8249,7 +8250,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < matrix.Length; i++)
             {
                 matrix[i].Print("Sorted MATRIX");
-                Console.WriteLine($" '{k[i]}'th smallest element in the sorted order (not the kth distinct element) is: '{DailyProblem.KthSmallestInSortedMatrix(matrix[i], k[i])}'\n");
+                Console.WriteLine($" '{k[i]}'th smallest element in the sorted order (not the kth distinct element) is: '{DailyProblem.KthSmallestInSortedMatrix(matrix[i], k[i])}'\nodes");
             }
         }
 
@@ -8270,7 +8271,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("1694. Reformat Phone Number");
             string[] numbers = { "1-23-45 6", "123 4-567", "123 4-5678", "12", "--17-5 229 35-39475 " };
             foreach (var number in numbers)
-                Console.WriteLine($" Formatting '{number}' as per given instruction gives: '{DailyProblem.ReformatNumber(number)}'\n");
+                Console.WriteLine($" Formatting '{number}' as per given instruction gives: '{DailyProblem.ReformatNumber(number)}'\nodes");
         }
 
 
@@ -8283,7 +8284,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" The no of triplets chosen from the above array that can make triangles if we take them as side lengths of a triangle are: '{DailyProblem.TriangleNumber(nums)}'\n");
+                Console.WriteLine($" The no of triplets chosen from the above array that can make triangles if we take them as side lengths of a triangle are: '{DailyProblem.TriangleNumber(nums)}'\nodes");
             }
         }
 
@@ -8301,7 +8302,7 @@ namespace InterviewProblemNSolutions
             {
                 arr.Print("Input Array");
                 int[] ans = DailyProblem.ThreeEqualParts(arr);
-                Console.WriteLine($" Dividing above array into 3 non-empty parts such that all of these parts represent the same binary value: '{ans[0]}...{ans[1]}'\n");
+                Console.WriteLine($" Dividing above array into 3 non-empty parts such that all of these parts represent the same binary value: '{ans[0]}...{ans[1]}'\nodes");
             }
         }
 
@@ -8325,7 +8326,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("838. Push Dominoes");
             string[] dominoesArr = { "RR.L", ".L.R...LR..L.." };
             foreach (var dominoes in dominoesArr)
-                Console.WriteLine($" For initial state '{dominoes}' final state would be => '{DailyProblem.PushDominoes(dominoes)}'\n");
+                Console.WriteLine($" For initial state '{dominoes}' final state would be => '{DailyProblem.PushDominoes(dominoes)}'\nodes");
         }
 
 
@@ -8439,8 +8440,8 @@ namespace InterviewProblemNSolutions
             int biggestBeautifulSeen = 1;
 
             foreach (var n in nArr)
-                //DailyProblem.BeautifulArray(n).Print($"for n={n}, below is generated beautiful array");
-                DailyProblem.BeautifulArray_Cache(n, cache, ref biggestBeautifulSeen).Print($"for n={n}, below is generated beautiful array");
+                //DailyProblem.BeautifulArray(nodes).Print($"for nodes={nodes}, below is generated beautiful array");
+                DailyProblem.BeautifulArray_Cache(n, cache, ref biggestBeautifulSeen).Print($"for nodes={n}, below is generated beautiful array");
         }
 
 
@@ -8506,7 +8507,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("639. Decode Ways II");
             string[] sArr = { "1212", "*", "1*", "2*", "**", "***", "****", "*1*1*0" };
             foreach (var s in sArr)
-                Console.WriteLine($" Given '{s}' consisting of digits(0...9) & *, the no of ways to decode it are: '{DynamicProgramming.DecodeWaysII(s)}'\n");
+                Console.WriteLine($" Given '{s}' consisting of digits(0...9) & *, the no of ways to decode it are: '{DynamicProgramming.DecodeWaysII(s)}'\nodes");
         }
 
 
@@ -8521,7 +8522,7 @@ namespace InterviewProblemNSolutions
             foreach (var grid in gridArr)
             {
                 grid.Print("GRID");
-                Console.WriteLine($" size of the largest island in above grid after changing at most one 0 to be 1: '{DailyProblem.MakingALargeIsland(grid)}'\n");
+                Console.WriteLine($" size of the largest island in above grid after changing at most one 0 to be 1: '{DailyProblem.MakingALargeIsland(grid)}'\nodes");
             }
         }
 
@@ -8579,7 +8580,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("132. Palindrome Partitioning II");
             string[] sArr = { "aab", "a", "ab", "aaaannnnnbcjsjscgsioudcsssss" };
             foreach (var s in sArr)
-                Console.WriteLine($" Min no of cuts to make each partition of '{s}' a paldinrome is => '{DynamicProgramming.MinCut(s)}'\n");
+                Console.WriteLine($" Min no of cuts to make each partition of '{s}' a paldinrome is => '{DynamicProgramming.MinCut(s)}'\nodes");
         }
 
 
@@ -8651,8 +8652,8 @@ namespace InterviewProblemNSolutions
             string[] trees = { "9,3,4,#,#,1,#,#,2,#,6,#,#", "9,#,#,1", "1,#", "9,#,92,#,#", "#,7,6,9,#,#,#" };
             foreach (var binaryTree in trees)
             {
-                Console.WriteLine($" Binary-Tree-Serialization '{binaryTree}' is Valid : '{DailyProblem.IsValidSerialization(binaryTree)}'\n");
-                Console.WriteLine($" Binary-Tree-Serialization '{binaryTree}' is Valid : '{DailyProblem.IsValidSerialization_Iterative(binaryTree)}'\n");
+                Console.WriteLine($" Binary-Tree-Serialization '{binaryTree}' is Valid : '{DailyProblem.IsValidSerialization(binaryTree)}'\nodes");
+                Console.WriteLine($" Binary-Tree-Serialization '{binaryTree}' is Valid : '{DailyProblem.IsValidSerialization_Iterative(binaryTree)}'\nodes");
             }
         }
 
@@ -8665,7 +8666,7 @@ namespace InterviewProblemNSolutions
             foreach (var strs in s_Arr)
             {
                 strs.Print("Input array");
-                Console.WriteLine($" Longest uncommon subsequence in above array is of length: '{StringAlgorithms.FindLUSlength(strs)}'\n");
+                Console.WriteLine($" Longest uncommon subsequence in above array is of length: '{StringAlgorithms.FindLUSlength(strs)}'\nodes");
             }
         }
 
@@ -8682,8 +8683,8 @@ namespace InterviewProblemNSolutions
                 startTime[i].Print("Start-Time");
                 endTime[i].Print("End-Time");
                 profit[i].Print("Profit");
-                Console.WriteLine($" Max profit we can get from above jobs is: '{DynamicProgramming.JobScheduling(startTime[i], endTime[i], profit[i])}'\n");
-                Console.WriteLine($" Max profit we can get from above jobs is: '{DynamicProgramming.JobScheduling_Faster(startTime[i], endTime[i], profit[i])}'\n");
+                Console.WriteLine($" Max profit we can get from above jobs is: '{DynamicProgramming.JobScheduling(startTime[i], endTime[i], profit[i])}'\nodes");
+                Console.WriteLine($" Max profit we can get from above jobs is: '{DynamicProgramming.JobScheduling_Faster(startTime[i], endTime[i], profit[i])}'\nodes");
             }
         }
 
@@ -8696,7 +8697,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < nums.Length; i++)
             {
                 nums[i].Print("Input");
-                Console.WriteLine($" minimum number of patches required to make up all numbers upto '{target[i]}' are: '{DynamicProgramming.MinPatches(nums[i], target[i])}'\n");
+                Console.WriteLine($" minimum number of patches required to make up all numbers upto '{target[i]}' are: '{DynamicProgramming.MinPatches(nums[i], target[i])}'\nodes");
             }
         }
 
@@ -8720,8 +8721,8 @@ namespace InterviewProblemNSolutions
             int[] m = { 3, 3, 3 }, n = { 3, 3, 3 };
             for (int i = 0; i < ops.Length; i++)
             {
-                ops[i].Print("Operations to be performed in {m[i]}x{n[i]} Mattrix");
-                Console.WriteLine($" number of maximum integers in the matrix after performing all the operations is: '{DailyProblem.RangeAdditionII(m[i], n[i], ops[i])}'\n");
+                ops[i].Print("Operations to be performed in {m[i]}x{nodes[i]} Mattrix");
+                Console.WriteLine($" number of maximum integers in the matrix after performing all the operations is: '{DailyProblem.RangeAdditionII(m[i], n[i], ops[i])}'\nodes");
             }
         }
 
@@ -8734,7 +8735,7 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print("Nums");
-                Console.WriteLine($" Smallest number in above rotated array is: '{SearchAlgorithms.MinInRotatedSortedArray(nums)}'\n");
+                Console.WriteLine($" Smallest number in above rotated array is: '{SearchAlgorithms.MinInRotatedSortedArray(nums)}'\nodes");
             }
         }
 
@@ -8747,7 +8748,7 @@ namespace InterviewProblemNSolutions
             foreach (var arr in arrays)
             {
                 arr.Print("Input");
-                Console.WriteLine($" longest length of a set s[k] is: '{DailyProblem.ArrayNesting(arr)}'\n");
+                Console.WriteLine($" longest length of a set s[k] is: '{DailyProblem.ArrayNesting(arr)}'\nodes");
             }
         }
 
@@ -8758,7 +8759,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("95. Unique Binary Search Trees II");
             for (int n = 1; n <= 8; n++)
             {
-                Console.WriteLine($"\n For Catalan no {n}, below are all the structurally unique BST's, which has exactly {n} nodes of unique values from 1 to {n}");
+                Console.WriteLine($"\nodes For Catalan no {n}, below are all the structurally unique BST's, which has exactly {n} nodes of unique values from 1 to {n}");
                 foreach (var validBST in DailyProblem.GenerateTrees(n))
                     validBST.InOrder("BST");
             }
@@ -8774,7 +8775,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < n.Length; i++)
             {
                 mines[i].Print("Mines");
-                Console.WriteLine($" In a Grid of {n[i]}x{n[i]} the order of the largest plus sign is: '{DynamicProgramming.OrderOfLargestPlusSign(n[i], mines[i])}'\n");
+                Console.WriteLine($" In a Grid of {n[i]}x{n[i]} the order of the largest plus sign is: '{DynamicProgramming.OrderOfLargestPlusSign(n[i], mines[i])}'\nodes");
             }
         }
 
@@ -8792,8 +8793,8 @@ namespace InterviewProblemNSolutions
             foreach (var nums in numsArr)
             {
                 nums.Print(nameof(nums));
-                // Console.WriteLine($" No of all the arithmetic subsequences of numsArr(len>2) are: '{DynamicProgramming.NumberOfArithmeticSlices_Recursive(numsArr)}'\n");
-                Console.WriteLine($" No of all the arithmetic subsequences of numsArr(len>2) are: '{DynamicProgramming.NumberOfArithmeticSlices_DP(nums)}'\n");
+                // Console.WriteLine($" No of all the arithmetic subsequences of numsArr(len>2) are: '{DynamicProgramming.NumberOfArithmeticSlices_Recursive(numsArr)}'\nodes");
+                Console.WriteLine($" No of all the arithmetic subsequences of numsArr(len>2) are: '{DynamicProgramming.NumberOfArithmeticSlices_DP(nums)}'\nodes");
                 
             }
         }
@@ -8812,7 +8813,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < edges.Length; i++)
             {
                 edges[i].Print("Edges");
-                Console.WriteLine($" No of nodes that are reachable from node '0' in the new graph with maxMoves '{maxMoves[i]}' are: '{DailyProblem.ReachableNodes(edges[i], maxMoves[i], n[i])}'\n");
+                Console.WriteLine($" No of nodes that are reachable from node '0' in the new graph with maxMoves '{maxMoves[i]}' are: '{DailyProblem.ReachableNodes(edges[i], maxMoves[i], n[i])}'\nodes");
             }
         }
 
@@ -8823,7 +8824,7 @@ namespace InterviewProblemNSolutions
             Utility.Print("1189. Maximum Number of Balloons");
             string[] texts = { "nlaebolko", "loonbalxballpoon", "leetcode", "balloonballo" };
             foreach (var text in texts)
-                Console.WriteLine($" No of 'balloon' we can make from characters in '{text}' are: '{DailyProblem.MaxNumberOfBalloons(text)}'\n");
+                Console.WriteLine($" No of 'balloon' we can make from characters in '{text}' are: '{DailyProblem.MaxNumberOfBalloons(text)}'\nodes");
         }
 
 
@@ -8835,7 +8836,7 @@ namespace InterviewProblemNSolutions
             foreach (var array in arrays)
             {
                 array.Print("Input array");
-                Console.WriteLine($" Length of a maximum size turbulent subarray in above arr is: '{DailyProblem.MaxTurbulenceSize(array)}'\n");
+                Console.WriteLine($" Length of a maximum size turbulent subarray in above arr is: '{DailyProblem.MaxTurbulenceSize(array)}'\nodes");
             }
         }
 
@@ -8847,9 +8848,9 @@ namespace InterviewProblemNSolutions
             string[] s = { "rabbbit", "babgbag" }, t = { "rabbit", "bag" };
             for (int i = 0; i < s.Length; i++)
             {
-                Console.WriteLine($" Given strings s:'{s[i]}' and t:'{t[i]}' the no of distinct subsequences of s which equals t are: '{StringAlgorithms.NumDistinctSubsequences_Recursive(s[i], t[i])}'\n");
-                Console.WriteLine($" Given strings s:'{s[i]}' and t:'{t[i]}' the no of distinct subsequences of s which equals t are: '{DynamicProgramming.NumDistinctSubsequences_DP(s[i], t[i])}'\n");
-                Console.WriteLine($" Given strings s:'{s[i]}' and t:'{t[i]}' the no of distinct subsequences of s which equals t are: '{DynamicProgramming.NumDistinctSubsequences_DP_TopDown(s[i], t[i])}'\n");
+                Console.WriteLine($" Given strings s:'{s[i]}' and t:'{t[i]}' the no of distinct subsequences of s which equals t are: '{StringAlgorithms.NumDistinctSubsequences_Recursive(s[i], t[i])}'\nodes");
+                Console.WriteLine($" Given strings s:'{s[i]}' and t:'{t[i]}' the no of distinct subsequences of s which equals t are: '{DynamicProgramming.NumDistinctSubsequences_DP(s[i], t[i])}'\nodes");
+                Console.WriteLine($" Given strings s:'{s[i]}' and t:'{t[i]}' the no of distinct subsequences of s which equals t are: '{DynamicProgramming.NumDistinctSubsequences_DP_TopDown(s[i], t[i])}'\nodes");
             }
         }
 
@@ -8866,7 +8867,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < k.Length; i++)
             {
                 grid[i].Print("GRID");
-                Console.WriteLine($" Shortest part from top-left to bottom right cell after removing max '{k[i]}' obstacles is: '{DailyProblem.ShortestPathWithObstaclesElimination(grid[i], k[i])}'\n");
+                Console.WriteLine($" Shortest part from top-left to bottom right cell after removing max '{k[i]}' obstacles is: '{DailyProblem.ShortestPathWithObstaclesElimination(grid[i], k[i])}'\nodes");
             }
         }
 
@@ -8881,7 +8882,7 @@ namespace InterviewProblemNSolutions
             foreach (var emails in emailsArr)
             {
                 emails.Print("E-Mails array");
-                Console.WriteLine($" From above list number of different addresses that actually receive mails are: '{StringAlgorithms.NumUniqueEmails(emails)}'\n");
+                Console.WriteLine($" From above list number of different addresses that actually receive mails are: '{StringAlgorithms.NumUniqueEmails(emails)}'\nodes");
             }
         }
 
@@ -8919,8 +8920,8 @@ namespace InterviewProblemNSolutions
                      p = { "a", "*", "?a", "*a*b", "a*c?b", "******", "a*******b", "*****b*aba***babaa*bbaba***a*aaba*b*aa**a*b**ba***a*a*", "m??*ss*?i*pi", "*b**b***baba***aaa*b***", "**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b**aaaaaaaaa*a********ba*bbb***a*ba*bb*bb**a*b*bb" };
             for (int i = 0; i < s.Length; i++)
             {
-                //Console.WriteLine($" For Input =>\t'{s[i]}'\n and Pattern =>\t'{p[i]}',\n wildcard pattern matching results in : '{StringAlgorithms.WildcardMatching(s[i], p[i])}'\n");
-                Console.WriteLine($" For Input =>\t'{s[i]}'\n and Pattern =>\t'{p[i]}',\n wildcard pattern matching results in : '{DynamicProgramming.WildcardMatching_DP(s[i], p[i])}'\n");
+                //Console.WriteLine($" For Input =>\t'{s[i]}'\nodes and Pattern =>\t'{p[i]}',\nodes wildcard pattern matching results in : '{StringAlgorithms.WildcardMatching(s[i], p[i])}'\nodes");
+                Console.WriteLine($" For Input =>\t'{s[i]}'\nodes and Pattern =>\t'{p[i]}',\nodes wildcard pattern matching results in : '{DynamicProgramming.WildcardMatching_DP(s[i], p[i])}'\nodes");
             }
         }
 
@@ -9192,8 +9193,8 @@ namespace InterviewProblemNSolutions
             {
                 positionArr[i].Print("Positions of cars");
                 speedArr[i].Print("Speed of cars");
-                //Console.WriteLine($"For reaching target '{targetArr[i]}' miles above cars would reach in '{DailyProblem.CarFleet(targetArr[i], positionArr[i], speedArr[i])}' grps/fleets of cars\n");
-                Console.WriteLine($"For reaching target '{targetArr[i]}' miles above cars would reach in '{DailyProblem.CarFleet_Faster(targetArr[i], positionArr[i], speedArr[i])}' grps/fleets of cars\n");
+                //Console.WriteLine($"For reaching target '{targetArr[i]}' miles above cars would reach in '{DailyProblem.CarFleet(targetArr[i], positionArr[i], speedArr[i])}' grps/fleets of cars\nodes");
+                Console.WriteLine($"For reaching target '{targetArr[i]}' miles above cars would reach in '{DailyProblem.CarFleet_Faster(targetArr[i], positionArr[i], speedArr[i])}' grps/fleets of cars\nodes");
             }
         }
 
@@ -9420,8 +9421,8 @@ namespace InterviewProblemNSolutions
 
         public static void Power()
         {
-            // https://leetcode.com/problems/powx-n/
-            Utility.Print("50. Pow(x, n)");
+            // https://leetcode.com/problems/powx-nodes/
+            Utility.Print("50. Pow(x, nodes)");
             double[] x = { 2.0, 2.1, 2.0, 4.0, -54, 0, 1, 2 };
             int[] n = { 0, 3, -2, -2, 0, 9, -2147483648, -2147483648 };
             for (int i = 0; i < x.Length; i++)
@@ -9653,7 +9654,7 @@ namespace InterviewProblemNSolutions
                 {9,362880},
             };
             for (int i = 0; i < n.Length; i++)
-                Console.WriteLine($"For Given n '{n[i]}' and k '{k[i]}', the kth permutation sequence is => '{DailyProblem.PermutationSequence(n[i], k[i], factDict)}'");
+                Console.WriteLine($"For Given nodes '{n[i]}' and k '{k[i]}', the kth permutation sequence is => '{DailyProblem.PermutationSequence(n[i], k[i], factDict)}'");
         }
 
 
@@ -9812,7 +9813,7 @@ namespace InterviewProblemNSolutions
             foreach(var arr in arrays)
             {
                 arr.Print("Input Array");
-                Console.WriteLine($" For above arr the sum of all sub-array minimums => '{DailyProblem.SumSubarrayMins(arr)}'\n");
+                Console.WriteLine($" For above arr the sum of all sub-array minimums => '{DailyProblem.SumSubarrayMins(arr)}'\nodes");
             }
         }
 
@@ -9904,7 +9905,7 @@ namespace InterviewProblemNSolutions
             string[] sArr = { "aacecaaa", "abcd", "dabcd",
             "dabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabbcdaacecaaadabb" };
             foreach (var s in sArr)
-                Console.WriteLine($" For Input string => '{s}'\n by adding minimum characters in front to make palindrome is => '{StringAlgorithms.ShortestPalindrome(s)}'");
+                Console.WriteLine($" For Input string => '{s}'\nodes by adding minimum characters in front to make palindrome is => '{StringAlgorithms.ShortestPalindrome(s)}'");
         }
 
 
@@ -10241,7 +10242,7 @@ namespace InterviewProblemNSolutions
             int[] left = { 5, 0, 1, 1111, 126 };
             int[] right = { 7, 0, int.MaxValue, int.MaxValue, 256 };
             for (int i = 0; i < left.Length; i++)
-                Console.WriteLine($"Bitwise AND of all numbers in the range [{left[i]}..{right[i]}] is => {DailyProblem.RangeBitwiseAnd(left[i], right[i])}\n");
+                Console.WriteLine($"Bitwise AND of all numbers in the range [{left[i]}..{right[i]}] is => {DailyProblem.RangeBitwiseAnd(left[i], right[i])}\nodes");
         }
 
 
@@ -10277,7 +10278,7 @@ namespace InterviewProblemNSolutions
             foreach(var nums in numsArr) 
             {
                 nums.Print("Input arr");
-                Console.WriteLine($"With condition: 'can traverse between index i and index j, i != j, if and only if gcd(nums[i], nums[j]) > 1'\n" +
+                Console.WriteLine($"With condition: 'can traverse between index i and index j, i != j, if and only if gcd(nums[i], nums[j]) > 1'\nodes" +
                     $"Every pair of indices i and j in nums, where i < j, there exists a sequence of traversals that can take us from i to j => {DailyProblem.CanTraverseAllPairs(nums)}");
                 Console.WriteLine(Utility.lineDelimeter);
             }
@@ -10540,10 +10541,10 @@ namespace InterviewProblemNSolutions
             Utility.Print("2485. Find the Pivot Integer");
             int[] nums = [8, 1, 4, 99, 999, 1000, 128];
             foreach (var n in nums)
-                //Console.WriteLine($"For the Numbers in the range [{1}..{n}]\n" +
-                //    $" The pivot integer such that sum of all elements between 1..x inclusively equals sum of all elements between x..n => {DailyProblem.PivotInteger_Linear(n)}");
-                Console.WriteLine($"For the Numbers in the range [{1}..{n}]\n" +
-                    $" The pivot integer such that sum of all elements between 1..x inclusively equals sum of all elements between x..n => {DailyProblem.PivotInteger_Logarithmic(n)}");
+                //Console.WriteLine($"For the Numbers in the range [{1}..{nodes}]\nodes" +
+                //    $" The pivot integer such that sum of all elements between 1..x inclusively equals sum of all elements between x..nodes => {DailyProblem.PivotInteger_Linear(nodes)}");
+                Console.WriteLine($"For the Numbers in the range [{1}..{n}]\nodes" +
+                    $" The pivot integer such that sum of all elements between 1..x inclusively equals sum of all elements between x..nodes => {DailyProblem.PivotInteger_Logarithmic(n)}");
         }
 
 
@@ -10709,7 +10710,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < nodes.Length; i++)
             {
                 edgesArr[i].Print("Input-Array");
-                DailyProblem.SumOfDistancesInTree(nodes[i], edgesArr[i]).Print($"For tree/graph with '{nodes[i]}' nodes and above given edges the sum of the distances between the ith node in the tree and all other nodes is\n");
+                DailyProblem.SumOfDistancesInTree(nodes[i], edgesArr[i]).Print($"For tree/graph with '{nodes[i]}' nodes and above given edges the sum of the distances between the ith node in the tree and all other nodes is\nodes");
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
@@ -10807,7 +10808,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < grid.Length; i++)
             {
                 grid[i].Print("Input-GRID");
-                Console.WriteLine($"Maximum safeness factor of all paths leading to cell from [0,0] to [n-1, n-1] => '{DailyProblem.MaximumSafenessFactor(grid[i])}'");
+                Console.WriteLine($"Maximum safeness factor of all paths leading to cell from [0,0] to [nodes-1, nodes-1] => '{DailyProblem.MaximumSafenessFactor(grid[i])}'");
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
@@ -10934,7 +10935,7 @@ namespace InterviewProblemNSolutions
                 profits[i].Print("Profits");
                 capital[i].Print("Capital");
                 Console.WriteLine($"From above Projects after choosing at most k '{k[i]}' distinct projects from given projects to maximize your final capital when starting cap '{w[i]}'," +
-                    $"\n the final maximized capital is => \t'{DailyProblem.FindMaximizedCapital(k[i], w[i], profits[i], capital[i])}'");
+                    $"\nodes the final maximized capital is => \t'{DailyProblem.FindMaximizedCapital(k[i], w[i], profits[i], capital[i])}'");
             }
         }
 
@@ -11061,6 +11062,22 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void RemoveMaxNumberOfEdgesToKeepGraphFullyTraversable()
+        {
+            // https://leetcode.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable
+            int[][][] edges = [
+                                [[3, 1, 2], [3, 2, 3], [1, 1, 3], [1, 2, 4], [1, 1, 2], [2, 3, 4]],
+                                [[3, 1, 2], [3, 3, 4], [1, 1, 3], [2, 2, 4]]
+                              ];
+            int[] nodes = [4,4];
+            Utility.Print("1579. Remove Max Number of Edges to Keep Graph Fully Traversable");
+            for (int i = 0; i < nodes.Length; i++)
+            {
+                edges[i].Print($"Edges for graph with '{nodes[i]}' Nodes");
+                Console.WriteLine($"Return the maximum number of edges you can remove, or return -1 if Alice and Bob cannot fully traverse the graph => '{DailyProblem.MaxNumEdgesToRemove(nodes[i], edges[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
@@ -11123,14 +11140,14 @@ namespace InterviewProblemNSolutions
         public static void MinimumStepsToMinimizeToOne()
         {
             Utility.Print("MinimumStepsToMinimize_NoTo1 || Dynamic Programming");
-            Console.WriteLine("\n------------ Recursive approach");
+            Console.WriteLine("\nodes------------ Recursive approach");
             int[] numArray = { 6, 5, 4, 10, 15, 25, 500, 45123, 75845, 13245, 99589 };
             foreach (var num in numArray)
-                Console.WriteLine($"\n Minimum Steps Requied to minimize '{num}' to '1' : \t{DynamicProgramming.GetMinSteps_Recursive(num)}");
+                Console.WriteLine($"\nodes Minimum Steps Requied to minimize '{num}' to '1' : \t{DynamicProgramming.GetMinSteps_Recursive(num)}");
 
 
 
-            Console.WriteLine("\n------------ Dynamic Programming (Memoization) || Top-Down approach");
+            Console.WriteLine("\nodes------------ Dynamic Programming (Memoization) || Top-Down approach");
             // Memoization
             // create an array to update intermediate value as & when encoutnered while calculating min steps for a given 'num'
             int[] memo = new int[numArray.Max() + 1];
@@ -11139,7 +11156,7 @@ namespace InterviewProblemNSolutions
 
 
 
-            Console.WriteLine("\n------------ Dynamic Programming (Tabulation) || Bottom-up approach");
+            Console.WriteLine("\nodes------------ Dynamic Programming (Tabulation) || Bottom-up approach");
             // Tabulation
             // create an array to store all possible value b/w 1 to largest input num
             int[] tab = DynamicProgramming.GetMinSteps_DP_Tab(numArray.Max() + 1);
@@ -11195,8 +11212,8 @@ namespace InterviewProblemNSolutions
         {
             Utility.Print("Problem - 9 Give an algorithm for reversing words in a sentence.(p. 691)");
             string input = "This is a Career Monk String";
-            Console.WriteLine($" Sentence : \t'{input}'\n In-Reverse : \t'{StringAlgorithms.ReverseSentence(input.ToCharArray())}'");
-            Console.WriteLine($" Sentence : \t'{input}'\n In-Reverse : \t'{StringAlgorithms.ReverseSentenceInPlace(input.ToCharArray())}'");
+            Console.WriteLine($" Sentence : \t'{input}'\nodes In-Reverse : \t'{StringAlgorithms.ReverseSentence(input.ToCharArray())}'");
+            Console.WriteLine($" Sentence : \t'{input}'\nodes In-Reverse : \t'{StringAlgorithms.ReverseSentenceInPlace(input.ToCharArray())}'");
         }
 
         public static void StringPermutationAlgorithm()
@@ -11275,13 +11292,13 @@ namespace InterviewProblemNSolutions
             Utility.Print("Length of the longest substring without repeating characters");
             string[] strArr = { "BBBBA", "ABDEFGABEF", "GEEKSFORGEEKS" };
             foreach (var str in strArr)
-                StringAlgorithms.LongestSubStringNonRepeatingChar(str);       // O(n)
-            //StringAlgorithms.LongestSubStringNonRepeatingCharacters(str);   // O(n^2)
+                StringAlgorithms.LongestSubStringNonRepeatingChar(str);       // O(nodes)
+            //StringAlgorithms.LongestSubStringNonRepeatingCharacters(str);   // O(nodes^2)
         }
 
         public static void ElectionWinner()
         {
-            Utility.Print("Problem-3&4  Given an array A[0 ...n – 1], where each element of the array represents a vote in the election." +
+            Utility.Print("Problem-3&4  Given an array A[0 ...nodes – 1], where each element of the array represents a vote in the election." +
                 "Assume that each vote is given as an integer representing the ID of the chosen candidate." +
                 "Give an algorithm for determining who wins the election.(p. 532)");
             Console.WriteLine();
@@ -11299,7 +11316,7 @@ namespace InterviewProblemNSolutions
 
 
             // if we are allowed to use little extra space & Min - Max ID's of all candidate are known can use 'Counting Sort' 
-            input = Sorting.Sort.Countsort(input, 0, 12);   // Time O(n), N = no of votes || Space O(k), k = no of candidates
+            input = Sorting.Sort.Countsort(input, 0, 12);   // Time O(nodes), N = no of votes || Space O(k), k = no of candidates
 
             // To Sort the array without using extra space
             //Sorting.Sort.Heapsort(ref input);               // Time O(nLogn) || Space O(1)
@@ -11307,7 +11324,7 @@ namespace InterviewProblemNSolutions
 
             // check for reapted ID's and if found one update its count and at last update WinnerCount and WinnerID
             int winnerCount = 0, winnerID = -1, count = 1;
-            for (int i = 0; i < input.Length - 1; i++)      // Time O(n)
+            for (int i = 0; i < input.Length - 1; i++)      // Time O(nodes)
             {
                 if (input[i] == input[i + 1])
                     count++;
@@ -11326,10 +11343,10 @@ namespace InterviewProblemNSolutions
 
         public static void Merge_BinA_WhichHasExtraSpaceEqualToB()
         {
-            Utility.Print("Problem-33  There are two sorted arrays A and B. The first one is of size m + n containing only m elements." +
-                "Another one is of size n and contains n elements. Merge these two arrays into the first array of size m + n such that the output is sorted.(p. 543)");
-            int[] a = new int[10];      // size m + n
-            int[] b = new int[4];       // size n
+            Utility.Print("Problem-33  There are two sorted arrays A and B. The first one is of size m + nodes containing only m elements." +
+                "Another one is of size nodes and contains nodes elements. Merge these two arrays into the first array of size m + nodes such that the output is sorted.(p. 543)");
+            int[] a = new int[10];      // size m + nodes
+            int[] b = new int[4];       // size nodes
 
             #region Initialize Input arrays
             Console.WriteLine();
@@ -11381,7 +11398,7 @@ namespace InterviewProblemNSolutions
 
         public static void FindMaxRecurrence()
         {
-            Utility.Print("Problem-5  Given an array of n numbers. Give an algorithm for finding the element which appears the max times(p. 564)");
+            Utility.Print("Problem-5  Given an array of nodes numbers. Give an algorithm for finding the element which appears the max times(p. 564)");
             int[] input = { 3, 5, 1, 3, 3, 5, 1, 5, 5 };
             input.Print("Input Array");
             SearchAlgorithms.MaxRecurrence(input);
@@ -11400,9 +11417,9 @@ namespace InterviewProblemNSolutions
         public static void FindTwoRepeatingElements()
         {
             Utility.Print("Problem-19  Find the two repeating elements in a given array: Given an array with size," +
-                " all elements of the array are in range 1 to n and also all elements occur only once except two numbers which occur twice." +
-                " Find those two repeating numbers. For example: if the array is 4,2,4,5,2,3,1 with size = 7 and n = 5." +
-                " This input has n + 2 = 7 elements with all elements occurring once except 2 and 4 which occur twice. So the output should be 4 2.(pp. 569)");
+                " all elements of the array are in range 1 to nodes and also all elements occur only once except two numbers which occur twice." +
+                " Find those two repeating numbers. For example: if the array is 4,2,4,5,2,3,1 with size = 7 and nodes = 5." +
+                " This input has nodes + 2 = 7 elements with all elements occurring once except 2 and 4 which occur twice. So the output should be 4 2.(pp. 569)");
             int[] input = { 4, 2, 4, 5, 2, 3, 1 };
             int len = input.Length;
             int range = 5;    // [1...5] all elements are in this range
@@ -11414,26 +11431,26 @@ namespace InterviewProblemNSolutions
         // GFG https://www.geeksforgeeks.org/given-sorted-array-number-x-find-pair-array-whose-sum-closest-x/
         public static void FindPairWhoseSumIsClosetToGivenValue()
         {
-            Utility.Print("Problem - 25 Given an array of n elements. Find two elements in the array such that their sum is equal to given element K.(p. 572)");
+            Utility.Print("Problem - 25 Given an array of nodes elements. Find two elements in the array such that their sum is equal to given element K.(p. 572)");
             int[] input = { 3, 8, 2, 5, 9, 1, 15, 7, 45 };
             input.Print("Input");
             int sum = 18;
             Console.WriteLine($"Find Pair whose Sum matches or closet to {sum}");
             Sort.Heapsort(ref input);   // Time O(nLogn) can skip this step if array is already sorted
 
-            SearchAlgorithms.PairWhoseSumIsClosestToGivenValue(input, sum);     // O(n)
+            SearchAlgorithms.PairWhoseSumIsClosestToGivenValue(input, sum);     // O(nodes)
         }
 
         public static void FindTripletWhoseSumIsClosetToGivenValue()
         {
-            Utility.Print("Problem-36  Given an array of n integers, find three integers whose sum is closest to GivenNo/zero.(p. 578)");
+            Utility.Print("Problem-36  Given an array of nodes integers, find three integers whose sum is closest to GivenNo/zero.(p. 578)");
             int[] input = { 3, -8, 2, 5, 9, -1, 15, 7, 45, -5, -15 };
             input.Print("Input");
             int sum = 0;
             Console.WriteLine($"Find Pair whose Sum matches or closet to {sum}");
             Sort.Heapsort(ref input);   // Time O(nLogn) can skip this step if array is already sorted
 
-            SearchAlgorithms.TripletWhoseSumIsClosetToGivenValue(input, sum);   // O(n^2)
+            SearchAlgorithms.TripletWhoseSumIsClosetToGivenValue(input, sum);   // O(nodes^2)
         }
 
         public static void FindPeakOfIncreasingSequence()
@@ -11449,7 +11466,7 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/search-in-rotated-sorted-array/
             // https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
             Utility.Print("33. Search in Rotated Sorted Array");
-            Utility.Print("Problem-40  Given a sorted array of n integers that has been rotated an unknown number of times," +
+            Utility.Print("Problem-40  Given a sorted array of nodes integers that has been rotated an unknown number of times," +
                 " give a O(logn) algorithm that finds an element in the array.(pp. 579 - 580)");
             int[][] input = { new int[] { 15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14 }, new int[] { 4, 5, 6, 7, 0, 1, 2 }, new int[] { 4, 5, 6, 7, 0, 1, 2 }, new int[] { 1 } };
             int[] searchFor = { 5, 0, 3, 0 };
@@ -11472,7 +11489,7 @@ namespace InterviewProblemNSolutions
 
         public static void FindFirstAndLastOccurenceOfNumInSortedArrayWithDuplicates()
         {
-            Utility.Print("Problem-46  Given a sorted array A of n elements, possibly with duplicates," +
+            Utility.Print("Problem-46  Given a sorted array A of nodes elements, possibly with duplicates," +
                 " find the index of the first occurrence of a number in O(logn) time.(p. 582)");
             int[] input = { 1, 1, 1, 1, 2, 2, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 6, 7, 7, 8 };
             input.Print("Input : ");
@@ -11480,7 +11497,7 @@ namespace InterviewProblemNSolutions
             var index = SearchAlgorithms.FirstOccurenceInSortedArray(input, searchFor);
             Console.WriteLine($" First index where {searchFor} found is : {index}");
 
-            Utility.Print("Problem-47  Given a sorted array A of n elements, possibly with duplicates. Find the index of the last occurrence of a number in O(logn) time.(p. 583)");
+            Utility.Print("Problem-47  Given a sorted array A of nodes elements, possibly with duplicates. Find the index of the last occurrence of a number in O(logn) time.(p. 583)");
             input.Print("Input : ");
             index = SearchAlgorithms.LastOccurenceInSortedArray(input, searchFor);
             Console.WriteLine($" Last index where {searchFor} found is : {index}");
@@ -11509,7 +11526,7 @@ namespace InterviewProblemNSolutions
         // Other Approach similar to MaxRecurrence https://youtu.be/UW1InjlrXFU
         public static void CountFrequenciesOfNElements()
         {
-            Utility.Print("Problem-79  Given an array of n elements, how do you print the frequencies of elements without using extra space. Assume all elements are positive, editable and less than n.(p. 596)");
+            Utility.Print("Problem-79  Given an array of nodes elements, how do you print the frequencies of elements without using extra space. Assume all elements are positive, editable and less than nodes.(p. 596)");
             int[][] inputs = { new int[] { 10, 10, 9, 4, 7, 6, 5, 2, 3, 2, 1 },
                                 new int[] { 4, 4, 4, 4, 4, 6 },
                                 new int[] { 1, 3, 5, 7, 9, 1, 3, 5, 7, 9, 1}
@@ -11524,14 +11541,14 @@ namespace InterviewProblemNSolutions
 
         public static void FindKSmallestElements()
         {
-            Utility.Print("Problem-10  Find the k-smallest elements in an array S of n elements using partitioning method.(p. 604)");
+            Utility.Print("Problem-10  Find the k-smallest elements in an array S of nodes elements using partitioning method.(p. 604)");
             int[] input = { 10, 10, 9, 4, 7, 6, 5, 2, 3, 2, 1 };
             input.Print("Input array :");
             var k = 4;
             // based on Quick Sort
             SelectionAlgorithms.KSmallestElements(input, 0, input.Length - 1, k);
 
-            // Another way to solve in O(klogk) + O((n-k)logk) = O(nlogk) by creating 'balanced binary search tree' for K elements
+            // Another way to solve in O(klogk) + O((nodes-k)logk) = O(nlogk) by creating 'balanced binary search tree' for K elements
             // & than inserting elements one by one if it's greater than largest element in tree (after removing current largest)
             // in the end printing all elements of tree via InOrder traversal
 
@@ -11548,7 +11565,7 @@ namespace InterviewProblemNSolutions
             /* Number is happy is or not?
              * Ex: 7 square of Digits (7*7) = 49 (2 digits) || Square of (4 = 16) + (9 = 81) = 97 (2 digits) || Square of (9=81)+(7=49) = 130 ||
              * Square of (1=1)+(3=9)+(0=0) = 10 || Square of (1=1)+(0=0) = 1
-             * So number who's square of digit comes out to be 1 after some 'n' operation is said to be 'Happy Number'
+             * So number who's square of digit comes out to be 1 after some 'nodes' operation is said to be 'Happy Number'
              */
             int[] inputs = { 7, 13, 19, 23, 31, 79, 97, 103, 109, 139, 144, 256, 1091 };
             foreach (var num in inputs)
@@ -11601,8 +11618,8 @@ namespace InterviewProblemNSolutions
         {
             Utility.Print("K’th Smallest/Largest Element in Unsorted Array | Set 3 (Worst Case Linear Time)");
             // for O(NLogK) algorithms use Heap/QuickSort
-            // For Expected O(n) use Random Pivot in QuickSort
-            // For worse case but still O(n) use Med of Med below
+            // For Expected O(nodes) use Random Pivot in QuickSort
+            // For worse case but still O(nodes) use Med of Med below
             int[] input = { 7, 10, 4, 3, 20, 15 };
             input.Print("Input array :");
             var k = 4;  // 4th smallest
@@ -11620,7 +11637,7 @@ namespace InterviewProblemNSolutions
             var len = a1.Length;
 
 
-            Utility.Print("Median Of Two Sorted Arrays of Same Size, using Count || Time O(n)");
+            Utility.Print("Median Of Two Sorted Arrays of Same Size, using Count || Time O(nodes)");
             var median = SelectionAlgorithms.MedianSortedArrayEqualSizeUsingCount(a1, a2, len);
             if (median >= 0) Console.WriteLine($" Median value of above two sorted array is : {median}");
 
@@ -11635,7 +11652,7 @@ namespace InterviewProblemNSolutions
 
         public static void MedianOfTwoSortedArraysDifferentSize()
         {
-            Utility.Print("Median Of Two Sorted Arrays of different size, Efficient Approach|| Time O(Log(Min(n,m))");
+            Utility.Print("Median Of Two Sorted Arrays of different size, Efficient Approach|| Time O(Log(Min(nodes,m))");
             int[] a1 = { 1, 3, 8, 9, 15 };          //{ 1, 12, 16, 26, 38 };
             int[] a2 = { 7, 11, 18, 19, 21, 25 };   //{ 2, 13, 17, 30, 45, 65 };
             a1.Print(" Arr1 :");
@@ -11666,7 +11683,7 @@ namespace InterviewProblemNSolutions
         // GFG https://www.geeksforgeeks.org/closest-pair-of-points-using-divide-and-conquer-algorithm/
         public static void ClosetPairOfPoints()
         {
-            Utility.Print("Closest-Pair of Points: Given a set of n points, S = {p1,p2,p3,…,pn}, " +
+            Utility.Print("Closest-Pair of Points: Given a set of nodes points, S = {p1,p2,p3,…,pn}, " +
                 "where pi = (xi,yi). Find the pair of points having the smallest distance among all pairs (assume that all points are in one dimension).(p. 749)");
             int[,] input = { { 2, 3 }, { 12, 30 }, { 40, 50 }, { 5, 1 }, { 12, 10 }, { 3, 4 } };
             Point[] pointArr = new Point[input.GetLength(0)];
@@ -11684,7 +11701,7 @@ namespace InterviewProblemNSolutions
             // https://leetcode.com/problems/the-skyline-problem/
             Utility.Print("218. The Skyline Problem");
             Utility.Print("The Skyline Problem using Divide and Conquer algorithm. " +
-                "Given n rectangular buildings in a 2 - dimensional city, computes the skyline of these buildings, eliminating hidden lines.");
+                "Given nodes rectangular buildings in a 2 - dimensional city, computes the skyline of these buildings, eliminating hidden lines.");
             //int[,] { { 1, 14, 7 }, { 3, 9, 10 }, { 5, 17, 12 }, { 14, 11, 18 }, { 15, 6, 27 }, { 20, 19, 22 }, { 23, 15, 30 }, { 26, 14, 29 } };
             int[][,] input = { new int[,] { { 1, 14, 7 }, { 3, 9, 10 }, { 5, 17, 12 }, { 14, 11, 18 }, { 15, 6, 27 }, { 20, 19, 22 }, { 23, 15, 30 }, { 26, 14, 29 } },
                                 new int[,] { { 1, 11, 5 }, { 2, 6, 7 }, { 3, 13, 9 }, { 12, 7, 16 }, { 14, 3, 25 }, { 19, 18, 22 }, { 23, 13, 29 }, { 24, 4, 28 } },
@@ -11702,7 +11719,7 @@ namespace InterviewProblemNSolutions
                 var skyLine = DivideAndConquerAlgorithms.GetSkyLine(buildArr, 0, buildArr.Length - 1);              // O(nlogn)
                 DivideAndConquerAlgorithms.PrintSkyLine(skyLine);
 
-                var skyLineSlow = DivideAndConquerAlgorithms.BruteForceSkyLine(buildArr, 0, buildArr.Length - 1);   // O(n^2)
+                var skyLineSlow = DivideAndConquerAlgorithms.BruteForceSkyLine(buildArr, 0, buildArr.Length - 1);   // O(nodes^2)
             }
         }
 
@@ -11732,15 +11749,15 @@ namespace InterviewProblemNSolutions
             string str2 = "ACBCF";// BDCABA";
             string lcsString = "";
             var LCS = DynamicProgramming.LongestCommonSubsequence(str1, str2, ref lcsString);
-            Console.WriteLine($" Input1 : \t{str1}\n Input2 : \t{str2}\n Longest Common Subsequence : {lcsString} of length {LCS}");
+            Console.WriteLine($" Input1 : \t{str1}\nodes Input2 : \t{str2}\nodes Longest Common Subsequence : {lcsString} of length {LCS}");
         }
 
         public static void ConvertGivenRecurrenceToCode()
         {
             Utility.Print("Problem-1,2,3  Convert the following recurrence to code.(pp. 772 - 773)");
             /* T(0) =T(1) = 2
-             * for n > 1
-             * T(n) sum of [ 2 * T(i) * T(i-1) ] for all i starting from '1 to n-1'
+             * for nodes > 1
+             * T(nodes) sum of [ 2 * T(i) * T(i-1) ] for all i starting from '1 to nodes-1'
              */
             int[] nums = { 1, 2, 3, 4, 5 };
             int[] tab = new int[nums.Max() + 1];
@@ -11762,7 +11779,7 @@ namespace InterviewProblemNSolutions
 
         public static void FindCatalanNumber()
         {
-            Utility.Print("Problem-14  Catalan Numbers: How many binary search trees are there with n vertices?(p. 782)");
+            Utility.Print("Problem-14  Catalan Numbers: How many binary search trees are there with nodes vertices?(p. 782)");
             int[] nodeArr = { 1, 2, 3, 4, 5 };
             int[] memo = new int[nodeArr.Max() + 1];            // Cache/table being populated and used in DP solution
             foreach (var noOfNodes in nodeArr)
@@ -11785,14 +11802,14 @@ namespace InterviewProblemNSolutions
                 PrintMatrix(chainOfMatrices);
                 //var result = DynamicProgramming.MatrixChainOrderBruteForce(chainOfMatrices, 1, chainOfMatrices.Length - 1); // Brute Force
                 var result = DynamicProgramming.MatrixChainOrder(chainOfMatrices);
-                Console.WriteLine($"\n Minimum no of Multiplication required to perform Matrix Multiplication on above Matrices : {result} ");
+                Console.WriteLine($"\nodes Minimum no of Multiplication required to perform Matrix Multiplication on above Matrices : {result} ");
             }
 
             // local function to print Matrixces and their dimensions
             void PrintMatrix(int[] arr)
             {
                 var len = arr.Length;
-                Console.Write($"\n Input Matrices \t");
+                Console.Write($"\nodes Input Matrices \t");
                 for (int i = 1; i < len; i++)
                     Console.Write($" {arr[i - 1]}x{arr[i]} >>");      // end of last matrix becomes the start of next matrix
 
@@ -11813,7 +11830,7 @@ namespace InterviewProblemNSolutions
             foreach (var bagCapacity in bagCapacityArr)
             {
                 var maxProfit = DynamicProgramming.KnapSack(bagCapacity, profit, wt, noOfItems);
-                Console.WriteLine($" Max Profit/Value we can get by filling KnapSack of capacity '{bagCapacity}' is : '{maxProfit}'\n");
+                Console.WriteLine($" Max Profit/Value we can get by filling KnapSack of capacity '{bagCapacity}' is : '{maxProfit}'\nodes");
             }
         }
 
@@ -11830,7 +11847,7 @@ namespace InterviewProblemNSolutions
                 coins.Print("Coins Array");
                 var minNoOfCoins = DynamicProgramming.CoinChangeMinimumNoOfCoins(coins, changeReq);
                 //var minNoOfCoins = DynamicProgramming.CoinChange_DP_BottomUp(coins, changeReq);
-                Console.WriteLine($" Min No of coins to get '{changeReq}' in change is : '{minNoOfCoins}'\n");
+                Console.WriteLine($" Min No of coins to get '{changeReq}' in change is : '{minNoOfCoins}'\nodes");
             }
         }
 
@@ -11844,7 +11861,7 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < coins.Length; i++)
             {
                 coins[i].Print("Coins Array");
-                Console.WriteLine($"Number of combinations that make up that amount '{changeAmt[i]}' from above list of coins is : '{DynamicProgramming.CoinChangeII(changeAmt[i], coins[i])}'\n");
+                Console.WriteLine($"Number of combinations that make up that amount '{changeAmt[i]}' from above list of coins is : '{DynamicProgramming.CoinChangeII(changeAmt[i], coins[i])}'\nodes");
             }
         }
 
@@ -11876,7 +11893,7 @@ namespace InterviewProblemNSolutions
                 }
 
                 var maxBridgesPossible = DynamicProgramming.MaxBridges(cities, len);
-                Console.WriteLine($" Max Bridges that can be build over above pair of cities is : \t{maxBridgesPossible} \n");
+                Console.WriteLine($" Max Bridges that can be build over above pair of cities is : \t{maxBridgesPossible} \nodes");
             }
 
         }
@@ -11889,7 +11906,7 @@ namespace InterviewProblemNSolutions
             input.Print("Set of No's: ");
 
             foreach (var findSubsetForSum in sumArr)
-                Console.WriteLine($" Subset in above array whose sum equals to '{findSubsetForSum}', \tExists = {DynamicProgramming.SubsetSum(input, input.Length, findSubsetForSum)}\n");
+                Console.WriteLine($" Subset in above array whose sum equals to '{findSubsetForSum}', \tExists = {DynamicProgramming.SubsetSum(input, input.Length, findSubsetForSum)}\nodes");
         }
 
         public static void ParitionArrayInEqualHalf()
@@ -11914,15 +11931,15 @@ namespace InterviewProblemNSolutions
             frequency.Print("Frequence");
 
             var costOfSearch = DynamicProgramming.OptimalBinarySearchTree(keys, frequency, keys.Length);
-            Console.WriteLine($"\n Min Cost of Search in Optimal BST with above 'keys & frequencey' is : \t{costOfSearch}");
+            Console.WriteLine($"\nodes Min Cost of Search in Optimal BST with above 'keys & frequencey' is : \t{costOfSearch}");
         }
 
         public static void MinOperationToConvertStringAtoB()
         {
             Utility.Print("Minimum Edit Distance");
-            Console.WriteLine("Problem - 31 Problem Statement: Given two strings A of length m and B of length n," +
+            Console.WriteLine("Problem - 31 Problem Statement: Given two strings A of length m and B of length nodes," +
                 " transform A into B with a minimum number of operations of the following types: (p. 806)" +
-                "\n >> delete a character from A,\n >> insert a character into A,\n >> change some character in A into a new character.\n");
+                "\nodes >> delete a character from A,\nodes >> insert a character into A,\nodes >> change some character in A into a new character.\nodes");
 
             string[] aArr = { "abcdef", "harsh", "" };
             string[] bArr = { "azced", "", "har" };
@@ -11931,7 +11948,7 @@ namespace InterviewProblemNSolutions
                 foreach (var b in bArr)
                 {
                     var minCost = DynamicProgramming.MinimumEditDistance(a, a.Length, b, b.Length);
-                    Console.WriteLine($" Min Cost of converting A:'{a}' into B:'{b}' is: {minCost}\n");
+                    Console.WriteLine($" Min Cost of converting A:'{a}' into B:'{b}' is: {minCost}\nodes");
                 }
         }
 
@@ -11967,7 +11984,7 @@ namespace InterviewProblemNSolutions
                 var maxWinValue = DynamicProgramming.OptimalStrategy(input, len);                       // Tabulation 
                 //var maxWinValue = DynamicProgramming.OptimalStrategyMemo(input, 0, len - 1, cache);     // Memoization
                 //var maxWinValue = DynamicProgramming.OptimalStrategyGameRecursive(input, 0, len - 1);   // Recursive Brute Force 
-                Console.WriteLine($" Max value Player1 (us) can get with above set of values : {maxWinValue}\n");
+                Console.WriteLine($" Max value Player1 (us) can get with above set of values : {maxWinValue}\nodes");
             }
         }
 
@@ -12036,7 +12053,7 @@ namespace InterviewProblemNSolutions
         {
             // GFG https://www.geeksforgeeks.org/maximum-sum-rectangle-in-a-2d-matrix-dp-27/
             Utility.Print("Problem-42  Maximum sum rectangle Sub-matrix:" +
-                " Given an n × n matrix M of positive and negative integers," +
+                " Given an nodes × nodes matrix M of positive and negative integers," +
                 " give an algorithm to find the sub-matrix with the largest possible sum.(p. 823)");
             int[][,] inputArr = { new int[,] {{ 2, 1, -3, -4, 5 },
                                               { 0, 6, 3, 4, 1 },
@@ -12050,7 +12067,7 @@ namespace InterviewProblemNSolutions
             {
                 input.Print();
                 var maxSum = DynamicProgramming.MaximumSumRectangleSubMatrix(input, input.GetLength(0), input.GetLength(1));
-                Console.WriteLine($" Maximum Sum Rectangular SubMatrix in above Matrix has SUM : {maxSum}\n");
+                Console.WriteLine($" Maximum Sum Rectangular SubMatrix in above Matrix has SUM : {maxSum}\nodes");
             }
         }
 
@@ -12062,7 +12079,7 @@ namespace InterviewProblemNSolutions
             foreach (var input in inputArr)
             {
                 input.Print("Jump Array");
-                Console.WriteLine($" Min no of jumps required to reach end in above array is: {DynamicProgramming.OptimalJumpsToReachLastOn(input, input.Length)}\n");
+                Console.WriteLine($" Min no of jumps required to reach end in above array is: {DynamicProgramming.OptimalJumpsToReachLastOn(input, input.Length)}\nodes");
             }
         }
 
@@ -12077,7 +12094,7 @@ namespace InterviewProblemNSolutions
                 Console.Write($" Ht: {input[i, 0]} Wt: {input[i, 1]} ||");
             }
             var maxPersonPossible = DynamicProgramming.CircusTowerRoutine(persons, persons.Count);
-            Console.WriteLine($"\n Max person possible with above list of persons is: {maxPersonPossible}");
+            Console.WriteLine($"\nodes Max person possible with above list of persons is: {maxPersonPossible}");
         }
 
         // Tushar Roy https://youtu.be/WepWFGxiwRs
@@ -12103,7 +12120,7 @@ namespace InterviewProblemNSolutions
                     //var result = DynamicProgramming.WordBreakProblemMemo(input, dictionary, memo);
                     //var result = DynamicProgramming.WordBreakProblemTabulation(input, dictionary);
                     var result = DynamicProgramming.WordBreakProblemTabulation_Efficient(input, dictionary);
-                    Console.WriteLine($"\n For above Dictonary given sentence \'{input}\' can be split into words which exists: \t{result}");
+                    Console.WriteLine($"\nodes For above Dictonary given sentence \'{input}\' can be split into words which exists: \t{result}");
                 }
         }
     }

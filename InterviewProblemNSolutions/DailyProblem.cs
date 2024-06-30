@@ -21944,7 +21944,7 @@ namespace InterviewProblemNSolutions
                 // add right child to next level
                 if (lastVal.right != null) nextLevel.Add(lastVal.right);
 
-                
+
                 if (evenIndexedLevel)
                 {
                     if (lastVal.val % 2 == 0) return false;  // 1st value not odd
@@ -22119,8 +22119,8 @@ namespace InterviewProblemNSolutions
                     }
             // get all the unique heights in ascending order
             var unqHeights = (from kvp in sameHeightCells
-                                       orderby kvp.Key
-                                       select kvp.Key).ToArray();
+                              orderby kvp.Key
+                              select kvp.Key).ToArray();
 
 
             int smallestBoundryWallHeight, waterTrappedInCurPond = 0;
@@ -22145,7 +22145,7 @@ namespace InterviewProblemNSolutions
 
                     waterTrappedInCurPond = 0;
                     // Fill the cell(s) just iterated to the height of next neareset cell or wall
-                    foreach(var sameHtCell in recentlyVisitedCells)
+                    foreach (var sameHtCell in recentlyVisitedCells)
                     {
 
                         int r1 = sameHtCell[0], c1 = sameHtCell[1];
@@ -22214,9 +22214,9 @@ namespace InterviewProblemNSolutions
             dummy.next = cur;
             // remove all 0 value nodes
             cur = dummy;
-            while(cur.next!=null)
+            while (cur.next != null)
             {
-                if(cur.next.val==0)
+                if (cur.next.val == 0)
                     cur.next = cur.next.next;
                 else cur = cur.next;
             }
@@ -22701,7 +22701,7 @@ namespace InterviewProblemNSolutions
                 k ^= nums[i];
 
             // no of bits that needed to be flipped equal to no of bits that are still on
-            while (k!= 0)                   // O(32)
+            while (k != 0)                   // O(32)
             {
                 // if right most bit is one we increament 1 to bits that need to be flipped
                 bitFlipsNeeded += k & 1;
@@ -23390,7 +23390,7 @@ namespace InterviewProblemNSolutions
                 cur = nums[rt];
                 // update the Min Queue
                 // if we have a number larger than cur than remove it as we have a new minimum
-                while (min.Count > 0 && nums[min[min.Count-1]] >= cur)
+                while (min.Count > 0 && nums[min[min.Count - 1]] >= cur)
                     min.RemoveAt(min.Count - 1);
                 // add cur idx to minimum Queue
                 min.Add(rt);
@@ -23551,13 +23551,13 @@ namespace InterviewProblemNSolutions
                     }
                 else //if(parent==-1) // end of cur level
                     if (nextLevelParents.Count > 0)    // still have more nodes to visit
-                    {
-                        foreach (var nextParent in nextLevelParents)
-                            q.Enqueue(nextParent);
-                        q.Enqueue(-1);  // mark end of cur level
-                        // clear nextLevelParents object now
-                        nextLevelParents.Clear();
-                    }
+                {
+                    foreach (var nextParent in nextLevelParents)
+                        q.Enqueue(nextParent);
+                    q.Enqueue(-1);  // mark end of cur level
+                                    // clear nextLevelParents object now
+                    nextLevelParents.Clear();
+                }
 
             // prepare the final answer which contains all the nodes and each nodes has ansectors in sorted order
             List<IList<int>> sortedAns = new List<IList<int>>();
@@ -23568,6 +23568,131 @@ namespace InterviewProblemNSolutions
                 sortedAns.Add(sorted);
             }
             return sortedAns;
+        }
+
+
+        // O(n+E), E = no of Edges
+        public static int MaxNumEdgesToRemove(int n, int[][] edges)
+        {
+            // UnSaid Rule: we can only remove edges used by either Alice or Bob, NOT edges which both can use i.e. Type#3
+            /* ALGO
+            1. ** Main idea is to find out the min edges required so that
+                Alice and Bob can traverse the entire graph**
+            2. ** Which than is subtracted from total no of edges = redundant
+                edges count **
+            3. so we can achive this by starting with 'n' disconnected grp in Graph
+            4. first iterate thru all the Common Edge i.e. Type#3
+                these are best as they eliminates need of person specific edge
+                increament 'edgesNeeded' count by 1
+                a. so we join 2 groups of Nodes if they are already not
+                    part of same grp
+                b. after which we point all the Nodes in the grp A to point
+                    to same Object of HashSet<int> which contains all the grp
+                member A+B(re-pointing small grp is time efficient)
+            5. now create 2 copy from Common edge object one fr Alice & for Bob each
+            6. Now we iterate thru all the edges which are either Type#1 or Type#2
+            7. if edge #1 its for Alice we join the grp in grp of Node create
+                for Alice and increament 'edgesNeeded' count by 1
+            8. if edge #2 its for Bob we join the grp in grp of Node create
+                for Bob and increament 'edgesNeeded' count by 1
+            9. Lastly we check if either Alice or Bob can't cover all Nodes
+                from any starting point return -1.
+            10. lastly we return (total no of edge - edgesNeeded)
+             */
+            List<HashSet<int>>[] connected = [[], [], []];
+            connected[0].Add(new());
+            for (int i = 1; i <= n; i++)   // O(n)
+                connected[0].Add(new HashSet<int>() { i });
+            int edgesNeeded = 0;
+            foreach (var edge in edges)
+                if (edge[0] == 3)  // type#3 can be used by both
+                {
+                    // check and join the 2 components if they are not already joined
+                    int a = edge[1], b = edge[2];
+                    if (!connected[0][a].Contains(b))
+                    {
+                        edgesNeeded++;
+                        if (connected[0][b].Count < connected[0][a].Count)
+                        {
+                            // move all the components from B to A
+                            foreach (var nodeInB in connected[0][b])
+                                connected[0][a].Add(nodeInB);
+                            // merge both components by pointing both to same HashSet
+                            foreach (var nodeInB in connected[0][b])
+                                connected[0][nodeInB] = connected[0][a];
+                        }
+                        else
+                        {
+                            // move all the components from A to B
+                            foreach (var nodeInA in connected[0][a])
+                                connected[0][b].Add(nodeInA);
+                            // merge both components by pointing both to same HashSet
+                            foreach (var nodeInA in connected[0][a])
+                                connected[0][nodeInA] = connected[0][b];
+                        }
+                    }
+                    // else // means they are already joined hence no extra edge needed
+                }
+
+            Dictionary<HashSet<int>, HashSet<int>> forAlice = new(), forBob = new();
+            // copy essential edges from Common to both
+            for (int i = 0; i <= n; i++)   // O(n)
+            {
+                // for Alice
+                if (forAlice.TryGetValue(connected[0][i], out HashSet<int> alreadySeenGrpFrAlice))
+                    connected[1].Add(alreadySeenGrpFrAlice);
+                else
+                {
+                    forAlice[connected[0][i]] = new HashSet<int>(connected[0][i]);
+                    connected[1].Add(forAlice[connected[0][i]]);
+                }
+                // for Bob
+                if (forBob.TryGetValue(connected[0][i], out HashSet<int> alreadySeenGrpFrBob))
+                    connected[2].Add(alreadySeenGrpFrBob);
+                else
+                {
+                    forBob[connected[0][i]] = new HashSet<int>(connected[0][i]);
+                    connected[2].Add(forBob[connected[0][i]]);
+                }
+            }
+
+            // now join components for Alice and Bob
+            foreach (var edge in edges)
+                if (edge[0] != 3)  // Not the common edge
+                {
+                    // check and join the 2 components if they are not already joined
+                    int a = edge[1], b = edge[2], aliceOrBobIdx = edge[0];
+                    if (!connected[aliceOrBobIdx][a].Contains(b))
+                    {
+                        edgesNeeded++;
+                        if (connected[aliceOrBobIdx][b].Count < connected[aliceOrBobIdx][a].Count)
+                        {
+                            // move all the components from B to A
+                            foreach (var nodeInB in connected[aliceOrBobIdx][b])
+                                connected[aliceOrBobIdx][a].Add(nodeInB);
+                            // merge both components by pointing both to same HashSet
+                            foreach (var nodeInB in connected[aliceOrBobIdx][b])
+                                connected[aliceOrBobIdx][nodeInB] = connected[aliceOrBobIdx][a];
+                        }
+                        else
+                        {
+                            // move all the components from A to B
+                            foreach (var nodeInA in connected[aliceOrBobIdx][a])
+                                connected[aliceOrBobIdx][b].Add(nodeInA);
+                            // merge both components by pointing both to same HashSet
+                            foreach (var nodeInA in connected[aliceOrBobIdx][a])
+                                connected[aliceOrBobIdx][nodeInA] = connected[aliceOrBobIdx][b];
+                        }
+                    }
+                }
+
+            // check if Alice & Bob can travel all the nodes if not return -1
+            for (int i = 2; i <= n; i++)
+                // if there are even 2 diff compoenent then traversal is not possible
+                if (connected[1][i] != connected[1][1] || connected[2][i] != connected[2][1])
+                    return -1;
+
+            return edges.Length - edgesNeeded;
         }
     }
 }
