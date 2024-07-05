@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Xml.Linq;
 using static System.Formats.Asn1.AsnWriter;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -648,6 +649,7 @@ namespace InterviewProblemNSolutions
             MaximumTotalImportanceOfRoads();
             AllAncestorsOfANodeInADirectedAcyclicGraph();
             RemoveMaxNumberOfEdgesToKeepGraphFullyTraversable();
+            FindTheMinimumAndMaximumNumberOfNodesBetweenCriticalPoints();
 
 
 
@@ -11080,6 +11082,33 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void FindTheMinimumAndMaximumNumberOfNodesBetweenCriticalPoints()
+        {
+            // https://leetcode.com/problems/find-the-minimum-and-maximum-number-of-nodes-between-critical-points
+            Utility.Print("2058. Find the Minimum and Maximum Number of Nodes Between Critical Points");
+            ListNode ls = new(5)
+            {
+                next = new(3)
+                {
+                    next = new(1)
+                    {
+                        next = new(2)
+                        {
+                            next = new(5)
+                            {
+                                next = new(1)
+                                {
+                                    next = new(2)
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            ls.Print();
+            var ans = DailyProblem.NodesBetweenCriticalPoints(ls);
+            Console.WriteLine($"Minimum & Maximum distance between any two distinct critical points => [{ans[0]},{ans[1]}]");
+        }
 
 
 

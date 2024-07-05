@@ -23694,5 +23694,67 @@ namespace InterviewProblemNSolutions
 
             return edges.Length - edgesNeeded;
         }
+
+        // Time O(n) | Space O(1), n = no of nodes in linked-list
+        public static int[] NodesBetweenCriticalPoints(ListNode head)
+        {
+            /* ALGO
+            1. problem is simple just keep track of last 2 values while
+                iterating from 3rd node in linked-list
+            2. we then compare all 3 values to find it lastValue was a
+                critical point when compared with lasttoLast and cur value
+            3. if yes, update the last critical index and minCiritcal distance
+                and also first if this is 1st critical point
+            4. at end just check if we have 2 diff critical point
+                if No, return [-1,-1]
+                if Yes, return the minDis and MaxDis b/w critical
+                i.e. lastCirital-firstCritical distance in an array
+             */
+            int idx = 0, lastVal = head.next.val, lastTolastVal = head.val, cur, lastCriticalIdx = -1, firstCriticalIdx = -1, minDis = 1000000;
+            head = head.next.next;    // start iterating from 3rd node
+            while (head != null)
+            {
+                cur = head.val;
+                if (lastTolastVal < lastVal && lastVal > cur)        // MINIMA
+                {
+                    // first critical point found in linked list
+                    if (firstCriticalIdx == -1)
+                    {
+                        lastCriticalIdx = idx;
+                        firstCriticalIdx = idx;
+                    }
+                    // NOT the first ciritical
+                    else // update the min Critical distance (max will update at the end)
+                    {
+                        minDis = Math.Min(minDis, idx - lastCriticalIdx);
+                        lastCriticalIdx = idx;
+                    }
+                }
+                else if (lastTolastVal > lastVal && lastVal < cur)   // MAXIMA
+                {
+                    // first critical point found in linked list
+                    if (firstCriticalIdx == -1)
+                    {
+                        lastCriticalIdx = idx;
+                        firstCriticalIdx = idx;
+                    }
+                    // NOT the first ciritical
+                    else // update the min Critical distance (max will update at the end)
+                    {
+                        minDis = Math.Min(minDis, idx - lastCriticalIdx);
+                        lastCriticalIdx = idx;
+                    }
+                }
+                // move the index counter and head
+                idx++;
+                head = head.next;
+                // update the last 2 values
+                lastTolastVal = lastVal;
+                lastVal = cur;
+            }
+            if (lastCriticalIdx == firstCriticalIdx) return [-1, -1];
+            // update the Max Critical distance
+            return [minDis, lastCriticalIdx - firstCriticalIdx];
+        }
     }
 }
