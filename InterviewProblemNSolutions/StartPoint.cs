@@ -650,6 +650,7 @@ namespace InterviewProblemNSolutions
             AllAncestorsOfANodeInADirectedAcyclicGraph();
             RemoveMaxNumberOfEdgesToKeepGraphFullyTraversable();
             FindTheMinimumAndMaximumNumberOfNodesBetweenCriticalPoints();
+            WaterBottles();
 
 
 
@@ -11111,6 +11112,14 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void WaterBottles()
+        {
+            // https://leetcode.com/problems/water-bottles
+            Utility.Print("1518. Water Bottles");
+            int[] numBottles = [9, 15], numExchange = [3, 4];
+            for (int i = 0; i < numExchange.Length; i++)
+                Console.WriteLine($"Given the two integers numBottles '{numBottles[i]}' and numExchange '{numExchange[i]}', max no of water bottles you can drink. => '{DailyProblem.NumWaterBottles(numBottles[i], numExchange[i])}'");
+        }
 
 
 

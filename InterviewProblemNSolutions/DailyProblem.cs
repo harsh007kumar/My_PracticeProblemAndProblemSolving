@@ -23756,5 +23756,19 @@ namespace InterviewProblemNSolutions
             // update the Max Critical distance
             return [minDis, lastCriticalIdx - firstCriticalIdx];
         }
+
+        // Time = Space = O(1)
+        public static int NumWaterBottles(int numBottles, int numExchange)
+        {
+            int waterDrank = 0, usedEmptyBottle = 0, totalUnsedBottles = 0;
+            while (numBottles > 0)
+            {
+                waterDrank += numBottles;
+                totalUnsedBottles = numBottles + usedEmptyBottle;
+                numBottles = totalUnsedBottles / numExchange;
+                usedEmptyBottle = totalUnsedBottles % numExchange;
+            }
+            return waterDrank;
+        }
     }
 }
