@@ -651,6 +651,7 @@ namespace InterviewProblemNSolutions
             RemoveMaxNumberOfEdgesToKeepGraphFullyTraversable();
             FindTheMinimumAndMaximumNumberOfNodesBetweenCriticalPoints();
             WaterBottles();
+            FindTheWinnerOfTheCircularGame();
 
 
 
@@ -11122,6 +11123,14 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void FindTheWinnerOfTheCircularGame()
+        {
+            // https://leetcode.com/problems/find-the-winner-of-the-circular-game
+            Utility.Print("1823. Find the Winner of the Circular Game");
+            int[] noOfPeople = [5, 6], k = [2, 5];
+            for (int i = 0; i < k.Length; i++)
+                Console.WriteLine($"Given the number of friends '{noOfPeople[i]}', and an integer '{k[i]}', the winner of the game => '{DailyProblem.FindTheWinner(noOfPeople[i], k[i])}'");
+        }
 
 
 

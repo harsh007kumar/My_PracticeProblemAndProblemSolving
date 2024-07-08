@@ -23770,5 +23770,36 @@ namespace InterviewProblemNSolutions
             }
             return waterDrank;
         }
+
+
+        // Time = Space = O(n)
+        public static int FindTheWinner(int n, int k)
+        {
+            /* ALGO
+            1. first create a list of 'n' friend with values from 1..N
+            2. Now we keep iterating till list has > one person
+            3. for each removed we calculate the distance to be moved by taking mod with current circle length
+            4. now we move above distance from our last index
+            5. finally remove the person
+            6. also keep in mind if removing last person means index goes out of bound hence should be reset to 0
+            7. at last return the single person left in circle
+             */
+            List<int> ls = [];
+            for (int i = 1; i <= n; i++) ls.Add(i);
+            int toBeRemoved, lastIdx = 0;
+            k--;
+            while (ls.Count > 1)   // O(n)
+            {
+                // find out distance to be moved from last index
+                toBeRemoved = k % ls.Count;
+                // find out the index by adding the distance
+                lastIdx = (lastIdx + toBeRemoved) % ls.Count;
+                // remove the friend
+                ls.RemoveAt(lastIdx);
+                // update index if it goes out of boundry
+                lastIdx = lastIdx % ls.Count;
+            }
+            return ls[0];   // return the last person left
+        }
     }
 }
