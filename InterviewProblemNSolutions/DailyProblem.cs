@@ -23801,5 +23801,66 @@ namespace InterviewProblemNSolutions
             }
             return ls[0];   // return the last person left
         }
+
+
+        // Time = Space = O(n), n = no of nodes in the tree
+        public static string GetDirections(TreeNode root, int startValue, int destValue)
+        {
+            /* ALGO
+            1. Get the path from Root to start and destination nodes
+            2. Now remove all common nodes in the start
+            3. now add 'U' to final first equal to left length in pathtoSource
+            4. now add 'L' or 'R" as per instructions left in pathtoDest
+            5. return final path
+             */
+            Stack<char> pathForS = [], pathForD = [];
+            // get the path from Root till startValue
+            bool pathFound = false;
+            GetPathFromRootToNode(root, startValue, pathForS);
+            // get the path from Root till destValue
+            pathFound = false;
+            GetPathFromRootToNode(root, destValue, pathForD);
+
+            var forS = pathForS.Reverse().ToArray();
+            var forD = pathForD.Reverse().ToArray();
+
+            // Now remove all common ansectors and reach to LCA
+            int i = 0, l1 = forS.Length, l2 = forD.Length;
+            while (i < l1 && i < l2)
+                if (forS[i] != forD[i]) break;
+                else i++;
+
+            List<char> path = [];
+            // add 'U' times == no of left instruction in pathtoSource
+            for (int j = i; j < l1; j++) path.Add('U');
+            // add original instruction left in pathtoDestination
+            for (int j = i; j < l2; j++) path.Add(forD[j]);
+
+            // Return Step-By-Step Directions From Start to Destination
+            return new string(path.ToArray());
+
+            // local helper func
+            void GetPathFromRootToNode(TreeNode r, int val, Stack<char> st)
+            {
+                if (r == null || pathFound) return;
+                if (r.val == val) pathFound = true;
+
+                if (!pathFound)
+                {
+                    st.Push('L');
+                    GetPathFromRootToNode(r.left, val, st);
+                    // Pop only if Path is not found
+                    if (!pathFound) st.Pop();
+                }
+
+                if (!pathFound)
+                {
+                    st.Push('R');
+                    GetPathFromRootToNode(r.right, val, st);
+                    // Pop only if Path is not found
+                    if (!pathFound) st.Pop();
+                }
+            }
+        }
     }
 }

@@ -652,6 +652,7 @@ namespace InterviewProblemNSolutions
             FindTheMinimumAndMaximumNumberOfNodesBetweenCriticalPoints();
             WaterBottles();
             FindTheWinnerOfTheCircularGame();
+            StepByStepDirectionsFromABinaryTreeNodeToAnother();
 
 
 
@@ -11132,6 +11133,38 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"Given the number of friends '{noOfPeople[i]}', and an integer '{k[i]}', the winner of the game => '{DailyProblem.FindTheWinner(noOfPeople[i], k[i])}'");
         }
 
+
+        public static void StepByStepDirectionsFromABinaryTreeNodeToAnother()
+        {
+            // https://leetcode.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/
+            Utility.Print("2096. Step-By-Step Directions From a Binary Tree Node to Another");
+            TreeNode[] tArr =
+                [
+                    new(5)
+                    {
+                        left = new(1)
+                        {
+                            left = new(3)
+                        },
+                        right = new(2)
+                        {
+                            left = new(6),
+                            right = new(4)
+                        }
+                    },
+                    new(2)
+                    {
+                        left = new(1)
+                    }
+                ];
+            int[] s = [3, 2], d = [6, 1];
+            for (int i = 0; i < tArr.Length; i++)
+            {
+                tArr[i].InOrder("Input-Binary-Tree");
+                Console.WriteLine($"Step-by-Step directions of the shortest path from starting from node s '{s[i]}' and ending at node d '{d[i]}' => '{DailyProblem.GetDirections(tArr[i], s[i], d[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
