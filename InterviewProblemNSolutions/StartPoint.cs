@@ -653,6 +653,7 @@ namespace InterviewProblemNSolutions
             WaterBottles();
             FindTheWinnerOfTheCircularGame();
             StepByStepDirectionsFromABinaryTreeNodeToAnother();
+            DeleteNodesAndReturnForest();
 
 
 
@@ -11167,6 +11168,45 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void DeleteNodesAndReturnForest()
+        {
+            // https://leetcode.com/problems/delete-nodes-and-return-forest
+            Utility.Print("1110. Delete Nodes And Return Forest");
+            TreeNode[] trees =
+                [
+                    new(1)
+                    {
+                        left = new(2)
+                        {
+                            left = new(4),
+                            right = new(5)
+                        },
+                        right = new(3)
+                        {
+                            left = new(6),
+                            right = new(7)
+                        }
+                    },
+                    new (1)
+                    {
+                        left = new(2)
+                        {
+                            right = new(3)
+                        },
+                        right = new(4)
+                    }
+                ];
+            int[][] toDelete = [[3, 5], [3]];
+            for (int i = 0; i < trees.Length; i++)
+            {
+                trees[i].InOrder("Input-Tree");
+                toDelete[i].Print($"Nodes to be deleted");
+                Console.WriteLine($"After deleteing above nodes, we are left with a forest (a disjoint union of trees).\n\tRoots of the trees in the remaining forest:");
+                foreach (var disjointTree in DailyProblem.DelNodes(trees[i], toDelete[i]))
+                    disjointTree.InOrder();
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

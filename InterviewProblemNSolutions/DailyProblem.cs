@@ -23862,5 +23862,35 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+        // Time = Space = O(n), n = no of nodes in the tree
+        public static IList<TreeNode> DelNodes(TreeNode root, int[] to_delete)
+        {
+            // Set of nodes to be delete
+            HashSet<int> toDel = new HashSet<int>(to_delete);
+
+            // PostOrder traversal to delete nodes
+            IList<TreeNode> disjointTrees = new List<TreeNode>();
+            if (Remove(root) != null) disjointTrees.Add(root);
+            // return list of disjoint trees
+            return disjointTrees;
+
+
+            // local helper func
+            TreeNode Remove(TreeNode r)
+            {
+                if (r == null) return null;
+                r.left = Remove(r.left);    // travserse and delete all to_be_delete from left
+                r.right = Remove(r.right);  // travserse and delete all to_be_delete from right
+                if (toDel.Contains(r.val))   // delete cur root if present in SET
+                {
+                    // if cur root is getting deleted add its left and rt subtree's as distinct trees
+                    if (null != r.left) disjointTrees.Add(r.left);
+                    if (null != r.right) disjointTrees.Add(r.right);
+                    return null;
+                }
+                else return r;
+            }
+        }
     }
 }
