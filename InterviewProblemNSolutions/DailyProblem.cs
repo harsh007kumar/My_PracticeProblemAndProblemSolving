@@ -23892,5 +23892,76 @@ namespace InterviewProblemNSolutions
                 else return r;
             }
         }
+
+
+        // Time O(n*(Max(n/2,distance))) | Space O(n), n = no of nodes in the tree
+        public static int CountPairs(TreeNode root, int distance)
+        {
+            /* ALGO
+            1. Creata a UnDirected graph from the input tree
+            2. while creating the graph save all the leaf nodes in a HashSet
+            3. Now run DFS on all leaf nodes in graph
+            4. while moving down the adjacent edge keep reducing the distance
+                travelled
+            5. if distance is >=0 and adjacnet is leaf node increament the
+                global interger 'goodPairs'
+            6. at last divide the 'goodPairs'/2 as all paths would be counted
+                twice in above approach.
+             */
+            Dictionary<TreeNode, List<TreeNode>> g = [];
+            HashSet<TreeNode> leafNodes = [];
+            g[root] = [];
+            CreateGraph(root, null);
+            g[root].RemoveAt(0);    // remove the only dummy node added
+
+            int goodPairs = 0;
+            HashSet<TreeNode> visited = [];
+            foreach (var leaf in leafNodes)
+            {
+                visited.Clear();
+                FindGoodPairs(leaf, distance);
+                goodPairs--;    // reduce 1 as we are starting from leaf not which gets wrongly added to total goodPairs
+            }
+
+            return goodPairs / 2;
+
+            // local helper func
+            void CreateGraph(TreeNode r, TreeNode parent)
+            {
+                // add edge to parent node
+                g[r].Add(parent);   // v->u
+
+                if (r.left != null)
+                {
+                    g[r.left] = [];
+                    g[r].Add(r.left);   // u->v
+                    CreateGraph(r.left, r);
+                }
+                if (r.right != null)
+                {
+                    g[r.right] = [];
+                    g[r].Add(r.right);   // u->v
+                    CreateGraph(r.right, r);
+                }
+
+                // Add to Leaf HashSet
+                if (r.left == null && r.right == null)
+                    leafNodes.Add(r);
+            }
+
+            void FindGoodPairs(TreeNode r, int leftDistance)
+            {
+                // if already visited return
+                if (visited.Contains(r) || leftDistance < 0) return;
+                // add to the visited Set
+                visited.Add(r);
+
+                if (leafNodes.Contains(r))
+                    ++goodPairs;
+
+                foreach (var adj in g[r])
+                    FindGoodPairs(adj, leftDistance - 1);
+            }
+        }
     }
 }

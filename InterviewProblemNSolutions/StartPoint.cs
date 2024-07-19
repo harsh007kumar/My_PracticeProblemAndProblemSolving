@@ -654,6 +654,7 @@ namespace InterviewProblemNSolutions
             FindTheWinnerOfTheCircularGame();
             StepByStepDirectionsFromABinaryTreeNodeToAnother();
             DeleteNodesAndReturnForest();
+            NumberOfGoodLeafNodesPairs();
 
 
 
@@ -11209,6 +11210,41 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void NumberOfGoodLeafNodesPairs()
+        {
+            // https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/description/
+            Utility.Print("1530. Number of Good Leaf Nodes Pairs");
+            TreeNode[] trees =
+                [
+                    new(1)
+                    {
+                        left = new(2)
+                        { right = new(4) },
+                        right = new(3)
+                    },
+                    new(1)
+                    {
+                        left = new(2)
+                        {
+                            left = new(4),
+                            right = new (5)
+                        },
+                        right = new(3)
+                        {
+                            left = new(6),
+                            right = new (7)
+                        }
+
+                    }
+                ];
+            int[] dist = [3, 3];
+            for (int i = 0; i < trees.Length; i++)
+            {
+                trees[i].InOrder("Input binary tree");
+                Console.WriteLine($"No of good leaf node pairs in the tree => '{DailyProblem.CountPairs(trees[i], dist[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
