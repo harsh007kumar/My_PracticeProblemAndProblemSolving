@@ -655,6 +655,7 @@ namespace InterviewProblemNSolutions
             StepByStepDirectionsFromABinaryTreeNodeToAnother();
             DeleteNodesAndReturnForest();
             NumberOfGoodLeafNodesPairs();
+            LuckyNumbersInAMatrix();
 
 
 
@@ -11246,6 +11247,25 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void LuckyNumbersInAMatrix()
+        {
+            // https://leetcode.com/problems/lucky-numbers-in-a-matrix
+            Utility.Print("1380. Lucky Numbers in a Matrix");
+            int[][][] matrixArr =
+                [
+                    [[3,7,8],[9,11,13],[15,16,17]],
+                    [[1,10,4,2],[9,3,8,7],[15,16,17,12]],
+                    [[7,8],[1,2]],
+                ];
+
+            foreach (var matrix in matrixArr)
+            {
+                matrix.Print();
+                Console.WriteLine($"All lucky numbers in above matrix in any order => '{DailyProblem.LuckyNumbers(matrix)[0]}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

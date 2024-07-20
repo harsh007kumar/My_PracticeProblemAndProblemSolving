@@ -23963,5 +23963,44 @@ namespace InterviewProblemNSolutions
                     FindGoodPairs(adj, leftDistance - 1);
             }
         }
+
+
+        // Time O(r*c) | Space O(c), {r,c} = no of rows and cols respectively in Matrix
+        public static IList<int> LuckyNumbers(int[][] matrix)
+        {
+            /* ALGO
+            1. find the maxNo for all the columsn from 0..cols-1
+            2. now start iterating once again thru the matrix
+            3. basically we know since all numbers are distinct there can 
+                be only 1 minimum no in each row i.e. max 1 Lucky per row
+            4. find the min no index for given row it that is also index of max no in that column, we got our lucky no for current row
+            5. After finding the lukcy no return the ans list of only lucky no
+                else return empty list.
+             */
+            // find all the maximum no index for all the columsn
+            int rows = matrix.Length, cols = matrix[0].Length;
+            int[] maxNo = new int[cols];
+            for (int c = 0; c < cols; c++)     // O(r*c)
+            {
+                maxNo[c] = matrix[0][c];
+                for (int r = 1; r < rows; r++) // go thru entire columns and update the max number for this column
+                    maxNo[c] = Math.Max(maxNo[c], matrix[r][c]);
+            }
+            // find all lucky number for each row
+            for (int r = 0; r < rows; r++)     // O(r*c)
+            {
+                int minNoIdx = 0, minNo = matrix[r][0];
+                for (int c = 1; c < cols; c++)
+                    if (matrix[r][c] < minNo)
+                    {
+                        minNo = matrix[r][c];
+                        minNoIdx = c;
+                    }
+                if (matrix[r][minNoIdx] == maxNo[minNoIdx])
+                    return new List<int>() { minNo };
+            }
+
+            return new List<int>();
+        }
     }
 }
