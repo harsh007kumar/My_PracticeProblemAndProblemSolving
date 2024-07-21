@@ -24002,5 +24002,94 @@ namespace InterviewProblemNSolutions
 
             return new List<int>();
         }
+
+
+        // Time = Space = O(k^2)
+        public static int[][] BuildMatrix(int k, int[][] rowConditions, int[][] colConditions)
+        {
+            /* ALGO
+            1. using TopSort create the order of the numbers from 1..K as per rowConditions
+                // to run Top-Sort, first create a Adjacency Graph from 'rowConditions'
+                // Using DFS iterate thru all the nodes
+                // if there is cycle exit as => No matrix can satisfy all the conditions
+                // reverse the TopSort and add the numbers in a Dictionary 'validOrderRows' which tells which row should contains which no
+
+            2. using TopSort create the order of the numbers from 1..K as per colConditions
+                // to run Top-Sort, first create a Adjacency Graph from 'colConditions'
+                // Using DFS iterate thru all the nodes
+                // if there is cycle exit as => No matrix can satisfy all the conditions
+                // reverse the TopSort and add the numbers in a Dictionary 'validOrderCols' which tells which col should contains which no
+    
+            3. Iterate thru all the number from 1..K and save the number in the rowID, colId as optioned from 'validOrderRows' & 'validOrderCols'
+             */
+            var validOrderRows = TopSort(rowConditions);
+            if (validOrderRows == null) return new int[0][];
+            // using TopSort create the order of the numbers from 1..K as per colConditions
+            var validOrderCols = TopSort(colConditions);
+            if (validOrderCols == null) return new int[0][];
+
+            // Create Empty GRID before placing 1..K no's
+            int[][] A = new int[k][];
+            for (int i = 0; i < k; i++)
+                // initialize empty row with only Zero's
+                A[i] = new int[k];
+
+            for (int num = 1; num < k + 1; num++)
+                // place the no in the GRID
+                A[validOrderRows[num]][validOrderCols[num]] = num;
+
+            return A;
+            //////////////////////////////////////////////////////
+            // Local Helper func
+            Dictionary<int, int> TopSort(int[][] edges)
+            {
+                List<int>[] g = new List<int>[k + 1];
+                // create a Directed Adjacency Graph
+                foreach (var edge in edges)
+                {
+                    var src = edge[0];
+                    var dest = edge[1];
+                    if (g[src] == null) g[src] = [];
+                    // add edge u->v
+                    g[src].Add(dest);
+                }
+                // Visited set keep trackers of which all nodes have been visited & path include all nodes in cur path
+                HashSet<int> visited = [], path = [];
+                List<int> topSortOrder = [];
+                // if there are cycle exit as => No matrix can satisfy all the conditions
+                for (int i = 1; i < k + 1; i++)
+                    // if cycle found return empty Dictionary
+                    if (!DFS(i))
+                        return null;
+                // reverse the TopSort and add the numbers in a Dictionary which tells which row should contains which no
+                Dictionary<int, int> order = [];
+                for (int i = 0; i < k; i++)
+                    order[topSortOrder[i]] = k - 1 - i;
+                return order;
+
+                bool DFS(int cur)
+                {
+                    if (path.Contains(cur)) return false;
+                    if (visited.Contains(cur)) return true;
+                    // if not visited add cur to visited set
+                    visited.Add(cur);
+                    // add cur node in Path
+                    path.Add(cur);
+
+                    if (g[cur] != null)
+                        // iterate thru all neighbour's
+                        foreach (var adj in g[cur])
+                            // if cycle detected return false to indicate same
+                            if (!DFS(adj))
+                                return false;
+
+                    // add node after all its dependencies have been processed
+                    topSortOrder.Add(cur);
+                    // during cur node during back tracking
+                    path.Remove(cur);
+                    return true;
+                }
+            }
+        }
     }
 }

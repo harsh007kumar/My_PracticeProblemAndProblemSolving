@@ -656,6 +656,7 @@ namespace InterviewProblemNSolutions
             DeleteNodesAndReturnForest();
             NumberOfGoodLeafNodesPairs();
             LuckyNumbersInAMatrix();
+            BuildAMatrixWithConditions();
 
 
 
@@ -11268,6 +11269,29 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void BuildAMatrixWithConditions()
+        {
+            // https://leetcode.com/problems/build-a-matrix-with-conditions
+            Utility.Print("2392. Build a Matrix With Conditions");
+            int[] k = [3, 3];
+            int[][][] rowConditions =
+                [
+                    [[1,2],[3,2]],
+                    [[1,2],[2,3],[3,1],[2,3]],
+                ];
+            int[][][] colConditions =
+                [
+                    [[2,1],[3,2]],
+                    [[2,1]],
+                ];
+            for (int i = 0; i < k.Length; i++)
+            {
+                rowConditions[i].Print("rowConditions");
+                colConditions[i].Print("colConditions");
+                DailyProblem.BuildMatrix(k[i], rowConditions[i], colConditions[i]).Print($"matrix that satisfies the conditions for k '{k[i]}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
