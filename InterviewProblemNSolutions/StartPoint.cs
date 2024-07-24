@@ -657,6 +657,7 @@ namespace InterviewProblemNSolutions
             NumberOfGoodLeafNodesPairs();
             LuckyNumbersInAMatrix();
             BuildAMatrixWithConditions();
+            SortTheJumbledNumbers();
 
 
 
@@ -11294,6 +11295,20 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void SortTheJumbledNumbers()
+        {
+            // https://leetcode.com/problems/sort-the-jumbled-numbers/
+            Utility.Print("2191. Sort the Jumbled Numbers");
+            int[][] mappings = [[8, 9, 4, 0, 2, 1, 3, 5, 7, 6], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]];
+            int[][] nums = [[991, 338, 38], [789, 456, 123], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                mappings[i].Print("Mappings-Array");
+                nums[i].Print("Nums-Array");
+                DailyProblem.SortJumbled(mappings[i], nums[i]).Print($"Return the array nums sorted in non-decreasing order based on the mapped values of its elements");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

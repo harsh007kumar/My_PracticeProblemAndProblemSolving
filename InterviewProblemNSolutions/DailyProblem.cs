@@ -24091,5 +24091,45 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+
+        // Time O(nlogn) | Space O(n), n = length of nums array
+        public static int[] SortJumbled(int[] mapping, int[] nums)
+        {
+            /* ALGO
+            1. Generate mapped values for all the numbers in input 'nums'
+                - Important point keep in mind if num == 0,
+                - just return the mapped value on 0th index of 'mapping'
+            2. Now using above Hashtable sort the 'nums' array
+            3. Return 'nums'
+             */
+            Dictionary<int, int> mappedVal = [];
+            foreach (var n in nums)                  // O(n)
+                if (!mappedVal.ContainsKey(n))
+                    mappedVal[n] = GetMappedVal(n);
+            // sort the nums basis their mapped value which can be taken form Hashtable // O(nlogn)
+            Array.Sort(nums, (x, y) => mappedVal[x].CompareTo(mappedVal[y]));
+            return nums;
+
+            // local helper func
+            int GetMappedVal(int val)
+            {
+                // if just a single digit zero just return its equivalent mapped digit
+                if (val == 0) return mapping[0];
+                // store the digit from right to left
+                Stack<int> map = [];
+                while (val > 0)
+                {
+                    map.Push(val % 10);
+                    val /= 10;
+                }
+                // generate mapped value for the input 'val'
+                // by parsing the mapped value for each digit
+                int mappedVal = 0;
+                while (map.TryPop(out int digit))
+                    mappedVal = mappedVal * 10 + mapping[digit];
+                return mappedVal;
+            }
+        }
     }
 }
