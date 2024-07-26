@@ -658,6 +658,7 @@ namespace InterviewProblemNSolutions
             LuckyNumbersInAMatrix();
             BuildAMatrixWithConditions();
             SortTheJumbledNumbers();
+            FindTheCityWithTheSmallestNumberOfNeighborsAtAThresholdDistance();
 
 
 
@@ -11311,6 +11312,24 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void FindTheCityWithTheSmallestNumberOfNeighborsAtAThresholdDistance()
+        {
+            // https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance
+            Utility.Print("1334. Find the City With the Smallest Number of Neighbors at a Threshold Distance");
+            int[][][] edges =
+                [
+                    [[0,1,3],[1,2,1],[1,3,4],[2,3,1]],
+                    [[0,1,2],[0,4,8],[1,2,3],[1,4,2],[2,3,1],[3,4,1]]
+                ];
+            int[] n = [4, 5];
+            int[] distanceThreshold = [4, 2];
+            for (int i = 0; i < edges.Length; i++)
+            {
+                edges[i].Print("Edges-array");
+                Console.WriteLine($"City with the smallest number of cities that are reachable through some path and whose distance is at most '{distanceThreshold[i]}' => '{DailyProblem.FindTheCity(n[i], edges[i], distanceThreshold[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

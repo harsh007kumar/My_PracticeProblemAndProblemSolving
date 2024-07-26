@@ -24131,5 +24131,61 @@ namespace InterviewProblemNSolutions
                 return mappedVal;
             }
         }
+
+
+        // FloydWarshall
+        // Time O(n^3) || Space O(n^2)
+        public static int FindTheCity(int n, int[][] edges, int distanceThreshold)
+        {
+            /* ALGO
+            1. Create a UnDirected Graph represented in form of Adjacancy Matrix of size N x N
+            2. intially mark all nodes as unreachable
+            3. Copy all values into graph matrix 'S'
+            4. for each vertex A..B try and see if there exists an path via some Vertex K which yields shorter distance
+            5. Find city with the smallest number of reachable cities at most 'distanceThreshold' starting from 0th to N-1th city
+             */
+            // Step1 Create a table to store shortest path b/w all pairs of Vertex
+            int[,] S = new int[n, n];
+
+            // Step2.intially mark all nodes as unreachable
+            for (int i = 0; i < n; i++)
+                for (int j = 0; j < n; j++)
+                    S[i, j] = int.MaxValue;
+
+            // Step3. Copy all values from graph matrix to S
+            foreach (var edge in edges)
+            {
+                int from = edge[0], to = edge[1], wt = edge[2];
+                S[from, to] = wt;
+                S[to, from] = wt;
+            }
+
+            // Step4. for each vertex A..B try and see if there exists an path via some Vertex K which yields shorter distance,
+            // dist(A to B) = Min(dist(A to B) , dist(A to K) + dist(K to B))
+            for (int k = 0; k < n; k++)                            // intermediate Vertex being tried
+                for (int i = 0; i < n; i++)                        // Vertex A
+                    for (int j = 0; j < n; j++)                    // Vertex B
+                        if (i != j && i != k && j != k) // skip when Vertex A&B are same, also exclude when k is either A or B
+                                                        // make sure connecting edge with K exists (IntMax indicates Edge doesn't exists)
+                            if (S[i, k] != int.MaxValue && S[k, j] != int.MaxValue)
+                                S[i, j] = Math.Min(S[i, j], S[i, k] + S[k, j]);
+
+            int cityWithSmallestReachableNeighbours = -1, noOfCitiesWithinReach = n;
+            // Step4. Find city with the smallest number of reachable cities at most distanceThreshold
+            for (int cityIdx = 0; cityIdx < n; cityIdx++)
+            {
+                int citiesWithinReach = 0;
+                for (int adj = 0; adj < n; adj++)
+                    if (S[cityIdx, adj] <= distanceThreshold)
+                        ++citiesWithinReach;
+
+                if (noOfCitiesWithinReach >= citiesWithinReach)        // found city with smaller neighbours with threshold dist
+                {
+                    cityWithSmallestReachableNeighbours = cityIdx;
+                    noOfCitiesWithinReach = citiesWithinReach;
+                }
+            }
+            return cityWithSmallestReachableNeighbours;
+        }
     }
 }
