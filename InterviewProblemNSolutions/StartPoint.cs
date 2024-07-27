@@ -659,6 +659,7 @@ namespace InterviewProblemNSolutions
             BuildAMatrixWithConditions();
             SortTheJumbledNumbers();
             FindTheCityWithTheSmallestNumberOfNeighborsAtAThresholdDistance();
+            MinimumCostToConvertStringI();
 
 
 
@@ -11332,6 +11333,39 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MinimumCostToConvertStringI()
+        {
+            // https://leetcode.com/problems/minimum-cost-to-convert-string-i
+            Utility.Print("2976. Minimum Cost to Convert String I");
+            string[] source = ["abcd", "aaaa", "abcd"];
+            string[] target = ["acbe", "bbbb", "abce"];
+            char[][] original =
+                [
+                    ['a','b','c','c','e','d'],
+                    ['a','c'],
+                    ['a']
+                ];
+            char[][] changed =
+                [
+                    ['b','c','b','e','b','e'],
+                    ['c','b'],
+                    ['e']
+                ];
+            int[][] cost =
+                [
+                    [2,5,5,1,2,20],
+                    [1,2],
+                    [10000]
+                ];
+            for (int i = 0; i < cost.Length; i++)
+            {
+                original[i].Print("original");
+                changed[i].Print("changed");
+                cost[i].Print("cost");
+                Console.WriteLine($"Min cost to convert the string '{source[i]}' to the string '{target[i]}'using any number of operations => '{DailyProblem.MinimumCost(source[i], target[i], original[i], changed[i], cost[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

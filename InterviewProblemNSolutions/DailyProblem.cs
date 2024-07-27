@@ -24187,5 +24187,98 @@ namespace InterviewProblemNSolutions
             }
             return cityWithSmallestReachableNeighbours;
         }
+
+
+        // Time O(Max(n,m)) | Space O(m), n, m = length of 'source' string and 'original' array respectively
+        public static long MinimumCost(string source, string target, char[] original, char[] changed, int[] cost)
+        {
+            /* ALGO
+            // Graph + Dijkstra + Caching
+            1. Create an Directed Weighted Graph for all characters that can be converted from 'original' to 'changed at 'cost' for all indices
+            2. Now run the 'Dijkstra' trying to calculate cost for converting each index in 'source' to 'target'
+            3. also cache the answer 'from' char => 'to' char for 'wt' in cache HashTable
+            4. if any characters cannot reach final desired characters at any stage return -1
+            
+            Note:
+                later i realised instead of above one can also run FloydWarshall
+                algo to find smallest cost for all the characters in O(n^3)
+                and then simply run a 'n' loop to total all the cost.
+             */
+            int n = source.Length, m = original.Length;
+            Dictionary<char, Dictionary<char, int>> g = [];
+            // Create a Directed weighted Graph for all characters which can be converted
+            for (int i = 0; i < m; i++)                    // O(m)
+            {
+                var src = original[i];
+                var dest = changed[i];
+                var W = cost[i];
+                if (g.TryGetValue(src, out Dictionary<char, int> adj))
+                {
+                    if (adj.TryGetValue(dest, out int wt))
+                        adj[dest] = Math.Min(wt, W);
+                    else adj[dest] = W;
+                }
+                else
+                {
+                    g[src] = [];
+                    g[src][dest] = W;
+                }
+                // add Node Destination in Graph
+                if (!g.ContainsKey(dest)) g[dest] = [];
+            }
+            long totalCost = 0;
+            Dictionary<char, Dictionary<char, long>> cache = [];
+            // calculate the cost of converting all characters in source => target
+            for (int i = 0; i < n; i++)                    // O(n*26)
+                if (cache.TryGetValue(source[i], out Dictionary<char, long> val))
+                    if (val.TryGetValue(target[i], out long C))
+                    {
+                        if (C == -1) return -1;
+                        else totalCost += C;
+                    }
+                    else
+                    {
+                        var conversionCost = BFS(source[i], target[i]);
+                        if (conversionCost == -1) return -1;
+                        else totalCost += conversionCost;
+
+                        // save to cache
+                        val[target[i]] = conversionCost;
+                    }
+                else
+                {
+                    cache[source[i]] = [];
+                    var conversionCost = BFS(source[i], target[i]);
+                    if (conversionCost == -1) return -1;
+                    else totalCost += conversionCost;
+
+                    // save to cache
+                    cache[source[i]][target[i]] = conversionCost;
+                }
+            return totalCost;
+
+            // local helper func
+            long BFS(char from, char to)
+            {
+                if (from == to) return 0;
+                if (!g.ContainsKey(from) || !g.ContainsKey(to)) return -1;
+
+                HashSet<char> visited = [];
+                PriorityQueue<char, long> pq = new();
+                pq.Enqueue(from, 0);
+
+                while (pq.TryDequeue(out char curChar, out long costSoFar))
+                    if (!visited.Contains(curChar))      // traverse Node if not already visited
+                    {
+                        if (curChar == to) return costSoFar;// found destination return costSoFar
+
+                        foreach (var adj in g[curChar])
+                            pq.Enqueue(adj.Key, adj.Value + costSoFar);
+
+                        visited.Add(curChar);           // mark cur Node as visited now
+                    }
+                return -1;
+            }
+        }
     }
 }
