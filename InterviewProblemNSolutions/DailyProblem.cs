@@ -24280,5 +24280,70 @@ namespace InterviewProblemNSolutions
                 return -1;
             }
         }
+
+
+        // Time O(V+E), V = no of nodes i.e. 'n' & E = no of edges i.e. 'length of edges'
+        public static int SecondMinimum(int n, int[][] edges, int time, int change)
+        {
+            List<int>[] g = new List<int>[n + 1];
+            Dictionary<int, List<int>> visited = [];
+            for (int i = 1; i < n + 1; i++)
+            {
+                g[i] = [];                //  initialize every Node of Graph
+                visited[i] = [];           // mark no of times each node is visited as 0 initially
+            }
+            foreach (var edge in edges)
+            {
+                var from = edge[0];   // subtracting 1 as nodes are 1-indexed not 0-indexed
+                var to = edge[1];
+                // u->v
+                g[from].Add(to);
+                // v->u
+                g[to].Add(from);
+            }
+            foreach (var edge in edges)
+            {
+                // u->v
+                g[edge[0]].Add(edge[1]);
+                // v->u
+                g[edge[1]].Add(edge[0]);
+            }
+
+            int minTimeToReachDest = -1, curTime = 0;
+            // BFS
+            Queue<int> q = [];
+            q.Enqueue(1);
+            // keep traversing till 2nd shortest path is found
+            while (true)
+            {
+                var qLen = q.Count;
+                for (int i = 0; i < qLen; i++)
+                {
+                    var curNode = q.Dequeue();
+                    if (curNode == n)    // reached destination
+                    {
+                        if (minTimeToReachDest == -1 || minTimeToReachDest == curTime)
+                            minTimeToReachDest = curTime;
+                        else return curTime;    // found 2nd minimum by travel time
+                    }
+
+                    foreach (var adj in g[curNode])
+                        // if we would be visiting the adj neighbour node for 1st time, than we add to Queue
+                        // OR if visiting for 2nd time AND this time curTime is different than last time we visited it, add to Queue
+                        if (visited[adj].Count == 0 || (visited[adj].Count == 1 && visited[adj][0] != curTime))
+                        {
+                            q.Enqueue(adj);
+                            visited[adj].Add(curTime);
+                        }
+                }
+                // once all nodes have been visited at 'X" time not time to increment it
+                // check if we need to wait for signal to change from RED to GREEN
+                if ((curTime / change) % 2 == 1) // if ODD we need to wait if EVEN no wait
+                    curTime += change - (curTime % change);   // added wait time till signal gets Green again
+                                                              // before iterating to Adjcanet Nodes add travel time for moving from 1 to another node
+                curTime += time;
+            }
+            return -1;
+        }
     }
 }

@@ -660,6 +660,7 @@ namespace InterviewProblemNSolutions
             SortTheJumbledNumbers();
             FindTheCityWithTheSmallestNumberOfNeighborsAtAThresholdDistance();
             MinimumCostToConvertStringI();
+            SecondMinimumTimeToReachDestination();
 
 
 
@@ -11368,6 +11369,27 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void SecondMinimumTimeToReachDestination()
+        {
+            // Neetcode https://youtu.be/2F7gwxfy1CU
+            // https://leetcode.com/problems/second-minimum-time-to-reach-destination
+            Utility.Print("2045. Second Minimum Time to Reach Destination");
+            int[] n = [5, 2];
+            int[][][] edges =
+                [
+                    [[1,2],[1,3],[1,4],[3,4],[4,5]],
+                    [[1,2]],
+                ];
+            int[] time = [3, 3];
+            int[] change = [5, 2];
+            for (int i = 0; i < n.Length; i++)
+            {
+                edges[i].Print("Edges");
+                Console.WriteLine($"Given '{n[i]}' Nodes in Graph & aboves Edges and time '{time[i]}', and change '{change[i]}'\n\t" +
+                    $"The second minimum time it will take to go from vertex 1 to vertex '{n[i]}' => '{DailyProblem.SecondMinimum(n[i], edges[i], time[i], change[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
