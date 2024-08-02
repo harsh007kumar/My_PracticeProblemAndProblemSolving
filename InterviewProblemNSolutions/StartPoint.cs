@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using static System.Formats.Asn1.AsnWriter;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -645,22 +646,23 @@ namespace InterviewProblemNSolutions
             //MagneticForceBetweenTwoBalls();
             //CountNumberOfNiceSubarrays();
             //LongestContinuousSubarrayWithAbsoluteDiffLessThanOrEqualToLimit();
-            MinNumberOfKConsecutiveBitFlips();
-            MaximumTotalImportanceOfRoads();
-            AllAncestorsOfANodeInADirectedAcyclicGraph();
-            RemoveMaxNumberOfEdgesToKeepGraphFullyTraversable();
-            FindTheMinimumAndMaximumNumberOfNodesBetweenCriticalPoints();
-            WaterBottles();
-            FindTheWinnerOfTheCircularGame();
-            StepByStepDirectionsFromABinaryTreeNodeToAnother();
-            DeleteNodesAndReturnForest();
-            NumberOfGoodLeafNodesPairs();
-            LuckyNumbersInAMatrix();
-            BuildAMatrixWithConditions();
-            SortTheJumbledNumbers();
-            FindTheCityWithTheSmallestNumberOfNeighborsAtAThresholdDistance();
-            MinimumCostToConvertStringI();
-            SecondMinimumTimeToReachDestination();
+            //MinNumberOfKConsecutiveBitFlips();
+            //MaximumTotalImportanceOfRoads();
+            //AllAncestorsOfANodeInADirectedAcyclicGraph();
+            //RemoveMaxNumberOfEdgesToKeepGraphFullyTraversable();
+            //FindTheMinimumAndMaximumNumberOfNodesBetweenCriticalPoints();
+            //WaterBottles();
+            //FindTheWinnerOfTheCircularGame();
+            //StepByStepDirectionsFromABinaryTreeNodeToAnother();
+            //DeleteNodesAndReturnForest();
+            //NumberOfGoodLeafNodesPairs();
+            //LuckyNumbersInAMatrix();
+            //BuildAMatrixWithConditions();
+            //SortTheJumbledNumbers();
+            //FindTheCityWithTheSmallestNumberOfNeighborsAtAThresholdDistance();
+            //MinimumCostToConvertStringI();
+            //SecondMinimumTimeToReachDestination();
+            MinimumSwapsToGroupAll1sTogetherII();
 
 
 
@@ -11392,6 +11394,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MinimumSwapsToGroupAll1sTogetherII()
+        {
+            // https://leetcode.com/problems/minimum-swaps-to-group-all-1s-together-ii
+            Utility.Print("2134. Minimum Swaps to Group All 1's Together II");
+            int[][] numsArr =
+                [
+                    [0,1,0,1,1,0,0],
+                    [0,1,1,1,0,0,1,1,0],
+                    [1,1,0,0,1],
+                ];
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Input-Array");
+                Console.WriteLine($"Given abvoe binary circular array, the min no of swaps required to group all 1's present in the array together at any location => '{DailyProblem.MinSwaps(nums)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

@@ -24345,5 +24345,75 @@ namespace InterviewProblemNSolutions
             }
             return -1;
         }
+
+
+        // Time O(n) | Space O(1), n = length of input array
+        public static int MinSwaps(int[] A)
+        {
+            /* ALGO
+            1. since we need to grp all 0's and 1's together in minSwaps
+            2. we can either grp 0's together or 1's together
+            3. lets grp 1's together meaning all 0's would also be grp
+                together as the array is circular as given in probl.
+            4. in order to grp all 1's lets first find out how many 1's are
+                there in total present in array
+            5. Now max no of swaps we need is total 'no of Ones'
+            6. Now to optimize counting of 0's for each sub-array including
+                ones wrapped arounds the edges
+            7. we first count no of zero's in first sub-array from its
+                lt-end till rt-end index-1
+            8. not we start evaluting all subarray ending at index 0 to N-1
+            9. NOTE: for an subarray of length 3, in array of size 8
+                if rt end is at '0' idx, then the lt end would be at idx '6'
+            10. while iterating we try to 'minmize no of swaps' depending
+                on 'number of Zero's in cur sub-array
+            11. if at any point we get '0 swapsReq' perfect break out of loop.
+            12. also before moving rtIdx by 1, removing any Zero at lt idx as
+                its also going to be moved by 1
+             */
+            int l = A.Length, noOfOnes = 0;
+            // count no of 1's
+            for (int i = 0; i < l; i++)                        // O(n)
+                noOfOnes += A[i];
+            // base condition we should have atleast 2 or more One's in order grp them
+            if (noOfOnes < 2) return 0;
+
+            // now try every sub-array of size 'noOfOnes' including circular
+            // to find out which one has least no of 0's as that sub-array will required minSwaps
+            // ex: if we need total three 1's togeter an an sub-array has 0 1 0 , two 0's than Swaps req is '2'
+
+            int ltIdx = l - noOfOnes, RtIdx = 0, minSwapsReq = noOfOnes, noOfZerosInCurSubArray = 0;
+            var fillFrom = (++ltIdx) % l; // setting the starting Index for current sub-array wrapped around the edges
+
+            // fill initial sub-array Zero's in Queue
+            while (fillFrom != RtIdx)
+            {
+                if (A[fillFrom] == 0)
+                    noOfZerosInCurSubArray++;
+                fillFrom = (++fillFrom) % l;
+            }
+            // Now try all sub-array Ending at Index 0 till one Ending at idx N-1
+            while (RtIdx < l)
+            {
+                // add last element to complete first subarray ending at index 0
+                if (A[RtIdx] == 0)
+                    noOfZerosInCurSubArray++;
+
+                // update the minSwaps required value depending on no of Zero's cur sub-array has
+                minSwapsReq = Math.Min(minSwapsReq, noOfZerosInCurSubArray);
+
+                // if optimal ans found break out of loop
+                if (minSwapsReq == 0) break;
+
+                // remove if any index which will NOT be part of next sub-array
+                if (A[ltIdx] == 0)
+                    noOfZerosInCurSubArray--;
+
+                // move the pointers
+                ++RtIdx;
+                ltIdx = (++ltIdx) % l;
+            }
+            return minSwapsReq;
+        }
     }
 }
