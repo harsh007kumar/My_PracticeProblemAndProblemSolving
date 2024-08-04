@@ -24415,5 +24415,26 @@ namespace InterviewProblemNSolutions
             }
             return minSwapsReq;
         }
+
+
+        // Time O(n^2*(log(n^2))) | Space O(n^2)
+        public static int RangeSum(int[] nums, int n, int left, int right)
+        {
+            List<int> subArrSums = [];
+            int curSum = 0;
+            // Calculate all the subarrays Sum
+            for (int startIdx = 0; startIdx < n; startIdx++, curSum = 0)
+                for (int i = startIdx; i < n; i++)
+                    subArrSums.Add(curSum += nums[i]);
+
+            // Sort the subArray's sum in Asc
+            subArrSums.Sort();
+
+            curSum = 0;
+            --left; // since its 1 indexed not Zero
+            while (left < right)
+                curSum = (curSum + subArrSums[left++]) % 1000000007;
+            return curSum;
+        }
     }
 }

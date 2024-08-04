@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Metrics;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
@@ -663,6 +664,7 @@ namespace InterviewProblemNSolutions
             //MinimumCostToConvertStringI();
             //SecondMinimumTimeToReachDestination();
             MinimumSwapsToGroupAll1sTogetherII();
+            RangeSumOfSortedSubarraySums();
 
 
 
@@ -11412,6 +11414,28 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void RangeSumOfSortedSubarraySums()
+        {
+            // https://leetcode.com/problems/range-sum-of-sorted-subarray-sums
+            Utility.Print("1508. Range Sum of Sorted Subarray Sums");
+            int[][] nums = 
+                [
+                    [1,2,3,4],
+                    [1,2,3,4],
+                    [1,2,3,4],
+                ];
+            int[] n = [4, 4, 4];
+            int[] left = [1, 3, 1];
+            int[] rt = [5, 4, 10];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Input-Array");
+                Console.WriteLine($"sum of the numbers from index '{left[i]}' to index '{rt[i]}' (indexed from 1), inclusive," +
+                    $" in the new array of sum of all Sum-Arrays is => '{DailyProblem.RangeSum(nums[i], n[i], left[i], rt[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
