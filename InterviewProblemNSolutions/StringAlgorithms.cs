@@ -2049,5 +2049,38 @@ namespace InterviewProblemNSolutions
             }
             return sb.ToString();
         }
+
+
+        // Time O(n) | Space O(1), n = length of 'word'
+        public static int MinimumPushes(string word)
+        {
+            /* ALGO
+            1. Since any character can be mapped to any key
+            2. it makes sense to map most freq characters such that we
+                can get them in 1 push.
+            3. since we only have 8 distinct keys so 1st set of eight most
+                frequent characters get mapped 1st & 1 push we can get them
+                a. second set of most freq get mapped to 2-push
+                b. 3rd set get mapped to 3-push
+                c. last 2 characters least freq get mapped to 4-push
+            7. Now we can simply count the freq of all characters in input
+            8. sort the characters by non-increasing frequencies
+            9. not we multiply each character freq * by no pushed required
+                to get it & add it to grand total
+             */
+            int[] charFreq = new int[26];
+            // fetch the freq of all distinct characters
+            foreach (var c in word)  // O(n)
+                charFreq[c - 'a']++;
+            // sort in Non-increasing order
+            Array.Sort(charFreq, (a, b) => b.CompareTo(a));   // O(26log26) ~O(1)
+            int unqKeys = 8, pushCount = 0;
+            // first 8 most freq character get mapped to 1st place on 8 different keys
+            // second set of 8 characters get mapped to 2nd place on all keys and so on ...
+            // if any character has 0 freq it does add to pushCount
+            for (int i = 0; i < 26; i++)   // O(26)
+                pushCount += charFreq[i] * (1 + (i / unqKeys)); // freq of char * times key has to be pushed to get the character
+            return pushCount;
+        }
     }
 }

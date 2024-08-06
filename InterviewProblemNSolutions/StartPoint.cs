@@ -665,6 +665,7 @@ namespace InterviewProblemNSolutions
             //SecondMinimumTimeToReachDestination();
             MinimumSwapsToGroupAll1sTogetherII();
             RangeSumOfSortedSubarraySums();
+            MinimumNumberOfPushesToTypeWordII();
 
 
 
@@ -11437,7 +11438,14 @@ namespace InterviewProblemNSolutions
             }
         }
 
-
+        public static void MinimumNumberOfPushesToTypeWordII()
+        {
+            // https://leetcode.com/problems/minimum-number-of-pushes-to-type-word-ii
+            Utility.Print("3016. Minimum Number of Pushes to Type Word II");
+            string[] words = ["abcde", "xyzxyzxyzxyz", "aabbccddeeffgghhiiiiii"];
+            foreach (var word in words)
+                Console.WriteLine($"the minimum number of pushes needed to type word '{word}' after remapping the key => '{StringAlgorithms.MinimumPushes(word)}'");
+        }
 
 
 
