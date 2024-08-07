@@ -473,7 +473,7 @@ namespace InterviewProblemNSolutions
             //MaximumAreaOfPieceOfCakeAfterHorizontalAndVerticalCuts();
             //OpenTheLock();
             //MaximumPerformanceOfATeam();
-            //IntegerToEnglishWords();
+            IntegerToEnglishWords();
             //LongestConsecutiveSequence();
             //MinCostClimbingStairs();
             //MyCalendarI();
@@ -7892,7 +7892,10 @@ namespace InterviewProblemNSolutions
             Utility.Print("273. Integer to English Words");
             int[] nums = { 123, 12345, 1234567, 1234567891, 0, 123000000, 1230000000, 100 };
             foreach (var num in nums)
-                Console.WriteLine($" '{num}' get converted into '{DailyProblem.NumberToWords(num)}'\nodes");
+            {
+                Console.WriteLine($"'{num}' get converted into '{DailyProblem.NumberToWords(num)}'\n");
+                Console.WriteLine($"'{num}' get converted into '{DailyProblem.NumberToWordsFaster(num)}'\n");
+            }
         }
 
 

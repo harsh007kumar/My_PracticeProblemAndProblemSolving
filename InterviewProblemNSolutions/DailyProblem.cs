@@ -17598,6 +17598,107 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        // Time = Space = O(1)
+        public static string NumberToWordsFaster(int num)
+        {
+            /* ALGO
+            1. Start from the most significant Digit
+            2. if any value for Billion is present Spell + Add "Billions"
+            3. if any value for Million is present Spell + Add "Millions"
+            4. if any value for Thousand is present Spell + Add "Thousand"
+            5. if at end last 3 digit have any value Spell them too.
+            6. Create a Helper func Spell() which converts any
+                3 digit value to corrosponding (Hundred, Tens & Ones)
+            7. If spelled word so far is not empty return it else return "Zero".
+             */
+            string[] ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+            string[] tens = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
+            string[] second = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+            
+            Dictionary<string, int> d = [];
+            d["Billion"] = 1000000000;
+            d["Million"] = 1000000;
+            d["Thousand"] = 1000;
+            
+            StringBuilder inWords = new();
+            
+            // spell out Billions
+            string spelled = Spell(num / d["Billion"]);
+            if (spelled.Length > 0)
+                inWords.Append(spelled + " " + "Billion");
+            num %= d["Billion"];
+
+            // spell out Million
+            spelled = Spell(num / d["Million"]);
+            if (spelled.Length > 0)
+            {
+                if (inWords.Length > 0) inWords.Append(" ");
+                inWords.Append(spelled + " " + "Million");
+            }
+            num %= d["Million"];
+
+            // spell out Thousand
+            spelled = Spell(num / d["Thousand"]);
+            if (spelled.Length > 0)
+            {
+                if (inWords.Length > 0) inWords.Append(" ");
+                inWords.Append(spelled + " " + "Thousand");
+            }
+            num %= d["Thousand"];
+
+            // spell last/Right-Most 3 digit
+            spelled = Spell(num);
+            if (spelled.Length > 0)
+            {
+                if (inWords.Length > 0) inWords.Append(" ");
+                inWords.Append(spelled);
+            }
+            // return entire spelled integer
+            return inWords.Length == 0 ? "Zero" : inWords.ToString();
+
+            string Spell(int num)
+            {
+                StringBuilder ans = new();
+                int val = num / 100;
+                if (val > 0)
+                    ans.Append(ones[val] + " " + "Hundred");
+                num %= 100;
+
+                val = num / 10;
+                if (val == 0)  // Tens place is empty/Zero
+                {
+                    num %= 10;
+                    // add the ones value
+                    if (num > 0)
+                    {
+                        if (ans.Length > 0) ans.Append(" ");
+                        ans.Append(ones[num]);
+                    }
+                }
+                else    // Tens place value remaining
+                {
+                    if (val == 1)  // b/w Ten...Nineteen
+                    {
+                        if (ans.Length > 0) ans.Append(" ");
+                        ans.Append(tens[num % 10]);
+                    }
+                    else // Tens value is b/w 2...9
+                    {
+                        if (ans.Length > 0) ans.Append(" ");
+                        ans.Append(second[val]);
+                        // don't forget to add the ones value
+                        num %= 10;
+                        if (num > 0)
+                        {
+                            if (ans.Length > 0) ans.Append(" ");
+                            ans.Append(ones[num]);
+                        }
+                    }
+                }
+                return ans.ToString();
+            }
+        }
+
 
         // Time = Space = O(n), n = length of 'nums'
         public static int LongestConsecutive(int[] nums)
