@@ -666,6 +666,7 @@ namespace InterviewProblemNSolutions
             MinimumSwapsToGroupAll1sTogetherII();
             RangeSumOfSortedSubarraySums();
             MinimumNumberOfPushesToTypeWordII();
+            SpiralMatrixIII();
 
 
 
@@ -11451,6 +11452,18 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void SpiralMatrixIII()
+        {
+            // NeetCode https://youtu.be/Xf5Zm5Y8PKM
+            // https://leetcode.com/problems/spiral-matrix-iii
+            int[] rows = [1, 5], cols = [4, 6], rStart = [0, 1], cStart = [0, 4];
+            Utility.Print("885. Spiral Matrix III");
+            for (int i = 0; i < rows.Length; i++)
+            {
+                DailyProblem.SpiralMatrixIII(rows[i], cols[i], rStart[i], cStart[i]).Print($"Returning an array of coordinates representing the positions of the grid of size [{rows[i]}x{cols[i]}]\n In the order you visited them by starting circular at [{rStart[i]},{cStart[i]}]\n ");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

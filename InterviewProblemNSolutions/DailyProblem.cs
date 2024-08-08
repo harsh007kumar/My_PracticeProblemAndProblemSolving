@@ -24537,5 +24537,41 @@ namespace InterviewProblemNSolutions
                 curSum = (curSum + subArrSums[left++]) % 1000000007;
             return curSum;
         }
+
+
+        // Time = Space = O(rows*cols)
+        public static int[][] SpiralMatrixIII(int rows, int cols, int r, int c)
+        {
+            /* ALGO
+            1. Main realization here is, once u have noticed we take/move same no of steps twice before increasing no of steps to move by 1
+            2. Ex: 1-Rt, 1-Down, 2-Lt,2-Up,3-Rt,3-Down,4-Lt,4-Up
+            3. Now just create a Direction array which increament (r,c) in our desired direction
+            4. to change direction move to next index in Directions array
+            5. we run the loop till we have result.Length == no of valid cells
+            6. increament steps by 1 once u same no of steps have been travelled twice in any direction.
+             */
+            int[][] directions = [[0, 1], [1, 0], [0, -1], [-1, 0]];
+            List<int[]> ans = new();
+            int steps = 1, curDir = 0;
+            while (ans.Count < (rows * cols))
+            {
+                // only increament steps after same step has been used twice
+                for (int i = 0; i < 2; i++)
+                {
+                    for (int j = 0; j < steps; j++)
+                    {
+                        // only add to result if its a valid cell
+                        if (0 <= r && r < rows && 0 <= c && c < cols)
+                            ans.Add([r, c]);
+                        r += directions[curDir][0];
+                        c += directions[curDir][1];
+                    }
+                    // change direction after we have moved all req steps in cur direction
+                    curDir = (1 + curDir) % 4;
+                }
+                steps++;
+            }
+            return ans.ToArray();
+        }
     }
 }
