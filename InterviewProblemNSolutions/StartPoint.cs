@@ -667,6 +667,7 @@ namespace InterviewProblemNSolutions
             RangeSumOfSortedSubarraySums();
             MinimumNumberOfPushesToTypeWordII();
             SpiralMatrixIII();
+            RegionsCutBySlashes();
 
 
 
@@ -11466,6 +11467,24 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void RegionsCutBySlashes()
+        {
+            // NeetCode https://youtu.be/j8KrBYIxHK8
+            // https://leetcode.com/problems/regions-cut-by-slashes
+            Utility.Print("959. Regions Cut By Slashes");
+            string[][] grids =
+                [
+                    [" /", "/ "],
+                    [" /","  "],
+                    ["/\\","\\/"],
+                ];
+            foreach (var grid in grids)
+            {
+                grid.Print("GRID");
+                Console.WriteLine($"From above GRID represented as a string array, the number of regions => '{DailyProblem.RegionsBySlashes(grid)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

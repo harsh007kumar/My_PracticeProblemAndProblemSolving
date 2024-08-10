@@ -24573,5 +24573,59 @@ namespace InterviewProblemNSolutions
             }
             return ans.ToArray();
         }
+
+
+        // Time = Space = O(n^2), n = length of 'GRID'
+        public static int RegionsBySlashes(string[] grid)
+        {
+            // scale each cell to 3x3
+            int n = grid.Length, noOfIslands = 0;
+            // 0 means empty, 1 means blocked by line
+            int[,] scaledGrid = new int[n * 3, n * 3];
+            // Mark the Boundries in Scaled GRID
+            for (int r = 0; r < n; r++)
+            {
+                int c = 0;
+                for (int j = 0; j < grid[r].Length; j++, c++)
+                    if (grid[r][j] == '\\')
+                        Mark(r, c);
+                    else if (grid[r][j] == '/')
+                        Mark(r, c, false);
+            }
+            // count insland using DFS on scaled GRId
+            n *= 3;
+            for (int r = 0; r < n; r++)
+                for (int c = 0; c < n; c++)
+                    if (scaledGrid[r, c] == 0)
+                    {
+                        noOfIslands++;
+                        DFS(r, c);
+                    }
+
+            return noOfIslands;
+
+            // local helper func
+            void Mark(int rID, int cID, bool leftDiag = true)
+            {
+                rID *= 3;
+                cID *= 3;
+                if (leftDiag)
+                    scaledGrid[rID, cID] = scaledGrid[rID + 1, cID + 1] = scaledGrid[rID + 2, cID + 2] = 1;
+                else
+                    scaledGrid[rID, cID + 2] = scaledGrid[rID + 1, cID + 1] = scaledGrid[rID + 2, cID] = 1;
+            }
+            void DFS(int rID, int cID)
+            {
+                // out of bounds or already visited, then return
+                if (rID < 0 || rID == n || cID < 0 || cID == n || scaledGrid[rID, cID] == 1) return;
+                // else mark visited
+                scaledGrid[rID, cID] = 1;
+
+                DFS(rID, cID + 1);
+                DFS(rID, cID - 1);
+                DFS(rID + 1, cID);
+                DFS(rID - 1, cID);
+            }
+        }
     }
 }
