@@ -24627,5 +24627,44 @@ namespace InterviewProblemNSolutions
                 DFS(rID - 1, cID);
             }
         }
+
+
+        // Time O(n*logMax) | Space O(1), n = length of 'nums' & MAX = biggest Integer in 'nums'
+        public static int SmallestDistancePair(int[] nums, int k)
+        {
+            /* ALGO
+            1. Sort the input array as i,j should not be equal is only condition
+            2. Now we start a Binary Search for finding a appropriate distance which results in excatly 'k' difference b/w numbers in array
+            3. Keep lt = 0 and rt = MAX value in array
+            4. now count pairs with diff <= midDist (using sliding window)
+            5. last update rt pointer to midDiff if we got equal or more pairs
+            6. and upate lt = midDiff + 1 if we got less than 'k' pairs
+            7. run BinarySearch till lt != rt
+            8. at end return the distance which resulted in 'k' pairs i.e. lt/rt
+             */
+            Array.Sort(nums);                   // O(nlogn)
+            int n = nums.Length, lt = 0, rt = nums[n - 1], midDist, i, j, validPairs;
+            while (lt != rt)                       // O(logMAX)
+            {
+                midDist = lt + (rt - lt) / 2;
+
+                // Count total no of pairs with diff <= midDist
+                i = j = validPairs = 0;
+                while (++j < n)                    // O(n)
+                {
+                    // move the lt pointer if the difference is higher
+                    while ((nums[j] - nums[i]) > midDist)
+                        ++i;
+                    validPairs += j - i;
+                }
+
+                // Now update Binary Search pointers basis how many Pairs we got for distance 'midDist'
+                if (validPairs >= k)
+                    rt = midDist;
+                else lt = midDist + 1;
+            }
+            // return last distance which resulted in 'k' pairs
+            return rt;
+        }
     }
 }

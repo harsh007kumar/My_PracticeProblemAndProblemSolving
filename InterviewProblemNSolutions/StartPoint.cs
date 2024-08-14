@@ -663,11 +663,12 @@ namespace InterviewProblemNSolutions
             //FindTheCityWithTheSmallestNumberOfNeighborsAtAThresholdDistance();
             //MinimumCostToConvertStringI();
             //SecondMinimumTimeToReachDestination();
-            MinimumSwapsToGroupAll1sTogetherII();
-            RangeSumOfSortedSubarraySums();
-            MinimumNumberOfPushesToTypeWordII();
-            SpiralMatrixIII();
-            RegionsCutBySlashes();
+            //MinimumSwapsToGroupAll1sTogetherII();
+            //RangeSumOfSortedSubarraySums();
+            //MinimumNumberOfPushesToTypeWordII();
+            //SpiralMatrixIII();
+            //RegionsCutBySlashes();
+            FindKthSmallestPairDistance();
 
 
 
@@ -11487,6 +11488,25 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void FindKthSmallestPairDistance()
+        {
+            // NeetCode https://youtu.be/bQ-QcFKwsZc
+            // https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/
+            Utility.Print("719. Find K-th Smallest Pair Distance");
+            int[][] nums =
+                [
+                    [1,3,1],
+                    [1,1,1],
+                    [1,6,1]
+                ];
+            int[] k = [1, 2, 3];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Input-Array");
+                Console.WriteLine($"From above array and an integer k '{k[i]}', the kth smallest distance among all the pairs nums[i] and nums[j] where 0 <= i < j < nums.length. => '{DailyProblem.SmallestDistancePair(nums[i], k[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
