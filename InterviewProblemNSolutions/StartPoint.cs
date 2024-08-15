@@ -669,6 +669,7 @@ namespace InterviewProblemNSolutions
             //SpiralMatrixIII();
             //RegionsCutBySlashes();
             FindKthSmallestPairDistance();
+            LemonadeChange();
 
 
 
@@ -11509,6 +11510,21 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void LemonadeChange()
+        {
+            // https://leetcode.com/problems/lemonade-change/description
+            Utility.Print("860. Lemonade Change");
+            int[][] billsArr = [
+                [5,5,5,10,20],
+                [5,5,10,10,20]
+                ];
+            foreach (var bills in billsArr)
+            {
+                bills.Print("Bills Array");
+                Console.WriteLine($" => '{DailyProblem.LemonadeChange(bills)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

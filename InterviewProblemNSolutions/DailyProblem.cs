@@ -24666,5 +24666,56 @@ namespace InterviewProblemNSolutions
             // return last distance which resulted in 'k' pairs
             return rt;
         }
+
+
+        // Time O(n) | Space O(1), n = length of 'bills' array
+        public static bool LemonadeChange(int[] bills)
+        {
+            /* ALGO
+            1. we need to have count of how many changes of 5 and 10 dollar bill we have as those are required to payback the change to customer
+            2. NOTE: 20 dollar is never req hence not counting
+            3. Now there are 3 kind of customer
+                a. 5 dollar one
+                    just add to 5 dollar counter
+                b. 10 dollar one
+                    check if we have atleast 1 five dollar bill than we are good
+                    also add + 1 ten dollar counter
+                    else return false
+                c. 20 dollar one
+                    check if we have 1 10 dollar + 1 five dollar bill
+                    or if we have 3 five dollar bill 
+                    we are good in both of above cases
+                    else return false
+            4. if all customer get changes at end return true
+             */
+            int five = 0, ten = 0;         // 1st is Five | 2nd is 10 | 3rd is 20 Dollar bill
+            foreach (var bill in bills)      // O(n)
+                switch (bill)
+                {
+                    case 5:
+                        five++;        // increament 5 dollar bill
+                        break;
+                    case 10:
+                        {
+                            if (--five < 0) return false;
+                            ten++;    // increament 10 dollar bill
+                        }
+                        break;
+                    default: // 20
+                        {
+                            // atleast one 10 & 5 dollar bill
+                            if (ten >= 1 && five >= 1)
+                            {
+                                ten--;
+                                five--;
+                            }
+                            else if (five >= 3)
+                                five -= 3;
+                            else return false;
+                        }
+                        break;
+                }
+            return true;
+        }
     }
 }
