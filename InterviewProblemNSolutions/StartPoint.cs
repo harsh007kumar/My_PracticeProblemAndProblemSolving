@@ -670,6 +670,7 @@ namespace InterviewProblemNSolutions
             //RegionsCutBySlashes();
             FindKthSmallestPairDistance();
             LemonadeChange();
+            MaximumNumberOfPointsWithCost();
 
 
 
@@ -11527,6 +11528,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MaximumNumberOfPointsWithCost()
+        {
+            // https://leetcode.com/problems/maximum-number-of-points-with-cost
+            Utility.Print("1937. Maximum Number of Points with Cost");
+            int[][][] pointsArr =
+                [
+                    [[1,2,3],[1,5,1],[3,1,1]],
+                    [[1,5],[2,3],[4,2]],
+                    [[5,2,1,2],[2,1,5,2],[5,5,5,0]],
+                ];
+            foreach(var points in pointsArr)
+            {
+                points.Print("Input-Array");
+                Console.WriteLine($"maximum number of points you can achieve => '{DailyProblem.MaxPoints(points)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

@@ -24717,5 +24717,39 @@ namespace InterviewProblemNSolutions
                 }
             return true;
         }
+
+
+        // Time = Space = O(r*c) | r,c = no of rows and cols in 'points'
+        public static long MaxPoints(int[][] points)
+        {
+            int rows = points.Length, cols = points[0].Length;
+            long[] left = new long[cols], right = new long[cols], last = new long[cols];
+
+            // copy paste value for 1st row
+            for (int c = 0; c < cols; c++)
+                last[c] = points[0][c];
+            // now calclate from 2nd row onwards
+            for (int r = 1; r < rows; r++)
+            {
+                // calculate from lt side
+                for (int c = 0; c < cols; c++)
+                    if (c == 0)
+                        left[c] = last[c];
+                    else
+                        left[c] = Math.Max(last[c], left[c - 1] - 1);
+
+                // calculate from rt side
+                for (int c = cols - 1; c >= 0; c--)
+                    if (c == cols - 1)
+                        right[c] = last[c];
+                    else
+                        right[c] = Math.Max(last[c], right[c + 1] - 1);
+
+                for (int c = 0; c < cols; c++)
+                    last[c] = points[r][c] + Math.Max(left[c], right[c]);
+            }
+            // return max value from last computed row
+            return last.Max();
+        }
     }
 }
