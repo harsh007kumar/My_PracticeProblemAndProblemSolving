@@ -671,6 +671,7 @@ namespace InterviewProblemNSolutions
             FindKthSmallestPairDistance();
             LemonadeChange();
             MaximumNumberOfPointsWithCost();
+            UglyNumberII();
 
 
 
@@ -11547,6 +11548,14 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void UglyNumberII()
+        {
+            // https://leetcode.com/problems/ugly-number-ii
+            Utility.Print("264. Ugly Number II");
+            int[] nums = [10, 1, 1407, 1309];
+            foreach (var n in nums)
+                Console.WriteLine($"Given an integer n '{n}', return the nth ugly number(prime factors are limited to 2, 3, and 5) is => '{DailyProblem.NthUglyNumber(n)}'");
+        }
 
 
 

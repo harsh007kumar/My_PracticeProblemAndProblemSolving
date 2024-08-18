@@ -24751,5 +24751,54 @@ namespace InterviewProblemNSolutions
             // return max value from last computed row
             return last.Max();
         }
+
+
+        // Time O(n) | Space O(n)
+        public static int NthUglyNumber(int n)
+        {
+            /* ALGO
+            1. Initlize a main List which hold ugly no initially with only 1
+            2. Also Create 3 queues which hold next multiplied no in line for x2, x3 and x5
+            2. keep the ugly index set to 0
+            3. Now until uglyIndex + 1 < n, we repeat below steps
+            4. Calculate the next ugly no for two, three and five queue by using last ugly idx
+            5. add each no to its repestive queue
+            6. Now find the min of all the no's from each Q front
+            7. this min no is the next ugly no gets added to main List
+            8. also remember to remove the min no from queue's where its in the front (as its possible after few iteration we get same no in different list)
+             */
+            List<long> ugly = new() { 1 };
+            Queue<long> two = new(), three = new(), five = new();
+            int lastUglyNoIdx = 0;
+            long byTwo, byThree, byFive, min;
+            while (lastUglyNoIdx + 1 < n)
+            {
+                // calculate next ugly values
+                byTwo = ugly[lastUglyNoIdx] * 2;
+                byThree = ugly[lastUglyNoIdx] * 3;
+                byFive = ugly[lastUglyNoIdx] * 5;
+
+                // now add next ugly values to their representative list
+                two.Enqueue(byTwo);
+                three.Enqueue(byThree);
+                five.Enqueue(byFive);
+
+                // pick min from the 3 list and add to ugly list
+                min = Math.Min(two.Peek(), Math.Min(three.Peek(), five.Peek()));
+                ugly.Add(min);
+
+                // remove the min from list(s) where it in front of the queue
+                if (two.Peek() == min)
+                    two.Dequeue();
+                if (three.Peek() == min)
+                    three.Dequeue();
+                if (five.Peek() == min)
+                    five.Dequeue();
+
+                // increament the ugly idx counter
+                lastUglyNoIdx++;
+            }
+            return (int)ugly[lastUglyNoIdx];
+        }
     }
 }
