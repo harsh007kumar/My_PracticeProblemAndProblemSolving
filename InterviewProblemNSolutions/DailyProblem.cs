@@ -24800,5 +24800,41 @@ namespace InterviewProblemNSolutions
             }
             return (int)ugly[lastUglyNoIdx];
         }
+
+
+        // Time O(2*n^2) | Space O(n^2) , n = length of piles
+        public static int StoneGameII(int[] piles)
+        {
+            Dictionary<string, int> cache = [];
+            int n = piles.Length;
+            return Max(0, 1, true);
+
+            // local helper func
+            int Max(int idx, int M, bool isAlice)
+            {
+                if (idx >= n) return 0;
+                string key = idx + "," + M + "," + (isAlice ? "A" : "B");
+
+                if (cache.TryGetValue(key, out int val))
+                    return val;
+
+                int maxPile = (isAlice ? 0 : int.MaxValue), sumSoFar = 0, futureMax;
+                // try all combination from cur idx plus 1..2M
+                for (int X = 1; X <= 2 * M; X++)
+                {
+                    // check out of bounds statement
+                    if (idx + X > n) break;
+
+                    sumSoFar += piles[-1 + idx + X];
+
+                    futureMax = Max(idx + X, Math.Max(M, X), !isAlice);
+                    if (isAlice)
+                        maxPile = Math.Max(maxPile, sumSoFar + futureMax);
+                    else
+                        maxPile = Math.Min(maxPile, futureMax);
+                }
+                return cache[key] = maxPile;
+            }
+        }
     }
 }

@@ -672,6 +672,7 @@ namespace InterviewProblemNSolutions
             LemonadeChange();
             MaximumNumberOfPointsWithCost();
             UglyNumberII();
+            StoneGameII();
 
 
 
@@ -11557,6 +11558,20 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine($"Given an integer n '{n}', return the nth ugly number(prime factors are limited to 2, 3, and 5) is => '{DailyProblem.NthUglyNumber(n)}'");
         }
 
+
+        public static void StoneGameII()
+        {
+            // Neetcode https://youtu.be/I-z-u0zfQtg
+            // https://leetcode.com/problems/stone-game-ii
+            Utility.Print("1140. Stone Game II");
+            int[][] pilesArr = [[2, 7, 9, 4, 4], [1, 2, 3, 4, 5, 100]];
+            foreach (var piles in pilesArr)
+            {
+                piles.Print("Piles-Array");
+                Console.WriteLine($" => '{DailyProblem.StoneGameII(piles)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
