@@ -673,6 +673,7 @@ namespace InterviewProblemNSolutions
             MaximumNumberOfPointsWithCost();
             UglyNumberII();
             StoneGameII();
+            StrangePrinter();
 
 
 
@@ -11574,6 +11575,14 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void StrangePrinter()
+        {
+            // https://leetcode.com/problems/strange-printer
+            Utility.Print("664. Strange Printer");
+            string[] sArr = ["aaabbb", "aba", "abccba", "abcabc", "aaaaaaaaaaaaaaaaaaaaa"];
+            foreach (var s in sArr)
+                Console.WriteLine($"Given a string '{s}',\nThe minimum number of turns the printer needed to print it => '{DynamicProgramming.StrangePrinter(s)}'");
+        }
 
 
 

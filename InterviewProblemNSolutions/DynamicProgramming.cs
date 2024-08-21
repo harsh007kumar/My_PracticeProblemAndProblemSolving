@@ -3543,5 +3543,51 @@ namespace InterviewProblemNSolutions
                 return cache[ringIdx, keyIdx] = rotationsNeeded;
             }
         }
+
+
+        // Time O(n^2*logn) | Space O(n^2), n = length of 's'
+        public static int StrangePrinter(string s)
+        {
+            /* ALGO
+            1. Use Merge Sort based approach to split a bigger problem into smaller problems
+            2. we know for single character string we need just 1 turn
+            3. now while merging lt & rt parts we combine turns from both.
+            4. but we deduct -1 if lt half 1st and rt half last character(s)
+                are same as they could have been written in one go than
+                other operation could be overwritten on top.
+            5. also since we don't know what is best option to split the
+                string (> 1 lengt is) we try all possible split points
+                while breaking bigger strings till single char is left.
+            6. also adding caching drastically imnproves the performance as
+                we can directly return from cache if a given string b/w
+                lt..rt turns have been counted before.
+             */
+            int n = s.Length;
+            int[,] cache = new int[n, n];
+            // Initialize the Cache with default values
+            for (int r = 0; r < n; r++)
+                for (int c = 0; c < n; c++)
+                    cache[r, c] = int.MaxValue;
+            return BreakAndMerge(0, n - 1);
+
+            // local helper func
+            int BreakAndMerge(int lt, int rt)
+            {
+                if (lt == rt) return 1;
+                if (cache[lt, rt] != int.MaxValue)
+                    return cache[lt, rt];
+
+                // trying all possible split points b/w lt..rt index
+                for (int mid = lt; mid < rt; mid++)  // O(n)
+                {
+                    // break
+                    var turnToMakeLt = BreakAndMerge(lt, mid);
+                    var turnToMakeRt = BreakAndMerge(mid + 1, rt);
+                    // merge (reduce -1 turn if 1st and last character are same as they could be written in one go)
+                    cache[lt, rt] = Math.Min(cache[lt, rt], turnToMakeLt + turnToMakeRt - (s[lt] == s[rt] ? 1 : 0));
+                }
+                return cache[lt, rt];
+            }
+        }
     }
 }
