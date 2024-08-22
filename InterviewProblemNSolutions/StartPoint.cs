@@ -668,12 +668,13 @@ namespace InterviewProblemNSolutions
             //MinimumNumberOfPushesToTypeWordII();
             //SpiralMatrixIII();
             //RegionsCutBySlashes();
-            FindKthSmallestPairDistance();
-            LemonadeChange();
-            MaximumNumberOfPointsWithCost();
-            UglyNumberII();
-            StoneGameII();
-            StrangePrinter();
+            //FindKthSmallestPairDistance();
+            //LemonadeChange();
+            //MaximumNumberOfPointsWithCost();
+            //UglyNumberII();
+            //StoneGameII();
+            //StrangePrinter();
+            NumberComplement();
 
 
 
@@ -11585,6 +11586,15 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void NumberComplement()
+        {
+            // https://leetcode.com/problems/number-complement/
+            Utility.Print("476. Number Complement");
+            int[] nums = [5, 1];
+            foreach (var num in nums)
+                Console.WriteLine($"The complement of an integer is the integer you get when you flip all the 0's to 1's and all the 1's to 0's in its binary representation" +
+                    $"\n For {num} its complement is => '{DailyProblem.FindComplement(num)}'");
+        }
 
 
 

@@ -24836,5 +24836,32 @@ namespace InterviewProblemNSolutions
                 return cache[key] = maxPile;
             }
         }
+
+
+        // Time O(31) | Space O(1)
+        public static int FindComplement(int num)
+        {
+            /* ALGO
+            1. Find the left most bit thats on so we can start create the
+                complement from that bit onwards by reversing the polarity
+                for each bit till rt-most/0th bit
+            2. from for each bit from ltMost..rtMost if the bit is ON leave
+                it OFF in complement
+            3. if bit OFF than set that bit to ON by left shifting 1 no of
+                times/place which bit we are evaluting in num rt now.
+            4. at end return the complement
+             */
+            int comp = 0, ltMostOnBitPLace = 31;
+            // findout the left most bit thats ON
+            while (((1 << ltMostOnBitPLace) & num) == 0)
+                ltMostOnBitPLace--;
+            // now start building the complement
+            while (ltMostOnBitPLace >= 0)
+            {
+                var val = (((1 << ltMostOnBitPLace) & num) == 0 ? 1 : 0) << ltMostOnBitPLace--;
+                comp += val;
+            }
+            return comp;
+        }
     }
 }
