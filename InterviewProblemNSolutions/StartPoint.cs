@@ -675,6 +675,7 @@ namespace InterviewProblemNSolutions
             //StoneGameII();
             //StrangePrinter();
             NumberComplement();
+            FractionAdditionandSubtraction();
 
 
 
@@ -11597,6 +11598,15 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void FractionAdditionandSubtraction()
+        {
+            // https://leetcode.com/problems/fraction-addition-and-subtraction
+            Utility.Print("592. Fraction Addition and Subtraction");
+            string[] expressions = ["-1/2+1/2", "-1/2+1/2+1/3", "1/3-1/2", "6/12", "6/8"];
+            foreach (var expression in expressions)
+                Console.WriteLine($"Given a string '{expression}' expression representing an expression of fraction addition and subtraction" +
+                    $"\n The final result is => '{DailyProblem.FractionAddition(expression)}'");
+        }
 
 
 

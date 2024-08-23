@@ -24863,5 +24863,76 @@ namespace InterviewProblemNSolutions
             }
             return comp;
         }
+
+
+        // Time O(n) | Space O(1), n = length of 'expression' string
+        public static string FractionAddition(string expression)
+        {
+            /* ALGO
+            1. Basic idea is to calculate fraction
+            2. so we iterate thru the 0..n-1 index in input string
+            3. we initialize the numerator = denominator = 0 which hold computed result
+            4. now we have 4 operation
+                a. Reading the digits of Numberator
+                b. Reading the digits of Denominator
+                c. Compute Addition => cur fraction and result so far
+                c. Compute Substraction => cur fraction and result so far
+            5. final Simplify fraction and return the result
+            6. NOTE: whenever denominator = 0 before evaluation set it to 1 before appliying Math to avoid divide by zero error
+             */
+            int numerator = 0, denominator = 0, curN = 0, curD = 0;
+            bool fillingNumerator = true;
+            char lastOperator = '+';
+            foreach (var ch in expression)
+            {
+                var d = ch - '0';
+                if (0 <= d && d <= 9) // Read numerator & denominator
+                {
+                    if (fillingNumerator) curN = (curN * 10) + d;
+                    else curD = (curD * 10) + d;
+                }
+                else if (ch == '/')
+                    fillingNumerator = false;
+                else // Add fraction to result
+                {
+                    if (curD == 0) curD = 1;
+                    if (denominator == 0) denominator = 1;
+
+                    if (lastOperator == '+')
+                        numerator = numerator * curD + curN * denominator;
+                    else // if(ch=='-')
+                        numerator = numerator * curD - curN * denominator;
+
+                    denominator = denominator * curD;
+                    lastOperator = ch;
+                    curN = curD = 0;
+                    fillingNumerator = true;
+                }
+            }
+            // we have to computed result one last time as last pair of fractions is not followed by any sign + / -
+            if (curD == 0) curD = 1;
+            if (denominator == 0) denominator = 1;
+
+            // Add fraction to result
+            if (lastOperator == '+')
+                numerator = numerator * curD + curN * denominator;
+            else // if(ch=='-')
+                numerator = numerator * curD - curN * denominator;
+            denominator = denominator * curD;
+
+            // base case
+            if (numerator == 0) return "0/1";
+
+            // Simplify fraction
+            if (Math.Abs(numerator) != 1 && denominator != 1)
+                for (int divisor = Math.Min(denominator, Math.Abs(numerator)); divisor > 1; divisor--)
+                    if (numerator % divisor == 0 && denominator % divisor == 0)
+                    {
+                        denominator /= divisor;
+                        numerator /= divisor;
+                    }
+
+            return numerator + "/" + denominator;
+        }
     }
 }
