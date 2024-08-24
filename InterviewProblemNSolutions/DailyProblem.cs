@@ -24934,5 +24934,55 @@ namespace InterviewProblemNSolutions
 
             return numerator + "/" + denominator;
         }
+
+
+        // Time O(l) | Space O(1), l = length of input string
+        public static string NearestPalindromic(string n)
+        {
+            List<long> fiveCloset = new();
+            int l = n.Length, mid = (l - 1) / 2;
+            bool isEvenLength = l % 2 == 0;
+            long firstHalf = 0, original = long.Parse(n);
+            for (int i = 0; i <= mid; i++)     // O(n/2)
+                firstHalf = firstHalf * 10 + (n[i] - '0');
+            
+            // get reverse of first half
+            fiveCloset.Add(Rev(firstHalf, isEvenLength));    // O(n/2)
+            // add one to firstHalf and rev
+            fiveCloset.Add(Rev(firstHalf + 1, isEvenLength));  // O(n/2)
+            // subtract one from firstHalf and rev
+            fiveCloset.Add(Rev(firstHalf - 1, isEvenLength));  // O(n/2)
+            // 10 to power ex: 100000
+            fiveCloset.Add(1 + (long)Math.Pow(10, l));       // O(1)
+            // all 99999
+            fiveCloset.Add(-1 + (long)Math.Pow(10, l - 1));     // O(1)
+
+            long diff = long.MaxValue, closet = long.MaxValue;
+            foreach (var closetRelative in fiveCloset)       // O(5)
+                if (closetRelative != original)
+                {
+                    var curDiff = Math.Abs(closetRelative - original);
+                    if (diff > curDiff || (diff == curDiff && closetRelative < closet))
+                    {
+                        closet = closetRelative;
+                        diff = curDiff;
+                    }
+                }
+            return closet.ToString();
+
+            // local helper func
+            static long Rev(long first, bool isEven)
+            {
+                long final = first;
+                if (!isEven)
+                    first /= 10;
+                while (first > 0)
+                {
+                    final = final * 10 + first % 10;
+                    first /= 10;
+                }
+                return final;
+            }
+        }
     }
 }

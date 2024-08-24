@@ -676,6 +676,7 @@ namespace InterviewProblemNSolutions
             //StrangePrinter();
             NumberComplement();
             FractionAdditionandSubtraction();
+            FindTheClosestPalindrome();
 
 
 
@@ -11609,6 +11610,15 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void FindTheClosestPalindrome()
+        {
+            // https://youtu.be/tF9VhkSDaSI
+            // https://leetcode.com/problems/find-the-closest-palindrome
+            Utility.Print("564. Find the Closest Palindrome");
+            string[] sArr = ["123", "1", "125", "921", "999", "10", "9999", "4234"];
+            foreach (var s in sArr)
+                Console.WriteLine($"The closest for {s} => '{DailyProblem.NearestPalindromic(s)}'");
+        }
 
 
 
