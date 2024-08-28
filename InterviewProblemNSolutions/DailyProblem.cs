@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using static InterviewProblemNSolutions.DailyProblem;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace InterviewProblemNSolutions
@@ -24982,6 +24983,71 @@ namespace InterviewProblemNSolutions
                     first /= 10;
                 }
                 return final;
+            }
+        }
+
+
+        // Time = Space = O(r*c), r = no of rows & c = no of cols in Grid1
+        public static int CountSubIslands(int[][] g1, int[][] g2)
+        {
+            /* ALGO
+            1. find no of islands in G2 and store all cells for each island in a list
+            2. Now for each island in G2 check if all the cells of each island is also a land cell in G1
+            3. if yes increment 'subIslands' counter.
+            4. if even one cell is water in G1 DO NOT INCREMENT the counter.
+            5. return the 'subIslands' counter.
+             */
+            List<int[]> directions =
+            [
+                [0,1],
+                [0,-1],
+                [1,0],
+                [-1,0]
+            ];
+
+            int rows = g1.Length, cols = g1[0].Length, subIslands = 0;
+            List<List<int[]>> islandsInG2 = new();
+            List<int[]> listOfLandCells;
+
+            // find no of islands in G2
+            for (int r = 0; r < rows; r++)
+                for (int c = 0; c < cols; c++)
+                    if (g2[r][c] == 1)
+                    {
+                        listOfLandCells = new();
+                        MarkVisited(r, c);
+                        islandsInG2.Add(listOfLandCells);
+                    }
+
+            // foreach individual island in G2 check if all its cell are also land cell are also land in G1
+            foreach (var island in islandsInG2)
+                if (CheckIfSubIsland(island))
+                    subIslands++;
+
+            return subIslands;
+
+            // local helper func
+            // Add all the cell if current island in G2 to a List
+            void MarkVisited(int i, int j)
+            {
+                if (i < 0 || i == rows || j < 0 | j == cols || g2[i][j] == 0) return;
+                // mark visited
+                g2[i][j] = 0;
+
+                listOfLandCells.Add([i, j]);
+
+                foreach (var dir in directions)
+                    MarkVisited(dir[0] + i, dir[1] + j);
+            }
+            // returns true if all the cells of given island in G2 is also land cells in G1
+            bool CheckIfSubIsland(List<int[]> islandList)
+            {
+                foreach (var cell in islandList)
+                    // if even one cell is Water return false
+                    if (g1[cell[0]][cell[1]] == 0)
+                        return false;
+                // if all cells are lands return true as this is valid sub-island
+                return true;
             }
         }
     }

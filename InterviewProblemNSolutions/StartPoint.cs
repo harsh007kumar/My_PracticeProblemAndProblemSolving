@@ -677,6 +677,7 @@ namespace InterviewProblemNSolutions
             NumberComplement();
             FractionAdditionandSubtraction();
             FindTheClosestPalindrome();
+            CountSubIslands();
 
 
 
@@ -11621,6 +11622,28 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void CountSubIslands()
+        {
+            // https://leetcode.com/problems/count-sub-islands/
+            Utility.Print("1905. Count Sub Islands");
+            int[][][] g1 =
+                [
+                    [[1,1,1,0,0],[0,1,1,1,1],[0,0,0,0,0],[1,0,0,0,0],[1,1,0,1,1]],
+                    [[1,0,1,0,1],[1,1,1,1,1],[0,0,0,0,0],[1,1,1,1,1],[1,0,1,0,1]]
+                ];
+            int[][][] g2 =
+                [
+                    [[1,1,1,0,0],[0,0,1,1,1],[0,1,0,0,0],[1,0,1,1,0],[0,1,0,1,0]],
+                    [[0,0,0,0,0],[1,1,1,1,1],[0,1,0,1,0],[0,1,0,1,0],[1,0,0,0,1]]
+                ];
+            for (int i = 0; i < g1.Length; i++)
+            {
+                g1[i].Print("GRID #1");
+                g2[i].Print("GRID #1");
+                Console.WriteLine($"The no of islands in grid2 that are considered sub-islands from grid1 are => '{DailyProblem.CountSubIslands(g1[i], g2[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
