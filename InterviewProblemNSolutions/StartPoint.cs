@@ -678,6 +678,7 @@ namespace InterviewProblemNSolutions
             FractionAdditionandSubtraction();
             FindTheClosestPalindrome();
             CountSubIslands();
+            MostStonesRemovedWithSameRowOrColumn();
 
 
 
@@ -11645,6 +11646,25 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void MostStonesRemovedWithSameRowOrColumn()
+        {
+            // https://leetcode.com/problems/most-stones-removed-with-same-row-or-column
+            Utility.Print("947. Most Stones Removed with Same Row or Column");
+            int[][][] stonesArr =
+                [
+                    [[0,0],[0,1],[1,0],[1,2],[2,1],[2,2]],
+                    [[0,0],[0,2],[1,1],[2,0],[2,2]],
+                    [[0,0]]
+                ];
+            foreach (var stones in stonesArr)
+            {
+                stones.Print("Stones-Array");
+                Console.WriteLine($"Given above array of stones each index representing the location of the ith stone," +
+                    $"\nThe largest possible number of stones that can be removed => '{DailyProblem.RemoveStones(stones)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)

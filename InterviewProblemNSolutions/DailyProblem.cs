@@ -25050,5 +25050,59 @@ namespace InterviewProblemNSolutions
                 return true;
             }
         }
+
+
+        // Time = Space = O(n), n = length of 'stones'
+        public static int RemoveStones(int[][] stones)
+        {
+            /* ALGO
+            1. Create 2 graphs one for rows and another for cols
+            2. Now iterate thru all the stones coordinates in input
+                add the stone to list of stones belonging to given rowID
+                add the stone to list of stones belonging to given colID
+            3. Now all left is count no of nodes in each connected componenet in graph and subtract -1 before adding to counter 'removed'
+            4. Use DFS to traverse connected component in graph
+             */
+            // Create graph
+            Dictionary<int, List<int[]>> rows = new(), cols = new();
+            foreach (var stone in stones)
+            {
+                int r = stone[0], c = stone[1];
+                if (!rows.ContainsKey(r)) rows[r] = new();
+                if (!cols.ContainsKey(c)) cols[c] = new();
+
+                rows[r].Add(stone);
+                cols[c].Add(stone);
+            }
+            // count no of connected components
+            HashSet<string> visited = new();
+            int removed = 0;
+            foreach (var stone in stones)
+                if (!visited.Contains(stone[0] + "." + stone[1]))
+                    // for each new connected components we add all the nodes except 1
+                    removed += (DFS(stone) - 1);
+            return removed;
+
+            // local helper func
+            int DFS(int[] coordinate)
+            {
+                string key = coordinate[0] + "." + coordinate[1];
+                // if already visited return as we can remove any further
+                if (visited.Contains(key)) return 0;
+                // mark visited
+                visited.Add(key);
+
+                int count = 1;
+                // check rows connected adj
+                foreach (var rowConnected in rows[coordinate[0]])
+                    count += DFS(rowConnected);
+
+                // check columns connected adj
+                foreach (var colConnected in cols[coordinate[1]])
+                    count += DFS(colConnected);
+
+                return count;
+            }
+        }
     }
 }
