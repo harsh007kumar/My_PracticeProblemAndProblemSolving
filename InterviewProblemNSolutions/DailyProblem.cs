@@ -25104,5 +25104,86 @@ namespace InterviewProblemNSolutions
                 return count;
             }
         }
+
+
+        // O(Max(n, m610^4)), n = lenght of commands array and m = length of 'obstacles'.
+        public static int RobotSim(int[] commands, int[][] obstacles)
+        {
+            // store the obstacles in the Dictionary
+            Dictionary<int, HashSet<int>> obs = new();
+            int x, y, dir = 0, final, furthestPoint = 0;
+            foreach (var obstacle in obstacles)      // O(m)
+            {
+                x = obstacle[0];
+                y = obstacle[1];
+                if (!obs.ContainsKey(x))
+                    obs[x] = [];
+                obs[x].Add(y);
+            }
+
+            // set the starting point as origin
+            x = y = 0;
+            // Now track the journey
+            foreach (var cmd in commands)            // O(n)
+            {
+                if (cmd == -2)         // turn left
+                    dir = (dir + 1) % 4;
+                else if (cmd == -1)    // turn right
+                    dir = (dir + 3) % 4;
+                else    // move 'k' distance (if no obstacle)
+                {
+                    // move up
+                    if (dir == 0)
+                    {
+                        // increase 'y' axis
+                        final = y + cmd;
+                        while (y < final)
+                        {
+                            if (obs.TryGetValue(x, out HashSet<int> blocks) && blocks.Contains(y + 1))
+                                break;
+                            else y++;
+                        }
+                    }
+                    // move down
+                    else if (dir == 2)
+                    {
+                        // increase 'y' axis
+                        final = y - cmd;
+                        while (y > final)
+                        {
+                            if (obs.TryGetValue(x, out HashSet<int> blocks) && blocks.Contains(y - 1))
+                                break;
+                            else y--;
+                        }
+                    }
+                    // move lt
+                    else if (dir == 1)
+                    {
+                        // increase 'y' axis
+                        final = x - cmd;
+                        while (x > final)
+                        {
+                            if (obs.TryGetValue(x - 1, out HashSet<int> blocks) && blocks.Contains(y))
+                                break;
+                            else x--;
+                        }
+                    }
+                    // move rt
+                    else //if(dir==3)
+                    {
+                        // increase 'y' axis
+                        final = x + cmd;
+                        while (x < final)
+                        {
+                            if (obs.TryGetValue(x + 1, out HashSet<int> blocks) && blocks.Contains(y))
+                                break;
+                            else x++;
+                        }
+                    }
+                }
+                furthestPoint = Math.Max(furthestPoint, (x * x) + (y * y));
+            }
+            return furthestPoint;
+        }
     }
 }

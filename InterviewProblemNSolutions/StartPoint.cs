@@ -679,6 +679,7 @@ namespace InterviewProblemNSolutions
             FindTheClosestPalindrome();
             CountSubIslands();
             MostStonesRemovedWithSameRowOrColumn();
+            WalkingRobotSimulation();
 
 
 
@@ -11665,6 +11666,36 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void WalkingRobotSimulation()
+        {
+            // https://leetcode.com/problems/walking-robot-simulation
+            Utility.Print("874. Walking Robot Simulation");
+            int[][] commands =
+                [
+                    [4,-1,3],
+                    [4,-1,4,-2,4],
+                    [6,-1,-1,6]
+                ];
+            int[][][] obstacles =
+                [
+                    [],
+                    [[2,4]],
+                    []
+                ];
+            for (int i = 0; i < commands.Length; i++)
+            {
+                commands[i].Print("Commands-Array");
+                obstacles[i].Print("Obstacles");
+                Console.WriteLine($"The max Euclidean distance that the robot ever gets from the origin squared => '{DailyProblem.RobotSim(commands[i], obstacles[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+
+
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
