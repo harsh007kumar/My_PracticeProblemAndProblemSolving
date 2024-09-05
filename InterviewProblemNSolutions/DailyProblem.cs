@@ -25185,5 +25185,32 @@ namespace InterviewProblemNSolutions
             }
             return furthestPoint;
         }
+
+
+        // Time O(n+m) | Space O(n), m = length of 'rolls'
+        public static int[] MissingRolls(int[] rolls, int mean, int n)
+        {
+            // Get the total of rolls
+            int totalM = 0, m = rolls.Length, curMean;
+            for (int i = 0; i < m; i++)                // O(m)
+                totalM += rolls[i];
+
+            // Calculate the total sum which should be distributed in 'n' missing values
+            int missingTotal = mean * (m + n) - totalM;
+
+            // if even assiging 6 to each missing dice falls short of req total than return empty array
+            if (missingTotal < n || missingTotal > (6 * n))
+                return [];
+
+            // Fill the missing values
+            int[] missing = new int[n];
+            for (int i = 0; i < n; i++)                // O(n)
+            {
+                curMean = missingTotal / (n - i);
+                missingTotal -= curMean;
+                missing[i] = curMean;
+            }
+            return missing;
+        }
     }
 }

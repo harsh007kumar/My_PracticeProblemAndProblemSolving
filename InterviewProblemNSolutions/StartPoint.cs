@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using static System.Formats.Asn1.AsnWriter;
@@ -680,6 +681,7 @@ namespace InterviewProblemNSolutions
             CountSubIslands();
             MostStonesRemovedWithSameRowOrColumn();
             WalkingRobotSimulation();
+            FindMissingObservations();
 
 
 
@@ -11692,6 +11694,53 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void FindMissingObservations()
+        {
+            // https://leetcode.com/problems/find-missing-observations
+            Utility.Print("2028. Find Missing Observations");
+            int[][] rolls =
+                [
+                    [3,2,4,3],
+                    [1,5,6],
+                    [1,2,3,4],
+                    [6,3,4,3,5,3]
+                ];
+            int[] mean = [4, 3, 6, 1], n = [2, 4, 4, 6];
+            for (int i = 0; i < rolls.Length; i++)
+            {
+                rolls[i].Print("Rolls-Array");
+                Console.WriteLine($"Below is Missing-Array so that the mean is => '{mean[i]}' in missing array of size '{n[i]}'");
+                DailyProblem.MissingRolls(rolls[i], mean[i], n[i]).Print("Missing-Array");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
