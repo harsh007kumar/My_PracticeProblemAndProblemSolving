@@ -6919,6 +6919,26 @@ namespace InterviewProblemNSolutions
             return Match(head.next, root.left) || Match(head.next, root.right);
         }
 
+        // Time O(Min(n^2,m)) || Space O(h), n = no of nodes in List & m = no of nodes in tree & h = hieght of tree
+        public static bool IsSubPathAlternate(ListNode head, TreeNode root, bool lookingForFirstNode = true)
+        {
+            if (head == null) return true;
+            else if (root == null) return false;
+
+            // once we got the 1st node than remaining all nodes have to be continuous without gap/random nodes in b/w in tree
+            if (lookingForFirstNode)
+            {
+                if (root.val == head.val && (IsSubPathAlternate(head.next, root.left, false) | IsSubPathAlternate(head.next, root.right, false)))
+                    return true;
+                // if first node matching does result in favourable response (as remaining node were not found/non-continous)
+                // we should also check if there is some other node in Tree that can match list head and all following nodes in continuation
+                else return IsSubPathAlternate(head, root.left, true) | IsSubPathAlternate(head, root.right, true);
+            }
+            // if are not looking for 1st node meaning we should find continuous elements in tree for each node in list now-onwards
+            else if (root.val == head.val)
+                return IsSubPathAlternate(head.next, root.left, false) | IsSubPathAlternate(head.next, root.right, false);
+            else return false;
+        }
 
         // Time O(Min(n,b)+m), b = appendTill & n,m = length of list1 & list2 respectively || Space O(1)
         public static ListNode MergeInBetween(ListNode list1, int a, int b, ListNode list2)

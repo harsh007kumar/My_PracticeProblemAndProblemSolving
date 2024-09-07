@@ -3464,6 +3464,8 @@ namespace InterviewProblemNSolutions
             root.InOrder("Binary-Tree");
             Console.WriteLine($" All the elements in the linked list starting from the head correspond " +
                 $"to some downward path connected in the binary tree : \'{DailyProblem.IsSubPath(head, root)}\'");
+            Console.WriteLine($" All the elements in the linked list starting from the head correspond " +
+                $"to some downward path connected in the binary tree : \'{DailyProblem.IsSubPathAlternate(head, root)}\'");
         }
 
 
@@ -11716,7 +11718,6 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
-
 
 
 
