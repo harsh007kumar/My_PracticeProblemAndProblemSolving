@@ -25232,5 +25232,64 @@ namespace InterviewProblemNSolutions
             }
             return missing;
         }
+
+
+        // Time O(n) | Space O(1), n = length of 'nums'
+        public static int LongestSubarrayWithMaximumBitwiseAND(int[] nums)
+        {
+            /* ALGO (2-Pass)
+            1. Find the max number in the array
+            2. now iterate thru 0..n-1 index
+            3. if num at any index matches the maxNum
+                increament the 'curMaxSubArray' len + 1,
+                update 'longestSubArr' if its smaller than 'curMaxSubArray'
+            4. else if num at cur index is ! maxNum,
+                update the 'curMaxSubArray' to 0
+             */
+            // 2 - Pass
+            //int l = nums.Length, longest = 1, curMax = 0;
+            //int maxNum = nums.Max();
+
+            //for (int i = 0; i < l; i++)
+            //    if (nums[i] != maxNum)
+            //        curMax = 0;
+            //    else if (++curMax > longest)
+            //        longest = curMax;
+
+            //return longest;
+
+
+            /* ALGO (1-Pass)
+            1. initially set the longestSub length and curSubLen to 0
+            2. iterate thru 0..n-1 index
+            3. there are 3 possibilities
+                a. cur num is > than maxNum we have seen so far
+                    reset the longestSub & curSubLen to 1
+                    as its hold longest subarray for numbers == maxNum
+                    and rt now if only have 1 length of subArray with maxNum
+                a. cur num == maxNum
+                    increament the 'curSubLen' by 1 & update longestSub if its smaller than 'curSubLen'
+                a. cur num < maxNum
+                    reset 'curSubLen' to 0
+    
+             */
+            int l = nums.Length, longestSub = 1, curSubLen = 0, maxNum = 0;
+            for (int i = 0; i < l; i++)
+                if (nums[i] > maxNum)
+                {
+                    maxNum = nums[i];
+                    // reset the longestSub-Array as we have found a new maximum integer in the array
+                    longestSub = curSubLen = 1;
+                }
+                else if (nums[i] == maxNum)
+                {
+                    if (++curSubLen > longestSub)
+                        longestSub = curSubLen;
+                }
+                else
+                    curSubLen = 0;
+
+            return longestSub;
+        }
     }
 }

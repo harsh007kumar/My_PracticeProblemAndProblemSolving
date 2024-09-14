@@ -682,6 +682,7 @@ namespace InterviewProblemNSolutions
             MostStonesRemovedWithSameRowOrColumn();
             WalkingRobotSimulation();
             FindMissingObservations();
+            LongestSubarrayWithMaximumBitwiseAND();
 
 
 
@@ -11720,6 +11721,24 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void LongestSubarrayWithMaximumBitwiseAND()
+        {
+
+            // https://leetcode.com/problems/longest-subarray-with-maximum-bitwise-and
+            Utility.Print("2419. Longest Subarray With Maximum Bitwise AND");
+            int[][] numsArr =
+                [
+                    [1, 2, 3, 3, 2, 2],
+                    [1,2,3,4],
+                    [96317,96317,96317,96317,96317,96317,96317,96317,96317,279979],
+                ];
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Input-Array");
+                Console.WriteLine($"length of the longest subarray whose AND is maximum in above input => '{DailyProblem.LongestSubarrayWithMaximumBitwiseAND(nums)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
