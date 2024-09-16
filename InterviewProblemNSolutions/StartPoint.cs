@@ -683,6 +683,7 @@ namespace InterviewProblemNSolutions
             WalkingRobotSimulation();
             FindMissingObservations();
             LongestSubarrayWithMaximumBitwiseAND();
+            MinimumTimeDifference();
 
 
 
@@ -11741,6 +11742,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MinimumTimeDifference()
+        {
+            // https://leetcode.com/problems/minimum-time-difference
+            Utility.Print("539. Minimum Time Difference");
+            List<string>[] timePointsArr =
+                [
+                    ["23:59","00:00"],
+                    ["00:00","23:59","00:00"],
+                ];
+            foreach(var timePoints in timePointsArr)
+            {
+                timePoints.Print("Time-List");
+                Console.WriteLine($"The Min minutes difference between any two time-points in above list => '{DailyProblem.FindMinDifference(timePoints)}'");
+                Console.WriteLine($"The Min minutes difference between any two time-points in above list => '{DailyProblem.FindMinDifference_Slower(timePoints)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

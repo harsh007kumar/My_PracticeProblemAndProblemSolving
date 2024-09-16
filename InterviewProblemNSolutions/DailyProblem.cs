@@ -25291,5 +25291,76 @@ namespace InterviewProblemNSolutions
 
             return longestSub;
         }
+
+
+        // Time O(n) | Space O(m), n = length of 'timePoints' & m = 1440
+        public static int FindMinDifference(IList<string> timePoints)
+        {
+            /* ALGO
+            1. Convert all the times from HH:MM to minutes and mark given
+                time as True in array which keep tracks of all diff time
+                possible in a day which we have seen so far
+            2. If a given time in minutes has already been seen before
+                return 0 as min diff
+            3. once all the times have been converted to min and market
+            4. iterate thru all the index in boolean array from smallest
+                possible to maxPossible time.
+            5. keep update min time b/w any 2 index which existed in
+                original array.
+            6. at end the update minTime once for diff b/w smallest and
+                largest present time (adding 1440 to firstTime and
+                subtrating with largest gives that diff).
+            7. return minTime
+             */
+            int m = 1440;   // there are at max 1440 different minutes in a day
+            bool[] minTime = new bool[m];
+            for (int i = 0; i < timePoints.Count; i++)        // O(n)
+            {
+                var t = timePoints[i].Split(':');
+                var minIdx = Convert.ToInt32(t[0]) * 60 + Convert.ToInt32(t[1]);
+
+                // if we have seen excat same time before than min diff would be Zero
+                if (minTime[minIdx])
+                    return 0;
+                else // mark true for all the times that we found in input
+                    minTime[minIdx] = true;
+            }
+            int prv = 0, first = -1, minDiff = m;
+            for (int i = 0; i < m; i++)                        // O(1440)
+                if (minTime[i])                  // this time was present in input array
+                {
+                    if (first == -1)
+                        first = i;
+                    else
+                        minDiff = Math.Min(minDiff, i - prv);
+                    prv = i;
+                }
+
+            return minDiff = Math.Min(minDiff, first + 1440 - prv);
+        }
+
+        // Time O(nlogn) | Space O(n), n = length of 'timePoints'
+        public static int FindMinDifference_Slower(IList<string> timePoints)
+        {
+            int l = timePoints.Count;
+            int[] timeInMinutes = new int[l];
+            // Conver the times from HH:MM => Minutes
+            for (int i = 0; i < l; i++)            // O(n)
+            {
+                var t = timePoints[i].Split(':');
+                timeInMinutes[i] = Convert.ToInt32(t[0]) * 60 + Convert.ToInt32(t[1]);
+            }
+
+            // sort the time in asc order
+            Array.Sort(timeInMinutes);      // O(nlogn)
+
+            // calculate the minDiff b/w adjacent indexes in sorted array of times
+            // initially set the minDiff b/w smallest and largest time in array
+            int minDiff = timeInMinutes[0] + 1440 - timeInMinutes[l - 1];
+            for (int i = 1; i < l; i++)            // O(n)
+                minDiff = Math.Min(minDiff, timeInMinutes[i] - timeInMinutes[i - 1]);
+
+            return minDiff;
+        }
     }
 }
