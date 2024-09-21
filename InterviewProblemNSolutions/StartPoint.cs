@@ -684,6 +684,7 @@ namespace InterviewProblemNSolutions
             FindMissingObservations();
             LongestSubarrayWithMaximumBitwiseAND();
             MinimumTimeDifference();
+            LexicographicalNumbers();
 
 
 
@@ -11761,6 +11762,14 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void LexicographicalNumbers()
+        {
+            // https://leetcode.com/problems/lexicographical-numbers
+            Utility.Print("386. Lexicographical Numbers");
+            int[] nums = [13, 2, 133, 143, 961];
+            foreach (var n in nums)
+                DailyProblem.LexicographicalNumbers(n).Print($"All the numbers in the range [1, {n}] sorted in lexicographical order");
+        }
 
 
 

@@ -25362,5 +25362,31 @@ namespace InterviewProblemNSolutions
 
             return minDiff;
         }
+
+
+        // Time O(n) | Space O(1)
+        public static IList<int> LexicographicalNumbers(int upperBound)
+        {
+            IList<int> res = [];
+            LexiNums();   // O(n) n = upperBound
+            return res;
+
+            // local helper func
+            void LexiNums(int n = 0)
+            {
+                int plusTen = n + 10;
+                while (n < plusTen)
+                    if (n <= upperBound)
+                    {
+                        if (n != 0)
+                        {
+                            res.Add(n);
+                            LexiNums(n * 10);
+                        }
+                        n++;
+                    }
+                    else break;
+            }
+        }
     }
 }
