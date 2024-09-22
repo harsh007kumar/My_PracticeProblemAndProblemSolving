@@ -25388,5 +25388,39 @@ namespace InterviewProblemNSolutions
                     else break;
             }
         }
+
+
+        // Time O(n) | Space O(1), n = upperBound
+        public static int FindKthNumber(int upperBound, int k)
+        {
+            int cur = 1, pos = 1, steps;
+            while (pos < k)
+            {
+                steps = Count(cur);
+                if (pos + steps <= k)
+                {
+                    cur++;
+                    pos += steps;
+                }
+                else
+                {
+                    cur *= 10;
+                    pos++;
+                }
+            }
+            return cur;
+
+            int Count(long curNo)
+            {
+                long total = 0, nei = curNo + 1;
+                while (curNo <= upperBound)
+                {
+                    total += Math.Min(nei, upperBound + 1) - curNo;
+                    curNo *= 10;
+                    nei *= 10;
+                }
+                return (int)total;
+            }
+        }
     }
 }

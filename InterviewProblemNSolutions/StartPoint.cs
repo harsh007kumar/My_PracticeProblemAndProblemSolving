@@ -685,6 +685,7 @@ namespace InterviewProblemNSolutions
             LongestSubarrayWithMaximumBitwiseAND();
             MinimumTimeDifference();
             LexicographicalNumbers();
+            KthSmallestInLexicographicalOrder();
 
 
 
@@ -11772,6 +11773,15 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void KthSmallestInLexicographicalOrder()
+        {
+            // NeetCode https://www.youtube.com/watch?v=wRubz1zhVqk
+            // https://leetcode.com/problems/k-th-smallest-in-lexicographical-order
+            Utility.Print("440. K-th Smallest in Lexicographical Order");
+            int[] n = [13, 2, 681692778], k = [3, 1, 351251360];
+            for (int i = 0; i < n.Length; i++)
+                Console.WriteLine($"The {k[i]}-th lexicographically smallest integer in the range [1, {n[i]}] => '{DailyProblem.FindKthNumber(n[i], k[i])}'");
+        }
 
 
 
