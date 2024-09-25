@@ -686,6 +686,7 @@ namespace InterviewProblemNSolutions
             MinimumTimeDifference();
             LexicographicalNumbers();
             KthSmallestInLexicographicalOrder();
+            SumOfPrefixScoresOfStrings();
 
 
 
@@ -11784,6 +11785,22 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void SumOfPrefixScoresOfStrings()
+        {
+            // https://leetcode.com/problems/sum-of-prefix-scores-of-strings
+            Utility.Print("2416. Sum of Prefix Scores of Strings");
+            string[][] wordsArr =
+                [
+                    ["abc","ab","bc","b"],
+                    ["abcd"]
+                ];
+            foreach (var words in wordsArr)
+            {
+                words.Print("Words-Array");
+                DailyProblem.SumPrefixScores(words).Print($"an array where answer[i] is the sum of scores of every non-empty prefix of words[i]");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

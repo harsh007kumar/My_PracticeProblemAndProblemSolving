@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace InterviewProblemNSolutions
 {
@@ -72,6 +73,30 @@ namespace InterviewProblemNSolutions
                 return val;
             else
                 return null;
+        }
+        // 2416. Sum of Prefix Scores of Strings
+        public void AddNewWord(string word)
+        {
+            TrieNode temp = root;
+            foreach (var ch in word)
+            {
+                if (!temp.children.ContainsKey(ch)) temp.children.Add(ch, new TrieNode());
+                temp = temp.children[ch];
+                temp.times++;
+            }
+        }
+        // 2416. Sum of Prefix Scores of Strings
+        public int PrefixScore(string word)
+        {
+            int score = 0;
+            TrieNode temp = root;
+            foreach (var ch in word)
+            {
+                if (temp.children[ch] == null) break;
+                temp = temp.children[ch];
+                score += temp.times;  // add the prefix freq till now to score
+            }
+            return score;
         }
     }
 

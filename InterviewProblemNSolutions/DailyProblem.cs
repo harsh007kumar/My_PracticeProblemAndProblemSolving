@@ -25422,5 +25422,30 @@ namespace InterviewProblemNSolutions
                 return (int)total;
             }
         }
+
+
+        // Time = Space = O(l*k) | l = length of 'words' & k = avg length of each word
+        public static int[] SumPrefixScores(string[] words)
+        {
+            /* ALGO
+            1. Create a Trie which hold all the words and 
+                also keep track of no of words with same prefix path
+            2. Now first add all the word in words to Trie
+            3. now we know excatly thre freq of each prefix
+            4. we traverse thru words again this time we count the freq of all the prefix
+                which makes the current word & store the score in Result at same index as word
+            5. Return the result array.
+             */
+            int l = words.Length;
+            Trie t = new();
+            for (int i = 0; i < l; i++)                        // O(l)
+                t.AddNewWord(words[i]);                        // O(k)
+
+            int[] res = new int[l];
+            for (int i = 0; i < l; i++)                        // O(l)
+                res[i] = t.PrefixScore(words[i]);       // O(k)
+
+            return res;
+        }
     }
 }
