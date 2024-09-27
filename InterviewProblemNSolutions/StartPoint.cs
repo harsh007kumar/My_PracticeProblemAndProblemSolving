@@ -11803,6 +11803,25 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MyCalendarII()
+        {
+            // NeetCode https://youtu.be/7utL5cTDcnA
+            // https://leetcode.com/problems/my-calendar-ii
+            Utility.Print("731. My Calendar II");
+            string[] instructions = ["MyCalendarTwo", "book", "book", "book", "book", "book", "book"];
+            int[][] events = [[], [10, 20], [50, 60], [10, 40], [5, 15], [5, 10], [25, 55]];
+            MyCalendarTwo ob = null;
+            for (int i = 0; i < instructions.Length; i++)
+                switch (instructions[i])
+                {
+                    case "MyCalendarTwo":
+                        ob = new();
+                        break;
+                    case "book":
+                        Console.WriteLine($"Trying to book [{events[i][0]},{events[i][1]}) result in booking => {ob.Book(events[i][0], events[i][1])}");
+                        break;
+                }
+        }
 
 
 
