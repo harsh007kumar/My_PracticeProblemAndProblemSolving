@@ -25447,5 +25447,43 @@ namespace InterviewProblemNSolutions
 
             return res;
         }
+
+
+        // Time = Space = O(n), n = length of 'arr'
+        public static bool CanArrange(int[] arr, int k)
+        {
+            /* ALGO
+            1. Iterate thru all the numbers in input integer array
+            2. we basically need to find another number for each no which when added together is divisible by 'k'
+            3. for each num find mod using => ((n%k)+k)%k
+            4. if k-mod is present in Dict then we found a pair, reduce freq in Dictionary and remove is freq goes 0
+            5. else check if mod == 0 means no itself is a multiple of 'k'
+                then check if we have been another multiple of 'k' if yes remnove it from dict and we have a pair
+            6. else #4 & #5 not true then simple add current mod to dictionary with freq 1 or increase by 1 if already present.
+            7. at end we found all pairs if dictionary is Empty
+             */
+            Dictionary<int, int> modFreq = [];
+            foreach (var n in arr)
+            {
+                var mod = ((n % k) + k) % k;        // simple n % k doesnot work with -ve integers
+                if (modFreq.TryGetValue(k - mod, out int freq))
+                {
+                    if (freq == 1)
+                        modFreq.Remove(k - mod);
+                    else
+                        modFreq[k - mod] = -1 + freq;
+                }
+                else if (mod == 0 && modFreq.ContainsKey(mod))
+                    modFreq.Remove(mod);
+                else
+                {
+                    if (modFreq.TryGetValue(mod, out int f))
+                        modFreq[mod] = 1 + f;
+                    else
+                        modFreq[mod] = 1;
+                }
+            }
+            return modFreq.Count == 0;
+        }
     }
 }
