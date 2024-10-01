@@ -687,6 +687,9 @@ namespace InterviewProblemNSolutions
             LexicographicalNumbers();
             KthSmallestInLexicographicalOrder();
             SumOfPrefixScoresOfStrings();
+            MyCalendarII();
+            CheckIfArrayPairsAreDivisibleByK();
+
 
 
 
@@ -11824,6 +11827,25 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void CheckIfArrayPairsAreDivisibleByK()
+        {
+            // https://leetcode.com/problems/check-if-array-pairs-are-divisible-by-k
+            Utility.Print("1497. Check If Array Pairs Are Divisible by k");
+            int[][] nums =
+                [
+                    [1,2,3,4,5,10,6,7,8,9],
+                    [1,2,3,4,5,6],
+                    [1,2,3,4,5,6],
+                    [-1,1,-2,2,-3,3,-4,4]
+                ];
+            int[] k = [5, 7, 10, 3];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums.Print("Input-Array");
+                Console.WriteLine($" => '{DailyProblem.CanArrange(nums[i], k[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
