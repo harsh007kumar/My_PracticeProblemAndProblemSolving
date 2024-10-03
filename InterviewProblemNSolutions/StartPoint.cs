@@ -675,20 +675,21 @@ namespace InterviewProblemNSolutions
             //UglyNumberII();
             //StoneGameII();
             //StrangePrinter();
-            NumberComplement();
-            FractionAdditionandSubtraction();
-            FindTheClosestPalindrome();
-            CountSubIslands();
-            MostStonesRemovedWithSameRowOrColumn();
-            WalkingRobotSimulation();
-            FindMissingObservations();
-            LongestSubarrayWithMaximumBitwiseAND();
-            MinimumTimeDifference();
-            LexicographicalNumbers();
-            KthSmallestInLexicographicalOrder();
-            SumOfPrefixScoresOfStrings();
-            MyCalendarII();
-            CheckIfArrayPairsAreDivisibleByK();
+            //NumberComplement();
+            //FractionAdditionandSubtraction();
+            //FindTheClosestPalindrome();
+            //CountSubIslands();
+            //MostStonesRemovedWithSameRowOrColumn();
+            //WalkingRobotSimulation();
+            //FindMissingObservations();
+            //LongestSubarrayWithMaximumBitwiseAND();
+            //MinimumTimeDifference();
+            //LexicographicalNumbers();
+            //KthSmallestInLexicographicalOrder();
+            //SumOfPrefixScoresOfStrings();
+            //MyCalendarII();
+            //CheckIfArrayPairsAreDivisibleByK();
+            MakeSumDivisibleByP();
 
 
 
@@ -11848,6 +11849,27 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MakeSumDivisibleByP()
+        {
+            // NeetCode https://youtu.be/tZXsLAyE0SE
+            // https://leetcode.com/problems/make-sum-divisible-by-p
+            Utility.Print("1590. Make Sum Divisible by P");
+            int[][] nums =
+                [
+                    [3,1,4,2],
+                    [6,3,5,2],
+                    [1,2,3],
+                    [8,32,31,18,34,20,21,13,1,27,23,22,11,15,30,4,2],
+                    [1000000000,1000000000,1000000000],
+                ];
+            int[] p = [6, 9, 3, 148, 3];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Input-Array");
+                Console.WriteLine($"length of the smallest subarray that you need to remove in order to make sum of rest divisible by '{p[i]}' => '{DailyProblem.MinSubarray(nums[i], p[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

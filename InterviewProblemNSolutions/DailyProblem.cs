@@ -25485,5 +25485,31 @@ namespace InterviewProblemNSolutions
             }
             return modFreq.Count == 0;
         }
+
+
+        // Time = Space = O(n), n = length of 'nums'
+        public static int MinSubarray(int[] nums, int p)
+        {
+            int l = nums.Length, remain, curSum = 0, smallestSubArrayRemoved = l;
+            long t = 0;
+            for (int i = 0; i < l; i++) t = (t + nums[i]) % p;
+            remain = (int)t;
+
+            // if total sum itself is divisible by 'p' we need to remove Nothing
+            if (remain == 0) return 0;
+
+            Dictionary<int, int> remain_Idx = [];
+            remain_Idx[0] = -1;
+            for (int i = 0; i < l; i++)
+            {
+                curSum = (curSum + nums[i]) % p;
+                // what sub-array sum if we remove to get the excat remainder as of total sum%p
+                if (remain_Idx.TryGetValue((curSum - remain + p) % p, out int lastSeenIdx))
+                    smallestSubArrayRemoved = Math.Min(smallestSubArrayRemoved, i - lastSeenIdx);
+                // update the index for curSum
+                remain_Idx[curSum] = i;
+            }
+            return smallestSubArrayRemoved != l ? smallestSubArrayRemoved : -1;
+        }
     }
 }
