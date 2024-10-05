@@ -25511,5 +25511,37 @@ namespace InterviewProblemNSolutions
             }
             return smallestSubArrayRemoved != l ? smallestSubArrayRemoved : -1;
         }
+
+
+        // Time = Space = O(n), n = length of 'skill'
+        public static long DividePlayers(int[] skill)
+        {
+            int l = skill.Length, noOfTeams = l / 2, perTeamScore;
+            // if we only have 2 elements they form the only valid pair
+            if (noOfTeams == 1) return skill[0] * skill[1];
+
+            long totalScore = skill.Sum(), totalChemistry = 0;
+            // we cannot divide the total score equally return -1
+            if (totalScore % noOfTeams != 0) return -1;
+
+            perTeamScore = (int)(totalScore / noOfTeams);
+            Dictionary<int, int> numFreq = [];
+            foreach (var n in skill)
+                if (n > perTeamScore)
+                    return -1;
+                else if (numFreq.TryGetValue(perTeamScore - n, out int freq))
+                {
+                    totalChemistry += (perTeamScore - n) * n;
+                    if (freq == 1) numFreq.Remove(perTeamScore - n);
+                    else numFreq[perTeamScore - n] = -1 + freq;
+                }
+                else
+                {
+                    if (numFreq.TryGetValue(n, out int f)) numFreq[n] = 1 + f;
+                    else numFreq[n] = 1;
+                }
+
+            return numFreq.Count == 0 ? totalChemistry : -1;
+        }
     }
 }

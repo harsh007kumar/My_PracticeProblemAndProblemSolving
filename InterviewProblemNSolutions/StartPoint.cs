@@ -690,6 +690,7 @@ namespace InterviewProblemNSolutions
             //MyCalendarII();
             //CheckIfArrayPairsAreDivisibleByK();
             MakeSumDivisibleByP();
+            DividePlayersIntoTeamsOfEqualSkill();
 
 
 
@@ -11872,6 +11873,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void DividePlayersIntoTeamsOfEqualSkill()
+        {
+            // https://leetcode.com/problems/divide-players-into-teams-of-equal-skill
+            Utility.Print("2491. Divide Players Into Teams of Equal Skill");
+            int[][] skillsArr =
+                [
+                    [3,2,5,1,3,4],
+                    [3,4],
+                    [1,1,2,3]
+                ];
+            foreach (var skill in skillsArr)
+            {
+                skill.Print("Skill-Array");
+                Console.WriteLine($"The total chemistry of all the team => '{DailyProblem.DividePlayers(skill)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
