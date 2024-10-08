@@ -691,6 +691,7 @@ namespace InterviewProblemNSolutions
             //CheckIfArrayPairsAreDivisibleByK();
             MakeSumDivisibleByP();
             DividePlayersIntoTeamsOfEqualSkill();
+            MinimumNumberOfSwapsToMakeTheStringBalanced();
 
 
 
@@ -11892,6 +11893,14 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MinimumNumberOfSwapsToMakeTheStringBalanced()
+        {
+            // https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-string-balanced
+            Utility.Print("1963. Minimum Number of Swaps to Make the String Balanced");
+            string[] sArr = ["][][", "]]][[[", "[]"];
+            foreach (var s in sArr)
+                Console.WriteLine($"For '{s}' minimum number of swaps to make it balanced => '{DailyProblem.MinSwaps(s)}'");
+        }
 
 
 

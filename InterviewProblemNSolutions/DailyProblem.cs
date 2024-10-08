@@ -25543,5 +25543,35 @@ namespace InterviewProblemNSolutions
 
             return numFreq.Count == 0 ? totalChemistry : -1;
         }
+
+
+        // Time O(n) | Space O(1), n = length of 's'
+        public static int MinSwaps(string s)
+        {
+            /* ALGO
+            a. Iterate over the string and keep track of the number of opening and closing brackets on each step.
+            b. If the number of closing brackets is ever larger, you need to make a swap.
+            c. Swap it with the opening bracket closest to the end of s.
+             */
+            int lt = -1, openingFromEnd = s.Length - 1, swapCount = 0, bracketBalance = 0;
+            while (++lt < openingFromEnd)
+                // Opening bracket
+                if (s[lt] == '[')
+                    bracketBalance++;
+                // closing bracket
+                else if (--bracketBalance < 0)
+                {
+                    // swap with 1st opening from end
+                    while (s[openingFromEnd] != '[')
+                        openingFromEnd--;
+                    // now swap is done so increament swapCount
+                    swapCount++;
+                    // also move rt idx for next swap (if needed)
+                    openingFromEnd--;
+                    // and reset the balance after swap as cur bracket is now replaced by Opening
+                    bracketBalance = 1;
+                }
+            return swapCount;
+        }
     }
 }
