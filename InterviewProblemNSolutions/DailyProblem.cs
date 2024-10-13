@@ -25573,5 +25573,61 @@ namespace InterviewProblemNSolutions
                 }
             return swapCount;
         }
+
+
+        // Time O(nlogn) | Space O(n), n = length of 'times' array
+        public static int SmallestChair(int[][] times, int targetFriend)
+        {
+            /* ALGO
+            1. we first store the arrival time of TargetFrnd to identify whose chairID we need to return
+                since all arrival times are unique.
+            2. Sort the input array basis arrival times.
+            3. Now we keep TWO minimum PriorityQueue one 'smallestNoChair' which haas all free ChairID intially full
+            4. second 'occupiedChair' keep track of time when a given chair would get free
+            5. now we iterate thru the sorted times array
+            6. first we see if before or at current time any chair is getting free in 'occupiedChair' we free them all
+                and add them back to 'smallestNoChair' pq
+            7. now take the small Chair Id from 'smallestNoChair' and assign it to current guest.
+            8. also check if current guest arrival times matched with 'targetFriendArrivalTime' return their chairID
+                else add them this chairId to 'occupiedChair' list along with time it would get free.
+             */
+            // arrival times are unique
+            int n = times.Length, targetFriendArrivalTime = times[targetFriend][0];
+
+            // Sor the Array basis arrival time
+            var sortedtimeWithIdx = (from t in times               // O(nlogn)
+                                     orderby t[0]
+                                     select t).ToArray();
+
+            PriorityQueue<int, int> smallestNoChair = new();
+            // Intially all the chairs are free
+            for (int i = 0; i < n; i++)
+                smallestNoChair.Enqueue(i, i);                               // O(nlogn)
+
+            // And there are no Occupied chairs in Start
+            PriorityQueue<int, int> occupiedChair = new();
+
+            int curTime, leavingTime, freeChairID;
+            for (int i = 0; i < n; i++)                                            // O(nlogn)
+            {
+                curTime = sortedtimeWithIdx[i][0];
+                leavingTime = sortedtimeWithIdx[i][1];
+                // Mark all the chair Free if their occupants have left earlier than current time
+                while (occupiedChair.TryPeek(out int chairID, out int freeTime))
+                    if (freeTime <= curTime)
+                    {
+                        occupiedChair.Dequeue();
+                        smallestNoChair.Enqueue(chairID, chairID);
+                    }
+                    else break;
+                freeChairID = smallestNoChair.Dequeue();
+                // if we found target friend return their ChairID
+                if (curTime == targetFriendArrivalTime)
+                    return freeChairID;
+                else    // mark the chair they occupied along with the time it will get free at
+                    occupiedChair.Enqueue(freeChairID, leavingTime);
+            }
+            return -1;
+        }
     }
 }

@@ -692,6 +692,7 @@ namespace InterviewProblemNSolutions
             MakeSumDivisibleByP();
             DividePlayersIntoTeamsOfEqualSkill();
             MinimumNumberOfSwapsToMakeTheStringBalanced();
+            TheNumberOfTheSmallestUnoccupiedChair();
 
 
 
@@ -11903,6 +11904,24 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void TheNumberOfTheSmallestUnoccupiedChair()
+        {
+            // https://leetcode.com/problems/the-number-of-the-smallest-unoccupied-chair
+            Utility.Print("1942. The Number of the Smallest Unoccupied Chair");
+            int[][][] times =
+                [
+                    [[1,4],[2,3],[4,6]],
+                    [[3,10],[1,5],[2,6]],
+                    [[33889,98676],[80071,89737],[44118,52565],[52992,84310],[78492,88209],[21695,67063],[84622,95452],[98048,98856],[98411,99433],[55333,56548],[65375,88566],[55011,62821],[48548,48656],[87396,94825],[55273,81868],[75629,91467]]
+                ];
+            int[] targetFriend = [1, 0, 6];
+            for (int i = 0; i < times.Length; i++)
+            {
+                times[i].Print("Times-Array");
+                Console.WriteLine($"chair number that the friend numbered targetFriend '{targetFriend[i]}' will sit on chairID => '{DailyProblem.SmallestChair(times[i], targetFriend[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
