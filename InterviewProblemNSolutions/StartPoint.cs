@@ -693,6 +693,7 @@ namespace InterviewProblemNSolutions
             DividePlayersIntoTeamsOfEqualSkill();
             MinimumNumberOfSwapsToMakeTheStringBalanced();
             TheNumberOfTheSmallestUnoccupiedChair();
+            DivideIntervalsIntoMinimumNumberOfGroups();
 
 
 
@@ -11923,6 +11924,23 @@ namespace InterviewProblemNSolutions
             }
         }
 
+
+        public static void DivideIntervalsIntoMinimumNumberOfGroups()
+        {
+            // https://leetcode.com/problems/divide-intervals-into-minimum-number-of-groups
+            Utility.Print("2406. Divide Intervals Into Minimum Number of Groups");
+            int[][][] intervalsArr =
+                [
+                    [[5,10],[6,8],[1,5],[2,3],[1,10]],
+                    [[1,3],[5,6],[8,10],[11,13]],
+                ];
+            foreach (var intervals in intervalsArr)
+            {
+                intervals.Print("Intervals-Array");
+                Console.WriteLine($"The minimum number of groups needed so taht no two intervals overlap are => '{DailyProblem.MinGroups(intervals)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

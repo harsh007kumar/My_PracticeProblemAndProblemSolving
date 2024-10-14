@@ -25629,5 +25629,46 @@ namespace InterviewProblemNSolutions
             }
             return -1;
         }
+
+
+        // Time O(nlogn)| Space O(n), n = length of intervals'
+        public static int MinGroups(int[][] intervals)
+        {
+            /* ALGO
+            1. Store the starting in one array array and ending in another
+            2. Sorted both the arrays.
+            3. Now we are just looking to find the maximum no of intersection at any point
+                in time which translates to min grp required.
+            4. so we iterate over both the arrays
+            5. if we found a starting <= last ending we increase no of grps
+            6. we we found a starting point > ending we decrease no of grps
+            7. keep track of max no of grps at any given point & return in end
+             */
+            // Sort in increasing order of endTime
+            int grps = 0, maxIntersectingIntervals = 0, n = intervals.Length, lt = 0, rt = 0;
+            int[] starting = new int[n];
+            int[] ending = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                starting[i] = intervals[i][0];
+                ending[i] = intervals[i][1];
+            }
+            Array.Sort(starting);       // O(nlogn)
+            Array.Sort(ending);         // O(nlogn)
+
+            while (lt < n)              // O(n)
+                if (starting[lt] <= ending[rt])
+                {
+                    if (++grps > maxIntersectingIntervals)
+                        maxIntersectingIntervals = grps;
+                    lt++;
+                }
+                else
+                {
+                    rt++;
+                    grps--;
+                }
+            return maxIntersectingIntervals;
+        }
     }
 }
