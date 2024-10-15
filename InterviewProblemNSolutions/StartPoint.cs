@@ -694,6 +694,7 @@ namespace InterviewProblemNSolutions
             MinimumNumberOfSwapsToMakeTheStringBalanced();
             TheNumberOfTheSmallestUnoccupiedChair();
             DivideIntervalsIntoMinimumNumberOfGroups();
+            SmallestRangeCoveringElementsFromKLists();
 
 
 
@@ -11943,6 +11944,25 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void SmallestRangeCoveringElementsFromKLists()
+        {
+            // https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists
+            Utility.Print("632. Smallest Range Covering Elements from K Lists");
+            IList<IList<int>>[] numsArr =
+                [
+                    [[4,10,15,24,26],[0,9,12,20],[5,18,22,30]],
+                    [[1,2,3],[1,2,3],[1,2,3]],
+                    [[4,10,15,24,26]],
+                    [[10,10],[11,11]]
+                ];
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Input-Array");
+                var ans = DailyProblem.SmallestRange(nums);
+                Console.WriteLine($"smallest range that includes at least one number from each of the k lists => '[{ans[0]}-{ans[1]}]'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

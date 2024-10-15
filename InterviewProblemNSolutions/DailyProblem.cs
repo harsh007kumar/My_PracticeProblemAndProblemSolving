@@ -25670,5 +25670,47 @@ namespace InterviewProblemNSolutions
                 }
             return maxIntersectingIntervals;
         }
+
+
+        // Time O(n*logk), n = total no of numbers in all the lists, k = no of lists
+        public static int[] SmallestRange(IList<IList<int>> nums)
+        {
+            int k = nums.Count;
+            int[] range = [nums[0][0], nums[0][0]];
+            if (k == 1)    // we only have 1 list of nums return 1st value as the range
+                return range;
+
+            // add first number from each list to minHeap as priority
+            // and index of list and elements idx in that list as Element
+            PriorityQueue<int[], int> curRange = new();
+            for (int i = 0; i < k; i++)
+            {
+                curRange.Enqueue([i, 0], nums[i][0]);             // O(logk)
+                range[0] = Math.Min(range[0], nums[i][0]);       // update smallest val
+                range[1] = Math.Max(range[1], nums[i][0]);       // update curLargestNumst val
+            }
+
+            int small, curLargestNum = range[1];
+            while (true)                                         // O(n)
+                if (curRange.TryDequeue(out int[] listIdxAndNum, out int num))
+                {
+                    var listIdx = listIdxAndNum[0];
+                    var numIdx = listIdxAndNum[1];
+
+                    // if we reached end of a given list then our range is only going to increase hence break-out
+                    if (++numIdx == nums[listIdx].Count) break;
+                    else curRange.Enqueue([listIdx, numIdx], nums[listIdx][numIdx]);              // O(logK)
+
+                    // update the largest no
+                    curLargestNum = Math.Max(curLargestNum, nums[listIdx][numIdx]);
+
+                    // update smallest no which is always minHeap top
+                    if (curRange.TryPeek(out int[] listMetaData, out int curSmallestVal))        // O(logK)
+                                                                                                 // if new range is smaller than update the result
+                        if (curLargestNum - curSmallestVal < range[1] - range[0])
+                            range = [curSmallestVal, curLargestNum];
+                }
+            return range;
+        }
     }
 }
