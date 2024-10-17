@@ -12029,6 +12029,40 @@ namespace InterviewProblemNSolutions
             return num;
         }
 
+        // Time = Space = O(n) || Greedy Approach
+        public static int MaximumSwap_Efficient(int num)
+        {
+            int l = (num + "").Length, idx = -1;
+            int[] n = new int[l];
+            // store all the digit of 'num' in an array
+            for (int i = l - 1; i >= 0; i--)
+            {
+                n[i] = num % 10;
+                num /= 10;
+            }
+            // Store idx of max no on the rt of each idx in 'maxOnRt'
+            int[] maxOnRt = new int[l];
+            for (int i = l - 1; i >= 0; i--)
+                maxOnRt[i] = n[i] > (i + 1 < l ? n[maxOnRt[i + 1]] : -1) ? i : maxOnRt[i + 1];
+
+            // if there exists any idx from left side which is not digit 9 
+            // and has a a digit higher than itself on its right than
+            // swap with right most idx of that digit with cur idx and breakout
+            while (++idx < l)
+                if (n[idx] < n[maxOnRt[idx]])
+                {
+                    var temp = n[idx];
+                    n[idx] = n[maxOnRt[idx]];
+                    n[maxOnRt[idx]] = temp;
+                    break;
+                }
+            // compute the result
+            int res = 0;
+            for (int i = 0; i < l; i++)
+                res = res * 10 + n[i];
+            return res;
+        }
+
 
         // Time O(n) || Recursive Space O(n) || Auxillary Space O(1)
         // Given the root of a binary tree, then value v and depth d, you need to add a row of nodes with value v at the given depth d. The root node is at depth 1.

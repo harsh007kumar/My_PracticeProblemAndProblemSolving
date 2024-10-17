@@ -5624,7 +5624,8 @@ namespace InterviewProblemNSolutions
             Utility.Print("670. Maximum Swap");
             int[] nums = { 2736, 9973, 987652791 };
             foreach (var num in nums)
-                Console.WriteLine($" Max value number possible from \'{num}\' by swapping two digits at most once is: \'{DailyProblem.MaximumSwap(num)}\'\nodes");
+                //Console.WriteLine($" Max value number possible from \'{num}\' by swapping two digits at most once is: \'{DailyProblem.MaximumSwap(num)}\'\nodes");
+                Console.WriteLine($" Max value number possible from \'{num}\' by swapping two digits at most once is: \'{DailyProblem.MaximumSwap_Efficient(num)}\'\n");
         }
 
 
