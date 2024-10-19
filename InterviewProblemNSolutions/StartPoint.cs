@@ -695,6 +695,7 @@ namespace InterviewProblemNSolutions
             TheNumberOfTheSmallestUnoccupiedChair();
             DivideIntervalsIntoMinimumNumberOfGroups();
             SmallestRangeCoveringElementsFromKLists();
+            CountNumberOfMaximumBitwiseORSubsets();
 
 
 
@@ -11966,6 +11967,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void CountNumberOfMaximumBitwiseORSubsets()
+        {
+            // https://leetcode.com/problems/count-number-of-maximum-bitwise-or-subsets
+            Utility.Print("2044. Count Number of Maximum Bitwise-OR Subsets");
+            int[][] numsArr =
+                [
+                    [3,1],
+                    [2,2,2],
+                    [3,2,1,5]
+                ];
+            foreach (var nums in numsArr)
+            {
+                nums.Print("Input-Array");
+                Console.WriteLine($"The total no of different non-empty subsets with the maximum bitwise OR are => '{DailyProblem.CountMaxOrSubsets(nums)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

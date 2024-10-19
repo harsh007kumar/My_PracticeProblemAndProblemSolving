@@ -25746,5 +25746,28 @@ namespace InterviewProblemNSolutions
                 }
             return range;
         }
+
+
+        // Time O(2^n) | Auxillary Space O(n), n = length of 'nums'
+        public static int CountMaxOrSubsets(int[] nums)
+        {
+            int maxOR = 0, l = nums.Length;
+            for (int i = 0; i < l; i++)        // O(n)
+                maxOR |= nums[i];
+
+            return Count(0, 0);                 // O(2^n)
+
+            int Count(int idx, int curOR)
+            {
+                if (idx == l)
+                {
+                    if (curOR == maxOR) return 1;
+                    else return 0;
+                }
+
+                // we include cur no                 // skip cur no
+                return Count(idx + 1, curOR | nums[idx]) + Count(idx + 1, curOR);
+            }
+        }
     }
 }
