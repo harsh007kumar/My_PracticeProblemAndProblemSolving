@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 
 namespace InterviewProblemNSolutions
@@ -2081,6 +2082,26 @@ namespace InterviewProblemNSolutions
             for (int i = 0; i < 26; i++)   // O(26)
                 pushCount += charFreq[i] * (1 + (i / unqKeys)); // freq of char * times key has to be pushed to get the character
             return pushCount;
+        }
+
+
+        // Time = Space = O(n* k), n = length of 'folder' and k = avg length of each folder in array
+        public static IList<string> RemoveSubfolders(string[] folder)
+        {
+            /* ALGO
+            1. Add all folder to the Trie data-structure (each folder split by '/') is new sub-folder
+            2. also remeber to mark the last sub-folder as 'isFolder'
+            3. Once all folder are added we can simply iterate thru Trie to only add root folder which is identified by isFolder=true
+            4. and stop iterating down-stream as anything under it is sub-folder
+             */
+            IList<string> ans = new List<string>();
+            TrieFileSystem t = new();
+            // add all the folder in the 'Trie' data-structure
+            foreach (var fol in folder) t.Add(fol);
+            // now iterate over the trie to only add Root folders
+            t.FindRootOnly(ans, t.root, new Stack<string>());
+            return ans;
+
         }
     }
 }

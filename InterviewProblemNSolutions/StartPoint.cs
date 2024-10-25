@@ -696,6 +696,7 @@ namespace InterviewProblemNSolutions
             DivideIntervalsIntoMinimumNumberOfGroups();
             SmallestRangeCoveringElementsFromKLists();
             CountNumberOfMaximumBitwiseORSubsets();
+            RemoveSubFoldersFromTheFilesystem();
 
 
 
@@ -11984,6 +11985,35 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void RemoveSubFoldersFromTheFilesystem()
+        {
+            // https://leetcode.com/problems/remove-sub-folders-from-the-filesystem
+            Utility.Print("1233. Remove Sub-Folders from the Filesystem");
+            string[][] foldersArr =
+                [
+                    ["/a","/a/b","/c/d","/c/d/e","/c/f"],
+                    ["/a","/a/b/c","/a/b/d"],
+                    ["/a/b/c","/a/b/ca","/a/b/d"]
+                ];
+            foreach(var folders in foldersArr)
+            {
+                folders.Print("Folders-Array");
+                StringAlgorithms.RemoveSubfolders(folders).Print($"Folders after removing all sub-folders in above folders are");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
 
 
 

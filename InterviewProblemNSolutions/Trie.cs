@@ -288,6 +288,57 @@ namespace InterviewProblemNSolutions
     }
 
 
-
+    public class TrieNodeFileSystem
+    {
+        public Dictionary<string, TrieNodeFileSystem> child;
+        public bool isFolder;
+        public TrieNodeFileSystem()
+        {
+            child = new();
+            isFolder = false;
+        }
+    }
+    public class TrieFileSystem
+    {
+        public TrieNodeFileSystem root;
+        public TrieFileSystem() => root = new();
+        public void Add(string folder)
+        {
+            TrieNodeFileSystem cur = root;
+            var fold_Struc = folder.Split('/');
+            for (int i = 1; i < fold_Struc.Length; i++)
+            {
+                var sub = fold_Struc[i];
+                if (cur.child.TryGetValue(sub, out TrieNodeFileSystem val))
+                    cur = val;
+                else
+                {
+                    cur.child[sub] = new();
+                    cur = cur.child[sub];
+                }
+            }
+            // mark the existance of folder
+            cur.isFolder = true;
+        }
+        public void FindRootOnly(IList<string> ans, TrieNodeFileSystem cur, Stack<string> st)
+        {
+            // if we found a root folder stop iterating downwards as anything under it is sub-folder
+            // and remeber to add the root to 'ans'
+            if (cur.isFolder)
+            {
+                StringBuilder sb = new();
+                foreach (var sub in st.Reverse())
+                    sb.Append('/').Append(sub);
+                ans.Add(sb.ToString());
+            }
+            else
+                foreach (var sub in cur.child)
+                {
+                    st.Push(sub.Key);
+                    FindRootOnly(ans, sub.Value, st);
+                    st.Pop();
+                }
+        }
+    }
 
 }
