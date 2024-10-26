@@ -25843,5 +25843,97 @@ namespace InterviewProblemNSolutions
             // #4 return original tree back
             return root;
         }
+
+
+        public static int[] TreeQueries(TreeNode root, int[] queries)
+        {
+            int m = queries.Length, curlevel = 0;
+            // Create a list where each idx has a HashSet containing Nodes for 1 level
+            List<HashSet<TreeNode>> levels = new();
+            levels.Add(new());
+            Dictionary<int, PairForSubTreeRemoval> nodeLevelMap = new();
+            Dictionary<TreeNode, int> nodeHeightFromBottom = new();
+
+            // Find Height of Each Node
+            GetHeight(root);                                    // O(n)
+
+            // BFS traversal to populate the 'levels' list and 'nodeLevelMap' dictionary
+            Queue<TreeNode> q = new();
+            q.Enqueue(root);
+            q.Enqueue(null);
+            while (q.TryDequeue(out TreeNode cur))               // O(n)
+                                                                 // if end of curLevel, add the level sum to minHeap and reset back to 0
+                if (cur == null)
+                {
+                    curlevel++;
+                    // if more levels left to be traverse, add new HashSet for next level
+                    if (q.Count > 0)
+                    {
+                        q.Enqueue(null);
+                        levels.Add(new());
+                    }
+                }
+                else
+                {
+                    // map the level of cur nodes value to its idx level in Tree
+                    nodeLevelMap[cur.val] = new(curlevel, cur);
+                    // also add the node to along with all nodes from its level
+                    levels[curlevel].Add(cur);
+
+                    if (cur.left != null)
+                        q.Enqueue(cur.left);
+                    if (cur.right != null)
+                        q.Enqueue(cur.right);
+                }
+
+            // Calculate the top 2 heights of each level and store in 'top2Ht' array
+            int h = levels.Count;
+            int[][] top2Ht = new int[h][];
+            for (int i = 0; i < h; i++)
+            {
+                int max1 = -1, max2 = -1;
+                foreach (var listOfNodes in levels[i])
+                    if (max1 == -1)
+                        max1 = nodeHeightFromBottom[listOfNodes];
+                    else if (nodeHeightFromBottom[listOfNodes] >= max1)
+                    {
+                        max2 = max1;
+                        max1 = nodeHeightFromBottom[listOfNodes];
+                    }
+                    else
+                        max2 = Math.Max(max2, nodeHeightFromBottom[listOfNodes]);
+
+                top2Ht[i] = [max1, max2];
+                Console.WriteLine($"Max 2 Ht for {i} level are => {max1} & {max2}");
+            }
+
+            // Calculate the Result
+            int[] ans = new int[m];
+            for (int i = 0; i < m; i++)                            // O(m)
+            {
+                var nodeLevel = nodeLevelMap[queries[i]];
+                var l = nodeLevel.l;
+                var n = nodeLevel.n;
+                // update the min possible height of tree
+                ans[i] = l - 1;
+
+                if (top2Ht[l][0] != nodeHeightFromBottom[n])
+                    ans[i] = l + top2Ht[l][0];
+                else
+                    ans[i] = Math.Max(ans[i], l + top2Ht[l][1]);
+            }
+            return ans;
+
+
+            // local helper func
+            int GetHeight(TreeNode r)
+            {
+                if (r == null) return 0;
+                var lt = GetHeight(r.left);
+                var rt = GetHeight(r.right);
+                nodeHeightFromBottom[r] = Math.Max(lt, rt);
+                return 1 + nodeHeightFromBottom[r];
+            }
+        }
     }
 }

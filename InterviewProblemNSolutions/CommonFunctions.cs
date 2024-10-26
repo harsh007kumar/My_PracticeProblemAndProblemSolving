@@ -18,6 +18,18 @@ namespace InterviewProblemNSolutions
         }
         public TreeNode() => left = right = null;
     }
+
+    public class PairForSubTreeRemoval
+    {
+        public int l;
+        public TreeNode n;
+        public PairForSubTreeRemoval(int level, TreeNode node)
+        {
+            l = level;
+            n = node;
+        }
+    }
+
     public class ListNode
     {
         public int val = 0;

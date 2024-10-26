@@ -698,6 +698,7 @@ namespace InterviewProblemNSolutions
             CountNumberOfMaximumBitwiseORSubsets();
             CousinsInBinaryTreeII();
             RemoveSubFoldersFromTheFilesystem();
+            HeightOfBinaryTreeAfterSubtreeRemovalQueries();
 
 
 
@@ -12041,6 +12042,58 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void HeightOfBinaryTreeAfterSubtreeRemovalQueries()
+        {
+            // https://leetcode.com/problems/height-of-binary-tree-after-subtree-removal-queries
+            TreeNode[] trees =
+                [
+                    new(1)
+                    {
+                        left = new(3)
+                        {
+                            left = new(2)
+                        },
+                        right = new(4)
+                        {
+                            left = new(6),
+                            right = new(5)
+                            {
+                                right = new(7)
+                            }
+                        }
+                    },
+                    new(5)
+                    {
+                        left = new(8)
+                        {
+                            left = new(2)
+                            {
+                                left = new(4),
+                                right = new(6)
+                            },
+                            right = new(1)
+                        },
+                        right = new(9)
+                        {
+                            left = new(3),
+                            right = new(7)
+                        }
+                    }
+                ];
+            int[][] queries =
+                [
+                    [4],
+                    [3, 2, 4, 8],
+                ];
+            Utility.Print("2458. Height of Binary Tree After Subtree Removal Queries");
+            for(int i=0;i<trees.Length;i++)
+            {
+                trees[i].InOrder("Input-Tree");
+                queries[i].Print("Queries Array");
+                DailyProblem.TreeQueries(trees[i], queries[i]).Print($"Height of the tree after performing the ith query");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
