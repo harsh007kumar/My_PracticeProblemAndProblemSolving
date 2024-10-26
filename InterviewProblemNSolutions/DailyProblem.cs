@@ -25769,5 +25769,79 @@ namespace InterviewProblemNSolutions
                 return Count(idx + 1, curOR | nums[idx]) + Count(idx + 1, curOR);
             }
         }
+
+
+        // Time O(n)-2-Pass | Space O(h), h = height of the Tree
+        public static TreeNode ReplaceValueInTree(TreeNode root)
+        {
+            /* ALGO
+            1. In 2st BFS traversal we calculate the level sum of each level in tree
+            2. in second iteration we simply update the nodes values by fetching the level sum of each level - sum of same parent sibilings
+            3. lastly update root.val to 0 as it has no parent/sibiling
+            4. return the original tree
+             */
+            // #1 find level sum
+            Queue<TreeNode> q = new();
+            q.Enqueue(root);
+            q.Enqueue(null);
+            int curLevelSum = 0;
+            List<int> levelSum = new();
+            while (q.TryDequeue(out TreeNode cur))
+                // if end of curLevel, add the level sum to levelSum and reset back to 0
+                if (cur == null)
+                {
+                    levelSum.Add(curLevelSum);
+                    // if more levels left to be traverse, reset the levelSum and mark end of cur level
+                    if (q.Count > 0)
+                    {
+                        curLevelSum = 0;
+                        q.Enqueue(null);
+                    }
+                }
+                else
+                {
+                    curLevelSum += cur.val;
+                    if (cur.left != null)
+                        q.Enqueue(cur.left);
+                    if (cur.right != null)
+                        q.Enqueue(cur.right);
+                }
+            // #2 update the original tree with update values
+            q.Enqueue(root);
+            q.Enqueue(null);
+            int levelIdx = 1, sameParentSiblingsSum;
+            while (q.TryDequeue(out TreeNode cur))
+                // if end of curLevel, add the level sum to levelSum and reset back to 0
+                if (cur == null)
+                {
+                    // point to level sum of next level in list now
+                    levelIdx++;
+                    // if more levels left to be traverse, reset the levelSum and mark end of cur level
+                    if (q.Count > 0)
+                    {
+                        curLevelSum = 0;
+                        q.Enqueue(null);
+                    }
+                }
+                else
+                {
+
+                    sameParentSiblingsSum = (cur.left != null ? cur.left.val : 0) + (cur.right != null ? cur.right.val : 0);
+                    if (cur.left != null)
+                    {
+                        cur.left.val = levelSum[levelIdx] - sameParentSiblingsSum;
+                        q.Enqueue(cur.left);
+                    }
+                    if (cur.right != null)
+                    {
+                        cur.right.val = levelSum[levelIdx] - sameParentSiblingsSum;
+                        q.Enqueue(cur.right);
+                    }
+                }
+            // #3 root has no parent & siblings it will be always zero 
+            root.val = 0;
+            // #4 return original tree back
+            return root;
+        }
     }
 }

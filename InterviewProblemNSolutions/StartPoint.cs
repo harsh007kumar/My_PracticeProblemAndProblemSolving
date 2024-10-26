@@ -696,6 +696,7 @@ namespace InterviewProblemNSolutions
             DivideIntervalsIntoMinimumNumberOfGroups();
             SmallestRangeCoveringElementsFromKLists();
             CountNumberOfMaximumBitwiseORSubsets();
+            CousinsInBinaryTreeII();
             RemoveSubFoldersFromTheFilesystem();
 
 
@@ -11985,6 +11986,40 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void CousinsInBinaryTreeII()
+        {
+            // https://leetcode.com/problems/cousins-in-binary-tree-ii
+            Utility.Print("2641. Cousins in Binary Tree II");
+            TreeNode[] treeArr =
+                [
+                    new(5)
+                    {
+                        left = new(4)
+                        {
+                            left = new(1),
+                            right = new(10)
+                        },
+                        right = new(9)
+                        {
+                            right = new(7)
+                        },
+                    },
+                    new(3)
+                    {
+                        left = new(1),
+                        right = new(2)
+                    },
+                ];
+            foreach(var tree in treeArr)
+            {
+                tree.InOrder("Input-Tree");
+                DailyProblem.ReplaceValueInTree(tree).InOrder($"Modified tree after replacing the value of each node in the tree with the sum of all its cousins' values");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
 
 
         public static void RemoveSubFoldersFromTheFilesystem()
