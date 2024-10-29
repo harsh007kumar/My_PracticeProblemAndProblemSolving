@@ -25935,5 +25935,36 @@ namespace InterviewProblemNSolutions
                 return 1 + nodeHeightFromBottom[r];
             }
         }
+
+
+        // Time O(r*c) | Space O(1), r,c = no of rows and cols respectively in 'matrix'
+        internal static int CountSquares(int[][] matrix)
+        {
+            /* ALGO
+            1. Start from 0..rows-1 and iterate from 0..cols-1 column
+            2. for each cell if its val == 1
+            3. we try and see the biggest sq matrix on:
+                a. cell = [row,col-1] i.e. lt
+                b. cell = [row-1,col] i.e. top
+                c. cell = [row-1,col-1] i.e. diagnal
+            4. we take min of above 3 and add '1' and update it in cache
+            5. and also add that value to counter
+            6. in the end return the counter
+             */
+            int rows = matrix.Length, cols = matrix[0].Length, lt, top, cross, sqMatrix = 0;
+            for (int r = 0; r < rows; r++)
+                for (int c = 0; c < cols; c++)
+                    if (matrix[r][c] == 1)
+                    {
+                        lt = c - 1 >= 0 ? matrix[r][c - 1] : 0;
+                        top = r - 1 >= 0 ? matrix[r - 1][c] : 0;
+                        cross = r - 1 >= 0 && c - 1 >= 0 ? matrix[r - 1][c - 1] : 0;
+                        // save the largest sq matrix of 1's found in cache
+                        matrix[r][c] = 1 + Math.Min(Math.Min(lt, top), cross);
+                        // also add to the counter
+                        sqMatrix += matrix[r][c];
+                    }
+            return sqMatrix;
+        }
     }
 }

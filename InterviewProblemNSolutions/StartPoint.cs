@@ -699,6 +699,7 @@ namespace InterviewProblemNSolutions
             CousinsInBinaryTreeII();
             RemoveSubFoldersFromTheFilesystem();
             HeightOfBinaryTreeAfterSubtreeRemovalQueries();
+            CountSquareSubmatricesWithAllOnes();
 
 
 
@@ -12096,6 +12097,23 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void CountSquareSubmatricesWithAllOnes()
+        {
+            // https://leetcode.com/problems/count-square-submatrices-with-all-ones/
+            Utility.Print("1277. Count Square Submatrices with All Ones");
+            int[][][] matArr =
+                [
+                    [[0,1,1,1],[1,1,1,1],[0,1,1,1]],
+                    [[1,0,1],[1,1,0],[1,1,0]],
+                    [[1,1,1],[1,1,1],[1,1,1]]
+                ];
+            foreach(var matrix in  matArr)
+            {
+                matrix.Print("Input-Matrix");
+                Console.WriteLine($"In above Matrix no of square submatrices with all ones are => '{DailyProblem.CountSquares(matrix)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
