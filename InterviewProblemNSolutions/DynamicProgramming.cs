@@ -3589,5 +3589,40 @@ namespace InterviewProblemNSolutions
                 return cache[lt, rt];
             }
         }
+
+
+        // Time O(n^2) | Space O(n), n = length of 'nums'
+        internal static int MinimumMountainRemovals(int[] nums)
+        {
+            /* ALGO
+            1. we need to find the longest increasing starting from lt side and longest from rt side.
+            2. Now we just need to iterate thru each idx from 1..n-2
+            3. for each index we subtract from n - LIS - LDS + 1 (pivot element is counted twice) 
+                to see how many elements were not selected aka have to be deleted to make the mountain possible.
+             */
+            int n = nums.Length, minNoOfRemovals = n;
+            int[] lis = new int[n], lds = new int[n];
+            // LIS
+            for (int i = 0; i < n; i++)            // O(n^2)
+            {
+                for (int k = 0; k < i; k++)
+                    if (nums[i] > nums[k])
+                        lis[i] = Math.Max(lis[i], lis[k]);
+                lis[i]++;
+            }
+            // LDS
+            for (int i = n - 1; i >= 0; i--)         // O(n^2)
+            {
+                for (int k = n - 1; k > i; k--)
+                    if (nums[i] > nums[k])
+                        lds[i] = Math.Max(lds[i], lds[k]);
+                lds[i]++;
+            }
+            // compute longest mountain length - n = min no of removals required
+            for (int i = 1; i < n - 1; i++)          // O(n)
+                if (lis[i] != 1 && lds[i] != 1)
+                    minNoOfRemovals = Math.Min(minNoOfRemovals, 1 + n - lis[i] - lds[i]);
+            return minNoOfRemovals;
+        }
     }
 }

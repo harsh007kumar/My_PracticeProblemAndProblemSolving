@@ -700,6 +700,7 @@ namespace InterviewProblemNSolutions
             RemoveSubFoldersFromTheFilesystem();
             HeightOfBinaryTreeAfterSubtreeRemovalQueries();
             CountSquareSubmatricesWithAllOnes();
+            MinimumNumberOfRemovalsToMakeMountainArray();
 
 
 
@@ -12046,6 +12047,7 @@ namespace InterviewProblemNSolutions
         public static void HeightOfBinaryTreeAfterSubtreeRemovalQueries()
         {
             // https://leetcode.com/problems/height-of-binary-tree-after-subtree-removal-queries
+            Utility.Print("2458. Height of Binary Tree After Subtree Removal Queries");
             TreeNode[] trees =
                 [
                     new(1)
@@ -12086,8 +12088,7 @@ namespace InterviewProblemNSolutions
                     [4],
                     [3, 2, 4, 8],
                 ];
-            Utility.Print("2458. Height of Binary Tree After Subtree Removal Queries");
-            for(int i=0;i<trees.Length;i++)
+            for (int i=0;i<trees.Length;i++)
             {
                 trees[i].InOrder("Input-Tree");
                 queries[i].Print("Queries Array");
@@ -12116,6 +12117,25 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MinimumNumberOfRemovalsToMakeMountainArray()
+        {
+            // NeetCode https://youtu.be/Ys-q9qPpleY
+            // https://leetcode.com/problems/minimum-number-of-removals-to-make-mountain-array
+            Utility.Print("1671. Minimum Number of Removals to Make Mountain Array");
+            int[][] numsArr =
+                [
+                    [1,3,1],
+                    [2,1,1,5,6,2,3,1],
+                    [23,47,63,72,81,99,88,55,21,33,32],
+                    [100,92,89,77,74,66,64,66,64]
+                ];
+            foreach(var nums in numsArr)
+            {
+                nums.Print("Input-Array");
+                Console.WriteLine($"The minimum number of elements to remove to make nums​​​ a mountain array. => '{DynamicProgramming.MinimumMountainRemovals(nums)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
