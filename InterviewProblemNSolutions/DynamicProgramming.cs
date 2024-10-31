@@ -3029,10 +3029,10 @@ namespace InterviewProblemNSolutions
                 // delete char
                 editCount = Math.Min(editCount, 1 + GetMinEdit(i1 + 1, i2));
                 if (editCount == 0) return dp[i1][i2] = 0;
-                
+
                 // insert char
                 editCount = Math.Min(editCount, 1 + GetMinEdit(i1, i2 + 1));
-                
+
                 // update cache
                 return dp[i1][i2] = editCount;
             }
@@ -3117,15 +3117,15 @@ namespace InterviewProblemNSolutions
                     if (i >= powerfulLength - sLen)
                     {
                         int sIdx = sLen - (powerfulLength - i);
-                        startDigit = Math.Max(startDigit, suffix[sIdx]-'0');
-                        endDigit = Math.Min(endDigit, suffix[sIdx]-'0');
+                        startDigit = Math.Max(startDigit, suffix[sIdx] - '0');
+                        endDigit = Math.Min(endDigit, suffix[sIdx] - '0');
                     }
 
                     long ans = 0;
                     while (startDigit <= endDigit)                      // O(10)
                     {
                         // have not found smaller earlier than see if current digit is smaller or not is yes update to 1
-                        ans += PowerFul(i + 1, foundSmallerEarlier==1 ? 1 : (startDigit < (x[i] - '0') ? 1 : 0));
+                        ans += PowerFul(i + 1, foundSmallerEarlier == 1 ? 1 : (startDigit < (x[i] - '0') ? 1 : 0));
 
                         startDigit++;
                     }
@@ -3173,7 +3173,7 @@ namespace InterviewProblemNSolutions
             */
             int rows = matrix.Length, cols = matrix[0].Length, maxRectangle = 0, lastIdx = 0;
             int[] histogram = new int[cols];
-            Stack<Pair<int,int>> st = [];
+            Stack<Pair<int, int>> st = [];
             for (int r = 0; r < rows; r++)
             {
                 // Create Histogram for current row
@@ -3623,6 +3623,76 @@ namespace InterviewProblemNSolutions
                 if (lis[i] != 1 && lds[i] != 1)
                     minNoOfRemovals = Math.Min(minNoOfRemovals, 1 + n - lis[i] - lds[i]);
             return minNoOfRemovals;
+        }
+
+
+        // Time = Spaec = O(n*m), n,m = no of robots and no of factories respectively
+        internal static long MinimumTotalDistance(IList<int> unSortedRobot, int[][] factory)
+        {
+            /* ALGO
+            1. Sort both the robots and factories basis index they are placed at
+            2. Now create a 2D array of Dictionary/HashTable for for storing
+                pre-computed sub-problems in them.
+            3. Now we start from 0th idx of robot and 0th idx of factory
+            4. for each robot we have two option:
+                a. we skip fixing it at cur factory and direct move to next
+                    factory
+                b. we fix it at current factory and reduce factory capacity
+                    by 1 and add the distance b/w robot idx and cur factory
+                    to our 'travel' and move to next robot idx.
+            5. if we reach the end of robot list means all robots are fixed
+                and no more travel needed hence return 0.
+            6. if we reach the end of factory, then return 0 if all robots
+                are fixed else return a very large no so that this solution
+                doesn't gets counted as there were still robots left to be
+                fixed.
+            7. also remember to cache ur ans for each robot,factory idx in
+                cache along with the left capacity of the factory at that
+                index.
+             */
+            int n = unSortedRobot.Count, m = factory.Length;
+            var robot = unSortedRobot.ToList(); // O(n)
+                                                // Sort the Robots on basis of their idx values i.e. Idx they are placed at
+            robot.Sort();                       // O(nlogn)
+                                                // Sort the Factory on basis of index they are situated on
+            factory = (from eachFac in factory  // O(mlogm)
+                       orderby eachFac[0]
+                       select eachFac).ToArray();
+            
+            // Create a 2D-cache
+            Dictionary<int, long>[,] cache = new Dictionary<int, long>[n, m];
+            for (int i = 0; i < n; i++)
+                for (int j = 0; j < m; j++)
+                    cache[i, j] = new();
+
+            // Compute Total min distance tavelled
+            return MinDistTravelToRepairRobots(0, 0);
+
+            // local helper func
+            long MinDistTravelToRepairRobots(int r, int f)
+            {
+                // no more factory left to traverse, if no of robots to repair are also zero than we found our ans
+                if (f == m) return r == n ? 0 : 1000 * (long)int.MaxValue;
+                // if all robots are already repair
+                if (r == n) return 0;  // no more travel neccessary
+
+                // if cur factory capacity is all used up move to next one
+                if (factory[f][1] <= 0)
+                    return MinDistTravelToRepairRobots(r, f + 1);
+
+                if (cache[r, f].TryGetValue(factory[f][1], out long fromCache))
+                    return fromCache;
+
+                // we skip cur factory and repair at next factory which comes
+                var travel = MinDistTravelToRepairRobots(r, f + 1);
+
+                // we repair cur robot at current factory
+                factory[f][1]--;
+                travel = Math.Min(travel, Math.Abs((long)robot[r] - (long)factory[f][0]) + MinDistTravelToRepairRobots(r + 1, f));
+                factory[f][1]++;
+
+                return cache[r, f][factory[f][1]] = travel;
+            }
         }
     }
 }

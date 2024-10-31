@@ -701,6 +701,7 @@ namespace InterviewProblemNSolutions
             HeightOfBinaryTreeAfterSubtreeRemovalQueries();
             CountSquareSubmatricesWithAllOnes();
             MinimumNumberOfRemovalsToMakeMountainArray();
+            MinimumTotalDistanceTraveled();
 
 
 
@@ -12138,6 +12139,34 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MinimumTotalDistanceTraveled()
+        {
+            // https://leetcode.com/problems/minimum-total-distance-traveled
+            Utility.Print("2463. Minimum Total Distance Traveled");
+            int[][] robots =
+                [
+                    [0,4,6],
+                    [1,-1],
+                    [0,6],
+                    [670355988,403625544,886437985,224430896,126139936,-477101480,-868159607,-293937930],
+                    [-333539942,359275673,89966494,949684497,-733065249,241002388,325009248,403868412,-390719486,-670541382,563735045,119743141,323190444,534058139,-684109467,425503766,761908175]
+                ];
+            int[][][] factory =
+                [
+                    [[2,2],[6,2]],
+                    [[-2,1],[2,1]],
+                    [[7,2]],
+                    [[333473422,7],[912209329,7],[468372740,7],[-765827269,4],[155827122,4],[635462096,2],[-300275936,2],[-115627659,0]],
+                    [[-590277115,0],[-80676932,3],[396659814,0],[480747884,9],[118956496,10]]
+                ];
+            for (int i = 0; i < robots.Length; i++)
+            {
+                robots[i].Print($"Robots location at various indexes");
+                factory[i].Print($"Factory at at various indexes along with their capacity");
+                Console.WriteLine($"Min the total distance traveled by all the robots before they are repaired => '{DynamicProgramming.MinimumTotalDistance(robots[i].ToList(), factory[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
