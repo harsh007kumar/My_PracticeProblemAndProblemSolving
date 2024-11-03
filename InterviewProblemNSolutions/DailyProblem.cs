@@ -25847,6 +25847,23 @@ namespace InterviewProblemNSolutions
 
         public static int[] TreeQueries(TreeNode root, int[] queries)
         {
+            /* ALGO
+            1. Create a list where each idx has a HashSet containing Nodes for one level
+            2. Create a Dictionary 'nodeHeightFromBottom' which hold the hops from
+                given node to its leaf node.
+            3. Using PostOrder traversal populate the 'nodeHeightFromBottom'
+            4. Create a 'nodeLevelMap' dictionary which store node val as key and
+                its level and TreeNode ref as value.
+            4. Now using BFS-traversal populate the 'levels' list and 'nodeLevelMap' dictionary
+            5. Create array 'top2Ht' of length = height of original tree
+            6. and calculate the top 2 heights of each level and store in 'top2Ht' array.
+            7. Now its simple to calculate the result for each query
+            8. by first looking up node level and reference from 'nodeLevelMap'
+            9. and then getting the top 2 depths for cur level from 'top2Ht' and
+                assigning max value that doesn't belong in path of cur node.
+            10. return the array 'ans' at end.
+             * 
+             */
             int m = queries.Length, curlevel = 0;
             // Create a list where each idx has a HashSet containing Nodes for 1 level
             List<HashSet<TreeNode>> levels = new();

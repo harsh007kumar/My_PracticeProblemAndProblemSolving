@@ -698,6 +698,7 @@ namespace InterviewProblemNSolutions
             CountNumberOfMaximumBitwiseORSubsets();
             CousinsInBinaryTreeII();
             RemoveSubFoldersFromTheFilesystem();
+            SplitStringIntoMaxNumberOfUniqueSubstrings();
             HeightOfBinaryTreeAfterSubtreeRemovalQueries();
             CountSquareSubmatricesWithAllOnes();
             MinimumNumberOfRemovalsToMakeMountainArray();
@@ -12042,6 +12043,15 @@ namespace InterviewProblemNSolutions
                 StringAlgorithms.RemoveSubfolders(folders).Print($"Folders after removing all sub-folders in above folders are");
                 Console.WriteLine(Utility.lineDelimeter);
             }
+        }
+
+        public static void SplitStringIntoMaxNumberOfUniqueSubstrings()
+        {
+            // https://leetcode.com/problems/split-a-string-into-the-max-number-of-unique-substrings/description/
+            Utility.Print("1593. Split a String Into the Max Number of Unique Substrings");
+            string[] sArr = ["ababccc", "aba", "aa"];
+            foreach(var s in sArr)
+                Console.WriteLine($"Max no of unique substrings that the string '{s}' can be split into => '{StringAlgorithms.MaxUniqueSplit(s)}'");
         }
 
 

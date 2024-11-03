@@ -2103,5 +2103,44 @@ namespace InterviewProblemNSolutions
             return ans;
 
         }
+
+
+        // Time O(n^2) | Space O(n), n = length of 's'
+        internal static int MaxUniqueSplit(string s)
+        {
+            /* ALGO
+            1. Try all possible words starting from 0th idx of length 1..max
+            2. if curWord is not present in HashTable, add it and recursively
+                call the func to see how many unq words we can get before
+                reaching last idx
+            3. during backtracking if word was added remove it so that next char can be included as steps and be repeated.
+            4. at the end when idx==l, update maxUniqueSplits with hashset count indicating count of unq words
+             */
+            HashSet<string> unq = new();
+            int maxUniqueSplits = 0, l = s.Length;
+            Try(0);
+            return maxUniqueSplits;
+
+            // local helper func
+            void Try(int idx)
+            {
+                if (idx == l) maxUniqueSplits = Math.Max(maxUniqueSplits, unq.Count);
+                else
+                {
+                    StringBuilder sb = new();
+                    for (int i = idx; i < l; i++)
+                    {
+                        sb.Append(s[i]);
+                        var curWord = sb.ToString();
+                        if (!unq.Contains(curWord))
+                        {
+                            unq.Add(curWord);
+                            Try(i + 1);
+                            unq.Remove(curWord);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
