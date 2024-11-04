@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using static InterviewProblemNSolutions.DailyProblem;
 using static System.Formats.Asn1.AsnWriter;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -703,6 +704,7 @@ namespace InterviewProblemNSolutions
             CountSquareSubmatricesWithAllOnes();
             MinimumNumberOfRemovalsToMakeMountainArray();
             MinimumTotalDistanceTraveled();
+            KthLargestSumInBinaryTree();
 
 
 
@@ -12179,6 +12181,45 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void KthLargestSumInBinaryTree()
+        {
+            // https://leetcode.com/problems/kth-largest-sum-in-a-binary-tree/description/
+            Utility.Print("2583. Kth Largest Sum in a Binary Tree");
+            TreeNode[] trees =
+                [
+                    new(5)
+                    {
+                        left = new(8)
+                        {
+                            left = new(2)
+                            {
+                                left = new(4),
+                                right = new(6)
+                            },
+                            right = new(1)
+                        },
+                        right = new(9)
+                        {
+                            left = new(3),
+                            right = new(7),
+                        },
+                    },
+                    new(1)
+                    {
+                        left = new(2)
+                        {
+                            left = new(3)
+                        }
+                    },
+                ];
+            int[] k = [2, 1];
+            for(int i=0;i<k.Length;i++)
+            {
+                trees[i].InOrder("Binary-Tree");
+                Console.WriteLine($"The kth '{k[i]}' largest level-sum in the tree => '{DailyProblem.KthLargestLevelSum(trees[i], k[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

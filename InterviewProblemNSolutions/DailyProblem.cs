@@ -25983,5 +25983,49 @@ namespace InterviewProblemNSolutions
                     }
             return sqMatrix;
         }
+
+
+        // Time O(n) | Space O(k), n = no of elements in Tree
+        internal static long KthLargestLevelSum(TreeNode root, int k)
+        {
+            /* ALGO
+            1. Traverse the tree using BFS for level order traversal
+            2. for each level keep update the sum of elements in that level
+            3. at last before moving onto next level add the level sum to minHeap
+            4. if heap count is less than 'k' add new levelSum
+            5. if heap count==k, than check if heapTop is smaller than curlevel remove it and add levelSum
+            6. at the end just check if heap has 'k' elements than return top
+                else return -1 as we did not have enouf elements.
+             */
+            Queue<TreeNode> q = new();
+            q.Enqueue(root);
+            q.Enqueue(null);
+            long curLevelSum = 0;
+            PriorityQueue<long, long> minHeap = new();
+            while (q.TryDequeue(out TreeNode cur))
+                // if end of curLevel, add the level sum to minHeap and reset back to 0
+                if (cur == null)
+                {
+                    if (minHeap.Count < k)
+                        minHeap.Enqueue(curLevelSum, curLevelSum);
+                    else if (curLevelSum > minHeap.Peek())
+                        minHeap.DequeueEnqueue(curLevelSum, curLevelSum);
+                    // if more levels left to be traverse, reset the levelSum and mark end of cur level
+                    if (q.Count > 0)
+                    {
+                        curLevelSum = 0;
+                        q.Enqueue(null);
+                    }
+                }
+                else
+                {
+                    curLevelSum += cur.val;
+                    if (cur.left != null)
+                        q.Enqueue(cur.left);
+                    if (cur.right != null)
+                        q.Enqueue(cur.right);
+                }
+            return minHeap.Count == k ? minHeap.Peek() : -1;
+        }
     }
 }
