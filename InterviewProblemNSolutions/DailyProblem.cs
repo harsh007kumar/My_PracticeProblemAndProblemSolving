@@ -26027,5 +26027,83 @@ namespace InterviewProblemNSolutions
                 }
             return minHeap.Count == k ? minHeap.Peek() : -1;
         }
+
+        // Time O(n^2) | Space O(n), n = no of nodes in Graph
+        public static int MagnificentSets(int n, int[][] edges)
+        {
+            // find connected components
+            // run BFS from every node of each compoenent to find out the max no of grp possible
+            List<int>[] g = new List<int>[n + 1];
+            for (int i = 1; i <= n; i++)
+                g[i] = new();
+            // Create Undirected graph
+            foreach (var e in edges)
+            {
+                int src = e[0], dest = e[1];
+                g[src].Add(dest);
+                g[dest].Add(src);
+            }
+            // find no of connected components and all store nodes in each of them
+            List<int> curComponent = new();
+            List<List<int>> connected = new();
+            bool[] visited = new bool[n + 1];
+            for (int src = 1; src <= n; src++)
+                if (!visited[src])
+                {
+                    curComponent = new();
+                    DFS(src);
+                    connected.Add(curComponent);
+                }
+            // Now try to divide each component into grps and maximize no of grp for each
+            // if any 1 grp cannot be divided return -1
+            int maxGrps = 0, curGrps;
+            foreach (var grp in connected)
+            {
+                curGrps = -1;
+                foreach (var node in grp)
+                    curGrps = Math.Max(curGrps, BFS(node));
+                // impossible to group the nodes with the given conditions for current grp
+                if (curGrps == -1) return -1;
+                else maxGrps += curGrps;
+            }
+            return maxGrps;
+
+            // local helper func
+            void DFS(int cur)
+            {
+                if (visited[cur]) return;
+                visited[cur] = true;
+                curComponent.Add(cur);
+                foreach (var adj in g[cur])
+                    DFS(adj);
+            }
+            int BFS(int cur)
+            {
+                int[] color = new int[n + 1];
+                int grpCount = 0;
+
+                Queue<int[]> q = new();
+                q.Enqueue([cur, 1]);
+                color[cur] = 1;
+
+                while (q.TryDequeue(out int[] node))
+                {
+                    grpCount = Math.Max(grpCount, node[1]);
+                    foreach (var adj in g[node[0]])
+                        // if already visited
+                        if (color[adj] != 0)
+                        {
+                            // see if the cycle is odd length divide NOT possible
+                            if ((color[adj] % 2) != ((node[1] + 1) % 2)) return -1;
+                        }
+                        else
+                        {
+                            color[adj] = node[1] + 1;
+                            q.Enqueue([adj, node[1] + 1]);
+                        }
+                }
+                return grpCount;
+            }
+        }
     }
 }
