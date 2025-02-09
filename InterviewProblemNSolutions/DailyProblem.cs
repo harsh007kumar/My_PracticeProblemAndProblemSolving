@@ -26105,5 +26105,32 @@ namespace InterviewProblemNSolutions
                 return grpCount;
             }
         }
+
+
+        // Time = Space = O(n), n = length of 'nums'
+        public static long CountBadPairs(int[] nums)
+        {
+            /* ALGO
+            1. set the no of possible pairs as initial value of 'badPairs'
+            2. Create a HashTable to store nums[i]-i for each index in array and +1 the freq is same value is seen more than once
+            3. Now we want to do is find goodPairs and subtract them from total 'badPairs'
+            4. j-i == Abs(nums[j]-nums[i]) is a good pair can also be written as
+            5. nums[i]-i == nums[j]-j i.e. good pairs is found it their exists
+            6. atleast 1 or more freq in Hashtable whose value matches cur idx num - cur idx value
+            7. iterate from 0..n-1 and return the final 'badPairs' after subtracting all good ones.
+             */
+            Dictionary<int, int> goodPair = new();
+            int n = nums.Length;
+            long badPairs = (n * (long)(n - 1)) / 2;
+            for (int i = 0; i < n; i++)        // O(n)
+                if (goodPair.TryGetValue(nums[i] - i, out int freq))
+                {
+                    badPairs -= freq;
+                    goodPair[nums[i] - i] = 1 + freq;
+                }
+                else
+                    goodPair[nums[i] - i] = 1;
+            return badPairs;
+        }
     }
 }

@@ -706,6 +706,7 @@ namespace InterviewProblemNSolutions
             MinimumTotalDistanceTraveled();
             KthLargestSumInBinaryTree();
             DivideNodesIntoTheMaximumNumberOfGroups();
+            CountNumberOfBadPairs();
 
 
 
@@ -12240,7 +12241,22 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void CountNumberOfBadPairs()
+        {
+            // https://leetcode.com/problems/count-number-of-bad-pairs/description
+            Utility.Print("2364. Count Number of Bad Pairs");
+            int[][] numsArr = [
+                                [4,1,3,3],
+                                [1,2,3,4,5]
+                              ];
+            foreach(var nums in numsArr)
+            {
+                nums.Print("Input array");
+                Console.WriteLine($"Total number of bad pairs in above array where," +
+                    $" bad pair is if => i < j and j - i != nums[j] - nums[i] are :" +
+                    $"{DailyProblem.CountBadPairs(nums)}");
+            }
+        }
 
 
 
