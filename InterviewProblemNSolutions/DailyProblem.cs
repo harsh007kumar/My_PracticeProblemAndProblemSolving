@@ -26132,5 +26132,33 @@ namespace InterviewProblemNSolutions
                     goodPair[nums[i] - i] = 1;
             return badPairs;
         }
+
+
+        // Time O(n* l^2),n = input number 'no', l = avg no of digit for each no b/w 1..No
+        public static int PunishmentNumber(int no)
+        {
+            int pNo = 0;
+            for (int n = 1; n <= no; n++)
+                if (CheckSubSum(0, (n * n) + "", n, 0))
+                    pNo += n * n;
+            return pNo;
+            // local helper func
+            bool CheckSubSum(int idx, string s, int target, int curSum)
+            {
+                if (idx == s.Length)
+                    return target == curSum;
+                else
+                {
+                    string curString = "";
+                    for (int i = idx; i < s.Length; i++)
+                    {
+                        curString = curString + s[i];
+                        if (CheckSubSum(i + 1, s, target, curSum + Convert.ToInt32(curString)))
+                            return true;
+                    }
+                    return false;
+                }
+            }
+        }
     }
 }

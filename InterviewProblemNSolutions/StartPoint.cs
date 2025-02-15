@@ -707,6 +707,7 @@ namespace InterviewProblemNSolutions
             KthLargestSumInBinaryTree();
             DivideNodesIntoTheMaximumNumberOfGroups();
             CountNumberOfBadPairs();
+            FindThePunishmentNumberOfAnInteger();
 
 
 
@@ -12258,16 +12259,23 @@ namespace InterviewProblemNSolutions
             }
         }
 
-
+        public static void FindThePunishmentNumberOfAnInteger()
+        {
+            // https://leetcode.com/problems/find-the-punishment-number-of-an-integer/description
+            Utility.Print("2698. Find the Punishment Number of an Integer");
+            int[] noArr = [10, 37];
+            foreach (var n in noArr)
+                Console.WriteLine($"Ppunishment number of n {n} is: {DailyProblem.PunishmentNumber(n)}");
+        }
 
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
-        /// <summary>
-        /// Calculate the minimum steps required to minimize any given no to '1', using below avaliable rules/steps only
-        /// Number - 1 || Number / 3 || Number / 2
-        /// </summary>
+                /// <summary>
+                /// Calculate the minimum steps required to minimize any given no to '1', using below avaliable rules/steps only
+                /// Number - 1 || Number / 3 || Number / 2
+                /// </summary>
         public static void MinimumStepsToMinimizeToOne()
         {
             Utility.Print("MinimumStepsToMinimize_NoTo1 || Dynamic Programming");
