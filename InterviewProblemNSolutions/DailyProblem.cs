@@ -26160,5 +26160,58 @@ namespace InterviewProblemNSolutions
                 }
             }
         }
+
+
+        // Greedy + backtrack
+        public static int[] ConstructDistancedSequence(int n)
+        {
+            int toPlace = 1 + ((n - 1) << 1);
+            bool[] noUsed = new bool[n + 1];
+            bool[] idxOccupied = new bool[toPlace];
+            int[] ans = new int[toPlace];
+            BackTrack(0);
+            return ans;
+
+
+            // local helper func
+            bool BackTrack(int idx, int noPlaced = 0)
+            {
+                if (noPlaced == n)         // all no placed
+                    return true;
+                else if (idx == toPlace)   // ran out of idx to place all no's
+                    return false;
+                else if (idxOccupied[idx])// cur idx occupied move to next
+                    return BackTrack(idx + 1, noPlaced);
+
+                for (int no = n; no >= 1; no--)
+                    if (!noUsed[no]) // if not placed yet
+                    {
+                        noUsed[no] = true;
+                        idxOccupied[idx] = true;
+                        ans[idx] = no;
+                        if (no != 1)   // check if 2 instance of cur no can be placed at ideal distance
+                        {
+                            if (idx + no < toPlace && !idxOccupied[idx + no])
+                            {
+                                idxOccupied[idx + no] = true;
+                                ans[idx + no] = no;
+                                if (BackTrack(idx + 1, noPlaced + 1))
+                                    return true;
+                                idxOccupied[idx + no] = false;
+                            }
+                        }
+                        else
+                        {
+                            if (BackTrack(idx + 1, noPlaced + 1))
+                                return true;
+                        }
+
+                        noUsed[no] = false;
+                        idxOccupied[idx] = false;
+                    }
+
+                return false;
+            }
+        }
     }
 }

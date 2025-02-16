@@ -3,6 +3,7 @@ using Sorting;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.Linq;
@@ -708,6 +709,7 @@ namespace InterviewProblemNSolutions
             DivideNodesIntoTheMaximumNumberOfGroups();
             CountNumberOfBadPairs();
             FindThePunishmentNumberOfAnInteger();
+            ConstructTheLexicographicallyLargestValidSequence();
 
 
 
@@ -12267,6 +12269,24 @@ namespace InterviewProblemNSolutions
             foreach (var n in noArr)
                 Console.WriteLine($"Ppunishment number of n {n} is: {DailyProblem.PunishmentNumber(n)}");
         }
+
+
+        public static void ConstructTheLexicographicallyLargestValidSequence()
+        {
+            // https://leetcode.com/problems/construct-the-lexicographically-largest-valid-sequence/description
+            Utility.Print($"1718. Construct the Lexicographically Largest Valid Sequence");
+            foreach (var no in new int[] { 3, 5, 19 })
+                DailyProblem.ConstructDistancedSequence(no).Print($"For n '{no}' the largest valid subsequence is:");
+        }
+
+
+
+
+
+
+
+
+
 
 
 
