@@ -26213,5 +26213,38 @@ namespace InterviewProblemNSolutions
                 return false;
             }
         }
+
+
+        // Time O(2^n) | Space O(n), n = length of pattern
+        public static string SmallestNumber(string pattern)
+        {
+            int maxNo = pattern.Length + 1;
+            bool[] usedNo = new bool[maxNo+1];
+            char[] ans = new char[maxNo];
+            Construct(0, pattern[0] == 'I' ? -1 : 10);
+            return new string(ans);
+
+            /// local helper func
+            bool Construct(int idx, int lastNum)
+            {
+                if (idx == maxNo) return true;
+                else
+                    for (int n = 1; n <= maxNo; n++)
+                        if (!usedNo[n])
+                        {
+                            if (idx > 0 && ((pattern[idx - 1] == 'I' && n < lastNum) || (pattern[idx - 1] == 'D' && n > lastNum)))
+                                continue;
+                            // mark used
+                            usedNo[n] = true;
+                            // add try cur work and see if it makes valid smallest string, yes return true
+                            ans[idx] = (char)('0' + n);
+                            if (Construct(idx + 1, n))
+                                return true;
+                            // mark un-used
+                            usedNo[n] = false;
+                        }
+                return false;
+            }
+        }
     }
 }

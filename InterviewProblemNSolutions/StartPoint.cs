@@ -710,7 +710,7 @@ namespace InterviewProblemNSolutions
             CountNumberOfBadPairs();
             FindThePunishmentNumberOfAnInteger();
             ConstructTheLexicographicallyLargestValidSequence();
-
+            ConstructSmallestNumberFromDIString();
 
 
 
@@ -12280,7 +12280,13 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void ConstructSmallestNumberFromDIString()
+        {
+            // https://leetcode.com/problems/construct-smallest-number-from-di-string/description
+            Utility.Print("2375. Construct Smallest Number From DI String");
+            foreach (var str in new string[] { "IIIDIDDD", "DDD", "DIDIDI" })
+                Console.WriteLine($"For input '{str}' exicographically smallest possible string num that meets the conditions is: {DailyProblem.SmallestNumber(str)}");
+        }
 
 
 
