@@ -26246,5 +26246,29 @@ namespace InterviewProblemNSolutions
                 return false;
             }
         }
+
+
+        // Time O(2^n) | Auxillary Space O(k)
+        public static string GetHappyString(int n, int k)
+        {
+            char[] chars = ['a', 'b', 'c'];
+            char[] ans = new char[n];
+            return GetKthString() ? new string(ans) : "";
+
+            // local helper func
+            bool GetKthString(int idx = 0, char lastCh = '-')
+            {
+                if (idx == n) return (--k) == 0;
+                else
+                    foreach (var ch in chars)
+                        if (ch != lastCh)
+                        {
+                            ans[idx] = ch;
+                            if (GetKthString(idx + 1, ch))
+                                return true;
+                        }
+                return false;
+            }
+        }
     }
 }

@@ -711,6 +711,7 @@ namespace InterviewProblemNSolutions
             FindThePunishmentNumberOfAnInteger();
             ConstructTheLexicographicallyLargestValidSequence();
             ConstructSmallestNumberFromDIString();
+            TheKthLexicographicalStringOfAllHappyStringsOfLengthN();
 
 
 
@@ -12289,7 +12290,14 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void TheKthLexicographicalStringOfAllHappyStringsOfLengthN()
+        {
+            // https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/description
+            Utility.Print("1415. The k-th Lexicographical String of All Happy Strings of Length n");
+            foreach (var input in new int[][] { [1, 3], [1, 4], [3, 9] })
+                Console.WriteLine($"For n '{input[0]}' and k '{input[1]}' the  kth lexicographical string is: {DailyProblem.GetHappyString(input[0], input[1])}");
 
+        }
 
 
 
