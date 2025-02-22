@@ -712,6 +712,7 @@ namespace InterviewProblemNSolutions
             ConstructTheLexicographicallyLargestValidSequence();
             ConstructSmallestNumberFromDIString();
             TheKthLexicographicalStringOfAllHappyStringsOfLengthN();
+            RecoverATreeFromPreorderTraversal();
 
 
 
@@ -12300,6 +12301,13 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void RecoverATreeFromPreorderTraversal()
+        {
+            // https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/description
+            Utility.Print("1028. Recover a Tree From Preorder Traversal");
+            foreach (var str in new string[] { "1-2--3--4-5--6--7", "1-2--3---4-5--6---7", "1-401--349---90--88" })
+                Utility.InOrder(DailyProblem.RecoverFromPreorder(str), $"Inorder tree recorevered from {str}");
+        }
 
 
 
