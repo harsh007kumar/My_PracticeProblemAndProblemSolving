@@ -713,6 +713,7 @@ namespace InterviewProblemNSolutions
             ConstructSmallestNumberFromDIString();
             TheKthLexicographicalStringOfAllHappyStringsOfLengthN();
             RecoverATreeFromPreorderTraversal();
+            ConstructBinaryTreeFromPreorderAndPostorderTraversal();
 
 
 
@@ -12308,6 +12309,25 @@ namespace InterviewProblemNSolutions
             foreach (var str in new string[] { "1-2--3--4-5--6--7", "1-2--3---4-5--6---7", "1-401--349---90--88" })
                 Utility.InOrder(DailyProblem.RecoverFromPreorder(str), $"Inorder tree recorevered from {str}");
         }
+
+
+        public static void ConstructBinaryTreeFromPreorderAndPostorderTraversal()
+        {
+            // Ref https://youtu.be/H1nBu3L-2gQ
+            // https://leetcode.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/description
+            Utility.Print("889. Construct Binary Tree from Preorder and Postorder Traversal");
+            int[][] pre = [[1, 2, 4, 5, 3, 6, 7], [1]];
+            int[][] post = [[4, 5, 2, 6, 7, 3, 1], [1]];
+            for (int i = 0; i < pre.Length; i++)
+            {
+                pre[i].Print("Pre-Order-Traversal");
+                post[i].Print("Post-Order-Traversal");
+                DailyProblem.ConstructFromPrePost(pre[i], post[i]).InOrder($"Inorder traversal");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
 
 
 

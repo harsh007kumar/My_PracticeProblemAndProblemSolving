@@ -26315,5 +26315,30 @@ namespace InterviewProblemNSolutions
             }
             return root;
         }
+
+
+        // Time = Space = O(n), n = no of nodes in Tree
+        public static TreeNode ConstructFromPrePost(int[] preorder, int[] postorder)
+        {
+            int n = preorder.Length;
+            int[] postOrderIdx = new int[n + 1];
+            for (int i = 0; i < n; i++)
+                postOrderIdx[postorder[i]] = i;
+            return Build(0, n - 1, 0, n - 1);
+
+            // local helper func
+            TreeNode Build(int lt, int rt, int lt2, int rt2)
+            {
+                if (lt > rt) return null;
+                else if (lt == rt) return new TreeNode(preorder[lt]);
+
+                TreeNode r = new(preorder[lt]);
+                var mid = postOrderIdx[preorder[lt + 1]];
+                var len = 1 + mid - lt2;
+                r.left = Build(lt + 1, lt + len, lt2, mid);
+                r.right = Build(lt + len + 1, rt, mid + 1, rt2 - 1);
+                return r;
+            }
+        }
     }
 }
