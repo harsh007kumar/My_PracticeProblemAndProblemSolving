@@ -714,6 +714,7 @@ namespace InterviewProblemNSolutions
             TheKthLexicographicalStringOfAllHappyStringsOfLengthN();
             RecoverATreeFromPreorderTraversal();
             ConstructBinaryTreeFromPreorderAndPostorderTraversal();
+            MostProfitablePathInATree();
 
 
 
@@ -12328,7 +12329,21 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void MostProfitablePathInATree()
+        {
+            // https://leetcode.com/problems/most-profitable-path-in-a-tree/description
+            Utility.Print("2467. Most Profitable Path in a Tree");
+            int[][][] edges = [[[0, 1], [1, 2], [1, 3], [3, 4]], [[0, 1]], [[0, 1], [1, 2], [1, 3], [3, 4]], [[0, 1], [1, 2], [2, 3]]];
+            int[] bob = [3, 1, 3,3];
+            int[][] amt = [[-2, 4, 2, -4, 6], [-7280, 2350], [-2, 4, 10, -4, 6], [-5644, -6018, 1188, -8502]];
+            for (int i = 0; i < bob.Length; i++)
+            {
+                edges[i].Print("Edges");
+                amt[i].Print("Amount");
+                Console.WriteLine($"if bob is present at '{bob[i]}' max profit alice can make is => {DailyProblem.MostProfitablePath(edges[i], bob[i], amt[i])}");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
