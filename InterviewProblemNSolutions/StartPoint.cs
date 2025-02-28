@@ -715,6 +715,7 @@ namespace InterviewProblemNSolutions
             RecoverATreeFromPreorderTraversal();
             ConstructBinaryTreeFromPreorderAndPostorderTraversal();
             MostProfitablePathInATree();
+            ShortestCommonSupersequence();
 
 
 
@@ -12344,6 +12345,28 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void ShortestCommonSupersequence()
+        {
+            // Ref https://youtu.be/JkjQNJSxXN0
+            // https://leetcode.com/problems/shortest-common-supersequence/description
+            Utility.Print("1092. Shortest Common Supersequence");
+            string[] s1 = ["abac", "aaaaaaaa"];
+            string[] s2 = ["cab", "aaaaaaaa"];
+            for (int i = 0; i < s1.Length; i++)
+                Console.WriteLine($"Shortest Common Supersequence for s1 '{s1[i]}' and s2 '{s2[i]}' is => {DynamicProgramming.ShortestCommonSupersequence(s1[i], s2[i])}");
+        }
+
+
+
+
+
+
+
+
+
+
 
 
 

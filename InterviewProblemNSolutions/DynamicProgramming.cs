@@ -3694,5 +3694,35 @@ namespace InterviewProblemNSolutions
                 return cache[r, f][factory[f][1]] = travel;
             }
         }
+
+
+        // Time O(n*m*(n+m)) | Space O(m), n,m = length of 'str1' & 'str2' respectively
+        public static string ShortestCommonSupersequence(string str1, string str2)
+        {
+            int l1 = str1.Length, l2 = str2.Length;
+            string[] prv = new string[l2 + 1], cur = null;
+            for (int c = 0; c < l2; c++)   // initialize the last row
+                prv[c] = str2.Substring(c);
+            prv[l2] = string.Empty;
+
+            for (int r = l1 - 1; r >= 0; r--)
+            {
+                cur = new string[l2 + 1];
+                cur[l2] = str1.Substring(r);  // set the last col as per str1
+
+                for (int c = l2 - 1; c >= 0; c--)
+                    if (str1[r] == str2[c])
+                        cur[c] = str1[r] + prv[c + 1];
+                    else
+                    {
+                        if (cur[c + 1].Length < prv[c].Length)
+                            cur[c] = str2[c] + cur[c + 1];
+                        else
+                            cur[c] = str1[r] + prv[c];
+                    }
+                prv = cur;
+            }
+            return cur[0];
+        }
     }
 }
