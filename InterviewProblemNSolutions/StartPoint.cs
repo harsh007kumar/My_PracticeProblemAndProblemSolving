@@ -716,6 +716,7 @@ namespace InterviewProblemNSolutions
             ConstructBinaryTreeFromPreorderAndPostorderTraversal();
             MostProfitablePathInATree();
             ShortestCommonSupersequence();
+            ZeroArrayTransformationII();
 
 
 
@@ -12359,7 +12360,22 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void ZeroArrayTransformationII()
+        {
+            // https://leetcode.com/problems/zero-array-transformation-ii/description/?envType=daily-question&envId=2025-03-13
+            Utility.Print("3356. Zero Array Transformation II");
+            int[][] nums = [[2, 0, 2], [4, 3, 2, 1], [0]];
+            int[][][] queries = [[[0, 2, 1], [0, 2, 1], [1, 1, 3]], [[1, 3, 2], [0, 2, 1]], [[0, 0, 2], [0, 0, 4], [0, 0, 4], [0, 0, 3], [0, 0, 5]]];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                nums[i].Print("Input");
+                queries[i].Print("Query array");
+                Console.WriteLine($"minimum possible non-negative value of k, " +
+                    $"such that after processing the first k queries in sequence, nums becomes a Zero Array is:" +
+                    $" '{DailyProblem.MinZeroArray(nums[i], queries[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

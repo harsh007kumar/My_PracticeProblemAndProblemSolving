@@ -26413,5 +26413,58 @@ namespace InterviewProblemNSolutions
                     maxProfitForAlice = Math.Max(maxProfitForAlice, aliceProfit);
             }
         }
+
+
+        // Time O(logl*(n+l)) | Space O(1), n,l = length of 'nums' and 'queries' respectively
+        public static int MinZeroArray(int[] nums, int[][] queries)
+        {
+            /* ALGO
+            1. Base-case check if all values in nums are already 0, return 0
+            2. We use Binary search to find smallest 'k' index in queries which satisfy the condition.
+            2. if all queries till midK idx result in all zero values in n
+            3. update the 'smallestIdx' to min of Min(smallestIdx,midK)
+                and also update the maxK to mid-1
+            4. if middle index is not enouf update minK to mid+1
+            5. now for each iteration in i.e. mid value in our binary search
+            6. we create a prefix sum of all values that can be reduce from a given idx.
+            7. At the end result the 'smallestIdx+1' that satified condition.
+             */
+            int n = nums.Length, l = queries.Length;
+            if (AllZero(-1)) return 0;
+            int minKIdx = 0, maxKIdx = l - 1, mid, smallestIdx = l;
+            while (minKIdx <= maxKIdx)
+            {
+                mid = minKIdx + (maxKIdx - minKIdx) / 2;
+                if (AllZero(mid))
+                {
+                    smallestIdx = Math.Min(smallestIdx, mid);
+                    maxKIdx = mid - 1;
+                }
+                else
+                    minKIdx = mid + 1;
+            }
+            return smallestIdx != l ? smallestIdx + 1 : -1;
+            // locla helper func
+            bool AllZero(int k)     // O(l+n)
+            {
+                int reduceBy = 0;
+                int[] prefix = new int[n + 1];
+                // store the subtract counter for each idx in prefix array
+                for (int i = 0; i <= k; i++)   // O(l)
+                {
+                    var q = queries[i];
+                    prefix[q[0]] += q[2];     // all index post start idx have to be subtracted by 1
+                    prefix[q[1] + 1] -= q[2];   // all index post last+1 idx dont have to be updated
+                }
+                // check if all values are below zero
+                for (int i = 0; i < n; i++)        // O(n)
+                {
+                    reduceBy += prefix[i];
+                    if (nums[i] > reduceBy)    // if any value is greater than 0 after update, return false
+                        return false;
+                }
+                return true;
+            }
+        }
     }
 }
