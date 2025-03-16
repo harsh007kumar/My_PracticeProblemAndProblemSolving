@@ -26466,5 +26466,34 @@ namespace InterviewProblemNSolutions
                 return true;
             }
         }
+
+
+        // Time O(log(cars^2)*n) | Space O(1), n = length of 'Ranks'
+        public static long RepairCars(int[] ranks, int cars)
+        {
+            int n = ranks.Length;
+            long ans = -1, lt = 1, rt = ranks.Min() * (long)cars * cars, mid;
+            while (lt <= rt)                           // O(log(cars^2))
+            {
+                mid = lt + (rt - lt) / 2;
+                if (CanRepairAllInGivenTime(mid))    // O(n)
+                {
+                    rt = mid - 1;
+                    ans = mid;
+                }
+                else
+                    lt = mid + 1;
+            }
+            return ans;
+            // local helper func
+            bool CanRepairAllInGivenTime(long timeAvaliable)
+            {
+                long carsRepaired = 0;
+                for (int i = 0; i < n; i++)
+                    carsRepaired += (long)(Math.Sqrt(timeAvaliable / ranks[i]));
+                return carsRepaired >= cars;
+            }
+
+        }
     }
 }
