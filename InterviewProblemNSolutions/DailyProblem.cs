@@ -26495,5 +26495,36 @@ namespace InterviewProblemNSolutions
             }
 
         }
+
+
+        // Time O(n) | Space O(1), n = length of 'nums'
+        public static int LongestNiceSubarray(int[] nums)
+        {
+            /* ALGO
+            1. we using lt and rt pointer to keep track of current sliding window
+                which represent cur sub-array
+            2. we check if AND of next rt idx no with curSubArrXOR result in 0
+            3. YES, go ahead and update the max length valid sub-array
+                & also add the cur no by using OR operator to 'curSubArrXOR'
+            4. NO, move the lt pointer by using XOR operator till condition 
+                satifies for adding next no, reduce the rt idx by 1 at end
+                as we have not yet counted rt idx no
+             */
+            int lt = 0, rt = -1, curSubArrXOR = 0, ans = 0, n = nums.Length;
+            while (++rt < n)
+                if ((curSubArrXOR & nums[rt]) == 0)
+                {
+                    curSubArrXOR |= nums[rt];           // OR to add bits
+                    ans = Math.Max(ans, 1 + rt - lt);
+                }
+                else
+                {
+                    while ((curSubArrXOR & nums[rt]) != 0)
+                        curSubArrXOR ^= nums[lt++];     // move the lt pointer aka Shrink the sliding window
+                    // now we know we can move frwd in order to count rt idx no reduce it by 1
+                    rt--;
+                }
+            return ans;
+        }
     }
 }
