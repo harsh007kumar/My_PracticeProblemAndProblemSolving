@@ -719,6 +719,7 @@ namespace InterviewProblemNSolutions
             ZeroArrayTransformationII();
             MinimumTimeToRepairCars();
             LongestNiceSubarray();
+            MinimumCostWalkInWeightedGraph();
 
 
 
@@ -12411,7 +12412,29 @@ namespace InterviewProblemNSolutions
         }
 
 
-
+        public static void MinimumCostWalkInWeightedGraph()
+        {
+            // NeetCode https://youtu.be/UL8radjMPUM
+            // https://leetcode.com/problems/minimum-cost-walk-in-weighted-graph/description
+            Utility.Print("3108. Minimum Cost Walk in Weighted Graph");
+            int[] n = [5, 3];
+            int[][][] edges =   [
+                                [[0, 1, 7], [1, 3, 7], [1, 2, 1]],
+                                [[0, 2, 7], [0, 1, 15], [1, 2, 6], [1, 2, 1]]
+                                ];
+            int[][][] query =   [
+                                [[0, 3], [3, 4]],
+                                [[1, 2]]
+                                ];
+            for(int i=0;i<n.Length;i++)
+            {
+                Console.WriteLine($"Total no of Vertex in Graph: {n[i]}");
+                edges[i].Print("Edges");
+                query[i].Print("Query");
+                DailyProblem.MinimumCostOfWalk(n[i], edges[i], query[i]).Print($"The cost of walk b/w 2 nodes as given in Query");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

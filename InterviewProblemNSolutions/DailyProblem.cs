@@ -26526,5 +26526,62 @@ namespace InterviewProblemNSolutions
                 }
             return ans;
         }
+
+        
+        // Time O(V+E+Q), V = no of nodes, E = length of edges, Q = length of query
+        public static int[] MinimumCostOfWalk(int n, int[][] edges, int[][] query)
+        {
+            /* ALGO
+            1. Find all the connected components in the grp after creating the grp from edges
+            2. Store grpID for each vertex in a Dictionary/Hashtable for quick reference
+            3. AND operator and only result in reduction of value never increase
+            4. hence for each grp while iterating over nodes to identify
+                their grp we also calculate the total 'CostOfWalk' for a
+                given connected grp and store that value in 'grp' array.
+            5. now we iterate thru each query and see if 2 vertex are not in same component assign -1 as its answer
+            6. else find and assign the 'CostOfWalk' for that grp which we can find using either one of the vertex.
+             */
+            List<int[]>[] g = new List<int[]>[n];
+            for (int i = 0; i < n; i++) g[i] = new();
+            foreach (var e in edges)                 // O(E)
+            {
+                int s = e[0], d = e[1], w = e[2];
+                g[s].Add([d, w]);    // u->v
+                g[d].Add([s, w]);    // v->u
+            }
+            int grpId = 0, totalCostOfWalk;
+            int[] grp = new int[n];
+            bool[] visited = new bool[n];
+            Dictionary<int, int> grpANdTheirCostOfWalk = new();
+            for (int i = 0; i < n; i++)                    // O(n+E)
+                if (!visited[i])
+                {
+                    totalCostOfWalk = int.MaxValue;
+                    DFS(i);
+                    grpANdTheirCostOfWalk[grpId++] = totalCostOfWalk;
+                }
+            // populate the result array basis the cost of walk for that grp if both vertex are part of same component else assign -1
+            int[] ans = new int[query.Length];
+            for (int i = 0; i < query.Length; i++)         // O(q)
+                if (grp[query[i][0]] != grp[query[i][1]])  // both vertex not present in same component
+                    ans[i] = -1;
+                else
+                    ans[i] = grpANdTheirCostOfWalk[grp[query[i][0]]];
+            return ans;
+
+            // local helper func
+            void DFS(int src)
+            {
+                if (visited[src]) return;
+                visited[src] = true;// mark it visited
+                grp[src] = grpId;   // assign component grp id for the vertex
+                foreach (var edge in g[src])
+                {
+                    totalCostOfWalk &= edge[1];
+                    DFS(edge[0]);
+                }
+
+            }
+        }
     }
 }
