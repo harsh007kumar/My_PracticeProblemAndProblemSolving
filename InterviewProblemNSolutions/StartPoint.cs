@@ -720,6 +720,7 @@ namespace InterviewProblemNSolutions
             MinimumTimeToRepairCars();
             LongestNiceSubarray();
             MinimumCostWalkInWeightedGraph();
+            MaximumNumberOfPointsFromGridQueries();
 
 
 
@@ -12436,6 +12437,21 @@ namespace InterviewProblemNSolutions
             }
         }
 
+        
+        public static void MaximumNumberOfPointsFromGridQueries()
+        {
+            // https://leetcode.com/problems/maximum-number-of-points-from-grid-queries/description
+            Utility.Print("2503. Maximum Number of Points From Grid Queries");
+            int[][][] grid = [[[1, 2, 3], [2, 5, 7], [3, 5, 1]], [[5, 2, 1], [1, 1, 2]]];
+            int[][] query = [[5, 6, 2], [3]];
+            for (int i = 0; i < grid.Length; i++)
+            {
+                grid[i].Print("GRID");
+                query[i].Print("Queries");
+                DailyProblem.MaxPointsFromGridQueries(grid[i], query[i]).Print($"The maximum number of points you can get in above GRID for given queries");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

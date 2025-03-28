@@ -16242,7 +16242,7 @@ namespace InterviewProblemNSolutions
             {
                 List<string> coordinates = new List<string>();
                 string left, right;
-                // Make valid coordinate from s.Substring(l, r)
+                // Make valid curPos from s.Substring(l, r)
                 for (int d = 1; d <= r - l; d++)
                 {
                     left = s.Substring(l, d);
@@ -19544,7 +19544,7 @@ namespace InterviewProblemNSolutions
                     {
                         currR = r + d[0];
                         currC = c + d[1];
-                        // if current cell is valid coordinate
+                        // if current cell is valid curPos
                         if (0 <= currR && currR < m && 0 <= currC && currC < n)
                         {
                             // curr cell is obstacle
@@ -26582,6 +26582,47 @@ namespace InterviewProblemNSolutions
                 }
 
             }
+        }
+
+
+        // Time O(nlogn + r*c) | Space O(r*c), n = length of 'queries' and r,c = no of rows and cols in GRID
+        public static int[] MaxPointsFromGridQueries(int[][] g, int[] queries)
+        {
+            int[][] directions = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+            int rows = g.Length, cols = g[0].Length, n = queries.Length, nextQueryIdx = 0, cellsVisited = 0;
+            var sortedQueries = new (int Query, int Index)[n];
+            for (int i = 0; i < n; i++)
+                sortedQueries[i] = (queries[i], i);  // sorted the query value along with its index
+            Array.Sort(sortedQueries, (a, b) => a.Query.CompareTo(b.Query));// O(nlogn)
+                                                                      // Using BFS to find the totalPoint for each query start from smallest to largest value
+            PriorityQueue<(int X, int Y), int> minPQ = new();
+            minPQ.Enqueue((0, 0), g[0][0]);
+            g[0][0] = -1;   // mark visited
+            while (minPQ.TryDequeue(out var curPos, out int val))
+                if (nextQueryIdx == n) break;
+                else
+                {
+                    // if value becomes larger than query value, set the visited cell count for that query
+                    while (nextQueryIdx < n && val >= sortedQueries[nextQueryIdx].Query)
+                        queries[sortedQueries[nextQueryIdx++].Index] = cellsVisited;
+                    cellsVisited++;
+                    g[curPos.X][curPos.Y] = -1;    // mark current cell as visited
+                                                             // iterate in all 4 valid directions
+                    foreach (var dir in directions)
+                    {
+                        int nextR = dir[0] + curPos.X, nextC = dir[1] + curPos.Y;
+                        // cell Not visited and not outside the boundry limits
+                        if (nextR >= 0 && nextR < rows && nextC >= 0 && nextC < cols && g[nextR][nextC] != -1)
+                        {
+                            minPQ.Enqueue((nextR, nextC), g[nextR][nextC]);
+                            g[nextR][nextC] = -1;
+                        }
+                    }
+                }
+            // all remaining queries will have visited cell count == rows*cols
+            while (nextQueryIdx < n)
+                queries[sortedQueries[nextQueryIdx++].Index] = cellsVisited;
+            return queries;
         }
     }
 }
