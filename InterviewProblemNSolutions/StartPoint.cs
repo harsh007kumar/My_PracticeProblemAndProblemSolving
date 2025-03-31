@@ -691,36 +691,37 @@ namespace InterviewProblemNSolutions
             //SumOfPrefixScoresOfStrings();
             //MyCalendarII();
             //CheckIfArrayPairsAreDivisibleByK();
-            MakeSumDivisibleByP();
-            DividePlayersIntoTeamsOfEqualSkill();
-            MinimumNumberOfSwapsToMakeTheStringBalanced();
-            TheNumberOfTheSmallestUnoccupiedChair();
-            DivideIntervalsIntoMinimumNumberOfGroups();
-            SmallestRangeCoveringElementsFromKLists();
-            CountNumberOfMaximumBitwiseORSubsets();
-            CousinsInBinaryTreeII();
-            RemoveSubFoldersFromTheFilesystem();
-            SplitStringIntoMaxNumberOfUniqueSubstrings();
-            HeightOfBinaryTreeAfterSubtreeRemovalQueries();
-            CountSquareSubmatricesWithAllOnes();
-            MinimumNumberOfRemovalsToMakeMountainArray();
-            MinimumTotalDistanceTraveled();
-            KthLargestSumInBinaryTree();
-            DivideNodesIntoTheMaximumNumberOfGroups();
-            CountNumberOfBadPairs();
-            FindThePunishmentNumberOfAnInteger();
-            ConstructTheLexicographicallyLargestValidSequence();
-            ConstructSmallestNumberFromDIString();
-            TheKthLexicographicalStringOfAllHappyStringsOfLengthN();
-            RecoverATreeFromPreorderTraversal();
-            ConstructBinaryTreeFromPreorderAndPostorderTraversal();
-            MostProfitablePathInATree();
-            ShortestCommonSupersequence();
-            ZeroArrayTransformationII();
-            MinimumTimeToRepairCars();
-            LongestNiceSubarray();
-            MinimumCostWalkInWeightedGraph();
-            MaximumNumberOfPointsFromGridQueries();
+            //MakeSumDivisibleByP();
+            //DividePlayersIntoTeamsOfEqualSkill();
+            //MinimumNumberOfSwapsToMakeTheStringBalanced();
+            //TheNumberOfTheSmallestUnoccupiedChair();
+            //DivideIntervalsIntoMinimumNumberOfGroups();
+            //SmallestRangeCoveringElementsFromKLists();
+            //CountNumberOfMaximumBitwiseORSubsets();
+            //CousinsInBinaryTreeII();
+            //RemoveSubFoldersFromTheFilesystem();
+            //SplitStringIntoMaxNumberOfUniqueSubstrings();
+            //HeightOfBinaryTreeAfterSubtreeRemovalQueries();
+            //CountSquareSubmatricesWithAllOnes();
+            //MinimumNumberOfRemovalsToMakeMountainArray();
+            //MinimumTotalDistanceTraveled();
+            //KthLargestSumInBinaryTree();
+            //DivideNodesIntoTheMaximumNumberOfGroups();
+            //CountNumberOfBadPairs();
+            //FindThePunishmentNumberOfAnInteger();
+            //ConstructTheLexicographicallyLargestValidSequence();
+            //ConstructSmallestNumberFromDIString();
+            //TheKthLexicographicalStringOfAllHappyStringsOfLengthN();
+            //RecoverATreeFromPreorderTraversal();
+            //ConstructBinaryTreeFromPreorderAndPostorderTraversal();
+            //MostProfitablePathInATree();
+            //ShortestCommonSupersequence();
+            //ZeroArrayTransformationII();
+            //MinimumTimeToRepairCars();
+            //LongestNiceSubarray();
+            //MinimumCostWalkInWeightedGraph();
+            //MaximumNumberOfPointsFromGridQueries();
+            PutMarblesInBags();
 
 
 
@@ -12452,6 +12453,24 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void PutMarblesInBags()
+        {
+
+            // https://leetcode.com/problems/put-marbles-in-bags/description/
+            Utility.Print("2551. Put Marbles in Bags");
+            int[][] weights = [[1, 3, 5, 1], [1, 3]];
+            int[] k = [2, 2];
+            for(int i=0;i<k.Length;i++)
+            {
+
+                weights[i].Print("Weights-Array");
+                Console.WriteLine($"Diff b/w the max & min scores among marble distribution with '{k[i]}' bags => '{DailyProblem.PutMarbles(weights[i], k[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
 
 
 

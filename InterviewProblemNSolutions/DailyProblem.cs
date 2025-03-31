@@ -26624,5 +26624,45 @@ namespace InterviewProblemNSolutions
                 queries[sortedQueries[nextQueryIdx++].Index] = cellsVisited;
             return queries;
         }
+
+
+        // Time O(nlogk) | Space O(k), n = length of 'weights'
+        public static long PutMarbles(int[] weights, int k)
+        {
+            /* ALGO
+            1. Basically we keep 2 priority queue
+                a. minPQ to store all 'k-1' max cost-pair of adjacent-indicies
+                b. maxPQ to store all 'k-1' min cost-pair of adjacent-indicies
+            2. we iterate thru 0..n-2 indicices and store 'k-1' pair and their cost which is weights[i]+weights[i+1]
+            3. at the end just take the diff of cost from minPQ-maxPQ of all such 'k-1' indices to get the difference.
+            4. NOTE: we don't need to bother about start and ending indices as they would be part of both min and max.
+             */
+            PriorityQueue<int, long> minPQ = new();
+            PriorityQueue<int, long> maxPQ = new(Comparer<long>.Create((a, b) => b.CompareTo(a)));
+            int n = weights.Length;
+
+            for (int i = 0; i < n - 1; i++)// O(nlogk)
+            {
+                long curWt = (long)weights[i] + weights[i + 1];
+                // minPQ stores all maximum possible costs
+                if (minPQ.Count < k - 1)
+                    minPQ.Enqueue(i, curWt);
+                else if (minPQ.TryPeek(out int indicies, out long val) && val < curWt)
+                    minPQ.DequeueEnqueue(i, curWt);
+
+                // maxPQ stores all minimum possible costs
+                if (maxPQ.Count < k - 1)
+                    maxPQ.Enqueue(i, curWt);
+                else if (maxPQ.TryPeek(out int indicies2, out long val2) && val2 > curWt)
+                    maxPQ.DequeueEnqueue(i, curWt);
+            }
+
+            // Find the Diff // O(klogk)
+            long diff = 0;
+            while (minPQ.TryDequeue(out int indicies1, out long cost1) && maxPQ.TryDequeue(out int indicies2, out long cost2))
+                diff += (cost1 - cost2);
+
+            return diff;
+        }
     }
 }
