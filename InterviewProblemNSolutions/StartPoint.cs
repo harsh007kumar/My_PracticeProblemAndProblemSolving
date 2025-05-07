@@ -722,6 +722,7 @@ namespace InterviewProblemNSolutions
             //MinimumCostWalkInWeightedGraph();
             //MaximumNumberOfPointsFromGridQueries();
             PutMarblesInBags();
+            MinimumTimeToReachLastRoomI();
 
 
 
@@ -12472,6 +12473,18 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MinimumTimeToReachLastRoomI()
+        {
+            // https://leetcode.com/problems/find-minimum-time-to-reach-last-room-i/description
+            Utility.Print("3341. Find Minimum Time to Reach Last Room I");
+            int[][][] moveTimeArr = [[[0, 4], [4, 4]], [[0, 1], [1, 2]], [[0, 0, 0], [0, 0, 0]], [[31, 52], [47, 94]], [[56, 93], [3, 38]]];
+            foreach(var moveTime in moveTimeArr)
+            {
+                moveTime.Print("Move Time");
+                Console.WriteLine($"Return the minimum time to reach the room (n - 1, m - 1) => '{DailyProblem.MinTimeToReach(moveTime)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
