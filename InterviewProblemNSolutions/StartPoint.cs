@@ -723,6 +723,7 @@ namespace InterviewProblemNSolutions
             //MaximumNumberOfPointsFromGridQueries();
             PutMarblesInBags();
             MinimumTimeToReachLastRoomI();
+            MinimumEqualSumOTwoArraysAfterReplacingZeros();
 
 
 
@@ -12487,6 +12488,20 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MinimumEqualSumOTwoArraysAfterReplacingZeros()
+        {
+            // https://leetcode.com/problems/minimum-equal-sum-of-two-arrays-after-replacing-zeros/
+            Utility.Print("2918. Minimum Equal Sum of Two Arrays After Replacing Zeros");
+            int[][] nums1 = [[3, 2, 0, 1, 0], [2, 0, 2, 0]];
+            int[][] nums2 = [[6, 5, 0], [1, 4]];
+            for (int i = 0; i < nums1.Length; i++)
+            {
+                nums1[i].Print("Input-Array1");
+                nums2[i].Print("Input-Array2");
+                Console.WriteLine($" => '{DailyProblem.MinimumEqualSumInTwoArrays(nums1[i], nums2[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 

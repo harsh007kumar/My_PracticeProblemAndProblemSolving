@@ -26695,5 +26695,28 @@ namespace InterviewProblemNSolutions
                     }
             return -1;
         }
+
+
+        // Time O(n+m), n,m = respective length of nums1 , nums2 | Space O(1)
+        public static long MinimumEqualSumInTwoArrays(int[] nums1, int[] nums2)
+        {
+            int zeroCount1 = 0, zeroCount2 = 0;
+            long longSum1 = 0, longSum2 = 0;
+            foreach (var n in nums1)
+                if (n == 0)
+                    zeroCount1++;
+                else longSum1 += n;
+            foreach (var n in nums2)
+                if (n == 0)
+                    zeroCount2++;
+                else longSum2 += n;
+            // now we know no of zero in both array's add to sum the no of zero's considering we replaced them with 1's instead
+            longSum1 += zeroCount1;
+            longSum2 += zeroCount2;
+
+            if (longSum1 < longSum2 && zeroCount1 == 0) return -1;
+            else if (longSum1 > longSum2 && zeroCount2 == 0) return -1;
+            else return Math.Min(longSum1, longSum2) + Math.Abs(longSum1 - longSum2);
+        }
     }
 }
