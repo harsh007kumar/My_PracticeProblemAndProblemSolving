@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace InterviewProblemNSolutions
 {
@@ -3723,6 +3725,119 @@ namespace InterviewProblemNSolutions
                 prv = cur;
             }
             return cur[0];
+        }
+
+        public static IList<string> GetWordsInLongestSubsequence(string[] words, int[] groups)
+        {
+            int n = words.Length;
+            int[] dp = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                dp[i] = 1;
+                for (int j = 0; j < i; j++)
+                    if (words[j].Length == words[i].Length && groups[j] != groups[i])
+                    {
+                        int diffCount = 0;
+                        for (int k = 0; k < words[j].Length; k++)
+                            if (words[j][k] != words[i][k] && ++diffCount == 2)
+                                break;
+                        if (diffCount == 1)
+                            dp[i] = Math.Max(dp[i], dp[j] + 1);
+                    }
+            }
+            int max = dp.Max();
+            Console.WriteLine($"max len = {max}");
+
+            var ans = new List<int>();
+            for (int i = n - 1; i >= 0; i--)
+                if (ans.Count == 0)
+                {
+                    if (max == dp[i])
+                    {
+                        ans.Add(i);
+                        max--;
+                    }
+                }
+                else if (max == dp[i] && words[ans[ans.Count - 1]].Length == words[i].Length && groups[ans[ans.Count - 1]] != groups[i])
+                {
+                    int diffCount = 0;
+                    for (int k = 0; k < words[i].Length; k++)
+                        if (words[ans[ans.Count - 1]][k] != words[i][k] && ++diffCount == 2)
+                            break;
+                    if (diffCount == 1)
+                    {
+                        ans.Add(i);
+                        max--;
+                    }
+                }
+
+            Console.WriteLine($"ans len = {ans.Count}");
+            var result = new List<string>();
+            for (int i = ans.Count - 1; i >= 0; i--)
+                result.Add(words[ans[i]]);
+            return result;
+        }
+
+
+        public static int ColorTheGrid(int m, int n)
+        {
+            int mod = 1000000007;
+            Dictionary<int, long>[] cache = new Dictionary<int, long>[n];
+            for (int i = 0; i < n; i++) cache[i] = new();
+            int[] val = new int[m];
+            List<int> validMasks = new();
+            FillSet();
+            Console.WriteLine($"\n\n size: {validMasks.Count}");
+            long result = 0;
+            foreach (var curMask in validMasks)
+                result = (result + Ways(1, curMask)) % mod;
+            return (int)result;
+            // local helper func
+            long Ways(int idx, int prvCol)
+            {
+                if (idx == n) return 1;
+                if (cache[idx].TryGetValue(prvCol, out var preComputedWays))
+                    return preComputedWays;
+                long ans = 0;
+                var validCurMaskAsPerPrvCol = (from mask in validMasks
+                                               where NotMatching(mask,prvCol)
+                                               select mask).ToList();
+                foreach (var curMask in validCurMaskAsPerPrvCol)
+                    ans = (ans + Ways(idx + 1, curMask)) % mod;
+                return cache[idx][prvCol] = ans;
+            }
+
+            void FillSet(int idx = 0)
+            {
+                if (idx == m)
+                {
+                    int mask = val[0];
+                    for (int i = 1; i < m; i++)
+                        mask += val[i] * (int)Math.Pow(10, i);
+
+                    Console.Write($" {mask} |");
+                    validMasks.Add(mask);
+                }
+                else
+                {
+                    for (int color = 1; color <= 3; color++)
+                        if (idx == 0 || val[idx - 1] != color)
+                        {
+                            val[idx] = color;
+                            FillSet(idx + 1);
+                        }
+                }
+            }
+            bool NotMatching(int a, int b)
+            {
+                if (a%10 == b%10) return false;
+                if (m >=2 && (a%100)/ 10 == (b% 100) / 10) return false;
+                if (m >=3 && (a % 1000) / 100 != (b % 1000) / 100) return false;
+                if (m >=4 && (a % 10000) / 1000 != (b % 10000) / 1000) return false;
+                if (m >=5 && (a % 100000) / 10000 != (b % 100000) / 10000) return false;
+                
+                return true;
+            }
         }
     }
 }
