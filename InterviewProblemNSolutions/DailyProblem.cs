@@ -26718,5 +26718,46 @@ namespace InterviewProblemNSolutions
             else if (longSum1 > longSum2 && zeroCount2 == 0) return -1;
             else return Math.Min(longSum1, longSum2) + Math.Abs(longSum1 - longSum2);
         }
+
+
+        // Time = Space = O(n), n = length of 'words'
+        public static int LongestPalindromeWithTwoLetter(string[] words)
+        {
+            /* ALGO
+            1. Calculate the hash & reverseHash of curret 2-letter word
+            2. if rever exists already then increasement the answer by 4 (cur & reverse can be added)
+            3. remove reverse if after decreasing its freq by 1 its zero
+            4. if reverse does not exist then add cur word to dict and increase its freq by 1
+            5. finally we can have 1 letter in b/w which has same both letter and freq should be odd.
+             */
+            Dictionary<int, int> paliWords = new();
+            int ans = 0;
+            foreach (var w in words)
+            {
+                int hash = (w[0] - 'a') * 100 + (w[1] - 'a');
+                int hashReverse = (w[1] - 'a') * 100 + (w[0] - 'a');
+                if (paliWords.TryGetValue(hashReverse, out int freq))
+                {
+                    if (freq == 1) paliWords.Remove(hashReverse);
+                    else paliWords[hashReverse]--;
+
+                    ans += 4;             // add both words to pali
+                }
+                // if pali of current word not present then add it to dictionary
+                else
+                {
+                    if (paliWords.TryGetValue(hash, out int f))
+                        paliWords[hash] = 1 + f;
+                    else paliWords[hash] = 1;
+                }
+            }
+            foreach (var kvp in paliWords)
+                if (kvp.Value % 2 == 1 && (kvp.Key / 100 == kvp.Key % 100))
+                {
+                    ans += 2;
+                    break;
+                }
+            return ans;
+        }
     }
 }

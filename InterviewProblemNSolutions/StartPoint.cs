@@ -724,6 +724,9 @@ namespace InterviewProblemNSolutions
             PutMarblesInBags();
             MinimumTimeToReachLastRoomI();
             MinimumEqualSumOTwoArraysAfterReplacingZeros();
+            LongestUnequalAdjacentGroupsSubsequenceII();
+            PaintingAGridWithThreeDifferentColors();
+            LongestPalindromeByConcatenatingTwoLetterWords();
 
 
 
@@ -12504,6 +12507,44 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void LongestUnequalAdjacentGroupsSubsequenceII()
+        {
+            // https://leetcode.com/problems/longest-unequal-adjacent-groups-subsequence-ii/description/?envType=daily-question&envId=2025-05-16
+            Utility.Print("2901. Longest Unequal Adjacent Groups Subsequence II");
+            string[][] words = [["bab", "dab", "cab"], ["a", "b", "c", "d"], ["ac", "caa", "cda", "ba"]];
+            int[][] groups = [[1, 2, 2], [1, 2, 3, 4], [3, 1, 2, 3]];
+            for (int i = 0; i < words.Length; i++)
+            {
+                words[i].Print("Input words");
+                groups[i].Print("groups array");
+                DynamicProgramming.GetWordsInLongestSubsequence(words[i], groups[i]).Print($"longest subsequence from input array's as per given conditions");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
+
+        public static void PaintingAGridWithThreeDifferentColors()
+        {
+            // https://leetcode.com/problems/painting-a-grid-with-three-different-colors/description
+            Utility.Print("1931. Painting a Grid With Three Different Colors");
+            int[][] inputs = [[1, 1], [1, 2], [5, 5]];
+            foreach (var input in inputs)
+                Console.WriteLine($"No of ways to Paint the Grid of size [{input[0]}]x[{input[1]}] are => '{DynamicProgramming.ColorTheGrid(input[0], input[1])}'");
+        }
+
+
+        public static void LongestPalindromeByConcatenatingTwoLetterWords()
+        {
+            // https://leetcode.com/problems/longest-palindrome-by-concatenating-two-letter-words/
+            Utility.Print("2131. Longest Palindrome by Concatenating Two Letter Words");
+            string[][] wordsArr = [["qo", "fo", "fq", "qf", "fo", "ff", "qq", "qf", "of", "of", "oo", "of", "of", "qf", "qf", "of"], ["lc", "cl", "gg"], ["ab", "ty", "yt", "lc", "cl", "ab"], ["cc", "ll", "xx"]];
+            foreach(var words in wordsArr)
+            {
+                words.Print("Input string of 2-letter words");
+                Console.WriteLine($"Rhe length of the longest palindrome that can be created => '{DailyProblem.LongestPalindromeWithTwoLetter(words)}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
 
