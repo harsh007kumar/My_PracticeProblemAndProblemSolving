@@ -1,18 +1,8 @@
-﻿using InterviewProblemNSolutions;
-using Sorting;
+﻿using Sorting;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
-using System.Diagnostics.Metrics;
-using System.Globalization;
+using System.Drawing;
 using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
-using static InterviewProblemNSolutions.DailyProblem;
-using static System.Formats.Asn1.AsnWriter;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InterviewProblemNSolutions
 {
@@ -727,6 +717,7 @@ namespace InterviewProblemNSolutions
             LongestUnequalAdjacentGroupsSubsequenceII();
             PaintingAGridWithThreeDifferentColors();
             LongestPalindromeByConcatenatingTwoLetterWords();
+            LargestColorValueInADirectedGraph();
 
 
 
@@ -12545,6 +12536,24 @@ namespace InterviewProblemNSolutions
                 Console.WriteLine(Utility.lineDelimeter);
             }
         }
+
+
+        public static void LargestColorValueInADirectedGraph()
+        {
+            // NeetCode https://youtu.be/xLoDjKczUSk
+            // http://leetcode.com/problems/largest-color-value-in-a-directed-graph/description/
+            Utility.Print("1857. Largest Color Value in a Directed Graph");
+            string[] colors = ["abaca", "a"];
+            int[][][] edges = [[[0, 1], [0, 2], [2, 3], [3, 4]], [[0, 0]]];
+            for (int i = 0; i < colors.Length; i++)
+            {
+
+                edges[i].Print("Input-Array");
+                Console.WriteLine($"For input colors {colors[i]}, the largest color value of any valid path in the given graph=> '{DynamicProgramming.LargestPathValue(colors[i], edges[i])}'");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
+
 
 
 

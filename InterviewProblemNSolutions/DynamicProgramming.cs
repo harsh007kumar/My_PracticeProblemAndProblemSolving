@@ -3839,5 +3839,50 @@ namespace InterviewProblemNSolutions
                 return true;
             }
         }
+
+
+        // Time O(n+m) | Space O(n*26), n,m = length of 'colors' & 'edges' respectively
+        public static int LargestPathValue(string colors, int[][] edges)
+        {
+            int n = colors.Length, maxFreqColor = 0;
+            List<int>[] g = new List<int>[n];
+            for (int i = 0; i < n; i++)
+                g[i] = new();
+            // Create a DAG
+            foreach (var e in edges)
+                g[e[0]].Add(e[1]);      // U->V
+
+            int[,] cache = new int[n, 26];
+            int[] visited = new int[n];
+            for (int i = 0; i < n; i++)
+                if (visited[i] == 0 && DFS(i))
+                    return -1;
+
+            for (int i = 0; i < n; i++)
+                for (int c = 0; c < 26; c++)
+                    maxFreqColor = Math.Max(maxFreqColor, cache[i, c]);
+            return maxFreqColor;
+
+            // local helper func
+            bool DFS(int idx)
+            {
+                if (visited[idx] == 1) // cycle found
+                    return true;
+                // mark temp visited
+                visited[idx] = 1;
+                foreach (var adj in g[idx])
+                {
+                    if (visited[adj] != 2) // already calculated the freq for this node
+                        if (DFS(adj)) return true;
+                    for (int c = 0; c < 26; c++)
+                        cache[idx, c] = Math.Max(cache[idx, c], cache[adj, c]);
+                }
+                // add current node color to the cache
+                cache[idx, colors[idx] - 'a']++;
+                // mark permanent visited
+                visited[idx] = 2;
+                return false;
+            }
+        }
     }
 }
