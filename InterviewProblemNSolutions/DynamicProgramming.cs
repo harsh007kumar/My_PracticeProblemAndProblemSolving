@@ -3660,7 +3660,7 @@ namespace InterviewProblemNSolutions
             factory = (from eachFac in factory  // O(mlogm)
                        orderby eachFac[0]
                        select eachFac).ToArray();
-            
+
             // Create a 2D-cache
             Dictionary<int, long>[,] cache = new Dictionary<int, long>[n, m];
             for (int i = 0; i < n; i++)
@@ -3800,7 +3800,7 @@ namespace InterviewProblemNSolutions
                     return preComputedWays;
                 long ans = 0;
                 var validCurMaskAsPerPrvCol = (from mask in validMasks
-                                               where NotMatching(mask,prvCol)
+                                               where NotMatching(mask, prvCol)
                                                select mask).ToList();
                 foreach (var curMask in validCurMaskAsPerPrvCol)
                     ans = (ans + Ways(idx + 1, curMask)) % mod;
@@ -3830,12 +3830,12 @@ namespace InterviewProblemNSolutions
             }
             bool NotMatching(int a, int b)
             {
-                if (a%10 == b%10) return false;
-                if (m >=2 && (a%100)/ 10 == (b% 100) / 10) return false;
-                if (m >=3 && (a % 1000) / 100 != (b % 1000) / 100) return false;
-                if (m >=4 && (a % 10000) / 1000 != (b % 10000) / 1000) return false;
-                if (m >=5 && (a % 100000) / 10000 != (b % 100000) / 10000) return false;
-                
+                if (a % 10 == b % 10) return false;
+                if (m >= 2 && (a % 100) / 10 == (b % 100) / 10) return false;
+                if (m >= 3 && (a % 1000) / 100 != (b % 1000) / 100) return false;
+                if (m >= 4 && (a % 10000) / 1000 != (b % 10000) / 1000) return false;
+                if (m >= 5 && (a % 100000) / 10000 != (b % 100000) / 10000) return false;
+
                 return true;
             }
         }
@@ -3882,6 +3882,47 @@ namespace InterviewProblemNSolutions
                 // mark permanent visited
                 visited[idx] = 2;
                 return false;
+            }
+        }
+
+        public static int MinimizeTheMaximumDifferenceOfPairs_TLE(int[] nums, int p)
+        {
+            if (p == 0) return 0;   // base case
+            Array.Sort(nums);   // O(nlogn)
+            int minMax = int.MaxValue, n = nums.Length;
+            Dictionary<string, int> cache = new();
+            Get(p, 0);
+            return minMax;
+
+            // local helper func
+            int Get(int pairsNeeded, int idx)
+            {
+                if (idx >= n - 1) return int.MaxValue;
+                else
+                {
+                    int maxFromRemainingPairs = 0, skip = 0, take = 0;
+                    bool updateAns = pairsNeeded == p;
+                    string key = pairsNeeded + "|" + idx;
+                    if (cache.TryGetValue(key, out int ans))
+                        return ans;
+                    else
+                    {
+                        // skip the current idx
+                        skip = (-1 + n - idx)/ 2 >= pairsNeeded ? Get(pairsNeeded, idx + 1) : int.MaxValue;
+
+                        // take the pair of cur idx + next adjacent one
+                        take = nums[idx + 1] - nums[idx];
+                        if (--pairsNeeded > 0)
+                            take = Math.Max(take, Get(pairsNeeded, idx + 2));
+
+                        maxFromRemainingPairs = Math.Min(skip, take);
+                    }
+
+                    // update and return the ans
+                    if (updateAns)
+                        minMax = Math.Min(minMax, maxFromRemainingPairs);
+                    return cache[key] = maxFromRemainingPairs;
+                }
             }
         }
     }

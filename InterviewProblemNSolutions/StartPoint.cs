@@ -718,6 +718,7 @@ namespace InterviewProblemNSolutions
             PaintingAGridWithThreeDifferentColors();
             LongestPalindromeByConcatenatingTwoLetterWords();
             LargestColorValueInADirectedGraph();
+            MinimizeTheMaximumDifferenceOfPairs();
 
 
 
@@ -12555,14 +12556,27 @@ namespace InterviewProblemNSolutions
         }
 
 
+        public static void MinimizeTheMaximumDifferenceOfPairs()
+        {
+            // https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/description
+            Utility.Print($"2616. Minimize the Maximum Difference of Pairs");
+            int[][] nums = [[10, 1, 2, 7, 1, 3], [4, 2, 1, 2], [4, 2, 1, 2], [4, 0, 2, 1, 2, 5, 5, 3]];
+            int[] p = [2, 1, 2, 3];
+            for (int i = 0; i < p.Length; i++)
+            {
+                nums[i].Print($"Input array");
+                Console.WriteLine($"Minimum maximum difference among all '{p[i]}' pairs in above is => {DynamicProgramming.MinimizeTheMaximumDifferenceOfPairs_TLE(nums[i], p[i])}");
+                Console.WriteLine(Utility.lineDelimeter);
+            }
+        }
 
 
         // Learn Dynamic Programming (Memoization & Tabulation)
         // KeepOnCoding https://youtu.be/f2xi3c1S95M
-                /// <summary>
-                /// Calculate the minimum steps required to minimize any given no to '1', using below avaliable rules/steps only
-                /// Number - 1 || Number / 3 || Number / 2
-                /// </summary>
+        /// <summary>
+        /// Calculate the minimum steps required to minimize any given no to '1', using below avaliable rules/steps only
+        /// Number - 1 || Number / 3 || Number / 2
+        /// </summary>
         public static void MinimumStepsToMinimizeToOne()
         {
             Utility.Print("MinimumStepsToMinimize_NoTo1 || Dynamic Programming");
